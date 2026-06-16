@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Follow 深度日报：Fable 治理余震与 Agent 工程回到可控性</title>
+    <title>Follow 深度日报：Fable 治理余震与 Agent 工程回到可控性（午后补充）</title>
     <meta name="description" content="2026-06-16 Follow List 公开来源深度日报。">
     <style>
       :root {
@@ -123,11 +123,12 @@
   <body>
     <main>
       <article>
-        <h1>Follow 深度日报：Fable 治理余震与 Agent 工程回到可控性</h1>
-        <p class="meta">窗口：2026-06-15 14:02 至 2026-06-16 11:34（Asia/Shanghai）｜来源：Obsidian Follow List active 条目，high 优先；未使用 Folo CLI。</p>
+        <h1>Follow 深度日报：Fable 治理余震与 Agent 工程回到可控性（午后补充）</h1>
+        <p class="meta">主窗口：2026-06-15 14:02 至 2026-06-16 11:34（Asia/Shanghai）｜补充检查：2026-06-16 11:34 至 2026-06-16 14:29（Asia/Shanghai）｜来源：Obsidian Follow List active 条目，high 优先；未使用 Folo CLI。</p>
 
         <section class="summary-box">
           <p><strong>总览：</strong>今天最值得跟进的不是单一模型发布，而是三条线合流：Anthropic Fable/Mythos 的政府禁用事件继续把 frontier model governance 推到台前；AI agent 工具讨论从“能做什么”转向“写入、审批、可观测、回归测试”；Gemini、LangChain、Shreya/Nathan 等公开信号都在把实际工作流往更细的工程控制点推进。</p>
+          <p><strong>午后补充：</strong>上次发布后，Follow List 的 high/active 来源里新增高信号主要来自 Simon Willison 转引 Luta Security/Katie Moussouris 对 Fable 5 出口管制的技术反驳。其余已抓取来源在补充窗口内没有足够新的公开更新，避免重复写入。</p>
         </section>
 
         <h2>核心主题</h2>
@@ -139,6 +140,15 @@
         </ul>
 
         <h2>重要更新</h2>
+        <section class="item">
+          <h3>0. 午后补充：安全专家反驳 Fable 5 出口管制依据</h3>
+          <p class="label">来源账号/机构：Simon Willison、Luta Security / Katie Moussouris｜发布时间：2026-06-16 05:20 UTC｜链接：<a href="https://simonwillison.net/2026/Jun/16/fable-5-export-controls/">Simon 转引</a>、<a href="https://www.lutasecurity.com/post/the-fable-5-export-controls-harm-us-cyber-defense">Luta Security 原文</a></p>
+          <p>Simon 新增转引 Katie Moussouris 的文章。Katie 称她看过引发争议的第三方研究，认为所谓“绕过护栏”的关键路径更接近防御者常用的找漏洞、修补代码、生成测试流程，而不是应触发模型级出口管制的攻击能力。</p>
+          <p>这篇文章把 Fable/Mythos 事件从抽象治理争议拉回到安全工作流本身：如果“修复有漏洞代码并验证补丁”也被视为危险能力，防守方会首先受损，而攻击者仍可转向其他模型或工具。它也呼应了上一版日报的判断：政策系统正在用过粗的控制杆处理 agentic coding/cyber capability。</p>
+          <p><strong>为什么值得看：</strong>这是少数声称读过相关研究材料的外部安全专家给出的公开技术判断，可作为评估 Anthropic 官方说法和媒体叙事的重要交叉来源。</p>
+          <p><strong>后续行动：</strong>继续等 Anthropic、美国商务部或研究方公开更完整材料；若只看到转述，暂时把“具体 jailbreak 风险等级”列为待验证，不把它当成已定论。</p>
+        </section>
+
         <section class="item">
           <h3>1. Anthropic Fable/Mythos 禁用事件进入“治理样板”阶段</h3>
           <p class="label">来源账号/机构：Anthropic、Simon Willison、Nathan Lambert、Francois Chollet｜发布时间：2026-06-12 至 2026-06-16｜链接：<a href="https://www.anthropic.com/news/fable-mythos-access">Anthropic 声明</a>、<a href="https://simonwillison.net/2026/Jun/16/matteo-wong-the-atlantic/">Simon 摘要</a>、<a href="https://www.interconnects.ai/p/welcome-to-the-agi-era-of-ai-governance">Interconnects 分析</a></p>
