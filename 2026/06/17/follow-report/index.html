@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Follow 深度日报：部署前仿真、Post-training 配方与 Agent Loop 工程</title>
+    <meta name="description" content="2026-06-17 Follow List 公开来源深度日报。">
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7f9;
+        --paper: #ffffff;
+        --text: #1f2933;
+        --muted: #64748b;
+        --line: #d8dee8;
+        --accent: #0f766e;
+        --accent-soft: #d9f0ec;
+        --warn-soft: #fff4d6;
+        --link: #075985;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.72;
+      }
+
+      main {
+        width: min(980px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 42px 0 64px;
+      }
+
+      article {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: clamp(22px, 4vw, 42px);
+      }
+
+      h1, h2, h3 {
+        line-height: 1.22;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(30px, 4vw, 46px);
+      }
+
+      h2 {
+        margin: 34px 0 12px;
+        font-size: 24px;
+        border-top: 1px solid var(--line);
+        padding-top: 22px;
+      }
+
+      h3 {
+        margin: 22px 0 8px;
+        font-size: 19px;
+      }
+
+      p { margin: 0 0 12px; }
+
+      ul, ol {
+        margin: 0 0 14px;
+        padding-left: 22px;
+      }
+
+      li { margin: 6px 0; }
+
+      a {
+        color: var(--link);
+        text-decoration-thickness: 0.08em;
+        text-underline-offset: 0.18em;
+      }
+
+      .meta, .muted { color: var(--muted); }
+
+      .pill {
+        display: inline-block;
+        margin: 0 8px 8px 0;
+        padding: 4px 9px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: #075e56;
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .item {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 16px;
+        margin: 14px 0;
+        background: #fff;
+      }
+
+      .item h3 { margin-top: 0; }
+
+      .note {
+        background: var(--warn-soft);
+        border: 1px solid #eed27a;
+        border-radius: 8px;
+        padding: 14px 16px;
+      }
+
+      .source-list li {
+        overflow-wrap: anywhere;
+      }
+
+      footer {
+        margin-top: 30px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <article>
+        <a href="../../../..">← 返回索引</a>
+        <h1>Follow 深度日报：部署前仿真、Post-training 配方与 Agent Loop 工程</h1>
+        <p class="meta">2026-06-17 19:19 Asia/Shanghai · 窗口：2026-06-16 14:33 至 2026-06-17 19:19（北京时间）</p>
+        <p>
+          <span class="pill">OpenAI / evals</span>
+          <span class="pill">Post-training</span>
+          <span class="pill">Agent architecture</span>
+          <span class="pill">AI engineering</span>
+          <span class="pill">Open tools</span>
+        </p>
+
+        <h2>总览</h2>
+        <p>今天的高信号更新集中在一个共同方向：把模型能力从“发布后观察”前移到“部署前仿真”，再把 agent 系统从“会跑”推进到“可预算、可评价、可循环改进”。OpenAI 的 Deployment Simulation 直接指向预发布安全评估；Nathan Lambert 的 post-training 访谈把训练后流程拆成可讨论的 recipe；LangChain 连续几篇文章则在落地层面讨论 agent loop、trace judge 和编码 agent 成本。</p>
+        <p>公开 X/Nitter/RSSHub 路径本轮没有稳定返回 Follow List 中多数账号的最近推文，因此报告主体采用可核验的官方新闻、RSS、个人博客和 LangChain/Interconnects 页面。X 账号仍用于来源归因，但不使用任何私密登录态、cookie 或内部数据。</p>
+
+        <h2>核心主题</h2>
+        <ul>
+          <li><strong>评估前移：</strong>OpenAI 把“真实部署后才知道的模型行为”搬进部署前模拟，重点是用真实对话数据预测上线后的安全与行为表现。</li>
+          <li><strong>Post-training 可复盘：</strong>Interconnects 把 RL、偏好数据、合成数据、模型 personality 等训练后关键环节拆开讨论，适合跟踪开源模型与闭源模型差距。</li>
+          <li><strong>Agent 工程回归控制面：</strong>LangChain 的新文章强调 loop harness、预算、trace judge、错误信号挖掘，说明 agent 产品竞争点正在从 demo 迁移到运行系统。</li>
+          <li><strong>小工具仍有长期价值：</strong>Simon Willison 的 Datasette/Tailscale/Web Component 更新看似小，但都服务于可本地运行、可渐进增强、可审计的数据工作流。</li>
+        </ul>
+
+        <h2>重要更新</h2>
+        <div class="item">
+          <h3>OpenAI：Deployment Simulation 用部署前仿真预测模型行为</h3>
+          <p><strong>来源账号：</strong>OpenAI News / Follow List 相关：Sam Altman、Kevin Weil、Noam Brown 等 OpenAI 方向账号</p>
+          <p><strong>发布时间：</strong>2026-06-16 · <a href="https://openai.com/index/deployment-simulation">原文链接</a></p>
+          <p>OpenAI 发布 Deployment Simulation，核心思路是用真实对话数据在上线前模拟模型部署后的行为，帮助安全团队提前发现风险。它不是普通 benchmark，而是更贴近产品环境的预发布评估方法，适合观察 frontier lab 如何把 evals 接入 release gate。</p>
+          <p><strong>为什么值得看：</strong>这可能成为大模型发布流程的新基建信号：未来模型能力、政策、安全和产品体验会越来越依赖真实场景模拟，而不是只看公开榜单。</p>
+          <p><strong>后续行动：</strong>跟踪 OpenAI 是否公开更多方法细节、数据抽样策略、失败案例分类；把它映射到内部 agent 发布流程，设计“上线前模拟任务集”。</p>
+        </div>
+
+        <div class="item">
+          <h3>Nathan Lambert / Interconnects：Frontier post-training recipe review</h3>
+          <p><strong>来源账号：</strong>Nathan Lambert（natolambert）/ Interconnects</p>
+          <p><strong>发布时间：</strong>2026-06-16 13:29 UTC · <a href="https://www.interconnects.ai/p/frontier-post-training-recipe-review">原文链接</a></p>
+          <p>这期访谈围绕 frontier post-training 的实际 recipe 展开，覆盖偏好数据、RL、合成数据、模型风格与训练后调优的取舍。它的价值不在于某个单点技巧，而在于把“模型发布前最后一公里”拆成工程决策：数据怎么来，奖励怎么设，能力与行为如何一起校准。</p>
+          <p><strong>为什么值得看：</strong>Follow List 里很多 AI 研究与开源模型来源都在围绕 post-training 竞争，这篇能帮助判断哪些开源模型更新是真进步，哪些只是包装。</p>
+          <p><strong>后续行动：</strong>整理一份 post-training 观察清单：数据来源、RL 目标、拒答策略、tool-use 表现、长上下文稳定性；用于后续读模型 release note。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangChain：The Art of Loop Engineering</h3>
+          <p><strong>来源账号：</strong>Harrison Chase（hwchase17）/ LangChain Blog</p>
+          <p><strong>发布时间：</strong>2026-06-16 · <a href="https://www.langchain.com/blog/the-art-of-loop-engineering">原文链接</a></p>
+          <p>文章把 agent 的核心循环视为可设计的 harness：模型调用只是其中一环，还需要状态、工具、计划、反馈、错误恢复与观测。它强调通过堆叠和扩展不同层级的 loop，逐步构造更可靠的 agent，而不是把复杂性全部交给模型。</p>
+          <p><strong>为什么值得看：</strong>这与近期 Codex/Claude Code/Deep Agents 的行业走向一致：真正有差异的不是“能不能调用工具”，而是循环如何被约束、记录和改进。</p>
+          <p><strong>后续行动：</strong>把现有 agent 任务拆成 loop 图：输入、计划、执行、观察、评价、重试；标出每一层需要日志和预算控制的位置。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangChain：编码 agent 成本可预测化</h3>
+          <p><strong>来源账号：</strong>Harrison Chase（hwchase17）/ LangChain Blog</p>
+          <p><strong>发布时间：</strong>2026-06-15 · <a href="https://www.langchain.com/blog/how-we-made-coding-agent-spend-predictable">原文链接</a></p>
+          <p>LangChain 介绍用 LangSmith LLM Gateway 跟踪编码 agent 实时成本、按团队和用户设预算，并阻止 runaway spend。这个方向非常务实：当 agent 开始长时间自主跑任务，成本就不再是单次调用问题，而是系统治理问题。</p>
+          <p><strong>为什么值得看：</strong>AI coding 工具的采购和内部推广会越来越关注“可控成本 / 可审计效果”，这会影响工具选型和团队管理方式。</p>
+          <p><strong>后续行动：</strong>为长期运行的 coding agent 定义预算警戒线、按任务记录 token/费用/成功率；把“超预算停止并总结”作为默认行为。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangChain + Fireworks：用更便宜的 trace judge 挖生产错误信号</h3>
+          <p><strong>来源账号：</strong>Harrison Chase（hwchase17）/ LangChain Blog</p>
+          <p><strong>发布时间：</strong>2026-06-15 · <a href="https://www.langchain.com/blog/building-a-100x-cheaper-trace-judge-with-fireworks">原文链接</a></p>
+          <p>这篇文章介绍用微调开源模型从生产 traces 中挖掘“感知错误”信号，目标是在显著降低成本的同时接近 frontier judge 的效果。它把 evals 从离线问卷推进到生产观测：真实用户路径、工具调用和失败恢复都能进入评价闭环。</p>
+          <p><strong>为什么值得看：</strong>agent 产品很难只靠人工抽样评测，低成本 judge 是规模化质量控制的关键。</p>
+          <p><strong>后续行动：</strong>记录 agent 运行 trace 时预留 judge 字段：用户意图、工具选择、最终结果、可疑错误、人工复核标签。</p>
+        </div>
+
+        <h2>人物 / 机构动态</h2>
+        <ul>
+          <li><strong>OpenAI：</strong>本轮最值得关注的是 Deployment Simulation，而不是普通产品公告。Follow List 中 OpenAI 产品与研究账号后续若转发或补充细节，应优先检查。</li>
+          <li><strong>Nathan Lambert：</strong>继续把 Interconnects 定位为“frontier lab 内部视角的外部解读”。本轮内容适合长期沉淀为 post-training 知识卡。</li>
+          <li><strong>Harrison Chase / LangChain：</strong>LangChain 近期连发 agent engineering 主题文章，说明其叙事重点从框架 API 转向生产 agent 的可靠性、成本和评估。</li>
+          <li><strong>Simon Willison：</strong>连续发布 Datasette、datasette-tailscale 和 click-to-play 小工具更新，保持“可本地、可审计、渐进增强”的工程路线。</li>
+        </ul>
+
+        <h2>值得跟进项目</h2>
+        <div class="item">
+          <h3>Datasette 1.0a34 与 Datasette Agent</h3>
+          <p><strong>来源账号：</strong>Simon Willison（simonw）</p>
+          <p><strong>发布时间：</strong>2026-06-16 21:31 UTC · <a href="https://simonwillison.net/2026/Jun/16/datasette/">原文链接</a></p>
+          <p>Datasette 1.0a34 增加表格页面的插入/编辑/删除等写入能力。Simon 明确提到 Datasette Agent 推动了这项 UI 改进：如果 chat interface 已能写 SQL，常规 UI 也应该补上对应能力。</p>
+          <p><strong>为什么值得看：</strong>这是 agent 反哺传统软件界面的好例子：AI 功能暴露出的产品缺口，最后变成普通用户也能用的基础能力。</p>
+          <p><strong>后续行动：</strong>检查 Datasette Agent 的写入权限模型和审计日志；思考内部工具是否也存在“agent 能做、人类 UI 做不了”的不一致。</p>
+        </div>
+
+        <div class="item">
+          <h3>datasette-tailscale：把 Datasette 跑在 Tailscale 网络里</h3>
+          <p><strong>来源账号：</strong>Simon Willison（simonw）</p>
+          <p><strong>发布时间：</strong>2026-06-16 16:18 UTC · <a href="https://simonwillison.net/2026/Jun/16/datasette-tailscale/">原文链接</a></p>
+          <p>这是一个实验性 alpha 插件，用于把 Datasette 实例接入 Tailscale 网络。它适合私有数据浏览、团队内部只读/轻写数据工具、以及不想暴露公网的临时分析场景。</p>
+          <p><strong>为什么值得看：</strong>agent 与数据工具结合后，访问边界会变得更敏感；Tailscale 这类网络层控制能降低“为了方便临时公开服务”的风险。</p>
+          <p><strong>后续行动：</strong>后续如要搭私有数据问答/浏览工具，可评估 Datasette + Tailscale + 明确写权限的组合。</p>
+        </div>
+
+        <h2>待验证信息</h2>
+        <div class="note">
+          <p>本轮 X/Nitter/RSSHub 公开抓取没有稳定返回 Follow List 中多数账号的最新推文；未使用 Folo CLI，也没有绕过 CAPTCHA 或做反爬规避。因此，Sam Altman、Kevin Weil、Amanda Askell、Alex Albert、Logan Kilpatrick、Jeff Dean 等账号在 X 上的过去 24 小时动态没有被完整验证。下一步可在可用登录态的真实浏览器中人工打开对应公开 X URL，或为 Follow List 增加每人的官方博客/RSS/Newsletter 替代源。</p>
+        </div>
+
+        <h2>低优先级噪音</h2>
+        <ul>
+          <li>Chip Huyen、Lilian Weng 等博客 feed 本轮没有窗口内新文章，保留为高质量但低频来源。</li>
+          <li>Anthropic 新闻页本轮没有比 6 月 11-12 日 Fable/Mythos 相关更新更新的高信号条目；今日不重复展开。</li>
+          <li>LangChain 博客有多篇案例/产品文章，已筛选出与 agent loop、成本、trace judge 最相关的三篇，其余暂不纳入重点。</li>
+        </ul>
+
+        <h2>原始链接</h2>
+        <ul class="source-list">
+          <li><a href="https://openai.com/index/deployment-simulation">OpenAI - Predicting model behavior before release by simulating deployment</a></li>
+          <li><a href="https://www.interconnects.ai/p/frontier-post-training-recipe-review">Interconnects - Frontier post-training recipe review with Finbarr Timbers</a></li>
+          <li><a href="https://www.langchain.com/blog/the-art-of-loop-engineering">LangChain - The Art of Loop Engineering</a></li>
+          <li><a href="https://www.langchain.com/blog/how-we-made-coding-agent-spend-predictable">LangChain - How LangChain Made Coding Agent Spend Predictable</a></li>
+          <li><a href="https://www.langchain.com/blog/building-a-100x-cheaper-trace-judge-with-fireworks">LangChain - Building a 100x Cheaper Trace Judge with Fireworks</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/16/datasette/">Simon Willison - datasette 1.0a34</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/16/datasette-tailscale/">Simon Willison - datasette-tailscale 0.1a0</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/17/click-to-play-component/">Simon Willison - click-to-play Web Component</a></li>
+        </ul>
+
+        <footer>Generated from Follow List active sources. Public links only; no private tokens, cookies, or account-internal content included.</footer>
+      </article>
+    </main>
+  </body>
+</html>
