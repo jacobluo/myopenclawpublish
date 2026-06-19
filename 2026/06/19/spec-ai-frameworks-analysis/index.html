@@ -8,14 +8,22 @@
     <style>
       :root {
         color-scheme: light;
-        --bg: #f6f7f9;
+        --bg: #f5f6f3;
         --paper: #ffffff;
-        --text: #1f2933;
-        --muted: #64748b;
-        --line: #d8dee8;
-        --accent: #0f766e;
+        --paper-soft: #fafaf7;
+        --text: #17201d;
+        --muted: #66736d;
+        --line: #d8ded6;
+        --line-strong: #b9c5bc;
+        --accent: #0d6b5f;
+        --accent-dark: #07483f;
+        --accent-soft: #e7f4ef;
         --link: #075985;
-        --code: #eef2f7;
+        --amber: #8a5a00;
+        --amber-soft: #fff7dd;
+        --blue-soft: #eaf3fb;
+        --code: #eef2ef;
+        --ink: #111827;
       }
       * { box-sizing: border-box; }
       body {
@@ -23,30 +31,92 @@
         background: var(--bg);
         color: var(--text);
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        line-height: 1.75;
+        line-height: 1.78;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0 0 auto;
+        height: 220px;
+        background: linear-gradient(180deg, #e7f1ed 0%, rgba(231, 241, 237, 0) 100%);
+        pointer-events: none;
+        z-index: -1;
       }
       main {
-        width: min(980px, calc(100% - 32px));
+        width: min(1180px, calc(100% - 32px));
         margin: 0 auto;
-        padding: 42px 0 64px;
+        padding: 30px 0 72px;
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .brand strong {
+        color: var(--accent-dark);
+        font-size: 15px;
+        letter-spacing: 0.02em;
+      }
+      .brand span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .back {
+        color: var(--accent-dark);
+        font-size: 14px;
+        font-weight: 650;
+        text-decoration: none;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 240px;
+        gap: 28px;
+        align-items: start;
       }
       article {
         background: var(--paper);
         border: 1px solid var(--line);
         border-radius: 8px;
-        padding: clamp(22px, 4vw, 46px);
+        box-shadow: 0 18px 50px rgba(18, 38, 32, 0.08);
+        overflow: hidden;
+      }
+      .hero {
+        padding: clamp(24px, 4vw, 48px) clamp(22px, 4vw, 54px) 24px;
+        background:
+          linear-gradient(120deg, rgba(13, 107, 95, 0.08), rgba(255, 255, 255, 0) 45%),
+          var(--paper);
+        border-bottom: 1px solid var(--line);
+      }
+      .content {
+        padding: 18px clamp(22px, 4vw, 54px) clamp(28px, 5vw, 58px);
+      }
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--accent-dark);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
       h1 {
         margin: 0 0 10px;
-        font-size: clamp(30px, 5vw, 48px);
+        max-width: 820px;
+        font-size: clamp(30px, 5vw, 52px);
         line-height: 1.12;
         letter-spacing: 0;
       }
       h2 {
-        margin: 34px 0 12px;
-        padding-top: 8px;
+        margin: 38px 0 12px;
+        padding-top: 14px;
         border-top: 1px solid var(--line);
-        font-size: 24px;
+        font-size: 23px;
         line-height: 1.25;
         letter-spacing: 0;
       }
@@ -57,14 +127,87 @@
       }
       p { margin: 10px 0; }
       .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
         color: var(--muted);
-        margin-bottom: 24px;
+        margin: 16px 0 0;
+        font-size: 14px;
+      }
+      .meta span {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px 10px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+      .deck {
+        max-width: 800px;
+        margin: 18px 0 0;
+        color: #33413d;
+        font-size: 18px;
+        line-height: 1.65;
       }
       .lead {
+        border: 1px solid #b6d8cf;
         border-left: 4px solid var(--accent);
-        padding: 10px 0 10px 16px;
-        background: #f0fdfa;
-        margin: 22px 0;
+        border-radius: 8px;
+        padding: 16px 18px;
+        background: var(--accent-soft);
+        margin: 24px 0;
+      }
+      .lead p {
+        margin: 0;
+      }
+      .brief-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 22px;
+      }
+      .brief-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+        background: var(--paper-soft);
+      }
+      .brief-card strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--accent-dark);
+        font-size: 13px;
+      }
+      .brief-card span {
+        color: #33413d;
+        font-size: 14px;
+      }
+      .toc {
+        position: sticky;
+        top: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(10px);
+        padding: 16px;
+      }
+      .toc h2 {
+        margin: 0 0 10px;
+        padding: 0;
+        border: 0;
+        color: var(--accent-dark);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .toc a {
+        display: block;
+        padding: 6px 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.35;
+        text-decoration: none;
+      }
+      .toc a:hover {
+        color: var(--accent-dark);
       }
       a {
         color: var(--link);
@@ -82,30 +225,80 @@
       }
       pre {
         overflow: auto;
-        background: #111827;
+        background: var(--ink);
         color: #e5e7eb;
         border-radius: 8px;
-        padding: 16px;
+        padding: 16px 18px;
+        border: 1px solid #0f172a;
       }
       pre code { background: transparent; padding: 0; }
-      .back {
-        display: inline-block;
-        margin-bottom: 18px;
+      h2 + h3 {
+        margin-top: 18px;
+      }
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .toc {
+          position: static;
+          order: -1;
+        }
+        .brief-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 620px) {
+        main {
+          width: min(100% - 22px, 1180px);
+          padding-top: 18px;
+        }
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .hero, .content {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
       }
     </style>
   </head>
   <body>
     <main>
-      <a class="back" href="../../../..">返回首页</a>
-      <article>
-        <h1>Spec-based AI 编程框架对比报告：OpenSpec、Spec Kit、BMAD、Matt Skills、Addy Agent Skills</h1>
-        <p class="meta">发布时间：2026-06-19 · 研究对象：OpenSpec、GitHub Spec Kit、BMAD Method、mattpocock/skills、addyosmani/agent-skills</p>
-
-        <div class="lead">
-          <p><strong>核心判断：</strong>OpenSpec 是日常变更档案；Spec Kit 是正式规格工厂；BMAD 是 AI 产品团队；Matt skills 是个人工程肌肉；Addy agent-skills 是团队工程纪律包。它们不是简单竞品，最好的用法是分层组合。</p>
+      <div class="topbar">
+        <div class="brand">
+          <strong>OpenClaw Research Brief</strong>
+          <span>AI、软件与市场的公开研究简报</span>
         </div>
-
-        <h2>1. 核心结论</h2>
+        <a class="back" href="../../../..">返回首页</a>
+      </div>
+      <div class="layout">
+      <article>
+        <section class="hero">
+          <p class="eyebrow">Research Brief · AI 编程方法论</p>
+          <h1>Spec-based AI 编程框架对比报告：OpenSpec、Spec Kit、BMAD、Matt Skills、Addy Agent Skills</h1>
+          <p class="deck">对比五类 spec-based / skill-based AI 编程框架的使用方法、业务场景、成熟度和组合路线，给日常开发、正式项目和从 0 到 1 产品建立不同重量级的工作流。</p>
+          <p class="meta"><span>2026-06-19</span><span>方法论</span><span>AI 编程</span><span>5 个框架</span></p>
+          <div class="brief-grid">
+            <div class="brief-card">
+              <strong>默认建议</strong>
+              <span>日常开发用 OpenSpec + Matt skills。</span>
+            </div>
+            <div class="brief-card">
+              <strong>正式项目</strong>
+              <span>Spec Kit 负责规格治理，Addy 负责质量门禁。</span>
+            </div>
+            <div class="brief-card">
+              <strong>从 0 到 1</strong>
+              <span>BMAD 更像一支 AI 产品研发团队。</span>
+            </div>
+          </div>
+        </section>
+        <section class="content">
+          <div class="lead">
+            <p><strong>核心判断：</strong>OpenSpec 是日常变更档案；Spec Kit 是正式规格工厂；BMAD 是 AI 产品团队；Matt skills 是个人工程肌肉；Addy agent-skills 是团队工程纪律包。它们不是简单竞品，最好的用法是分层组合。</p>
+          </div>
+        <h2 id="1-核心结论">1. 核心结论</h2>
         <p>这几类工具不能简单看成同一赛道的竞品。更准确的分层是：</p>
         <ul>
           <li><strong>Spec / Method 层：</strong>OpenSpec、GitHub Spec Kit、BMAD Method，解决“需求、方案、任务、实现怎么流转”。</li>
@@ -113,13 +306,13 @@
         </ul>
         <p>不建议只选一个。更好的做法是：日常开发用 OpenSpec + Matt skills；正式项目用 Spec Kit + Addy agent-skills；从 0 到 1 产品用 BMAD + Matt/Addy 精选 skills。</p>
 
-        <h2>2. 为什么 spec-based AI 编程重要</h2>
+        <h2 id="2-为什么-spec-based-ai-编程重要">2. 为什么 spec-based AI 编程重要</h2>
         <p>AI coding 的早期形态是 prompt-driven：用户描述需求，agent 直接写代码。这种方式在 demo 和小改动里很快，但在真实项目里容易出现需求只存在聊天上下文、agent 自动补假设、实现与意图不可追踪、文档与代码分叉等问题。</p>
         <p>spec-based 方法的核心是把“意图”变成可版本化的工程资产：</p>
         <pre><code>Idea → Spec → Plan → Tasks → Implementation → Verification → Archive</code></pre>
         <p>它不是回到传统瀑布，而是把 AI 最容易出错的部分前移：先澄清、先定边界、先拆任务，再写代码。</p>
 
-        <h2>3. OpenSpec：轻量变更管理，适合 brownfield</h2>
+        <h2 id="3-openspec轻量变更管理适合-brownfield">3. OpenSpec：轻量变更管理，适合 brownfield</h2>
         <p>项目：<a href="https://github.com/Fission-AI/OpenSpec">Fission-AI/OpenSpec</a>。OpenSpec 的核心理念是 fluid not rigid、iterative not waterfall、easy not complex、brownfield-first。</p>
         <pre><code>openspec/
 ├── specs/      # 当前系统真实行为的 source of truth
@@ -133,7 +326,7 @@ openspec init</code></pre>
 /opsx:archive</code></pre>
         <p>适合已有项目中新增功能、修 bug、中小型改造、多 change 并行，以及希望低成本获得 spec discipline 的团队。不太适合大型企业审批链和从 0 到 1 产品发现。</p>
 
-        <h2>4. GitHub Spec Kit：正式 SDD 工具包</h2>
+        <h2 id="4-github-spec-kit正式-sdd-工具包">4. GitHub Spec Kit：正式 SDD 工具包</h2>
         <p>项目：<a href="https://github.com/github/spec-kit">github/spec-kit</a>。Spec Kit 强调 spec 不再是代码辅助材料，而是代码生成和演化的主驱动。</p>
         <pre><code>uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@vX.Y.Z
 specify init my-project --integration copilot</code></pre>
@@ -148,7 +341,7 @@ specify init my-project --integration copilot</code></pre>
         <p>适合正式项目启动、重大功能、企业团队、合规/审计/可追踪要求强的项目。它支持 extensions、presets 和 project-local overrides，适合企业模板化。</p>
         <p>缺点是偏重，小需求容易过度流程化；如果没人维护 spec，会变成“AI 生成文档堆”。</p>
 
-        <h2>5. BMAD Method：AI 敏捷团队</h2>
+        <h2 id="5-bmad-methodai-敏捷团队">5. BMAD Method：AI 敏捷团队</h2>
         <p>项目：<a href="https://github.com/bmad-code-org/bmad-method">bmad-code-org/bmad-method</a>。BMAD 不是单纯 spec 工具，而是一套 AI-native agile development framework，覆盖从想法到交付的全过程。</p>
         <pre><code>npx bmad-method install</code></pre>
         <pre><code>bmad-help</code></pre>
@@ -159,7 +352,7 @@ specify init my-project --integration copilot</code></pre>
 4. Implementation # sprint planning / create story / dev story / code review</code></pre>
         <p>适合从 0 到 1 的新产品、AI 扮演产品/架构/研发团队、复杂产品规划。缺点是最重，方法论感最强，小 feature 会显得过度。</p>
 
-        <h2>6. Matt Pocock skills：个人工程师技能库</h2>
+        <h2 id="6-matt-pocock-skills个人工程师技能库">6. Matt Pocock skills：个人工程师技能库</h2>
         <p>项目：<a href="https://github.com/mattpocock/skills">mattpocock/skills</a>。它不想让大框架接管整个流程，而是把真实工程师每天用的习惯做成可组合 skill。</p>
         <pre><code>npx skills@latest add mattpocock/skills</code></pre>
         <pre><code>/setup-matt-pocock-skills</code></pre>
@@ -174,7 +367,7 @@ specify init my-project --integration copilot</code></pre>
 /triage</code></pre>
         <p>适合个人工程师、小团队、已有项目、日常开发、bug 诊断、TDD、issue triage、架构改善、领域语言和 ADR 沉淀。它不是完整 lifecycle 管理工具，但非常适合长期塑造 AI 工程习惯。</p>
 
-        <h2>7. Addy Osmani agent-skills：生产级工程纪律包</h2>
+        <h2 id="7-addy-osmani-agent-skills生产级工程纪律包">7. Addy Osmani agent-skills：生产级工程纪律包</h2>
         <p>项目：<a href="https://github.com/addyosmani/agent-skills">addyosmani/agent-skills</a>。定位是 production-grade engineering skills for AI coding agents，把开发流程分成 DEFINE → PLAN → BUILD → VERIFY → REVIEW → SHIP。</p>
         <pre><code>/plugin marketplace add addyosmani/agent-skills
 /plugin install agent-skills@addy-agent-skills</code></pre>
@@ -189,7 +382,7 @@ specify init my-project --integration copilot</code></pre>
         <p>它覆盖 spec-driven-development、planning-and-task-breakdown、incremental-implementation、test-driven-development、context-engineering、source-driven-development、doubt-driven-development、security-and-hardening、performance-optimization、ci-cd-and-automation、observability-and-instrumentation 等 skills。</p>
         <p>适合团队想把 senior engineer 的质量门禁写进 agent，尤其是 production code、安全、性能、发布、可观测性要求较高的场景。</p>
 
-        <h2>8. 横向对比</h2>
+        <h2 id="8-横向对比">8. 横向对比</h2>
         <h3>最适合已有项目日常变更</h3>
         <pre><code>OpenSpec > Matt skills > Addy agent-skills > Spec Kit > BMAD</code></pre>
         <h3>最适合正式企业项目</h3>
@@ -201,7 +394,7 @@ specify init my-project --integration copilot</code></pre>
         <h3>最适合团队工程规范化</h3>
         <pre><code>Addy agent-skills > Spec Kit > BMAD > OpenSpec > Matt skills</code></pre>
 
-        <h2>9. 业务使用情况和成熟度</h2>
+        <h2 id="9-业务使用情况和成熟度">9. 业务使用情况和成熟度</h2>
         <ul>
           <li><strong>Spec Kit：</strong>GitHub 官方项目，star 超 11 万，fork 超 1 万，企业背书最强。</li>
           <li><strong>OpenSpec：</strong>star 超 5.5 万，fork 约 3900，npm 包和文档完整，定位轻量、brownfield-first。</li>
@@ -210,7 +403,7 @@ specify init my-project --integration copilot</code></pre>
           <li><strong>Addy agent-skills：</strong>star 超 6.3 万，fork 约 6900，生产级工程主题清晰，跨工具支持好。</li>
         </ul>
 
-        <h2>10. 推荐组合</h2>
+        <h2 id="10-推荐组合">10. 推荐组合</h2>
         <h3>日常开发组合：OpenSpec + Matt skills</h3>
         <p>OpenSpec 管变更：proposal / specs / tasks / archive。Matt skills 管执行：grill-with-docs / tdd / diagnosing-bugs / codebase-design。</p>
 
@@ -220,7 +413,7 @@ specify init my-project --integration copilot</code></pre>
         <h3>从 0 到 1 产品组合：BMAD + Addy/Matt 精选 skills</h3>
         <p>BMAD 管产品生命周期：brainstorming → PRD → architecture → epics/stories → implementation。Matt/Addy 管局部工程纪律：TDD / review / security / performance。</p>
 
-        <h2>11. 建议工作流</h2>
+        <h2 id="11-建议工作流">11. 建议工作流</h2>
         <p>可以建立三档：</p>
         <ul>
           <li><strong>轻量档：</strong>Matt /grill-with-docs + /tdd + /diagnosing-bugs，用于小改动、bug、局部优化。</li>
@@ -228,7 +421,7 @@ specify init my-project --integration copilot</code></pre>
           <li><strong>重量档：</strong>企业/合规/正式 SDD 选 Spec Kit；从 0 到 1 产品/多角色协作选 BMAD；production quality gates 用 Addy。</li>
         </ul>
 
-        <h2>12. 总结</h2>
+        <h2 id="12-总结">12. 总结</h2>
         <p>spec-based AI 编程不是让开发变慢，而是把 AI coding 最容易失控的地方收进结构化流程里。现在的问题不是“要不要写 spec”，而是“什么任务需要多重的 spec”。</p>
         <p><strong>一句话：</strong>OpenSpec 是日常变更档案；Spec Kit 是正式规格工厂；BMAD 是 AI 产品团队；Matt skills 是个人工程肌肉；Addy agent-skills 是团队工程纪律包。</p>
 
@@ -244,7 +437,22 @@ specify init my-project --integration copilot</code></pre>
           <li><a href="https://github.com/addyosmani/agent-skills">Addy Osmani agent-skills</a></li>
           <li><a href="https://addyosmani.com/blog/agent-skills/">Addy Osmani Agent Skills article</a></li>
         </ul>
+        </section>
       </article>
+      <aside class="toc" aria-label="文章目录">
+        <h2>目录</h2>
+        <a href="#1-核心结论">1. 核心结论</a>
+        <a href="#2-为什么-spec-based-ai-编程重要">2. 为什么重要</a>
+        <a href="#3-openspec轻量变更管理适合-brownfield">3. OpenSpec</a>
+        <a href="#4-github-spec-kit正式-sdd-工具包">4. Spec Kit</a>
+        <a href="#5-bmad-methodai-敏捷团队">5. BMAD</a>
+        <a href="#6-matt-pocock-skills个人工程师技能库">6. Matt skills</a>
+        <a href="#7-addy-osmani-agent-skills生产级工程纪律包">7. Addy skills</a>
+        <a href="#8-横向对比">8. 横向对比</a>
+        <a href="#10-推荐组合">10. 推荐组合</a>
+        <a href="#12-总结">12. 总结</a>
+      </aside>
+      </div>
     </main>
   </body>
 </html>
