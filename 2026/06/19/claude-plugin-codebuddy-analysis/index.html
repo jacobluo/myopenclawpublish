@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>从 dotey 推文看 Claude/CodeBuddy 插件架构</title>
+    <meta name="description" content="研究 dotey 关于 Claude Skill、Agent、MCP Connector、Plugin 的推文，并扩展分析 CodeBuddy 插件机制和插件开发方式。">
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7f9;
+        --paper: #ffffff;
+        --text: #1f2933;
+        --muted: #64748b;
+        --line: #d8dee8;
+        --accent: #0f766e;
+        --link: #075985;
+        --code: #eef2f7;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.75;
+      }
+
+      main {
+        width: min(980px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 42px 0 64px;
+      }
+
+      article {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: clamp(22px, 4vw, 46px);
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(30px, 5vw, 48px);
+        line-height: 1.12;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin: 34px 0 12px;
+        padding-top: 8px;
+        border-top: 1px solid var(--line);
+        font-size: 24px;
+        line-height: 1.25;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 24px 0 8px;
+        font-size: 18px;
+        letter-spacing: 0;
+      }
+
+      p { margin: 10px 0; }
+
+      .meta {
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+
+      .lead {
+        border-left: 4px solid var(--accent);
+        padding: 10px 0 10px 16px;
+        background: #f0fdfa;
+        margin: 22px 0;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration-thickness: 0.08em;
+        text-underline-offset: 0.18em;
+      }
+
+      ul, ol { padding-left: 24px; }
+      li { margin: 5px 0; }
+
+      code {
+        background: var(--code);
+        padding: 0.12em 0.35em;
+        border-radius: 4px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.92em;
+      }
+
+      pre {
+        overflow: auto;
+        background: #111827;
+        color: #e5e7eb;
+        border-radius: 8px;
+        padding: 16px;
+      }
+
+      pre code {
+        background: transparent;
+        padding: 0;
+      }
+
+      .back {
+        display: inline-block;
+        margin-bottom: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="../../../..">返回首页</a>
+      <article>
+        <h1>从 dotey 推文看 Claude/CodeBuddy 插件架构：Skill、Agent、MCP 与 Plugin</h1>
+        <p class="meta">发布时间：2026-06-19 · 研究对象：<a href="https://x.com/dotey/status/2054383106115678639">dotey 推文</a> · 扩展研究：CodeBuddy 插件机制与插件开发方式</p>
+
+        <div class="lead">
+          <p><strong>核心判断：</strong>AI 编程工具正在从“提示词 + 工具调用”进化到“可安装能力包”。Skill 是工作手册，Agent 是执行主体，MCP 是外部系统连接器，Plugin 是把这些能力打包、分发、升级和团队共享的容器。</p>
+        </div>
+
+        <h2>1. 核心结论</h2>
+        <p>这篇推文的价值在于把现在 AI Agent 生态里容易混淆的四个概念讲清楚：<strong>Skill、Agent、MCP Connector、Plugin</strong>。</p>
+        <ul>
+          <li><strong>Skill</strong> 是工作手册，告诉 Agent 怎么把一类事情做好。</li>
+          <li><strong>Agent</strong> 是执行主体，负责规划、调用工具、读写文件、并行处理任务。</li>
+          <li><strong>MCP Connector</strong> 是数据和工具连接器，把外部系统接进来。</li>
+          <li><strong>Plugin</strong> 是把 Skills、Agents、MCP、Hooks、配置和模板打包到一起的分发容器。</li>
+        </ul>
+        <p>这套分层并不是 Claude 独有。CodeBuddy Code 的插件体系已经采用了非常接近的结构：一个插件目录可以同时包含 Skills、Agents、Hooks、MCP Servers、LSP Servers、Commands、settings、可执行文件和市场元数据。</p>
+
+        <h2>2. 推文讲了什么</h2>
+        <h3>2.1 Skill：给 Agent 看的工作手册</h3>
+        <p>推文把 Skill 定义为技能、领域知识、工作流，类似“怎么干好一件事的说明书”。例如法律场景中的 <code>nda-review</code>，核心是一份 <code>SKILL.md</code>，里面写清审 NDA 时的条款比对、风险分级、升级条件和输出格式。重点是：Skill 本身不执行任务，它是给 Agent 看的作业指导书。</p>
+
+        <h3>2.2 Agent：真正执行任务的主体</h3>
+        <p>Agent 是会规划、调用工具、读取上下文、执行任务的主体。推文把自定义 Agent 分成 Subagent 和 Scheduled agent。前者适合并行处理子任务，后者适合定时自动运行。</p>
+
+        <h3>2.3 MCP Connector：把外部系统接进来</h3>
+        <p>Skill 写得再好，也需要真实数据。MCP Connector 的作用就是连接外部系统，例如合同库、文档管理、电子签、法院判例库、项目管理系统等。Agent 通过 MCP Connector 访问这些系统，而不是靠用户复制粘贴。</p>
+
+        <h3>2.4 Plugin：把以上能力打包成容器</h3>
+        <p>Plugin 是把 Skills、Agents、MCP 配置、团队 playbook、模板等打包到一起的容器。安装一个 plugin，就等于一次性装好某个业务场景的完整 AI 工作能力。</p>
+
+        <h2>3. 这套模型为什么重要</h2>
+        <p>企业真实场景里，提示词远远不够，因为需要可复用流程、团队知识、真实系统连接、执行边界、版本化分发和后台任务。用软件工程语言说：Prompt 是一次性参数，Skill 是可复用 SOP，Agent 是运行时执行器，MCP 是 I/O 接口，Plugin 是包管理和分发单元。</p>
+
+        <h2>4. CodeBuddy 的插件机制</h2>
+        <p>CodeBuddy 官方文档把插件定义为一个自包含组件目录，用于扩展 CodeBuddy 的自定义功能。插件组件包括 Skills、Agents、Hooks、MCP Servers、LSP Servers、Commands、output styles、settings 和可执行文件。</p>
+        <p>这与推文里的 Claude plugin 架构非常接近，只是 CodeBuddy 把 CLI 产品里的文件约定和分发机制写得更工程化。</p>
+
+        <h2>5. CodeBuddy 插件目录结构</h2>
+        <pre><code>enterprise-plugin/
+├── .codebuddy-plugin/
+│   └── plugin.json
+├── commands/
+│   ├── status.md
+│   └── logs.md
+├── agents/
+│   ├── security-reviewer.md
+│   └── performance-tester.md
+├── skills/
+│   ├── code-reviewer/
+│   │   └── SKILL.md
+│   └── pdf-processor/
+│       ├── SKILL.md
+│       └── scripts/
+├── output-styles/
+│   └── terse.md
+├── hooks/
+│   └── hooks.json
+├── bin/
+│   └── my-tool
+├── settings.json
+├── .mcp.json
+└── .lsp.json</code></pre>
+        <p>关键点：<code>.codebuddy-plugin/plugin.json</code> 放插件元数据；<code>skills/</code> 放 Agent Skills；<code>agents/</code> 放子代理定义；<code>commands/</code> 放 slash command；<code>hooks/</code> 放事件钩子；<code>.mcp.json</code> 放 MCP 服务；<code>.lsp.json</code> 放语言服务器配置；<code>bin/</code> 里的可执行文件会加入 PATH。</p>
+
+        <h2>6. plugin.json 怎么写</h2>
+        <p>最小版本：</p>
+        <pre><code>{
+  "name": "my-first-plugin",
+  "version": "0.1.0",
+  "description": "My first CodeBuddy plugin"
+}</code></pre>
+        <p>团队分发时建议写完整元数据：</p>
+        <pre><code>{
+  "name": "enterprise-review",
+  "version": "1.2.0",
+  "description": "Enterprise code review workflows for CodeBuddy",
+  "author": {
+    "name": "DevTools Team",
+    "email": "devtools@example.com",
+    "url": "https://github.com/example"
+  },
+  "homepage": "https://docs.example.com/enterprise-review",
+  "repository": "https://github.com/example/enterprise-review",
+  "license": "MIT",
+  "keywords": ["code-review", "security", "compliance"]
+}</code></pre>
+
+        <h2>7. Skills 怎么开发</h2>
+        <p>CodeBuddy 的 Skill 与 Claude Skills 非常像：一个 Skill 是包含 <code>SKILL.md</code> 的目录。</p>
+        <pre><code>skills/
+└── pr-review/
+    ├── SKILL.md
+    ├── references/
+    │   └── review-checklist.md
+    └── scripts/
+        └── collect-diff.sh</code></pre>
+        <p><code>SKILL.md</code> 示例：</p>
+        <pre><code>---
+description: Review a pull request for correctness, security, tests, and maintainability
+---
+
+# PR Review Skill
+
+When reviewing a pull request:
+
+1. Inspect the diff and identify behavior-changing code.
+2. Check correctness, security risk, error handling, and test coverage.
+3. Prioritize findings by severity.
+4. Avoid style-only comments unless they block maintainability.
+5. Return findings first, then open questions, then a short summary.</code></pre>
+        <p>安装插件后，Skill 会变成带命名空间的 slash command，例如 <code>/enterprise-review:pr-review</code>。CodeBuddy 还支持 <code>$ARGUMENTS</code> 占位符，用来接收用户在命令后输入的参数。</p>
+
+        <h2>8. Agents 怎么开发</h2>
+        <p>插件可以提供专门子代理。Agent 文件放在 <code>agents/</code> 目录下，是带 frontmatter 的 Markdown。</p>
+        <pre><code>---
+name: security-reviewer
+description: Reviews code changes for security vulnerabilities and risky data flows
+model: sonnet
+effort: medium
+maxTurns: 20
+disallowedTools: Write, Edit
+---
+
+You are a security reviewer.
+
+Focus on authentication, authorization, input validation, secret handling,
+SSRF, SQL injection, XSS, path traversal, and unsafe shell execution.
+
+Return concrete findings with file and line references. Do not modify files.</code></pre>
+        <p>CodeBuddy 文档列出的插件 Agent frontmatter 字段包括 <code>name</code>、<code>description</code>、<code>model</code>、<code>effort</code>、<code>maxTurns</code>、<code>tools</code>、<code>disallowedTools</code>、<code>skills</code>、<code>memory</code>、<code>background</code> 和 <code>isolation</code>。</p>
+
+        <h2>9. MCP Servers 怎么接</h2>
+        <p>如果插件需要连接外部系统，可以在插件根目录写 <code>.mcp.json</code>，或在 <code>plugin.json</code> 中内联配置。</p>
+        <pre><code>{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    }
+  }
+}</code></pre>
+        <p>这对应推文中的 MCP Connector：Agent 不直接知道怎么访问 GitHub/Jira/Figma/Sentry，而是通过 MCP Server 获取标准化工具能力。</p>
+
+        <h2>10. Hooks 和 LSP 的意义</h2>
+        <p><strong>Hooks</strong> 适合做运行前安全检查、命令执行前拦截、编辑后格式化、自动日志记录和团队合规检查。它让插件从“被动被调用”变成“能挂在 Agent 生命周期上”。</p>
+        <p><strong>LSP Servers</strong> 让 CodeBuddy 获得自动诊断、跳转定义、查找引用、获取类型信息等代码智能。官方文档说明，LSP 插件只配置 CodeBuddy 如何连接语言服务器，不包含语言服务器二进制本身。</p>
+
+        <h2>11. 插件开发完整流程</h2>
+        <pre><code>mkdir my-first-plugin
+mkdir my-first-plugin/.codebuddy-plugin
+mkdir -p my-first-plugin/skills/hello</code></pre>
+        <p>创建 <code>my-first-plugin/.codebuddy-plugin/plugin.json</code>：</p>
+        <pre><code>{
+  "name": "my-first-plugin",
+  "version": "0.1.0",
+  "description": "A simple plugin for learning CodeBuddy plugins"
+}</code></pre>
+        <p>创建 <code>my-first-plugin/skills/hello/SKILL.md</code>：</p>
+        <pre><code>---
+description: Greet the user with a personalized message
+---
+
+# Hello Skill
+
+Greet the user named "$ARGUMENTS" warmly and ask how you can help them today.</code></pre>
+        <p>开发期用本地插件目录测试：</p>
+        <pre><code>codebuddy --plugin-dir ./my-first-plugin</code></pre>
+        <p>进入 CodeBuddy 后运行：</p>
+        <pre><code>/reload-plugins
+/my-first-plugin:hello Alex</code></pre>
+
+        <h2>12. 插件如何分发</h2>
+        <p>CodeBuddy 插件可以通过 Marketplace 分发。一个市场本质上是一个 Git 仓库，根目录包含 <code>.codebuddy-plugin/marketplace.json</code>。</p>
+        <pre><code>{
+  "name": "company-tools",
+  "owner": {
+    "name": "DevTools Team",
+    "email": "devtools@example.com"
+  },
+  "plugins": [
+    {
+      "name": "code-formatter",
+      "source": "./plugins/formatter",
+      "description": "Automatic code formatting on save",
+      "version": "2.1.0"
+    }
+  ]
+}</code></pre>
+        <p>使用方式：</p>
+        <pre><code>/plugin marketplace add your-org/codebuddy-plugins
+/plugin
+/plugin install commit-commands@your-org-codebuddy-plugins
+/reload-plugins
+/commit-commands:commit</code></pre>
+
+        <h2>13. 安装作用域与团队分发</h2>
+        <p>CodeBuddy 支持 <code>user</code>、<code>project</code>、<code>local</code> 和 <code>managed</code> 作用域。团队可以在 <code>.codebuddy/settings.json</code> 中写 <code>extraKnownMarketplaces</code> 和 <code>enabledPlugins</code>，让协作者打开项目时自动安装市场和插件。</p>
+        <pre><code>{
+  "extraKnownMarketplaces": {
+    "my-team-tools": {
+      "source": {
+        "source": "github",
+        "repo": "your-org/codebuddy-plugins"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "enterprise-review@my-team-tools": true
+  }
+}</code></pre>
+
+        <h2>14. 安全边界</h2>
+        <p>CodeBuddy 官方文档提醒：插件和市场是高度受信任的组件，可以以用户权限在本机执行任意代码。建议只安装可信来源插件，企业内部维护自己的 marketplace，对插件仓库做 code review，锁定版本，不硬编码 token，MCP 通过环境变量读取密钥，Hooks 中避免执行不可审计的远程脚本。</p>
+        <p>另一个细节：CodeBuddy 会把市场插件复制到本地缓存 <code>~/.codebuddy/plugins/cache</code>，已安装插件无法引用插件目录之外的文件。开发插件时不要依赖 <code>../shared-utils</code> 这类外部路径。</p>
+
+        <h2>15. 对 OpenClaw 的启发</h2>
+        <ol>
+          <li><strong>Skill 负责方法论：</strong>报告写作、项目分析、招投标分析、GitHub issue 处理，都应该沉淀成 Skill。</li>
+          <li><strong>Agent 负责执行隔离：</strong>长报告可以拆成搜索 Agent、代码 Agent、财务 Agent、写作 Agent。</li>
+          <li><strong>MCP/Connector 负责数据：</strong>GitHub、Feishu、Obsidian、墨问、Follow、网页搜索、证券数据都应该被抽象成连接器。</li>
+          <li><strong>Plugin 负责打包分发：</strong>一个“AI 投研插件”可以包括财报 Skill、公告抓取 MCP、产业链分析 Agent、报告模板、GitHub Pages 发布流程。</li>
+          <li><strong>Marketplace 负责团队扩散：</strong>对团队是可审查、可版本化、可统一安装的能力市场。</li>
+        </ol>
+
+        <h2>16. 可以设计一个什么插件</h2>
+        <p>以我们的工作流为例，可以做一个 <code>research-report</code> 插件：</p>
+        <pre><code>research-report/
+├── .codebuddy-plugin/
+│   └── plugin.json
+├── skills/
+│   ├── github-project-report/
+│   │   └── SKILL.md
+│   ├── public-company-analysis/
+│   │   └── SKILL.md
+│   └── tender-analysis/
+│       └── SKILL.md
+├── agents/
+│   ├── source-verifier.md
+│   ├── codebase-reader.md
+│   └── investment-mapper.md
+├── commands/
+│   ├── publish-report.md
+│   └── update-index.md
+├── .mcp.json
+└── settings.json</code></pre>
+        <p>它能提供 GitHub 项目分析、招投标分析、来源核验、产业链映射、报告发布等能力。这就是从“会写报告的助手”升级为“可安装的报告生产系统”。</p>
+
+        <h2>17. 总结</h2>
+        <p>dotey 这篇推文看似是在解释 Claude for Legal，其实讲的是下一代 Agent 产品的基本架构：工作流知识用 Skill 封装，执行用 Agent，外部系统用 MCP Connector，整体能力用 Plugin 分发。</p>
+        <p>CodeBuddy 的插件机制说明，这个方向已经进入工程实现阶段。未来 AI 编程工具竞争，不只是谁的模型更强，而是谁能形成更好的“能力包生态”。团队真正需要的不是一个个提示词，而是可安装、可审查、可升级、可复用的插件。</p>
+
+        <h2>参考来源</h2>
+        <ul>
+          <li><a href="https://x.com/dotey/status/2054383106115678639">dotey 原推</a></li>
+          <li><a href="https://www.sina.cn/news/detail/5298055268008864.html">新浪镜像文本</a></li>
+          <li><a href="https://platform.claude.com/docs/zh-CN/agents-and-tools/agent-skills/overview">Claude Agent Skills 文档</a></li>
+          <li><a href="https://www.codebuddy.ai/docs/cli/plugins">CodeBuddy 插件创建文档</a></li>
+          <li><a href="https://www.codebuddy.ai/docs/zh/cli/plugins-reference">CodeBuddy 插件参考文档</a></li>
+          <li><a href="https://www.codebuddy.ai/docs/zh/cli/plugin-marketplaces">CodeBuddy 插件市场文档</a></li>
+          <li><a href="https://www.codebuddy.ai/docs/cli/sdk">CodeBuddy Agent SDK 文档</a></li>
+          <li><a href="https://www.tencentcloud.com/zh/document/product/1256/77266">腾讯云 CodeBuddy 产品概述</a></li>
+        </ul>
+      </article>
+    </main>
+  </body>
+</html>
