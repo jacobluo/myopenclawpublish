@@ -280,10 +280,10 @@ h1 {
   max-width: 780px;
   margin: 0;
   color: var(--primary);
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(28px, 3.2vw, 38px);
   font-weight: 600;
   line-height: 1.14;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .deck,
@@ -611,8 +611,8 @@ footer {
   }
 
   h1 {
-    font-size: 32px;
-    line-height: 38px;
+    font-size: 28px;
+    line-height: 34px;
   }
 
   .post {
