@@ -21,7 +21,7 @@
       </header>
 
       <section class="summary">
-        <strong>总览：</strong>Loop engineering 不是“写一个更长的 prompt”，而是把人原来反复做的发现、分派、检查、记忆、升级交给一个可审计的外部循环系统。Harness engineering 解决单次 agent run 如何可靠执行；loop engineering 解决跨时间、跨任务、跨多次运行如何持续发现、推进、验证和交接。
+        <strong>总览：</strong>Loop engineering 不是“写一个更长的 prompt”，而是把人原来反复做的发现、分派、检查、记忆、预算控制和升级交给一个可审计的外部循环系统。Harness engineering 解决单次 agent run 如何可靠执行；loop engineering 解决跨时间、跨任务、跨多次运行如何持续发现、推进、验证和交接。真正的工程价值不在“循环调用模型”，而在把循环做成有状态、有成本边界、有验证者、有停机条件的运营系统。
       </section>
 
       <section>
@@ -147,6 +147,109 @@
       </section>
 
       <section>
+        <h2>GitHub 仓库拆解</h2>
+        <p><a href="https://github.com/cobusgreyling/loop-engineering">cobusgreyling/loop-engineering</a> 的价值不只是整理概念，它更像一个“loop engineering 参考实现”：用文档定义方法论，用 patterns 把方法论产品化，用 starters 降低采用门槛，用 skills 固化执行规则，用 CLI 工具做评分、成本估算和脚手架，再用 GitHub Actions 在仓库自己身上运行这些规则。</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>层级</th>
+              <th>仓库里的对应物</th>
+              <th>工程含义</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>概念层</td>
+              <td><code>docs/primitives.md</code>、<code>docs/loop-design-checklist.md</code>、<code>docs/safety.md</code>、<code>docs/operating-loops.md</code></td>
+              <td>把 loop 拆成调度、状态、技能、验证、预算、升级等原语，避免大家把它误解成“定时 prompt”。</td>
+            </tr>
+            <tr>
+              <td>模式层</td>
+              <td><code>patterns/*.md</code>、<code>patterns/registry.yaml</code></td>
+              <td>把常见 loop 做成可选模式，例如 daily triage、PR babysitter、CI sweeper、dependency sweeper。<code>registry.yaml</code> 让模式可以被工具读取。</td>
+            </tr>
+            <tr>
+              <td>脚手架层</td>
+              <td><code>starters/*</code>、<code>templates/*</code></td>
+              <td>把“我想试试”变成“复制一套最小可运行结构”。每个 starter 通常包含 <code>LOOP.md</code>、state 示例、预算和运行日志模板。</td>
+            </tr>
+            <tr>
+              <td>技能层</td>
+              <td><code>skills/loop-triage</code>、<code>loop-verifier</code>、<code>loop-budget</code>、<code>minimal-fix</code></td>
+              <td>把执行纪律写进可复用 skill：如何 triage、如何验收、如何控制预算、如何限制小修复边界。</td>
+            </tr>
+            <tr>
+              <td>工具层</td>
+              <td><code>tools/loop-init</code>、<code>loop-audit</code>、<code>loop-cost</code></td>
+              <td>把方法论变成可运行命令：初始化 loop、检查成熟度、估算 token 成本。</td>
+            </tr>
+            <tr>
+              <td>运行层</td>
+              <td><code>LOOP.md</code>、<code>STATE.md</code>、<code>loop-budget.md</code>、<code>loop-run-log.md</code>、<code>.github/workflows/*</code></td>
+              <td>仓库自己 dogfood：记录活跃 loop、预算、状态、运行历史，并用 CI 做 registry/audit 验证。</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="item">
+          <h3>1. <code>LOOP.md</code> 是运营合同，不是普通 README</h3>
+          <p>它列出当前活跃 loop：Daily Triage 是 L1 report-only，PR Babysitter 是 L2 assisted，Dependency Sweeper 是 L2 patch-only，Changelog Drafter 是 L1 draft-only。每个 loop 都有 cadence、状态文件、技能、允许动作和人类交接规则。这相当于把“自动化可以做什么、不能做什么、什么时候升级”写成仓库级合同。</p>
+        </div>
+        <div class="item">
+          <h3>2. <code>loop-audit</code> 把“成熟度”变成可检查信号</h3>
+          <p>这个 CLI 会给项目打 0-100 的 Loop Readiness 分数，检查是否有 state file、triage skill、verifier、<code>LOOP.md</code>、<code>AGENTS.md</code>、safety docs、GitHub workflow、MCP/connectors、worktree evidence、registry、budget、run log 和真实活动证据。最重要的是 L3 不是“文件齐了就行”，还要求 verifier、状态、成本可观测性和 proven loop activity。</p>
+        </div>
+        <div class="item">
+          <h3>3. <code>loop-cost</code> 把 token 成本放到设计阶段</h3>
+          <p>高频 loop 最大的问题不是写不出来，而是运行成本被 cadence 线性放大。仓库里的 cost model 区分 no-op、full triage、action every run 和 realistic blend。比如 CI sweeper、PR babysitter 这类 5-15 分钟级 loop，如果没有 early exit 和预算上限，很容易从“自动化助手”变成成本黑洞。</p>
+        </div>
+        <div class="item">
+          <h3>4. <code>loop-init</code> 解决采用门槛，但也暴露模板化风险</h3>
+          <p>它可以按 pattern 和工具生成 starter，例如 daily-triage、pr-babysitter、ci-sweeper，并支持 Grok、Claude、Codex 等不同运行环境。好处是团队能快速起步；风险是容易 cargo cult：文件都复制了，但没有结合本项目修改 allowlist、denylist、状态字段、预算和验收标准。</p>
+        </div>
+        <div class="item">
+          <h3>5. Skills 是执行纪律的载体</h3>
+          <p><code>loop-triage</code> 要求只输出今天工程师真正该关心的高优先级事项；<code>loop-verifier</code> 默认从怀疑出发，要求检查 scope、测试、diff 和风险；<code>loop-budget</code> 在运行前检查预算和 kill switch，在结束时记录 run log；<code>minimal-fix</code> 限制 agent 只解决一个明确问题。这些 skill 把“经验丰富的工程师会怎么做”沉淀成可重复约束。</p>
+        </div>
+        <div class="item">
+          <h3>6. GitHub Actions 的 dogfood 很关键，但它不是魔法自治</h3>
+          <p><code>daily-triage.yml</code> 会更新状态、追加 run log、跑 validate/audit gates，并通过 PR 形式写回仓库。这个设计很实际：先用确定性 CI 和脚本承载 loop 外壳，再逐步加入 agent 能力。它说明 loop engineering 的第一步不是追求完全自主，而是把后台运行、状态变更、验证和人类 review 通路先搭起来。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>仓库优点与不足</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>优点：方法论有可执行物</h3>
+            <p>不是只讲概念，而是提供 starter、skill、registry、CLI 和 workflow。读完可以直接在项目里试一个 L1 loop。</p>
+          </div>
+          <div class="card">
+            <h3>优点：治理意识强</h3>
+            <p>预算、运行日志、kill switch、human gate、denylist、maker/checker 分离都是默认一等公民。</p>
+          </div>
+          <div class="card">
+            <h3>优点：从 L1 到 L3 有梯度</h3>
+            <p>先 report-only，再 assisted，再 unattended-capable，符合真实团队采用自动化的信任曲线。</p>
+          </div>
+          <div class="card">
+            <h3>不足：评分不等于业务价值</h3>
+            <p><code>loop-audit</code> 能检查结构完整性，但不能证明 loop 真能减少人工负担、降低故障时间或提高交付质量。</p>
+          </div>
+          <div class="card">
+            <h3>不足：安全多数仍是策略层</h3>
+            <p>文档和 denylist 很重要，但更强的生产级方案还需要权限隔离、沙箱、密钥边界、审计日志和回滚机制配合。</p>
+          </div>
+          <div class="card">
+            <h3>不足：非代码场景样例还少</h3>
+            <p>仓库以工程仓库维护为主。研究、投研、内容分析、知识库维护这类 loop，需要再抽象 object type、证据标准和发布 gate。</p>
+          </div>
+        </div>
+        <p class="why"><strong>我的判断：</strong>这个仓库目前最适合当“loop 工程化检查表 + starter kit”，不应该直接当生产系统照搬。真正落地时，要把它的结构迁移到自己的工作流：明确数据源、状态字段、预算、动作边界、验收人和发布规则。</p>
+      </section>
+
+      <section>
         <h2>工程价值</h2>
         <div class="grid">
           <div class="card"><h3>响应速度</h3><p>CI 红了、PR 卡住、issue 噪音增加时，不再等人主动巡检。</p></div>
@@ -198,7 +301,25 @@
         </table>
 
         <h3>推荐第一个 loop：Daily Research Triage</h3>
-        <p>每天从指定来源发现高价值 AI engineering / agent engineering 信号，写入 <code>STATE.md</code>：候选主题、证据链接、优先级、建议动作。L1 阶段只整理，不自动发布；发布需要人确认。</p>
+        <p>每天从指定来源发现高价值 AI engineering / agent engineering 信号，写入 <code>research-triage-state.md</code>：候选主题、证据链接、对象类型、优先级、建议动作。L1 阶段只整理，不自动发布；发布需要人确认。</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>组件</th>
+              <th>建议设计</th>
+              <th>原因</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>输入源</td><td>Follow/RSS、GitHub trending、用户丢来的 URL、OpenClaw memory、已有报告索引。</td><td>先覆盖高信号入口，不追求全网爬取。</td></tr>
+            <tr><td>对象类型</td><td>博客文章、GitHub 仓库、技术点、论文/标准、产品发布、争议话题。</td><td>不同对象不能用同一套分析模板，否则会变浅。</td></tr>
+            <tr><td>分析模板</td><td>博客看论点链路；仓库看架构、文件结构、工具链、维护活跃度；技术点看定义、边界、替代方案和实践路径。</td><td>深度来自对象适配，而不是加长 prompt。</td></tr>
+            <tr><td>状态文件</td><td><code>research-triage-state.md</code> + <code>research-run-log.md</code>。</td><td>避免重复研究同一话题，保留上次判断和待验证假设。</td></tr>
+            <tr><td>预算</td><td>无新高信号来源时 early exit；深研任务单独申请预算。</td><td>日常 triage 低成本，深研按需启动。</td></tr>
+            <tr><td>发布 gate</td><td>L1 只产出候选；L2 可起草 Pages 报告；发布前保留人工确认。</td><td>研究报告会影响判断，不能把自动发布作为默认动作。</td></tr>
+          </tbody>
+        </table>
 
         <h3>适合 OpenClaw / 个人工作流的三个候选</h3>
         <div class="grid">
