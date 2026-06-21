@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loop Engineering 深度研究报告</title>
+    <meta name="description" content="解释 loop engineering 的概念、工程实践、工程价值，以及它与 agent harness engineering 的区别，并给出落地建议。">
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #111318;
+        --muted: #5f6675;
+        --line: #dbe1ea;
+        --soft: #f5f7fa;
+        --panel: #ffffff;
+        --green: #0b8f65;
+        --blue: #1d61c9;
+        --amber: #a66b00;
+        --red: #b54234;
+        --violet: #6552b8;
+        --radius: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: #eef2f6;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 15px;
+        line-height: 1.72;
+      }
+
+      a {
+        color: var(--blue);
+        text-decoration-thickness: .08em;
+        text-underline-offset: .2em;
+      }
+
+      main {
+        width: min(1320px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 22px 0 72px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 48px;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 22px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .brand strong {
+        color: var(--ink);
+        font-size: 14px;
+      }
+
+      .back {
+        color: var(--muted);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr);
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+
+      .hero-main,
+      .hero-side,
+      .section,
+      .toc {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--panel);
+        box-shadow: 0 14px 36px rgba(28, 38, 56, .08);
+      }
+
+      .hero-main {
+        padding: clamp(26px, 4vw, 44px);
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 980px;
+        font-size: clamp(34px, 6vw, 70px);
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+
+      .deck {
+        max-width: 860px;
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .hero-side {
+        padding: 20px;
+      }
+
+      .hero-side h2 {
+        margin: 0 0 12px;
+        font-size: 17px;
+      }
+
+      .hero-side ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .hero-side li {
+        margin: 8px 0;
+        color: var(--muted);
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fbfcfd;
+        padding: 13px;
+      }
+
+      .metric b {
+        display: block;
+        font-size: 24px;
+        line-height: 1.2;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .toc {
+        position: sticky;
+        top: 16px;
+        padding: 16px;
+      }
+
+      .toc h2 {
+        margin: 0 0 12px;
+        font-size: 14px;
+      }
+
+      .toc a {
+        display: block;
+        border-radius: 6px;
+        padding: 7px 8px;
+        color: var(--muted);
+        font-size: 13px;
+        text-decoration: none;
+      }
+
+      .toc a:hover {
+        background: #edf4ff;
+        color: var(--blue);
+      }
+
+      .section {
+        margin-bottom: 18px;
+        padding: clamp(22px, 3vw, 34px);
+      }
+
+      h2 {
+        margin: 0 0 12px;
+        font-size: 28px;
+        line-height: 1.18;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 22px 0 8px;
+        font-size: 19px;
+      }
+
+      p {
+        margin: 10px 0;
+        color: #333a46;
+      }
+
+      .lead {
+        color: var(--ink);
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .callout {
+        border-left: 4px solid var(--green);
+        background: #f3fbf7;
+        border-radius: 0 var(--radius) var(--radius) 0;
+        margin: 18px 0;
+        padding: 14px 16px;
+      }
+
+      .warning {
+        border-left-color: var(--amber);
+        background: #fff8ea;
+      }
+
+      .danger {
+        border-left-color: var(--red);
+        background: #fff3f1;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .box {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fbfcfd;
+        padding: 14px;
+      }
+
+      .box h3 {
+        margin-top: 0;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 4px 9px;
+        background: #edf4ff;
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 8px;
+        margin: 18px 0;
+      }
+
+      .flow span {
+        min-height: 84px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fbfcfd;
+        padding: 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .flow b {
+        display: block;
+        color: var(--ink);
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        margin: 16px 0;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 11px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: #edf1f6;
+        color: #3f4958;
+        font-size: 12px;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      td {
+        color: #2e3541;
+      }
+
+      code {
+        border-radius: 4px;
+        background: #edf1f6;
+        padding: .12em .35em;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: .92em;
+      }
+
+      .source-list li {
+        margin: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        .hero,
+        .layout,
+        .grid-2,
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+
+        .toc {
+          position: static;
+        }
+
+        .metrics {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .flow {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        table {
+          display: block;
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav class="topbar" aria-label="导航">
+        <div class="brand"><strong>OpenClaw Research Brief</strong><span>AI 工程方法论</span></div>
+        <a class="back" href="../../../../">返回首页</a>
+      </nav>
+
+      <header class="hero">
+        <div class="hero-main">
+          <p class="eyebrow">Research report · 2026-06-21</p>
+          <h1>Loop Engineering：从提示词走向可运营的 Agent 循环</h1>
+          <p class="deck">Loop engineering 是 AI 编程代理从“人驱动的一次次 prompt”走向“系统驱动的持续工作流”的工程化阶段。它把发现任务、分派执行、验证结果、记录状态、升级给人这些动作设计成可重复、可审计、可暂停的循环。</p>
+          <div class="metrics" aria-label="核心结论">
+            <div class="metric"><b>1 层更高</b><span>位于 harness 之上</span></div>
+            <div class="metric"><b>5+1</b><span>调度、worktree、skills、connector、subagent、memory</span></div>
+            <div class="metric"><b>L1 先行</b><span>报告型循环优先于自动修改</span></div>
+            <div class="metric"><b>人仍负责</b><span>判断、验收、边界与风险</span></div>
+          </div>
+        </div>
+        <aside class="hero-side">
+          <h2>一句话判断</h2>
+          <ul>
+            <li>Prompt engineering 优化单次对话。</li>
+            <li>Harness engineering 优化单次 agent run 的运行环境。</li>
+            <li>Loop engineering 优化跨时间、跨任务、跨多次运行的工作系统。</li>
+            <li>真正的价值不是“无人值守”，而是把重复监督变成可度量的系统。</li>
+          </ul>
+        </aside>
+      </header>
+
+      <div class="layout">
+        <aside class="toc" aria-label="目录">
+          <h2>目录</h2>
+          <a href="#summary">执行摘要</a>
+          <a href="#definition">概念定义</a>
+          <a href="#why-now">为什么现在流行</a>
+          <a href="#harness">与 harness 区别</a>
+          <a href="#practice">工程实践</a>
+          <a href="#value">工程价值</a>
+          <a href="#risks">风险与反模式</a>
+          <a href="#advice">落地建议</a>
+          <a href="#sources">资料来源</a>
+        </aside>
+
+        <article>
+          <section class="section" id="summary">
+            <h2>执行摘要</h2>
+            <p class="lead">Loop engineering 的核心不是“让 agent 自己干活”，而是“设计一个能反复唤起 agent、约束 agent、检查 agent、并把进度写回外部状态的控制系统”。</p>
+            <p>它的出现是 AI 编程代理成熟后的自然结果：当 Claude Code、Codex、Cursor、Grok 等工具已经具备调度、技能、连接器、工作区隔离和多代理能力后，工程师的杠杆点从“如何写一个好 prompt”转向“如何设计一个可持续运行的闭环”。Addy Osmani 把它概括为：不要再做那个不断提示 agent 的人，而是设计替你提示 agent 的系统。</p>
+            <p>这不是一个全新的框架，而是一种系统设计范式。成熟的 loop 不应该一开始就自动改代码、自动合并、自动发布。正确路线是从 L1 report-only 开始，让 loop 先负责发现、整理、记录和提醒；等它的信号质量稳定后，再逐步开放小范围动作，例如修复格式、补测试、处理依赖补丁或起草 PR。</p>
+          </section>
+
+          <section class="section" id="definition">
+            <h2>概念定义</h2>
+            <p>Loop engineering 可以定义为：为 AI agent 设计一个可重复运行的外部控制循环，使它能够按固定或事件驱动的节奏发现任务、读取上下文、调用技能、分派子代理、隔离执行、验证结果、更新状态，并在不确定或高风险时交还给人。</p>
+            <div class="flow" aria-label="loop 工程基本流程">
+              <span><b>发现</b>定时或事件触发，扫描 CI、PR、issue、数据源、日志。</span>
+              <span><b>归类</b>调用 triage skill，把信号分成噪音、建议、待行动。</span>
+              <span><b>分派</b>为可行动项开 worktree，交给实现 agent 或专门技能。</span>
+              <span><b>验证</b>由独立 checker 运行测试、审查 diff、判断是否满足停止条件。</span>
+              <span><b>记录</b>把尝试、结果、失败原因和下次动作写入外部 state。</span>
+              <span><b>升级</b>遇到高风险、歧义或多次失败时，带上下文交给人。</span>
+            </div>
+            <p>这套流程里最关键的不是“循环”两个字，而是循环外部的工程约束：状态文件、预算、权限、停止条件、回滚路径、观察指标和人类交接规则。没有这些，loop 只是一个会重复犯错的 cron prompt。</p>
+          </section>
+
+          <section class="section" id="why-now">
+            <h2>为什么现在流行</h2>
+            <div class="grid-2">
+              <div class="box">
+                <h3>1. 工具原语成熟</h3>
+                <p>调度、skills、MCP connector、subagent、worktree 这些能力已经从自建脚本变成主流 agent 工具的内置能力。Codex automations 可以定时运行并进入 triage；skills 可以把可复用工作流封装成可触发知识包；subagents 可以并行探索或承担 maker/checker 分工。</p>
+              </div>
+              <div class="box">
+                <h3>2. 单次 prompt 的边际收益下降</h3>
+                <p>复杂工程任务的问题不再只是“模型听不懂”，而是它需要跨多个运行窗口保持上下文、处理失败、避免重复劳动、控制成本和知道什么时候停。单次 prompt 很难承担这些运营职责。</p>
+              </div>
+              <div class="box">
+                <h3>3. 长任务暴露记忆断层</h3>
+                <p>Anthropic 的长运行 agent 文章指出，多窗口任务会遇到“每个新 session 都像新人接班”的问题。Loop 的 state/memory 机制就是为了解决跨运行交接。</p>
+              </div>
+              <div class="box">
+                <h3>4. 团队开始关心运营指标</h3>
+                <p>当 agent 从玩具变成团队工具，问题从“能不能生成代码”变成“能否降低响应时间、减少人类扫尾、稳定处理重复流程”。这天然需要 loop 而不是聊天。</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="harness">
+            <h2>Loop Engineering 与 Harness Engineering 的区别</h2>
+            <p class="lead">最简单的区分：harness 是 agent 一次运行时的“装备和跑道”；loop 是让多次运行形成持续工作的“运营系统”。</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>维度</th>
+                  <th>Harness Engineering</th>
+                  <th>Loop Engineering</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>关注层级</td>
+                  <td>单个 agent run 的上下文、工具、沙箱、提示、hook、观察性。</td>
+                  <td>跨运行、跨时间、跨任务的发现、分派、验证、记忆和升级。</td>
+                </tr>
+                <tr>
+                  <td>核心问题</td>
+                  <td>“怎样让这个 agent 在这次任务中不迷路、不误操作？”</td>
+                  <td>“怎样让系统每天/每小时自己发现该做什么，并可靠推进？”</td>
+                </tr>
+                <tr>
+                  <td>典型产物</td>
+                  <td><code>AGENTS.md</code>、skill、工具描述、沙箱规则、hook、测试命令。</td>
+                  <td><code>STATE.md</code>、调度器、run log、budget、watchlist、handoff inbox。</td>
+                </tr>
+                <tr>
+                  <td>失败模式</td>
+                  <td>工具太危险、上下文不够、prompt 不清、验证缺失。</td>
+                  <td>重复修错、状态漂移、通知疲劳、成本失控、无人确认却自动行动。</td>
+                </tr>
+                <tr>
+                  <td>工程比喻</td>
+                  <td>给工人配工具、护具、说明书和验收标准。</td>
+                  <td>设计班次、工单流、质检、交接记录和升级机制。</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="callout">
+              <p><strong>关系不是替代，而是包含。</strong> 一个可靠 loop 必须建立在可靠 harness 之上。没有 harness，loop 只是把不可靠行为重复更多次；没有 loop，harness 只能提升单次 agent 工作质量，无法形成持续运营。</p>
+            </div>
+          </section>
+
+          <section class="section" id="practice">
+            <h2>工程实践：如何设计一个能用的 Loop</h2>
+            <h3>1. 从 report-only 开始</h3>
+            <p>第一个 loop 不要自动改代码。最稳妥的起点是 Daily Triage：每天或每 2 小时读取 CI、issue、PR、近期 commit、项目状态，输出一份优先级清单，写入 <code>STATE.md</code> 或 Linear/GitHub Project。运行一周后，对比它与人工判断的差异，再决定是否放开行动权限。</p>
+
+            <h3>2. 把任务写成 skill，而不是写成长 prompt</h3>
+            <p>Loop 的 prompt 应该短，真正的项目规则放在 skill 里。比如 <code>loop-triage</code> 负责“如何读 CI、如何判定优先级、输出格式是什么”；<code>minimal-fix</code> 负责“小修复的边界”；<code>release-note-drafter</code> 负责“如何从 merged PR 生成 changelog”。这样 loop 可维护，也便于复用。</p>
+
+            <h3>3. 任何会写文件的 loop 都应使用 worktree</h3>
+            <p>并行 agent 最常见的灾难是互相覆盖文件。worktree 把不同 agent 的改动隔离在不同 checkout 里，降低冲突与误操作。它不是银弹，仍需要人审查 diff，但它让并行探索从机械上可控。</p>
+
+            <h3>4. Maker 与 Checker 必须分离</h3>
+            <p>写代码的 agent 不应该给自己判定“已完成”。至少需要一个独立 verifier：检查 diff 是否只改了目标范围、测试是否真的跑过、有没有安全/权限/依赖风险。高风险任务还要把 verifier 放在更强模型或更高 reasoning effort 上。</p>
+
+            <h3>5. 状态文件是 loop 的脊柱</h3>
+            <p>一个 loop 必须在每次运行开始读状态、结束写状态。最低限度需要记录：上次运行时间、发现项、行动项、尝试次数、失败原因、等待人类决策的事项、已关闭事项。没有外部 state，loop 会在每次运行时失忆。</p>
+
+            <h3>6. 预算和停止条件要写进系统</h3>
+            <p>高频 loop 很容易烧 token。PR babysitter 或 CI sweeper 每 5 分钟跑一次，如果没有 early exit、预算上限和最大尝试次数，会迅速变成成本黑洞。每个 loop 都应有 <code>loop-budget.md</code>、<code>loop-run-log.md</code> 和 kill switch。</p>
+          </section>
+
+          <section class="section" id="value">
+            <h2>工程价值</h2>
+            <div class="grid-3">
+              <div class="box">
+                <span class="tag">响应速度</span>
+                <h3>更快发现问题</h3>
+                <p>CI 红了、PR 卡住、issue 噪音增加时，不再等人主动巡检。Loop 把发现问题的延迟从“人什么时候想起来看”降到固定 cadence。</p>
+              </div>
+              <div class="box">
+                <span class="tag">质量控制</span>
+                <h3>让验证成为流程</h3>
+                <p>成熟 loop 会强制 maker/checker 分离，减少 agent 自我感觉良好导致的假完成。</p>
+              </div>
+              <div class="box">
+                <span class="tag">组织记忆</span>
+                <h3>沉淀决策和上下文</h3>
+                <p>状态文件、run log、skills 把隐性经验变成可读资产，减少重复解释和重复犯错。</p>
+              </div>
+              <div class="box">
+                <span class="tag">并行能力</span>
+                <h3>安全扩大吞吐</h3>
+                <p>worktree + subagent 让探索、实现、验证可以并行，但仍受人类 review 带宽约束。</p>
+              </div>
+              <div class="box">
+                <span class="tag">运营化</span>
+                <h3>从助手变成后台流程</h3>
+                <p>Agent 不再只是“问一下”，而是可以成为团队工程系统中的 watcher、triager、drafter、sweeper。</p>
+              </div>
+              <div class="box">
+                <span class="tag">治理</span>
+                <h3>降低黑箱自动化风险</h3>
+                <p>好的 loop 把权限、记录、升级和停止条件显式化，让自动化行为能被审计。</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="risks">
+            <h2>风险与反模式</h2>
+            <div class="warning">
+              <p><strong>最危险的误解：</strong>把 loop engineering 理解成“让 AI 完全替我工作”。正确理解是：让系统承担重复运营动作，让人类保留判断、边界、验收和责任。</p>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>反模式</th>
+                  <th>表现</th>
+                  <th>治理方式</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Prompt cron</td>
+                  <td>只把长 prompt 放进定时器，没有 state、预算、验证。</td>
+                  <td>补齐 state、run log、skill、early exit。</td>
+                </tr>
+                <tr>
+                  <td>自我验收</td>
+                  <td>同一个 agent 写代码并宣布完成。</td>
+                  <td>独立 verifier；必要时更强模型或人工 gate。</td>
+                </tr>
+                <tr>
+                  <td>无限修复循环</td>
+                  <td>同一个 PR/CI 失败被反复修改，越修越乱。</td>
+                  <td>最大尝试次数；三次失败自动升级给人。</td>
+                </tr>
+                <tr>
+                  <td>通知疲劳</td>
+                  <td>每次运行都 ping 人，导致人忽略真正信号。</td>
+                  <td>只在需要决策、超预算或高风险时通知。</td>
+                </tr>
+                <tr>
+                  <td>理解债务</td>
+                  <td>loop 产出越来越多，人越来越不理解系统。</td>
+                  <td>定期读 diff、写决策记录、限制自动改动范围。</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="section" id="advice">
+            <h2>实践建议：如何开始</h2>
+            <p class="lead">建议按四级成熟度推进，不要跳级。</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>阶段</th>
+                  <th>目标</th>
+                  <th>允许动作</th>
+                  <th>退出条件</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>L0 草案</td>
+                  <td>定义 loop 目的、范围、非目标。</td>
+                  <td>只写设计文档。</td>
+                  <td>有明确 owner、cadence、数据源、状态格式。</td>
+                </tr>
+                <tr>
+                  <td>L1 报告型</td>
+                  <td>自动发现和整理信号。</td>
+                  <td>写报告、更新 state，不改业务代码。</td>
+                  <td>连续一周信号质量稳定，噪音可控。</td>
+                </tr>
+                <tr>
+                  <td>L2 协助型</td>
+                  <td>处理低风险小动作。</td>
+                  <td>开 worktree、起草 PR、补测试、修格式。</td>
+                  <td>验证通过率高，人工返工率低。</td>
+                </tr>
+                <tr>
+                  <td>L3 半无人值守</td>
+                  <td>在 allowlist 内持续运行。</td>
+                  <td>有限自动提交、自动评论、自动关单。</td>
+                  <td>有预算、日志、审计、回滚和 kill switch。</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>推荐的第一个 loop</h3>
+            <p>如果团队还没有 loop 经验，首选 <strong>Daily Triage Loop</strong>：每天早上扫描 GitHub issues、PR、CI、近期 commit 和项目状态，写一份 <code>STATE.md</code>。它风险低、回报快、容易评估，也能训练团队如何维护 state 和 skill。</p>
+
+            <h3>适合 OpenClaw / 个人工作流的三个候选</h3>
+            <div class="grid-3">
+              <div class="box">
+                <h3>研究报告 loop</h3>
+                <p>每天/每周从指定来源发现高价值话题，生成候选清单；人选题后再深研。适合现在的 Follow 日报和专题报告。</p>
+              </div>
+              <div class="box">
+                <h3>项目维护 loop</h3>
+                <p>定时检查 Pages 发布、数据抓取、脚本失败、仓库状态，自动写状态文件，只在异常时提醒。</p>
+              </div>
+              <div class="box">
+                <h3>链接深读 loop</h3>
+                <p>当你丢博客、GitHub 仓库或技术链接时，自动识别对象类型，选择对应分析模板，沉淀引用和反方观点。</p>
+              </div>
+            </div>
+
+            <h3>一份可直接用的 loop 设计模板</h3>
+            <div class="callout">
+              <p><strong>Loop 名称：</strong>Daily Research Triage</p>
+              <p><strong>目的：</strong>每天发现 5 个值得深研的 AI engineering / agent engineering 信号。</p>
+              <p><strong>输入：</strong>RSS、GitHub trending、指定作者博客、X/Follow 列表、已有 memory。</p>
+              <p><strong>输出：</strong><code>STATE.md</code> 中的候选主题、证据链接、优先级、建议动作。</p>
+              <p><strong>权限：</strong>L1 阶段只写报告，不自动发布；发布必须由人确认。</p>
+              <p><strong>升级条件：</strong>来源冲突、重大事实不确定、涉及投资建议或成本较高时交给人。</p>
+              <p><strong>成功指标：</strong>人类采用率、低噪音率、报告返工率、遗漏重要事件次数。</p>
+            </div>
+          </section>
+
+          <section class="section" id="sources">
+            <h2>资料来源</h2>
+            <ul class="source-list">
+              <li><a href="https://addyosmani.com/blog/loop-engineering/">Addy Osmani, Loop Engineering</a>：提出 loop engineering 的主流定义，并把它放在 harness 之上。</li>
+              <li><a href="https://github.com/alchaincyf/loop-engineering-orange-book">loop-engineering-orange-book</a>：中文/英文橙皮书，适合作为概念入门与传播材料。</li>
+              <li><a href="https://github.com/cobusgreyling/loop-engineering">cobusgreyling/loop-engineering</a>：实践型仓库，包含 primitives、patterns、starter、audit、cost 等工具化材料。</li>
+              <li><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">Anthropic, Effective harnesses for long-running agents</a>：解释长任务、多 context window、initializer/coding agent 与 handoff artifacts。</li>
+              <li><a href="https://www.anthropic.com/engineering/building-effective-agents">Anthropic, Building effective agents</a>：给出 workflows 与 agents 的区分，以及从简单可组合模式开始的工程原则。</li>
+              <li><a href="https://addyosmani.com/blog/agent-harness-engineering/">Addy Osmani, Agent Harness Engineering</a>：定义 harness engineering，并说明 model 外部脚手架的工程价值。</li>
+              <li><a href="https://developers.openai.com/codex/app/automations">OpenAI Codex Automations</a>：Codex 中 schedule、worktree、skills、sandbox 与自动化风险的官方说明。</li>
+              <li><a href="https://developers.openai.com/codex/skills">OpenAI Codex Agent Skills</a>：skills 作为可复用 workflow authoring format 的官方说明。</li>
+              <li><a href="https://developers.openai.com/codex/subagents">OpenAI Codex Subagents</a>：subagents 并行探索、专门化和 token 成本的官方说明。</li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>
