@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../../../assets/research-brief.css">
     <title>Matt Pocock Agentic Engineering Workflow 播客分析报告</title>
-    <meta name="description" content="基于跨国串门儿计划 #591 的公开节目文稿、原访谈 YouTube 链接和 Matt Pocock skills 仓库，分析 AI 编程时代的 Agentic Engineering 工作流。">
+    <meta name="description" content="基于跨国串门儿计划 #591 的完整音频自动转写、原访谈 YouTube 链接和 Matt Pocock skills 仓库，分析 AI 编程时代的 Agentic Engineering 工作流。">
   </head>
   <body>
     <main>
       <header>
         <div class="kicker">Podcast Research Brief</div>
         <h1>Matt Pocock：AI 编程时代，开发者真正该升级什么</h1>
-        <p class="muted">基于《跨国串门儿计划》#591 公开节目文稿、David Ondrej 原访谈链接、Matt Pocock skills 仓库，以及前一篇 Loop Engineering 报告延展分析。</p>
+        <p class="muted">基于《跨国串门儿计划》#591 完整音频自动转写、David Ondrej 原访谈链接、Matt Pocock skills 仓库，以及前一篇 Loop Engineering 报告延展分析。</p>
         <div class="meta">
           <span>发布时间：2026-06-21</span>
           <span>对象：播客 / GitHub 仓库 / 技术点</span>
@@ -21,18 +21,18 @@
       </header>
 
       <section class="summary">
-        <strong>总览：</strong>这一集的核心不是“哪个模型最强”，而是 Matt Pocock 如何把 AI 编程从随机对话变成一套可复用工程系统：先通过 grilling 对齐意图，再用 skill 固化流程，用 TDD、调试、领域语言和架构设计作为反馈回路，最后把可执行工作下沉给 AFK agent / issue queue。它和 loop engineering 的关系很清楚：Matt 更偏向“队列 + 检查点 + 小技能组合”，而不是让 agent 无限制循环。
+        <strong>总览：</strong>完整转写后，这集的重点比 shownotes 更清楚：Matt Pocock 反复把 AI 编程拆成四层，模型只是执行层，真正决定上限的是运行框架、代码库可修改性、技能系统和人的战略判断。它和 loop engineering 的关系也更清楚：Matt 不反对 loop，但更偏好“任务队列 + AFK 执行 + 人类检查点右移”，而不是把 agent 放进无限循环。
       </section>
 
       <section>
-        <h2>原始文稿抽取</h2>
+        <h2>音频转写与边界</h2>
         <div class="item">
-          <h3>可获取材料</h3>
-          <p>Apple Podcast 页面只暴露节目元信息。RSS 和小宇宙页面提供了完整 shownotes：节目简介、时间戳、精彩内容、少量引用句、评论和原访谈 YouTube 链接。小宇宙页面还暴露 <code>transcriptMediaId</code>，但公开 HTML 未返回逐字稿内容；管理端 transcript 接口需要权限，不能公开获取。</p>
+          <h3>本次新增处理</h3>
+          <p>Apple Podcast 页面和小宇宙公开页没有直接暴露完整逐字稿。已从 RSS 音频源下载 58:59 的 <code>m4a</code> 音频，转换为 16kHz 单声道 wav，并使用本机 <code>whisper.cpp</code> 的 multilingual small 模型完成整集自动转写，生成 <code>txt</code> 与 <code>srt</code> 两份工作稿。</p>
         </div>
         <div class="item">
-          <h3>本报告采用的“原始文稿”边界</h3>
-          <p>以下分析基于公开 shownotes 的结构化抽取与扩展，不重新发布完整原文或逐字稿。原因有两个：第一，平台没有公开完整逐字稿；第二，整段搬运节目文稿不适合公开复刻。报告保留短引文和要点抽取，并把原始链接列在文末。</p>
+          <h3>公开发布边界</h3>
+          <p>完整自动转写稿已用于本文分析和时间轴校准，但公开页不整段重发布整集逐字稿。原因是这属于播客内容的完整再发布，不适合放到公开 Pages。本文保留可验证的短摘录、详细时间轴、术语校订说明和基于完整稿的扩展分析。</p>
         </div>
         <table>
           <tbody>
@@ -42,12 +42,76 @@
             <tr><th>时长</th><td>58 分 59 秒</td></tr>
             <tr><th>原访谈</th><td>David Ondrej: Matt Pocock's Agentic Engineering Workflow (just copy him)</td></tr>
             <tr><th>关联仓库</th><td><code>github.com/mattpocock/skills</code></td></tr>
+            <tr><th>转写工具</th><td><code>whisper.cpp</code> + <code>ggml-small.bin</code>，语言参数 <code>zh</code></td></tr>
+            <tr><th>转写质量</th><td>适合语义分析和时间轴定位；专有名词已在报告中校订；不是播客官方逐字稿。</td></tr>
           </tbody>
         </table>
       </section>
 
       <section>
-        <h2>文稿要点抽取</h2>
+        <h2>自动转写质量</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>问题类型</th>
+              <th>自动稿表现</th>
+              <th>报告处理</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>英文人名 / 产品名</td><td>Matt Pocock、David Ondrej、Claude Code、Sandcastle、Fable 等多处被音译或误识别。</td><td>结合 shownotes、原链接和上下文统一校订。</td></tr>
+            <tr><td>工程术语</td><td>queue、AFK、DX、AX、PRD、skill 等在中文声纹克隆音频里有混杂识别。</td><td>以工程语义为准，不机械沿用自动稿。</td></tr>
+            <tr><td>局部幻觉</td><td>约 14:24 附近出现一段重复乱码式转写。</td><td>从分析稿中剔除，不作为证据。</td></tr>
+            <tr><td>语气与口语</td><td>自动稿能保留问答结构，但标点、说话人分隔不足。</td><td>时间轴采用“主题摘要”，摘录只取短句。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>完整转写后的新增判断</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. 这不是“AI 写代码更快”的访谈</h3>
+            <p>Matt 的主线是：AI 已经吃掉大量 tactical programming，人必须转到 strategic programming。真正要学习的是任务设计、架构判断、反馈回路和系统改进，而不是追逐模型名。</p>
+          </div>
+          <div class="card">
+            <h3>2. Skill 的核心是流程，而不是能力</h3>
+            <p>他反复区分“流程型 skill”和“能力型 skill”。前者教 agent 怎样做事，后者只是堆更多工具。过多 MCP、插件和长指令会污染上下文，导致系统变重。</p>
+          </div>
+          <div class="card">
+            <h3>3. Teach skill 是 stateful learning</h3>
+            <p>teach skill 不只是生成课程，而是记录学习目标、起点、已学内容和下一课。它把最近发展区、知识/技能/智慧等教育原则转成可执行教学循环。</p>
+          </div>
+          <div class="card">
+            <h3>4. AFK 才是产出倍增点</h3>
+            <p>Matt 认为产出大幅提升来自把自己从“等 agent 请求权限”的位置移走，让多个 agent 在沙箱或队列里探索、实现，再把结果交给人审查。</p>
+          </div>
+          <div class="card">
+            <h3>5. Loop 被降级为 Queue</h3>
+            <p>在 40 分钟后，Matt 明确说单一无限循环不符合开发团队真实工作方式。他更喜欢 issue queue：探索、定界、实现、review、合并，每个 item 可完成、可移除。</p>
+          </div>
+          <div class="card">
+            <h3>6. Review 对象变了</h3>
+            <p>AI 时代 review 不只是看 diff，而是审查“生成 diff 的系统”：任务如何被选中、读了什么上下文、跑了什么验证、为什么可以后移或取消人类检查点。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>短摘录</h2>
+        <p class="muted">以下为自动转写后的短摘录与释义，已校订明显术语错误。摘录只用于定位核心论点，不替代完整节目内容。</p>
+        <div class="grid">
+          <div class="card"><h3>模型狂热</h3><p>“大家都盯着模型，我觉得他们更该关心运行框架。”</p></div>
+          <div class="card"><h3>人的上限</h3><p>“你的技能就是 AI 能做到什么程度的上限。”</p></div>
+          <div class="card"><h3>代码库可改性</h3><p>优化 token 的真正抓手不是压缩 prompt，而是让代码库更容易被修改。</p></div>
+          <div class="card"><h3>Loop 与 Queue</h3><p>Matt 更愿意把 AFK 工作看成队列处理，而不是单一 agent 无限循环。</p></div>
+          <div class="card"><h3>Review 进化</h3><p>审查对象从代码 diff 扩展到生成代码的系统本身。</p></div>
+          <div class="card"><h3>配置建议</h3><p>从空白 agent 配置重新开始，只加回真正有用、可定制的流程型技能。</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>核心论点抽取</h2>
         <div class="grid">
           <div class="card">
             <h3>1. Tactical vs Strategic</h3>
@@ -77,30 +141,35 @@
       </section>
 
       <section>
-        <h2>主题结构</h2>
+        <h2>详细时间轴</h2>
         <table>
           <thead>
             <tr>
               <th>时间段</th>
               <th>主题</th>
-              <th>可扩展洞察</th>
+              <th>转写后的分析</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>00:00-05:15</td><td>AI 编程时代的人类价值</td><td>从“亲自写代码”转向“设计任务、接口、测试和判断标准”。这会改变开发者招聘和绩效评价。</td></tr>
-            <tr><td>06:01-16:21</td><td>teach skill 与个性化学习</td><td>stateful skill 的价值是记住学习者目标、进度和上下文。它更像小型教学系统，而不是一次问答。</td></tr>
-            <tr><td>16:42-22:28</td><td>好技能、坏技能与主导权</td><td>流程型 skill 比能力堆叠更重要。过多插件、MCP、能力列表会污染上下文，反而降低可控性。</td></tr>
-            <tr><td>23:27-31:13</td><td>Agentic Engineering 配置</td><td>Claude Code、Opus、Sandcastle、GitHub Actions 只是表层；真正的系统是沙箱、队列、review 和代码库可修改性。</td></tr>
-            <tr><td>32:32-39:48</td><td>深层 bug 与系统性改进</td><td>十倍 builder 不是修更多 bug，而是修掉 bug 产生的系统原因：测试缺口、架构耦合、流程缺失。</td></tr>
-            <tr><td>40:48-50:53</td><td>AFK、任务队列与人类检查点</td><td>人类检查点应该逐步右移：从“批准每一步”变成“review 探索结果、修复方案和系统行为”。</td></tr>
-            <tr><td>51:36-59:19</td><td>产品、创业与未来开发者</td><td>AI 加速实现，但不能替你找真实需求。未来只做 tactical programming 的人风险最高。</td></tr>
+            <tr><td>00:00-02:17</td><td>中文声纹克隆导入与核心句预告</td><td>节目开场已经给出三条主线：运行框架比模型更可控、代码库可修改性比 token 技巧更重要、人的技能决定 AI 上限。</td></tr>
+            <tr><td>02:17-05:59</td><td>Tactical Programming 被 AI 吃掉</td><td>Matt 借 John Ousterhout 的 tactical / strategic programming 区分，强调写代码、修语法、做 commit 正在商品化，人的价值要上移到战略层。</td></tr>
+            <tr><td>06:01-12:42</td><td>teach skill 的教学系统设计</td><td>teach skill 内置教育原则：最近发展区、知识/技能/智慧区分、目标记录、课程生成和交互练习。它是一个小型学习产品，不是单条 prompt。</td></tr>
+            <tr><td>12:42-16:21</td><td>用 Git 教学演示 stateful skill</td><td>自动稿显示了完整问答路径：从 working tree、stage、commit、restore 等概念一路检查掌握程度。关键是 skill 记住学习轨迹。</td></tr>
+            <tr><td>16:42-22:28</td><td>流程型 skill vs 能力型 skill</td><td>Matt 对“装一堆能力”持谨慎态度。他真正推荐的是流程型技能，例如 grill me，让 agent 在动手前追问假设、边界和目标。</td></tr>
+            <tr><td>23:27-31:13</td><td>Agentic Engineering 配置</td><td>Claude Code、Opus、Sandcastle、GitHub Actions 等工具只是外显配置；更重要的是沙箱、权限、上下文、队列和代码库结构。</td></tr>
+            <tr><td>32:04-39:40</td><td>Fable、深层 bug 与系统改进</td><td>讨论从“修一个 bug”转向“为什么这个 bug 能存在这么久”。十倍 builder 会修补底层系统：测试、流程、架构、预发布机制。</td></tr>
+            <tr><td>39:40-44:34</td><td>Loop 热潮与 queue 修正</td><td>主持人追问 agentic loops。Matt 回答的核心是：AFK agent 有价值，但无限 loop 不是完整答案；真实开发更像多人从队列里取任务。</td></tr>
+            <tr><td>44:34-50:53</td><td>人类检查点右移与 review 形态变化</td><td>Matt 认为可以逐步减少人类检查点，但不能失去对生成系统的可观测性。未来 review 可能变成日报、视频走查、模式总结和抽查机制。</td></tr>
+            <tr><td>51:36-53:40</td><td>做产品仍要回到真人需求</td><td>AI 能加速实现，但不能替你决定该做什么。产品判断、客户访谈、需求取舍仍是人的职责。</td></tr>
+            <tr><td>53:40-57:25</td><td>高级开发者、初级开发者与 AX</td><td>经验和 AI 兴奋度都重要。好的 DX 与好的 AX 高度重叠：清晰模块、好测试、低耦合、可读上下文同时利于人和 agent。</td></tr>
+            <tr><td>57:27-58:59</td><td>最终实践建议</td><td>Matt 的第一建议很反直觉：先删掉所有 skill、插件和 MCP，观察基础 agent 怎么工作，再只加回真正想念、能定制、能实验的流程型技能。</td></tr>
           </tbody>
         </table>
       </section>
 
       <section>
         <h2>Matt Skills 仓库验证</h2>
-        <p>我额外检查了 <a href="https://github.com/mattpocock/skills">mattpocock/skills</a>。这个仓库和播客观点高度一致：它不是一个“万能 agent 框架”，而是一组小、可组合、可改造的技能，目标是修复 AI 编程常见失败模式。</p>
+        <p>我额外检查了 <a href="https://github.com/mattpocock/skills">mattpocock/skills</a>。这个仓库和播客观点高度一致：它不是一个“万能 agent 框架”，而是一组小、可组合、可改造的技能，目标是修复 AI 编程常见失败模式。仓库安装入口强调 <code>npx skills@latest add mattpocock/skills</code>，说明 Matt 希望这些 skill 被复制、裁剪、改写，而不是作为黑盒产品使用。</p>
         <table>
           <thead>
             <tr>
@@ -118,6 +187,28 @@
           </tbody>
         </table>
         <p class="why"><strong>关键观察：</strong>Matt 的 skill 设计反对“大而全流程接管”。它更像工程师工具箱：每个 skill 只处理一个失败模式，组合权仍在人手里。</p>
+      </section>
+
+      <section>
+        <h2>仓库拆解</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>层级</th>
+              <th>代表内容</th>
+              <th>为什么重要</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>需求澄清层</td><td><code>grill-me</code>、<code>grill-with-docs</code></td><td>在实现前把模糊需求变成可执行约束，减少 agent 过早写代码。</td></tr>
+            <tr><td>学习层</td><td><code>teach</code></td><td>把人类学习也纳入 agent workflow，使 skill 不只面向产出，也面向人的能力增长。</td></tr>
+            <tr><td>实现层</td><td><code>tdd</code>、<code>diagnosing-bugs</code></td><td>给 agent 可执行反馈，让每一步由测试、日志和复现路径驱动。</td></tr>
+            <tr><td>建模层</td><td><code>domain-modeling</code>、<code>CONTEXT.md</code>、ADR</td><td>把业务语言、架构决策和边界显式化，降低上下文理解成本。</td></tr>
+            <tr><td>任务拆分层</td><td><code>to-prd</code>、<code>to-issues</code>、<code>triage</code></td><td>把一个大想法拆成可排队、可并行、可验收的任务单元。</td></tr>
+            <tr><td>架构治理层</td><td><code>codebase-design</code>、<code>improve-codebase-architecture</code></td><td>对抗 AI 时代更快的架构熵增，保持代码库对人和 agent 都可修改。</td></tr>
+          </tbody>
+        </table>
+        <p class="why"><strong>我的判断：</strong>这个仓库最值得学的不是具体措辞，而是 skill 的粒度。每个 skill 都应该有明确触发场景、输入、过程和退出条件；一旦一个 skill 试图“什么都管”，它就会变成上下文噪音。</p>
       </section>
 
       <section>
@@ -140,6 +231,21 @@
             <p>更实用的模型是：Harness 保障一次执行，Queue 管理任务流，Loop 负责周期性发现和推进，Human Gate 控制边界。</p>
           </div>
         </div>
+        <table>
+          <thead>
+            <tr>
+              <th>问题</th>
+              <th>Harness 答案</th>
+              <th>Queue / Loop 答案</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>如何让一次 agent run 更可靠？</td><td>给清晰上下文、skill、测试、沙箱、权限和验收命令。</td><td>不负责单次可靠性，只负责把任务持续推进。</td></tr>
+            <tr><td>如何避免无限烧 token？</td><td>限制上下文和工具面，缩短单次 run。</td><td>用队列、状态和退出条件替代无限 while loop。</td></tr>
+            <tr><td>人什么时候介入？</td><td>在单次 run 前后介入，主要看 prompt 和 diff。</td><td>在人类检查点介入，主要看探索结论、风险分级、可回滚性和系统健康。</td></tr>
+            <tr><td>系统如何进化？</td><td>根据失败案例改 prompt、skill、测试和代码库。</td><td>根据队列吞吐、返工率、自动合并事故率和 review 成本改流程。</td></tr>
+          </tbody>
+        </table>
       </section>
 
       <section>
@@ -180,6 +286,7 @@
             <tr><td>建立 report verifier</td><td>发布前检查来源、时间、版权边界、样式统一、链接 200、是否区分事实与判断。</td><td>review 的对象是内容和生成内容的系统。</td></tr>
           </tbody>
         </table>
+        <p class="why"><strong>落地顺序：</strong>先做 harness，再做 queue，最后再谈 loop。没有稳定 harness 的 loop 只是自动化返工；没有 queue 的 loop 会缺少任务边界；没有人类检查点的 loop 会把错误扩散到生产系统。</p>
       </section>
 
       <section>
@@ -190,6 +297,32 @@
           <div class="card"><h3>代码库治理</h3><p>每周跑一次架构改进扫描，找“让 AI 难改”的地方：耦合、命名不统一、测试缺口、隐性业务规则。</p></div>
           <div class="card"><h3>研究报告</h3><p>把播客/博客/GitHub 仓库分别做对象化分析：原文抽取、证据表、核心论点、反方观点、实践建议。</p></div>
         </div>
+        <table>
+          <thead>
+            <tr>
+              <th>今天就能做</th>
+              <th>一周内能做</th>
+              <th>一个月内能做</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>清空臃肿 agent 配置，只保留一个明确流程 skill；给每个任务写验收命令。</td>
+              <td>把常见工作拆成 <code>grill</code>、<code>plan</code>、<code>implement</code>、<code>verify</code>、<code>review</code> 五段。</td>
+              <td>建立 issue queue，让 agent 先做探索和方案，再由人选择是否进入实现。</td>
+            </tr>
+            <tr>
+              <td>记录每次 AI 失败原因：需求不清、上下文错、测试缺、权限错、代码难改。</td>
+              <td>把最高频失败原因写成一个小 skill 或检查清单。</td>
+              <td>把失败原因接入 review：不只修当次 bug，还修生成 bug 的流程。</td>
+            </tr>
+            <tr>
+              <td>要求 agent 每次输出“我读了什么、改了什么、怎么验证”。</td>
+              <td>让 PR 自动带上探索摘要、测试日志和风险分级。</td>
+              <td>试点低风险自动合并，但保留抽查、回滚和事故日志。</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
 
       <section>
