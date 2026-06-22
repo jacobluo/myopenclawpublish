@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../assets/research-brief.css">
+    <title>Follow 深度日报：GLM 5.2 进入 Agent 实战、企业 AI 部署继续扩张</title>
+    <meta name="description" content="2026-06-22 Follow List 深度日报：GLM 5.2 与开源 coding agent、OpenAI/Samsung 企业部署、Cloudflare 临时账号、Codex 测试 loop、AI 产品工程闭环。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>GLM 5.2 进入 Agent 实战、企业 AI 部署继续扩张</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-06-21 00:00 UTC 至 2026-06-22 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。今天的增量来自官方 RSS、个人博客/Atom 和公开 X/Nitter RSS。</p>
+        <div class="meta">
+          <span>发布时间：2026-06-22 08:00 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、公开 X/Nitter RSS、官方博客、RSS/Atom</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天的主线很清楚：开源模型在 coding agent 场景里从“可讨论”变成“可试用”，GLM 5.2 被 Nathan Lambert、Harrison Chase、Thomas Wolf、Clem Delangue 等多条线索同时放大；企业侧，OpenAI 发布 Samsung Electronics 部署案例，ChatGPT 与 Codex 继续进入大型组织；工具侧，Simon Willison 关注 Cloudflare 为 AI agents 提供临时账号，并发布 sqlite-utils 4.0rc1；Greg Brockman 转发 Codex 自动遍历应用功能并生成测试清单的 loop。今天值得关注的不是单点新闻，而是 agent 从模型能力进入组织治理、身份权限、测试覆盖和可替代模型栈的组合竞争。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. GLM 5.2 成为开源 coding agent 的共同话题</h3>
+            <p>Nathan Lambert、Harrison Chase、Thomas Wolf、Clem Delangue 都在 24 小时窗口内提到 GLM 5.2 或相关使用反馈。信号不只是榜单热度，而是它已经被放进 Claude Code / Deep Agents / OpenCode / Fireworks 这类真实开发工作流里比较。</p>
+          </div>
+          <div class="card">
+            <h3>2. 企业 AI 部署从 ChatGPT 扩展到 Codex</h3>
+            <p>OpenAI RSS 新增 Samsung Electronics 部署案例，标题直接把 ChatGPT 和 Codex 放在一起。大型企业采用不再只围绕聊天助手，而是进入代码、测试、知识工作和内部流程。</p>
+          </div>
+          <div class="card">
+            <h3>3. Agent 身份和权限成为基础设施问题</h3>
+            <p>Simon Willison 关注 Cloudflare Temporary Accounts for AI agents，说明“让 agent 拿到临时、隔离、可撤销身份”正在变成部署前提。这个方向和 MCP auth、沙箱、审计日志、预算控制是一组问题。</p>
+          </div>
+          <div class="card">
+            <h3>4. AI 产品工程继续回到 eval 与闭环</h3>
+            <p>Hamel Husain、Shreya Shankar 相关转发仍围绕 AI Product Engineering、OCR、retrieval、evals、open models 和 live Q&amp;A。社区教育内容的核心也在从“会调用模型”转为“能定义任务、评估失败、持续改进”。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>OpenAI：Samsung Electronics 将 ChatGPT 和 Codex 带给员工</h3>
+          <p class="source">来源：OpenAI RSS；时间：2026-06-21 23:00 UTC；链接：<a href="https://openai.com/index/samsung-electronics-chatgpt-codex-deployment">OpenAI 官方文章</a></p>
+          <p>OpenAI 发布 Samsung Electronics 企业部署案例，标题明确提到 ChatGPT 与 Codex。结合前几天企业用量分析、spend controls 和 Codex credit 管理，OpenAI 的企业叙事正在从“员工使用 ChatGPT”升级为“把 AI 编码和流程自动化纳入组织级管理”。</p>
+          <p class="why"><strong>为什么值得看：</strong>Samsung 这种规模的案例，会强化企业 AI 采购从单一聊天入口转向多工具组合。Codex 被放进同一叙事，意味着代码生成、测试、内部工具维护和工程流程可能成为企业版订阅与使用量增长的重要抓手。</p>
+          <p class="action"><strong>后续行动：</strong>跟进文章细节里的部署范围、治理方式、数据边界和 Codex 使用场景；把 Samsung、Morgan Stanley、PwC 等案例放进“企业 AI 落地样本库”。</p>
+        </div>
+
+        <div class="item">
+          <h3>Nathan Lambert：GLM 5.2 在 coding harness 里出现“实用时刻”</h3>
+          <p class="source">来源：Nathan Lambert / @natolambert；时间：2026-06-21 14:00-15:40 UTC；链接：<a href="https://nitter.net/natolambert/status/2068695675299336270#m">公开镜像 1</a> / <a href="https://nitter.net/natolambert/status/2068720732797014188#m">公开镜像 2</a></p>
+          <p>Nathan 在窗口内连续测试和评论 GLM 5.2，重点是它在 coding harness、Claude Code 类工作流和 Fireworks 部署中的可用性。他的判断是：开源权重模型已经在某些实用 coding agent 场景里形成明显存在感，至少值得被纳入严肃比较。</p>
+          <p class="why"><strong>为什么值得看：</strong>过去开源模型常被当作成本替代或研究玩具，但 coding agent 对上下文、工具调用、稳定性和长程任务要求更高。GLM 5.2 如果能在这类场景里站住，会直接影响 Claude、Codex、Gemini、OpenRouter、Fireworks、Together 等生态的价格和分发格局。</p>
+          <p class="action"><strong>后续行动：</strong>做一张 GLM 5.2 coding agent 对比表：模型服务商、价格、上下文、工具调用、失败样本、可复现 benchmark 和真实项目表现。</p>
+        </div>
+
+        <div class="item">
+          <h3>Harrison Chase：Deep Agents 可做通用、模型无关的 Claude Code 替代底座</h3>
+          <p class="source">来源：Harrison Chase / @hwchase17；时间：2026-06-21 14:19-16:42 UTC；链接：<a href="https://nitter.net/hwchase17/status/2068700213783724191#m">公开镜像 1</a> / <a href="https://nitter.net/hwchase17/status/2068736324064927964#m">公开镜像 2</a></p>
+          <p>Harrison 转发社区文章，主题是用 Deep Agents 搭建 Claude Code 类 agent，并在回复中强调它是模型无关、通用目的的系统。结合他前一天转发 Leve、LangGraph 和 GLM 5.2 线索，LangChain 正在把自己的位置从“agent framework”推进到“可替代专有 coding agent 的可组合底座”。</p>
+          <p class="why"><strong>为什么值得看：</strong>如果 coding agent 可以拆成模型、文件系统、计划器、工具协议、状态和评测几层，专有产品的壁垒就会被开源框架和低成本模型持续侵蚀。LangChain/LangGraph 的价值也会从开发者工具扩展到企业可控 agent 平台。</p>
+          <p class="action"><strong>后续行动：</strong>验证 Deep Agents + GLM 5.2/OpenRouter/Fireworks 是否能跑真实仓库任务；记录成功率、人工 review 成本和失败模式。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison：Cloudflare 临时账号把 agent 身份问题摆上台面</h3>
+          <p class="source">来源：Simon Willison Atom；时间：2026-06-21 22:01 UTC；链接：<a href="https://simonwillison.net/2026/Jun/21/temporary-cloudflare-accounts/">Simon Willison 条目</a></p>
+          <p>Simon 记录 Cloudflare Temporary Accounts for AI agents 这个方向。重点是 agent 需要一种临时、隔离、可撤销、低权限的执行身份，而不是直接复用人的长期账号或全权 token。</p>
+          <p class="why"><strong>为什么值得看：</strong>这和 MCP auth、agent sandbox、企业权限审计、预算控制是同一套部署前提。真正可用的企业 agent，不只是能调用工具，还要能证明“谁授权、能做什么、什么时候失效、出错后如何回滚”。</p>
+          <p class="action"><strong>后续行动：</strong>把 Cloudflare 这条线纳入 agent identity/permission 主题；后续对比 OpenAI connector 权限、Anthropic MCP、Google Workspace agent 权限和企业 IAM 集成。</p>
+        </div>
+
+        <div class="item">
+          <h3>Greg Brockman：Codex 用 loop 自动遍历应用功能并生成测试清单</h3>
+          <p class="source">来源：Greg Brockman / @gdb；时间：2026-06-21 18:23 UTC；链接：<a href="https://nitter.net/gdb/status/2068761809318990054#m">公开镜像</a></p>
+          <p>Greg 转发了一个 Codex 自动遍历应用功能、建立用户故事和预期行为清单、再逐项测试的 workflow。这个例子把 Codex 从“写代码”推向“理解现有产品、建立测试资产、覆盖回归风险”的工程管理层面。</p>
+          <p class="why"><strong>为什么值得看：</strong>AI coding 的下一个竞争点不是生成更多代码，而是能否自动发现功能面、维护测试矩阵、减少人类遗漏。它也和前几天 LangChain loop engineering、trace judge、human-in-the-loop 主题连上了。</p>
+          <p class="action"><strong>后续行动：</strong>在自己的项目中试一次类似 `/goal`：让 Codex 建立功能清单、预期行为和回归测试表，观察它能否发现隐藏功能和边界条件。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison：sqlite-utils 4.0rc1 加入 migrations 和 nested transactions</h3>
+          <p class="source">来源：Simon Willison Atom / @simonw；时间：2026-06-21 23:30-23:36 UTC；链接：<a href="https://simonwillison.net/2026/Jun/21/sqlite-utils/">sqlite-utils 4.0rc1</a> / <a href="https://simonwillison.net/2026/Jun/21/sqlite-utils-40rc1/">发布说明</a></p>
+          <p>Simon 发布 sqlite-utils 4.0rc1，并在公开 X/Nitter 上同步。新增迁移系统和嵌套事务支持，属于工具链基础设施更新，不是 AI 新闻，但对轻量数据应用、agent 本地状态、可审计小型数据库工作流很实用。</p>
+          <p class="why"><strong>为什么值得看：</strong>很多 agent 原型最后都会落到“怎么可靠地记录状态、任务、trace 和结果”。sqlite-utils 这类轻量工具降低了把原型做成可维护系统的成本。</p>
+          <p class="action"><strong>后续行动：</strong>关注 4.0 正式版；评估是否适合 OpenClaw 报告状态、抓取日志、去重索引从 JSON 迁移到 SQLite。</p>
+        </div>
+
+        <div class="item">
+          <h3>AI Product Engineering：课程和社区继续围绕 eval、retrieval、open models 聚合</h3>
+          <p class="source">来源：Hamel Husain / @HamelHusain、Shreya Shankar / @sh_reya；时间：2026-06-21 15:10 UTC 附近；链接：<a href="https://nitter.net/Ashish_Soni08/status/2068713170508955999#m">Hamel 转发线索</a> / <a href="https://nitter.net/sh_reya">Shreya 公开 feed</a></p>
+          <p>Hamel 转发 AI Product Engineering 课程，Shreya 近期相关线索也围绕 OCR、retrieval、evals、open models 和 live Q&amp;A。它不是一个单独产品发布，而是说明应用层 AI 工程教育正在从模型 API 教程转向完整产品闭环。</p>
+          <p class="why"><strong>为什么值得看：</strong>企业 agent 真正落地时，最难的常常是任务定义、数据清洗、评测、人工抽检和反馈闭环。Hamel/Shreya 这条线持续提供反炒作视角，能帮助判断哪些 AI 应用是真工程，哪些只是 demo。</p>
+          <p class="action"><strong>后续行动：</strong>把课程内容与 Hamel 的 eval 建议、Shreya 的 DocETL/AI data analyst 观点合并成“AI 产品工程检查清单”。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>OpenAI：</strong>Samsung Electronics 企业部署成为今天最重要官方新增；企业治理和 Codex 采用继续升温。</li>
+          <li><strong>Nathan Lambert：</strong>从开放模型政策转向 GLM 5.2 实测，说明开源权重争论正在落到具体能力和部署体验。</li>
+          <li><strong>Harrison Chase / LangChain：</strong>继续强化 Deep Agents、LangGraph、模型无关 coding agent 的平台叙事。</li>
+          <li><strong>Simon Willison：</strong>一边跟踪 agent 身份权限，一边推进 sqlite-utils 工具链，仍是 AI 工程实践高信号源。</li>
+          <li><strong>Hugging Face 生态：</strong>Clem Delangue、Thomas Wolf 的 GLM 5.2 转发说明开源社区正在主动放大非欧美模型的 agent 能力。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>GLM 5.2 coding agent 评测：</strong>用同一仓库任务对比 Codex、Claude Code、Deep Agents + GLM 5.2、OpenCode。</li>
+          <li><strong>Agent identity / 临时账号：</strong>跟进 Cloudflare Temporary Accounts 的实际权限模型、过期机制、审计能力和开发者体验。</li>
+          <li><strong>企业 AI 部署样本库：</strong>把 Samsung 案例拆成行业、规模、工具、治理、数据边界、ROI 叙事。</li>
+          <li><strong>Codex 测试 loop：</strong>把“自动生成功能矩阵 + 预期行为 + 回归测试”做成可复用工作流。</li>
+          <li><strong>AI 产品工程清单：</strong>沉淀 eval、retrieval、OCR、open models、人工评审与上线反馈闭环。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>GLM 5.2 的大量反馈来自公开短帖和社区使用感受，需要用可复现实验验证成功率、成本、上下文稳定性和失败样本。</li>
+          <li>OpenAI/Samsung 文章需要进一步核对部署范围：是全员入口、试点团队，还是特定工程/办公场景。</li>
+          <li>Cloudflare Temporary Accounts 的边界需要看官方实现细节：它解决的是账号隔离、OAuth 授权、沙箱执行，还是更完整的 agent IAM。</li>
+          <li>Nitter/RSS 对 X 时间线仍可能缺帖或延迟；今天只把可公开抓到的内容作为线索，不声称覆盖完整社交时间线。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul class="noise">
+          <li>会议票务、课程宣传、个人感想和没有技术细节的转发已降权，只在它们能指向明确主题时纳入。</li>
+          <li>GLM 5.2 的夸张表达很多，未把情绪化形容当作事实判断。</li>
+          <li>OpenAI、Hugging Face、LangChain 多条旧 RSS 仍出现在 feed 中，今天不重复包装为新发布。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul class="links">
+          <li><a href="https://openai.com/index/samsung-electronics-chatgpt-codex-deployment">OpenAI: Samsung Electronics brings ChatGPT and Codex to employees</a></li>
+          <li><a href="https://nitter.net/natolambert/status/2068695675299336270#m">Nathan Lambert: GLM 5.2 coding harness signal</a></li>
+          <li><a href="https://nitter.net/natolambert/status/2068720732797014188#m">Nathan Lambert: GLM 5.2 on Fireworks / Claude Code workflow</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2068700213783724191#m">Harrison Chase: Build your own Claude Code with Deep Agents</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2068736324064927964#m">Harrison Chase: Deep Agents model-agnostic signal</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/21/temporary-cloudflare-accounts/">Simon Willison: Temporary Cloudflare Accounts for AI agents</a></li>
+          <li><a href="https://nitter.net/gdb/status/2068761809318990054#m">Greg Brockman: Codex loop testing app features</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/21/sqlite-utils/">Simon Willison: sqlite-utils 4.0rc1</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/21/sqlite-utils-40rc1/">Simon Willison: sqlite-utils 4.0rc1 adds migrations and nested transactions</a></li>
+          <li><a href="https://nitter.net/Ashish_Soni08/status/2068713170508955999#m">Hamel Husain: AI Product Engineering course signal</a></li>
+          <li><a href="https://nitter.net/Thom_Wolf/status/2068426548726690025#m">Thomas Wolf: GLM 5.2 signal</a></li>
+          <li><a href="https://nitter.net/ClementDelangue">Clem Delangue public feed</a></li>
+          <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+          <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+          <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+          <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+        </ul>
+      </section>
+
+      <footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer>
+    </main>
+    <script src="../../../../assets/research-brief.js" defer></script>
+  </body>
+</html>
