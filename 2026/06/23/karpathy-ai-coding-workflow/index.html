@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../assets/research-brief.css">
+    <title>Karpathy AI 编程观点报告：Tab、Prompt、Agent 与 Vibe Coding</title>
+    <meta name="description" content="翻译并拆解 Andrej Karpathy 关于 AI 编程工作流的观点，结合 Cursor、GitHub Copilot、Claude Code、OpenAI Codex 与开发者调查做交叉分析。">
+    <style>
+      .quote-strip {
+        border-left: 3px solid var(--blue-700);
+        background: var(--blue-100);
+        color: var(--primary);
+        margin: 20px 0;
+        padding: 14px 16px;
+      }
+
+      .quote-strip p {
+        margin: 0;
+      }
+
+      .axis {
+        display: grid;
+        gap: 12px;
+        margin: 18px 0;
+      }
+
+      .axis-row {
+        display: grid;
+        grid-template-columns: 140px minmax(0, 1fr) 130px;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .axis-label,
+      .axis-value {
+        color: var(--secondary);
+        font-size: 13px;
+      }
+
+      .axis-bar {
+        height: 12px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--blue-700), var(--gray-300));
+      }
+
+      .source-list li {
+        word-break: break-word;
+      }
+
+      @media (max-width: 720px) {
+        .axis-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">AI Coding Workflow</div>
+        <h1>Karpathy 的 AI 编程观点：不是反 Prompt，而是在讲“自主性滑杆”</h1>
+        <p class="muted">基于 Andrej Karpathy 关于 Cursor Tab、vibe coding 与 autonomy slider 的公开表述，翻译核心观点，拆解适用场景，并结合 Cursor、GitHub Copilot、Claude Code、OpenAI Codex、Stack Overflow 与 GitHub Octoverse 的行业信号做交叉分析。</p>
+        <div class="meta">
+          <span>发布时间：2026-06-23</span>
+          <span>主题：AI 编程 / Cursor / Codex / Claude Code</span>
+          <span>结论：未来不是单一范式，而是分层协作</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>一句话结论：</strong>Karpathy 的核心观点不是“文字 prompt 没用”，也不是“vibe coding 已死”。他真正强调的是：AI 编程有不同自主性档位。低自主性的 Tab 补全适合高频小改、低延迟、贴近代码现场；中档的局部编辑适合明确范围内的修改；高自主性的 agent 适合可验证、可回滚、边界清楚的任务。业界正在沿着这条“自主性滑杆”分化：Cursor 把 Tab、局部编辑和 Agent 放在同一个 IDE；Copilot 把补全扩展到 PR、Code Review 和安全修复；Claude Code 与 Codex 则把任务委托推进到终端、云沙箱和团队协作层。
+      </section>
+
+      <section>
+        <h2>原文观点的中文翻译</h2>
+        <p>下面不是逐字全文搬运，而是对公开原帖的关键意思做中文翻译和压缩。为避免断章取义，保留少量英文关键词，并在文末给出原始链接。</p>
+
+        <div class="quote-strip">
+          <p><strong>Cursor Tab 观点：</strong>Karpathy 说，他日常 LLM 辅助编程的主力仍然是 Cursor 的 Tab 补全，大约占很高比例。他发现，在项目里正确的位置写几行代码或注释，本身就是一种高带宽的任务说明；相比用自然语言长篇描述，这种方式更快、延迟更低，也更贴近模型要修改的上下文。</p>
+        </div>
+
+        <div class="quote-strip">
+          <p><strong>Vibe coding 观点：</strong>他把一种新的编程状态称为 vibe coding：开发者更愿意把实现细节交给模型，通过说需求、看运行结果、粘贴错误、继续调整来推进。它对周末项目、原型和低风险尝试很有趣，但代码可能很快超出开发者即时理解范围。</p>
+        </div>
+
+        <div class="quote-strip">
+          <p><strong>Autonomy slider 观点：</strong>最好的 AI 应用不是只有“人工写代码”或“AI 全自动”两个极端，而是应该有自主性滑杆。以 Cursor 为例，Tab 是低自主性，Cmd+K 是局部编辑，Chat/Composer 是更高自主性，Agent 模式则把更多执行权交给 AI。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>观点列举与解释</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. 代码现场比长 prompt 更“高带宽”</h3>
+            <p>自然语言 prompt 的问题不在于无效，而在于需要把上下文重新讲一遍。代码现场已经包含变量名、函数边界、类型、调用关系和邻近约定。Tab 补全直接读这些线索，所以适合高频、短半径、可即时判断的改动。</p>
+          </div>
+          <div class="card">
+            <h3>2. Tab 是最小摩擦的 AI 编程界面</h3>
+            <p>Tab 的优势是快、可打断、风险小。开发者仍然站在驾驶位，只是把“下一小步”交给模型猜。它不会要求用户切换窗口、写大段需求或等待 agent 长时间跑任务。</p>
+          </div>
+          <div class="card">
+            <h3>3. Vibe coding 是原型速度，不是工程免死金牌</h3>
+            <p>Vibe coding 把人从语法和局部实现中解放出来，但也把工作重心推向验收、调试和风险控制。适合 demo、UI 原型、个人小工具；进入生产系统时必须补上测试、代码审查、权限控制和可回滚机制。</p>
+          </div>
+          <div class="card">
+            <h3>4. Agent 的价值取决于“可验证性”</h3>
+            <p>一个任务能不能交给 agent，不只看模型是否聪明，还看结果是否容易验收。迁移脚本、测试补齐、依赖升级、重复重构更适合 agent；模糊产品判断、复杂架构取舍、强安全边界任务仍需要人主导。</p>
+          </div>
+          <div class="card">
+            <h3>5. 人类工程师从“写”转向“设定边界与验收”</h3>
+            <p>AI 越能写代码，人类越要擅长定义任务、设计接口、识别坏抽象、写测试、审 diff、看日志。真正稀缺的不是敲代码速度，而是系统判断力。</p>
+          </div>
+          <div class="card">
+            <h3>6. 未来工具会按自主性分层，而不是互相替代</h3>
+            <p>Tab、局部编辑、Chat、Agent、云端异步任务会共存。不同层级对应不同延迟、风险、上下文和控制权。优秀团队会给每类任务选合适档位，而不是把所有需求都扔给同一种工具。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>自主性滑杆：四类工作流</h2>
+        <div class="axis" aria-label="AI 编程自主性滑杆">
+          <div class="axis-row">
+            <div class="axis-label">Tab 补全</div>
+            <div class="axis-bar" style="width: 28%"></div>
+            <div class="axis-value">低自主性 / 低延迟</div>
+          </div>
+          <div class="axis-row">
+            <div class="axis-label">局部编辑</div>
+            <div class="axis-bar" style="width: 48%"></div>
+            <div class="axis-value">人定范围 / AI 改片段</div>
+          </div>
+          <div class="axis-row">
+            <div class="axis-label">对话式改造</div>
+            <div class="axis-bar" style="width: 70%"></div>
+            <div class="axis-value">多轮上下文 / 人验收</div>
+          </div>
+          <div class="axis-row">
+            <div class="axis-label">Agent 委托</div>
+            <div class="axis-bar" style="width: 92%"></div>
+            <div class="axis-value">高自主性 / 高验证成本</div>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>档位</th>
+              <th>代表工具形态</th>
+              <th>适用任务</th>
+              <th>主要风险</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tab 补全</td>
+              <td>Cursor Tab、Copilot completion</td>
+              <td>样板代码、测试断言、小函数、变量续写、局部修正</td>
+              <td>模型猜错 API、补出不存在的约定、打断开发者思路</td>
+            </tr>
+            <tr>
+              <td>局部编辑</td>
+              <td>Cursor Cmd+K、Copilot inline chat</td>
+              <td>重命名、提取函数、局部 bug fix、样式调整</td>
+              <td>范围外修改、没理解隐含约束</td>
+            </tr>
+            <tr>
+              <td>对话式改造</td>
+              <td>Cursor Composer、ChatGPT、Claude</td>
+              <td>新功能草案、模块改造、解释代码、方案比较</td>
+              <td>上下文漂移、实现越来越绕、审查负担上升</td>
+            </tr>
+            <tr>
+              <td>Agent 委托</td>
+              <td>Claude Code、OpenAI Codex、Cursor Agent</td>
+              <td>修 issue、跑测试、生成 PR、跨文件迁移、异步代码清理</td>
+              <td>权限过大、测试不足、长程任务偏航、安全与合规边界</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>业界交叉分析</h2>
+        <h3>Cursor：把 Karpathy 的滑杆产品化</h3>
+        <p>Cursor 的产品结构最贴近 Karpathy 的说法：Tab 处理“下一步补全”，Cmd+K 做局部定向修改，Composer/Agent 处理更高自主性的任务。Cursor 官网也引用了 Karpathy 关于 autonomy slider 的表达，说明它并不是把 vibe coding 和 Tab 补全对立起来，而是把它们放在同一条控制权连续谱上。</p>
+
+        <h3>GitHub Copilot：补全入口成熟，正在扩展到平台工作流</h3>
+        <p>Copilot 最早让行业接受“AI pair programmer”的补全模式。GitHub/Microsoft 研究显示，在受控任务中 Copilot 可显著缩短完成时间；GitHub Octoverse 2025 进一步显示，AI 已经成为开发平台级基础设施，新开发者很快开始使用 Copilot。它的问题也很典型：当 AI 从编辑器补全扩展到 PR、Review、Autofix 时，开发者会更关注控制权、误报、审查成本和平台默认开启策略。</p>
+
+        <h3>Claude Code：代表终端里的 agentic coding</h3>
+        <p>Claude Code 的强项是让模型进入真实代码库，读文件、跑命令、改代码、迭代测试。Anthropic 2026 年基于约 40 万个交互 session 的研究强调，agentic coding 并没有消灭专业能力，反而让专业能力继续产生复利：会拆任务、会验收、懂代码库的人，使用 agent 的收益更高。</p>
+
+        <h3>OpenAI Codex：从个人工具进入团队协作层</h3>
+        <p>Codex 的 GA 版本把云端软件工程 agent、Slack 集成、SDK 和管理员工具放在一起，方向很清楚：AI 编程不只发生在 IDE 里，也会进入团队频道、异步任务队列和企业治理层。它对应自主性滑杆的高档位：人负责提出任务、审查结果和合并代码，agent 在隔离环境中执行。</p>
+
+        <h3>Stack Overflow 调查：采用率上升，但信任没有同步上升</h3>
+        <p>Stack Overflow 2025 开发者调查显示，AI 工具使用已经很普遍，但对准确性的信任并不高，主动不信任者多于信任者。这和 Karpathy 的分层观点相互印证：越高自主性的工具越需要验证机制。没有测试、审查、可观测性和权限边界，agent 的产出会把“写代码时间”转移成“排查和背锅时间”。</p>
+      </section>
+
+      <section>
+        <h2>对企业和个人的判断</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>对象</th>
+              <th>应该怎么用</th>
+              <th>不应该怎么用</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>个人开发者</td>
+              <td>把 Tab 当加速器，把 Chat 当老师，把 Agent 当临时外包；先用在低风险项目中建立手感。</td>
+              <td>不要把没读懂、没测试的生成代码直接放进长期维护项目。</td>
+            </tr>
+            <tr>
+              <td>创业团队</td>
+              <td>用 vibe coding 快速出原型，用 agent 跑重复任务，用代码审查守住核心模块。</td>
+              <td>不要把 demo 速度误认为工程质量，尤其是支付、权限、数据安全和合规模块。</td>
+            </tr>
+            <tr>
+              <td>成熟企业</td>
+              <td>建立 AI coding policy、沙箱、日志、权限、测试门禁和团队级最佳实践。</td>
+              <td>不要只采购许可证而不改流程，也不要只用“节省时间”指标评价效果。</td>
+            </tr>
+            <tr>
+              <td>工程管理者</td>
+              <td>把 AI 工具纳入开发生命周期：需求拆分、代码生成、测试、Review、上线和事故复盘。</td>
+              <td>不要用 AI 产出行数作为生产力指标，真正指标应是交付质量、周期、缺陷率和维护成本。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>我的结论</h2>
+        <ol>
+          <li><strong>Tab 不低级。</strong>它是目前最稳定、最低摩擦、最贴近工程师肌肉记忆的 AI 编程入口。</li>
+          <li><strong>Prompt 不过时。</strong>它适合表达意图、讨论方案、生成初稿和驱动 agent，只是不适合承担所有微小编辑。</li>
+          <li><strong>Vibe coding 有边界。</strong>它是原型范式，不是生产范式；进入生产后必须升级为可测试、可审查、可回滚的工程流程。</li>
+          <li><strong>Agent 是下一阶段主战场。</strong>但 agent 的瓶颈不是“会不会写代码”，而是权限、上下文、测试、验收和组织治理。</li>
+          <li><strong>最强开发者会变成编排者。</strong>他们既能在代码现场精确控制，也能把合适任务交给 agent 异步执行，并知道什么时候必须亲自下场。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>资料来源</h2>
+        <ul class="source-list">
+          <li>Andrej Karpathy 关于 Cursor Tab / LLM assisted coding 的原帖：<a href="https://x.com/karpathy/status/1959703967694545296">https://x.com/karpathy/status/1959703967694545296</a></li>
+          <li>Andrej Karpathy 关于 Cursor Tab 与 Agent 请求比例的原帖：<a href="https://x.com/karpathy/status/2027501331125239822">https://x.com/karpathy/status/2027501331125239822</a></li>
+          <li>Simon Willison 收录并评论 Karpathy “vibe coding” 原帖：<a href="https://simonwillison.net/2025/Feb/6/andrej-karpathy/">https://simonwillison.net/2025/Feb/6/andrej-karpathy/</a></li>
+          <li>Simon Willison 对 “Not all AI-assisted programming is vibe coding” 的区分：<a href="https://simonwillison.net/2025/Mar/19/vibe-coding/">https://simonwillison.net/2025/Mar/19/vibe-coding/</a></li>
+          <li>Cursor 官网关于 Tab、局部编辑和 Agent 的产品表述：<a href="https://cursor.com/">https://cursor.com/</a></li>
+          <li>GitHub Octoverse 2025：<a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/">https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/</a></li>
+          <li>Microsoft Research / GitHub Copilot productivity study：<a href="https://www.microsoft.com/en-us/research/publication/the-impact-of-ai-on-developer-productivity-evidence-from-github-copilot/">https://www.microsoft.com/en-us/research/publication/the-impact-of-ai-on-developer-productivity-evidence-from-github-copilot/</a></li>
+          <li>Stack Overflow Developer Survey 2025 AI 部分：<a href="https://survey.stackoverflow.co/2025/ai">https://survey.stackoverflow.co/2025/ai</a></li>
+          <li>Anthropic 关于 Claude Code 与专业能力的研究：<a href="https://www.anthropic.com/research/claude-code-expertise">https://www.anthropic.com/research/claude-code-expertise</a></li>
+          <li>OpenAI Codex GA 公告：<a href="https://openai.com/index/codex-now-generally-available/">https://openai.com/index/codex-now-generally-available/</a></li>
+          <li>YC Startup Library：Karpathy《Software Is Changing (Again)》：<a href="https://www.ycombinator.com/library/MW-andrej-karpathy-software-is-changing-again">https://www.ycombinator.com/library/MW-andrej-karpathy-software-is-changing-again</a></li>
+        </ul>
+      </section>
+
+      <footer>Repository: jacobluo/myopenclawpublish</footer>
+    </main>
+    <script src="../../../../assets/research-brief.js" defer></script>
+  </body>
+</html>
