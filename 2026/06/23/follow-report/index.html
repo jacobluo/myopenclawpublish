@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../assets/research-brief.css">
+    <title>Follow 深度日报：安全 Agent、终端 RL 与浏览器本地模型成为主线</title>
+    <meta name="description" content="2026-06-23 Follow List 深度日报：OpenAI Daybreak/Codex Security、TMax 终端 agent RL、Simon Willison 的 Moebius WebGPU 移植、PP-OCRv6 与 coding agent 成本治理。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>安全 Agent、终端 RL 与浏览器本地模型成为主线</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-06-22 00:00 UTC 至 2026-06-23 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。公开 X/Nitter RSS 本轮多数不可读，采用官方 RSS、个人博客/Atom、公开 X 搜索结果与来源自带页面交叉确认。</p>
+        <div class="meta">
+          <span>发布时间：2026-06-23 08:00 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、OpenAI RSS、Simon Willison Atom、Substack、Hugging Face RSS、公开 X 搜索</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天最强信号来自三条线。第一，OpenAI 把 Daybreak 扩展为安全修复体系：Codex Security、GPT-5.5-Cyber、Patch the Planet 和合作伙伴计划一起出现，重点从“发现漏洞”推进到“验证、打补丁、提交证据”。第二，Nathan Lambert 跟进 TMax，说明终端 agent 的 RL 研究正在从数学题 RLVR 转向更贵、更难复现、但更贴近真实工具使用的训练配方。第三，Simon Willison 用 Claude Code 把 Moebius 0.2B inpainting 模型移植到浏览器 WebGPU，给出一个很有代表性的“并行 agent side project”样本：人类负责方向、测试和上线判断，agent 负责跨栈实现。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. 安全 agent 从扫描器走向修复流水线</h3>
+            <p>OpenAI Daybreak 的叙事不是再发布一个安全模型，而是把 Codex、受限 cyber 模型、专家审查、开源维护者协作和 partner program 串成 remediation loop。企业安全市场会关注它能否减少误报、落地补丁和留出可审计证据。</p>
+          </div>
+          <div class="card">
+            <h3>2. 终端 agent RL 需要公共配方</h3>
+            <p>TMax 的价值在于开放数据、权重、rollouts 和训练脚本，让社区能研究 terminal-use agent 的小规模 ablation。Nathan Lambert 的评论重点是：agent RL 已经不同于早期数学 RLVR，需要处理复杂工具、history 管理和训练基础设施。</p>
+          </div>
+          <div class="card">
+            <h3>3. Coding agent 进入“并行副项目”模式</h3>
+            <p>Simon 的 Moebius WebGPU 实验展示了另一种工作方式：主线任务由 Codex Desktop 跑，等待期间让 Claude Code 处理模型转换、前端、Hugging Face 发布和缓存。关键不是他学会了每行代码，而是验证了这种跨栈移植现在可以由 agent 推到可访问 demo。</p>
+          </div>
+          <div class="card">
+            <h3>4. 专用小模型继续压缩 VLM 的使用边界</h3>
+            <p>Hugging Face 上的 PP-OCRv6 强调 1.5M 到 34.5M 参数、50 语言、多后端部署。对 agent 工作流来说，文档解析、截图 OCR、工业文本识别不一定都需要大 VLM，专用模型会成为成本和延迟优化的工具箱。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>OpenAI：Daybreak 扩展到 Codex Security 与 GPT-5.5-Cyber</h3>
+          <p class="source">来源账号/机构：OpenAI；发布时间：2026-06-22 10:00 UTC；链接：<a href="https://openai.com/index/daybreak-securing-the-world/">Daybreak 官方文章</a> / <a href="https://x.com/OpenAI/status/2069104283824640023">OpenAI X 帖</a></p>
+          <p>OpenAI 发布 Daybreak 扩展，核心包括 Codex Security、GPT-5.5-Cyber 完整版本、Daybreak Cyber Partner Program 和开源修复计划。官方强调目标是从漏洞发现推进到端到端补丁自动化：识别安全相关组件、验证可达性、在受控环境中测试、生成补丁并准备证据给人类复核。</p>
+          <p>值得注意的是，GPT-5.5-Cyber 被定位为给 verified defenders 使用的更强、更 permissive 的安全模型，而 Codex Security 更像是把这些能力放进开发者工作流的入口。OpenAI 同时披露 CyberGym、ExploitGym、SEC-bench Pro 等结果，但这些 benchmark 还需要结合真实 disclosure 与误报率理解。</p>
+          <p class="why"><strong>为什么值得看：</strong>安全是 agent 最容易产生高 ROI 的企业场景之一，因为流程天然包含代码阅读、复现、补丁、测试和审计。OpenAI 这次把模型、工具、合作伙伴和开源维护者计划打包，说明它要争夺的是安全运营与开发流程中的“修复层”，不只是模型调用。</p>
+          <p class="action"><strong>后续行动：</strong>跟进 Codex Security plugin 的实际可用范围、授权门槛、日志审计与误报处理；把 OpenAI Daybreak 和 Anthropic Claude Security / Project Glasswing 做一张安全 agent 对比表。</p>
+        </div>
+
+        <div class="item">
+          <h3>OpenAI：Patch the Planet 面向开源维护者做 AI 辅助补丁</h3>
+          <p class="source">来源账号/机构：OpenAI；发布时间：2026-06-22 10:00 UTC；链接：<a href="https://openai.com/index/patch-the-planet/">Patch the Planet</a></p>
+          <p>OpenAI 与 Trail of Bits 推出 Patch the Planet，面向 cURL、NATS Server、pyca/cryptography、Sigstore、aiohttp、Go、freenginx、Python、python.org 等关键开源项目。流程不是把 AI 发现直接丢给维护者，而是由安全工程师先做验证、补丁开发、测试和 coordinated disclosure。</p>
+          <p>官方称 Trail of Bits 在 19 个开源项目上用 Codex 与 GPT-5.5-Cyber 识别了数百个安全问题，并合并了几十个补丁，同时产出 fuzzing harness、历史 CVE 分析、差分测试、威胁模型和去重/降噪流程。这里最重要的是“减轻维护者负担”这个定位，而不是制造更多未验证报告。</p>
+          <p class="why"><strong>为什么值得看：</strong>开源安全的瓶颈通常不是没有扫描结果，而是维护者没有精力处理噪音。AI 如果能和专家审查、测试基础设施、patch PR 结合，才有机会变成公共基础设施层面的正外部性。</p>
+          <p class="action"><strong>后续行动：</strong>持续记录参与项目的公开 PR、CVE、测试基础设施变更；重点观察哪些成果可以复用到企业私有代码库的安全修复流水线。</p>
+        </div>
+
+        <div class="item">
+          <h3>Nathan Lambert：TMax 给终端 agent RL 提供开放研究配方</h3>
+          <p class="source">来源账号/机构：Nathan Lambert / @natolambert；发布时间：2026-06-22；链接：<a href="https://natolambert.substack.com/p/tmax-an-open-rl-recipe-for-terminal">Substack 文章</a> / <a href="https://x.com/natolambert/status/2069055254961021150">X 帖</a> / <a href="https://github.com/hamishivi/tmax">GitHub</a></p>
+          <p>Nathan 介绍 TMax：面向 terminal agents 的开放 RL 配方，公开论文、博客、GitHub、Hugging Face artifacts、rollouts 和数据。他强调 agent RL 已经不同于早期数学 RLVR，任务更硬，需要复杂工具使用、history 管理、harness 设计和更长训练，社区需要可研究的小规模公共配方。</p>
+          <p>这条线索的重要性不只在分数，而在研究资产。TMax 将训练任务成本描述为 8 个 H100 节点跑 2-3 天，仍然贵，但已经接近学术界可以研究的级别；它也让后续 DPPO、数据构造、rollout 过滤、terminal benchmark 等 ablation 有了共同起点。</p>
+          <p class="why"><strong>为什么值得看：</strong>coding/terminal agent 的能力提升不能只靠闭源榜单。开放配方一旦成熟，会给开源模型、企业自训、学术复现和低成本 agent 供应链带来真实压力。</p>
+          <p class="action"><strong>后续行动：</strong>下载论文和 repo，整理 TMax 的训练数据、环境、reward、rollout 管理和 Terminal-Bench 结果；评估它与 GLM 5.2、OpenCode、Deep Agents 的组合价值。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison：用 Claude Code 把 Moebius 0.2B 移植到浏览器 WebGPU</h3>
+          <p class="source">来源账号/机构：Simon Willison / @simonw；发布时间：2026-06-22 23:43 UTC；链接：<a href="https://simonwillison.net/2026/Jun/22/porting-moebius/">Simon Willison 博文</a> / <a href="https://simonw.github.io/moebius-web/">可运行 demo</a> / <a href="https://github.com/simonw/moebius-web">GitHub</a></p>
+          <p>Simon 看到 Moebius 0.2B image inpainting 模型后，让 Claude Code 尝试把 PyTorch/CUDA 模型转换为 ONNX，并通过 ONNX Runtime Web + WebGPU 在浏览器中运行。他把代码、权重、Transformers.js、ONNX Runtime 等材料放到同一工作区，要求 agent 写 plan、notes、commit，并在测试错误后不断迭代，最终发布到 Hugging Face 与 GitHub Pages。</p>
+          <p>这个案例的亮点是完整链路：模型权重转换、浏览器 UI、线上 demo、GitHub Pages 路径修正、1.3GB 权重缓存、service worker / CacheStorage。Simon 明确说自己没有逐行读代码，学习到的更多是“现在什么事可行”。这很像未来个人研发的常态：人类做目标设定、例子选择、验收和发布判断，agent 做跨工具执行。</p>
+          <p class="why"><strong>为什么值得看：</strong>它证明 coding agent 不只会改 Web App，也能跨 ML 工程、模型格式、浏览器 runtime、前端和部署完成小型产品化实验。对本地模型和边缘 AI 来说，WebGPU + ONNX + agent-assisted porting 是值得跟进的组合。</p>
+          <p class="action"><strong>后续行动：</strong>复盘 repo 的 `research.md`、`notes.md`、`understanding.md` 和缓存实现；评估是否可以把这种流程变成“模型到浏览器 demo”的 OpenClaw 模板。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hugging Face：PP-OCRv6 发布 50 语言轻量 OCR 模型族</h3>
+          <p class="source">来源账号/机构：Hugging Face / PaddlePaddle；发布时间：2026-06-22 13:18 UTC；链接：<a href="https://huggingface.co/blog/paddlepaddle/pp-ocrv6">Hugging Face 博文</a> / <a href="https://huggingface.co/collections/PaddlePaddle/pp-ocrv6">模型集合</a></p>
+          <p>PP-OCRv6 是 PaddleOCR 的新一代通用 OCR 模型族，覆盖 tiny、small、medium 三档，从 1.5M 到 34.5M 参数。官方强调 medium 与 small 支持 50 种语言，适用于文档、截图、多语言图片、数字屏、工业标签和场景文本。</p>
+          <p>它提供 Paddle Inference、Transformers、ONNX Runtime 等后端，并把可视化结果、结构化 JSON、在线 demo 和 Hugging Face model collection 结合起来。对 agent workflow 来说，这类小模型可用于截图理解、票据/文档抽取、RAG 入库前处理、UI automation 视觉辅助。</p>
+          <p class="why"><strong>为什么值得看：</strong>很多 OCR 任务用大 VLM 会过贵、过慢且不稳定。专用小模型让 agent 可以把“看图读字”降到可控成本，尤其适合本地化和批量管道。</p>
+          <p class="action"><strong>后续行动：</strong>选中英文截图、PDF 页面、表格图、工业标签做小样本测试；比较 PP-OCRv6、PaddleOCR-VL、Qwen/Gemini/GPT 视觉模型的准确率、延迟和成本。</p>
+        </div>
+
+        <div class="item">
+          <h3>Harrison Chase：继续强调 coding agent 的模型路由与成本治理</h3>
+          <p class="source">来源账号/机构：Harrison Chase / @hwchase17、LangChain；发布时间：2026-06-22；链接：<a href="https://x.com/hwchase17/status/2069148652459761912">Harrison X 帖</a> / <a href="https://www.langchain.com/blog/how-we-made-coding-agent-spend-predictable">LangChain 成本治理文章</a></p>
+          <p>Harrison 今天的公开帖提到 model routing 和相关思考，并关联 LangChain 如何让 coding agent spend predictable 的内部实践。LangChain 文章虽然发布于 6 月 15 日，但今天被重新带入讨论，核心是用 LangSmith LLM Gateway 给 coding agent 做实时成本可见性、预算、用户/API key 级限制和 trace 关联。</p>
+          <p>这条线与昨天的 GLM 5.2 / Deep Agents 线索相互呼应：当模型选择变多，agent 的运行成本和路由策略会变成产品能力，而不是财务后台问题。LangChain 的说法是，一个重度 coding agent 用户可能在被发现前产生数千美元周开销，因此实时治理要内嵌到 agent 生命周期。</p>
+          <p class="why"><strong>为什么值得看：</strong>agent 规模化的瓶颈之一是不可预测成本。模型路由、trace、预算、限额申请和评测结果如果能连起来，会决定企业是否敢放开 agent 使用。</p>
+          <p class="action"><strong>后续行动：</strong>把 LangSmith LLM Gateway、OpenAI Enterprise spend controls、Anthropic 计划/credit 模式、OpenRouter/Fireworks 成本路由做一个治理维度对比。</p>
+        </div>
+
+        <div class="item">
+          <h3>OpenAI：Codex-maxxing 把 Codex 描述为长程工作空间</h3>
+          <p class="source">来源账号/机构：OpenAI；发布时间：2026-06-22 00:00 UTC；链接：<a href="https://openai.com/index/codex-maxxing-long-running-work/">OpenAI 官方页</a></p>
+          <p>OpenAI 发布 Jason Liu 的 Codex-maxxing 白皮书入口，主题是让 Codex 支持超出单次 prompt 的长程工作：保存上下文、管理复杂项目、让工作跨会话延续。虽然公开页内容较短，但它与近期 Codex Enterprise、Samsung 部署、Daybreak 安全修复形成同一叙事。</p>
+          <p>这里的关键词是 persistent workspace。OpenAI 正在把 Codex 从“CLI/编码助手”描述成组织内部可持续运行的工程工作空间，这与 Claude Code dynamic workflows、LangChain Deep Agents、OpenClaw taskflow 等方向高度重合。</p>
+          <p class="why"><strong>为什么值得看：</strong>长程 agent 的价值不在一次生成，而在任务状态、上下文、文件、权限、测试和审计可以持续积累。谁能把这些做成可信工作空间，谁就更接近企业 adoption。</p>
+          <p class="action"><strong>后续行动：</strong>下载白皮书后拆解 Jason Liu 的具体工作流，提炼适合 OpenClaw/Codex 的长程项目模板。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>OpenAI：</strong>一天内围绕 Daybreak、Patch the Planet、Codex-maxxing 发出多条信号，方向集中在安全修复、长程工作和企业化。</li>
+          <li><strong>Nathan Lambert：</strong>继续充当开放模型与 RL 研究的高信号解释器，这次重点转到 terminal agents 的公共训练资产。</li>
+          <li><strong>Simon Willison：</strong>用一篇长文给出 AI 编程协作的细节样本，包括计划、笔记、权重发布、缓存和上线。</li>
+          <li><strong>Hugging Face / PaddlePaddle：</strong>PP-OCRv6 说明 HF 生态继续吸纳专用小模型，不只围绕大语言模型。</li>
+          <li><strong>LangChain / Harrison Chase：</strong>模型路由、成本治理和 coding agent 可观测性仍是其企业平台叙事核心。</li>
+          <li><strong>Anthropic：</strong>本窗口官方 RSS 路径不可用，公开页面未看到 24 小时内新增重大新闻；Fable 5 临时 included window 于 6 月 22 日结束这件事仍值得后续验证是否延期。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>Daybreak / Codex Security：</strong>跟踪是否有公开 demo、developer docs、插件权限模型和企业安全合作案例。</li>
+          <li><strong>TMax：</strong>阅读论文和训练脚本，确认数据规模、环境设计、reward、DPPO 细节、Terminal-Bench 设置和开放 license。</li>
+          <li><strong>Moebius WebGPU：</strong>复盘 Simon 的 agent transcript，提炼“模型转换到浏览器 demo”的标准操作流程。</li>
+          <li><strong>PP-OCRv6：</strong>做本地 OCR 小评测，重点看中文、英文、截图、小字号、表格和低清场景。</li>
+          <li><strong>Agent 成本治理：</strong>把 trace、budget、model routing、provider billing、用户限额和异常告警串成企业 agent 运维 checklist。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>GPT-5.5-Cyber 的 benchmark 数字来自 OpenAI 官方披露，需要等待第三方复测、真实漏洞披露和误报/安全边界案例。</li>
+          <li>Patch the Planet 的“数百问题、几十补丁”目前项目细节有限，应以后续公开 PR、CVE 和 maintainer 反馈核验。</li>
+          <li>TMax 的成本和复现实验虽比闭源训练透明，但 8 个 H100 节点 2-3 天仍不是普通个人可轻松复现，需要拆分哪些 ablation 可以低成本做。</li>
+          <li>Moebius WebGPU demo 依赖约 1.3GB 权重下载与浏览器 WebGPU 支持，实际用户体验需要在不同浏览器、设备和网络下复测。</li>
+          <li>X/Nitter RSS 本轮抓取不可用；公开 X 搜索可见的帖子只作为线索，不能代表完整时间线。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul class="noise">
+          <li>围绕 Daybreak 的转发很多，但缺少技术细节的祝贺、立场表达和营销短帖未纳入重点。</li>
+          <li>AI agent 榜单、泛化工具清单和 SEO 型文章较多，只在能补充具体事实时保留。</li>
+          <li>PP-OCRv6 的二次转载和社区热帖没有替代原始 HF/PaddlePaddle 链接。</li>
+          <li>旧的 Anthropic、LangChain、Hugging Face RSS 条目未重复包装为新发布。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul class="links">
+          <li><a href="https://openai.com/index/daybreak-securing-the-world/">OpenAI: Daybreak - tools for securing every organization</a></li>
+          <li><a href="https://x.com/OpenAI/status/2069104283824640023">OpenAI X: Daybreak / Codex Security / GPT-5.5-Cyber</a></li>
+          <li><a href="https://openai.com/index/patch-the-planet/">OpenAI: Patch the Planet</a></li>
+          <li><a href="https://openai.com/index/codex-maxxing-long-running-work/">OpenAI: Codex-maxxing for long-running work</a></li>
+          <li><a href="https://natolambert.substack.com/p/tmax-an-open-rl-recipe-for-terminal">Nathan Lambert: TMax - an open RL recipe for terminal agents</a></li>
+          <li><a href="https://x.com/natolambert/status/2069055254961021150">Nathan Lambert X: TMax</a></li>
+          <li><a href="https://github.com/hamishivi/tmax">TMax GitHub repo</a></li>
+          <li><a href="https://huggingface.co/collections/allenai/tmax">TMax artifacts on Hugging Face</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/22/porting-moebius/">Simon Willison: Porting Moebius to browser WebGPU with Claude Code</a></li>
+          <li><a href="https://simonw.github.io/moebius-web/">Moebius WebGPU demo</a></li>
+          <li><a href="https://github.com/simonw/moebius-web">Moebius WebGPU GitHub repo</a></li>
+          <li><a href="https://huggingface.co/blog/paddlepaddle/pp-ocrv6">Hugging Face: PP-OCRv6</a></li>
+          <li><a href="https://huggingface.co/collections/PaddlePaddle/pp-ocrv6">PP-OCRv6 model collection</a></li>
+          <li><a href="https://x.com/hwchase17/status/2069148652459761912">Harrison Chase X: model routing / coding agent spend</a></li>
+          <li><a href="https://www.langchain.com/blog/how-we-made-coding-agent-spend-predictable">LangChain: How We Made Coding Agent Spend Predictable</a></li>
+          <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+          <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+          <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+        </ul>
+      </section>
+
+      <footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer>
+    </main>
+    <script src="../../../../assets/research-brief.js" defer></script>
+  </body>
+</html>
