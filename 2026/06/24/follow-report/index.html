@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../assets/research-brief.css">
+    <title>Follow 深度日报：Claude 进入团队频道，Agent 工程转向可治理生产形态</title>
+    <meta name="description" content="2026-06-24 Follow List 深度日报：Claude Tag、CUGA agent harness、Transformers.js 跨源缓存、Simon Willison 浏览器 SQLite 实验、prompt injection role confusion、AI 产品工程与自改进 harness。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>Claude 进入团队频道，Agent 工程转向可治理生产形态</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-06-23 00:00 UTC 至 2026-06-24 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。抓取优先级按 Follow List 中 Status=active、Priority=high、Cadence=weekly/daily 排序，使用官方页面/RSS、个人博客/Atom、Hugging Face RSS 与 Nitter 公开镜像交叉确认。</p>
+        <div class="meta">
+          <span>发布时间：2026-06-24 08:00 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、Anthropic News、Hugging Face RSS、Simon Willison Atom、Nitter 公开镜像</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天的主线不是新模型，而是 agent 从个人工具进入团队与生产环境。Anthropic 发布 Claude Tag，把 Claude 作为 Slack 频道里的可提及成员，并强调它是 Claude Code 的团队化演进；Hugging Face/IBM 发布 CUGA 应用集合，继续把 agent harness、状态、工具调用和治理封装成可复制工程资产；Transformers.js 与 Chrome 团队讨论跨源缓存，说明浏览器本地模型的基础设施开始补短板。Follow List 上，Karpathy、Alex Albert、Eugene Yan 等人都围绕 Claude Tag 转发/评论，Harrison Chase 与 Shreya/Hamel 继续强调 eval、loop engineering 与自改进 harness。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. Agent 从单人会话进入多人协作现场</h3>
+            <p>Claude Tag 的关键变化是把 AI 放进 Slack 频道和线程，而不是只在单用户 chat 或本地 terminal 里运行。它能继承频道上下文、接受多人补充信息、连接工具和代码库，这会改变产品团队、支持、数据分析和工程事故处理的协作方式。</p>
+          </div>
+          <div class="card">
+            <h3>2. Harness 正在成为 agent 产品的底座词</h3>
+            <p>CUGA、LangChain 的 loop engineering、自改进 harness 讨论都指向同一件事：agent 可靠性不只靠模型，而靠状态、工具边界、反思、评测、回放和治理。框架之争会慢慢转成 harness 能否帮团队持续迭代。</p>
+          </div>
+          <div class="card">
+            <h3>3. 浏览器本地 AI 的瓶颈转向缓存和存储</h3>
+            <p>Simon 的 OPFS + Pyodide 实验和 Hugging Face 的 Cross-Origin Storage 文章都围绕浏览器里的持久化资源。WebGPU/ONNX/Pyodide 让浏览器能跑更多 AI 与数据应用，下一步会卡在大模型权重、Wasm runtime、SQLite 文件和跨站缓存。</p>
+          </div>
+          <div class="card">
+            <h3>4. Prompt injection 仍是 agent 安全硬问题</h3>
+            <p>Simon 转引 role confusion 研究，提醒我们模型对“文本角色”的判断并不稳固，甚至会受风格影响。越多 agent 进入 Slack、代码库、浏览器和企业工具，越需要把非可信输入隔离、转写、标注和权限控制做成系统默认。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>Anthropic：Claude Tag 把 Claude 放进 Slack 团队工作流</h3>
+          <p class="source">来源账号/机构：Anthropic、Alex Albert、Karpathy、Eugene Yan；发布时间：2026-06-23；链接：<a href="https://www.anthropic.com/news/introducing-claude-tag">Anthropic 官方文章</a> / <a href="https://x.com/alexalbert__/status/2069470389391241314">Alex Albert X</a> / <a href="https://x.com/karpathy/status/2069547676849557725">Karpathy X</a> / <a href="https://x.com/eugeneyan/status/2069513502403035434">Eugene Yan X</a></p>
+          <p>Anthropic 发布 Claude Tag，先从 Slack beta 开始，面向 Claude Enterprise 和 Team 客户。Claude 可以被加入指定频道，连接获授权的工具、数据和代码库，团队成员在频道里 tag @Claude 后，它会把任务拆成阶段执行，并在线程里回复产物。</p>
+          <p>官方把它称为 Claude Code 的演进：更主动、更适合团队，并披露 Anthropic 内部产品团队已有大量代码来自 Claude Tag 内部版本。Alex Albert 说这种体验更像“管理一个团队”，Eugene Yan 强调多人可以在线程里给 Claude 补上下文，Karpathy 则把它看成 Claude 融入组织活动流的新交互范式。</p>
+          <p class="why"><strong>为什么值得看：</strong>这是 agent 产品从“个人提效工具”到“组织协作成员”的明确信号。若 Slack 里的 Claude 能可靠访问代码、数据、工单和监控，它会影响软件开发、产品分析、支持和 incident response 的日常流程。</p>
+          <p class="action"><strong>后续行动：</strong>跟进 Claude Tag 的权限模型、上下文记忆边界、审计日志、私有频道隔离和代码修改审批；与 OpenAI Codex long-running work、Workspace Agents、OpenClaw TaskFlow 做协作模式对比。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hugging Face / IBM：CUGA 用两打样例展示轻量 agent harness</h3>
+          <p class="source">来源账号/机构：Hugging Face、IBM Research；发布时间：2026-06-23 12:51 UTC；链接：<a href="https://huggingface.co/blog/ibm-research/cuga-apps">Hugging Face 文章</a> / <a href="https://github.com/IBM/cuga-apps">cuga-apps GitHub</a></p>
+          <p>IBM Research 在 Hugging Face 发布 CUGA 应用集合，用二十多个单文件 FastAPI 样例展示一个“harness 而非重框架”的 agent 方式。CUGA 负责计划、执行 loop、工具调用、生成代码、状态管理和反思，开发者主要写工具列表和 prompt。</p>
+          <p>文章强调这些样例不是纯 demo，而是可读、可复制、可在生产治理环境中迁移的应用形态。它还把 agent 规模化问题拆成边界、状态、工具、从单 agent 到多 agent、生产治理等工程环节，和最近 LangChain / Harrison Chase 反复讲的 lifecycle、trace、eval 形成呼应。</p>
+          <p class="why"><strong>为什么值得看：</strong>Agent 进入企业场景后，价值不在“能不能调用工具”，而在能否稳定地计划、回放、治理和扩展。CUGA 这类 harness 如果降低应用样例到生产约束之间的距离，会成为开源 agent 工程的重要路线。</p>
+          <p class="action"><strong>后续行动：</strong>拉取 CUGA 与 cuga-apps，选 2-3 个样例跑通；对比 LangGraph、OpenAI Agents SDK、Claude Code Skill/Plugin、OpenClaw skill/taskflow 的状态管理和治理边界。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hugging Face / Chrome：Cross-Origin Storage 试图解决浏览器 AI 重复下载</h3>
+          <p class="source">来源账号/机构：Hugging Face、Google Chrome 团队；发布时间：2026-06-23；链接：<a href="https://huggingface.co/blog/cross-origin-storage">Hugging Face 文章</a> / <a href="https://github.com/WICG/cross-origin-storage">Cross-Origin Storage proposal</a></p>
+          <p>Hugging Face 刊登 Chrome 团队的文章，说明 Transformers.js 在浏览器中运行模型时会遇到跨源缓存隔离问题。同一模型或 Wasm runtime 被不同 origin 的应用使用时，浏览器出于隐私和安全原因不会简单共享缓存，导致重复下载和重复占用磁盘。</p>
+          <p>Cross-Origin Storage 提案希望通过基于内容哈希、显式授权和完整性校验的共享存储，让大模型资源能跨 origin 复用。文章用 Whisper tiny 与 ONNX Runtime Web 的 Wasm 文件举例，并说明当前需要 Chrome 扩展 polyfill 才能实验。</p>
+          <p class="why"><strong>为什么值得看：</strong>WebGPU 与 Transformers.js 让本地浏览器 AI 变得可用，但 100MB 到数 GB 的模型权重会成为体验瓶颈。跨源安全缓存如果成熟，会降低浏览器端 agent、OCR、ASR、embedding、离线工具的启动成本。</p>
+          <p class="action"><strong>后续行动：</strong>跟进 WICG 提案状态；在本地测试 Transformers.js 常用模型的缓存命中、加载时间和存储占用，评估是否值得给 OpenClaw canvas/browser 工具加入模型资源缓存策略。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison：用 Claude Code for web 做 OPFS + Pyodide SQLite 持久化实验</h3>
+          <p class="source">来源账号/机构：Simon Willison / @simonw；发布时间：2026-06-23 18:58 UTC；链接：<a href="https://simonwillison.net/2026/Jun/23/opfs-pyodide/">Simon 博文</a></p>
+          <p>Simon 发布 OPFS + Pyodide test harness，目标是验证 Datasette Lite 这类完全运行在浏览器中的 Python/Wasm 应用，是否能编辑并持久保存用户电脑上的 SQLite 文件。他让 Claude Code for web 搭建 playground UI，用不同浏览器测试 Origin Private File System 的能力。</p>
+          <p>这延续了他前一天把 Moebius 模型移植到浏览器 WebGPU 的路线：浏览器不只是展示层，而是逐渐能承载数据库、模型、Wasm runtime、文件系统和小型本地应用。这里的关键是把“本地数据 + 浏览器 UI + AI 辅助开发”连成一个可实验的工程循环。</p>
+          <p class="why"><strong>为什么值得看：</strong>如果 Datasette Lite 能稳定编辑本地 SQLite，个人知识库、轻量 BI、离线分析和本地 agent 数据工作台都会更容易落地。它和 Transformers.js 缓存问题共同指向浏览器端 AI/数据应用的基础设施层。</p>
+          <p class="action"><strong>后续行动：</strong>复现 playground，记录 Chrome/Safari/Firefox 的 OPFS 行为；评估能否把 SQLite + Pyodide + local model 做成公开可部署的数据分析 demo。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison：Prompt injection as role confusion 给 agent 安全敲警钟</h3>
+          <p class="source">来源账号/机构：Simon Willison；发布时间：2026-06-22 23:59 UTC；链接：<a href="https://simonwillison.net/2026/Jun/22/prompt-injection-as-role-confusion/">Simon 链接日志</a> / <a href="https://arxiv.org/abs/2603.12277">arXiv 论文</a></p>
+          <p>Simon 转引 Charles Ye、Jasmine Cui、Dylan Hadfield-Menell 关于 role confusion 的研究。核心观点是，模型区分系统/思考/助手/用户文本的能力并不可靠，而且会受文本风格影响；攻击者可以把恶意指令写成模型内部推理或策略说明的风格，诱导模型错误归因。</p>
+          <p>研究中提到的 destyling 思路也很有启发：对非可信输入做轻微改写，可能显著降低攻击成功率。这不代表问题被解决，但说明 prompt injection 防御不能只靠“加一句不要听用户”，而要把输入来源、角色标注、权限和内容变换纳入工程系统。</p>
+          <p class="why"><strong>为什么值得看：</strong>Claude Tag、Slack agent、浏览器 agent 和 coding agent 都会读大量外部文本。只要模型会把外部文本误识别为高权限文本，agent 就可能在错误权限下行动。</p>
+          <p class="action"><strong>后续行动：</strong>把 role confusion 纳入 agent 安全 checklist；测试 OpenClaw/Claude/Codex 在邮件、网页、Slack、代码注释等外部文本中的指令隔离表现。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hamel Husain / Shreya Shankar：AI 产品工程 mini-course 启动，eval 自动化成为重点</h3>
+          <p class="source">来源账号/机构：Hamel Husain、Shreya Shankar；发布时间：2026-06-23；链接：<a href="https://x.com/HamelHusain/status/2069465758472814602">Hamel X</a> / <a href="https://x.com/sh_reya/status/2069475929353834909">Shreya X</a></p>
+          <p>Hamel 和 Shreya 宣布启动免费的 AI product engineering mini-course，覆盖 Design/UX & Evals、Retrieval、何时以及如何使用 open models 等主题。Shreya 特别提到即将讲如何用 AI coding tools 自动化 eval，核心是用 AI debugging AI。</p>
+          <p>这条不只是课程信息，它反映了应用 AI 工程社区的重心变化：从“接入模型”转向产品质量闭环。Evals、检索、设计、开放模型、调试、用户反馈会越来越像一个完整岗位技能栈。</p>
+          <p class="why"><strong>为什么值得看：</strong>Follow List 里 Hamel/Shreya 的价值就在于把 AI 产品从 demo 拉回质量体系。课程内容可能成为未来团队培训 AI 产品工程师的高信号材料。</p>
+          <p class="action"><strong>后续行动：</strong>跟进课程录像和材料，尤其是自动化 eval、AI coding tools 调试 AI、open models 选择这三块；整理成内部 AI 产品工程 checklist。</p>
+        </div>
+
+        <div class="item">
+          <h3>Harrison Chase：Agent 生命周期与 self-harness 继续升温</h3>
+          <p class="source">来源账号/机构：Harrison Chase / LangChain；发布时间：2026-06-23；链接：<a href="https://x.com/hwchase17/status/2069467520474501544">Harrison X</a> / <a href="https://www.langchain.com/blog/the-art-of-loop-engineering">LangChain Loop Engineering</a></p>
+          <p>Harrison 今天继续强调，发布第一个版本只是可靠 agent 的一小部分，关键是有可重复的 lifecycle 来持续改进。相关转发中出现 self-harness 话题：先运行 agent 观察失败，再提出 harness 改进，确认收益且避免副作用。</p>
+          <p>这与 LangChain 最近提出的 loop engineering 一脉相承：通过数据、eval、feedback 和 trace 给 agent 优化提供梯度，而不是凭直觉改 prompt。它也和 CUGA 的 harness 化叙事形成横向对照。</p>
+          <p class="why"><strong>为什么值得看：</strong>当 agent 进入长期任务和企业流程，真正难的是持续改进机制。Self-harness 的概念如果成立，agent 不仅执行任务，还会参与改进自己的运行环境。</p>
+          <p class="action"><strong>后续行动：</strong>把 self-harness 拆成可落地模块：失败挖掘、改进提案、回归测试、成本评估、上线审批；评估 OpenClaw cron/report 任务能否先做一个小闭环。</p>
+        </div>
+
+        <div class="item">
+          <h3>Nathan Lambert：新 RLHF/Post-Training 课程讲合成数据与 on-policy distillation</h3>
+          <p class="source">来源账号/机构：Nathan Lambert / @natolambert；发布时间：2026-06-23 15:14 UTC；链接：<a href="https://x.com/natolambert/status/2069439017750609972">Nathan X</a> / <a href="https://rlhfbook.com/course">RLHF &amp; Post-Training Course</a></p>
+          <p>Nathan 发布 RLHF/Post-Training 课程新讲，名义上是 synthetic data，但重点走读 distillation 文献，从 Hinton 2015 到今天的 multi-teacher on-policy distillation。他补充说 on-policy distillation 是书籍付印前最后加入的内容，因为这个方法增长很快，且正在以不同方式被使用。</p>
+          <p>这条线索和前一天的 TMax terminal-agent RL 互补：一个讲 agent RL 公共配方，一个讲 post-training 里的数据与蒸馏方法。对于开源模型和企业自训来说，合成数据、蒸馏、RLVR/RLHF 的边界会越来越重要。</p>
+          <p class="why"><strong>为什么值得看：</strong>后训练正在成为模型能力差异化的核心。Nathan 的课程能帮助判断哪些“开源模型能力跃迁”来自基础模型，哪些来自数据、蒸馏和策略优化。</p>
+          <p class="action"><strong>后续行动：</strong>记录该讲关键论文与方法谱系；把 on-policy distillation 与 GLM 5.2、TMax、open RL recipe 的训练路线做一页对照。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>Anthropic / Alex Albert：</strong>Claude Tag 成为今天最强产品信号，重点在 Slack、多人协作、记忆上下文、工具和代码库连接。</li>
+          <li><strong>Karpathy：</strong>转评 Claude Tag，指出这种“嵌入组织活动流”的交互范式需要大量底层集成工程。</li>
+          <li><strong>Eugene Yan：</strong>强调 Claude Tag 的 multiplayer 形态，其他人可以在线程里继续补充方向和上下文。</li>
+          <li><strong>Simon Willison：</strong>继续用 Claude Code 做浏览器本地数据/AI 实验，同时跟进 prompt injection 的基础安全研究。</li>
+          <li><strong>Hugging Face / IBM / Google Chrome：</strong>一天内出现 CUGA、huggingface_hub 自动化发布、Cross-Origin Storage 三条工程基础设施信号。</li>
+          <li><strong>Hamel Husain / Shreya Shankar：</strong>AI 产品工程课程启动，eval 自动化和 AI debugging AI 是最值得跟进的部分。</li>
+          <li><strong>Francois Chollet：</strong>今天围绕代码复杂度、agentic coding 和长期 AI stack 效率发帖，提醒 agent 生成代码会把复杂度带入后续上下文。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>Claude Tag：</strong>重点看 beta 文档、Slack 权限、工具连接、代码 PR 流程、审计日志和定价/配额。</li>
+          <li><strong>CUGA / cuga-apps：</strong>跑通样例，判断它是轻量 harness 还是 IBM 生态入口；比较 LangGraph、Agents SDK、OpenClaw taskflow。</li>
+          <li><strong>Cross-Origin Storage：</strong>跟进 WICG/Chrome 进展；测本地浏览器模型跨应用缓存是否能显著降低加载时间。</li>
+          <li><strong>Datasette Lite + OPFS：</strong>验证浏览器内 SQLite 编辑、持久化和备份导出路径。</li>
+          <li><strong>Role confusion 防御：</strong>把 destyling、可信/非可信文本隔离、权限最小化和工具调用审批组合成测试集。</li>
+          <li><strong>AI Product Engineering 课程：</strong>收集 Hamel/Shreya 课程资料，转成可执行的 eval 和产品质量 checklist。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>Claude Tag 官方称 Anthropic 内部产品团队已有大量代码来自内部版本，这属于厂商披露，需要等待外部团队 beta 使用反馈。</li>
+          <li>Claude Tag 的“学习频道上下文”需要进一步确认数据保留、私有频道隔离、退出频道后的遗忘机制和管理员审计能力。</li>
+          <li>CUGA 的 benchmark 与生产治理能力来自 IBM/HF 文章描述，需要实测样例和代码质量后再判断成熟度。</li>
+          <li>Cross-Origin Storage 仍是早期提案，当前依赖 Chrome 扩展 polyfill，不能当作已可依赖的 Web 标准。</li>
+          <li>Nitter 公开镜像可读，但并不保证覆盖每个账号完整时间线；X-only 短帖只作为公开线索，不代表完整抓取。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul class="noise">
+          <li>Claude Tag 的祝贺、转发和营销短帖很多，缺少权限、工程细节和实际案例的内容未纳入重点。</li>
+          <li>Gemini 足球模板、AI 工程大会预热、周边商品和泛泛公司祝贺与本日报主线相关性较低。</li>
+          <li>OpenAI DevDay apps 相关公开线索目前信息不足，只作为后续观察，不展开成重点结论。</li>
+          <li>围绕 SpaceX/Cursor compute deal 的二级推测缺少可核验来源，本轮仅列为投资线索观察，不公开放大。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul class="links">
+          <li><a href="https://www.anthropic.com/news/introducing-claude-tag">Anthropic: Introducing Claude Tag</a></li>
+          <li><a href="https://x.com/alexalbert__/status/2069470389391241314">Alex Albert on Claude Tag</a></li>
+          <li><a href="https://x.com/karpathy/status/2069547676849557725">Karpathy on Claude Tag</a></li>
+          <li><a href="https://x.com/eugeneyan/status/2069513502403035434">Eugene Yan on Claude Tag</a></li>
+          <li><a href="https://huggingface.co/blog/ibm-research/cuga-apps">Hugging Face / IBM: CUGA apps</a></li>
+          <li><a href="https://github.com/IBM/cuga-apps">cuga-apps GitHub</a></li>
+          <li><a href="https://huggingface.co/blog/cross-origin-storage">Hugging Face: Cross-Origin Storage in Transformers.js</a></li>
+          <li><a href="https://github.com/WICG/cross-origin-storage">WICG Cross-Origin Storage proposal</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/23/opfs-pyodide/">Simon Willison: OPFS + Pyodide test harness</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/22/prompt-injection-as-role-confusion/">Simon Willison: Prompt Injection as Role Confusion</a></li>
+          <li><a href="https://x.com/HamelHusain/status/2069465758472814602">Hamel Husain: AI product engineering mini-course</a></li>
+          <li><a href="https://x.com/sh_reya/status/2069475929353834909">Shreya Shankar: automate evals with AI coding tools</a></li>
+          <li><a href="https://x.com/hwchase17/status/2069467520474501544">Harrison Chase: reliable agent lifecycle</a></li>
+          <li><a href="https://www.langchain.com/blog/the-art-of-loop-engineering">LangChain: The Art of Loop Engineering</a></li>
+          <li><a href="https://x.com/natolambert/status/2069439017750609972">Nathan Lambert: synthetic data and on-policy distillation lecture</a></li>
+          <li><a href="https://rlhfbook.com/course">RLHF &amp; Post-Training Course</a></li>
+          <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+          <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+          <li><a href="https://nitter.net/hwchase17/rss">Harrison Chase Nitter RSS</a></li>
+          <li><a href="https://nitter.net/natolambert/rss">Nathan Lambert Nitter RSS</a></li>
+        </ul>
+      </section>
+
+      <footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer>
+    </main>
+    <script src="../../../../assets/research-brief.js" defer></script>
+  </body>
+</html>
