@@ -14,8 +14,15 @@
     background: #0a0a0f;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .poster-shell {
+    width: min(100vw, 1200px);
+    height: min(133.333vw, 1600px);
+    position: relative;
   }
 
   .poster {
@@ -27,6 +34,8 @@
     color: #e8ecf1;
     display: flex;
     flex-direction: column;
+    transform-origin: top left;
+    transform: scale(var(--poster-scale, 1));
   }
 
   /* Background grid */
@@ -423,6 +432,7 @@
 </style>
 </head>
 <body>
+<div class="poster-shell">
 <div class="poster">
   <div class="glow-1"></div>
   <div class="glow-2"></div>
@@ -648,5 +658,14 @@
     </div>
   </div>
 </div>
+</div>
+<script>
+  function fitPoster() {
+    const width = Math.min(window.innerWidth, 1200);
+    document.documentElement.style.setProperty('--poster-scale', String(width / 1200));
+  }
+  fitPoster();
+  window.addEventListener('resize', fitPoster);
+</script>
 </body>
 </html>
