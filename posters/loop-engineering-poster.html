@@ -413,7 +413,7 @@
               </div>
               <div class="thesis">
                 <div class="label">Core thesis</div>
-                <p>Loop 不是更长的 prompt；它是带模型能力的任务运行时。</p>
+        <p>Loop 不是更长的 prompt；它是带模型能力、预算和审计边界的任务运行时。</p>
               </div>
             </header>
           </div>
@@ -426,13 +426,13 @@
               </div>
               <div class="band-body">
                 <div class="mini-flow">
-                  <div class="node"><div class="mark">S</div><strong>State</strong><span>任务事实、阶段、证据、预算、重试次数。</span></div>
-                  <div class="node"><div class="mark">I</div><strong>Intent</strong><span>根据状态选择下一步，避免临场乱跑。</span></div>
-                  <div class="node"><div class="mark">A</div><strong>Action</strong><span>读日志、改文件、开 PR、发消息等工具动作。</span></div>
-                  <div class="node"><div class="mark">V</div><strong>Verify</strong><span>测试、lint、事实来源、独立检查。</span></div>
-                  <div class="node"><div class="mark">T</div><strong>Trace</strong><span>每轮留下证据，方便复盘和改进。</span></div>
+                  <div class="node"><div class="mark">S</div><strong>State</strong><span>goal、phase、evidence、budget、attempt、owner。</span></div>
+                  <div class="node"><div class="mark">I</div><strong>Intent</strong><span>next action 由状态推导，避免模型临场乱跑。</span></div>
+                  <div class="node"><div class="mark">A</div><strong>Action</strong><span>tool allowlist：读、写、发消息、开 PR 分级。</span></div>
+                  <div class="node"><div class="mark">V</div><strong>Verify</strong><span>测试、lint、事实来源、独立 reviewer、人工闸门。</span></div>
+                  <div class="node"><div class="mark">T</div><strong>Trace</strong><span>event log、artifact、diff、成本、失败原因。</span></div>
                 </div>
-                <div class="equation">state → intent → effect → event → state <span>｜写入真实系统前再加 verify → commit</span></div>
+                <div class="equation">state → intent → effect → event → state <span>｜提交前先验证；失败则重试 / 阻塞 / 交接</span></div>
               </div>
             </section>
 
@@ -445,17 +445,17 @@
                 <div class="card blue">
                   <div class="kicker">Harness</div>
                   <h3>单次执行的可靠性</h3>
-                  <p>工具、沙箱、上下文、权限、hook、测试命令和输出格式。目标是让一次 Agent run 不迷路、不误操作。</p>
+                  <p>关注一次 run：prompt、tools、sandbox、context policy、hooks、tests、output schema。核心问题：这次执行是否可控、可复现、可回滚。</p>
                 </div>
                 <div class="card green">
                   <div class="kicker">Loop</div>
                   <h3>跨时间的持续运营</h3>
-                  <p>调度、状态、预算、验证、通知、交接和长期改进。目标是让系统知道如何继续，也知道何时停止。</p>
+                  <p>关注多次 run：scheduler、state store、budget、queue、verification、notification、handoff、learning。核心问题：系统能否持续推进并停止。</p>
                 </div>
                 <div class="card amber">
                   <div class="kicker">Relationship</div>
                   <h3>不是二选一</h3>
-                  <p>Environment 决定能看见和能修改什么；Harness 承载每次执行；Loop 决定任务如何长期推进。</p>
+                  <p>Environment 定义可见世界和权限边界；Harness 承载每次执行；Loop 管理长期任务生命周期、升级路径和质量反馈。</p>
                 </div>
               </div>
             </section>
@@ -469,7 +469,7 @@
                 <div class="card red">
                   <div class="kicker">Start small</div>
                   <h3>第一版别做自动驾驶</h3>
-                  <p>先选读多、改少、证据清楚的场景：CI 失败分流、文档命令校验、PR 风险预检、依赖升级影响面扫描。</p>
+                  <p>先选读多、改少、证据清楚的场景：CI 失败分流、文档命令校验、PR 风险预检、依赖升级扫描。L1 只写报告；L2 才开低风险 PR；L3 只在 allowlist 内半无人值守。</p>
                 </div>
                 <div class="card">
                   <div class="kicker">Checklist</div>
@@ -477,10 +477,10 @@
                   <div class="checklist">
                     <div class="check"><i>1</i><div>写结构化状态，不把聊天记录当数据库。</div></div>
                     <div class="check"><i>2</i><div>候选结果和真实提交分开，副作用集中收口。</div></div>
-                    <div class="check"><i>3</i><div>Maker 不做 Checker，验证要独立。</div></div>
-                    <div class="check"><i>4</i><div>设置最大步数、预算、重试上限和停止条件。</div></div>
-                    <div class="check"><i>5</i><div>高风险动作默认人工确认。</div></div>
-                    <div class="check"><i>6</i><div>每轮留下 trace，用来改进 skill、memory 和工具。</div></div>
+                    <div class="check"><i>3</i><div>Maker 不做 Checker，验证要独立且可复跑。</div></div>
+                    <div class="check"><i>4</i><div>最大步数、预算、重试上限、停止条件写进系统。</div></div>
+                    <div class="check"><i>5</i><div>部署、删数据、外部承诺、权限修改默认人工确认。</div></div>
+                    <div class="check"><i>6</i><div>看指标：成功率、误报率、人工接管率、token 成本、平均恢复时间。</div></div>
                   </div>
                 </div>
               </div>
@@ -492,12 +492,12 @@
                 <h2>案例<br>CI<br>失败<br>分流</h2>
               </div>
               <div class="timeline">
-                <div class="case-step"><strong>触发</strong><span>CI job failed，记录 runId、commit、PR。</span></div>
-                <div class="case-step"><strong>收集</strong><span>读取日志片段、最近 commit、相关测试。</span></div>
-                <div class="case-step"><strong>分类</strong><span>test / dependency / permission / infra / unknown。</span></div>
-                <div class="case-step"><strong>建议</strong><span>生成带证据的修复方向或分流评论草稿。</span></div>
-                <div class="case-step"><strong>验证</strong><span>证据不足则停；权限/部署/账单直接交给人。</span></div>
-                <div class="case-step"><strong>提交</strong><span>只发布建议或低风险 PR；保留 trace 供复盘。</span></div>
+                <div class="case-step"><strong>触发</strong><span>CI job failed；写入 runId、repo、commit、PR、owner。</span></div>
+                <div class="case-step"><strong>收集</strong><span>拉取失败日志、最近 diff、依赖变更、历史相似失败。</span></div>
+                <div class="case-step"><strong>分类</strong><span>test / dependency / permission / infra / flaky / unknown。</span></div>
+                <div class="case-step"><strong>建议</strong><span>输出证据链、影响面、修复方向、可执行命令。</span></div>
+                <div class="case-step"><strong>验证</strong><span>复跑最小测试；权限、部署、账单、生产配置直接 handoff。</span></div>
+                <div class="case-step"><strong>提交</strong><span>L1 发分流报告；L2 开候选 PR；trace 进入后续规则改进。</span></div>
               </div>
             </section>
           </main>
