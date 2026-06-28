@@ -470,13 +470,13 @@
               </div>
               <div class="band-body">
                 <div class="mini-flow">
-                  <div class="node"><div class="mark">S</div><strong>State</strong><span>goal、phase、evidence、budget、attempt、owner。</span></div>
-                  <div class="node"><div class="mark">I</div><strong>Intent</strong><span>next action 由状态推导，避免模型临场乱跑。</span></div>
-                  <div class="node"><div class="mark">A</div><strong>Action</strong><span>tool allowlist：读、写、发消息、开 PR 分级。</span></div>
-                  <div class="node"><div class="mark">V</div><strong>Verify</strong><span>测试、lint、事实来源、独立 reviewer、人工闸门。</span></div>
-                  <div class="node"><div class="mark">T</div><strong>Trace</strong><span>event log、artifact、diff、成本、失败原因。</span></div>
+                  <div class="node"><div class="mark">S</div><strong>State</strong><span>任务账本：CI run #123，phase=collecting，attempt=1。</span></div>
+                  <div class="node"><div class="mark">I</div><strong>Intent</strong><span>下一步：收集日志、分类失败、草拟建议、交接。</span></div>
+                  <div class="node"><div class="mark">A</div><strong>Action</strong><span>实际动作：读日志、查 diff、跑测试、写评论。</span></div>
+                  <div class="node"><div class="mark">V</div><strong>Verify</strong><span>验收证据：测试通过、来源链接、独立复核。</span></div>
+                  <div class="node"><div class="mark">T</div><strong>Trace</strong><span>过程流水：读了什么、为何判断、花了多少。</span></div>
                 </div>
-                <div class="equation">state → intent → effect → event → state <span>｜提交前先验证；失败则重试 / 阻塞 / 交接</span></div>
+                <div class="equation">把 Loop 想成“任务账本 + 流水线” <span>｜状态决定下一步；动作留下证据；提交前先验证</span></div>
               </div>
             </section>
 
