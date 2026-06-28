@@ -30,7 +30,6 @@
       .poster {
         width: 1200px;
         height: 1600px;
-        position: relative;
         overflow: hidden;
         background:
           linear-gradient(#eef0f4 1px, transparent 1px),
@@ -41,262 +40,230 @@
         transform: scale(var(--scale, 1));
       }
 
-      .poster::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          linear-gradient(90deg, rgba(250, 249, 244, 0.98) 0 22%, transparent 22% 78%, rgba(250, 249, 244, 0.98) 78% 100%),
-          linear-gradient(0deg, rgba(250, 249, 244, 0.96), rgba(250, 249, 244, 0.96));
-        pointer-events: none;
-      }
-
       .inner {
-        position: relative;
-        z-index: 1;
         height: 100%;
-        padding: 70px 76px 58px;
+        padding: 50px 76px 42px;
         display: grid;
-        grid-template-rows: auto auto 1fr auto;
-        gap: 24px;
+        grid-template-rows: auto 1fr auto;
+        gap: 16px;
       }
 
       .topline {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        font-size: 22px;
-        font-weight: 700;
-        letter-spacing: 0;
-      }
-
-      .topline span {
-        color: #4c5666;
+        align-items: center;
+        color: #4b5565;
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 750;
       }
 
-      .hero {
+      .brand {
+        color: #16191f;
+        font-size: 23px;
+        font-weight: 900;
+      }
+
+      header {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 330px;
-        gap: 40px;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 42px;
         align-items: end;
-        padding-bottom: 20px;
+        padding: 10px 0 16px;
         border-bottom: 4px solid #16191f;
       }
 
       h1 {
         margin: 0;
-        max-width: 720px;
-        font-size: 88px;
-        line-height: 0.98;
-        font-weight: 900;
+        color: #16191f;
+        font-size: 74px;
+        line-height: 0.96;
+        font-weight: 950;
         letter-spacing: 0;
       }
 
       .deck {
-        margin-top: 20px;
+        margin-top: 14px;
         max-width: 760px;
-        color: #384150;
-        font-size: 28px;
-        line-height: 1.45;
-        font-weight: 600;
+        color: #334155;
+        font-size: 25px;
+        line-height: 1.42;
+        font-weight: 720;
       }
 
       .thesis {
         border: 3px solid #16191f;
         border-radius: 8px;
         background: #ffffff;
-        padding: 22px;
+        padding: 18px 20px;
         box-shadow: 10px 10px 0 #16191f;
       }
 
       .thesis .label {
         color: #a54a1f;
-        font-size: 16px;
-        font-weight: 900;
+        font-size: 15px;
+        font-weight: 950;
         letter-spacing: 0.12em;
         text-transform: uppercase;
       }
 
       .thesis p {
-        margin: 12px 0 0;
-        color: #16191f;
-        font-size: 24px;
-        line-height: 1.45;
-        font-weight: 800;
-      }
-
-      .main {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 20px;
-        min-height: 0;
-      }
-
-      .column {
-        display: grid;
-        grid-template-rows: auto 1fr;
-        min-height: 0;
-      }
-
-      .column-title {
-        min-height: 96px;
-        display: flex;
-        align-items: flex-end;
-        padding: 0 0 14px;
-        border-bottom: 3px solid #16191f;
-      }
-
-      .column-title .num {
-        margin-right: 12px;
-        color: #ffffff;
-        background: #16191f;
-        border-radius: 6px;
-        width: 52px;
-        height: 52px;
-        display: grid;
-        place-items: center;
-        font-size: 24px;
+        margin: 10px 0 0;
+        font-size: 21px;
+        line-height: 1.42;
         font-weight: 900;
       }
 
-      .column-title h2 {
+      .body {
+        min-height: 0;
+        display: grid;
+        grid-template-rows: 285px 270px 285px 170px;
+        gap: 16px;
+      }
+
+      .band {
+        display: grid;
+        grid-template-columns: 145px 1fr;
+        gap: 16px;
+        min-height: 0;
+      }
+
+      .band-head {
+        border: 3px solid #16191f;
+        border-radius: 8px;
+        background: #16191f;
+        color: #ffffff;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .band-head .num {
+        color: #f7d96f;
+        font-size: 38px;
+        line-height: 1;
+        font-weight: 950;
+      }
+
+      .band-head h2 {
         margin: 0;
-        font-size: 34px;
-        line-height: 1.1;
+        font-size: 30px;
+        line-height: 1.08;
         letter-spacing: 0;
       }
 
-      .stack {
+      .band-body {
+        min-height: 0;
         display: grid;
         gap: 14px;
-        align-content: start;
-        padding-top: 18px;
+      }
+
+      .cards-5 {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .cards-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .cards-2 {
+        grid-template-columns: 1.04fr 0.96fr;
       }
 
       .card {
         border: 2px solid #16191f;
         border-radius: 8px;
         background: #ffffff;
-        padding: 16px;
+        padding: 14px;
+        min-width: 0;
       }
 
-      .card.soft {
-        background: #f4f0e4;
+      .card.blue { background: #e9f0ff; }
+      .card.green { background: #e8f4ed; }
+      .card.amber { background: #fff3d7; }
+      .card.red { background: #ffe9e4; }
+      .card.soft { background: #f4f0e4; }
+      .card.dark {
+        background: #16191f;
+        color: #ffffff;
       }
 
-      .card.blue {
-        background: #e9f0ff;
-      }
-
-      .card.green {
-        background: #e8f4ed;
-      }
-
-      .card.amber {
-        background: #fff3d7;
-      }
-
-      .card.red {
-        background: #ffe9e4;
+      .kicker {
+        color: #6b7280;
+        font-size: 13px;
+        line-height: 1.1;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       .card h3 {
-        margin: 0 0 9px;
+        margin: 7px 0 7px;
         color: #16191f;
-        font-size: 20px;
-        line-height: 1.18;
+        font-size: 19px;
+        line-height: 1.14;
         letter-spacing: 0;
+      }
+
+      .card.dark h3,
+      .card.dark p {
+        color: #ffffff;
       }
 
       .card p {
         margin: 0;
         color: #414956;
-        font-size: 16px;
-        line-height: 1.52;
-        font-weight: 560;
+        font-size: 15px;
+        line-height: 1.38;
+        font-weight: 620;
       }
 
-      .mini {
-        color: #626b7a;
-        font-size: 14px;
-        line-height: 1.4;
-        font-weight: 650;
-      }
-
-      .flow {
+      .mini-flow {
         display: grid;
-        gap: 8px;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 9px;
+        align-items: stretch;
       }
 
-      .step {
-        display: grid;
-        grid-template-columns: 42px 1fr;
-        align-items: center;
-        gap: 10px;
+      .node {
         border: 2px solid #16191f;
         border-radius: 8px;
         background: #ffffff;
-        padding: 10px;
+        padding: 11px;
+        min-width: 0;
       }
 
-      .step .mark {
-        height: 42px;
-        border-radius: 6px;
+      .node .mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
         display: grid;
         place-items: center;
         color: #ffffff;
         background: #2d6cdf;
-        font-size: 16px;
-        font-weight: 900;
-      }
-
-      .step:nth-child(2) .mark { background: #1f8a5b; }
-      .step:nth-child(3) .mark { background: #b7791f; }
-      .step:nth-child(4) .mark { background: #bb4d2a; }
-      .step:nth-child(5) .mark { background: #6f54c7; }
-
-      .step strong {
-        display: block;
         font-size: 17px;
-        line-height: 1.2;
+        font-weight: 950;
       }
 
-      .step span {
+      .node:nth-child(2) .mark { background: #1f8a5b; }
+      .node:nth-child(3) .mark { background: #b7791f; }
+      .node:nth-child(4) .mark { background: #bb4d2a; }
+      .node:nth-child(5) .mark { background: #6f54c7; }
+
+      .node strong {
         display: block;
-        margin-top: 2px;
+        margin-top: 9px;
+        font-size: 18px;
+        line-height: 1.18;
+      }
+
+      .node span {
+        display: block;
+        margin-top: 4px;
         color: #566172;
-        font-size: 13px;
+        font-size: 12px;
         line-height: 1.25;
-        font-weight: 650;
-      }
-
-      .compare {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      .compare-box {
-        border: 2px solid #16191f;
-        border-radius: 8px;
-        background: #ffffff;
-        padding: 13px;
-        min-height: 156px;
-      }
-
-      .compare-box h3 {
-        margin: 0 0 8px;
-        font-size: 20px;
-      }
-
-      .compare-box p {
-        margin: 0;
-        color: #445064;
-        font-size: 14px;
-        line-height: 1.45;
-        font-weight: 650;
+        font-weight: 700;
       }
 
       .equation {
@@ -304,25 +271,38 @@
         border-radius: 8px;
         background: #16191f;
         color: #ffffff;
-        padding: 18px;
-        font-size: 23px;
-        line-height: 1.35;
-        font-weight: 900;
+        padding: 16px;
+        font-size: 22px;
+        line-height: 1.38;
+        font-weight: 950;
       }
 
       .equation span {
-        color: #f5c84b;
+        color: #f7d96f;
+      }
+
+      .compare {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1.08fr;
+        gap: 14px;
+      }
+
+      .practice {
+        display: grid;
+        grid-template-columns: 0.86fr 1.14fr;
+        gap: 14px;
       }
 
       .checklist {
         display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 10px;
       }
 
       .check {
         display: grid;
-        grid-template-columns: 28px 1fr;
-        gap: 9px;
+        grid-template-columns: 26px 1fr;
+        gap: 8px;
         align-items: start;
       }
 
@@ -334,26 +314,61 @@
         place-items: center;
         background: #16191f;
         color: #ffffff;
-        font-style: normal;
         font-size: 13px;
-        font-weight: 900;
+        font-style: normal;
+        font-weight: 950;
       }
 
       .check div {
         color: #2f3744;
-        font-size: 16px;
-        line-height: 1.42;
-        font-weight: 680;
+        font-size: 15px;
+        line-height: 1.34;
+        font-weight: 730;
       }
 
-      .callout {
-        border: 3px solid #16191f;
-        border-radius: 8px;
+      .case {
+        display: grid;
+        grid-template-columns: 145px 1fr;
+        gap: 16px;
+        min-height: 0;
+      }
+
+      .case .band-head {
         background: #f7d96f;
-        padding: 18px;
-        font-size: 23px;
-        line-height: 1.35;
-        font-weight: 900;
+        color: #16191f;
+      }
+
+      .case .band-head .num {
+        color: #bb4d2a;
+      }
+
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 9px;
+      }
+
+      .case-step {
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 10px 9px;
+      }
+
+      .case-step strong {
+        display: block;
+        color: #16191f;
+        font-size: 15px;
+        line-height: 1.15;
+      }
+
+      .case-step span {
+        display: block;
+        margin-top: 6px;
+        color: #526071;
+        font-size: 12px;
+        line-height: 1.28;
+        font-weight: 680;
       }
 
       .footer {
@@ -361,24 +376,24 @@
         grid-template-columns: 1fr auto;
         gap: 20px;
         align-items: end;
-        padding-top: 14px;
+        padding-top: 12px;
         border-top: 4px solid #16191f;
       }
 
       .sources {
         color: #4b5565;
-        font-size: 15px;
-        line-height: 1.45;
-        font-weight: 620;
+        font-size: 13px;
+        line-height: 1.42;
+        font-weight: 660;
       }
 
       .stamp {
         border: 3px solid #16191f;
         border-radius: 8px;
         background: #ffffff;
-        padding: 12px 16px;
-        font-size: 18px;
-        font-weight: 900;
+        padding: 10px 14px;
+        font-size: 17px;
+        font-weight: 950;
       }
     </style>
   </head>
@@ -386,119 +401,106 @@
     <div class="stage">
       <article class="poster">
         <div class="inner">
-          <div class="topline">
-            <div>OpenClaw Research Poster</div>
-            <span>2026-06-28 · AI Agent 工程方法论</span>
+          <div>
+            <div class="topline">
+              <div class="brand">OpenClaw Research Poster</div>
+              <div>2026-06-28 · AI Agent 工程方法论</div>
+            </div>
+            <header>
+              <div>
+                <h1>Loop Engineering</h1>
+                <div class="deck">把 Agent 从一次对话，变成可维护、可观察、可回放的任务闭环。</div>
+              </div>
+              <div class="thesis">
+                <div class="label">Core thesis</div>
+                <p>Loop 不是更长的 prompt；它是带模型能力的任务运行时。</p>
+              </div>
+            </header>
           </div>
 
-          <section class="hero">
-            <div>
-              <h1>Loop Engineering</h1>
-              <div class="deck">把 Agent 从一次对话，变成可维护、可观察、可回放的任务闭环。</div>
-            </div>
-            <div class="thesis">
-              <div class="label">Core thesis</div>
-              <p>Loop 不是更长的 prompt；它是带模型能力的任务运行时。</p>
-            </div>
-          </section>
-
-          <section class="main">
-            <div class="column">
-              <div class="column-title">
+          <main class="body">
+            <section class="band">
+              <div class="band-head">
                 <div class="num">01</div>
-                <h2>基础知识</h2>
+                <h2>上<br>基础<br>知识</h2>
               </div>
-              <div class="stack">
-                <div class="card blue">
-                  <h3>Loop 的最小骨架</h3>
-                  <p>目标进入系统后，不是让模型无限继续，而是让状态驱动下一步：观察、判断、行动、验证、记录、停止或交给人。</p>
+              <div class="band-body">
+                <div class="mini-flow">
+                  <div class="node"><div class="mark">S</div><strong>State</strong><span>任务事实、阶段、证据、预算、重试次数。</span></div>
+                  <div class="node"><div class="mark">I</div><strong>Intent</strong><span>根据状态选择下一步，避免临场乱跑。</span></div>
+                  <div class="node"><div class="mark">A</div><strong>Action</strong><span>读日志、改文件、开 PR、发消息等工具动作。</span></div>
+                  <div class="node"><div class="mark">V</div><strong>Verify</strong><span>测试、lint、事实来源、独立检查。</span></div>
+                  <div class="node"><div class="mark">T</div><strong>Trace</strong><span>每轮留下证据，方便复盘和改进。</span></div>
                 </div>
-                <div class="flow">
-                  <div class="step">
-                    <div class="mark">S</div>
-                    <div><strong>State</strong><span>任务事实、阶段、证据、重试次数</span></div>
-                  </div>
-                  <div class="step">
-                    <div class="mark">I</div>
-                    <div><strong>Intent</strong><span>根据状态选择下一步，而不是临场发挥</span></div>
-                  </div>
-                  <div class="step">
-                    <div class="mark">A</div>
-                    <div><strong>Action</strong><span>读文件、查日志、开 PR、发消息等工具动作</span></div>
-                  </div>
-                  <div class="step">
-                    <div class="mark">V</div>
-                    <div><strong>Verify</strong><span>测试、lint、事实来源、独立检查</span></div>
-                  </div>
-                  <div class="step">
-                    <div class="mark">T</div>
-                    <div><strong>Trace</strong><span>每轮留下证据，方便复盘和改进</span></div>
-                  </div>
-                </div>
-                <div class="equation">
-                  state → intent → effect → event → state<br>
-                  <span>写入真实系统前再加 verify → commit</span>
-                </div>
+                <div class="equation">state → intent → effect → event → state <span>｜写入真实系统前再加 verify → commit</span></div>
               </div>
-            </div>
+            </section>
 
-            <div class="column">
-              <div class="column-title">
+            <section class="band">
+              <div class="band-head">
                 <div class="num">02</div>
-                <h2>和 Harness 的区别</h2>
+                <h2>中<br>对比<br>关系</h2>
               </div>
-              <div class="stack">
-                <div class="compare">
-                  <div class="compare-box">
-                    <h3>Harness</h3>
-                    <p>让一次 Agent run 不迷路：工具、沙箱、上下文、权限、hook、测试命令、输出格式。</p>
-                  </div>
-                  <div class="compare-box">
-                    <h3>Loop</h3>
-                    <p>让多次 run 变成持续运营：调度、状态、预算、验证、通知、交接、长期改进。</p>
-                  </div>
+              <div class="band-body compare">
+                <div class="card blue">
+                  <div class="kicker">Harness</div>
+                  <h3>单次执行的可靠性</h3>
+                  <p>工具、沙箱、上下文、权限、hook、测试命令和输出格式。目标是让一次 Agent run 不迷路、不误操作。</p>
                 </div>
                 <div class="card green">
-                  <h3>一句话区分</h3>
-                  <p>Harness 解决“单次执行能不能靠谱”；Loop 解决“系统能不能跨时间持续推进并知道何时停”。</p>
-                </div>
-                <div class="card soft">
-                  <h3>关系不是二选一</h3>
-                  <p>Loop 调度任务，Harness 承载每次执行。没有 Harness，Loop 会乱跑；没有 Loop，Harness 只能处理一次性请求。</p>
+                  <div class="kicker">Loop</div>
+                  <h3>跨时间的持续运营</h3>
+                  <p>调度、状态、预算、验证、通知、交接和长期改进。目标是让系统知道如何继续，也知道何时停止。</p>
                 </div>
                 <div class="card amber">
-                  <h3>三层落点</h3>
-                  <p><strong>Environment</strong> 决定 Agent 看见和能改什么；<strong>Harness</strong> 决定一次运行怎么安全执行；<strong>Loop</strong> 决定任务如何长期推进。</p>
+                  <div class="kicker">Relationship</div>
+                  <h3>不是二选一</h3>
+                  <p>Environment 决定能看见和能修改什么；Harness 承载每次执行；Loop 决定任务如何长期推进。</p>
                 </div>
               </div>
-            </div>
+            </section>
 
-            <div class="column">
-              <div class="column-title">
+            <section class="band">
+              <div class="band-head">
                 <div class="num">03</div>
-                <h2>具体实践</h2>
+                <h2>下<br>实践<br>落地</h2>
               </div>
-              <div class="stack">
+              <div class="band-body practice">
                 <div class="card red">
+                  <div class="kicker">Start small</div>
                   <h3>第一版别做自动驾驶</h3>
                   <p>先选读多、改少、证据清楚的场景：CI 失败分流、文档命令校验、PR 风险预检、依赖升级影响面扫描。</p>
                 </div>
                 <div class="card">
+                  <div class="kicker">Checklist</div>
                   <h3>工程检查表</h3>
                   <div class="checklist">
                     <div class="check"><i>1</i><div>写结构化状态，不把聊天记录当数据库。</div></div>
                     <div class="check"><i>2</i><div>候选结果和真实提交分开，副作用集中收口。</div></div>
                     <div class="check"><i>3</i><div>Maker 不做 Checker，验证要独立。</div></div>
                     <div class="check"><i>4</i><div>设置最大步数、预算、重试上限和停止条件。</div></div>
-                    <div class="check"><i>5</i><div>高风险动作默认人工确认：部署、删数据、发外部承诺。</div></div>
+                    <div class="check"><i>5</i><div>高风险动作默认人工确认。</div></div>
+                    <div class="check"><i>6</i><div>每轮留下 trace，用来改进 skill、memory 和工具。</div></div>
                   </div>
                 </div>
-                <div class="callout">
-                  成熟 Loop 的标志：能解释每一步为什么做、做了什么、验证了什么、为什么继续或停止。
-                </div>
               </div>
-            </div>
-          </section>
+            </section>
+
+            <section class="case">
+              <div class="band-head">
+                <div class="num">04</div>
+                <h2>案例<br>CI<br>失败<br>分流</h2>
+              </div>
+              <div class="timeline">
+                <div class="case-step"><strong>触发</strong><span>CI job failed，记录 runId、commit、PR。</span></div>
+                <div class="case-step"><strong>收集</strong><span>读取日志片段、最近 commit、相关测试。</span></div>
+                <div class="case-step"><strong>分类</strong><span>test / dependency / permission / infra / unknown。</span></div>
+                <div class="case-step"><strong>建议</strong><span>生成带证据的修复方向或分流评论草稿。</span></div>
+                <div class="case-step"><strong>验证</strong><span>证据不足则停；权限/部署/账单直接交给人。</span></div>
+                <div class="case-step"><strong>提交</strong><span>只发布建议或低风险 PR；保留 trace 供复盘。</span></div>
+              </div>
+            </section>
+          </main>
 
           <footer class="footer">
             <div class="sources">
