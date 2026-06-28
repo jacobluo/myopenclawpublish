@@ -1,671 +1,524 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loop Engineering — 把 Agent 从"一次聊天"变成后台运营流程</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loop Engineering 海报</title>
+    <style>
+      * { box-sizing: border-box; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #111318;
+        color: #16191f;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
 
-  body {
-    font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
-    background: #0a0a0f;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+      body {
+        display: grid;
+        place-items: start center;
+      }
 
-  .poster-shell {
-    width: min(100vw, 1200px);
-    height: min(133.333vw, 1600px);
-    position: relative;
-  }
+      .stage {
+        width: min(100vw, 1200px);
+        height: min(133.333vw, 1600px);
+        overflow: hidden;
+      }
 
-  .poster {
-    width: 1200px;
-    height: 1600px;
-    background: linear-gradient(160deg, #080c14 0%, #0f1829 30%, #0d1520 70%, #080c14 100%);
-    position: relative;
-    overflow: hidden;
-    color: #e8ecf1;
-    display: flex;
-    flex-direction: column;
-    transform-origin: top left;
-    transform: scale(var(--poster-scale, 1));
-  }
+      .poster {
+        width: 1200px;
+        height: 1600px;
+        position: relative;
+        overflow: hidden;
+        background:
+          linear-gradient(#eef0f4 1px, transparent 1px),
+          linear-gradient(90deg, #eef0f4 1px, transparent 1px),
+          #faf9f4;
+        background-size: 40px 40px;
+        transform-origin: top left;
+        transform: scale(var(--scale, 1));
+      }
 
-  /* Background grid */
-  .poster::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,107,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,107,255,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-  }
+      .poster::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(250, 249, 244, 0.98) 0 22%, transparent 22% 78%, rgba(250, 249, 244, 0.98) 78% 100%),
+          linear-gradient(0deg, rgba(250, 249, 244, 0.96), rgba(250, 249, 244, 0.96));
+        pointer-events: none;
+      }
 
-  /* Glow orbs */
-  .glow-1 {
-    position: absolute;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(0,107,255,0.12) 0%, transparent 70%);
-    top: -100px; left: -150px;
-    pointer-events: none;
-  }
-  .glow-2 {
-    position: absolute;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(139,92,246,0.10) 0%, transparent 70%);
-    bottom: 200px; right: -100px;
-    pointer-events: none;
-  }
-  .glow-3 {
-    position: absolute;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%);
-    top: 600px; left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-  }
+      .inner {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        padding: 70px 76px 58px;
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        gap: 24px;
+      }
 
-  /* Header */
-  .header {
-    position: relative;
-    z-index: 2;
-    padding: 80px 100px 0;
-  }
+      .topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
 
-  .pill {
-    display: inline-block;
-    background: rgba(0,107,255,0.15);
-    border: 1px solid rgba(0,107,255,0.3);
-    color: #60a5fa;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 8px 20px;
-    border-radius: 20px;
-    margin-bottom: 32px;
-  }
+      .topline span {
+        color: #4c5666;
+        font-size: 18px;
+        font-weight: 600;
+      }
 
-  h1 {
-    font-size: 96px;
-    font-weight: 900;
-    line-height: 1.05;
-    letter-spacing: -2px;
-    background: linear-gradient(135deg, #f0f4ff 0%, #60a5fa 50%, #818cf8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 8px;
-  }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 330px;
+        gap: 40px;
+        align-items: end;
+        padding-bottom: 20px;
+        border-bottom: 4px solid #16191f;
+      }
 
-  h2 {
-    font-size: 36px;
-    font-weight: 600;
-    line-height: 1.4;
-    color: #94a3b8;
-    max-width: 800px;
-    letter-spacing: 0;
-  }
+      h1 {
+        margin: 0;
+        max-width: 720px;
+        font-size: 88px;
+        line-height: 0.98;
+        font-weight: 900;
+        letter-spacing: 0;
+      }
 
-  h2 strong {
-    color: #e2e8f0;
-  }
+      .deck {
+        margin-top: 20px;
+        max-width: 760px;
+        color: #384150;
+        font-size: 28px;
+        line-height: 1.45;
+        font-weight: 600;
+      }
 
-  /* Main content grid */
-  .content {
-    position: relative;
-    z-index: 2;
-    flex: 1;
-    padding: 30px 100px 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-  }
+      .thesis {
+        border: 3px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 22px;
+        box-shadow: 10px 10px 0 #16191f;
+      }
 
-  /* Section: The Loop */
-  .loop-flow {
-    display: flex;
-    gap: 0;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(15,23,42,0.8);
-    border: 1px solid rgba(51,65,85,0.5);
-    border-radius: 16px;
-    padding: 30px 40px;
-    backdrop-filter: blur(10px);
-  }
+      .thesis .label {
+        color: #a54a1f;
+        font-size: 16px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
 
-  .flow-step {
-    text-align: center;
-    flex: 1;
-    position: relative;
-  }
+      .thesis p {
+        margin: 12px 0 0;
+        color: #16191f;
+        font-size: 24px;
+        line-height: 1.45;
+        font-weight: 800;
+      }
 
-  .flow-step .icon {
-    font-size: 32px;
-    margin-bottom: 8px;
-    display: block;
-  }
+      .main {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+        min-height: 0;
+      }
 
-  .flow-step .label {
-    font-size: 12px;
-    font-weight: 700;
-    color: #60a5fa;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-  }
+      .column {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        min-height: 0;
+      }
 
-  .flow-step .name {
-    font-size: 17px;
-    font-weight: 700;
-    color: #e2e8f0;
-  }
+      .column-title {
+        min-height: 96px;
+        display: flex;
+        align-items: flex-end;
+        padding: 0 0 14px;
+        border-bottom: 3px solid #16191f;
+      }
 
-  .flow-step .sub {
-    font-size: 11px;
-    color: #64748b;
-    margin-top: 2px;
-  }
+      .column-title .num {
+        margin-right: 12px;
+        color: #ffffff;
+        background: #16191f;
+        border-radius: 6px;
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        font-size: 24px;
+        font-weight: 900;
+      }
 
-  .flow-arrow {
-    color: #475569;
-    font-size: 24px;
-    font-weight: 300;
-    flex-shrink: 0;
-    padding: 0 4px;
-  }
+      .column-title h2 {
+        margin: 0;
+        font-size: 34px;
+        line-height: 1.1;
+        letter-spacing: 0;
+      }
 
-  /* Two-column section */
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-  }
+      .stack {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+        padding-top: 18px;
+      }
 
-  /* Cards */
-  .card {
-    background: rgba(15,23,42,0.7);
-    border: 1px solid rgba(51,65,85,0.4);
-    border-radius: 14px;
-    padding: 28px 30px;
-    backdrop-filter: blur(10px);
-    transition: border-color 0.3s;
-  }
+      .card {
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 16px;
+      }
 
-  .card:hover { border-color: rgba(0,107,255,0.3); }
+      .card.soft {
+        background: #f4f0e4;
+      }
 
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 18px;
-  }
+      .card.blue {
+        background: #e9f0ff;
+      }
 
-  .card-icon {
-    width: 42px; height: 42px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
+      .card.green {
+        background: #e8f4ed;
+      }
 
-  .card-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #e2e8f0;
-    line-height: 1.3;
-  }
+      .card.amber {
+        background: #fff3d7;
+      }
 
-  .card-subtitle {
-    font-size: 12px;
-    color: #64748b;
-    font-weight: 500;
-  }
+      .card.red {
+        background: #ffe9e4;
+      }
 
-  .card-body {
-    font-size: 14px;
-    line-height: 1.7;
-    color: #94a3b8;
-  }
+      .card h3 {
+        margin: 0 0 9px;
+        color: #16191f;
+        font-size: 20px;
+        line-height: 1.18;
+        letter-spacing: 0;
+      }
 
-  .card-body ul {
-    list-style: none;
-    padding: 0;
-  }
+      .card p {
+        margin: 0;
+        color: #414956;
+        font-size: 16px;
+        line-height: 1.52;
+        font-weight: 560;
+      }
 
-  .card-body li {
-    padding: 4px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-  }
+      .mini {
+        color: #626b7a;
+        font-size: 14px;
+        line-height: 1.4;
+        font-weight: 650;
+      }
 
-  .card-body li::before {
-    content: '›';
-    color: #60a5fa;
-    font-weight: 700;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
+      .flow {
+        display: grid;
+        gap: 8px;
+      }
 
-  /* Maturity ladder */
-  .maturity {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-  }
+      .step {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        align-items: center;
+        gap: 10px;
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 10px;
+      }
 
-  .maturity-step {
-    background: rgba(15,23,42,0.7);
-    border: 1px solid rgba(51,65,85,0.4);
-    border-radius: 14px;
-    padding: 22px 18px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-  }
+      .step .mark {
+        height: 42px;
+        border-radius: 6px;
+        display: grid;
+        place-items: center;
+        color: #ffffff;
+        background: #2d6cdf;
+        font-size: 16px;
+        font-weight: 900;
+      }
 
-  .maturity-level {
-    font-size: 42px;
-    font-weight: 900;
-    letter-spacing: -1px;
-    margin-bottom: 4px;
-  }
+      .step:nth-child(2) .mark { background: #1f8a5b; }
+      .step:nth-child(3) .mark { background: #b7791f; }
+      .step:nth-child(4) .mark { background: #bb4d2a; }
+      .step:nth-child(5) .mark { background: #6f54c7; }
 
-  .maturity-label {
-    font-size: 14px;
-    font-weight: 700;
-    color: #e2e8f0;
-    margin-bottom: 4px;
-  }
+      .step strong {
+        display: block;
+        font-size: 17px;
+        line-height: 1.2;
+      }
 
-  .maturity-actions {
-    font-size: 11px;
-    color: #64748b;
-    line-height: 1.5;
-  }
+      .step span {
+        display: block;
+        margin-top: 2px;
+        color: #566172;
+        font-size: 13px;
+        line-height: 1.25;
+        font-weight: 650;
+      }
 
-  .maturity-allow {
-    display: inline-block;
-    background: rgba(0,107,255,0.12);
-    color: #60a5fa;
-    padding: 3px 10px;
-    border-radius: 10px;
-    font-size: 11px;
-    font-weight: 600;
-    margin-top: 6px;
-  }
+      .compare {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
 
-  /* Color variants */
-  .bg-blue { background: rgba(0,107,255,0.12); }
-  .bg-purple { background: rgba(139,92,246,0.12); }
-  .bg-cyan { background: rgba(6,182,212,0.12); }
-  .bg-emerald { background: rgba(16,185,129,0.12); }
-  .bg-amber { background: rgba(245,158,11,0.12); }
-  .bg-rose { background: rgba(244,63,94,0.12); }
+      .compare-box {
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 13px;
+        min-height: 156px;
+      }
 
-  .text-blue { color: #60a5fa; }
-  .text-purple { color: #a78bfa; }
-  .text-cyan { color: #22d3ee; }
-  .text-emerald { color: #34d399; }
-  .text-amber { color: #fbbf24; }
-  .text-rose { color: #fb7185; }
+      .compare-box h3 {
+        margin: 0 0 8px;
+        font-size: 20px;
+      }
 
-  /* Comparison table */
-  .comparison {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
+      .compare-box p {
+        margin: 0;
+        color: #445064;
+        font-size: 14px;
+        line-height: 1.45;
+        font-weight: 650;
+      }
 
-  .comp-col {
-    background: rgba(15,23,42,0.7);
-    border: 1px solid rgba(51,65,85,0.4);
-    border-radius: 14px;
-    padding: 24px 26px;
-    backdrop-filter: blur(10px);
-  }
+      .equation {
+        border: 3px solid #16191f;
+        border-radius: 8px;
+        background: #16191f;
+        color: #ffffff;
+        padding: 18px;
+        font-size: 23px;
+        line-height: 1.35;
+        font-weight: 900;
+      }
 
-  .comp-col h4 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
+      .equation span {
+        color: #f5c84b;
+      }
 
-  .comp-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 6px 0;
-    font-size: 13px;
-    border-bottom: 1px solid rgba(51,65,85,0.2);
-  }
+      .checklist {
+        display: grid;
+        gap: 10px;
+      }
 
-  .comp-row:last-child { border-bottom: none; }
-  .comp-row .key { color: #94a3b8; }
-  .comp-row .val { color: #e2e8f0; font-weight: 600; }
+      .check {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 9px;
+        align-items: start;
+      }
 
-  /* Footer */
-  .footer {
-    position: relative;
-    z-index: 2;
-    padding: 0 100px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
+      .check i {
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: #16191f;
+        color: #ffffff;
+        font-style: normal;
+        font-size: 13px;
+        font-weight: 900;
+      }
 
-  .footer-left {
-    font-size: 13px;
-    color: #475569;
-    line-height: 1.6;
-  }
+      .check div {
+        color: #2f3744;
+        font-size: 16px;
+        line-height: 1.42;
+        font-weight: 680;
+      }
 
-  .footer-right {
-    text-align: right;
-  }
+      .callout {
+        border: 3px solid #16191f;
+        border-radius: 8px;
+        background: #f7d96f;
+        padding: 18px;
+        font-size: 23px;
+        line-height: 1.35;
+        font-weight: 900;
+      }
 
-  .source-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: #60a5fa;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 6px 14px;
-    border: 1px solid rgba(0,107,255,0.25);
-    border-radius: 20px;
-    transition: all 0.2s;
-  }
+      .footer {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: end;
+        padding-top: 14px;
+        border-top: 4px solid #16191f;
+      }
 
-  .source-link:hover {
-    background: rgba(0,107,255,0.1);
-    border-color: rgba(0,107,255,0.4);
-  }
+      .sources {
+        color: #4b5565;
+        font-size: 15px;
+        line-height: 1.45;
+        font-weight: 620;
+      }
 
-  .date {
-    font-size: 12px;
-    color: #475569;
-    margin-top: 8px;
-  }
-
-  /* Section divider */
-  .section-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #475569;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  /* Values grid */
-  .values {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
-
-  .value-item {
-    background: rgba(15,23,42,0.7);
-    border: 1px solid rgba(51,65,85,0.4);
-    border-radius: 12px;
-    padding: 20px 18px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-  }
-
-  .value-icon { font-size: 28px; margin-bottom: 6px; }
-  .value-title { font-size: 15px; font-weight: 700; color: #e2e8f0; margin-bottom: 4px; }
-  .value-desc { font-size: 11px; color: #64748b; line-height: 1.5; }
-</style>
-</head>
-<body>
-<div class="poster-shell">
-<div class="poster">
-  <div class="glow-1"></div>
-  <div class="glow-2"></div>
-  <div class="glow-3"></div>
-
-  <!-- Header -->
-  <div class="header">
-    <div class="pill">AI Engineering · Methodology</div>
-    <h1>Loop Engineering</h1>
-    <h2>把 Agent 从<strong>"一次聊天"</strong>变成<strong>"可运行·可记录·可升级"</strong>的后台运营流程</h2>
-  </div>
-
-  <!-- Content -->
-  <div class="content">
-
-    <!-- The Loop Flow -->
-    <div>
-      <div class="section-label">THE LOOP</div>
-      <div class="loop-flow">
-        <div class="flow-step">
-          <span class="icon">🔍</span>
-          <div class="label">Discover</div>
-          <div class="name">发现</div>
-          <div class="sub">CI·PR·Issue·日志</div>
-        </div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step">
-          <span class="icon">🏷️</span>
-          <div class="label">Triage</div>
-          <div class="name">归类</div>
-          <div class="sub">噪音/建议/行动</div>
-        </div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step">
-          <span class="icon">🚀</span>
-          <div class="label">Dispatch</div>
-          <div class="name">分派</div>
-          <div class="sub">Worktree·子Agent</div>
-        </div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step">
-          <span class="icon">✅</span>
-          <div class="label">Verify</div>
-          <div class="name">验证</div>
-          <div class="sub">Maker≠Checker</div>
-        </div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step">
-          <span class="icon">📝</span>
-          <div class="label">Record</div>
-          <div class="name">记录</div>
-          <div class="sub">State·Run Log</div>
-        </div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step">
-          <span class="icon">🆘</span>
-          <div class="label">Escalate</div>
-          <div class="name">升级</div>
-          <div class="sub">给人·带上下文</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Harness vs Loop -->
-    <div class="two-col">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon bg-blue">🔧</div>
-          <div>
-            <div class="card-title">Harness Engineering</div>
-            <div class="card-subtitle">单次 Agent Run 的可靠性</div>
+      .stamp {
+        border: 3px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 12px 16px;
+        font-size: 18px;
+        font-weight: 900;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <article class="poster">
+        <div class="inner">
+          <div class="topline">
+            <div>OpenClaw Research Poster</div>
+            <span>2026-06-28 · AI Agent 工程方法论</span>
           </div>
-        </div>
-        <div class="card-body">
-          <ul>
-            <li>Prompt · Tools · 沙箱 · Hook</li>
-            <li>Context Policy · 子Agent</li>
-            <li>可观测性 · 测试命令</li>
-            <li>让一次运行不迷路、不误操作</li>
-          </ul>
-          <div style="margin-top:12px; padding:10px 14px; background:rgba(0,107,255,0.06); border-radius:8px; border-left:3px solid #3b82f6; font-size:12px; color:#60a5fa;">
-            Key artifact: AGENTS.md · Skills · Tool defs
-          </div>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon bg-purple">🔄</div>
-          <div>
-            <div class="card-title">Loop Engineering</div>
-            <div class="card-subtitle">跨时间·跨任务·跨多次运行的持续运营</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <ul>
-            <li>调度 · 状态文件 · 预算控制</li>
-            <li>Maker/Checker 分离验证</li>
-            <li>通知策略 · 人机交接</li>
-            <li>让系统自己发现、推进、验证</li>
-          </ul>
-          <div style="margin-top:12px; padding:10px 14px; background:rgba(139,92,246,0.06); border-radius:8px; border-left:3px solid #8b5cf6; font-size:12px; color:#a78bfa;">
-            Key artifact: STATE.md · Run Log · Budget · Handoff
-          </div>
-        </div>
-      </div>
-    </div>
+          <section class="hero">
+            <div>
+              <h1>Loop Engineering</h1>
+              <div class="deck">把 Agent 从一次对话，变成可维护、可观察、可回放的任务闭环。</div>
+            </div>
+            <div class="thesis">
+              <div class="label">Core thesis</div>
+              <p>Loop 不是更长的 prompt；它是带模型能力的任务运行时。</p>
+            </div>
+          </section>
 
-    <!-- Maturity Ladder -->
-    <div>
-      <div class="section-label">MATURITY MODEL</div>
-      <div class="maturity">
-        <div class="maturity-step" style="border-left: 3px solid #475569;">
-          <div class="maturity-level" style="color:#64748b;">L0</div>
-          <div class="maturity-label">草案</div>
-          <div class="maturity-actions">定义 loop 目的、范围、非目标</div>
-          <span class="maturity-allow" style="background:rgba(100,116,139,0.12); color:#64748b;">只写设计文档</span>
-        </div>
-        <div class="maturity-step" style="border-left: 3px solid #3b82f6;">
-          <div class="maturity-level" style="color:#60a5fa;">L1</div>
-          <div class="maturity-label">报告型</div>
-          <div class="maturity-actions">自动发现和整理信号</div>
-          <span class="maturity-allow">只写报告·不改代码</span>
-        </div>
-        <div class="maturity-step" style="border-left: 3px solid #f59e0b;">
-          <div class="maturity-level" style="color:#fbbf24;">L2</div>
-          <div class="maturity-label">协助型</div>
-          <div class="maturity-actions">处理低风险小动作</div>
-          <span class="maturity-allow">开 PR·修格式·补测试</span>
-        </div>
-        <div class="maturity-step" style="border-left: 3px solid #10b981;">
-          <div class="maturity-level" style="color:#34d399;">L3</div>
-          <div class="maturity-label">半无人值守</div>
-          <div class="maturity-actions">Allowlist 内持续运行</div>
-          <span class="maturity-allow">自动提交·关单·评论</span>
-        </div>
-      </div>
-    </div>
+          <section class="main">
+            <div class="column">
+              <div class="column-title">
+                <div class="num">01</div>
+                <h2>基础知识</h2>
+              </div>
+              <div class="stack">
+                <div class="card blue">
+                  <h3>Loop 的最小骨架</h3>
+                  <p>目标进入系统后，不是让模型无限继续，而是让状态驱动下一步：观察、判断、行动、验证、记录、停止或交给人。</p>
+                </div>
+                <div class="flow">
+                  <div class="step">
+                    <div class="mark">S</div>
+                    <div><strong>State</strong><span>任务事实、阶段、证据、重试次数</span></div>
+                  </div>
+                  <div class="step">
+                    <div class="mark">I</div>
+                    <div><strong>Intent</strong><span>根据状态选择下一步，而不是临场发挥</span></div>
+                  </div>
+                  <div class="step">
+                    <div class="mark">A</div>
+                    <div><strong>Action</strong><span>读文件、查日志、开 PR、发消息等工具动作</span></div>
+                  </div>
+                  <div class="step">
+                    <div class="mark">V</div>
+                    <div><strong>Verify</strong><span>测试、lint、事实来源、独立检查</span></div>
+                  </div>
+                  <div class="step">
+                    <div class="mark">T</div>
+                    <div><strong>Trace</strong><span>每轮留下证据，方便复盘和改进</span></div>
+                  </div>
+                </div>
+                <div class="equation">
+                  state → intent → effect → event → state<br>
+                  <span>写入真实系统前再加 verify → commit</span>
+                </div>
+              </div>
+            </div>
 
-    <!-- Engineering Practices -->
-    <div class="two-col">
-      <div>
-        <div class="section-label">ENGINEERING PRACTICES</div>
-        <div class="card" style="height: calc(100% - 20px);">
-          <div class="card-body">
-            <ul>
-              <li><strong style="color:#e2e8f0;">① Report-only 起步</strong> — 第一个 loop 不自动改代码，先跑一周看信号质量</li>
-              <li><strong style="color:#e2e8f0;">② 规则写进 Skill</strong> — Loop prompt 要短，项目规则放 skill 里</li>
-              <li><strong style="color:#e2e8f0;">③ Worktree 隔离</strong> — 并行 Agent 用不同 checkout，避免互相覆盖</li>
-              <li><strong style="color:#e2e8f0;">④ Maker ≠ Checker</strong> — 写代码的 Agent 不能给自己判"已完成"</li>
-              <li><strong style="color:#e2e8f0;">⑤ State 是脊柱</strong> — 每次运行先读状态，结束时写状态</li>
-              <li><strong style="color:#e2e8f0;">⑥ 预算写进系统</strong> — 高频 loop 必须有 early exit、上限和最大重试</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+            <div class="column">
+              <div class="column-title">
+                <div class="num">02</div>
+                <h2>和 Harness 的区别</h2>
+              </div>
+              <div class="stack">
+                <div class="compare">
+                  <div class="compare-box">
+                    <h3>Harness</h3>
+                    <p>让一次 Agent run 不迷路：工具、沙箱、上下文、权限、hook、测试命令、输出格式。</p>
+                  </div>
+                  <div class="compare-box">
+                    <h3>Loop</h3>
+                    <p>让多次 run 变成持续运营：调度、状态、预算、验证、通知、交接、长期改进。</p>
+                  </div>
+                </div>
+                <div class="card green">
+                  <h3>一句话区分</h3>
+                  <p>Harness 解决“单次执行能不能靠谱”；Loop 解决“系统能不能跨时间持续推进并知道何时停”。</p>
+                </div>
+                <div class="card soft">
+                  <h3>关系不是二选一</h3>
+                  <p>Loop 调度任务，Harness 承载每次执行。没有 Harness，Loop 会乱跑；没有 Loop，Harness 只能处理一次性请求。</p>
+                </div>
+                <div class="card amber">
+                  <h3>三层落点</h3>
+                  <p><strong>Environment</strong> 决定 Agent 看见和能改什么；<strong>Harness</strong> 决定一次运行怎么安全执行；<strong>Loop</strong> 决定任务如何长期推进。</p>
+                </div>
+              </div>
+            </div>
 
-      <div>
-        <div class="section-label">ANTI-PATTERNS</div>
-        <div class="card" style="height: calc(100% - 20px);">
-          <div class="card-body">
-            <ul>
-              <li><strong style="color:#fb7185;">Prompt Cron</strong> — 只把长 prompt 放进定时器，没有 state/预算/验证</li>
-              <li><strong style="color:#fb7185;">自我验收</strong> — 同一个 Agent 写代码并宣布完成</li>
-              <li><strong style="color:#fb7185;">无限修复循环</strong> — 同一 PR 反复修改，越修越乱</li>
-              <li><strong style="color:#fb7185;">通知疲劳</strong> — 每次运行都 ping 人，导致忽略真正信号</li>
-              <li><strong style="color:#fb7185;">理解债务</strong> — Loop 产出越来越多，人越来越不理解系统</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+            <div class="column">
+              <div class="column-title">
+                <div class="num">03</div>
+                <h2>具体实践</h2>
+              </div>
+              <div class="stack">
+                <div class="card red">
+                  <h3>第一版别做自动驾驶</h3>
+                  <p>先选读多、改少、证据清楚的场景：CI 失败分流、文档命令校验、PR 风险预检、依赖升级影响面扫描。</p>
+                </div>
+                <div class="card">
+                  <h3>工程检查表</h3>
+                  <div class="checklist">
+                    <div class="check"><i>1</i><div>写结构化状态，不把聊天记录当数据库。</div></div>
+                    <div class="check"><i>2</i><div>候选结果和真实提交分开，副作用集中收口。</div></div>
+                    <div class="check"><i>3</i><div>Maker 不做 Checker，验证要独立。</div></div>
+                    <div class="check"><i>4</i><div>设置最大步数、预算、重试上限和停止条件。</div></div>
+                    <div class="check"><i>5</i><div>高风险动作默认人工确认：部署、删数据、发外部承诺。</div></div>
+                  </div>
+                </div>
+                <div class="callout">
+                  成熟 Loop 的标志：能解释每一步为什么做、做了什么、验证了什么、为什么继续或停止。
+                </div>
+              </div>
+            </div>
+          </section>
 
-    <!-- Engineering Value -->
-    <div>
-      <div class="section-label">ENGINEERING VALUE</div>
-      <div class="values">
-        <div class="value-item">
-          <div class="value-icon">⚡</div>
-          <div class="value-title">响应速度</div>
-          <div class="value-desc">CI 红了、PR 卡住，不再等人巡检</div>
+          <footer class="footer">
+            <div class="sources">
+              基于站内多篇 Loop Engineering 阅读报告整理：基础概念、Harness/Environment 关系、公众号工程实战、Agentic Engineering 工作流。<br>
+              适合沉淀为 agent-loop-runtime-audit skill，用于审查长任务 Agent 是否具备闭环骨架。
+            </div>
+            <div class="stamp">jacobluo.github.io/myopenclawpublish</div>
+          </footer>
         </div>
-        <div class="value-item">
-          <div class="value-icon">🛡️</div>
-          <div class="value-title">质量控制</div>
-          <div class="value-desc">Maker/Checker 分离，验证成为流程</div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon">🧠</div>
-          <div class="value-title">组织记忆</div>
-          <div class="value-desc">State·Log·Skills 把隐性经验变成资产</div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon">🔀</div>
-          <div class="value-title">并行吞吐</div>
-          <div class="value-desc">Worktree + Subagent 并行探索实现</div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon">🏭</div>
-          <div class="value-title">运营化</div>
-          <div class="value-desc">Agent 不再是"问一下"，而是 Watcher·Triager·Sweeper</div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon">📋</div>
-          <div class="value-title">治理</div>
-          <div class="value-desc">权限·记录·升级·停止条件显式化，可审计</div>
-        </div>
-      </div>
+      </article>
     </div>
-  </div>
-
-  <!-- Footer -->
-  <div class="footer">
-    <div class="footer-left">
-      Based on Addy Osmani, cobusgreyling/loop-engineering,<br>
-      Anthropic Effective Agents & Harnesses, and Loop Engineering Orange Book
-    </div>
-    <div class="footer-right">
-      <a class="source-link" href="https://jacobluo.github.io/myopenclawpublish/2026/06/21/loop-engineering-analysis/">
-        📄 完整报告 →
-      </a>
-      <div class="date">2026.06.27 · 贾维斯出品</div>
-    </div>
-  </div>
-</div>
-</div>
-<script>
-  function fitPoster() {
-    const width = Math.min(window.innerWidth, 1200);
-    document.documentElement.style.setProperty('--poster-scale', String(width / 1200));
-  }
-  fitPoster();
-  window.addEventListener('resize', fitPoster);
-</script>
-</body>
+    <script>
+      const stage = document.querySelector(".stage");
+      const poster = document.querySelector(".poster");
+      const resize = () => {
+        const scale = Math.min(stage.clientWidth / 1200, stage.clientHeight / 1600);
+        poster.style.setProperty("--scale", scale);
+      };
+      addEventListener("resize", resize);
+      resize();
+    </script>
+  </body>
 </html>
