@@ -116,7 +116,7 @@
       .body {
         min-height: 0;
         display: grid;
-        grid-template-rows: 220px 210px 235px 230px 128px;
+        grid-template-rows: 220px 210px 255px 210px 128px;
         gap: 10px;
       }
 
@@ -294,25 +294,25 @@
       .relation-map {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 4px;
-        margin: 8px 0 10px;
+        gap: 2px;
+        margin: 6px 0 0;
       }
 
       .relation-row {
         border: 2px solid #16191f;
         border-radius: 8px;
         background: #ffffff;
-        padding: 7px 9px;
+        padding: 5px 7px;
         display: grid;
-        grid-template-columns: 92px 1fr;
-        gap: 8px;
+        grid-template-columns: 82px 1fr;
+        gap: 6px;
         align-items: center;
       }
 
       .relation-row strong {
         display: block;
         color: #16191f;
-        font-size: 12px;
+        font-size: 11px;
         line-height: 1.1;
         font-weight: 950;
       }
@@ -320,14 +320,14 @@
       .relation-row span {
         display: block;
         color: #526071;
-        font-size: 11px;
-        line-height: 1.16;
+        font-size: 10px;
+        line-height: 1.12;
         font-weight: 730;
       }
 
       .relation-link {
         color: #16191f;
-        font-size: 10px;
+        font-size: 8px;
         line-height: 1;
         font-weight: 900;
         text-align: center;
@@ -339,6 +339,73 @@
         display: grid;
         grid-template-columns: 0.86fr 1.14fr;
         gap: 14px;
+      }
+
+      .impl {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: 14px;
+      }
+
+      .stack {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+      }
+
+      .block {
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 10px 9px;
+        min-width: 0;
+      }
+
+      .block strong {
+        display: block;
+        color: #16191f;
+        font-size: 14px;
+        line-height: 1.12;
+        font-weight: 950;
+      }
+
+      .block span {
+        display: block;
+        margin-top: 5px;
+        color: #526071;
+        font-size: 10px;
+        line-height: 1.18;
+        font-weight: 720;
+      }
+
+      .route {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .level {
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 12px;
+      }
+
+      .level strong {
+        display: block;
+        color: #16191f;
+        font-size: 18px;
+        line-height: 1.1;
+        font-weight: 950;
+      }
+
+      .level span {
+        display: block;
+        margin-top: 7px;
+        color: #3d4654;
+        font-size: 12px;
+        line-height: 1.24;
+        font-weight: 720;
       }
 
       .checklist {
@@ -474,13 +541,13 @@
               </div>
               <div class="band-body">
                 <div class="mini-flow">
-                  <div class="node"><div class="mark">S</div><strong>State</strong><span>任务账本：CI run #123，phase=collecting，attempt=1。</span></div>
-                  <div class="node"><div class="mark">I</div><strong>Intent</strong><span>下一步：收集日志、分类失败、草拟建议、交接。</span></div>
-                  <div class="node"><div class="mark">A</div><strong>Action</strong><span>实际动作：读日志、查 diff、跑测试、写评论。</span></div>
-                  <div class="node"><div class="mark">V</div><strong>Verify</strong><span>验收证据：测试通过、来源链接、独立复核。</span></div>
-                  <div class="node"><div class="mark">T</div><strong>Trace</strong><span>过程流水：读了什么、为何判断、花了多少。</span></div>
+                  <div class="node"><div class="mark">1</div><strong>发现</strong><span>从 CI、PR、issue、日志或定时任务找到下一步。</span></div>
+                  <div class="node"><div class="mark">2</div><strong>计划</strong><span>决定分给谁、先做什么、用哪些工具和预算。</span></div>
+                  <div class="node"><div class="mark">3</div><strong>执行</strong><span>把任务交给 Agent、CLI、脚本或子代理处理。</span></div>
+                  <div class="node"><div class="mark">4</div><strong>验证</strong><span>用测试、证据、独立 reviewer 判断是否跑偏。</span></div>
+                  <div class="node"><div class="mark">5</div><strong>记录</strong><span>写回 state、run log、artifact、失败原因和下一步。</span></div>
                 </div>
-                <div class="equation">把 Loop 想成“任务账本 + 流水线” <span>｜状态决定下一步；动作留下证据；提交前先验证</span></div>
+                <div class="equation">不是你去 prompt agent，<span>而是设计那个会 prompt agent 的 loop</span></div>
               </div>
             </section>
 
@@ -519,21 +586,22 @@
                 <div class="num">03</div>
                 <h2>具体实现</h2>
               </div>
-              <div class="band-body compare">
+              <div class="band-body impl">
                 <div class="card blue">
-                  <div class="kicker">Scheduler</div>
-                  <h3>CLI 定期跑任务</h3>
-                  <p>用 cron / GitHub Actions / openclaw cron 触发：读取 repo、CI、issue、PR、STATE.md；写 run log；异常再通知人。</p>
-                </div>
-                <div class="card green">
-                  <div class="kicker">Workflow</div>
-                  <h3>LangGraph 定义任务流</h3>
-                  <p>用 State、Node、Edge 建模：collect → classify → draft → verify → commit / handoff。LangGraph 适合长时、有状态 agent。</p>
+                  <div class="kicker">Runtime sketch</div>
+                  <h3>CLI 调度 + LangGraph 状态流</h3>
+                  <p>外层用 cron / GitHub Actions / openclaw cron 周期触发；内层用 State、Node、Edge 建模 collect → classify → draft → verify → commit / handoff。每轮都读取 repo、CI、PR、issue、STATE.md，并写入 run log。</p>
                 </div>
                 <div class="card amber">
-                  <div class="kicker">Control plane</div>
-                  <h3>状态与闸门</h3>
-                  <p>状态存储记录 phase、evidence、attempt、owner；验证闸门负责测试、预算、权限、人工确认和停止条件。</p>
+                  <div class="kicker">Loop plumbing</div>
+                  <h3>五块工程积木</h3>
+                  <div class="stack">
+                    <div class="block"><strong>自动化</strong><span>重复跑；空结果归档；有结果进 triage。</span></div>
+                    <div class="block"><strong>隔离仓</strong><span>独立 checkout，避免任务互相踩文件。</span></div>
+                    <div class="block"><strong>技能</strong><span>项目规则、流程、脚本和资产写下来。</span></div>
+                    <div class="block"><strong>子代理</strong><span>research / write / verify 分开权限。</span></div>
+                    <div class="block"><strong>状态</strong><span>phase、evidence、attempt、budget 外置。</span></div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -545,20 +613,22 @@
               </div>
               <div class="band-body practice">
                 <div class="card red">
-                  <div class="kicker">Start small</div>
-                  <h3>第一版别做自动驾驶</h3>
-                  <p>先选读多、改少、证据清楚的场景：CI 失败分流、文档命令校验、PR 风险预检、依赖升级扫描。L1 只写报告；L2 才开低风险 PR；L3 只在 allowlist 内半无人值守。</p>
+                  <div class="kicker">Rollout</div>
+                  <h3>先可信，再自动</h3>
+                  <div class="route">
+                    <div class="level"><strong>L1</strong><span>只读、归类、写报告、提醒。</span></div>
+                    <div class="level"><strong>L2</strong><span>可开低风险 PR，但不自动合并。</span></div>
+                    <div class="level"><strong>L3</strong><span>allowlist 内半无人值守，强 gate。</span></div>
+                  </div>
                 </div>
                 <div class="card">
-                  <div class="kicker">Checklist</div>
-                  <h3>工程检查表</h3>
+                  <div class="kicker">Guardrails</div>
+                  <h3>必须显式写进系统</h3>
                   <div class="checklist">
-                    <div class="check"><i>1</i><div>写结构化状态，不把聊天记录当数据库。</div></div>
-                    <div class="check"><i>2</i><div>候选结果和真实提交分开，副作用集中收口。</div></div>
-                    <div class="check"><i>3</i><div>Maker 不做 Checker，验证要独立且可复跑。</div></div>
-                    <div class="check"><i>4</i><div>最大步数、预算、重试上限、停止条件写进系统。</div></div>
-                    <div class="check"><i>5</i><div>部署、删数据、外部承诺、权限修改默认人工确认。</div></div>
-                    <div class="check"><i>6</i><div>看指标：成功率、误报率、人工接管率、token 成本、平均恢复时间。</div></div>
+                    <div class="check"><i>1</i><div>读写分级：读日志自动；写评论、开 PR、改配置进审批。</div></div>
+                    <div class="check"><i>2</i><div>副作用后置：collect / classify / draft / verify 之后再提交。</div></div>
+                    <div class="check"><i>3</i><div>停止条件：done、blocked、over budget、low confidence。</div></div>
+                    <div class="check"><i>4</i><div>指标：误报率、遗漏率、人工接管率、token 成本、恢复时间。</div></div>
                   </div>
                 </div>
               </div>
@@ -582,7 +652,7 @@
 
           <footer class="footer">
             <div class="sources">
-              基于站内多篇 Loop Engineering 阅读报告整理：基础概念、Harness/Environment 关系、公众号工程实战、Agentic Engineering 工作流。<br>
+              基于 15 张 Loop Engineering 图片资料与站内报告整理：Addy Osmani、OpenAI Codex Automations/Worktrees/Skills、Claude Code、LangGraph、loop-audit / loop-init / loop-cost。<br>
               适合沉淀为 agent-loop-runtime-audit skill，用于审查长任务 Agent 是否具备闭环骨架。
             </div>
             <div class="stamp">jacobluo.github.io/myopenclawpublish</div>
