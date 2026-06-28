@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../assets/research-brief.css">
+    <title>Loop Engineering 图片资料归档与报告</title>
+    <meta name="description" content="基于 15 张 Loop Engineering 图片资料，整理概念、工具积木、实现方式、治理边界和落地路线。">
+    <style>
+      .flow {
+        margin: 18px 0;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius-md);
+        background: var(--background-200);
+        padding: 16px;
+        overflow-x: auto;
+      }
+
+      .flow svg {
+        display: block;
+        width: 100%;
+        min-width: 780px;
+        height: auto;
+      }
+
+      .node {
+        fill: var(--background-100);
+        stroke: var(--gray-300);
+        stroke-width: 1.5;
+      }
+
+      .node-strong {
+        fill: var(--blue-100);
+        stroke: var(--blue-700);
+        stroke-width: 1.5;
+      }
+
+      .edge {
+        fill: none;
+        stroke: var(--blue-700);
+        stroke-width: 2;
+      }
+
+      .svg-title {
+        fill: var(--primary);
+        font: 600 18px var(--font-sans);
+      }
+
+      .svg-label {
+        fill: var(--primary);
+        font: 600 14px var(--font-sans);
+      }
+
+      .svg-small {
+        fill: var(--secondary);
+        font: 12px var(--font-sans);
+      }
+
+      .compact-table th {
+        width: 140px;
+      }
+    </style>
+  </head>
+  <body class="rb-report-page">
+    <main>
+      <nav class="topbar" aria-label="页面导航">
+        <a class="back" href="../../../../">返回索引</a>
+        <div class="brand">
+          <strong>OpenClaw Publish</strong>
+          <span>Loop Engineering</span>
+        </div>
+      </nav>
+
+      <div class="layout">
+        <aside class="panel">
+          <p class="panel-title">目录</p>
+          <nav class="toc" aria-label="报告目录">
+            <a href="#summary">结论</a>
+            <a href="#archive">图片归档</a>
+            <a href="#definition">概念边界</a>
+            <a href="#building-blocks">工程积木</a>
+            <a href="#implementation">具体实现</a>
+            <a href="#rollout">落地路线</a>
+            <a href="#case">案例</a>
+            <a href="#sources">来源</a>
+          </nav>
+        </aside>
+
+        <article class="report">
+          <header>
+            <p class="eyebrow">2026-06-28 / 图片资料归档</p>
+            <h1>Loop Engineering：从“人追着 Agent 跑”到“系统驱动 Agent 跑”</h1>
+            <p class="deck">基于 15 张 Loop Engineering 图片资料，结合 Addy Osmani 原文、OpenAI Codex、LangChain/LangGraph、Claude Code 与 loop-engineering 开源仓库，整理给技术同事和领导都能读的工程报告。</p>
+            <div class="meta">
+              <span>图片批次：15 张</span>
+              <span>读者：技术团队 / 技术管理者</span>
+              <span>判断：先做 report-only loop</span>
+            </div>
+          </header>
+
+          <section id="summary">
+            <h2>结论</h2>
+            <div class="lead">
+              <p>Loop Engineering 不是一个新模型，也不是某家厂商的新协议。它更像一层“任务运行时”：系统定期或被事件触发，读取状态，判断下一步，调用 Agent 或工具，验证结果，写回记录，并在需要时交给人。</p>
+            </div>
+            <div class="grid">
+              <div class="card">
+                <h3>对技术同事</h3>
+                <p>它的落点不是 prompt，而是 state、scheduler、queue、tool allowlist、worktree、skill、subagent、verifier、run log 和 human gate。</p>
+              </div>
+              <div class="card">
+                <h3>对领导</h3>
+                <p>它的价值不是“让 AI 自己干活”这么粗，而是把可重复的工程运营动作做成有证据、有预算、有停机条件、有责任边界的自动化流程。</p>
+              </div>
+              <div class="card">
+                <h3>和 Harness 的关系</h3>
+                <p>Harness 管一次 Agent run 怎么可靠执行；Loop 管多次 run 怎么跨时间持续推进。没有 Harness，Loop 会重复放大错误；没有 Loop，Harness 很难变成持续运营能力。</p>
+              </div>
+              <div class="card">
+                <h3>建议起步方式</h3>
+                <p>从 L1 report-only 开始：只扫描、归类、写报告和提醒，不直接改代码。稳定后再进入 L2 低风险 PR，最后才考虑 L3 半无人值守。</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="archive">
+            <h2>图片归档</h2>
+            <p>本批次共 15 张图，主题可以合并成 8 个信息簇。第 8/10 张是 worktrees 近重复，第 9/11 张是 skills 近重复，报告中合并处理。</p>
+            <table class="compact-table">
+              <tbody>
+                <tr><th>01-05</th><td>概念定义：Loop Engineering 不是模型、协议或神奇框架，而是“发现、计划、执行、验证、记录”的系统循环。</td></tr>
+                <tr><th>06</th><td>递归目标：给定目标后持续迭代，直到完成、阻塞、超预算、越权或需要人补充输入。</td></tr>
+                <tr><th>07</th><td>Automations：定期或后台重复任务，把结果进入 triage，无结果自动归档，并可接 skills。</td></tr>
+                <tr><th>08 / 10</th><td>Worktrees：多个任务并行推进时，用独立 checkout 隔离文件、状态、diff 和测试结果。</td></tr>
+                <tr><th>09 / 11</th><td>Skills：把项目知识、流程、脚本和资产写下来，防止 Agent 每次从头猜。</td></tr>
+                <tr><th>12</th><td>Subagents：把研究、写作、验证拆给不同上下文和权限的子任务。</td></tr>
+                <tr><th>13</th><td>Memory / State：状态不能只放在对话框里，要放到外部文件、数据库、队列或 run log。</td></tr>
+                <tr><th>14-15</th><td>生态信号：OpenAI、Claude Code、LangChain 和开源仓库都在补 loop plumbing，npm 工具也已出现。</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="definition">
+            <h2>概念边界</h2>
+            <p>图片里最关键的一句话是：不是你去 prompt agent，而是你设计那个会 prompt agent 的 loop。这句话把设计对象从“单条指令”移到了“循环系统”。</p>
+            <div class="flow">
+              <svg viewBox="0 0 980 340" role="img" aria-label="Loop Engineering 控制循环">
+                <defs>
+                  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#006bff"></path>
+                  </marker>
+                </defs>
+                <text x="30" y="40" class="svg-title">Loop 的最小骨架</text>
+                <rect x="38" y="84" width="132" height="70" rx="8" class="node-strong"></rect>
+                <text x="78" y="113" class="svg-label">发现</text>
+                <text x="58" y="136" class="svg-small">CI / PR / Issue</text>
+                <rect x="224" y="84" width="132" height="70" rx="8" class="node"></rect>
+                <text x="264" y="113" class="svg-label">计划</text>
+                <text x="242" y="136" class="svg-small">分派 / 优先级</text>
+                <rect x="410" y="84" width="132" height="70" rx="8" class="node"></rect>
+                <text x="450" y="113" class="svg-label">执行</text>
+                <text x="429" y="136" class="svg-small">Agent / Tool</text>
+                <rect x="596" y="84" width="132" height="70" rx="8" class="node-strong"></rect>
+                <text x="636" y="113" class="svg-label">验证</text>
+                <text x="619" y="136" class="svg-small">Tests / Review</text>
+                <rect x="782" y="84" width="132" height="70" rx="8" class="node"></rect>
+                <text x="822" y="113" class="svg-label">记录</text>
+                <text x="804" y="136" class="svg-small">State / Log</text>
+                <path d="M170 119 H224" class="edge" marker-end="url(#arrow)"></path>
+                <path d="M356 119 H410" class="edge" marker-end="url(#arrow)"></path>
+                <path d="M542 119 H596" class="edge" marker-end="url(#arrow)"></path>
+                <path d="M728 119 H782" class="edge" marker-end="url(#arrow)"></path>
+                <path d="M848 154 C848 242 112 242 104 154" class="edge" marker-end="url(#arrow)"></path>
+                <text x="58" y="286" class="svg-small">停止条件：完成、阻塞、预算耗尽、权限越界、置信度不足、需要人工确认。</text>
+              </svg>
+            </div>
+            <p>这也解释了它和 prompt engineering、context engineering、harness engineering 的区别：prompt 负责表达意图，context 负责给模型正确上下文，harness 负责一次运行的工具和沙箱，loop 负责跨时间的调度、状态、验证和交接。</p>
+          </section>
+
+          <section id="building-blocks">
+            <h2>工程积木</h2>
+            <table>
+              <thead>
+                <tr><th>积木</th><th>它解决什么问题</th><th>工程要求</th></tr>
+              </thead>
+              <tbody>
+                <tr><th>Automations</th><td>让任务按时间或事件重复运行，而不是等人想起来再问。</td><td>调度周期、空结果归档、结果进入 triage、失败告警。</td></tr>
+                <tr><th>Worktrees</th><td>让多个后台任务并行，不互相污染文件、依赖和测试输出。</td><td>每个任务独立 checkout、独立 diff、独立测试、合并前 review。</td></tr>
+                <tr><th>Skills</th><td>把项目规则和重复流程沉淀成可复用知识。</td><td>SKILL.md、脚本、参考资料、资产、触发条件和维护 owner。</td></tr>
+                <tr><th>Subagents</th><td>让研究、实现、验证分开，降低上下文污染和权限混杂。</td><td>角色边界、工具权限、输入输出契约、maker/checker 分离。</td></tr>
+                <tr><th>Memory / State</th><td>让下一轮知道上一轮做了什么，而不是依赖聊天窗口记忆。</td><td>STATE.md、数据库、队列、run log、artifact、失败原因和下一步。</td></tr>
+                <tr><th>Budget / Gate</th><td>防止无人值守任务持续花钱或持续犯错。</td><td>token 上限、重试上限、写操作审批、发布 gate、kill switch。</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="implementation">
+            <h2>具体实现</h2>
+            <p>可以把实现拆成两层：外层用 CLI 或调度器把 loop 跑起来，内层用 LangGraph 这类状态图框架定义任务流。二者不冲突，反而适合组合。</p>
+            <h3>方案 A：CLI 定期跑任务</h3>
+            <pre><code>0 */2 * * * cd /repo && loop run --task ci-triage --write-report
+
+# 或用 GitHub Actions / OpenClaw cron：
+# 1. 拉取 repo 和远端状态
+# 2. 读取 CI / issue / PR / STATE.md
+# 3. 调用 Agent 或脚本做归类
+# 4. 输出 run-log、报告、必要时发通知</code></pre>
+            <p>这种方式适合第一阶段落地，因为简单、可审计、可回滚。把输出限制为报告、评论草稿和 issue 标注，先不直接合并代码。</p>
+            <h3>方案 B：用 LangGraph 定义任务流</h3>
+            <pre><code>State = {
+  goal,
+  phase,
+  evidence,
+  attempts,
+  budget,
+  owner,
+  next_action
+}
+
+collect -> classify -> draft -> verify -> {
+  commit_if_safe,
+  ask_human,
+  stop
+}</code></pre>
+            <p>LangGraph 的核心抽象是 State、Node、Edge：State 保存当前快照，Node 执行计算或副作用，Edge 决定下一步。对 Loop Engineering 来说，它刚好对应“状态决定下一步”的控制逻辑。需要人工审批时，可以在高风险节点触发 interrupt，保存状态并等待人恢复。</p>
+            <h3>关键设计原则</h3>
+            <ul>
+              <li>读和写分级：读日志、读 PR、读 issue 可以自动；写评论、开 PR、改文件要进审批或 allowlist。</li>
+              <li>副作用后置：先 collect、classify、draft、verify，最后才做 commit/comment/deploy。</li>
+              <li>验证独立：实现者和检查者分开，至少在 L2 之后引入独立 verifier。</li>
+              <li>状态外置：每轮都写 run log，包括输入、判断、证据、成本、失败原因和下一步。</li>
+              <li>停止条件显式：done、blocked、over budget、needs approval、low confidence 都要能停。</li>
+            </ul>
+          </section>
+
+          <section id="rollout">
+            <h2>落地路线</h2>
+            <table>
+              <thead>
+                <tr><th>阶段</th><th>开放能力</th><th>适合任务</th><th>验收指标</th></tr>
+              </thead>
+              <tbody>
+                <tr><th>L1</th><td>只读、归类、写报告、提醒。</td><td>CI 失败日报、issue triage、依赖风险扫描、PR 等待状态汇总。</td><td>误报率、遗漏率、人工节省时间、报告可读性。</td></tr>
+                <tr><th>L2</th><td>可开低风险 PR，但不自动合并。</td><td>文档修正、测试补充、依赖小版本升级、lint 修复。</td><td>PR 通过率、review 修改次数、回滚次数、平均恢复时间。</td></tr>
+                <tr><th>L3</th><td>allowlist 内半无人值守，强 gate。</td><td>固定模板变更、可逆脚本、低风险配置同步。</td><td>自动完成率、人工接管率、成本上限命中率、事故数。</td></tr>
+              </tbody>
+            </table>
+            <p>对组织来说，最重要的不是一开始就追求无人值守，而是让 loop 先产生可信记录。只要记录稳定，后续每开放一个动作都有证据支撑。</p>
+          </section>
+
+          <section id="case">
+            <h2>案例：CI 失败分流 Loop</h2>
+            <ol>
+              <li>每 30 分钟由 cron 或 GitHub Actions 触发一次。</li>
+              <li>读取最近失败的 CI run、相关 PR、diff、owner 和历史 run log。</li>
+              <li>分类为环境问题、测试不稳定、真实回归、依赖问题、未知问题。</li>
+              <li>对环境问题和 flaky test 生成报告或 issue comment 草稿。</li>
+              <li>对低风险文档/测试修复，在独立 worktree 开 PR，并附上证据。</li>
+              <li>对真实回归或未知问题，交给 owner，并带上日志、复现命令和失败分类理由。</li>
+              <li>verifier 单独检查 PR diff、测试结果和成本，再决定继续、停止或升级。</li>
+              <li>把本轮输入、判断、产物、失败原因、花费和下一步写回 STATE.md / run log。</li>
+            </ol>
+            <div class="note">
+              <p>这个案例的业务价值很清楚：它不是替代工程师判断，而是把重复的收集、归类、证据整理和低风险修复前置处理掉，让工程师只处理真正需要判断的部分。</p>
+            </div>
+          </section>
+
+          <section id="sources">
+            <h2>验证来源</h2>
+            <ul class="source-list">
+              <li><a href="https://addyosmani.com/blog/loop-engineering/">Addy Osmani: Loop Engineering</a>。原文提出“设计会 prompt agent 的 loop”，并把 loop 描述为围绕目标持续迭代直到完成的系统。</li>
+              <li><a href="https://developers.openai.com/codex/app/automations">OpenAI Codex Automations</a>。官方说明 recurring/background tasks、inbox triage、无结果归档和 skills 组合。</li>
+              <li><a href="https://developers.openai.com/codex/app/worktrees">OpenAI Codex Worktrees</a>。官方说明多任务并行和 background worktree 隔离。</li>
+              <li><a href="https://developers.openai.com/codex/app/features">OpenAI Codex App Features</a> 与 <a href="https://developers.openai.com/codex/app/commands">Codex Commands</a>。用于核对 skills、parallel threads 和 /goal。</li>
+              <li><a href="https://docs.langchain.com/oss/python/langchain/agents">LangChain Agents</a> 与 <a href="https://docs.langchain.com/oss/python/langgraph/graph-api">LangGraph Graph API</a>。用于核对 agent loop、State、Node、Edge 模型。</li>
+              <li><a href="https://docs.langchain.com/oss/python/langgraph/interrupts">LangGraph Interrupts</a> 与 <a href="https://docs.langchain.com/oss/python/langchain/human-in-the-loop">LangChain Human-in-the-loop</a>。用于核对人工审批和暂停恢复机制。</li>
+              <li><a href="https://code.claude.com/docs/en/hooks">Claude Code Hooks</a> 与 <a href="https://code.claude.com/docs/en/skills">Claude Code Skills</a>。用于核对 hooks、skills、subagent context 等机制。</li>
+              <li><a href="https://github.com/cobusgreyling/loop-engineering">cobusgreyling/loop-engineering</a>。开源实践仓库，包含 patterns、starters、skills、templates、tools 等目录。</li>
+              <li>npm 验证：<a href="https://www.npmjs.com/package/@cobusgreyling/loop-audit">@cobusgreyling/loop-audit</a> 1.4.2，<a href="https://www.npmjs.com/package/@cobusgreyling/loop-init">@cobusgreyling/loop-init</a> 1.2.2，<a href="https://www.npmjs.com/package/@cobusgreyling/loop-cost">@cobusgreyling/loop-cost</a> 1.0.3。</li>
+            </ul>
+          </section>
+        </article>
+
+        <aside class="panel summary-panel">
+          <p class="panel-title">一句话</p>
+          <ul class="summary-list">
+            <li><strong>定义</strong><span>Loop 是会持续 prompt agent 的系统。</span></li>
+            <li><strong>边界</strong><span>Harness 管单次运行，Loop 管跨时间运营。</span></li>
+            <li><strong>起步</strong><span>先 report-only，再开低风险写操作。</span></li>
+            <li><strong>治理</strong><span>状态、证据、预算、停止条件必须外置。</span></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+    <script src="../../../../assets/research-brief.js"></script>
+  </body>
+</html>
