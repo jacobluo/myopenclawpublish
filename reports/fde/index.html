@@ -559,6 +559,74 @@
       font-weight: 700;
     }
 
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .phase-card {
+      min-height: 190px;
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    .phase-card:nth-child(even) {
+      background: rgba(47, 115, 255, 0.16);
+    }
+
+    .phase-card b {
+      display: block;
+      color: var(--gold);
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .phase-card strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1.12;
+      margin-bottom: 12px;
+    }
+
+    .phase-card span {
+      display: block;
+      color: #d7e1ef;
+      font-size: 20px;
+      line-height: 1.32;
+    }
+
+    .deliverable-map {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 26px;
+    }
+
+    .deliverable {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 20px 24px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .deliverable strong {
+      color: var(--gold);
+      font-size: 24px;
+    }
+
+    .deliverable span {
+      color: #e6efff;
+      font-size: 24px;
+      line-height: 1.24;
+    }
+
     /* ===========================================
        ANIMATIONS
        Subtle reveal system for professional decks.
@@ -685,7 +753,7 @@
           <span class="tag">Evals</span>
         </div>
         <div class="source">Optimized HTML deck / 16:9 fixed stage</div>
-        <div class="page">01 / 15</div>
+        <div class="page">01 / 17</div>
       </section>
 
       <section class="slide">
@@ -699,7 +767,7 @@
             <div class="strip"><strong>产品</strong><span>evals、templates、skills、connectors、roadmap</span></div>
           </div>
         </div>
-        <div class="page">02 / 15</div>
+        <div class="page">02 / 17</div>
       </section>
 
       <section class="slide">
@@ -711,7 +779,7 @@
           <div class="card light reveal"><h3>行为不可测</h3><p>改了 prompt 后不知道变好还是变坏，缺少行为回归测试。</p></div>
         </div>
         <div class="source">Key point: AI Agent deployment is a workflow and trust problem, not only a model problem.</div>
-        <div class="page">03 / 15</div>
+        <div class="page">03 / 17</div>
       </section>
 
       <section class="slide">
@@ -724,7 +792,7 @@
           <div class="step reveal"><strong>Measure</strong><span>观察采纳率、失败案例和人工修正。</span></div>
           <div class="step reveal"><strong>Productize</strong><span>沉淀为 evals、skills、templates 和平台能力。</span></div>
         </div>
-        <div class="page">04 / 15</div>
+        <div class="page">04 / 17</div>
       </section>
 
       <section class="slide">
@@ -736,7 +804,7 @@
           <div class="card reveal"><h3>产品工程师</h3><p>面向通用产品路线图开发能力。</p></div>
           <div class="card highlight reveal"><h3>FDE</h3><p>在客户现场拥有代码和产品判断，把局部问题转成可复用能力。</p></div>
         </div>
-        <div class="page">05 / 15</div>
+        <div class="page">05 / 17</div>
       </section>
 
       <section class="slide">
@@ -751,7 +819,7 @@
           </div>
         </div>
         <div class="source">Sources: Palantir FDSE blog and Palantir job description.</div>
-        <div class="page">06 / 15</div>
+        <div class="page">06 / 17</div>
       </section>
 
       <section class="slide">
@@ -764,7 +832,7 @@
           <div class="card light reveal"><div class="number">4</div><h3>结果</h3><p>Salesforce 称一周内恢复，客户继续推出第二个 Agent。</p></div>
         </div>
         <div class="source">Source: Salesforce, “Forward Deployed Engineers are helping customers launch AI agents”.</div>
-        <div class="page">07 / 15</div>
+        <div class="page">07 / 17</div>
       </section>
 
       <section class="slide">
@@ -781,7 +849,41 @@
             <p style="font-size:32px;">它是一个生产系统调试、信任建立和组织流程改造项目。</p>
           </div>
         </div>
-        <div class="page">08 / 15</div>
+        <div class="page">08 / 17</div>
+      </section>
+
+      <section class="slide">
+        <div class="kicker reveal">Onsite Method</div>
+        <h2 class="reveal">FDE 到客户现场后，按 7 个阶段推进</h2>
+        <div class="body phase-grid">
+          <div class="phase-card reveal"><b>0</b><strong>进场准备</strong><span>客户背景、流程假设、访谈计划、数据访问清单。</span></div>
+          <div class="phase-card reveal"><b>1</b><strong>真实流程发现</strong><span>shadow 一线用户，收集例外流程、痛点和样本案例。</span></div>
+          <div class="phase-card reveal"><b>2</b><strong>问题定义</strong><span>把“要 AI”翻译成可部署的 Agent scope 和成功指标。</span></div>
+          <div class="phase-card reveal"><b>3</b><strong>数据工具审计</strong><span>检查知识、检索、API、权限、日志和 connector 缺口。</span></div>
+          <div class="phase-card reveal"><b>4</b><strong>最小可用部署</strong><span>配置 Agent、skills、expert rules、审批和 fallback。</span></div>
+          <div class="phase-card reveal"><b>5</b><strong>受控试点</strong><span>只读/建议模式先跑，记录失败、接管、采纳和修正。</span></div>
+          <div class="phase-card reveal"><b>6</b><strong>产品化沉淀</strong><span>把失败变 eval，把经验变 template，把脚本变 connector。</span></div>
+          <div class="phase-card reveal"><b>7</b><strong>持续运营</strong><span>监控漂移，更新 skills/evals，完成客户自运营交接。</span></div>
+        </div>
+        <div class="source">Key message: FDE 不是到现场“做需求”，而是把真实流程拆开并放进可验证闭环。</div>
+        <div class="page">09 / 17</div>
+      </section>
+
+      <section class="slide">
+        <div class="kicker reveal">Deliverables</div>
+        <h2 class="reveal">每个阶段都要留下可复用交付物</h2>
+        <div class="body deliverable-map">
+          <div class="deliverable reveal"><strong>流程发现</strong><span>当前流程图、痛点清单、异常场景、样本案例。</span></div>
+          <div class="deliverable reveal"><strong>问题定义</strong><span>Agent scope、成功指标、风险边界、人工审批规则。</span></div>
+          <div class="deliverable reveal"><strong>数据审计</strong><span>数据就绪报告、知识同步 checklist、工具集成图。</span></div>
+          <div class="deliverable reveal"><strong>MVP 部署</strong><span>instructions、skills、expert profile、tool config、fallback。</span></div>
+          <div class="deliverable reveal"><strong>生产试点</strong><span>pilot report、failure log、override analysis、go/no-go。</span></div>
+          <div class="deliverable reveal"><strong>产品沉淀</strong><span>reusable skills、templates、eval suite、launch playbook。</span></div>
+          <div class="deliverable reveal"><strong>平台反哺</strong><span>connector backlog、platform gaps、WORKBUDDY roadmap。</span></div>
+          <div class="deliverable reveal"><strong>持续运营</strong><span>运营看板、漂移监控、月度复盘、handoff package。</span></div>
+        </div>
+        <div class="source">PPT thesis: 现场交付的终点不是项目验收，而是 WORKBUDDY 的资产增长。</div>
+        <div class="page">10 / 17</div>
       </section>
 
       <section class="slide">
@@ -798,7 +900,7 @@
             <div class="layer customer"><strong>客户场景层</strong><span>客户知识、业务流程、系统连接、本地策略和权限配置</span></div>
           </div>
         </div>
-        <div class="page">09 / 15</div>
+        <div class="page">11 / 17</div>
       </section>
 
       <section class="slide">
@@ -811,7 +913,7 @@
           <div class="step reveal"><strong>Evals</strong><span>行为测试：正确、拒答、升级、隐私、边界条件。</span></div>
           <div class="step reveal"><strong>Dev</strong><span>仅当缺少共性连接器、权限、日志、部署能力时二开。</span></div>
         </div>
-        <div class="page">10 / 15</div>
+        <div class="page">12 / 17</div>
       </section>
 
       <section class="slide">
@@ -825,7 +927,7 @@
           <div class="card reveal"><h3>上线 Playbook</h3><p>知识准备、灰度试运行、人工接管、周复盘。</p></div>
           <div class="card reveal"><h3>必要 Connector</h3><p>CRM、ERP、飞书、企微、Jira、GitHub 等共性连接器。</p></div>
         </div>
-        <div class="page">11 / 15</div>
+        <div class="page">13 / 17</div>
       </section>
 
       <section class="slide">
@@ -842,7 +944,7 @@
           </div>
         </div>
         <div class="source">判断标准：这次交付留下的是代码债，还是平台资产？</div>
-        <div class="page">12 / 15</div>
+        <div class="page">14 / 17</div>
       </section>
 
       <section class="slide">
@@ -858,7 +960,7 @@
           </div>
           <div class="quote reveal">每做一个客户，WORKBUDDY 是否变得更强？</div>
         </div>
-        <div class="page">13 / 15</div>
+        <div class="page">15 / 17</div>
       </section>
 
       <section class="slide">
@@ -871,7 +973,7 @@
           <div class="card light reveal"><h3>行业研究</h3><p>文章 intake、事件抽取、公司映射、观点草稿。</p></div>
         </div>
         <div class="source">Selection rule: 高频、输入明确、输出可检查、有反馈信号、出错成本低。</div>
-        <div class="page">14 / 15</div>
+        <div class="page">16 / 17</div>
       </section>
 
       <section class="slide">
@@ -886,7 +988,7 @@
             <span class="tag">Product absorption creates scale</span>
           </div>
         </div>
-        <div class="page">15 / 15</div>
+        <div class="page">17 / 17</div>
       </section>
     </main>
   </div>
@@ -895,7 +997,7 @@
   <button class="edit-toggle" id="editToggle" type="button" title="Edit mode (E)">Edit</button>
   <nav class="deck-controls" aria-label="Slide controls">
     <button id="prev" type="button">Prev</button>
-    <span class="count" id="count">1 / 15</span>
+    <span class="count" id="count">1 / 17</span>
     <button id="next" type="button">Next</button>
   </nav>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
