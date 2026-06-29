@@ -4,942 +4,1079 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FDE：企业 AI Agent 落地的缺失一环</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
+    /* ===========================================
+       CSS CUSTOM PROPERTIES: THEME
+       Edit these variables to tune the whole deck.
+       =========================================== */
     :root {
-      --ink: #17202a;
-      --muted: #637083;
-      --line: #d9e0ea;
-      --paper: #f7f8fb;
-      --panel: #ffffff;
-      --blue: #246bfe;
-      --green: #0f9b73;
-      --red: #d64b4b;
-      --gold: #b7791f;
-      --soft-blue: #eaf1ff;
-      --soft-green: #e8f7f2;
-      --soft-red: #fff0f0;
-      --soft-gold: #fff5dd;
+      --stage-bg: #07111f;
+      --slide-bg: #0b1220;
+      --ink: #0b1220;
+      --paper: #f7f3e8;
+      --paper-2: #fff9ea;
+      --white: #ffffff;
+      --muted: #a8b4c6;
+      --blue: #2f73ff;
+      --cyan: #39d7ff;
+      --green: #20c997;
+      --gold: #ffbf47;
+      --red: #ff5c67;
+      --line: rgba(255, 255, 255, 0.16);
+      --shadow: rgba(0, 0, 0, 0.32);
+      --font-display: "Archivo Black", "Noto Sans SC", sans-serif;
+      --font-body: "IBM Plex Sans", "Noto Sans SC", sans-serif;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-normal: 0.58s;
     }
 
+    /* ===========================================
+       BASE RESET
+       Keep the browser chrome clean and predictable.
+       =========================================== */
     * {
       box-sizing: border-box;
     }
 
+    /* ===========================================
+       FIXED 16:9 STAGE: MANDATORY BASE STYLES
+       Included from frontend-slides viewport-base.css.
+       =========================================== */
+    html,
     body {
+      width: 100%;
+      height: 100%;
       margin: 0;
-      color: var(--ink);
-      background: var(--paper);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-      letter-spacing: 0;
+      overflow: hidden;
+      background: var(--stage-bg, #000);
     }
 
-    .deck {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
+    .deck-viewport {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background: var(--stage-bg, #000);
+    }
+
+    .deck-stage {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      transform-origin: 0 0;
+      background: var(--slide-bg, #fff);
     }
 
     .slide {
-      display: none;
-      width: min(1180px, 100%);
-      min-height: min(660px, calc(100vh - 88px));
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: 0 18px 48px rgba(23, 32, 42, 0.12);
-      padding: 44px 52px;
-      position: relative;
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
       overflow: hidden;
+      display: block;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      background: var(--slide-bg, #fff);
     }
 
-    .slide.active {
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      gap: 28px;
+    .slide.active,
+    .slide.visible {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    img,
+    video,
+    canvas,
+    svg {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .deck-controls {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
+
+    @media print {
+      html,
+      body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+      }
+
+      .deck-viewport {
+        position: static;
+        overflow: visible;
+        background: #fff;
+      }
+
+      .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        background: none;
+      }
+
+      .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+      }
+
+      .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+
+      .deck-controls,
+      .edit-toggle,
+      .edit-hotzone {
+        display: none !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+      }
+    }
+
+    /* ===========================================
+       SLIDE TYPOGRAPHY AND BACKGROUND SYSTEM
+       A precise enterprise-tech aesthetic for FDE content.
+       =========================================== */
+    body {
+      font-family: var(--font-body);
+      color: var(--white);
+    }
+
+    .slide {
+      padding: 86px 96px;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        radial-gradient(circle at 82% 18%, rgba(47, 115, 255, 0.28), transparent 430px),
+        radial-gradient(circle at 14% 84%, rgba(255, 191, 71, 0.14), transparent 390px),
+        var(--slide-bg);
+      background-size: 54px 54px, 54px 54px, auto, auto, auto;
+    }
+
+    .slide::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 380px;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(47, 115, 255, 0.16), rgba(57, 215, 255, 0.02));
+      clip-path: polygon(34% 0, 100% 0, 100% 100%, 0 100%);
+      pointer-events: none;
     }
 
     .kicker {
-      color: var(--blue);
-      font-size: 13px;
-      font-weight: 800;
-      text-transform: uppercase;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 22px;
+      font-weight: 700;
       letter-spacing: 0.08em;
-      margin-bottom: 10px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      z-index: 2;
     }
 
-    h1, h2 {
+    .kicker::before {
+      content: "";
+      width: 46px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 99px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
       margin: 0;
-      line-height: 1.08;
-      letter-spacing: 0;
     }
 
     h1 {
-      font-size: clamp(42px, 7vw, 76px);
-      max-width: 940px;
+      position: relative;
+      z-index: 2;
+      max-width: 1260px;
+      margin-top: 120px;
+      font-family: var(--font-display);
+      font-size: 112px;
+      line-height: 0.98;
+      letter-spacing: 0;
     }
 
     h2 {
-      font-size: clamp(30px, 4.6vw, 52px);
-      max-width: 980px;
+      position: relative;
+      z-index: 2;
+      max-width: 1320px;
+      margin-top: 18px;
+      font-family: var(--font-display);
+      font-size: 72px;
+      line-height: 1.04;
+      letter-spacing: 0;
     }
 
     .subtitle {
-      margin-top: 18px;
-      max-width: 780px;
-      color: var(--muted);
-      font-size: 22px;
-      line-height: 1.45;
+      position: relative;
+      z-index: 2;
+      max-width: 1040px;
+      margin-top: 32px;
+      font-size: 36px;
+      line-height: 1.42;
+      color: #d7e1ef;
+      font-weight: 500;
     }
 
     .body {
-      display: grid;
-      gap: 26px;
-      align-content: center;
+      position: relative;
+      z-index: 2;
+      margin-top: 58px;
     }
 
-    .two-col {
+    .source {
+      position: absolute;
+      left: 96px;
+      bottom: 54px;
+      max-width: 1280px;
+      font-size: 18px;
+      color: var(--muted);
+      z-index: 3;
+    }
+
+    .page {
+      position: absolute;
+      right: 96px;
+      bottom: 54px;
+      z-index: 3;
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    /* ===========================================
+       LAYOUT COMPONENTS
+       Reusable grids, cards, tags, and diagrams.
+       =========================================== */
+    .split {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 34px;
+      grid-template-columns: 0.98fr 1.02fr;
+      gap: 56px;
       align-items: center;
     }
 
-    .three-col {
+    .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      gap: 26px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
     }
 
     .card {
+      min-height: 210px;
+      padding: 30px;
       border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      padding: 22px;
+      background: rgba(255, 255, 255, 0.075);
+      box-shadow: 0 22px 44px var(--shadow);
+      border-radius: 18px;
+      backdrop-filter: blur(12px);
+    }
+
+    .card.light {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: rgba(11, 18, 32, 0.12);
+    }
+
+    .card.blue {
+      background: linear-gradient(135deg, rgba(47, 115, 255, 0.95), rgba(57, 215, 255, 0.72));
+      color: var(--white);
+      border: 0;
+    }
+
+    .card.gold {
+      background: linear-gradient(135deg, rgba(255, 191, 71, 0.95), rgba(255, 245, 207, 0.82));
+      color: var(--ink);
+      border: 0;
     }
 
     .card h3 {
-      margin: 0 0 10px;
-      font-size: 22px;
+      font-size: 34px;
+      line-height: 1.16;
+      margin-bottom: 18px;
+      font-weight: 800;
     }
 
-    .card p, .card li {
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.52;
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 22px;
-    }
-
-    li {
-      margin: 8px 0;
-      font-size: 22px;
+    .card p,
+    .card li {
+      font-size: 25px;
       line-height: 1.42;
+      color: inherit;
     }
 
     .muted {
       color: var(--muted);
     }
 
-    .big-point {
-      font-size: clamp(28px, 4.2vw, 48px);
-      line-height: 1.22;
-      font-weight: 780;
-      max-width: 960px;
+    .big-line {
+      max-width: 1400px;
+      font-size: 58px;
+      line-height: 1.16;
+      font-weight: 900;
+      letter-spacing: 0;
     }
 
-    .pill-row {
+    .number {
+      font-family: var(--font-display);
+      font-size: 118px;
+      line-height: 0.88;
+      color: var(--gold);
+    }
+
+    .tag-row {
       display: flex;
+      gap: 16px;
       flex-wrap: wrap;
-      gap: 12px;
     }
 
-    .pill {
+    .tag {
+      padding: 13px 18px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      padding: 10px 14px;
-      color: var(--ink);
-      background: #fff;
+      color: #deecff;
+      font-size: 22px;
       font-weight: 700;
+      background: rgba(255, 255, 255, 0.06);
     }
 
-    .diagram {
-      min-height: 340px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background:
-        linear-gradient(90deg, rgba(36, 107, 254, 0.08) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(36, 107, 254, 0.08) 1px, transparent 1px),
-        #fff;
-      background-size: 24px 24px;
-      padding: 24px;
+    .arrow-flow {
       display: grid;
-      place-items: center;
-    }
-
-    .bridge {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 120px 1fr;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .bridge-box {
-      border: 2px solid var(--line);
-      border-radius: 8px;
-      padding: 24px;
-      min-height: 178px;
-      background: #fff;
-    }
-
-    .bridge-box strong {
-      display: block;
-      font-size: 25px;
-      margin-bottom: 12px;
-    }
-
-    .bridge-box span {
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.45;
-    }
-
-    .arrow {
-      height: 6px;
-      background: var(--blue);
-      position: relative;
-      border-radius: 99px;
-    }
-
-    .arrow::after {
-      content: "";
-      position: absolute;
-      right: -2px;
-      top: 50%;
-      width: 18px;
-      height: 18px;
-      border-top: 6px solid var(--blue);
-      border-right: 6px solid var(--blue);
-      transform: translateY(-50%) rotate(45deg);
-    }
-
-    .loop {
-      width: min(520px, 100%);
-      aspect-ratio: 1;
-      border: 18px solid var(--soft-blue);
-      border-radius: 50%;
-      position: relative;
-      display: grid;
-      place-items: center;
-      background: #fff;
-    }
-
-    .loop-center {
-      width: 52%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: var(--ink);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 18px;
-      font-weight: 800;
-      font-size: 20px;
-      line-height: 1.25;
-    }
-
-    .loop-step {
-      position: absolute;
-      width: 150px;
-      text-align: center;
-      border: 1px solid var(--line);
-      background: #fff;
-      border-radius: 8px;
-      padding: 10px;
-      font-weight: 760;
-      box-shadow: 0 8px 20px rgba(23, 32, 42, 0.08);
-    }
-
-    .loop-step:nth-child(2) { top: -10px; left: 50%; transform: translateX(-50%); }
-    .loop-step:nth-child(3) { right: -14px; top: 30%; }
-    .loop-step:nth-child(4) { right: 8%; bottom: 10px; }
-    .loop-step:nth-child(5) { left: 8%; bottom: 10px; }
-    .loop-step:nth-child(6) { left: -14px; top: 30%; }
-
-    .matrix {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      width: 100%;
-    }
-
-    .matrix-cell {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 18px;
-      min-height: 118px;
-      background: #fff;
-    }
-
-    .matrix-cell.highlight {
-      border-color: var(--blue);
-      background: var(--soft-blue);
-    }
-
-    .matrix-cell strong {
-      display: block;
-      font-size: 21px;
-      margin-bottom: 8px;
-    }
-
-    .matrix-cell span {
-      color: var(--muted);
-      line-height: 1.4;
-    }
-
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 18px;
       align-items: stretch;
     }
 
-    .stage {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 24px;
-      background: #fff;
+    .step {
       position: relative;
+      min-height: 170px;
+      padding: 26px;
+      border-radius: 18px;
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 20px 34px var(--shadow);
     }
 
-    .stage::before {
-      content: attr(data-step);
+    .step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -26px;
+      width: 34px;
+      height: 4px;
+      background: var(--gold);
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .step strong {
+      display: block;
+      font-size: 27px;
+      line-height: 1.16;
+      margin-bottom: 12px;
+    }
+
+    .step span {
+      display: block;
+      font-size: 21px;
+      line-height: 1.36;
+      color: #4e5a6a;
+    }
+
+    .matrix {
       display: grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: var(--ink);
-      color: #fff;
-      font-weight: 800;
-      margin-bottom: 18px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
     }
 
-    .stage h3 {
-      margin: 0 0 12px;
-      font-size: 23px;
+    .matrix .card {
+      min-height: 240px;
     }
 
-    .stage p {
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.5;
-      margin: 0;
+    .matrix .highlight {
+      outline: 4px solid var(--gold);
+      background: linear-gradient(135deg, rgba(47, 115, 255, 0.96), rgba(13, 23, 42, 0.94));
     }
 
     .quote {
-      border-left: 6px solid var(--blue);
-      padding-left: 22px;
-      font-size: clamp(30px, 4vw, 46px);
-      line-height: 1.22;
-      font-weight: 760;
+      max-width: 1240px;
+      padding-left: 34px;
+      border-left: 8px solid var(--gold);
+      font-size: 60px;
+      line-height: 1.18;
+      font-weight: 900;
     }
 
-    .source {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.4;
+    .stack {
+      display: grid;
+      gap: 18px;
     }
 
-    .footer {
-      display: flex;
-      justify-content: space-between;
+    .strip {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 26px;
       align-items: center;
-      color: var(--muted);
-      font-size: 13px;
-      border-top: 1px solid var(--line);
-      padding-top: 12px;
-    }
-
-    .controls {
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.9);
+      padding: 24px 28px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 8px;
-      box-shadow: 0 8px 28px rgba(23, 32, 42, 0.12);
-      z-index: 20;
     }
 
-    button {
-      border: 0;
-      border-radius: 999px;
-      padding: 9px 14px;
-      background: var(--ink);
-      color: #fff;
-      font-weight: 800;
-      cursor: pointer;
+    .strip strong {
+      color: var(--gold);
+      font-size: 26px;
     }
 
-    button.secondary {
-      background: #eef2f7;
+    .strip span {
+      font-size: 28px;
+      line-height: 1.32;
+    }
+
+    .diagram-box {
+      position: relative;
+      min-height: 560px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+      box-shadow: 0 22px 44px var(--shadow);
+    }
+
+    .layer {
+      position: absolute;
+      left: 64px;
+      right: 64px;
+      height: 118px;
+      border-radius: 18px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 26px 32px;
       color: var(--ink);
     }
 
-    .counter {
-      min-width: 76px;
+    .layer strong {
+      font-size: 30px;
+    }
+
+    .layer span {
+      font-size: 23px;
+      line-height: 1.32;
+    }
+
+    .layer.platform {
+      top: 58px;
+      background: #d9e7ff;
+    }
+
+    .layer.assets {
+      top: 224px;
+      background: #fff3cf;
+    }
+
+    .layer.customer {
+      top: 390px;
+      background: #d8f7ec;
+    }
+
+    .bar-chart {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      align-items: end;
+      height: 430px;
+      padding: 36px 28px 24px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--line);
+    }
+
+    .bar {
+      display: grid;
+      align-items: end;
+      gap: 14px;
+      height: 100%;
+    }
+
+    .bar i {
+      display: block;
+      border-radius: 16px 16px 6px 6px;
+      background: linear-gradient(180deg, var(--cyan), var(--blue));
+      box-shadow: 0 18px 30px rgba(47, 115, 255, 0.28);
+    }
+
+    .bar span {
       text-align: center;
-      color: var(--muted);
-      font-weight: 760;
+      font-size: 20px;
+      color: #e6efff;
+      line-height: 1.22;
+      font-weight: 700;
     }
 
-    @media (max-width: 820px) {
-      .deck {
-        padding: 12px;
-      }
-
-      .slide {
-        padding: 28px 24px;
-        min-height: calc(100vh - 84px);
-      }
-
-      .two-col,
-      .three-col,
-      .timeline {
-        grid-template-columns: 1fr;
-      }
-
-      .bridge {
-        grid-template-columns: 1fr;
-      }
-
-      .arrow {
-        width: 6px;
-        height: 56px;
-        justify-self: center;
-      }
-
-      .arrow::after {
-        right: 50%;
-        top: auto;
-        bottom: -2px;
-        transform: translateX(50%) rotate(135deg);
-      }
-
-      li {
-        font-size: 18px;
-      }
-
-      .subtitle {
-        font-size: 18px;
-      }
-
-      .loop-step {
-        position: static;
-        transform: none !important;
-        width: auto;
-      }
-
-      .loop {
-        border-radius: 8px;
-        aspect-ratio: auto;
-        width: 100%;
-        display: grid;
-        gap: 10px;
-        padding: 14px;
-      }
-
-      .loop-center {
-        width: 100%;
-        border-radius: 8px;
-        aspect-ratio: auto;
-      }
+    /* ===========================================
+       ANIMATIONS
+       Subtle reveal system for professional decks.
+       =========================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition:
+        opacity var(--duration-normal) var(--ease-out-expo),
+        transform var(--duration-normal) var(--ease-out-expo);
     }
 
-    @media print {
-      body {
-        background: #fff;
-      }
+    .visible .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-      .deck {
-        display: block;
-        padding: 0;
-      }
+    .reveal:nth-child(1) { transition-delay: 0.06s; }
+    .reveal:nth-child(2) { transition-delay: 0.14s; }
+    .reveal:nth-child(3) { transition-delay: 0.22s; }
+    .reveal:nth-child(4) { transition-delay: 0.30s; }
+    .reveal:nth-child(5) { transition-delay: 0.38s; }
 
-      .slide,
-      .slide.active {
-        display: grid;
-        width: 100%;
-        min-height: 100vh;
-        border: 0;
-        border-radius: 0;
-        box-shadow: none;
-        page-break-after: always;
-      }
+    /* ===========================================
+       CONTROLS AND INLINE EDITING
+       Keyboard, buttons, progress, and edit mode.
+       =========================================== */
+    .deck-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      background: rgba(7, 17, 31, 0.84);
+      backdrop-filter: blur(12px);
+      color: var(--white);
+      font-family: var(--font-body);
+    }
 
-      .controls {
-        display: none;
-      }
+    .deck-controls button,
+    .edit-toggle {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: var(--white);
+      color: var(--ink);
+      font-weight: 800;
+      font-family: var(--font-body);
+      cursor: pointer;
+    }
+
+    .deck-controls .count {
+      min-width: 82px;
+      text-align: center;
+      color: #d7e1ef;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      height: 4px;
+      width: 100%;
+      z-index: 1001;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--cyan));
+      transition: width 0.3s ease;
+    }
+
+    .edit-hotzone {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 80px;
+      height: 80px;
+      z-index: 10000;
+      cursor: pointer;
+    }
+
+    .edit-toggle {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 10001;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    .edit-toggle.show,
+    .edit-toggle.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .editing [contenteditable="true"] {
+      outline: 3px dashed var(--gold);
+      outline-offset: 5px;
+      cursor: text;
     }
   </style>
 </head>
 <body>
-  <main class="deck">
-    <section class="slide active">
-      <header>
-        <div class="kicker">FDE / AI Agent / Loop Engineering</div>
-        <h1>FDE：企业 AI Agent 落地的缺失一环</h1>
-        <p class="subtitle">从客户现场的复杂现实，到可部署系统、行为评测和可复用产品能力。</p>
-      </header>
-      <div class="body">
-        <div class="pill-row">
-          <span class="pill">Forward Deployed Engineer</span>
-          <span class="pill">Agent Deployment</span>
-          <span class="pill">Evals</span>
-          <span class="pill">Product Feedback Loop</span>
+  <div class="deck-viewport">
+    <main class="deck-stage" id="deckStage">
+      <section class="slide active">
+        <div class="kicker reveal">FDE / Agent Delivery / Loop Engineering</div>
+        <h1 class="reveal">FDE：企业 AI Agent 落地的缺失一环</h1>
+        <p class="subtitle reveal">从客户现场的复杂现实，到可部署系统、行为评测和可复用产品能力。</p>
+        <div class="body tag-row reveal">
+          <span class="tag">Forward Deployed Engineer</span>
+          <span class="tag">WORKBUDDY</span>
+          <span class="tag">SED Delivery</span>
+          <span class="tag">Evals</span>
         </div>
-      </div>
-      <footer class="footer">
-        <span>Prepared for PPT drafting</span>
-        <span>2026.06</span>
-      </footer>
-    </section>
+        <div class="source">Optimized HTML deck / 16:9 fixed stage</div>
+        <div class="page">01 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Why Now</div>
-        <h2>AI 的 Demo 很容易，生产落地很难</h2>
-      </header>
-      <div class="body two-col">
-        <div>
-          <ul>
-            <li>模型能力快速提升，但企业工作流吸收速度慢。</li>
-            <li>Agent 要接数据、工具、权限、审批和业务规则。</li>
-            <li>失败常常不在模型，而在部署现场。</li>
-            <li>FDE 重新变热，是因为它填补了从能力到落地的断层。</li>
-          </ul>
-        </div>
-        <div class="diagram">
-          <div class="bridge">
-            <div class="bridge-box">
-              <strong>模型能力</strong>
-              <span>推理、多模态、工具调用、代码生成、Agent 框架</span>
-            </div>
-            <div class="arrow"></div>
-            <div class="bridge-box">
-              <strong>企业采用</strong>
-              <span>数据质量、流程整合、权限治理、用户信任、ROI</span>
-            </div>
+      <section class="slide">
+        <div class="kicker reveal">Core Thesis</div>
+        <h2 class="reveal">FDE 不是高级实施顾问，而是产品学习回路</h2>
+        <div class="body split">
+          <p class="big-line reveal">Agent 的难点不在 Demo，而在把现场失败转成产品资产。</p>
+          <div class="stack reveal">
+            <div class="strip"><strong>现场</strong><span>数据、权限、流程、隐性规则、异常场景</span></div>
+            <div class="strip"><strong>工程</strong><span>工具、集成、日志、人工审批、上线稳定性</span></div>
+            <div class="strip"><strong>产品</strong><span>evals、templates、skills、connectors、roadmap</span></div>
           </div>
         </div>
-      </div>
-      <footer class="footer">
-        <span>核心问题</span>
-        <span>2 / 14</span>
-      </footer>
-    </section>
+        <div class="page">02 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Definition</div>
-        <h2>FDE 是什么？</h2>
-      </header>
-      <div class="body">
-        <p class="big-point">FDE 是嵌入客户现场的工程师，负责把模糊业务问题变成可运行的生产系统，并把现场学习反哺给产品。</p>
-        <div class="three-col">
-          <div class="card">
-            <h3>靠近现场</h3>
-            <p>理解真实工作流、隐性规则、组织约束和用户习惯。</p>
-          </div>
-          <div class="card">
-            <h3>拥有代码</h3>
-            <p>不只是建议方案，而是做集成、写工具、交付系统。</p>
-          </div>
-          <div class="card">
-            <h3>反哺产品</h3>
-            <p>把反复出现的问题沉淀成 evals、playbooks 和产品能力。</p>
-          </div>
+      <section class="slide">
+        <div class="kicker reveal">Why Now</div>
+        <h2 class="reveal">企业 AI 卡住的位置，通常不是模型层</h2>
+        <div class="body grid-3">
+          <div class="card light reveal"><h3>数据不稳</h3><p>知识库未同步、字段缺失、权限隔离、历史数据不可用。</p></div>
+          <div class="card light reveal"><h3>流程不清</h3><p>谁能审批、何时转人工、失败后谁负责，往往没有被写下来。</p></div>
+          <div class="card light reveal"><h3>行为不可测</h3><p>改了 prompt 后不知道变好还是变坏，缺少行为回归测试。</p></div>
         </div>
-      </div>
-      <footer class="footer">
-        <span>角色定义</span>
-        <span>3 / 14</span>
-      </footer>
-    </section>
+        <div class="source">Key point: AI Agent deployment is a workflow and trust problem, not only a model problem.</div>
+        <div class="page">03 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Not Consulting</div>
-        <h2>FDE 不是“高级实施顾问”</h2>
-      </header>
-      <div class="body two-col">
-        <div>
-          <ul>
-            <li>顾问交付项目，FDE 交付系统和产品学习。</li>
-            <li>解决方案工程师证明价值，FDE 承担生产落地。</li>
-            <li>客户成功推动采用，FDE 用工程手段移除阻塞。</li>
-            <li>FDE 的关键产出不是定制工作本身，而是可复用能力。</li>
-          </ul>
+      <section class="slide">
+        <div class="kicker reveal">Definition</div>
+        <h2 class="reveal">FDE 是嵌入客户现场的工程闭环角色</h2>
+        <div class="body arrow-flow">
+          <div class="step reveal"><strong>Observe</strong><span>进入真实业务现场，理解工作流和阻塞。</span></div>
+          <div class="step reveal"><strong>Build</strong><span>用代码、工具和平台能力构建可用原型。</span></div>
+          <div class="step reveal"><strong>Deploy</strong><span>在受控生产环境中试运行和交付。</span></div>
+          <div class="step reveal"><strong>Measure</strong><span>观察采纳率、失败案例和人工修正。</span></div>
+          <div class="step reveal"><strong>Productize</strong><span>沉淀为 evals、skills、templates 和平台能力。</span></div>
         </div>
-        <div class="diagram">
-          <div class="matrix">
-            <div class="matrix-cell">
-              <strong>顾问</strong>
-              <span>客户侧、建议/交付</span>
-            </div>
-            <div class="matrix-cell">
-              <strong>产品工程师</strong>
-              <span>产品侧、代码拥有</span>
-            </div>
-            <div class="matrix-cell">
-              <strong>客户成功</strong>
-              <span>客户侧、采用推动</span>
-            </div>
-            <div class="matrix-cell highlight">
-              <strong>FDE</strong>
-              <span>客户侧 + 产品侧，代码拥有 + 反馈闭环</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <footer class="footer">
-        <span>角色边界</span>
-        <span>4 / 14</span>
-      </footer>
-    </section>
+        <div class="page">04 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Origin</div>
-        <h2>源头：Palantir 的 FDSE 模型</h2>
-      </header>
-      <div class="body two-col">
-        <div class="quote">复杂、高价值、非标准化的问题，不能只靠远程产品路线图解决。</div>
-        <div>
-          <ul>
-            <li>FDSE 嵌入客户现场，围绕真实任务配置和扩展平台。</li>
-            <li>角色横跨软件、数据、领域知识和用户采用。</li>
-            <li>重点是快速反馈和真实世界影响。</li>
-            <li>这个模式后来被 AI 公司重新拿起来。</li>
-          </ul>
+      <section class="slide">
+        <div class="kicker reveal">Role Boundary</div>
+        <h2 class="reveal">FDE 和顾问、售前、产品工程师不一样</h2>
+        <div class="body matrix">
+          <div class="card reveal"><h3>顾问</h3><p>交付项目，输出方案和实施结果。</p></div>
+          <div class="card reveal"><h3>售前/解决方案</h3><p>证明价值，配置演示，帮助成交。</p></div>
+          <div class="card reveal"><h3>产品工程师</h3><p>面向通用产品路线图开发能力。</p></div>
+          <div class="card highlight reveal"><h3>FDE</h3><p>在客户现场拥有代码和产品判断，把局部问题转成可复用能力。</p></div>
         </div>
-      </div>
-      <footer class="footer">
-        <span class="source">Source: Palantir FDSE blog and Palantir job page</span>
-        <span>5 / 14</span>
-      </footer>
-    </section>
+        <div class="page">05 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Agent Era</div>
-        <h2>为什么 AI Agent 让 FDE 更重要？</h2>
-      </header>
-      <div class="body two-col">
-        <div>
-          <ul>
-            <li>Agent 需要吸收未写下来的业务判断。</li>
-            <li>边界条件、例外流程和审批权限决定能否自动化。</li>
-            <li>RAG、工具调用、权限和日志常常比 prompt 更关键。</li>
-            <li>FDE 负责发现 Agent 真正需要知道什么、能做什么。</li>
-          </ul>
-        </div>
-        <div class="diagram">
-          <div class="card" style="width:100%; background:var(--soft-blue);">
-            <h3>水面上</h3>
-            <p>模型、Prompt、聊天界面、Demo</p>
-          </div>
-          <div style="height:12px"></div>
-          <div class="card" style="width:100%;">
-            <h3>水面下</h3>
-            <p>数据质量、系统权限、用户激励、异常流程、合规要求、人工审批、组织责任</p>
+      <section class="slide">
+        <div class="kicker reveal">Origin</div>
+        <h2 class="reveal">Palantir 把 FDE 做成复杂企业软件的操作系统</h2>
+        <div class="body split">
+          <div class="quote reveal">复杂、高价值、非标准化的问题，不能只靠远程产品路线图解决。</div>
+          <div class="grid-3 reveal" style="grid-template-columns:1fr; gap:18px;">
+            <div class="card blue"><h3>嵌入现场</h3><p>直接进入客户任务环境，接触真实用户和数据。</p></div>
+            <div class="card"><h3>横跨多域</h3><p>软件、数据、流程、领域知识和用户采用同时处理。</p></div>
+            <div class="card gold"><h3>快速反馈</h3><p>现场失败能快速回到工程和产品决策。</p></div>
           </div>
         </div>
-      </div>
-      <footer class="footer">
-        <span>AI 落地难点</span>
-        <span>6 / 14</span>
-      </footer>
-    </section>
+        <div class="source">Sources: Palantir FDSE blog and Palantir job description.</div>
+        <div class="page">06 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Loop Engineering</div>
-        <h2>FDE 是一个闭环，不是一次交付</h2>
-      </header>
-      <div class="body two-col">
-        <div class="diagram">
-          <div class="loop">
-            <div class="loop-center">Field Learning Loop</div>
-            <div class="loop-step">观察工作流</div>
-            <div class="loop-step">构建原型</div>
-            <div class="loop-step">生产使用</div>
-            <div class="loop-step">捕捉失败</div>
-            <div class="loop-step">产品化</div>
-          </div>
+      <section class="slide">
+        <div class="kicker reveal">Concrete Case</div>
+        <h2 class="reveal">Salesforce 案例：一个 Agent 试点为什么卡住？</h2>
+        <div class="body grid-4">
+          <div class="card light reveal"><div class="number">1</div><h3>目标</h3><p>订位平台上线 B2B 客服 Agent，回答客户服务问题。</p></div>
+          <div class="card light reveal"><div class="number">2</div><h3>问题</h3><p>Agent 有时答不上来，知识更新未同步。</p></div>
+          <div class="card light reveal"><div class="number">3</div><h3>动作</h3><p>FDE 诊断数据链路，协同产品团队修复 Agentforce / Data 360。</p></div>
+          <div class="card light reveal"><div class="number">4</div><h3>结果</h3><p>Salesforce 称一周内恢复，客户继续推出第二个 Agent。</p></div>
         </div>
-        <div>
-          <ul>
-            <li>Observe：进入真实业务现场。</li>
-            <li>Act：快速构建集成和 Agent 流程。</li>
-            <li>Measure：看用户是否采纳、哪里失败。</li>
-            <li>Learn：沉淀边界条件和评测用例。</li>
-            <li>Productize：变成工具、evals、产品能力。</li>
-          </ul>
-        </div>
-      </div>
-      <footer class="footer">
-        <span>闭环模型</span>
-        <span>7 / 14</span>
-      </footer>
-    </section>
+        <div class="source">Source: Salesforce, “Forward Deployed Engineers are helping customers launch AI agents”.</div>
+        <div class="page">07 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Product Compression</div>
-        <h2>FDE 把现场混乱压缩成产品资产</h2>
-      </header>
-      <div class="body">
-        <div class="three-col">
-          <div class="card">
-            <h3>失败案例</h3>
-            <p>变成 evals 和回归测试，防止下次再错。</p>
+      <section class="slide">
+        <div class="kicker reveal">Lesson</div>
+        <h2 class="reveal">这个案例的真正启示：失败在部署层</h2>
+        <div class="body split">
+          <div class="stack reveal">
+            <div class="strip"><strong>不是</strong><span>“prompt 写得不够聪明”</span></div>
+            <div class="strip"><strong>而是</strong><span>知识、数据、同步、权限和流程没有闭环</span></div>
+            <div class="strip"><strong>所以</strong><span>FDE 要同时懂客户现场、系统集成和产品反馈</span></div>
           </div>
-          <div class="card">
-            <h3>临时脚本</h3>
-            <p>变成通用工具、连接器或自动化流程。</p>
-          </div>
-          <div class="card">
-            <h3>客户经验</h3>
-            <p>变成 playbooks、模板和产品路线图信号。</p>
+          <div class="card gold reveal" style="min-height:420px; display:grid; align-content:center;">
+            <h3 style="font-size:50px;">Agent 落地不是模型接入项目</h3>
+            <p style="font-size:32px;">它是一个生产系统调试、信任建立和组织流程改造项目。</p>
           </div>
         </div>
-        <p class="big-point">最好的 FDE 团队，不是做更多定制，而是让定制越来越少。</p>
-      </div>
-      <footer class="footer">
-        <span>服务变资产</span>
-        <span>8 / 14</span>
-      </footer>
-    </section>
+        <div class="page">08 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Market Signal</div>
-        <h2>AI 公司正在重新组织 FDE 能力</h2>
-      </header>
-      <div class="body">
-        <div class="three-col">
-          <div class="card">
-            <h3>OpenAI</h3>
-            <p>FDE 将研究突破转成生产系统，并通过采用率、工作流影响和 eval 反馈衡量成功。</p>
+      <section class="slide">
+        <div class="kicker reveal">WORKBUDDY</div>
+        <h2 class="reveal">WORKBUDDY 应该成为 SED 的交付操作系统</h2>
+        <div class="body split">
+          <div>
+            <p class="big-line reveal">不要把 SED 变成客户定制开发队。</p>
+            <p class="subtitle reveal" style="font-size:31px;">正确定位：基于 WORKBUDDY 的 Agent 专家方案工厂。</p>
           </div>
-          <div class="card">
-            <h3>Databricks</h3>
-            <p>FDE 从迁移和数据管道，扩展到 AI 应用与 agentic systems 的业务结果交付。</p>
-          </div>
-          <div class="card">
-            <h3>Scale / Salesforce</h3>
-            <p>围绕 GenAI 数据、评测、Agent 上线和客户阻塞消除建立前线工程角色。</p>
+          <div class="diagram-box reveal">
+            <div class="layer platform"><strong>WORKBUDDY 平台层</strong><span>模型、工具、流程、知识库、权限、审批、日志、渠道</span></div>
+            <div class="layer assets"><strong>SED 交付资产层</strong><span>experts、skills、templates、evals、playbooks、connectors</span></div>
+            <div class="layer customer"><strong>客户场景层</strong><span>客户知识、业务流程、系统连接、本地策略和权限配置</span></div>
           </div>
         </div>
-      </div>
-      <footer class="footer">
-        <span class="source">Sources: OpenAI, Databricks, Scale, Salesforce pages</span>
-        <span>9 / 14</span>
-      </footer>
-    </section>
+        <div class="page">09 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Capabilities</div>
-        <h2>AI FDE 需要什么能力？</h2>
-      </header>
-      <div class="body">
-        <div class="pill-row">
-          <span class="pill">Full-stack / Backend</span>
-          <span class="pill">Data Integration</span>
-          <span class="pill">RAG</span>
-          <span class="pill">Tool Calling</span>
-          <span class="pill">Agent Workflow</span>
-          <span class="pill">Evals</span>
-          <span class="pill">Security</span>
-          <span class="pill">Customer Discovery</span>
-          <span class="pill">Product Judgment</span>
+      <section class="slide">
+        <div class="kicker reveal">Delivery Strategy</div>
+        <h2 class="reveal">优先做专家和技能，最后才做平台二开</h2>
+        <div class="body arrow-flow">
+          <div class="step reveal"><strong>Experts</strong><span>专业判断视角：法务、客服、销售、投研、供应链。</span></div>
+          <div class="step reveal"><strong>Skills</strong><span>具体任务能力：分类、草稿、审核、升级、抽取。</span></div>
+          <div class="step reveal"><strong>Templates</strong><span>场景工作流：客服分流、销售跟进、项目周报。</span></div>
+          <div class="step reveal"><strong>Evals</strong><span>行为测试：正确、拒答、升级、隐私、边界条件。</span></div>
+          <div class="step reveal"><strong>Dev</strong><span>仅当缺少共性连接器、权限、日志、部署能力时二开。</span></div>
         </div>
-        <div class="two-col">
-          <ul>
-            <li>能写生产代码，也能听懂客户的真实问题。</li>
-            <li>能把一次性集成抽象成可复用模块。</li>
-            <li>能判断哪些该定制，哪些必须产品化。</li>
-          </ul>
-          <div class="quote">FDE 是产品发现加上 commit access。</div>
-        </div>
-      </div>
-      <footer class="footer">
-        <span>人才画像</span>
-        <span>10 / 14</span>
-      </footer>
-    </section>
+        <div class="page">10 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">When To Use</div>
-        <h2>什么场景值得投入 FDE？</h2>
-      </header>
-      <div class="body two-col">
-        <div class="card" style="background:var(--soft-green);">
-          <h3>适合</h3>
-          <ul>
-            <li>高价值企业客户</li>
-            <li>复杂数据和权限环境</li>
-            <li>AI Agent 进入核心工作流</li>
-            <li>边界条件多、隐性知识多</li>
-            <li>需要从现场提炼产品能力</li>
-          </ul>
+      <section class="slide">
+        <div class="kicker reveal">Reusable Package</div>
+        <h2 class="reveal">一个 SED 交付包应该长这样</h2>
+        <div class="body grid-3">
+          <div class="card blue reveal"><h3>1 个行业 Expert</h3><p>定义专业视角、风险意识、判断原则和升级边界。</p></div>
+          <div class="card reveal"><h3>若干业务 Skills</h3><p>把任务步骤、输入输出、工具调用和人工审批写清楚。</p></div>
+          <div class="card gold reveal"><h3>1 个场景 Template</h3><p>把流程节点、角色、工具、知识库和输出格式标准化。</p></div>
+          <div class="card reveal"><h3>一组 Evals</h3><p>从现场失败和人工修正中沉淀行为回归测试。</p></div>
+          <div class="card reveal"><h3>上线 Playbook</h3><p>知识准备、灰度试运行、人工接管、周复盘。</p></div>
+          <div class="card reveal"><h3>必要 Connector</h3><p>CRM、ERP、飞书、企微、Jira、GitHub 等共性连接器。</p></div>
         </div>
-        <div class="card" style="background:var(--soft-red);">
-          <h3>不适合</h3>
-          <ul>
-            <li>简单自助型 SaaS</li>
-            <li>低客单、低复杂度业务</li>
-            <li>纯人力实施，无法产品化</li>
-            <li>FDE 被当成售后或临时救火</li>
-            <li>没有 evals 和反馈吸收机制</li>
-          </ul>
-        </div>
-      </div>
-      <footer class="footer">
-        <span>适用边界</span>
-        <span>11 / 14</span>
-      </footer>
-    </section>
+        <div class="page">11 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Operating Model</div>
-        <h2>FDE 团队应该怎么放？</h2>
-      </header>
-      <div class="body">
-        <div class="timeline">
-          <div class="stage" data-step="1">
-            <h3>靠近客户</h3>
-            <p>小团队嵌入战略客户，直接面对真实业务流程和上线指标。</p>
+      <section class="slide">
+        <div class="kicker reveal">Decision Rule</div>
+        <h2 class="reveal">什么时候才值得二次开发？</h2>
+        <div class="body split">
+          <div class="card light reveal" style="min-height:500px;">
+            <h3>值得做平台二开</h3>
+            <p>缺少共性连接器、权限审批、执行日志、eval 框架、多租户隔离、统一工具注册、版本部署能力。</p>
           </div>
-          <div class="stage" data-step="2">
-            <h3>连接产品</h3>
-            <p>每周回看现场失败、重复需求、eval 缺口和路线图信号。</p>
-          </div>
-          <div class="stage" data-step="3">
-            <h3>沉淀资产</h3>
-            <p>把脚本、规则、工具和经验变成共享仓库和标准 playbook。</p>
+          <div class="card reveal" style="min-height:500px;">
+            <h3>不应做私有定制</h3>
+            <p>只服务单个客户的特殊流程，应优先表达为配置、skill、template 或客户策略，而不是散落代码。</p>
           </div>
         </div>
-        <p class="big-point">FDE 不应被埋在服务部门里，而要直接连接产品和工程。</p>
-      </div>
-      <footer class="footer">
-        <span>组织设计</span>
-        <span>12 / 14</span>
-      </footer>
-    </section>
+        <div class="source">判断标准：这次交付留下的是代码债，还是平台资产？</div>
+        <div class="page">12 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Risks</div>
-        <h2>最大的风险：FDE 变成昂贵定制服务</h2>
-      </header>
-      <div class="body two-col">
-        <div>
-          <ul>
-            <li>每个客户都变成独立项目。</li>
-            <li>现场学习没有进入产品路线图。</li>
-            <li>只考核交付量，不考核产品杠杆。</li>
-            <li>没有 evals、没有 playbooks、没有复用组件。</li>
-            <li>销售承诺超过产品真实能力。</li>
-          </ul>
+      <section class="slide">
+        <div class="kicker reveal">Loop Metrics</div>
+        <h2 class="reveal">SED 不应只看项目数量，要看平台复利</h2>
+        <div class="body split">
+          <div class="bar-chart reveal">
+            <div class="bar"><i style="height:76%;"></i><span>Reusable<br>Skills</span></div>
+            <div class="bar"><i style="height:64%;"></i><span>Templates<br>Reused</span></div>
+            <div class="bar"><i style="height:86%;"></i><span>Eval<br>Cases</span></div>
+            <div class="bar"><i style="height:58%;"></i><span>Launch<br>Speed</span></div>
+            <div class="bar"><i style="height:70%;"></i><span>Custom Work<br>Absorbed</span></div>
+          </div>
+          <div class="quote reveal">每做一个客户，WORKBUDDY 是否变得更强？</div>
         </div>
-        <div class="card" style="background:var(--soft-gold);">
-          <h3>诊断问题</h3>
-          <p style="font-size:28px; line-height:1.35; color:var(--ink); font-weight:760;">如果同一个现场问题每个季度都重复出现，说明产品没有吸收 FDE 的学习。</p>
-        </div>
-      </div>
-      <footer class="footer">
-        <span>反模式</span>
-        <span>13 / 14</span>
-      </footer>
-    </section>
+        <div class="page">13 / 15</div>
+      </section>
 
-    <section class="slide">
-      <header>
-        <div class="kicker">Takeaway</div>
-        <h2>未来竞争的不是 Demo，而是部署闭环</h2>
-      </header>
-      <div class="body">
-        <p class="big-point">模型创造可能性，FDE 把可能性变成生产影响；evals 把失败变成记忆，产品吸收把服务变成规模化优势。</p>
-        <div class="pill-row">
-          <span class="pill">Models create possibility</span>
-          <span class="pill">FDE creates production impact</span>
-          <span class="pill">Evals create memory</span>
-          <span class="pill">Product absorption creates scale</span>
+      <section class="slide">
+        <div class="kicker reveal">Roadmap</div>
+        <h2 class="reveal">建议从低风险、高频、可评测场景切入</h2>
+        <div class="body grid-4">
+          <div class="card light reveal"><h3>客服工单</h3><p>分类、回复草稿、投诉升级、知识检索。</p></div>
+          <div class="card light reveal"><h3>销售线索</h3><p>需求抽取、优先级评分、跟进建议、CRM 更新。</p></div>
+          <div class="card light reveal"><h3>项目管理</h3><p>会议纪要、任务提取、进度追踪、周报生成。</p></div>
+          <div class="card light reveal"><h3>行业研究</h3><p>文章 intake、事件抽取、公司映射、观点草稿。</p></div>
         </div>
-      </div>
-      <footer class="footer">
-        <span>Final takeaway</span>
-        <span>14 / 14</span>
-      </footer>
-    </section>
-  </main>
+        <div class="source">Selection rule: 高频、输入明确、输出可检查、有反馈信号、出错成本低。</div>
+        <div class="page">14 / 15</div>
+      </section>
 
-  <nav class="controls" aria-label="Slide controls">
-    <button class="secondary" id="prev" type="button">上一页</button>
-    <span class="counter" id="counter">1 / 14</span>
-    <button id="next" type="button">下一页</button>
+      <section class="slide">
+        <div class="kicker reveal">Final Takeaway</div>
+        <h2 class="reveal">未来竞争的不是 Agent Demo，而是部署闭环</h2>
+        <div class="body">
+          <p class="big-line reveal">模型创造可能性，FDE 创造生产影响；evals 创造组织记忆，产品吸收创造规模化优势。</p>
+          <div class="tag-row reveal" style="margin-top:54px;">
+            <span class="tag">Models create possibility</span>
+            <span class="tag">FDE creates production impact</span>
+            <span class="tag">Evals create memory</span>
+            <span class="tag">Product absorption creates scale</span>
+          </div>
+        </div>
+        <div class="page">15 / 15</div>
+      </section>
+    </main>
+  </div>
+
+  <div class="edit-hotzone" aria-hidden="true"></div>
+  <button class="edit-toggle" id="editToggle" type="button" title="Edit mode (E)">Edit</button>
+  <nav class="deck-controls" aria-label="Slide controls">
+    <button id="prev" type="button">Prev</button>
+    <span class="count" id="count">1 / 15</span>
+    <button id="next" type="button">Next</button>
   </nav>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 
   <script>
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    const counter = document.getElementById('counter');
-    let index = 0;
+    /* ===========================================
+       SLIDE PRESENTATION CONTROLLER
+       Handles scale, keyboard, touch, wheel, hash, and progress.
+       =========================================== */
+    class SlidePresentation {
+      constructor() {
+        this.slides = Array.from(document.querySelectorAll('.slide'));
+        this.currentSlide = 0;
+        this.stage = document.getElementById('deckStage');
+        this.count = document.getElementById('count');
+        this.progressBar = document.getElementById('progressBar');
+        this.wheelLocked = false;
+        this.setupStageScale();
+        this.setupKeyboardNav();
+        this.setupButtons();
+        this.setupTouchNav();
+        this.setupWheelNav();
+        this.setupHash();
+        this.showSlide(this.currentSlide);
+      }
 
-    function showSlide(nextIndex) {
-      index = Math.max(0, Math.min(slides.length - 1, nextIndex));
-      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
-      counter.textContent = `${index + 1} / ${slides.length}`;
-      location.hash = `slide-${index + 1}`;
+      setupStageScale() {
+        const scale = () => {
+          const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+          const x = (window.innerWidth - 1920 * factor) / 2;
+          const y = (window.innerHeight - 1080 * factor) / 2;
+          this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+        };
+        scale();
+        window.addEventListener('resize', scale);
+      }
+
+      setupKeyboardNav() {
+        document.addEventListener('keydown', (event) => {
+          const editing = event.target && event.target.getAttribute('contenteditable') === 'true';
+          if (editing) return;
+          if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
+            event.preventDefault();
+            this.next();
+          }
+          if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+            event.preventDefault();
+            this.prev();
+          }
+          if (event.key === 'Home') this.showSlide(0);
+          if (event.key === 'End') this.showSlide(this.slides.length - 1);
+        });
+      }
+
+      setupButtons() {
+        document.getElementById('prev').addEventListener('click', () => this.prev());
+        document.getElementById('next').addEventListener('click', () => this.next());
+      }
+
+      setupTouchNav() {
+        let startX = 0;
+        let startY = 0;
+        window.addEventListener('touchstart', (event) => {
+          startX = event.changedTouches[0].clientX;
+          startY = event.changedTouches[0].clientY;
+        }, { passive: true });
+        window.addEventListener('touchend', (event) => {
+          const dx = event.changedTouches[0].clientX - startX;
+          const dy = event.changedTouches[0].clientY - startY;
+          if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+            if (dx < 0) this.next();
+            else this.prev();
+          }
+        }, { passive: true });
+      }
+
+      setupWheelNav() {
+        window.addEventListener('wheel', (event) => {
+          if (this.wheelLocked || Math.abs(event.deltaY) < 35) return;
+          this.wheelLocked = true;
+          if (event.deltaY > 0) this.next();
+          else this.prev();
+          setTimeout(() => { this.wheelLocked = false; }, 520);
+        }, { passive: true });
+      }
+
+      setupHash() {
+        const match = location.hash.match(/slide-(\d+)/);
+        if (match) this.currentSlide = Math.max(0, Math.min(this.slides.length - 1, Number(match[1]) - 1));
+      }
+
+      showSlide(index) {
+        this.currentSlide = Math.max(0, Math.min(this.slides.length - 1, index));
+        this.slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === this.currentSlide);
+          slide.classList.toggle('visible', i === this.currentSlide);
+        });
+        this.count.textContent = `${this.currentSlide + 1} / ${this.slides.length}`;
+        this.progressBar.style.width = `${((this.currentSlide + 1) / this.slides.length) * 100}%`;
+        history.replaceState(null, '', `#slide-${this.currentSlide + 1}`);
+      }
+
+      next() { this.showSlide(this.currentSlide + 1); }
+      prev() { this.showSlide(this.currentSlide - 1); }
     }
 
-    document.getElementById('prev').addEventListener('click', () => showSlide(index - 1));
-    document.getElementById('next').addEventListener('click', () => showSlide(index + 1));
-
-    window.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
-        event.preventDefault();
-        showSlide(index + 1);
+    /* ===========================================
+       INLINE EDITING
+       Press E or hover top-left, then click text to edit.
+       =========================================== */
+    class InlineEditor {
+      constructor() {
+        this.isActive = false;
+        this.button = document.getElementById('editToggle');
+        this.hotzone = document.querySelector('.edit-hotzone');
+        this.hideTimeout = null;
+        this.restore();
+        this.setup();
       }
-      if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
-        event.preventDefault();
-        showSlide(index - 1);
-      }
-      if (event.key === 'Home') showSlide(0);
-      if (event.key === 'End') showSlide(slides.length - 1);
-    });
 
-    const match = location.hash.match(/slide-(\d+)/);
-    if (match) {
-      showSlide(Number(match[1]) - 1);
-    } else {
-      showSlide(0);
+      setup() {
+        this.button.addEventListener('click', () => this.toggleEditMode());
+        this.hotzone.addEventListener('click', () => this.toggleEditMode());
+        this.hotzone.addEventListener('mouseenter', () => {
+          clearTimeout(this.hideTimeout);
+          this.button.classList.add('show');
+        });
+        this.hotzone.addEventListener('mouseleave', () => {
+          this.hideTimeout = setTimeout(() => {
+            if (!this.isActive) this.button.classList.remove('show');
+          }, 400);
+        });
+        this.button.addEventListener('mouseenter', () => clearTimeout(this.hideTimeout));
+        this.button.addEventListener('mouseleave', () => {
+          this.hideTimeout = setTimeout(() => {
+            if (!this.isActive) this.button.classList.remove('show');
+          }, 400);
+        });
+        document.addEventListener('keydown', (event) => {
+          const editing = event.target && event.target.getAttribute('contenteditable') === 'true';
+          if ((event.key === 'e' || event.key === 'E') && !editing) this.toggleEditMode();
+          if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
+            event.preventDefault();
+            this.save();
+          }
+        });
+      }
+
+      toggleEditMode() {
+        this.isActive = !this.isActive;
+        document.body.classList.toggle('editing', this.isActive);
+        this.button.classList.toggle('active', this.isActive);
+        this.button.textContent = this.isActive ? 'Save' : 'Edit';
+        document.querySelectorAll('h1,h2,h3,p,.tag,.strip span,.strip strong,.step strong,.step span').forEach((el) => {
+          el.setAttribute('contenteditable', this.isActive ? 'true' : 'false');
+        });
+        if (!this.isActive) this.save();
+      }
+
+      save() {
+        const data = Array.from(document.querySelectorAll('[contenteditable]')).map((el) => el.innerHTML);
+        localStorage.setItem('fdeDeckEdits', JSON.stringify(data));
+      }
+
+      restore() {
+        const raw = localStorage.getItem('fdeDeckEdits');
+        if (!raw) return;
+        try {
+          const data = JSON.parse(raw);
+          const nodes = Array.from(document.querySelectorAll('h1,h2,h3,p,.tag,.strip span,.strip strong,.step strong,.step span'));
+          data.forEach((html, index) => {
+            if (nodes[index]) nodes[index].innerHTML = html;
+          });
+        } catch (error) {
+          console.warn('Unable to restore edits', error);
+        }
+      }
     }
+
+    new SlidePresentation();
+    new InlineEditor();
   </script>
 </body>
 </html>
