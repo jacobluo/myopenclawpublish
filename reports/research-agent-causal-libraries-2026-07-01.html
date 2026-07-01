@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>实证研究 Agent Skills 与因果计量库调研报告</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5f6c7b;
+      --line: #d9e2ec;
+      --soft: #f6f8fb;
+      --accent: #126c83;
+      --accent-2: #8a5a22;
+      --good: #1b7f4b;
+      --warn: #9a5b00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.72;
+    }
+    header {
+      padding: 56px 24px 34px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #f8fbfd 0%, #ffffff 100%);
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 28px 24px 72px; }
+    .hero { max-width: 1120px; margin: 0 auto; }
+    .eyebrow { color: var(--accent); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: 13px; }
+    h1 { font-size: 38px; line-height: 1.18; margin: 10px 0 18px; }
+    h2 { font-size: 26px; margin: 44px 0 12px; padding-top: 8px; border-top: 1px solid var(--line); }
+    h3 { font-size: 20px; margin: 28px 0 8px; }
+    h4 { font-size: 16px; margin: 20px 0 6px; color: var(--accent-2); }
+    p { margin: 10px 0; }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .subtitle { max-width: 900px; color: var(--muted); font-size: 18px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .pill {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 4px 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .card { border: 1px solid var(--line); border-radius: 8px; padding: 16px; background: #fff; }
+    .card h3 { margin-top: 0; }
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+      padding: 14px 16px;
+      margin: 18px 0;
+    }
+    .warning { border-left-color: var(--warn); }
+    table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 14px; }
+    th, td { border: 1px solid var(--line); padding: 9px 10px; vertical-align: top; }
+    th { background: var(--soft); text-align: left; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background: #eef3f7;
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-size: 90%;
+    }
+    pre {
+      overflow-x: auto;
+      background: #101820;
+      color: #e8f1f2;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    ul { padding-left: 22px; }
+    .score { font-weight: 700; color: var(--good); }
+    .muted { color: var(--muted); }
+    .repo-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+    .repo-title small { color: var(--muted); font-weight: 400; }
+    .toc { columns: 2; column-gap: 32px; }
+    @media (max-width: 760px) {
+      h1 { font-size: 30px; }
+      .grid { grid-template-columns: 1fr; }
+      .toc { columns: 1; }
+      table { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <div class="eyebrow">Research Agent & Causal Inference Stack</div>
+      <h1>实证研究 Agent Skills 与因果计量 Python 库调研报告</h1>
+      <p class="subtitle">对 10 个仓库做逐项分析：Auto-Empirical-Research-Skills、StatsPAI、Awesome-Journal-Skills、AER-Skills、Auto-Research-Skills、statsmodels、DoWhy、CausalML、EconML、python-causality-handbook。重点放在使用方法、适合场景、组合路线和风险边界。</p>
+      <div class="meta">
+        <span class="pill">生成日期：2026-07-01</span>
+        <span class="pill">数据源：GitHub API + 仓库 README / 文档</span>
+        <span class="pill">本地浅克隆核验：10/10</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>一页结论</h2>
+      <div class="callout">
+        <p><strong>最关键的判断：</strong>这 10 个仓库不是同一类东西。前 5 个是给 AI agent 使用的“研究流程/投稿/技能路由层”，后 5 个是给 Python 人类用户和程序直接跑模型的“统计建模/因果推断计算层”。真正有价值的用法不是二选一，而是把二者叠起来：用技能库做研究流程和质量门，用 Python 库做可复现估计。</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>推荐默认组合</h3>
+          <p>实证社科 / 应用经济研究：<strong>AERS 或 AER-Skills 做流程编排，StatsPAI 做统一执行，statsmodels / DoWhy / EconML / causalml 作为底层或对照工具。</strong></p>
+          <p>如果只是学习因果推断：从 python-causality-handbook 入门，再用 DoWhy 理解识别-估计-反驳流程，用 EconML / causalml 进入 CATE 和 uplift。</p>
+        </div>
+        <div class="card">
+          <h3>不要误用</h3>
+          <p>Agent skill 仓库不是“pip 装完就能跑模型”的库；它们更像给 Claude Code / Codex / OpenClaw 的操作手册和模板。反过来，statsmodels、DoWhy、EconML 等库不会替你判断期刊规范、审稿回复、复制包结构和写作质量。</p>
+        </div>
+      </div>
+
+      <h3>快速选型</h3>
+      <table>
+        <thead>
+          <tr><th>任务</th><th>首选</th><th>备选 / 搭配</th><th>理由</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>从数据到可投稿实证论文</td><td>Auto-Empirical-Research-Skills + StatsPAI</td><td>AER-Skills</td><td>AERS 覆盖完整实证生态，StatsPAI 负责统一估计与结构化输出。</td></tr>
+          <tr><td>AER / AEJ / AER: Insights 投稿</td><td>AER-Skills</td><td>StatsPAI、statsmodels、pyfixest、Stata/R 模板</td><td>AER-Skills 聚焦 top-5 经济学约束：识别、复现、表图、审稿回复。</td></tr>
+          <tr><td>跨学科选刊与投稿格式</td><td>Awesome-Journal-Skills</td><td>AER-Skills 用于经济学深挖</td><td>覆盖期刊广，适合选刊路由和 submission checklist。</td></tr>
+          <tr><td>经典统计建模、回归、时间序列</td><td>statsmodels</td><td>StatsPAI 封装式工作流</td><td>成熟、文档好、生态稳，是 Python 统计建模底座。</td></tr>
+          <tr><td>因果图、识别假设、稳健性反驳</td><td>DoWhy</td><td>EconML 估计 CATE</td><td>DoWhy 的四步法适合把假设显式化，并做 refutation。</td></tr>
+          <tr><td>个体化处理效应 / CATE</td><td>EconML</td><td>DoWhy、causalml</td><td>双重机器学习、因果森林、正交学习方法最系统。</td></tr>
+          <tr><td>营销、增长、AB 后的 uplift 建模</td><td>causalml</td><td>EconML</td><td>对 uplift curve、meta-learner、treatment targeting 更顺手。</td></tr>
+          <tr><td>学习因果推断</td><td>python-causality-handbook</td><td>DoWhy notebooks</td><td>讲概念、公式和 Python 实操，比直接读 API 更友好。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>仓库现状总览</h2>
+      <table>
+        <thead>
+          <tr><th>仓库</th><th>类型</th><th>Stars / Forks</th><th>最近提交</th><th>许可证</th><th>一句话定位</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><a href="https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills">Auto-Empirical-Research-Skills</a></td><td>Agent skills 目录 + 路由器</td><td>2470 / 335</td><td>2026-06-26</td><td>CC BY-SA 4.0</td><td>实证研究 agent 技能大全，仓库自称覆盖 69 个合集、1,145 个 vendored skills，并映射 23k+ 生态。</td></tr>
+          <tr><td><a href="https://github.com/brycewang-stanford/StatsPAI">StatsPAI</a></td><td>Python 计量/因果库</td><td>258 / 48</td><td>2026-06-30</td><td>MIT</td><td>Agent-native、Stata/R 风格的 Python 实证研究工作台。</td></tr>
+          <tr><td><a href="https://github.com/brycewang-stanford/Awesome-Journal-Skills">Awesome-Journal-Skills</a></td><td>期刊投稿 skill pack 索引</td><td>554 / 76</td><td>2026-06-29</td><td>MIT</td><td>按期刊定制投稿 workflow，README 宣称覆盖 195 个 pack、519 本期刊、155 个 CS/AI 顶会。</td></tr>
+          <tr><td><a href="https://github.com/brycewang-stanford/AER-Skills">AER-Skills</a></td><td>AER/AEJ 专用 skill 栈</td><td>21 / 5</td><td>2026-06-23</td><td>MIT</td><td>面向 AER、AER: Insights、AEJ 的识别优先投稿技能栈。</td></tr>
+          <tr><td><a href="https://github.com/brycewang-stanford/Auto-Research-Skills">Auto-Research-Skills</a></td><td>自动化科研生态精选库</td><td>24 / 3</td><td>2026-06-29</td><td>CC0-1.0</td><td>收纳自动化研究 skills、systems、benchmarks、lists 的 hub。</td></tr>
+          <tr><td><a href="https://github.com/statsmodels/statsmodels">statsmodels</a></td><td>经典统计建模库</td><td>11491 / 3454</td><td>2026-06-30</td><td>BSD-3-Clause</td><td>Python 统计、回归、时间序列和计量建模的基础设施。</td></tr>
+          <tr><td><a href="https://github.com/py-why/dowhy">dowhy</a></td><td>因果推断框架</td><td>8192 / 1040</td><td>2026-06-23</td><td>MIT</td><td>用图模型 + 潜在结果统一识别、估计、反驳。</td></tr>
+          <tr><td><a href="https://github.com/uber/causalml">causalml</a></td><td>Uplift / causal ML</td><td>5892 / 860</td><td>2026-06-28</td><td>Apache-2.0</td><td>Uber 出品，偏 uplift、meta-learner、营销处理策略。</td></tr>
+          <tr><td><a href="https://github.com/py-why/EconML">EconML</a></td><td>CATE / DML / causal ML</td><td>4696 / 814</td><td>2026-06-11</td><td>MIT + BSD components</td><td>微软 ALICE 项目孵化，聚焦异质性处理效应和正交机器学习。</td></tr>
+          <tr><td><a href="https://github.com/matheusfacure/python-causality-handbook">python-causality-handbook</a></td><td>因果推断教材</td><td>3393 / 608</td><td>2026-06-09</td><td>MIT</td><td>《Causal Inference for the Brave and True》开源实战手册。</td></tr>
+        </tbody>
+      </table>
+      <p class="muted">注：Stars/Forks 与最近提交为 2026-07-01 通过 GitHub API 和本地浅克隆记录的快照，后续会变化。</p>
+    </section>
+
+    <section>
+      <h2>1. Auto-Empirical-Research-Skills</h2>
+      <div class="repo-title"><h3>实证研究 Agent Skills 总路由器</h3><small>brycewang-stanford/Auto-Empirical-Research-Skills</small></div>
+      <p><strong>定位：</strong>这是一个“给 agent 用的实证研究技能发行版”，不是普通 Python 包。README 明确说仓库根目录可以作为一个整体 router skill 导入 Codex、Claude Code、CodeBuddy 或类似 IDE。它的作用不是一次性把 1,145 个 skill 塞进上下文，而是先查目录，再路由到目标子 skill。</p>
+      <p><strong>核心内容：</strong>AERS 把实证研究拆成全流程、因果推断、文献综述、写作、人类化改写、引用核验、复现包、同行评审等模块。自研主干包括 StatsPAI skill、Python/Stata/R 全流程实证分析 skill、AER-skills、中文去 AIGC、Paper-WorkFlow 等。它也 vendor 了大量社区技能，README 显示 69 个合集、1,145 个 skills，并把更大的 23,000+ skill 生态作为外部地图。</p>
+      <h4>使用方法</h4>
+      <ul>
+        <li><strong>整仓作为 router skill：</strong>将仓库根目录导入支持 skill 的 agent runtime，让根目录 <code>SKILL.md</code> 负责路由。真正执行任务时，agent 先查 <code>catalog/skills.json</code> 或 <code>docs/SKILL_CATALOG.md</code>，只读取相关子 skill。</li>
+        <li><strong>单 skill 使用：</strong>如果 runtime 要求“一目录一个 skill”，复制直接包含 <code>SKILL.md</code> 的子目录，例如 <code>skills/50-brycewang-aer-skills/skills/aer-workflow/</code>。</li>
+        <li><strong>校验与审计：</strong>高信任场景建议运行仓库内的 audit / validate 命令，特别是 vendor skill 可能来自不同上游，安全和质量不应只看 README。</li>
+      </ul>
+      <h4>适合场景</h4>
+      <ul>
+        <li>你想让 agent 协助完成完整实证研究：选题、数据清洗、识别策略、估计、稳健性、表格、写作、投稿。</li>
+        <li>你在搭建科研 agent profile，希望有一个“大目录 + 按需加载”的技能库。</li>
+        <li>你需要在 Stata、R、Python、LaTeX、期刊格式之间切换，而不是只跑一个模型。</li>
+      </ul>
+      <h4>优势与风险</h4>
+      <p><strong>优势：</strong>覆盖面极广，研究流程意识强，能把“方法选择”“引用核验”“AER 合规”“复现包”等非代码工作纳入 agent 的操作手册。</p>
+      <p><strong>风险：</strong>数量大不等于每个 skill 都同等成熟；导入全仓会有上下文和命名冲突问题。对于严肃研究，必须把它当作工作流助手，而不是结果正确性的最终保证。</p>
+    </section>
+
+    <section>
+      <h2>2. StatsPAI</h2>
+      <div class="repo-title"><h3>Agent-native 因果计量 Python 工作台</h3><small>brycewang-stanford/StatsPAI</small></div>
+      <p><strong>定位：</strong>StatsPAI 试图做“Stata/R 的 Python 平替入口”：把 OLS、IV、高维固定效应、DiD、RD、合成控制、匹配、诊断、表格导出和 agent 可读元数据放进统一 API。它与 AERS、AER-Skills、Awesome-Journal-Skills 是同一生态的执行层。</p>
+      <h4>使用方法</h4>
+      <pre><code>pip install statspai
+
+import statspai as sp
+card = sp.datasets.card_1995()
+ols = sp.regress("lwage ~ educ + exper", data=card, robust="hc1")
+print(ols.summary())</code></pre>
+      <p>典型入口包括：</p>
+      <ul>
+        <li><code>sp.regress(...)</code>：OLS / robust SE，类似 Stata <code>reg</code> 或 R <code>lm</code>。</li>
+        <li><code>sp.ivreg("y ~ (d ~ z) + x", data=df)</code>：2SLS / IV。</li>
+        <li><code>sp.feols("y ~ x | firm + year", data=df)</code>：高维固定效应。</li>
+        <li><code>sp.callaway_santanna()</code> + <code>sp.aggte()</code>：现代 staggered DiD。</li>
+        <li><code>sp.rdrobust()</code>：断点回归。</li>
+        <li><code>sp.synth()</code>：合成控制。</li>
+        <li><code>.summary()</code>、<code>.tidy()</code>、<code>.plot()</code>、<code>.to_latex()</code>、<code>.to_docx()</code>、<code>.to_agent_summary()</code>：结构化输出。</li>
+      </ul>
+      <h4>适合场景</h4>
+      <ul>
+        <li>你熟悉 Stata/R，但希望在 Python 中完成日常实证研究。</li>
+        <li>你想让 agent 读取结果对象，而不是解析一堆不稳定的文本输出。</li>
+        <li>你需要把估计、诊断、论文表格和 Word/Excel/LaTeX 导出串成流水线。</li>
+      </ul>
+      <h4>优势与风险</h4>
+      <p><strong>优势：</strong>API 对实证研究者友好，覆盖设计广，强调 Stata/R parity、内置教学数据、结果对象和 agent summary。对于 agent 工作流，这比让 agent 手写 statsmodels / sklearn / pandas glue code 更稳。</p>
+      <p><strong>风险：</strong>项目相对新，生态和长期稳定性还不能与 statsmodels、DoWhy、EconML 相比。严肃论文应保留底层库、Stata/R 或已发表代码的交叉验证，关注函数的 validation status 与 parity tests。</p>
+    </section>
+
+    <section>
+      <h2>3. Awesome-Journal-Skills</h2>
+      <div class="repo-title"><h3>按期刊定制的投稿技能库</h3><small>brycewang-stanford/Awesome-Journal-Skills</small></div>
+      <p><strong>定位：</strong>AJS 的核心不是“怎么估计模型”，而是“这篇稿子投哪个期刊、按该期刊该怎么写、怎么检查格式和审稿要求”。它按 11 个学科板块组织，README 宣称覆盖 195 个 pack、519 本顶级期刊、155 个 CS/AI 顶会。</p>
+      <h4>使用方法</h4>
+      <ul>
+        <li>按学科或目标期刊进入对应 <code>*-Skills</code> 目录，例如 AER、QJE、Nature、Cell、管理世界、经济研究等。</li>
+        <li>把目标期刊 skill pack 安装到 Claude Code / Codex / OpenClaw，或者让 agent 读取对应目录中的 <code>SKILL.md</code>、resources、assets。</li>
+        <li>将其用于选刊、摘要长度、图表规范、cover letter、审稿意见分类、R&R 回复、投稿前 checklist。</li>
+      </ul>
+      <h4>适合场景</h4>
+      <ul>
+        <li>跨学科团队不熟悉目标期刊规则，想快速建立投稿路线。</li>
+        <li>需要比较 AER/QJE/Nature/Cell/中文经管期刊/CS 顶会的不同写作与提交要求。</li>
+        <li>想让 agent 做“期刊编辑视角”的稿件预审。</li>
+      </ul>
+      <h4>优势与风险</h4>
+      <p><strong>优势：</strong>覆盖广，中文/英文顶刊都有，适合做 venue routing 和投稿 checklist。</p>
+      <p><strong>风险：</strong>期刊政策随时间变化，投稿要求必须在最终提交前回到期刊官网核验；skill pack 可以减少遗漏，但不能替代官方 instructions for authors。</p>
+    </section>
+
+    <section>
+      <h2>4. AER-Skills</h2>
+      <div class="repo-title"><h3>AER / AEJ 经济学投稿专用技能栈</h3><small>brycewang-stanford/AER-Skills</small></div>
+      <p><strong>定位：</strong>这是一个比 AJS 更窄、更深的经济学 top-5 投稿工具箱。它覆盖选题、文献定位、识别策略、稳健性、正文写作、引言、表图、全稿一致性审计、模拟审稿、复现包、投稿与 rebuttal。</p>
+      <h4>使用方法</h4>
+      <pre><code>git clone https://github.com/brycewang-stanford/AER-Skills.git
+cd AER-Skills
+
+# Claude Code
+python3 scripts/install_skills.py claude
+
+# 或 Codex
+python3 scripts/install_skills.py codex
+
+# 新项目脚手架
+python3 scripts/scaffold_project.py python /path/to/new-project
+python3 scripts/scaffold_project.py skeleton /path/to/new-replication-package</code></pre>
+      <p>核心流程是：</p>
+      <pre><code>aer-topic-selection
+  -> aer-literature
+  -> aer-identification
+  -> aer-robustness
+  -> aer-paper-body
+  -> aer-introduction
+  -> aer-tables-figures
+  -> aer-consistency
+  -> aer-referee-sim
+  -> aer-replication
+  -> aer-submission
+  -> aer-rebuttal</code></pre>
+      <h4>适合场景</h4>
+      <ul>
+        <li>经济学、金融、公共政策、应用微观团队准备投 AER、AEJ、AER: Insights 或相邻 top journal。</li>
+        <li>需要把“识别先于写作”变成质量门，而不是最后才发现设计站不住。</li>
+        <li>要做 AEA 合规复制包、openICPSR 结构、表图规范、引用核验和审稿回复。</li>
+      </ul>
+      <h4>优势与风险</h4>
+      <p><strong>优势：</strong>深度贴合经济学顶刊的真实约束：100 词摘要、AER: Insights 长度规则、强复现要求、弱 IV/TWFE/RDD 常见雷区、booktabs 表格、referee simulation。</p>
+      <p><strong>风险：</strong>它有强烈 AER/AEJ 取向，不适合所有社科期刊。若投管理、社会学、医学或自然科学，应该换 AJS 中的目标期刊 pack。</p>
+    </section>
+
+    <section>
+      <h2>5. Auto-Research-Skills</h2>
+      <div class="repo-title"><h3>自动化科研 skills / systems / benchmarks hub</h3><small>brycewang-stanford/Auto-Research-Skills</small></div>
+      <p><strong>定位：</strong>ARS 是“自动化科研生态地图”，比 AERS 更泛化。它不仅收 skill，也收端到端自主研究系统、深度研究工具、自动实验智能体、领域科学 agent、评测基准和精选清单。</p>
+      <h4>使用方法</h4>
+      <pre><code>git clone https://github.com/brycewang-stanford/Auto-Research-Skills.git
+cd Auto-Research-Skills
+./setup.sh</code></pre>
+      <p>README 提醒不要把所有 <code>skills/</code> 子模块一次性装进同一个 agent profile，因为同名技能可能冲突。推荐按项目挑一两个集合安装，并查看 <code>catalog/collisions.json</code>。</p>
+      <h4>适合场景</h4>
+      <ul>
+        <li>你在调研“自动化科研 agent”生态，包括 AI Scientist、deep research、paper-to-code、科研 benchmark。</li>
+        <li>你想给团队建立科研 agent 工具雷达，而不是只做某一篇论文。</li>
+        <li>你要寻找可复用 skill、MCP、benchmark、系统论文配套代码。</li>
+      </ul>
+      <h4>优势与风险</h4>
+      <p><strong>优势：</strong>生态视野宽，把 skills、systems、benchmarks、lists 放在一起，适合做工具选型和技术路线规划。</p>
+      <p><strong>风险：</strong>它不是针对某个具体实证任务的执行工具，更多是目录和集合。真实使用时需要进一步筛选、安装、验证。</p>
+    </section>
+
+    <section>
+      <h2>6. statsmodels</h2>
+      <div class="repo-title"><h3>Python 统计建模与计量基础设施</h3><small>statsmodels/statsmodels</small></div>
+      <p><strong>定位：</strong>statsmodels 是 Python 统计建模的老牌核心库，补充 scipy 的统计估计和推断能力。它不是专门的因果推断库，但几乎所有 Python 实证研究都会在某处用到它。</p>
+      <h4>使用方法</h4>
+      <pre><code>pip install statsmodels
+# 或
+conda install statsmodels
+
+import statsmodels.formula.api as smf
+model = smf.ols("y ~ x1 + x2", data=df).fit(cov_type="HC1")
+print(model.summary())</code></pre>
+      <p>主要模块包括 OLS/GLS/WLS、GLM、GEE、Logit/Probit/Poisson/Negative Binomial、稳健线性模型、状态空间、ARIMA/VAR/VECM、时间序列检验、生存分析、MANOVA/PCA/因子分析、非参数、MICE、多重检验、模型诊断和表格输出。</p>
+      <h4>适合场景</h4>
+      <ul>
+        <li>传统回归、统计检验、时间序列、离散选择模型、稳健标准误。</li>
+        <li>需要可解释、可审计、与统计教科书一致的模型输出。</li>
+        <li>作为 StatsPAI、DoWhy、causalml 等上层库的底座或对照。</li>
+      </ul>
+      <h4>优势与风险</h4>
+      <p><strong>优势：</strong>成熟、文档系统、社区大、模型广，适合作为 Python 统计推断基线。</p>
+      <p><strong>风险：</strong>面板高维固定效应、现代 DiD、DML、因果图、uplift 等不是它的核心强项；遇到这些任务要配合 linearmodels、pyfixest、DoWhy、EconML、causalml 或 StatsPAI。</p>
+    </section>
+
+    <section>
+      <h2>7. DoWhy</h2>
+      <div class="repo-title"><h3>因果图 + 识别 + 估计 + 反驳的统一框架</h3><small>py-why/dowhy</small></div>
+      <p><strong>定位：</strong>DoWhy 是 PyWhy 生态的核心因果推断库。它强调把因果假设显式建模，用图模型和潜在结果框架统一语言，然后通过 identify、estimate、refute 四步完成因果分析。</p>
+      <h4>使用方法</h4>
+      <pre><code>pip install dowhy
+
+from dowhy import CausalModel
+
+model = CausalModel(
+    data=df,
+    treatment="treatment",
+    outcome="outcome",
+    graph="digraph {X -> treatment; X -> outcome; treatment -> outcome;}"
+)
+identified = model.identify_effect()
+estimate = model.estimate_effect(
+    identified,
+    method_name="backdoor.propensity_score_matching"
+)
+refute = model.refute_estimate(
+    identified,
+    estimate,
+    method_name="random_common_cause"
+)</code></pre>
+      <p>DoWhy 还包括 graphical causal model (GCM) 能力，用于根因分析、反事实、异常归因和干预分布模拟；也能桥接 EconML 做 CATE 估计。</p>
+      <h4>适合场景</h4>
+      <ul>
+        <li>你需要先说清楚 DAG、混杂、识别条件，而不是直接上模型。</li>
+        <li>你希望把同一个估计结果做 placebo、随机共同原因、数据子集等 refutation。</li>
+        <li>产品、运营、平台治理、供应链、因果根因分析等需要解释“为什么”的场景。</li>
+      </ul>
+      <h4>优势与风险</h4>
+      <p><strong>优势：</strong>方法论结构清楚，非常适合教学、审计和非专家理解因果假设。</p>
+      <p><strong>风险：</strong>DAG 错了，后面再漂亮也没用；估计器本身不是所有场景下最强。做高维 CATE 时通常要接 EconML；做传统经济学表格和期刊输出时要接 statsmodels / StatsPAI。</p>
+    </section>
+
+    <section>
+      <h2>8. causalml</h2>
+      <div class="repo-title"><h3>Uplift 建模和因果机器学习工具箱</h3><small>uber/causalml</small></div>
+      <p><strong>定位：</strong>CausalML 更靠近业务增长和营销实验：估计不同用户、客户或样本的个体化增量效果，做 treatment targeting 和 uplift evaluation。它同时包含 meta-learners、uplift trees/forests、深度因果模型、指标与验证工具。</p>
+      <h4>使用方法</h4>
+      <pre><code>pip install causalml
+# 可选深度学习后端
+pip install "causalml[tf]"
+pip install "causalml[torch]"
+pip install "causalml[jax]"</code></pre>
+      <p>常见模块：</p>
+      <ul>
+        <li><code>causalml.inference.meta</code>：S/T/X/R/DR learner 等 meta-learner。</li>
+        <li><code>causalml.inference.tree</code>：uplift tree / forest。</li>
+        <li><code>causalml.metrics</code>：AUUC、uplift curve、Qini 等评估。</li>
+        <li><code>causalml.inference.tf/torch/jax</code>：DragonNet、CEVAE 等深度模型后端。</li>
+      </ul>
+      <h4>适合场景</h4>
+      <ul>
+        <li>营销优惠券、广告投放、CRM 触达、留存干预、价格策略等 uplift / incremental value 问题。</li>
+        <li>A/B test 后想训练模型，把“平均效果”转成“对谁最有效”。</li>
+        <li>需要 uplift curve、AUUC、policy targeting 指标，而不仅是估计一个 ATE。</li>
+      </ul>
+      <h4>优势与风险</h4>
+      <p><strong>优势：</strong>业务 uplift 工具很全，和 sklearn 生态结合自然，评估指标贴近增长团队。</p>
+      <p><strong>风险：</strong>uplift 结果容易被选择偏差、样本重叠不足、未观测混杂误导。若不是随机实验数据，必须严肃处理识别假设；需要 DAG 审计时配 DoWhy，需要更系统 CATE inference 时配 EconML。</p>
+    </section>
+
+    <section>
+      <h2>9. EconML</h2>
+      <div class="repo-title"><h3>异质性处理效应与正交机器学习</h3><small>py-why/EconML</small></div>
+      <p><strong>定位：</strong>EconML 源于微软研究院 ALICE 项目，目标是把机器学习和计量经济学结合起来，估计 heterogeneous treatment effects。它特别适合 CATE、DML、因果森林、orthogonal forests、IV CATE、policy learning 和解释性分析。</p>
+      <h4>使用方法</h4>
+      <pre><code>pip install econml
+
+from econml.dml import LinearDML
+from sklearn.linear_model import LassoCV
+
+est = LinearDML(model_y=LassoCV(), model_t=LassoCV())
+est.fit(Y, T, X=X, W=W)
+te = est.effect(X_test)
+lb, ub = est.effect_interval(X_test, alpha=0.05)</code></pre>
+      <p>常见估计器包括 <code>LinearDML</code>、<code>SparseLinearDML</code>、<code>NonParamDML</code>、<code>CausalForestDML</code>、<code>DynamicDML</code>、<code>DMLOrthoForest</code>、<code>DROrthoForest</code>、XLearner、SLearner、TLearner，以及 IV 相关 CATE 估计器。</p>
+      <h4>适合场景</h4>
+      <ul>
+        <li>你关心“哪些人/公司/地区的处理效应更大”，不是只关心 ATE。</li>
+        <li>有高维协变量，需要用 ML 估计 nuisance model，但仍希望保持因果解释。</li>
+        <li>政策学习、个体化决策、异质性分析、反事实策略评估。</li>
+      </ul>
+      <h4>优势与风险</h4>
+      <p><strong>优势：</strong>CATE 方法体系完整，文档和示例丰富，很多估计器提供置信区间、解释器、model selection 工具。</p>
+      <p><strong>风险：</strong>学习曲线比 DoWhy 和 statsmodels 高。它不会自动替你解决 identification；no unobserved confounding、instrument validity、overlap 等前提仍需研究设计保证。</p>
+    </section>
+
+    <section>
+      <h2>10. python-causality-handbook</h2>
+      <div class="repo-title"><h3>《Causal Inference for the Brave and True》实战手册</h3><small>matheusfacure/python-causality-handbook</small></div>
+      <p><strong>定位：</strong>这是一本开源教材，不是模型库。它以 Python notebook 形式讲清楚因果推断的基本概念、潜在结果、DAG、偏差、matching、propensity score、DiD、IV、RDD、synthetic control、panel、CATE 等主题。</p>
+      <h4>使用方法</h4>
+      <ul>
+        <li>在线阅读官方站点：<a href="https://matheusfacure.github.io/python-causality-handbook/landing-page.html">Causal Inference for the Brave and True</a>。</li>
+        <li>克隆仓库运行 notebooks，配合自己的数据改写示例。</li>
+        <li>先学章节，再用 DoWhy / StatsPAI / EconML / causalml 实现工业或论文级流程。</li>
+      </ul>
+      <h4>适合场景</h4>
+      <ul>
+        <li>因果推断入门、团队培训、研究助理 onboarding。</li>
+        <li>需要把 Angrist/Abadie/Walters、Mostly Harmless Econometrics 一类内容转成 Python 实操。</li>
+        <li>在选库之前先建立方法论直觉。</li>
+      </ul>
+      <h4>优势与风险</h4>
+      <p><strong>优势：</strong>可读性强，概念解释友好，代码贴近真实分析。</p>
+      <p><strong>风险：</strong>教材不是 production API；部分内容作者也标注 Part II 更偏个人经验和实验性。用于论文或生产决策时，需要回到正式库和原始文献。</p>
+    </section>
+
+    <section>
+      <h2>组合架构建议</h2>
+      <h3>架构 A：应用经济学论文流水线</h3>
+      <pre><code>AER-Skills / AERS
+  负责：选题、文献、识别、稳健性、写作、复现包、审稿回复
+
+StatsPAI
+  负责：OLS / IV / FE / DiD / RD / SCM / DML、表格导出、agent summary
+
+statsmodels / DoWhy / EconML / causalml
+  负责：底层估计、交叉验证、特殊方法、机制扩展</code></pre>
+      <p><strong>适用：</strong>论文、政策评估、公司金融/劳动/教育/发展/公共经济学实证项目。这个架构的好处是 agent 不只会“跑回归”，还会检查识别、引用、复现、表图和审稿逻辑。</p>
+
+      <h3>架构 B：业务增长和个体化决策</h3>
+      <pre><code>DoWhy
+  负责：DAG、识别假设、refutation
+
+causalml / EconML
+  负责：uplift、CATE、policy learning
+
+statsmodels
+  负责：基线回归、诊断、报告中可解释统计模型</code></pre>
+      <p><strong>适用：</strong>优惠券、广告投放、运营触达、推荐策略、定价实验、A/B 后的差异化策略。</p>
+
+      <h3>架构 C：学习与团队能力建设</h3>
+      <pre><code>python-causality-handbook
+  负责：概念、公式、直觉、练习
+
+DoWhy
+  负责：把概念变成四步因果流程
+
+StatsPAI / statsmodels / EconML
+  负责：进入真实项目</code></pre>
+    </section>
+
+    <section>
+      <h2>风险清单</h2>
+      <table>
+        <thead>
+          <tr><th>风险</th><th>表现</th><th>缓解方式</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>把 skill 当成算法库</td><td>安装 AERS/AER-Skills 后期待直接 <code>pip import</code> 跑模型</td><td>明确区分 skill 层和 Python 包层；跑模型用 StatsPAI/statsmodels/DoWhy/EconML/causalml。</td></tr>
+          <tr><td>把算法输出当成因果结论</td><td>有 CATE/uplift 曲线就直接做策略</td><td>先用 DoWhy/AER-Skills 明确识别假设、overlap、混杂和反驳检验。</td></tr>
+          <tr><td>仓库新、变动快</td><td>StatsPAI 和若干 skill 仓库 2026 年仍在快速更新</td><td>固定版本、保存环境、复跑对照、保留原始输出和代码。</td></tr>
+          <tr><td>期刊要求过期</td><td>skill pack 中的 submission checklist 与官网不一致</td><td>最终投稿前必须查目标期刊官网。</td></tr>
+          <tr><td>全量导入冲突</td><td>多个 skill 同名、上下文过大、路由混乱</td><td>使用 router 或按项目挑选 1-3 个 relevant skill packs。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>最终建议</h2>
+      <ol>
+        <li><strong>如果你要做严肃实证论文：</strong>优先用 AERS 或 AER-Skills 作为 agent 流程层，用 StatsPAI 做主要执行层，再用 statsmodels/DoWhy/EconML/causalml 做方法补强和交叉验证。</li>
+        <li><strong>如果你要做业务因果和 uplift：</strong>不要从 AER-Skills 开始，直接用 DoWhy 建假设，用 causalml/EconML 做异质性与策略，用 statsmodels 做解释性基线。</li>
+        <li><strong>如果你要学习：</strong>先读 python-causality-handbook；不要一上来啃 EconML 的复杂 estimator。</li>
+        <li><strong>如果你要投不同期刊：</strong>Awesome-Journal-Skills 做选刊和投稿 checklist，AER-Skills 只在经济学 AER/AEJ 场景深用。</li>
+        <li><strong>如果要让 agent 长期参与科研：</strong>不要追求一次装满所有 skill。更稳的做法是建立“router + 少量高质量 skill + 可复现 Python 包 + 版本锁定”的工作台。</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>资料来源</h2>
+      <ul>
+        <li><a href="https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills">Auto-Empirical-Research-Skills GitHub</a></li>
+        <li><a href="https://github.com/brycewang-stanford/StatsPAI">StatsPAI GitHub</a></li>
+        <li><a href="https://github.com/brycewang-stanford/Awesome-Journal-Skills">Awesome-Journal-Skills GitHub</a></li>
+        <li><a href="https://github.com/brycewang-stanford/AER-Skills">AER-Skills GitHub</a></li>
+        <li><a href="https://github.com/brycewang-stanford/Auto-Research-Skills">Auto-Research-Skills GitHub</a></li>
+        <li><a href="https://github.com/statsmodels/statsmodels">statsmodels GitHub</a> 与 <a href="https://www.statsmodels.org/stable/">官方文档</a></li>
+        <li><a href="https://github.com/py-why/dowhy">DoWhy GitHub</a> 与 <a href="https://www.pywhy.org/dowhy/">官方文档</a></li>
+        <li><a href="https://github.com/uber/causalml">CausalML GitHub</a></li>
+        <li><a href="https://github.com/py-why/EconML">EconML GitHub</a> 与 <a href="https://www.pywhy.org/EconML/">官方文档</a></li>
+        <li><a href="https://github.com/matheusfacure/python-causality-handbook">python-causality-handbook GitHub</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
