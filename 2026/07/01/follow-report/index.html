@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../assets/research-brief.css">
+    <title>Follow 深度日报：Agent 进入科学、企业迁移与可审计工作台</title>
+    <meta name="description" content="2026-07-01 Follow List 深度日报：Claude Sonnet 5、Claude Science、GeneBench-Pro、Deep Agents 安全执行、Wiki Memory、ScarfBench 与 shot-scraper video。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>Agent 进入科学、企业迁移与可审计工作台</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-06-30 00:00 UTC 至 2026-07-01 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。抓取优先级按 Status=active、Priority=high、Cadence=daily/weekly/manual 排序，主要使用官方网页、博客/RSS、公开 X 页面搜索结果与网页搜索。</p>
+        <div class="meta">
+          <span>发布时间：2026-07-01 08:00 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、Anthropic、OpenAI、LangChain、Simon Willison、Hugging Face / IBM Research、公开 X 页面</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天的主线非常清晰：agent 正在从“写代码/调工具”进入更专业、更可审计、更长程的工作环境。Anthropic 同日推出 Claude Sonnet 5 与 Claude Science，把 Claude 的 Sonnet 级模型、Claude Code、科学工具链、技能、MCP 和 reviewer agent 串成生产力叙事；OpenAI 发布 GeneBench-Pro，把科学 agent 的评价重点放到真实研究里的判断、QC 和分析路径选择；LangChain 则继续补 agent 基础设施，围绕安全执行、能力隔离和 wiki memory 讲清长程 agent 的运行时与记忆层。工程侧，IBM Research/Hugging Face 的 ScarfBench 把 enterprise Java 迁移变成可测 benchmark，Simon Willison 的 shot-scraper video 则提醒 agent 交付物需要可复现演示，而不只是文字汇报。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. Sonnet 级模型继续承接 agent 主力位</h3>
+            <p>Claude Sonnet 5 的定位是把接近 Opus 4.8 的 agent 能力下放到更低价格、更广可用的默认模型层。</p>
+          </div>
+          <div class="card">
+            <h3>2. 科学 agent 开始强调审计和判断</h3>
+            <p>Claude Science 与 GeneBench-Pro 从两个方向指向同一个问题：科学工作流的瓶颈不是跑脚本，而是判断、复核和可追溯。</p>
+          </div>
+          <div class="card">
+            <h3>3. Agent 运行时需要更细的安全边界</h3>
+            <p>Deep Agents 的 code interpreter 讨论把问题从“能不能运行代码”推进到执行隔离、能力隔离和可暂停恢复。</p>
+          </div>
+          <div class="card">
+            <h3>4. 企业软件迁移成为新评测场</h3>
+            <p>ScarfBench 把 Java 框架迁移这种高价值、低花哨的任务带入 benchmark，适合观察 coding agent 的真实工程价值。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>Anthropic：Claude Sonnet 5 发布，面向 coding、tool use 与专业工作</h3>
+          <p class="source">来源账号/机构：Anthropic / Alex Albert；发布时间：2026-06-30；链接：<a href="https://www.anthropic.com/news/claude-sonnet-5">Anthropic 官方文章</a></p>
+          <p>Anthropic 发布 Claude Sonnet 5，称其是目前最 agentic 的 Sonnet 模型，重点提升 reasoning、tool use、coding 和 knowledge work。它在 Claude Code、Claude Platform 和各类 Claude 订阅中可用，API 模型名为 <code>claude-sonnet-5</code>，并在 2026-08-31 前采用较低的 introductory pricing。</p>
+          <p>这条更新的意义不只是“又一个模型发布”。Anthropic 把 Sonnet 5 放在默认和主力层，等于把更强 agent 能力从昂贵的 Opus 级别下沉到更多日常工作流，尤其是 Claude Code 与企业 agent 场景。</p>
+          <p class="why"><strong>为什么值得看：</strong>Follow List 里 Alex Albert、Amanda Askell、Anthropic 相关账号的核心信号都指向一个问题：哪个模型层会成为企业 agent 的默认执行层。Sonnet 5 的价格、速率限制和安全评估会直接影响 Claude Code、团队工作流和第三方 agent 框架的采用。</p>
+          <p class="action"><strong>后续行动：</strong>跟踪 Sonnet 5 在 Claude Code 中的实际表现，重点比较长程 repo 修改、测试修复、浏览器/终端工具调用、上下文保持和成本。</p>
+        </div>
+
+        <div class="item">
+          <h3>Anthropic：Claude Science 把技能、MCP、计算资源和审计历史装进科学工作台</h3>
+          <p class="source">来源账号/机构：Anthropic；发布时间：2026-06-30；链接：<a href="https://www.anthropic.com/news/claude-science-ai-workbench">Claude Science 官方文章</a></p>
+          <p>Anthropic 推出 Claude Science beta，定位为给科学家的 AI workbench。它把文献分析、多步研究、图表和 manuscript 迭代放进一个环境，支持本地 macOS/Linux、SSH、HPC login node，并预置 60 多个面向 genomics、single-cell、proteomics、structural biology、cheminformatics 等领域的 skills 与 connectors。</p>
+          <p>更关键的是，Claude Science 强调每个输出都有可审计历史，并设置 reviewer agent 检查引用和计算。这和昨天 Hamel 提到的“难评估是产品味道”形成呼应：在高风险知识工作里，产品形态必须让用户能复核，而不是只给最终答案。</p>
+          <p class="why"><strong>为什么值得看：</strong>这是 frontier lab 把 agent 从通用聊天产品推进到垂直专业工作台的强信号。科学场景对工具链、数据、计算和审计的要求很高，做成了会反哺企业研究、投研、医疗和工程分析工作台。</p>
+          <p class="action"><strong>后续行动：</strong>把 Claude Science 拆成 OpenClaw 可借鉴的组件：技能目录、连接器、计算环境、artifact 历史、reviewer agent、可复现实验记录。</p>
+        </div>
+
+        <div class="item">
+          <h3>OpenAI：GeneBench-Pro 衡量科学 agent 的研究判断，而不是只测脚本执行</h3>
+          <p class="source">来源账号/机构：OpenAI / Kevin Weil / Noam Brown 相关观察线；发布时间：2026-06-30；链接：<a href="https://openai.com/index/introducing-genebench-pro/">OpenAI 官方文章</a></p>
+          <p>OpenAI 发布 GeneBench-Pro，用 129 个覆盖 genomics、quantitative biology、translational medicine 等领域的问题，测试 agent 在真实计算生物学任务中的判断能力。文章强调科学数据很少自带说明，研究者需要判断信号与噪声、数据能否支撑问题、是否要调整分析路径，以及结果是否已经 decision-ready。</p>
+          <p>这比传统“跑对流程/答对数字”的 benchmark 更贴近研究工作。OpenAI 还公开表示，GPT-5.6 Sol 在最高 reasoning level 下通过率为 28.7%，Pro mode 为 31.5%，说明高水平科学 agent 仍远未可靠替代专家，但已经开始具备有经济价值的辅助能力。</p>
+          <p class="why"><strong>为什么值得看：</strong>GeneBench-Pro 把模型竞争从 coding 和 office work 推向 research taste、QC 和不确定性决策。它也给投研和科学工作台一个重要启发：benchmark 要测“什么时候该改计划”，而不只是“是否会调用工具”。</p>
+          <p class="action"><strong>后续行动：</strong>在研究报告和数据分析任务里增加类似 GeneBench-Pro 的评测维度：假设是否可支持、数据质量检查是否充分、分析路径是否合理、结论是否 decision-ready。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangChain：Deep Agents 的代码执行边界成为 agent 基础设施重点</h3>
+          <p class="source">来源账号/机构：LangChain / Harrison Chase；发布时间：2026-06-30；链接：<a href="https://www.langchain.com/blog/running-untrusted-agent-code-without-a-sandbox">LangChain 官方文章</a></p>
+          <p>LangChain 发布文章解释 Deep Agents 如何在没有完整 sandbox 的情况下运行 agent 写出的代码。文章把可信 agent 运行时拆成三件事：执行隔离，避免 agent-written code 影响宿主；能力隔离，只把明确授权的数据和动作交给 agent；durable pauses，让执行可以暂停等待人工输入并恢复。</p>
+          <p>这延续了昨日动态子代理的主线：一旦主 agent 可以写 orchestration code 调度子任务，运行时安全就不再是边缘问题。Prompt injection 仍未解决，所以系统不能依赖 agent 自觉，而要在运行环境层面限制能力。</p>
+          <p class="why"><strong>为什么值得看：</strong>企业 agent 的安全边界会越来越像操作系统和权限模型，而不是简单的提示词规范。谁能把工具权限、数据访问、暂停恢复和 trace 审计做扎实，谁更可能进入生产。</p>
+          <p class="action"><strong>后续行动：</strong>给 OpenClaw 长程任务补一个权限清单模板：可读数据、可写位置、可调用外部动作、是否需要人工确认、暂停恢复点和审计字段。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangChain / Harrison Chase：Wiki Memory 把原始材料压缩成 agent 可读知识层</h3>
+          <p class="source">来源账号/机构：Harrison Chase / LangChain；发布时间：2026-06-30；链接：<a href="https://www.langchain.com/blog/wiki-memory">Wiki Memory 官方文章</a> / <a href="https://x.com/hwchase17/article/2071963622298050997">公开 X Article</a></p>
+          <p>Harrison Chase 发布 Wiki Memory，核心想法是用 agent 把日志、笔记、代码、文档、实验记录、Slack 线程和 transcript 等原始材料，转成更紧凑、持久、agent-readable 的知识层。它和基础 RAG 的区别是：RAG 通常在查询时检索原始 chunk，而 wiki memory 预先维护一层高阶综合，让未来 agent 不必每次重新发现结构。</p>
+          <p>这与 OpenClaw 自身的 memory / skills / reports 工作流高度相关。Raw notes 适合存事实，但真正能复用的是经过压缩、去重、带结构的知识页面。</p>
+          <p class="why"><strong>为什么值得看：</strong>长程 agent 的可靠性不只靠更长上下文，还靠更好的知识整理格式。Wiki memory 是把“记忆”从黑盒 embedding 拉回到可读、可改、可审计文件的一种路线。</p>
+          <p class="action"><strong>后续行动：</strong>把 Follow 日报、Obsidian daily notes 和 MEMORY.md 的关系重新梳理成三层：原始来源、主题 wiki、长期记忆；先从 agent engineering 主题试点。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hugging Face / IBM Research：ScarfBench 测 enterprise Java 框架迁移</h3>
+          <p class="source">来源账号/机构：Hugging Face / IBM Research；发布时间：2026-06-30；链接：<a href="https://huggingface.co/blog/ibm-research/scarfbench">Hugging Face 官方博客</a></p>
+          <p>IBM Research 在 Hugging Face 发布 ScarfBench，用于评测 AI agents 做 enterprise Java cross-framework migration 的能力，覆盖 Spring、Jakarta EE、Quarkus 等生态。文章指出，框架迁移不同于简单 bug fix 或代码生成，它要求保持行为、改造 build system、处理 runtime dependencies，并判断迁移是否真正完成。</p>
+          <p>这类 benchmark 的商业价值很直接：企业遗留系统现代化是巨大成本项，但任务又复杂、脏、依赖多。ScarfBench 如果能形成稳定对比，将帮助判断 coding agent 是否能从 demo 走向真实企业软件交付。</p>
+          <p class="why"><strong>为什么值得看：</strong>Agent 评测不能只围绕新项目和小仓库。企业迁移任务能逼出依赖分析、测试、构建、运行时错误和完成度判断这些真实工程能力。</p>
+          <p class="action"><strong>后续行动：</strong>把 ScarfBench 加入 coding agent benchmark 观察表，后续重点看 Claude Sonnet 5、GPT-5.6 Sol、GLM 5.2、Qwen/DeepSeek 类模型在迁移任务上的差异。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison：shot-scraper video 让 coding agent 自动录制交付演示</h3>
+          <p class="source">来源账号/机构：Simon Willison；发布时间：2026-06-30；链接：<a href="https://simonwillison.net/2026/Jun/30/shot-scraper-video/">Simon 文章</a> / <a href="https://simonwillison.net/2026/Jun/30/shot-scraper/">shot-scraper 1.10 发布</a></p>
+          <p>Simon 发布 shot-scraper 1.10，其中新增 <code>shot-scraper video</code>，可以读取 storyboard.yml，用 Playwright 对 Web 应用执行一段操作并录制视频。他明确把这个功能和 coding agents 的交付方式联系起来：让 agent 不只说“我做好了”，而是能生成一段可复现的 UI demo。</p>
+          <p>这看起来是小工具，但对 agent 工程很关键。长程 coding agent 的输出需要验收证据，视频 demo、截图、测试日志和 trace 都是降低人工 review 成本的 artifact。</p>
+          <p class="why"><strong>为什么值得看：</strong>Agent 交付正在从文本报告走向证据包。能自动录制操作路径的工具，可以成为前端、后台管理、数据产品修改后的默认验收材料。</p>
+          <p class="action"><strong>后续行动：</strong>在 OpenClaw 前端任务模板中加入“可选演示 artifact”：Playwright screenshot、短视频、测试输出和变更摘要，尤其适合交给用户验收的页面改动。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>Anthropic / Alex Albert：</strong>今日是最大信号源，Claude Sonnet 5 与 Claude Science 同日发布，把模型层、Claude Code 和科学工作台连成完整叙事。</li>
+          <li><strong>OpenAI / Kevin Weil / Noam Brown 观察线：</strong>GeneBench-Pro 强化 OpenAI 在科学 agent、test-time compute 和高阶推理评测上的叙事；同时 6 月底的 Codex work 经济研究仍在发酵。</li>
+          <li><strong>Harrison Chase / LangChain：</strong>连续发布 Deep Agents 安全执行和 Wiki Memory，把 agent 基础设施从 orchestration 延伸到 runtime 权限和长期知识层。</li>
+          <li><strong>Simon Willison：</strong>把 agent 交付证据做成具体 CLI 功能，仍然是 practical AI engineering 的高质量信号。</li>
+          <li><strong>Hugging Face / IBM Research：</strong>ScarfBench 把 enterprise migration 引入 benchmark，说明开源生态正在把评测从通用 coding 推向企业软件现代化。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>Claude Sonnet 5 实测：</strong>跑一个中型 repo 修复任务、一个浏览器 UI 修改任务、一个多工具资料整理任务，记录成本、步数、失败点和可复现程度。</li>
+          <li><strong>科学/研究工作台组件拆解：</strong>把 Claude Science 的技能、连接器、reviewer、artifact history 映射到 OpenClaw 的报告生成和投研工作流。</li>
+          <li><strong>GeneBench-Pro 启发的评测表：</strong>给研究报告任务增加数据质量、假设支持、分析路径、可复核结论四个打分项。</li>
+          <li><strong>Agent 权限模板：</strong>按 LangChain 的执行隔离/能力隔离/durable pause，整理一版 OpenClaw 长程任务安全检查表。</li>
+          <li><strong>交付证据包：</strong>试用 shot-scraper video 或 Playwright trace，为前端改动自动生成短 demo。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>Claude Sonnet 5 的实际 agent 性能需要在真实代码库和长程任务上验证，不能只看官方 eval。</li>
+          <li>Claude Science 的 beta 体验、技能质量、HPC/SSH 集成稳定性和 reviewer agent 准确性仍需试用确认。</li>
+          <li>GeneBench-Pro 的公开样题只有代表性子集，完整 benchmark 的可复现性、第三方评测节奏和模型对比细节需要持续跟踪。</li>
+          <li>Deep Agents code interpreter 的安全模型需要看具体实现边界，尤其是网络、文件、凭据、外部工具调用和暂停恢复状态。</li>
+          <li>ScarfBench 是否能覆盖真实企业迁移的复杂度，需要看项目样本规模、依赖复杂度、测试质量和 leaderboard 更新。</li>
+          <li>公开 X 页面和镜像可能漏掉 X-only 内容；本报告未使用私密 cookie、token 或登录态内部数据。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul class="noise">
+          <li>部分围绕新模型发布的短转发和价格讨论没有独立信息量，未展开。</li>
+          <li>Hugging Face 6 月 30 日还有若干 leaderboard、specialization 和社区文章，今天优先保留与企业 agent 评测更相关的 ScarfBench。</li>
+          <li>OpenAI Codex 经济研究是重要背景，但发布日期为 2026-06-25，今天只作为延续主题，不重复列为新更新。</li>
+          <li>活动、招聘、品牌曝光和缺少原始链接的短帖暂不纳入重点。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul>
+          <li><a href="https://www.anthropic.com/news/claude-sonnet-5">Anthropic: Introducing Claude Sonnet 5</a></li>
+          <li><a href="https://www.anthropic.com/news/claude-science-ai-workbench">Anthropic: Claude Science, an AI workbench for scientists</a></li>
+          <li><a href="https://openai.com/index/introducing-genebench-pro/">OpenAI: Introducing GeneBench-Pro</a></li>
+          <li><a href="https://openai.com/index/how-agents-are-transforming-work/">OpenAI: How agents are transforming work</a></li>
+          <li><a href="https://www.langchain.com/blog/running-untrusted-agent-code-without-a-sandbox">LangChain: How Deep Agents Run Untrusted Code Without a Sandbox</a></li>
+          <li><a href="https://www.langchain.com/blog/wiki-memory">LangChain: Wiki Memory</a></li>
+          <li><a href="https://x.com/hwchase17/article/2071963622298050997">Harrison Chase: Wiki Memory X Article</a></li>
+          <li><a href="https://huggingface.co/blog/ibm-research/scarfbench">Hugging Face / IBM Research: ScarfBench</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/30/shot-scraper-video/">Simon Willison: Have your agent record video demos of its work with shot-scraper video</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/30/shot-scraper/">Simon Willison: Release shot-scraper 1.10</a></li>
+        </ul>
+      </section>
+
+      <footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer>
+    </main>
+  </body>
+</html>
