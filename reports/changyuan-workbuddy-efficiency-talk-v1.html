@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>长园科技 · WorkBuddy 提效演讲方案 v1</title>
+<title>长园科技 · WorkBuddy 提效案例</title>
 <style>
   :root{
     --bg:#f7f8fa; --card:#ffffff; --ink:#1f2329; --ink2:#5a616b; --ink3:#8a929c;
@@ -28,7 +28,6 @@
   .hero p{font-size:15px; opacity:.92; max-width:760px;}
   .hero .meta{margin-top:22px; display:flex; gap:10px; flex-wrap:wrap;}
   .hero .chip{background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28); padding:6px 14px; border-radius:20px; font-size:13px;}
-  .hero a.chip{color:#fff; text-decoration:none; background:rgba(255,255,255,.24); border-color:rgba(255,255,255,.44); font-weight:600;}
 
   h2.sec{font-size:22px; font-weight:700; margin:48px 0 8px; display:flex; align-items:center; gap:12px;}
   h2.sec .no{background:var(--brand); color:#fff; width:30px; height:30px; border-radius:9px; display:inline-flex; align-items:center; justify-content:center; font-size:15px;}
@@ -97,9 +96,13 @@
   .data{background:#f0f7ff; border:1px solid #cfe2fb; border-left:3px solid var(--brand); border-radius:8px; padding:9px 14px 9px 13px; font-size:12.8px; color:#1a4a8f; margin-bottom:14px; display:flex; gap:8px; align-items:baseline; flex-wrap:wrap;}
   .data b{font-weight:700; white-space:nowrap;}
   .data code{background:#fff; border:1px solid #d4e0ff; border-radius:5px; padding:1px 7px; font-family:"SF Mono",Menlo,Consolas,monospace; font-size:12px; color:#13399c;}
+  .data .download,.prep-item .download{display:inline-flex; align-items:center; justify-content:center; background:var(--brand); color:#fff; border:1px solid var(--brand); border-radius:6px; padding:2px 9px; font-size:12px; font-weight:700; text-decoration:none; line-height:1.4;}
+  .data .download:hover,.prep-item .download:hover{background:#174bd1; border-color:#174bd1;}
   .data.none{background:#f6f7f9; border-color:#e8ebf0; border-left-color:#aab2bd; color:#6b7280;}
   .data.ardot{background:#f0fbf6; border-color:#bfe6d4; border-left-color:#0f7a5a; color:#0c5a42;}
   .data.ardot code{border-color:#bfe6d4; color:#0c5a42;}
+  .data.ardot .download{background:#0f7a5a; border-color:#0f7a5a;}
+  .data.ardot .download:hover{background:#0c684d; border-color:#0c684d;}
 
   .twocol{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:18px;}
   .track{border-radius:12px; padding:18px 20px; border:1px solid;}
@@ -177,93 +180,59 @@
   .stepf .prepbox{background:#fbfcfe; border:1px dashed var(--line); border-radius:8px; padding:10px 14px; margin-bottom:10px; font-size:12.5px; color:var(--ink2);}
   .stepf .prepbox b{color:var(--ink); font-weight:700;}
   .stepf .prepbox code{background:#f1efe8; border-radius:4px; padding:1px 6px; font-family:"SF Mono",Menlo,Consolas,monospace; font-size:11.5px; color:#444;}
-  @media(max-width:880px){.grid2,.grid3,.grid5{grid-template-columns:1fr;} .steps{grid-template-columns:1fr 1fr;} .hero{padding:40px 24px;} .twocol{grid-template-columns:1fr;}}
+
+  /* fixed section navigation */
+  html{scroll-behavior:smooth;}
+  h2.sec{scroll-margin-top:24px;}
+  .side-nav{position:fixed; left:18px; top:18px; bottom:18px; width:220px; z-index:20; background:rgba(255,255,255,.94); border:1px solid var(--line); border-radius:14px; padding:14px; box-shadow:0 12px 36px rgba(16,32,74,.12); overflow:auto; backdrop-filter:blur(12px);}
+  .side-nav .nav-title{font-size:12px; font-weight:700; color:var(--ink3); letter-spacing:.8px; margin:0 0 10px 4px;}
+  .side-nav a{display:flex; gap:8px; align-items:center; color:var(--ink2); text-decoration:none; font-size:12.5px; line-height:1.35; padding:8px 9px; border-radius:8px; margin-bottom:2px;}
+  .side-nav a:hover{background:var(--brand-soft); color:#13399c;}
+  .side-nav .nav-no{flex:none; width:20px; height:20px; border-radius:6px; background:#f0f3f8; color:var(--brand); display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;}
+  body{padding-left:250px;}
+  @media(max-width:980px){body{padding-left:0;} .side-nav{left:12px; top:auto; right:12px; bottom:12px; width:auto; max-height:96px; display:flex; align-items:flex-start; gap:8px; padding:10px 12px;} .side-nav .nav-title{flex:none; margin:8px 4px 0 0;} .side-nav a{flex:none; white-space:nowrap; margin-bottom:0;} .side-nav .nav-text{display:none;}}
+  @media(max-width:880px){.grid2,.grid3,.grid5{grid-template-columns:1fr;} .steps{grid-template-columns:1fr 1fr;} .hero{padding:40px 24px;} .twocol{grid-template-columns:1fr;} .side-nav{max-height:84px;} .side-nav .nav-title{display:none;}}
 </style>
 </head>
 <body>
+<nav class="side-nav" aria-label="页面导航">
+  <div class="nav-title">目录</div>
+  <a href="#sec-1"><span class="nav-no">1</span><span class="nav-text">能力速览</span></a>
+  <a href="#sec-2"><span class="nav-no">2</span><span class="nav-text">沟通方法论</span></a>
+  <a href="#sec-3"><span class="nav-no">3</span><span class="nav-text">财务场景</span></a>
+  <a href="#sec-4"><span class="nav-no">4</span><span class="nav-text">商务场景</span></a>
+  <a href="#sec-5"><span class="nav-no">5</span><span class="nav-text">运营场景</span></a>
+  <a href="#sec-6"><span class="nav-no">6</span><span class="nav-text">质量场景</span></a>
+  <a href="#sec-7"><span class="nav-no">7</span><span class="nav-text">设计场景</span></a>
+  <a href="#sec-8"><span class="nav-no">8</span><span class="nav-text">招投标流程</span></a>
+  <a href="#sec-9"><span class="nav-no">9</span><span class="nav-text">推进建议</span></a>
+  <a href="#sec-10"><span class="nav-no">10</span><span class="nav-text">落地建议</span></a>
+</nav>
 
 <div class="hero">
   <div class="wrap-inner">
     <div class="kicker">WorkBuddy × 长园科技集团（600525.SH）</div>
-    <h1>AI 重塑日常工作<br>面向财务 / 商务 / 运营 / 质量 / 设计团队的 WorkBuddy 提效演讲方案</h1>
-    <p>以"演示为主、PPT 为辅"的形式，立足长园科技"电力能源 EPC ＋ 智能装备制造"双主业，向五大职能团队展示 AI 工具如何切实降低重复劳动、提升专业产出质量。本方案为第一版（v1），供技术专家审阅与迭代。</p>
+    <h1>AI 重塑日常工作<br>面向财务 / 商务 / 运营 / 质量 / 设计团队的 WorkBuddy 提效案例</h1>
+    <p>立足长园科技"电力能源 EPC ＋ 智能装备制造"双主业，向五大职能团队展示 AI 工具如何切实降低重复劳动、提升专业产出质量。本案例聚焦长园科技典型业务场景，展示 WorkBuddy 在文档处理、数据分析、知识检索、流程自动化与设计辅助等工作中的应用价值。</p>
     <div class="meta">
-      <span class="chip">演示型分享 · 约 90 分钟</span>
+      <span class="chip">客户案例版</span>
       <span class="chip">5 大职能 · 43 个原子场景 ＋ 1 个全流程综合案例</span>
-      <span class="chip">每场景含 场景说明 / 提效要点 / 示例提示词 / 沟通要点</span>
-      <span class="chip">配套 37 份脱敏示例数据 · 可直接上传演示</span>
-      <a class="chip" href="./assets/changyuan-workbuddy-example-data.zip" download>下载配套示例数据 ZIP</a>
+      <span class="chip">每场景含 场景说明 / 提效要点 / 示例提示词 / 使用建议</span>
+      <span class="chip">配套 37 份脱敏示例数据 · 可用于试点验证</span>
     </div>
   </div>
 </div>
 
 <div class="wrap">
 
-  <!-- 1. 业务洞察 -->
-  <h2 class="sec"><span class="no">1</span>长园科技业务洞察（场景设计依据）</h2>
-  <p class="sec-desc">场景不是凭空设计的——下面这些业务特征，决定了每个职能团队"真实的痛点在哪里"。</p>
-  <div class="grid2">
-    <div class="ins"><h4>双主业并行</h4><p>① 电力能源：继电保护、智能电网、储能充电、输配电设备，以 <b>EPC 总承包 + 全生命周期服务</b>为主；② 智能装备：面向消费电子 / 新能源汽车的智能测试与自动化装备制造。两条线一个偏"项目制"、一个偏"产品制"。</p></div>
-    <div class="ins"><h4>上市公司治理要求高</h4><p>作为 A 股上市公司，<b>财务合规、信息披露、内控、审计</b>等规范性要求高、节奏密集。财务团队的提效需求最为刚性。</p></div>
-    <div class="ins"><h4>多子公司 / 多基地</h4><p>长园深瑞、运泰利、高能、新能源等众多子公司，深圳/珠海/东莞/南京/武汉等多基地。<b>跨主体数据汇总、口径统一</b>是运营与财务的高频痛点。</p></div>
-    <div class="ins"><h4>全球化布局</h4><p>产品服务覆盖 80+ 国家，泰、印、美、芬、日、越、马设有分支。商务与运营存在 <b>多语言、跨境合同、海外法规</b>等需求。</p></div>
-    <div class="ins"><h4>项目制 = 长周期 + 招投标</h4><p>电力 EPC 业务围绕招投标、合同、里程碑、长账期回款运转，<b>标书、合同、回款跟踪</b>工作量极大。</p></div>
-    <div class="ins"><h4>制造 = 供应链 + 品质</h4><p>装备制造涉及 BOM、供应商、来料检验、生产排程、品质追溯，<b>大量表格、报告、台账</b>类重复工作。</p></div>
-  </div>
-
-  <h2 class="sec"><span class="no">2</span>五大受众画像</h2>
-  <p class="sec-desc">演讲要"对号入座"——先讲清楚每类人每天在跟什么较劲，他们才会觉得 AI 跟自己有关。</p>
-  <div class="grid5">
-    <div class="aud fin"><h4>财务团队</h4>
-      <ul>
-        <li>月结 / 季报 / 年报与合并报表</li>
-        <li>上市信息披露、内控、审计配合</li>
-        <li>应收账款与回款跟踪</li>
-        <li>预算、成本、经营分析</li>
-        <li>发票、税务、费用审核</li>
-      </ul></div>
-    <div class="aud biz"><h4>商务团队</h4>
-      <ul>
-        <li>招投标：标书制作与应答</li>
-        <li>合同起草、评审、风险识别</li>
-        <li>客户资料、商机、报价</li>
-        <li>跨境 / 多语言商务沟通</li>
-        <li>竞品与市场情报</li>
-      </ul></div>
-    <div class="aud ops"><h4>运营团队</h4>
-      <ul>
-        <li>供应链、采购、供应商管理</li>
-        <li>生产排程、台账协同</li>
-        <li>项目管理与进度协同</li>
-        <li>会议纪要、周报、汇报材料</li>
-        <li>制度流程、培训、行政人事</li>
-      </ul></div>
-    <div class="aud qa"><h4>质量管理团队</h4>
-      <ul>
-        <li>来料 / 过程 / 出货检验</li>
-        <li>客诉处理与 8D / CAPA</li>
-        <li>SPC 与过程能力分析</li>
-        <li>体系审核与不符合整改</li>
-        <li>供应商质量管理</li>
-      </ul></div>
-    <div class="aud dsn"><h4>设计团队</h4>
-      <ul>
-        <li>电气/硬件/结构工程设计</li>
-        <li>设计评审与变更闭环</li>
-        <li>BOM、选型与校核计算</li>
-        <li>软件界面/UI（调用 ardot）</li>
-        <li>图标、海报与品牌视觉（调用 ardot）</li>
-      </ul></div>
-  </div>
-
-  <!-- 3. 能力速览 -->
-  <h2 class="sec"><span class="no">3</span>WorkBuddy 能力速览（开场 5 分钟讲清"它能干嘛"）</h2>
+  <!-- 1. 能力速览 -->
+  <h2 class="sec" id="sec-1"><span class="no">1</span>WorkBuddy 能力速览</h2>
   <p class="sec-desc">一句话概括：<b>会读会写会算会查会做的桌面级 AI 助手</b>——能直接操作你的文件、联网查资料、生成文档/表格/PPT/图表，并把多步骤工作自动串起来完成。</p>
   <div class="card">
     <div class="caps">
       <span class="cap">📄 文档读写：Word / PDF / 长文档总结与起草</span>
       <span class="cap">📊 表格分析：Excel 数据清洗、透视、公式、可视化</span>
-      <span class="cap">🖥️ 演示制作：一键生成 PPT 与图表</span>
+      <span class="cap">🖥️ PPT 制作：一键生成 PPT 与图表</span>
       <span class="cap">🔍 联网检索：政策、竞品、客户、行情实时查</span>
       <span class="cap">🧩 多步骤自动化：把"查→算→写→排版"串成一条龙</span>
       <span class="cap">🌐 多语言：翻译、跨境合同、海外资料</span>
@@ -271,11 +240,10 @@
       <span class="cap">⏰ 定时自动化：日报 / 周报 / 监控定时跑</span>
       <span class="cap">🎨 设计能力：调用 ardot 生成界面 / 图标 / 海报</span>
     </div>
-    <div class="note">演示建议：开场不要讲功能清单，而是<b>当场抛一个长园真实场景</b>（如"把这份招标公告读完，提取关键要求做成对照表"），让大家先看到结果，再回头讲它由哪些能力组成。</div>
   </div>
 
-  <!-- 4. 沟通方法论 -->
-  <h2 class="sec"><span class="no">4</span>与 WorkBuddy 沟通的通用方法论</h2>
+  <!-- 2. 沟通方法论 -->
+  <h2 class="sec" id="sec-2"><span class="no">2</span>与 WorkBuddy 沟通的通用方法论</h2>
   <p class="sec-desc">提示词没有玄学。教给大家一个好记的框架，比给 100 条模板更有用——记住 <b>"角色 + 任务 + 背景 + 材料 + 产出"</b>五要素。</p>
   <div class="steps">
     <div class="step"><div class="n"></div><b>给角色</b><p>"你是资深财务分析师"——设定专业视角</p></div>
@@ -293,19 +261,19 @@
     </ul>
   </div>
 
-  <!-- 5. 财务场景 -->
-  <h2 class="sec"><span class="no">5</span>财务团队 · 提效场景库</h2>
+  <!-- 3. 财务场景 -->
+  <h2 class="sec" id="sec-3"><span class="no">3</span>财务团队 · 提效场景库</h2>
   <p class="sec-desc">围绕长园"上市合规 + 多子公司 + 项目长账期"的特点设计，共 9 个场景。</p>
 
   <!-- F1 -->
   <div class="scn fin">
     <div class="scn-head"><span class="tag">F1</span><h3>多子公司报表合并与口径核对</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F1_子公司报表合并_示例.xlsx</code><span>含6家子公司利润表/资产负债表、内部往来款、集团标准科目表，可直接上传演示。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F1_子公司报表合并_示例.xlsx</code><a class="download" href="示例数据/财务/F1_子公司报表合并_示例.xlsx" download>下载</a><span>含6家子公司利润表/资产负债表、内部往来款、集团标准科目表，可直接用于案例验证。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>月结时各子公司报表口径不一、科目命名混乱，财务需手工逐表核对、归并。WorkBuddy 可读取多份子公司 Excel，统一科目口径、合并汇总并标出异常差异。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>多表自动归并，省去手工复制粘贴</li><li>科目口径自动对齐，差异项高亮提示</li><li>钩稽关系校验，降低合并出错风险</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是集团合并报表会计。</span>我上传了 6 家子公司的资产负债表和利润表（Excel）。请：1) 按统一科目口径合并；2) 标出各子公司间往来款是否对得上（内部抵销项）；3) 把同比波动超过 20% 的科目单独列出并标注；4) 输出一份合并汇总表 + 一页差异说明。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">先把"集团标准科目表"也一起给它，对齐口径；合并结果务必人工复核抵销分录，AI 负责"找差异"，会计负责"做判断"。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">先把"集团标准科目表"也一起给它，对齐口径；合并结果需要人工复核抵销分录，AI 负责"找差异"，会计负责"做判断"。</div></div>
     </div>
   </div>
 
@@ -313,11 +281,11 @@
   <div class="scn fin">
     <div class="scn-head"><span class="tag">F2</span><h3>应收账款账龄分析与催收清单</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F2_应收账款明细_示例.xlsx</code><span>26条应收明细（客户/项目/发票日期/金额/已收），账期已铺开便于演示账龄分段。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F2_应收账款明细_示例.xlsx</code><a class="download" href="示例数据/财务/F2_应收账款明细_示例.xlsx" download>下载</a><span>26条应收明细（客户/项目/发票日期/金额/已收），账期已铺开便于验证账龄分段。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>EPC 项目账期长、回款分散，应收台账庞杂。WorkBuddy 可对账龄自动分段、按客户/项目排序，生成风险分级与催收优先级清单。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>账龄自动分段（30/60/90/180/365天以上）</li><li>按金额×逾期天数算风险敞口并排序</li><li>一键生成分客户催收话术草稿</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是应收账款管理专员。</span>这是我们的应收明细表（含客户、项目、发票日期、金额、已收）。请：1) 按账龄分段统计；2) 计算每个客户的逾期风险敞口并从高到低排序；3) 把逾期超 90 天的列为重点；4) 为前 10 大逾期客户各拟一段简短催收邮件。金额单位用万元。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">明确"今天的日期"让它算账龄；催收话术要它分"合作良好客户"和"长期拖欠客户"两种语气，更贴合实战。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">明确"今天的日期"让它算账龄；催收话术要它分"合作良好客户"和"长期拖欠客户"两种语气，更贴合实战。</div></div>
     </div>
   </div>
 
@@ -325,11 +293,11 @@
   <div class="scn fin">
     <div class="scn-head"><span class="tag">F3</span><h3>经营分析报告与管理层 PPT</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F3_经营数据_近12月_示例.xlsx</code><span>近12个月电力能源/智能装备两大板块收入与毛利，直接喂给它生成分析PPT。</span></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>月度/季度经营分析会前，财务需把财务数据整理成图文并茂的分析报告与汇报 PPT。WorkBuddy 可从原始数据直接产出分析结论 + 图表 + 演示稿。</p></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F3_经营数据_近12月_示例.xlsx</code><a class="download" href="示例数据/财务/F3_经营数据_近12月_示例.xlsx" download>下载</a><span>近12个月电力能源/智能装备两大板块收入与毛利，直接喂给它生成分析PPT。</span></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>月度/季度经营分析会前，财务需把财务数据整理成图文并茂的分析报告与汇报 PPT。WorkBuddy 可从原始数据直接产出分析结论 + 图表 + 汇报稿。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>数据 → 趋势图 / 结构图自动生成</li><li>自动写出"现象—原因—建议"分析逻辑</li><li>直接输出可编辑 PPT，省去排版</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是 CFO 办公室的经营分析师。</span>基于这份近 12 个月的收入、成本、毛利数据（按电力能源、智能装备两大板块），生成一份管理层月度经营分析 PPT：包含整体经营概览、两大板块对比、毛利率趋势、异常点分析与下月关注建议。图表用红涨绿跌的中国习惯配色。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">告诉它汇报对象是谁（董事会 / 总经理），它会自动调整详略；要求它在每页给"一句话结论"，让管理层一眼看懂。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">告诉它汇报对象是谁（董事会 / 总经理），它会自动调整详略；要求它在每页给"一句话结论"，让管理层一眼看懂。</div></div>
     </div>
   </div>
 
@@ -337,11 +305,11 @@
   <div class="scn fin">
     <div class="scn-head"><span class="tag">F4</span><h3>上市信息披露文稿辅助</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F4_季度财务数据_示例.xlsx</code><span>季度主要财务项目及同比变动，供起草"管理层讨论与分析"段落。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F4_季度财务数据_示例.xlsx</code><a class="download" href="示例数据/财务/F4_季度财务数据_示例.xlsx" download>下载</a><span>季度主要财务项目及同比变动，供起草"管理层讨论与分析"段落。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>定期报告、临时公告需符合交易所格式与口径。WorkBuddy 可基于财务数据起草"经营情况讨论与分析"等文字段落，并核对措辞规范性。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>财务数据自动转规范披露表述</li><li>同比/环比变动原因成段撰写</li><li>敏感措辞与合规口径提醒</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是上市公司董秘办的信息披露专员。</span>根据这份季度财务数据，起草年报"管理层讨论与分析"中关于营业收入与净利润变动的分析段落。要求：用词审慎合规、说明主要变动原因、避免预测性承诺、保持客观。先给我一版初稿。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">务必强调"这是辅助起草，最终须经董秘/法务/会计师审核"；让它避免任何业绩承诺或误导性表述，合规红线由人把关。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">需要明确"这是辅助起草，最终须经董秘/法务/会计师审核"；让它避免任何业绩承诺或误导性表述，合规红线由人把关。</div></div>
     </div>
   </div>
 
@@ -349,11 +317,11 @@
   <div class="scn fin">
     <div class="scn-head"><span class="tag">F5</span><h3>发票与费用报销合规审核</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F5_报销明细及标准_示例.xlsx</code><span>含本月报销明细 + 差旅报销标准两个表，故意埋了超标/缺票项供现场抓异常。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F5_报销明细及标准_示例.xlsx</code><a class="download" href="示例数据/财务/F5_报销明细及标准_示例.xlsx" download>下载</a><span>含本月报销明细 + 差旅报销标准两个表，故意埋了超标/缺票项用于识别异常。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>大量报销单据需核对发票要素、费用标准、政策符合性。WorkBuddy 可批量读取报销明细，比对公司报销制度，标出疑点。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>批量核对金额、抬头、税号、日期一致性</li><li>对照报销标准识别超标/异常项</li><li>生成审核疑点清单，人工聚焦例外</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是费用审核会计。</span>这是本月报销明细表和我们的《差旅报销标准》。请逐条检查：1) 是否超标准（如住宿单价上限）；2) 同一人是否有重复报销；3) 费用类型与事由是否匹配。把有疑点的行单独列成一张"待核查清单"，注明疑点原因。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">把制度原文喂给它做"判断依据"；它擅长找异常，但最终扣减/退单的决定仍由审核人做。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">把制度原文喂给它做"判断依据"；它擅长找异常，但最终扣减/退单的决定仍由审核人做。</div></div>
     </div>
   </div>
 
@@ -361,11 +329,11 @@
   <div class="scn fin">
     <div class="scn-head"><span class="tag">F6</span><h3>预算编制与执行偏差跟踪</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F6_预算执行_示例.xlsx</code><span>含各部门年度预算 + 1-5月实际支出两个表，可演示执行率与超进度判断。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F6_预算执行_示例.xlsx</code><a class="download" href="示例数据/财务/F6_预算执行_示例.xlsx" download>下载</a><span>含各部门年度预算 + 1-5月实际支出两个表，可验证执行率与超进度判断。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>年度/季度预算与实际执行对比分析。WorkBuddy 可自动计算预算执行率、偏差，并对超支项给出归因分析框架。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>预算 vs 实际自动比对，算执行率与偏差</li><li>超支/结余项自动排序与高亮</li><li>生成偏差说明初稿供预算负责人补充</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是预算管理岗。</span>这是各部门年度预算表和 1-5 月实际支出表。请：1) 计算各部门预算执行率；2) 找出执行率明显偏高或偏低的部门；3) 按时间进度（5/12）判断是否超进度；4) 输出一张对比表 + 三条重点提醒。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">提醒它考虑"时间进度匹配"（不是简单看花了多少），这样判断才合理。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">提醒它考虑"时间进度匹配"（不是简单看花了多少），这样判断才合理。</div></div>
     </div>
   </div>
 
@@ -373,11 +341,11 @@
   <div class="scn fin">
     <div class="scn-head"><span class="tag">F7</span><h3>税务政策检索与适用判断</h3></div>
     <div class="scn-body">
-      <div class="data none"><b>📎 示例数据</b><span>本场景无需上传文件——WorkBuddy 联网实时检索政策原文，直接照提示词演示即可。</span></div>
+      <div class="data none"><b>📎 示例数据</b><span>本场景无需上传文件——WorkBuddy 联网实时检索政策原文，可直接按提示词验证。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>高新技术企业、研发费用加计扣除等政策频繁更新。WorkBuddy 可联网检索最新政策，梳理适用条件与申报要点。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>实时检索最新税收政策原文</li><li>梳理适用条件、优惠幅度、申报材料</li><li>结合公司情况给初步适用性判断</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是税务经理。</span>请检索最新的高新技术企业研发费用加计扣除政策，整理：1) 当前加计扣除比例；2) 可加计的费用范围；3) 需要准备的台账与凭证；4) 我们作为电力设备+智能装备制造企业需特别注意的点。给出政策来源链接。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">要求它附上政策来源链接以便核实；涉及具体申报仍需与主管税务机关或税务师确认。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">要求它附上政策来源链接以便核实；涉及具体申报仍需与主管税务机关或税务师确认。</div></div>
     </div>
   </div>
 
@@ -385,11 +353,11 @@
   <div class="scn fin">
     <div class="scn-head"><span class="tag">F8</span><h3>现金流预测与资金调度参考</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F8_现金流预测输入_示例.xlsx</code><span>含未来3个月按周预计回款 + 付款计划，可演示滚动现金流与缺口识别。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/财务/F8_现金流预测输入_示例.xlsx</code><a class="download" href="示例数据/财务/F8_现金流预测输入_示例.xlsx" download>下载</a><span>含未来3个月按周预计回款 + 付款计划，可验证滚动现金流与缺口识别。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>项目制业务下回款节奏波动大。WorkBuddy 可基于历史回款与付款计划，搭建滚动现金流预测，提示资金缺口。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>按周/月滚动预测现金流入流出</li><li>自动识别资金紧张时段</li><li>生成多情景（乐观/中性/保守）对比</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是资金管理岗。</span>根据这份未来 3 个月的预计回款表和付款计划表，做一个按周的滚动现金流预测。标出哪几周可能出现资金缺口，并给出中性/保守两种情景的对比。输出表格 + 一段资金调度提示。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">让它把"假设条件"明确写出来（如回款延迟天数），方便你调参;预测是参考，决策需结合实际授信。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">让它把"假设条件"明确写出来（如回款延迟天数），方便你调参;预测是参考，决策需结合实际授信。</div></div>
     </div>
   </div>
 
@@ -397,27 +365,27 @@
   <div class="scn fin">
     <div class="scn-head"><span class="tag">F9</span><h3>定时自动化：每日资金 / 应收看板</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>复用 F2_应收账款明细 / F8_现金流预测输入</code><span>演示重点是"创建定时任务"这一动作，数据源可直接复用上面两份。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>复用 F2_应收账款明细 / F8_现金流预测输入</code><span>重点是"创建定时任务"这一动作，数据源可直接复用上面两份。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>把重复性的日报做成定时任务。WorkBuddy 可每天定时汇总指定数据源，生成资金/应收简报，自动推送。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>定时自动跑，无需每天手工拉数</li><li>固定模板输出，口径一致</li><li>异常自动标红提醒</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">帮我建一个每个工作日早上 8:30 的定时任务：</span>读取指定的资金台账与应收明细，生成一份"昨日回款 + 今日到期应收 + 资金余额"的简报，逾期项标红，输出到固定文档里。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">现场可演示"创建定时任务"这一能力，财务最有共鸣；强调数据源要稳定、格式固定，自动化才靠谱。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">可展示"创建定时任务"这一能力，财务最有共鸣；强调数据源要稳定、格式固定，自动化才靠谱。</div></div>
     </div>
   </div>
 
-  <!-- 6. 商务场景 -->
-  <h2 class="sec"><span class="no">6</span>商务团队 · 提效场景库</h2>
+  <!-- 4. 商务场景 -->
+  <h2 class="sec" id="sec-4"><span class="no">4</span>商务团队 · 提效场景库</h2>
   <p class="sec-desc">围绕长园"招投标 + 合同 + 跨境拓展"的特点设计，共 8 个场景。</p>
 
   <!-- B1 -->
   <div class="scn biz">
     <div class="scn-head"><span class="tag">B1</span><h3>招标文件解析与应答要点提取</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B1_招标文件_配电自动化_示例.txt</code><span>一份配电自动化招标文件（含资质/技术/商务/评分/废标条款），可直接喂入解析。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B1_招标文件_配电自动化_示例.txt</code><a class="download" href="示例数据/商务/B1_招标文件_配电自动化_示例.txt" download>下载</a><span>一份配电自动化招标文件（含资质/技术/商务/评分/废标条款），可直接喂入解析。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>一份招标文件动辄上百页，商务需快速提炼资质要求、技术参数、评分标准、废标项。WorkBuddy 可秒读全文，生成结构化应答对照表。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>长文档秒读，关键条款一网打尽</li><li>资质/技术/商务/评分四类自动归类</li><li>"废标雷区"单独高亮，避免低级失误</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是投标经理。</span>这是一份配电自动化设备的招标文件。请提取并做成对照表：1) 投标人资质要求；2) 核心技术参数与硬性指标；3) 商务要求（工期、付款、质保）；4) 评分办法与分值分布；5) 所有"否决项/废标条款"单独列出标红。最后给一段"我们投标的重点与风险"提示。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">直接把招标 PDF 丢给它即可；让它对"废标项"格外敏感——这是投标最致命的环节。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">直接把招标 PDF 丢给它即可；让它对"废标项"格外敏感——这是投标最致命的环节。</div></div>
     </div>
   </div>
 
@@ -425,11 +393,11 @@
   <div class="scn biz">
     <div class="scn-head"><span class="tag">B2</span><h3>投标文件 / 技术方案初稿撰写</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B2_投标素材包_示例.txt</code><span>含评分办法 + 公司资质业绩素材，配合 B1 招标文件可演示逐条响应成稿。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B2_投标素材包_示例.txt</code><a class="download" href="示例数据/商务/B2_投标素材包_示例.txt" download>下载</a><span>含评分办法 + 公司资质业绩素材，配合 B1 招标文件可验证逐条响应成稿。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>基于招标要求与公司既有资料，起草投标响应文件框架与技术方案章节，商务只需补充专业细节。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>按招标评分点逐条响应，不漏项</li><li>复用公司资质/案例库，快速成稿</li><li>统一格式与措辞，专业度提升</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是标书撰写专家。</span>根据这份招标的评分办法（已上传）和我们公司的资质案例资料，起草投标文件的"技术响应"和"商务响应"两部分初稿。要求逐条对应评分点编号、突出我们在智能配电网领域的优势案例。先出目录框架再填内容。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">先给它公司资质/业绩素材库，成稿质量天差地别；技术参数等硬数据务必人工核实，不能让 AI 编。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">先给它公司资质/业绩素材库，成稿质量天差地别；技术参数等硬数据需要人工核实，不能让 AI 编。</div></div>
     </div>
   </div>
 
@@ -437,11 +405,11 @@
   <div class="scn biz">
     <div class="scn-head"><span class="tag">B3</span><h3>合同条款审查与风险识别</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B3_销售合同_示例.txt</code><span>一份故意埋了多处不利条款（违约金上不封顶、验收标准单方变更等）的合同，演示效果好。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B3_销售合同_示例.txt</code><a class="download" href="示例数据/商务/B3_销售合同_示例.txt" download>下载</a><span>一份故意埋了多处不利条款（违约金上不封顶、验收标准单方变更等）的合同，验证效果明显。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>采购/销售/EPC 合同条款繁多，商务需识别付款、违约、质保、知识产权等风险点。WorkBuddy 可逐条审查并提示不利条款。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>逐条扫描，定位高风险/不利条款</li><li>对照常见商务底线给修改建议</li><li>生成审查意见表，提交法务更高效</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是商务合同审查专员。</span>审查这份销售合同，重点看：付款节点与账期、违约责任是否对等、质保期与范围、验收标准、知识产权归属、不可抗力。把对我方不利的条款列出来，逐条说明风险并给出修改建议措辞。输出成"条款—风险—建议"三列表格。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">明确"我方是甲方还是乙方"，风险判断方向完全不同；AI 出初审意见，正式法律意见仍以法务为准。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">明确"我方是甲方还是乙方"，风险判断方向完全不同；AI 出初审意见，正式法律意见仍以法务为准。</div></div>
     </div>
   </div>
 
@@ -449,11 +417,11 @@
   <div class="scn biz">
     <div class="scn-head"><span class="tag">B4</span><h3>客户与竞品情报调研</h3></div>
     <div class="scn-body">
-      <div class="data none"><b>📎 示例数据</b><span>本场景无需上传文件——WorkBuddy 联网检索公开信息，直接照提示词演示即可。</span></div>
+      <div class="data none"><b>📎 示例数据</b><span>本场景无需上传文件——WorkBuddy 联网检索公开信息，可直接按提示词验证。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>开拓新客户或参与竞争前，需快速了解客户背景、招标历史、竞争对手动态。WorkBuddy 联网检索并整理成情报简报。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>联网搜集客户/竞品公开信息</li><li>整理工商、业务、近期动向</li><li>形成结构化"作战参考"简报</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是市场情报分析师。</span>帮我调研某电网公司客户：1) 主营与近期重点项目；2) 近一年的相关招标/中标情况；3) 主要供应商有哪些；4) 我们切入的可能机会点。再补充我们在储能充电领域的 2 个竞争对手近期动态。给出信息来源。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">让它标注信息来源与时间，便于判断时效；公开信息为主，敏感信息不可依赖 AI 获取。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">让它标注信息来源与时间，便于判断时效；公开信息为主，敏感信息不可依赖 AI 获取。</div></div>
     </div>
   </div>
 
@@ -461,11 +429,11 @@
   <div class="scn biz">
     <div class="scn-head"><span class="tag">B5</span><h3>报价单与商务测算</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B5_产品成本清单_示例.xlsx</code><span>含某型配电终端的物料成本清单，已标注目标毛利率25%、毛利红线18%。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B5_产品成本清单_示例.xlsx</code><a class="download" href="示例数据/商务/B5_产品成本清单_示例.xlsx" download>下载</a><span>含某型配电终端的物料成本清单，已标注目标毛利率25%、毛利红线18%。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>根据产品配置、成本、目标毛利快速生成报价，并做不同折扣下的利润测算。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>BOM/成本 → 报价自动测算</li><li>多档折扣下的毛利对比一键算</li><li>生成规范报价单格式</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是商务报价岗。</span>这是产品配置成本清单和目标毛利率。请：1) 按目标毛利率算出含税报价；2) 给出 95 折、9 折、85 折三档下的实际毛利率；3) 标出哪一档会跌破我们的毛利红线（设为 18%）；4) 输出一张正式报价单和一张内部测算表。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">把税率、毛利红线等规则讲清楚；内部测算表和给客户的报价单要分开输出，避免误发。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">明确税率、毛利红线等规则；内部测算表和给客户的报价单要分开输出，避免误发。</div></div>
     </div>
   </div>
 
@@ -473,11 +441,11 @@
   <div class="scn biz">
     <div class="scn-head"><span class="tag">B6</span><h3>跨境商务沟通与多语言资料</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B6_跨境邮件及规格书_示例.txt</code><span>含一封待译中文报价邮件 + 一份待校对英文设备规格书（电力术语）。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B6_跨境邮件及规格书_示例.txt</code><a class="download" href="示例数据/商务/B6_跨境邮件及规格书_示例.txt" download>下载</a><span>含一封待译中文报价邮件 + 一份待校对英文设备规格书（电力术语）。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>面向泰、印、美、日等海外市场，需多语言邮件、产品资料、合同翻译。WorkBuddy 可专业翻译并本地化表达。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>专业术语准确的多语言互译</li><li>商务邮件本地化语气润色</li><li>中外对照排版，便于双方核对</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是外贸商务助理。</span>把这封中文报价跟进邮件翻译成正式商务英文，语气专业礼貌。同时帮我检查这份英文产品规格书里电力设备专业术语翻译是否准确，列出需要修改的地方。最终给中英对照版。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">告诉它目标国家/客户，语气和表达会更地道；关键合同条款翻译仍建议专业法律翻译复核。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">告诉它目标国家/客户，语气和表达会更地道；关键合同条款翻译仍建议专业法律翻译复核。</div></div>
     </div>
   </div>
 
@@ -485,11 +453,11 @@
   <div class="scn biz">
     <div class="scn-head"><span class="tag">B7</span><h3>商机台账与销售漏斗分析</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B7_商机明细_示例.xlsx</code><span>20条商机（金额/阶段/概率/最近跟进），含停滞商机供演示漏斗与跟进提醒。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/商务/B7_商机明细_示例.xlsx</code><a class="download" href="示例数据/商务/B7_商机明细_示例.xlsx" download>下载</a><span>20条商机（金额/阶段/概率/最近跟进），含停滞商机用于验证漏斗与跟进提醒。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>把零散的商机记录整理成结构化台账，分析转化率、阶段分布、预计成交额，辅助商务决策。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>杂乱商机信息自动结构化</li><li>按阶段/金额/概率算加权预测</li><li>识别停滞商机并提醒跟进</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是销售运营分析师。</span>这是我们的商机明细（客户、金额、阶段、预计成交概率、最近跟进日期）。请：1) 做销售漏斗各阶段金额分布；2) 算加权预计成交额；3) 找出超过 30 天没跟进的商机；4) 给销售团队 3 条行动建议。配一张漏斗图。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">字段越规范分析越准；让它对"长期不动"的商机重点提醒，这是漏斗里最易漏的钱。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">字段越规范分析越准；让它对"长期不动"的商机重点提醒，这是漏斗里最易漏的钱。</div></div>
     </div>
   </div>
 
@@ -497,27 +465,27 @@
   <div class="scn biz">
     <div class="scn-head"><span class="tag">B8</span><h3>投标 / 合同知识库问答</h3></div>
     <div class="scn-body">
-      <div class="data none"><b>📎 示例数据</b><span>本场景依赖企业知识库（如乐享）已接入并授权，无需上传文件，现场直接对知识库提问演示。</span></div>
+      <div class="data none"><b>📎 示例数据</b><span>本场景依赖企业知识库（如乐享）已接入并授权，无需上传文件，直接对知识库提问。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>把历史标书、合同模板、资质文件沉淀进知识库（如乐享），商务随时提问检索，告别"翻文件夹找模板"。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>对接企业知识库，自然语言检索</li><li>快速调取历史案例与标准模板</li><li>新人也能快速上手标准做法</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">在我们的乐享知识库里</span>找一下去年华南区配电自动化项目的中标标书，提取它的技术方案目录结构和报价区间，作为这次类似项目投标的参考。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">这依赖知识库已接入并授权（当前乐享已连接）；现场可演示"问一句话直接调出历史资料"，对商务很有冲击力。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">这依赖知识库已接入并授权（当前乐享已连接）；可展示"问一句话直接调出历史资料"，对商务很有冲击力。</div></div>
     </div>
   </div>
 
-  <!-- 7. 运营场景 -->
-  <h2 class="sec"><span class="no">7</span>运营团队 · 提效场景库</h2>
+  <!-- 5. 运营场景 -->
+  <h2 class="sec" id="sec-5"><span class="no">5</span>运营团队 · 提效场景库</h2>
   <p class="sec-desc">覆盖供应链、生产品质、项目协同、行政人事等，共 9 个场景。</p>
 
   <!-- O1 -->
   <div class="scn ops">
     <div class="scn-head"><span class="tag">O1</span><h3>供应商评估与比价分析</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O1_供应商比价_示例.xlsx</code><span>5家供应商对同批元器件的报价（单价/交期/账期/质保），已附建议权重。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O1_供应商比价_示例.xlsx</code><a class="download" href="示例数据/运营/O1_供应商比价_示例.xlsx" download>下载</a><span>5家供应商对同批元器件的报价（单价/交期/账期/质保），已附建议权重。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>采购需对多家供应商报价、资质、交期综合比选。WorkBuddy 可整合多份报价，做加权评分与比价矩阵。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>多份报价自动归一化对比</li><li>按价格/质量/交期/账期加权打分</li><li>生成比价矩阵 + 推荐建议</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是采购分析专员。</span>这是 5 家供应商对同一批电子元器件的报价表（含单价、交期、账期、质保）。请：1) 统一口径做比价表；2) 按价格40%、交期30%、账期20%、质保10%加权打分排序；3) 给出推荐供应商及理由；4) 标出每家的主要风险。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">权重由你定，告诉它即可；它负责算和列，最终供应商定标仍由采购委员会决策。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">权重由你定，告诉它即可；它负责算和列，最终供应商定标仍由采购委员会决策。</div></div>
     </div>
   </div>
 
@@ -525,11 +493,11 @@
   <div class="scn ops">
     <div class="scn-head"><span class="tag">O2</span><h3>生产 / 品质数据台账与报告</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O2_生产品质记录_示例.xlsx</code><span>含各产线产量良率 + 不良类型明细两个表，可演示良率排序与帕累托分析。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O2_生产品质记录_示例.xlsx</code><a class="download" href="示例数据/运营/O2_生产品质记录_示例.xlsx" download>下载</a><span>含各产线产量良率 + 不良类型明细两个表，可验证良率排序与帕累托分析。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>制造基地每日产生大量生产、良率、不良品数据。WorkBuddy 可汇总分析，生成品质日报/周报与趋势图。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>多产线数据自动汇总</li><li>良率/不良率趋势可视化</li><li>不良 Top 原因自动排序（帕累托）</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是品质工程师。</span>这是本周各产线的产量与不良品记录（含不良类型）。请：1) 算各产线良率并排序；2) 做不良原因的帕累托分析，找出占 80% 的主要问题；3) 对良率下滑明显的产线给改善建议方向；4) 输出一份品质周报（含图表）。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">让它按"二八原则"聚焦主要不良，比平均用力更有价值；改善措施需结合现场工艺人工确认。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">让它按"二八原则"聚焦主要不良，比平均用力更有价值；改善措施需结合现场工艺人工确认。</div></div>
     </div>
   </div>
 
@@ -537,11 +505,11 @@
   <div class="scn ops">
     <div class="scn-head"><span class="tag">O3</span><h3>项目进度跟踪与里程碑预警</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O3_项目里程碑计划_示例.xlsx</code><span>某EPC项目8个里程碑（计划/实际/状态/负责人），含已延期项供演示预警。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O3_项目里程碑计划_示例.xlsx</code><a class="download" href="示例数据/运营/O3_项目里程碑计划_示例.xlsx" download>下载</a><span>某EPC项目8个里程碑（计划/实际/状态/负责人），含已延期项用于验证预警。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>EPC 项目周期长、里程碑多。WorkBuddy 可基于项目计划表自动识别延期风险、生成进度看板与预警。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>计划 vs 实际进度自动比对</li><li>延期/临期里程碑自动预警</li><li>生成项目进度汇报材料</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是项目管理岗（PMO）。</span>这是某 EPC 项目的里程碑计划表（计划日期、实际/预计完成日期、负责人）。请：1) 标出已延期和未来两周临期的里程碑；2) 算整体进度偏差；3) 列出需要重点跟进的事项和责任人；4) 生成一页项目进度简报。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">告诉它"今天日期"以判断临期；可结合定时任务做成每周自动项目周报。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">告诉它"今天日期"以判断临期；可结合定时任务做成每周自动项目周报。</div></div>
     </div>
   </div>
 
@@ -549,11 +517,11 @@
   <div class="scn ops">
     <div class="scn-head"><span class="tag">O4</span><h3>会议纪要与待办自动整理</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O4_会议记录_原始_示例.txt</code><span>一段口语化的项目协调会原始记录，现场转成规范纪要+待办，最出"哇"效果。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O4_会议记录_原始_示例.txt</code><a class="download" href="示例数据/运营/O4_会议记录_原始_示例.txt" download>下载</a><span>一段口语化的项目协调会原始记录，转成规范纪要+待办，效果直观。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>各类例会、评审会记录冗长。WorkBuddy 可把会议记录/录音转写整理成结构化纪要，自动拆出待办与责任人。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>口语记录 → 结构化规范纪要</li><li>自动提取决议、待办、责任人、时限</li><li>格式统一，可直接分发归档</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是会议秘书。</span>把这段会议记录整理成正式纪要：包含会议主题、参会人、讨论要点、形成的决议。再单独生成一张"待办清单"，每项注明负责人和截止时间。语言精炼专业。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">这是最容易出"哇效果"的演示场景；可现场拿一段真实会议文字当场生成，最有说服力。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">会议纪要生成是效果较直观的应用场景，可基于真实会议文本快速生成规范纪要与待办清单。</div></div>
     </div>
   </div>
 
@@ -561,11 +529,11 @@
   <div class="scn ops">
     <div class="scn-head"><span class="tag">O5</span><h3>周报 / 月报汇总与提炼</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O5_各部门周报合集_示例.txt</code><span>8个部门的周报合集，演示一键汇总成管理层视角的集团周报。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O5_各部门周报合集_示例.txt</code><a class="download" href="示例数据/运营/O5_各部门周报合集_示例.txt" download>下载</a><span>8个部门的周报合集，验证一键汇总成管理层视角的集团周报。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>运营需把各部门/子公司周报汇总成一份总报告。WorkBuddy 可合并多份周报，去重提炼，形成管理层视角的综述。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>多份周报一键合并汇总</li><li>提炼共性问题与重点进展</li><li>生成管理层可读的综述版</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是运营管理岗。</span>这是 8 个部门提交的本周周报。请汇总成一份《集团运营周报》：1) 按"重点进展 / 存在问题 / 下周计划"三块归类；2) 提炼出需要管理层关注的 3-5 件大事；3) 去掉流水账细节。控制在两页内。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">告诉它读者是管理层，它会自动"抓大放小";要求控制篇幅，避免又变成流水账。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">告诉它读者是管理层，它会自动"抓大放小";要求控制篇幅，避免又变成流水账。</div></div>
     </div>
   </div>
 
@@ -577,7 +545,7 @@
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>运营常需编写或修订管理制度、作业流程、SOP。WorkBuddy 可按规范结构起草制度初稿并梳理流程步骤。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>按标准制度结构快速成稿</li><li>流程步骤清晰化、查漏补缺</li><li>可生成配套流程图</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是流程管理专员。</span>帮我起草一份《供应商准入管理制度》初稿，包含目的、适用范围、职责分工、准入流程、评估标准、退出机制。流程部分再画一张流程图。结构参考通用企业制度规范。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">给它参考已有制度模板，风格更统一；制度落地前需相关部门会签确认。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">给它参考已有制度模板，风格更统一；制度落地前需相关部门会签确认。</div></div>
     </div>
   </div>
 
@@ -585,11 +553,11 @@
   <div class="scn ops">
     <div class="scn-head"><span class="tag">O7</span><h3>库存与物料数据分析</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O7_库存明细_示例.xlsx</code><span>12种物料库存（含安全库存/最近动销/单价），埋了缺料与呆滞料供演示。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O7_库存明细_示例.xlsx</code><a class="download" href="示例数据/运营/O7_库存明细_示例.xlsx" download>下载</a><span>12种物料库存（含安全库存/最近动销/单价），埋了缺料与呆滞料用于验证。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>制造业库存管理涉及呆滞料、安全库存、周转率分析。WorkBuddy 可分析库存数据，识别呆滞与缺料风险。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>库存周转率/呆滞料自动识别</li><li>低于安全库存物料预警</li><li>ABC 分类辅助库存策略</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是仓储物料管理员。</span>这是当前库存明细（物料、库存量、安全库存、最近出入库日期、单价）。请：1) 找出低于安全库存需补货的物料；2) 找出超过 180 天没动的呆滞料并算占用金额；3) 按金额做 ABC 分类；4) 给一段库存优化建议。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">明确"呆滞"的天数标准；呆滞料处理建议供参考，实际需结合生产计划判断。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">明确"呆滞"的天数标准；呆滞料处理建议供参考，实际需结合生产计划判断。</div></div>
     </div>
   </div>
 
@@ -597,11 +565,11 @@
   <div class="scn ops">
     <div class="scn-head"><span class="tag">O8</span><h3>人事招聘与培训材料</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O8_招聘简历样例_示例.txt</code><span>3份不同匹配度的简历样例，演示按岗位要求提炼要点并做匹配度初评。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/运营/O8_招聘简历样例_示例.txt</code><a class="download" href="示例数据/运营/O8_招聘简历样例_示例.txt" download>下载</a><span>3份不同匹配度的简历样例，验证按岗位要求提炼要点并做匹配度初评。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>HR/运营需编写岗位 JD、筛选简历、制作培训材料。WorkBuddy 可起草 JD、批量初筛简历要点、生成培训课件。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>岗位 JD 快速起草</li><li>简历批量提炼关键信息对照岗位</li><li>培训 PPT / 考核题自动生成</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是 HR 专员。</span>1) 帮我写一份"电力自动化软件工程师"的招聘 JD；2) 我上传了 10 份简历，请按这个岗位要求提炼每人的匹配要点并打个匹配度初评；3) 再做一份针对该岗位新人的入职培训 PPT 大纲。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">简历初筛仅作参考排序，最终甄选由 HR 与用人部门把关；注意候选人隐私信息的保护。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">简历初筛仅作参考排序，最终甄选由 HR 与用人部门把关；注意候选人隐私信息的保护。</div></div>
     </div>
   </div>
 
@@ -609,27 +577,27 @@
   <div class="scn ops">
     <div class="scn-head"><span class="tag">O9</span><h3>定时自动化：每日生产 / 项目晨报</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>复用 O2_生产品质记录 / O3_项目里程碑计划</code><span>演示重点是"创建定时任务"，数据源可直接复用上面两份。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>复用 O2_生产品质记录 / O3_项目里程碑计划</code><span>重点是"创建定时任务"，数据源可直接复用上面两份。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>把生产/项目日报做成定时任务，每天自动汇总关键指标推送给管理层，运营从"做报表"变成"看报表"。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>定时自动汇总，零手工</li><li>关键指标异常自动标记</li><li>固定推送，信息及时统一</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">建一个每个工作日早上 8 点的定时任务：</span>汇总昨日各基地产量、良率、重大异常和在产项目进度，生成一份"生产运营晨报"，异常项标红，输出到指定文档。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">与财务 F9 呼应，强调"自动化"是 WorkBuddy 区别于普通问答工具的杀手锏；数据源需稳定可访问。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">与财务 F9 呼应，强调"自动化"是 WorkBuddy 区别于普通问答工具的杀手锏；数据源需稳定可访问。</div></div>
     </div>
   </div>
 
   <!-- 8. 质量管理场景 -->
-  <h2 class="sec"><span class="no">8</span>质量管理团队 · 提效场景库</h2>
+  <h2 class="sec" id="sec-6"><span class="no">6</span>质量管理团队 · 提效场景库</h2>
   <p class="sec-desc">围绕长园制造业务的"检验—分析—改善—体系"质量闭环设计，共 7 个场景。</p>
 
   <!-- Q1 -->
   <div class="scn qa">
     <div class="scn-head"><span class="tag">Q1</span><h3>来料检验数据分析与质量月报</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q1_来料检验IQC记录_示例.xlsx</code><span>近30天IQC记录（供应商/物料/不良数/判定），可演示批合格率与不良分布。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q1_来料检验IQC记录_示例.xlsx</code><a class="download" href="示例数据/质量管理/Q1_来料检验IQC记录_示例.xlsx" download>下载</a><span>近30天IQC记录（供应商/物料/不良数/判定），可验证批合格率与不良分布。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>来料检验数据散落在台账里，月底要汇总成质量月报很费时。WorkBuddy 可统计批次合格率、不良类型分布，按供应商/物料维度透视并生成月报。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>批合格率、不良率自动统计</li><li>按供应商/物料/不良类型多维透视</li><li>一键生成图文质量月报</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是来料质量(IQC)工程师。</span>这是近30天的来料检验记录。请：1) 计算总体批次合格率；2) 按供应商统计各自合格率并排序；3) 做不良类型的帕累托分析找出主要问题；4) 标出合格率最低的供应商；5) 生成一份IQC质量月报（含图表）。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">告诉它"让步接收"如何计入口径；分析结论可直接用于供应商质量约谈，但处置决定由质量负责人定。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">告诉它"让步接收"如何计入口径；分析结论可直接用于供应商质量约谈，但处置决定由质量负责人定。</div></div>
     </div>
   </div>
 
@@ -637,11 +605,11 @@
   <div class="scn qa">
     <div class="scn-head"><span class="tag">Q2</span><h3>8D 报告与根因分析框架生成</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q2_质量问题描述_8D输入_示例.txt</code><span>一个真实质量问题描述（主控板通信间歇断连），演示从问题到8D框架的生成。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q2_质量问题描述_8D输入_示例.txt</code><a class="download" href="示例数据/质量管理/Q2_质量问题描述_8D输入_示例.txt" download>下载</a><span>一个真实质量问题描述（主控板通信间歇断连），验证从问题到 8D 框架的生成。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>出现质量异常时，质量工程师要按 8D 方法系统分析。WorkBuddy 可基于问题描述快速搭出 D1–D8 框架，并提供"人机料法环"根因分析思路与 CAPA 建议方向。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>8D 八步框架自动成型</li><li>5Why / 鱼骨图根因分析引导</li><li>纠正预防措施(CAPA)建议方向</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是资深质量工程师，精通8D方法。</span>这是一个客户反馈的质量问题描述（见附件）。请：1) 按8D方法生成报告框架(D1团队~D8总结)；2) 用"人机料法环"列出可能的根因方向，每个方向给出验证思路；3) 针对最可能的根因给出临时措施和长期纠正预防措施(CAPA)建议。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">AI 给的是分析框架和假设方向，真因仍需通过试验/数据验证；强调这能帮新人快速上手 8D，老手省去搭框架时间。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">AI 给的是分析框架和假设方向，真因仍需通过试验/数据验证；强调这能帮新人快速上手 8D，老手省去搭框架时间。</div></div>
     </div>
   </div>
 
@@ -649,11 +617,11 @@
   <div class="scn qa">
     <div class="scn-head"><span class="tag">Q3</span><h3>客户投诉处理与回复函撰写</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q3_客户投诉记录_示例.txt</code><span>一条带情绪、涉及合作关系的客诉原话，演示生成专业回复函+内部跟进表。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q3_客户投诉记录_示例.txt</code><a class="download" href="示例数据/质量管理/Q3_客户投诉记录_示例.txt" download>下载</a><span>一条带情绪、涉及合作关系的客诉原话，验证生成专业回复函+内部跟进表。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>客诉响应既要专业有担当，又要安抚客户情绪、明确改善承诺。WorkBuddy 可起草得体的客户回复函，并整理内部处理跟进表。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>专业、诚恳、有担当的回复函初稿</li><li>兼顾安抚情绪与维护合作关系</li><li>同步生成内部处理跟进表</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是质量客诉处理专员。</span>这是一条客户投诉记录（见附件）。请：1) 起草一封给客户的正式回复函，态度诚恳有担当、承诺明确改善措施、维护合作关系；2) 单独整理一张内部处理跟进表（问题点/措施/责任部门/时限）。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">回复函涉及对客承诺，发出前务必经质量负责人/相关部门确认；让它语气拿捏"专业而非推诿"。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">回复函涉及对客承诺，发出前需要经质量负责人/相关部门确认；让它语气拿捏"专业而非推诿"。</div></div>
     </div>
   </div>
 
@@ -661,11 +629,11 @@
   <div class="scn qa">
     <div class="scn-head"><span class="tag">Q4</span><h3>体系审核不符合项整改跟踪</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q4_体系审核不符合项_示例.xlsx</code><span>12条ISO9001内审不符合项（条款/等级/责任人/状态），演示分类统计与整改跟踪。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q4_体系审核不符合项_示例.xlsx</code><a class="download" href="示例数据/质量管理/Q4_体系审核不符合项_示例.xlsx" download>下载</a><span>12条ISO9001内审不符合项（条款/等级/责任人/状态），验证分类统计与整改跟踪。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>ISO9001 内审/外审产生大量不符合项需跟踪闭环。WorkBuddy 可按条款、部门、等级统计分布，识别高频问题，生成整改跟踪表。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>不符合项按条款/部门/等级统计</li><li>识别高频/重复发生的薄弱环节</li><li>生成整改跟踪表与到期提醒</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是体系管理工程师。</span>这是本次内审的不符合项清单。请：1) 按对应条款和发生部门统计分布；2) 找出问题最集中的条款和部门；3) 把"严重不符合"单独列出重点跟踪；4) 生成一张整改跟踪表（含建议整改时限）。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">让它对"重复出现的条款"重点提示，这往往是体系系统性问题；整改措施有效性仍需现场验证。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">让它对"重复出现的条款"重点提示，这往往是体系系统性问题；整改措施有效性仍需现场验证。</div></div>
     </div>
   </div>
 
@@ -673,11 +641,11 @@
   <div class="scn qa">
     <div class="scn-head"><span class="tag">Q5</span><h3>SPC 过程能力(CPK)分析</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q5_SPC过程数据_示例.xlsx</code><span>某关键尺寸50个连续测量值（已给规格上下限），演示CPK计算与过程能力判断。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q5_SPC过程数据_示例.xlsx</code><a class="download" href="示例数据/质量管理/Q5_SPC过程数据_示例.xlsx" download>下载</a><span>某关键尺寸50个连续测量值（已给规格上下限），验证 CPK 计算与过程能力判断。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>过程能力分析涉及均值、标准差、CPK 计算与判稳。WorkBuddy 可基于测量数据算出过程能力指数，判断是否满足要求并给出改善方向。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>自动计算均值、标准差、CP/CPK</li><li>对照规格判断过程能力等级</li><li>识别偏移/离散问题并给方向</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是SPC过程质量工程师。</span>这是某关键尺寸的50个连续测量值，规格为目标10.00、上限10.05、下限9.95。请：1) 计算均值、标准差、CP和CPK；2) 判断过程能力是否达标(CPK≥1.33)；3) 分析问题主要来自偏移还是离散；4) 给出改善建议。配一张数据分布图。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">明确规格上下限和目标值，计算才准确；CPK 结论是统计判断，工艺改善需结合现场。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">明确规格上下限和目标值，计算才准确；CPK 结论是统计判断，工艺改善需结合现场。</div></div>
     </div>
   </div>
 
@@ -685,11 +653,11 @@
   <div class="scn qa">
     <div class="scn-head"><span class="tag">Q6</span><h3>供应商质量记分卡与评级</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q6_供应商质量记分卡_示例.xlsx</code><span>6家供应商季度质量数据（合格率/准时率/投诉），演示加权评级与红黄绿分级。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/质量管理/Q6_供应商质量记分卡_示例.xlsx</code><a class="download" href="示例数据/质量管理/Q6_供应商质量记分卡_示例.xlsx" download>下载</a><span>6家供应商季度质量数据（合格率/准时率/投诉），验证加权评级与红黄绿分级。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>供应商质量评级需综合合格率、交付、投诉等多维度。WorkBuddy 可按权重计算综合得分、给出红黄绿分级与改进要求。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>多维质量指标加权综合评分</li><li>自动红黄绿分级排序</li><li>对落后供应商生成改进要求</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是供应商质量管理(SQE)工程师。</span>这是6家供应商的季度质量数据。请：1) 按批次合格率50%、准时交付率30%、质量投诉20%加权打分；2) 按得分做红(差)/黄(一般)/绿(优)分级；3) 排序输出记分卡；4) 对评为红色的供应商生成质量改进要求清单。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">权重和分级阈值你来定，告诉它即可；评级结果可作为供应商管理依据，淘汰/约谈决定由采购与质量共同把关。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">权重和分级阈值你来定，告诉它即可；评级结果可作为供应商管理依据，淘汰/约谈决定由采购与质量共同把关。</div></div>
     </div>
   </div>
 
@@ -697,16 +665,16 @@
   <div class="scn qa">
     <div class="scn-head"><span class="tag">Q7</span><h3>质量标准 / 法规检索与解读</h3></div>
     <div class="scn-body">
-      <div class="data none"><b>📎 示例数据</b><span>本场景无需上传文件——WorkBuddy 联网检索标准/法规原文，直接照提示词演示即可。</span></div>
+      <div class="data none"><b>📎 示例数据</b><span>本场景无需上传文件——WorkBuddy 联网检索标准/法规原文，可直接按提示词验证。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>电力设备涉及众多国标/行标与认证要求。WorkBuddy 可联网检索相关标准，梳理关键技术要求、试验项目与检验依据。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>实时检索相关标准/法规条文</li><li>提炼关键技术指标与试验要求</li><li>形成检验/验收依据速查</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是质量标准工程师。</span>帮我检索配电自动化终端(FTU)相关的国家标准和行业标准，整理：1) 主要适用标准有哪些；2) 关键的电气性能、环境适应性、电磁兼容试验要求；3) 型式试验通常包含哪些项目。给出标准编号和来源。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">要求它给出标准号便于核实；标准会更新，正式检验依据须以现行有效版本为准。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">要求它给出标准号便于核实；标准会更新，正式检验依据须以现行有效版本为准。</div></div>
     </div>
   </div>
 
   <!-- 9. 设计场景 -->
-  <h2 class="sec"><span class="no">9</span>设计团队 · 提效场景库</h2>
+  <h2 class="sec" id="sec-7"><span class="no">7</span>设计团队 · 提效场景库</h2>
   <p class="sec-desc">先说清一件事：长园这类"电力设备 + 智能装备"企业的"设计"，其实是<b>两条不同的线</b>——理解这点，才知道哪些用 WorkBuddy、哪些用专业设计工具 ardot。</p>
 
   <div class="twocol">
@@ -734,17 +702,17 @@
       <div class="tip" style="margin:10px 0 0;"><b>WorkBuddy 调用 ardot 的价值：</b>在同一个 WorkBuddy 入口里，用一句话/参考图生成可编辑界面稿、批量生成同风格图标、文生海报插画——即下面 D6、D9、D10 这些场景，依然是"和 WorkBuddy 对话"的体验。</div>
     </div>
   </div>
-  <div class="note" style="margin:-2px 0 20px;"><b>演讲口径提醒：</b>本场主角始终是 <b>WorkBuddy</b>。设计专场的主线是 WorkBuddy 辅助工程设计的文档脑力活（D1–D8）；当遇到软件界面、图标、海报这类视觉设计需求时，<b>WorkBuddy 可以顺势调用 ardot 这项设计能力</b>来一并解决——这是 WorkBuddy 能力版图的自然延伸，演示时从 WorkBuddy 入口进入即可，不必单独打开 ardot。本章共 <b>10 个场景</b>（D1–D10）。</div>
+  <div class="note" style="margin:-2px 0 20px;"><b>设计场景说明：</b>设计专场包含工程设计文档工作（D1–D8）与视觉设计辅助能力（D6、D9、D10）。软件界面、图标、海报等需求可在 WorkBuddy 入口中调用 ardot 设计能力完成。</div>
 
   <!-- D1 -->
   <div class="scn dsn">
     <div class="scn-head"><span class="tag">D1</span><h3>设计标准 / 规范检索与要点解读</h3></div>
     <div class="scn-body">
-      <div class="data none"><b>📎 示例数据</b><span>本场景无需上传文件——WorkBuddy 联网检索标准规范，直接照提示词演示即可。</span></div>
+      <div class="data none"><b>📎 示例数据</b><span>本场景无需上传文件——WorkBuddy 联网检索标准规范，可直接按提示词验证。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>设计前需吃透适用的国标/行标/设计规范。WorkBuddy 可检索相关标准，提炼对设计的硬性约束（如间距、绝缘、防护等级），形成设计依据。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>快速定位适用设计规范条文</li><li>提炼对设计的强制性要求</li><li>形成设计输入约束清单</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是电气设计工程师。</span>帮我检索中压配电柜设计相关的国标/行标，提炼对设计的硬性约束：1) 电气间隙与爬电距离要求；2) 绝缘配合与耐压等级；3) 防护等级(IP)与温升限值；4) 对开关设备的强制性安全要求。整理成设计约束清单，注明标准来源。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">让它列出标准号；设计取值最终须由设计师对照现行标准确认，AI 用于快速定位和理解。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">让它列出标准号；设计取值最终须由设计师对照现行标准确认，AI 用于快速定位和理解。</div></div>
     </div>
   </div>
 
@@ -752,11 +720,11 @@
   <div class="scn dsn">
     <div class="scn-head"><span class="tag">D2</span><h3>技术设计方案初稿撰写</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D2_设计输入需求_示例.txt</code><span>新一代配电终端的设计输入需求（功能/通信/电气/可靠性/成本），演示生成方案框架。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D2_设计输入需求_示例.txt</code><a class="download" href="示例数据/设计/D2_设计输入需求_示例.txt" download>下载</a><span>新一代配电终端的设计输入需求（功能/通信/电气/可靠性/成本），验证生成方案框架。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>立项后要把设计输入转化为技术设计方案。WorkBuddy 可基于设计输入需求，搭出方案框架（架构、技术路线、选型方向、可靠性、合规对照）。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>设计输入 → 结构化方案框架</li><li>覆盖架构/技术路线/选型/可靠性</li><li>自动生成标准符合性对照</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是产品总体设计工程师。</span>这是新一代配电终端的设计输入需求（见附件）。请起草一份《技术设计方案》初稿框架，包含：方案概述、系统架构、关键技术路线、主要器件选型方向、可靠性设计、与国标/行标的符合性对照、主要风险与对策。先给目录再展开。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">先把设计输入和约束讲清楚，方案才有针对性；具体技术参数与选型须由设计师专业判断，AI 负责成框架、补结构。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">先明确设计输入和约束，方案才有针对性；具体技术参数与选型须由设计师专业判断，AI 负责成框架、补结构。</div></div>
     </div>
   </div>
 
@@ -764,11 +732,11 @@
   <div class="scn dsn">
     <div class="scn-head"><span class="tag">D3</span><h3>设计评审意见汇总与闭环跟踪</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D3_设计评审意见_示例.xlsx</code><span>15条设计评审意见（类别/严重度/责任人/状态），演示分类统计与闭环跟踪表。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D3_设计评审意见_示例.xlsx</code><a class="download" href="示例数据/设计/D3_设计评审意见_示例.xlsx" download>下载</a><span>15条设计评审意见（类别/严重度/责任人/状态），验证分类统计与闭环跟踪表。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>设计评审产生大量分散意见需逐条闭环。WorkBuddy 可按类别、严重程度归类统计，区分"必须修改/建议优化"，生成闭环跟踪表。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>评审意见按类别/严重度归类</li><li>突出"必须修改"项优先处理</li><li>生成意见闭环跟踪表</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是设计项目工程师。</span>这是某新产品的设计评审意见汇总。请：1) 按类别(电气/结构/软件等)统计意见数量；2) 把"必须修改"的意见单独列出并按责任人分组；3) 统计当前闭环情况(已关闭/处理中/待处理)；4) 生成一张待办闭环跟踪表。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">让它把"必须修改"和"建议优化"严格分开，避免遗漏强制项；意见关闭需评审组确认。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">让它把"必须修改"和"建议优化"严格分开，避免遗漏强制项；意见关闭需评审组确认。</div></div>
     </div>
   </div>
 
@@ -776,11 +744,11 @@
   <div class="scn dsn">
     <div class="scn-head"><span class="tag">D4</span><h3>BOM 核对与成本 / 齐套分析</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D4_产品BOM清单_示例.xlsx</code><span>某型配电终端BOM（编码/用量/供应商/单价），演示成本测算与单一供应商风险识别。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D4_产品BOM清单_示例.xlsx</code><a class="download" href="示例数据/设计/D4_产品BOM清单_示例.xlsx" download>下载</a><span>某型配电终端BOM（编码/用量/供应商/单价），验证成本测算与单一供应商风险识别。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>BOM 是设计与制造的桥梁。WorkBuddy 可核对 BOM、测算整机物料成本、识别高价值件与单一供应商风险，辅助降本设计。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>整机物料成本自动测算</li><li>高价值件 / 成本占比排序</li><li>单一供应商依赖风险提示</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是产品设计工程师。</span>这是某型配电终端的BOM清单。请：1) 计算整机物料总成本；2) 按成本占比排序，找出成本最高的前3项；3) 识别只有单一供应商的关键物料并提示供应风险；4) 给出可能的降本方向建议。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">降本建议供参考，替换器件须经设计验证和质量确认；可结合 D5 变更场景联动演示。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">降本建议供参考，替换器件须经设计验证和质量确认；可结合 D5 变更场景联动使用。</div></div>
     </div>
   </div>
 
@@ -788,11 +756,11 @@
   <div class="scn dsn">
     <div class="scn-head"><span class="tag">D5</span><h3>设计变更(ECN)影响分析</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D5_设计变更ECN_示例.txt</code><span>一个真实变更场景（通信芯片换料，关联Q2质量问题），演示多维影响分析。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D5_设计变更ECN_示例.txt</code><a class="download" href="示例数据/设计/D5_设计变更ECN_示例.txt" download>下载</a><span>一个真实变更场景（通信芯片换料，关联Q2质量问题），验证多维影响分析。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>设计变更牵一发而动全身。WorkBuddy 可基于变更内容，系统分析对硬件、软件、测试认证、在产品、成本交期的影响，避免漏评。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>变更影响多维度系统梳理</li><li>提示是否需重新型式试验/认证</li><li>生成变更影响分析表与通知</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是设计变更管理工程师。</span>这是一份设计变更说明（通信芯片换料，见附件）。请生成《设计变更影响分析表》，覆盖：1) 硬件(PCB/BOM)；2) 固件/软件；3) 测试与认证(是否需重新型式试验)；4) 已发货/在产产品；5) 成本与交期；6) 需通知的内外部相关方。并起草一份对内变更通知。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">让它特别提示"是否触发重新认证"——这是换料最易踩的坑；正式变更须走 ECN 评审流程。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">让它特别提示"是否触发重新认证"——这是换料最易踩的坑；正式变更须走 ECN 评审流程。</div></div>
     </div>
   </div>
 
@@ -800,11 +768,11 @@
   <div class="scn dsn">
     <div class="scn-head"><span class="tag">D7</span><h3>设备选型与校核计算</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D7_设备选型计算输入_示例.xlsx</code><span>中压配电设备选型输入参数（电压/电流/短路/环境），演示选型推荐与校核。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D7_设备选型计算输入_示例.xlsx</code><a class="download" href="示例数据/设计/D7_设备选型计算输入_示例.xlsx" download>下载</a><span>中压配电设备选型输入参数（电压/电流/短路/环境），验证选型推荐与校核。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>电力设备设计需大量选型与校核计算（载流、短路、温升、降容）。WorkBuddy 可基于输入参数完成初步选型计算并说明依据。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>按输入参数完成选型计算</li><li>载流/短路/降容等校核引导</li><li>给出选型建议与计算依据</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是电气设计工程师。</span>这是中压配电设备的选型输入参数（见附件）。请：1) 根据额定电压/电流和短路参数，推荐主要设备规格；2) 考虑环境温度和海拔做降容校核；3) 校核短时耐受电流是否满足；4) 列出计算过程和依据，给出选型建议。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">务必让它写出计算过程和公式来源以便复核；选型结果是初步建议，最终须设计师按规范校核确认。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">需要让它写出计算过程和公式来源以便复核；选型结果是初步建议，最终须设计师按规范校核确认。</div></div>
     </div>
   </div>
 
@@ -812,25 +780,25 @@
   <div class="scn dsn">
     <div class="scn-head"><span class="tag">D8</span><h3>图纸文档版本核对与归档</h3></div>
     <div class="scn-body">
-      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D8_图纸文档目录_示例.xlsx</code><span>16条图纸/文档目录（图号/版本/状态），演示版本核对与缺漏/作废检查。</span></div>
+      <div class="data"><b>📎 配套示例数据</b><code>示例数据/设计/D8_图纸文档目录_示例.xlsx</code><a class="download" href="示例数据/设计/D8_图纸文档目录_示例.xlsx" download>下载</a><span>16条图纸/文档目录（图号/版本/状态），验证版本核对与缺漏/作废检查。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>设计文档版本多、易混乱。WorkBuddy 可核对图纸文档目录，找出版本不一致、缺漏、未及时作废等问题，辅助受控归档。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>按类型/状态梳理文档清单</li><li>识别审核中/作废/缺漏项</li><li>生成归档检查清单</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">你是设计文档管理员。</span>这是某产品的图纸文档目录。请：1) 按文档类型分类统计；2) 找出仍处于"审核中"和"作废"状态的文档；3) 检查是否存在某类图纸缺失（对照常规产品应有的图纸类型）；4) 生成一份发布前归档检查清单。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">告诉它"标准产品应包含哪些图纸类型"，缺漏检查才靠谱；归档以受控流程为准。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">告诉它"标准产品应包含哪些图纸类型"，缺漏检查才靠谱；归档以受控流程为准。</div></div>
     </div>
   </div>
 
-  <div class="note" style="margin:6px 0 18px; background:#f0fbf6; border-color:#bfe6d4; color:#0c5a42;"><b>下面 D6 / D9 / D10 是软件界面 / 视觉设计这条线 —— 在 WorkBuddy 里调用 ardot 设计能力完成。</b>演示时仍从 WorkBuddy 入口发起，把界面/图标/海报这类需求交给它，由 WorkBuddy 顺势调起 ardot 的设计能力出稿，全程是"和 WorkBuddy 对话"的一致体验。</div>
+  <div class="note" style="margin:6px 0 18px; background:#f0fbf6; border-color:#bfe6d4; color:#0c5a42;"><b>下面 D6 / D9 / D10 是软件界面 / 视觉设计这条线 —— 在 WorkBuddy 里调用 ardot 设计能力完成。</b>使用时仍从 WorkBuddy 入口发起，把界面/图标/海报这类需求交给它，由 WorkBuddy 顺势调起 ardot 的设计能力出稿，全程是"和 WorkBuddy 对话"的一致体验。</div>
 
   <!-- D6 ardot -->
   <div class="scn dsn">
     <div class="scn-head"><span class="tag">D6</span><h3>软件平台界面(UI)原型生成</h3></div>
     <div class="scn-body">
-      <div class="data ardot"><b>🎨 能力 / 示例数据</b><code>WorkBuddy 调用 ardot 设计能力</code><code>示例数据/设计/D6_界面需求描述_ardot_示例.txt</code><span>在 WorkBuddy 里一句话描述，即可生成配电监控平台仪表盘界面初稿。</span></div>
+      <div class="data ardot"><b>🎨 能力 / 示例数据</b><code>WorkBuddy 调用 ardot 设计能力</code><code>示例数据/设计/D6_界面需求描述_ardot_示例.txt</code><a class="download" href="示例数据/设计/D6_界面需求描述_ardot_示例.txt" download>下载</a><span>在 WorkBuddy 里一句话描述，即可生成配电监控平台仪表盘界面初稿。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>长园的智能配电监控平台、SCADA 大屏、运维后台都需要先做界面原型。在 WorkBuddy 中调用 ardot 设计能力，用一段描述就能生成<b>可编辑</b>的高保真界面稿，告别从零拉框、反复改图。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>文字/参考图 → 实时生成可编辑界面稿</li><li>多轮自然语言微调（改色、加按钮、出深色版）</li><li>结合团队组件库生成，风格统一不零散</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">（在 WorkBuddy 中输入，由它调用 ardot 出图）</span>帮我设计一个"配电运维监控平台"的首页仪表盘（Web 后台，蓝色科技风）：顶部导航栏，左侧竖向菜单(实时监控/设备台账/告警中心/巡检工单/能耗统计)，主区域含4个关键指标卡片、区域配电网拓扑面板、实时告警列表、24小时负荷曲线和设备状态环形图。适合大屏展示。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">演示从 WorkBuddy 入口发起，强调生成的是"可编辑设计稿"而非死图，可继续多轮微调；让听众感受到设计能力是 WorkBuddy 的自然延伸。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">从 WorkBuddy 入口发起，强调生成的是"可编辑设计稿"而非死图，可继续多轮微调；体现设计能力是 WorkBuddy 的自然延伸。</div></div>
     </div>
   </div>
 
@@ -838,11 +806,11 @@
   <div class="scn dsn">
     <div class="scn-head"><span class="tag">D9</span><h3>图标库 / 设计规范 / 组件体系沉淀</h3></div>
     <div class="scn-body">
-      <div class="data ardot"><b>🎨 能力 / 示例数据</b><code>WorkBuddy 调用 ardot 设计能力</code><code>示例数据/设计/D9_图标库与设计规范需求_ardot_示例.txt</code><span>批量生成同风格电力运维图标 + 建立设计令牌。</span></div>
+      <div class="data ardot"><b>🎨 能力 / 示例数据</b><code>WorkBuddy 调用 ardot 设计能力</code><code>示例数据/设计/D9_图标库与设计规范需求_ardot_示例.txt</code><a class="download" href="示例数据/设计/D9_图标库与设计规范需求_ardot_示例.txt" download>下载</a><span>批量生成同风格电力运维图标 + 建立设计令牌。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>长园多个软件产品界面风格不统一、图标各画各的。在 WorkBuddy 中调用 ardot 设计能力，可批量生成整套同风格矢量图标，建立颜色/字号/间距等设计变量(令牌)，沉淀为可复用的设计系统。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>一键批量生成整套统一风格矢量图标</li><li>建立设计令牌，支持浅色/深色双主题</li><li>统一多产品线 UI 资产，告别风格混乱</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">（在 WorkBuddy 中输入，由它调用 ardot 出图）</span>生成一套电力运维主题矢量图标，线性风格、统一描边、科技蓝，包含：变压器、配电柜、断路器、电表、告警铃、巡检、工单、能耗、地图定位、设备在线、设备离线、设置齿轮，共12个风格统一，导出可编辑并保存为风格模板。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">对有多个软件产品的团队价值最大——一次建立规范，长期复用；可现场展示"在 WorkBuddy 里一句话出一整套图标"的批量能力。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">对有多个软件产品的团队价值最大——一次建立规范，长期复用；可展示"在 WorkBuddy 里一句话出一整套图标"的批量能力。</div></div>
     </div>
   </div>
 
@@ -850,24 +818,24 @@
   <div class="scn dsn">
     <div class="scn-head"><span class="tag">D10</span><h3>运营海报 / 展会宣传视觉物料生成</h3></div>
     <div class="scn-body">
-      <div class="data ardot"><b>🎨 能力 / 示例数据</b><code>WorkBuddy 调用 ardot 设计能力</code><code>示例数据/设计/D10_运营海报宣传图需求_ardot_示例.txt</code><span>在 WorkBuddy 里文生海报/宣传图，多风格快速出稿。</span></div>
+      <div class="data ardot"><b>🎨 能力 / 示例数据</b><code>WorkBuddy 调用 ardot 设计能力</code><code>示例数据/设计/D10_运营海报宣传图需求_ardot_示例.txt</code><a class="download" href="示例数据/设计/D10_运营海报宣传图需求_ardot_示例.txt" download>下载</a><span>在 WorkBuddy 里文生海报/宣传图，多风格快速出稿。</span></div>
       <div class="row"><div class="lbl"><span class="dot"></span>场景说明</div><p>长园常参加电力、储能、新能源汽车展会，需要展位海报、产品宣传图、公众号配图等运营视觉。在 WorkBuddy 中调用 ardot 设计能力，一段描述即可<b>多风格快速出稿</b>，再二次编辑。</p></div>
       <div class="row"><div class="lbl"><span class="dot"></span>提效要点</div><ul class="pts"><li>文生图快速出多版运营/展会视觉物料</li><li>多风格可选，生成稿可继续编辑</li><li>与 WorkBuddy 文案能力配合：先拟文案再出图</li></ul></div>
       <div class="row"><div class="lbl"><span class="dot"></span>示例提示词</div><div class="prompt"><span class="c">（在 WorkBuddy 中输入，由它调用 ardot 出图）</span>设计一张电力储能行业展会的展位主视觉海报(竖版)，主题"智慧配电·安全可靠"，科技感、蓝色调，预留产品名与LOGO位置，生成3个风格版本供我选择。</div></div>
-      <div class="row"><div class="lbl"><span class="dot"></span>沟通要点</div><div class="talk">可与商务/运营的文案场景串起来演示：先让 WorkBuddy 拟好展会主题文案，再顺势出视觉稿，体现"一个入口、一气呵成"；正式对外物料建议设计师在生成稿上精修并确认字体版权。</div></div>
+      <div class="row"><div class="lbl"><span class="dot"></span>使用建议</div><div class="talk">可与商务/运营的文案场景串联使用：先让 WorkBuddy 拟好展会主题文案，再顺势出视觉稿，体现"一个入口、一气呵成"；正式对外物料建议设计师在生成稿上精修并确认字体版权。</div></div>
     </div>
   </div>
 
-  <!-- 10. 综合全流程案例 -->
-  <h2 class="sec"><span class="no">10</span>综合案例 · AI 搞定招投标全流程（压轴演示）</h2>
-  <p class="sec-desc">前面的场景多是"一句话搞定"的原子任务。这个压轴案例不一样——它是一条<b>端到端闭环工作流</b>，串起<b>多轮操作、多个 Skill、多个连接器</b>，最能体现 WorkBuddy 作为"会干活的同事"而非"问答机器人"的综合实力。招投标也正是长园电力 EPC 业务的核心命脉。</p>
+  <!-- 8. 综合全流程案例 -->
+  <h2 class="sec" id="sec-8"><span class="no">8</span>综合案例 · AI 搞定招投标全流程</h2>
+  <p class="sec-desc">前面的场景多是面向单点任务的效率提升，招投标综合案例则体现它是一条<b>端到端闭环工作流</b>，串起<b>多轮操作、多个 Skill、多个连接器</b>，能够体现 WorkBuddy 在复杂流程中的综合协同能力。招投标也正是长园电力 EPC 业务的核心命脉。</p>
 
   <div class="flag">
     <span class="ftag">FLAGSHIP · 全流程闭环</span>
     <h3>从一条标讯，到一份可提交的标书，再到中标复盘</h3>
     <p>不再是零散提问，而是把 WorkBuddy 配置成一个"投标助手"：它持续追踪标讯、拆解招标文件、调用知识库生成标书、合规审查估分、生成提交清单，最后把经验沉淀回知识库——一次配置，终身复用，越投越准。</p>
     <div class="caps2">
-      <span class="c2">⏱️ 建议演示时长 12–15 分钟</span>
+      <span class="c2">端到端流程示例</span>
       <span class="c2">🔁 10 个环节闭环</span>
       <span class="c2">🧩 多 Skill + 多连接器协同</span>
       <span class="c2">📎 配套贯穿式示例数据</span>
@@ -880,14 +848,14 @@
     <div class="ci out"><div class="h">阶段性产出</div><div class="tags"><span class="tg">作战地图</span><span class="tg">标书初稿</span><span class="tg">估分报告</span><span class="tg">提交清单</span><span class="tg">复盘沉淀</span></div></div>
   </div>
 
-  <div class="data"><b>📎 配套贯穿式示例数据</b><code>示例数据/综合案例-招投标/</code><span>① 招标文件完整版.txt　② 公司资质台账.xlsx（含已具备/缺失/临期）　③ 历史投标方案库索引.xlsx。一套数据贯穿全程演示。</span></div>
+  <div class="data"><b>📎 配套贯穿式示例数据</b><code>示例数据/综合案例-招投标_示例数据.zip</code><a class="download" href="示例数据/综合案例-招投标_示例数据.zip" download>下载</a><span>① 招标文件完整版.txt　② 公司资质台账.xlsx（含已具备/缺失/临期）　③ 历史投标方案库索引.xlsx。一套数据贯穿全流程。</span></div>
 
-  <!-- 演示前准备清单 -->
-  <h3 class="sub" style="font-size:17px;font-weight:700;margin:26px 0 6px;">演示前准备清单（务必提前 1 天完成并验证）</h3>
-  <p class="sec-desc" style="margin-bottom:16px;">这个综合案例要跑通，依赖 Skill、连接器、知识库三者就位。下面把"装什么、配什么、把哪些文件放哪里"逐项讲清楚——照着做，现场才不会卡。</p>
+  <!-- 综合案例运行条件 -->
+  <h3 class="sub" style="font-size:17px;font-weight:700;margin:26px 0 6px;">综合案例运行条件</h3>
+  <p class="sec-desc" style="margin-bottom:16px;">该综合案例依赖 Skill、连接器与知识库三类能力协同。以下内容说明案例运行所需的能力组件与样例数据组织方式。</p>
 
   <div class="prep">
-    <h3><span class="pn">A</span>安装 / 确认 Skill（技能）</h3>
+    <h3><span class="pn">A</span>能力组件</h3>
     <p class="pdesc">WorkBuddy 暂无单独的"招投标"打包技能，本案例用几个<b>通用能力 Skill 组合</b>完成。在对话框输入"/"或说"帮我安装 XX 技能"即可调起技能市场安装。</p>
     <div class="prep-item">
       <div class="pi-h"><span class="pill skill">SKILL</span>文档处理（docx / pdf）<span class="pill note">读招标文件、出标书</span></div>
@@ -939,7 +907,7 @@
     <div class="prep-item">
       <div class="pi-h"><span class="pill conn">连接器</span>标讯数据源 <span class="pill note">环节③标讯追踪</span></div>
       <ol>
-        <li>若有招标网/千里马等正式数据源 API，按其文档接入；现场<b>若无可用源，则用"联网检索 Skill + 一段示例标讯文本"替代演示</b>，效果一致。</li>
+        <li>若有招标网/千里马等正式数据源 API，按其文档接入；如暂未接入正式数据源，可使用"联网检索 Skill + 示例标讯文本"完成同类流程验证。</li>
       </ol>
     </div>
     <div class="prep-item">
@@ -951,33 +919,32 @@
   </div>
 
   <div class="prep">
-    <h3><span class="pn">C</span>在工具里准备样例数据（把文件放到对应位置）</h3>
-    <p class="pdesc">"知识库要放哪些文件、放哪里"是最常被忽略的一步。下面讲清每份示例数据的落点。</p>
+    <h3><span class="pn">C</span>样例数据准备</h3>
+    <p class="pdesc">知识库中的资料完整度会直接影响后续生成与检索质量，以下为样例数据组织建议。</p>
     <div class="prep-item">
       <div class="pi-h"><span class="pill kb">知识库</span>上传到乐享"长园投标资料库"</div>
       <ol>
-        <li>把 <code class="path">示例数据/综合案例-招投标/02_公司资质台账_示例.xlsx</code> 上传，作为"公司资质"分类。</li>
-        <li>把 <code class="path">示例数据/综合案例-招投标/03_历史投标方案库索引_示例.xlsx</code> 上传，作为"历史投标方案"分类。</li>
+        <li>把 <code class="path">示例数据/综合案例-招投标/02_公司资质台账_示例.xlsx</code> <a class="download" href="示例数据/综合案例-招投标/02_公司资质台账_示例.xlsx" download>下载</a> 上传，作为"公司资质"分类。</li>
+        <li>把 <code class="path">示例数据/综合案例-招投标/03_历史投标方案库索引_示例.xlsx</code> <a class="download" href="示例数据/综合案例-招投标/03_历史投标方案库索引_示例.xlsx" download>下载</a> 上传，作为"历史投标方案"分类。</li>
         <li>另把（前面商务场景用的）公司产品方案、资质证书扫描件一并放入，资料越全，AI 生成越准。</li>
       </ol>
     </div>
     <div class="prep-item">
-      <div class="pi-h"><span class="pill note">本地文件夹</span>桌面建一个演示文件夹</div>
+      <div class="pi-h"><span class="pill note">本地文件夹</span>准备案例文件夹</div>
       <ol>
-        <li>把 <code class="path">示例数据/综合案例-招投标/01_招标文件_完整版_示例.txt</code> 放到桌面 <code>招投标演示</code> 文件夹，演示"上传招标文件"时直接取用。</li>
+        <li>把 <code class="path">示例数据/综合案例-招投标/01_招标文件_完整版_示例.txt</code> <a class="download" href="示例数据/综合案例-招投标/01_招标文件_完整版_示例.txt" download>下载</a> 放到桌面 <code>招投标案例</code> 文件夹，用于上传招标文件环节。</li>
         <li>WorkBuddy 可直接读取本地文件夹中的补充材料，无需逐个粘贴。</li>
       </ol>
     </div>
     <div class="prep-item">
       <div class="pi-h"><span class="pill note">提示</span>脱敏与备份</div>
       <ol>
-        <li>本套示例数据已全部脱敏，可放心现场演示；切勿使用真实未披露的招标/报价数据。</li>
-        <li>建议每个环节<b>提前跑一遍并截图</b>，现场"边跑关键环节、其余用预产出衔接"。</li>
+        <li>本套示例数据已全部脱敏，适合用于案例展示；正式使用时应遵守企业数据安全与信息披露要求。</li>
       </ol>
     </div>
   </div>
 
-  <div class="note" style="margin:0 0 18px;"><b>我对参考流程的增补：</b>参考资料给的是"知识库→技能→拆解→生成→归档→审查"6 步，已很完整。我补了 4 个真实投标中常被忽略、却最体现 AI 价值的环节（下图绿色标记）：<b>③投标决策（投不投）、⑤澄清答疑+报价测算、⑨定稿+提交清单、⑩结果复盘沉淀</b>——让流程从"做标书"升级为"赢标书"的完整闭环。流程图见上方。</div>
+  <div class="note" style="margin:0 0 18px;"><b>流程亮点：</b>本案例覆盖知识库建设、技能配置、标讯研判、招标文件拆解、澄清答疑、报价测算、标书生成、合规审查、提交清单与结果复盘，形成从"做标书"到"赢标书"的完整闭环。</div>
 
   <!-- 闭环阶段 A：准备 -->
   <div class="stepf ori">
@@ -996,7 +963,7 @@
     <div class="sh"><span class="num">2</span><h4>配置投标技能</h4><span class="badge">原流程 · 准备</span></div>
     <div class="sb">
       <div class="meta"><span class="m sk">标讯查找</span><span class="m sk">标书制作</span><span class="m sk">标书审查</span></div>
-      <div class="prepbox"><b>本步依赖：</b>已安装 <code>文档处理(docx/pdf)</code>、<code>表格处理(xlsx)</code>、<code>联网检索</code> 三类 Skill（见准备清单 A）。这三者组合即覆盖"标讯查找/标书制作/标书审查"全链路，无需单独的招投标打包技能。</div>
+      <div class="prepbox"><b>本步依赖：</b>已安装 <code>文档处理(docx/pdf)</code>、<code>表格处理(xlsx)</code>、<code>联网检索</code> 三类 Skill。这三者组合即覆盖"标讯查找/标书制作/标书审查"全链路，无需单独的招投标打包技能。</div>
       <div class="desc">给 WorkBuddy 装上三大投标 Skill，覆盖"标讯追踪 → 标书制作 → 合规审查"全链路。一次配置，以后每次投标直接复用。</div>
       <div class="out2">产出：一个常驻的"投标助手"配置</div>
     </div>
@@ -1004,7 +971,7 @@
 
   <!-- 3 增补：标讯+决策 -->
   <div class="stepf add">
-    <div class="sh"><span class="num">3</span><h4>标讯捕获 + 投标决策（投不投？）</h4><span class="badge">＋ 增补环节</span></div>
+    <div class="sh"><span class="num">3</span><h4>标讯捕获 + 投标决策</h4><span class="badge">＋ 增补环节</span></div>
     <div class="sb">
       <div class="meta"><span class="m sk">标讯查找</span><span class="m cn">连接器 标讯源/企查查</span></div>
       <div class="prepbox"><b>本步依赖：</b>连接器 <code>标讯数据源</code>（无正式源时用 <code>联网检索 Skill</code> + 一段示例标讯文本替代）；可选 <code>企查查</code> 查招标方/对手背景。</div>
@@ -1019,7 +986,7 @@
     <div class="sh"><span class="num">4</span><h4>AI 拆解招标文件</h4><span class="badge">原流程 · 标书制作①</span></div>
     <div class="sb">
       <div class="meta"><span class="m sk">标书制作</span><span class="m in">输入 招标文件</span></div>
-      <div class="prepbox"><b>本步依赖：</b><code>文档处理</code>读招标文件 + <code>表格处理</code>出对比表 + 连接器 <code>乐享</code>取资质台账；<b>放什么：</b>从桌面 <code>招投标演示</code> 文件夹上传 <code>01_招标文件_完整版.txt</code>，知识库需已有 <code>02_资质台账</code> 与 <code>03_历史方案库</code>。</div>
+      <div class="prepbox"><b>本步依赖：</b><code>文档处理</code>读招标文件 + <code>表格处理</code>出对比表 + 连接器 <code>乐享</code>取资质台账；<b>放什么：</b>从桌面 <code>招投标案例</code> 文件夹上传 <code>01_招标文件_完整版.txt</code>，知识库需已有 <code>02_资质台账</code> 与 <code>03_历史方案库</code>。</div>
       <div class="desc">上传招标文件，WorkBuddy 一次分析、四份产出：评分表（采分项清单）、准备材料清单、资质对比表（已有/缺失）、最接近的历史方案+区别标注。这就是投标的"作战地图"。</div>
       <div class="pr"><span class="c">（上传 01_招标文件_完整版.txt）</span>拆解这份招标文件：1) 提取评分办法做成采分项清单；2) 列出投标文件要准备的全部材料；3) 对照知识库资质台账做"已有/缺失"对比表；4) 从历史方案库找最接近的一版并标注区别。废标条款单独标红。</div>
       <div class="out2">产出：评分表 + 材料清单 + 资质对比表 + 历史方案匹配</div>
@@ -1043,7 +1010,7 @@
     <div class="sh"><span class="num">6</span><h4>AI 生成标书初稿</h4><span class="badge">原流程 · 标书制作②</span></div>
     <div class="sb">
       <div class="meta"><span class="m sk">标书制作</span><span class="m in">人工核验风险项</span></div>
-      <div class="prepbox"><b>本步依赖：</b><code>文档处理(docx)</code>出标书 + 连接器 <code>乐享</code>调历史方案与产品资料；<b>放什么：</b>把本次补充材料（如针对性技术参数）放入桌面 <code>招投标演示</code> 文件夹供其读取。</div>
+      <div class="prepbox"><b>本步依赖：</b><code>文档处理(docx)</code>出标书 + 连接器 <code>乐享</code>调历史方案与产品资料；<b>放什么：</b>把本次补充材料（如针对性技术参数）放入桌面 <code>招投标案例</code> 文件夹供其读取。</div>
       <div class="desc">指定参考的历史方案与调整方向，补充材料放进文件夹，WorkBuddy 融合"知识库+补充材料+招标要求"产出第一版标书，并<b>主动标注需人工确认的风险项</b>（价格条款、技术承诺、法律表述）。人机协作，不是人机替代。</div>
       <div class="pr"><span class="c">（在 WorkBuddy 中）</span>以历史方案 H001 打底，按本次招标的评分点逐条响应，生成投标文件初稿（技术响应+商务响应+实施方案）。技术参数严格对照招标要求，凡是需要我确认的报价、承诺、法律表述都标注出来，不要自行编造。</div>
       <div class="out2">产出：标书初稿（含风险项标注）　⚠️ 人工核验技术参数、报价等关键数据</div>
@@ -1055,7 +1022,7 @@
     <div class="sh"><span class="num">7</span><h4>资质归档 + 缺失清单</h4><span class="badge">原流程 · 标书制作③</span></div>
     <div class="sb">
       <div class="meta"><span class="m sk">标书制作</span><span class="m cn">连接器 知识库</span></div>
-      <div class="prepbox"><b>本步依赖：</b>连接器 <code>乐享</code>取已有资质 + 环节④的材料清单；<b>看效果：</b><code>02_公司资质台账</code>里已埋真实缺口（第3个业绩、审计报告、信用截图缺失，ISO45001临期），现场能直接演示"AI 揪出缺什么"。</div>
+      <div class="prepbox"><b>本步依赖：</b>连接器 <code>乐享</code>取已有资质 + 环节④的材料清单；<b>案例亮点：</b><code>02_公司资质台账</code>里已埋真实缺口（第3个业绩、审计报告、信用截图缺失，ISO45001临期），可直观看到 AI 对材料缺口的识别能力。</div>
       <div class="desc">从知识库提取可用资质自动归档到投标材料文件夹，同时告诉你<b>还缺什么</b>。本案示例数据里就埋了真实缺口：第3个业绩、近三年审计报告、信用截图缺失，ISO45001 临期需续。</div>
       <div class="pr"><span class="c">（在 WorkBuddy 中）</span>按材料清单，把知识库里已有的资质文件归类整理好，并列出还需人工补充的资质清单，每项说明用途和获取方式；临近到期的证书也提醒我。</div>
       <div class="out2">产出：已归档资质 + 缺失清单（带用途说明与到期提醒）</div>
@@ -1098,38 +1065,31 @@
     </div>
   </div>
 
-  <div class="note"><b>为什么用它压轴？</b>单个原子场景展示的是"AI 能帮我做某件事"；这个综合案例展示的是"AI 能帮我把一整摊子事串起来做完"——多 Skill 接力、多连接器打通、多轮人机协作、还能自我沉淀。这正是 WorkBuddy 区别于普通 AI 问答工具的核心价值，建议作为现场的高潮和"记忆点"。</div>
+  <div class="note"><b>案例价值：</b>单个原子场景体现的是单点提效，招投标综合案例体现的是多 Skill 接力、多连接器打通、多轮人机协作与知识沉淀能力。这正是 WorkBuddy 区别于普通 AI 问答工具的核心价值。</div>
 
-  <!-- 11. 现场编排 -->
-  <h2 class="sec"><span class="no">11</span>现场演讲编排建议（约 125 分钟）</h2>
-  <p class="sec-desc">演示为主、PPT 为辅。核心原则：<b>少讲功能，多现场出活</b>。结构上建议"原子场景分职能快闪 + 招投标全流程压轴"——先用各职能小场景让每类人有共鸣，再用综合案例把全场推向高潮。</p>
+  <!-- 9. 应用推进 -->
+  <h2 class="sec" id="sec-9"><span class="no">9</span>应用推进建议</h2>
+  <p class="sec-desc">建议采用"典型场景试点 + 综合流程落地"的推进方式：先从各职能团队的高频场景切入，再选择招投标等跨部门流程做端到端闭环。</p>
   <div class="card">
     <table class="agenda">
-      <tr><th>时段</th><th>环节</th><th>形式与要点</th></tr>
-      <tr><td>0–10 min</td><td>开场 · 一个真实场景震撼开局</td><td>现场拿长园风格材料（如招标公告/会议记录）当场生成结果，先给"哇"再讲原理</td></tr>
-      <tr><td>10–20 min</td><td>WorkBuddy 是什么 · 能力速览</td><td>PPT 辅助，3 分钟讲清定位，配 1-2 个能力小演示</td></tr>
-      <tr><td>20–28 min</td><td>沟通方法论 · 五要素框架</td><td>教"角色+任务+背景+材料+产出"，现场演示"烂提示词 vs 好提示词"对比</td></tr>
-      <tr><td>28–40 min</td><td>财务专场实战</td><td>精选演示（推荐 F1 报表合并、F2 应收、F9 定时任务）</td></tr>
-      <tr><td>40–52 min</td><td>商务专场实战</td><td>精选演示（推荐 B1 招标解析、B3 合同审查、B6 跨境翻译）</td></tr>
-      <tr><td>52–63 min</td><td>运营专场实战</td><td>精选演示（推荐 O4 会议纪要、O1 比价、O3 项目预警）</td></tr>
-      <tr><td>63–74 min</td><td>质量管理专场实战</td><td>精选演示（推荐 Q2 8D报告、Q5 CPK分析、Q3 客诉回复）</td></tr>
-      <tr><td>74–88 min</td><td>设计专场实战</td><td>工程线推荐 D5 变更影响、D4 BOM成本；视觉线在 WorkBuddy 里调用 ardot 实演 D6 文生界面、D10 海报生成</td></tr>
-      <tr><td>88–108 min</td><td>🔥 压轴 · 招投标全流程综合案例</td><td>用一套贯穿数据，串演标讯研判→拆解→生成→审查估分→提交清单→复盘，展现多 Skill/多连接器协同的闭环实力</td></tr>
-      <tr><td>108–125 min</td><td>互动答疑 + 落地号召</td><td>邀请现场出题当场解、发放提示词卡片、公布试点计划</td></tr>
+      <tr><th>阶段</th><th>重点方向</th><th>建议动作</th></tr>
+      <tr><td>阶段一</td><td>高频场景试点</td><td>优先选择财务、商务、运营、质量、设计团队中数据充分、规则清晰、重复度高的任务。</td></tr>
+      <tr><td>阶段二</td><td>提示词与样例沉淀</td><td>将跑通的提示词、样例数据和输出模板沉淀到企业知识库，形成可复用资产。</td></tr>
+      <tr><td>阶段三</td><td>跨部门流程闭环</td><td>以招投标、项目管理、质量问题闭环等流程为抓手，连接文档、表格、知识库与自动化能力。</td></tr>
+      <tr><td>阶段四</td><td>治理与安全机制</td><td>建立数据脱敏、权限控制、人工复核和关键输出审批机制，保障可控落地。</td></tr>
     </table>
-    <div class="note"><b>演示备份预案：</b>现场联网或材料可能出状况，建议每个要演示的场景<b>提前跑一遍并截图/录屏</b>作为备份，避免冷场。配套的 37 份脱敏示例文件可直接用于现场演示，避免使用真实敏感数据。压轴的招投标全流程环节较多，建议<b>提前完整跑一遍并准备好各阶段产出截图</b>，现场可"边讲边跑关键环节、其余用预产出衔接"，控制好节奏。若时间偏紧，可将质量管理与设计专场合并为"制造研发专场"。<b>D6/D9/D10 是在 WorkBuddy 入口里调用 ardot 设计能力，从 WorkBuddy 发起即可。</b></div>
   </div>
 
-  <!-- 12. 落地 -->
-  <h2 class="sec"><span class="no">12</span>会后落地建议（让效果不止于一场演讲）</h2>
+  <!-- 10. 落地 -->
+  <h2 class="sec" id="sec-10"><span class="no">10</span>落地建议</h2>
   <div class="grid3">
     <div class="ins"><h4>① 选种子用户试点</h4><p>每个职能选 2-3 名"愿意尝鲜"的同事先用起来，1-2 周后收集真实案例，形成内部口碑。</p></div>
     <div class="ins"><h4>② 沉淀提示词库</h4><p>把跑通的好提示词按职能整理进知识库（如乐享），形成"长园专属提示词手册"，新人即学即用。</p></div>
     <div class="ins"><h4>③ 定期复盘 + 评优</h4><p>每月收集"我用 AI 省了多少时间"的案例，评选标杆，用真实收益驱动全员推广。</p></div>
   </div>
-  <div class="note" style="margin-top:18px;"><b>数据安全提醒：</b>面向上市公司，演示与日常使用都应遵守公司信息安全制度——敏感财务数据、未披露信息、客户隐私等需按内部规定脱敏或在合规环境中处理。这一点在演讲中也应主动说明，建立信任。</div>
+  <div class="note" style="margin-top:18px;"><b>数据安全提醒：</b>面向上市公司，试点与日常使用都应遵守公司信息安全制度——敏感财务数据、未披露信息、客户隐私等需按内部规定脱敏或在合规环境中处理。建议在试点启动前明确数据边界与审批机制，建立使用信任。</div>
 
-  <div class="footer">长园科技集团 · WorkBuddy 提效演讲方案 v1 ｜ 本方案为初稿，场景与编排可按现场反馈迭代</div>
+  <div class="footer">长园科技集团 · WorkBuddy 提效案例 ｜ 客户案例版</div>
 
 </div>
 </body>
