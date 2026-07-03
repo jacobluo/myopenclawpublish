@@ -1,0 +1,17 @@
+【B6 跨境商务沟通 示例素材·已脱敏】
+
+一、待翻译中文报价跟进邮件
+----------------------------------
+尊敬的客户：
+您好！感谢上周与贵司的会议。现就贵司关注的中压配电设备报价更新如下：我方可在原报价基础上提供 3% 的批量优惠，交货期可缩短至 75 天。随附最新规格书，期待您的反馈，并希望能尽快推进合同事宜。
+顺颂商祺！
+
+二、待校对英文产品规格书（节选，请检查电力专业术语）
+----------------------------------
+Product: Medium Voltage Switchgear
+Rated voltage: 12kV
+Rated current: 1250A
+Short-time withstand current: 25kA/4s
+Protection class: IP4X
+Insulation level: power frequency withstand voltage 42kV
+Operating mechanism: spring operated mechanism
