@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../assets/research-brief.css">
+    <title>Follow 深度日报：Agent 工程进入评审、远控与知识格式竞争</title>
+    <meta name="description" content="2026-07-06 Follow List 深度日报：Simon Willison 的 Claude Fable/sqlite-utils 发布前评审，Hamel 的 Claude Code remote-control，LangChain/OpenWiki 与 OKF，LongCat 2.0 开放权重，Nan Yu 代码理解观点，Amanda Askell 概率沟通信号。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>Agent 工程进入评审、远控与知识格式竞争</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-07-05 00:00 UTC 至 2026-07-06 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。抓取优先级按 Status=active、Priority=high、Cadence=daily/weekly/manual 排序，主要使用公开 Nitter RSS、作者博客/Atom、Substack RSS、项目仓库和来源自带 sitemap/JSON。</p>
+        <div class="meta">
+          <span>发布时间：2026-07-06 08:00 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、Simon Willison、公开 X/Nitter RSS、GitHub、Hugging Face、explainx.ai sitemap、AI 播客索引 JSON</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天没有大模型发布压过一切，但 agent 工程的实践信号很集中：Simon Willison 用 Claude Fable 帮 sqlite-utils 4.0rc2 做发布前深度评审，说明强模型已经能在真实维护场景里发现事务语义和文档承诺的 P1 问题；Hamel Husain 提到 Claude Code remote-control 的默认开启方式，把“人在外面、agent 在工作站里跑”的远控模式推到日常工作流；Harrison Chase 和 LangChain 社区继续围绕 wiki、deep agents、Open Knowledge Format 讨论 agent 记忆和知识表示；开放模型侧，Clem Delangue 转发 LongCat 2.0 MIT 权重信号，说明中文/亚洲开源 MoE 仍在加速。噪音方面，独立日、体育和个人感想很多，保留为背景，不扩展成技术结论。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. 发布前评审成为 coding agent 高价值场景</h3>
+            <p>Claude Fable 在 sqlite-utils 4.0rc2 中发现 release blocker，价值不在“多写代码”，而在接近资深维护者的边界检查、事务语义验证和文档一致性审查。</p>
+          </div>
+          <div class="card">
+            <h3>2. Remote-control 让 agent 从聊天框进入工作站</h3>
+            <p>Claude Code 远控默认开启虽然仍有脆弱点，但它把 agent 使用形态从“本地盯着跑”转成“长期后台工作 + 手机/远端接管”。</p>
+          </div>
+          <div class="card">
+            <h3>3. Agent 知识层开始争格式</h3>
+            <p>OpenWiki、deepagents、OKF、wiki-langGraph 指向同一件事：agent 需要可更新、可引用、可迁移的知识层，而不只是一次性上下文。</p>
+          </div>
+          <div class="card">
+            <h3>4. 开放模型生态继续从权重走向工程选择</h3>
+            <p>LongCat 2.0 的 MIT 权重、MoE active 参数和专家设计，说明开放模型观察要看许可证、部署成本、架构取舍和实际工具链。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>Simon Willison：Claude Fable 为 sqlite-utils 4.0rc2 找出发布前阻塞问题</h3>
+          <p class="source">来源账号/机构：Simon Willison；发布时间：2026-07-05 01:00/01:06 UTC；链接：<a href="https://simonwillison.net/2026/Jul/5/sqlite-utils-fable/">Simon 原文</a> / <a href="https://nitter.net/simonw/status/2073574214280544746#m">公开 X 线索</a></p>
+          <p>Simon 在准备 sqlite-utils 4.0 stable 前，让 Claude Fable 做最终评审。Fable 找出 5 个 release blocker，其中最严重的是事务处理相关问题：某些写操作没有按预期提交，后续操作可能被卷入未提交事务，关闭连接后数据变化丢失。Simon 继续用 Fable 和 GPT-5.5 交叉复审，进一步发现 <code>db.query()</code> 对写语句的副作用和 <code>INSERT ... RETURNING</code> 迭代语义问题。</p>
+          <p>这不是玩具 demo，而是维护者在真实库发布前使用 agent 做风险扫描。值得注意的是，模型的产出不止是代码补丁，还包括复现实验、文档审查、变更解释、成本估算和 PR 拆分；Simon 最终仍通过 GitHub PR 界面做人工审查。</p>
+          <p class="why"><strong>为什么值得看：</strong>这给 coding agent 的高价值使用场景定了一个很清楚的范式：越接近发布、兼容性、事务、数据安全和文档承诺，强模型评审越可能值回成本；但最终责任仍在维护者。</p>
+          <p class="action"><strong>后续行动：</strong>把“发布前 agent 评审”加入重要仓库 checklist：要求模型检查 breaking change、数据持久化、事务/并发、文档承诺、changelog 和一个异构模型复审。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hamel Husain：Claude Code remote-control 默认开启，远端接管变成日常生产力入口</h3>
+          <p class="source">来源账号/机构：Hamel Husain；发布时间：2026-07-05 16:35 UTC；链接：<a href="https://nitter.net/HamelHusain/status/2073807874036543728#m">公开 X 线索</a></p>
+          <p>Hamel 提到可以在 <code>~/.claude/settings.json</code> 中设置 <code>remoteControlAtStartup</code>，让 Claude Code 启动时默认开启 remote-control。他也明确指出体验仍可能脆弱，例如 host 侧切换 effort 时 client 会挂住，但整体上这是明显的生活质量提升。</p>
+          <p>这条小技巧背后是工作流形态变化：agent 不再只是你坐在机器前敲 prompt，而是本地环境、远端 UI、订阅身份、长期 session 和手机检查共同组成的运行时。它和 Simon 在手机上推进 Fable 任务的经历互相呼应。</p>
+          <p class="why"><strong>为什么值得看：</strong>OpenClaw/Codex 的长任务和 cron 也需要类似远控心智：任务在后台跑，用户只需要看到状态、关键转折和可接管入口。远控越常态化，日志、恢复和权限边界越重要。</p>
+          <p class="action"><strong>后续行动：</strong>为本地 agent 长任务记录“可远端接管”的最小状态：当前目标、最后动作、等待点、可取消方式、下一步建议和外部动作风险等级。</p>
+        </div>
+
+        <div class="item">
+          <h3>Harrison Chase / LangChain 社区：OpenWiki、deepagents 与 OKF 指向 agent 知识层竞争</h3>
+          <p class="source">来源账号/机构：Harrison Chase / LangChain 社区；发布时间：2026-07-05 15:36-18:21 UTC；链接：<a href="https://nitter.net/hwchase17/status/2073793142739132625#m">agent harnesses 线索</a> / <a href="https://nitter.net/hwchase17/status/2073805140738609176#m">OKF 讨论</a> / <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md">Open Knowledge Format</a> / <a href="https://github.com/varunyn/wiki-langGraph">wiki-langGraph</a></p>
+          <p>Harrison 提到 agent 行业正在从“agent frameworks”转向“agent harnesses”，把 deepagents、Claude Agent SDK、EVE 放在同一类运行时讨论里。随后他询问是否有人在 wiki 中使用 Open Knowledge Format，社区还出现了用 deep agents 和 OKF 搭 wiki 的项目线索。</p>
+          <p>这说明 wiki/记忆不再只是文档生成，而是在变成 agent harness 的一部分：知识如何分块、如何有 schema、如何被检索、如何保留出处、如何跨工具迁移，都会影响 agent 的长期可靠性。</p>
+          <p class="why"><strong>为什么值得看：</strong>OpenClaw 当前已有 daily memory、MEMORY.md、skills、项目文档和发布状态文件。OKF/OpenWiki 这类格式化知识层可以帮助把“可记忆信息”和“运行态日志”分开，减少未来 agent 误读过期上下文。</p>
+          <p class="action"><strong>后续行动：</strong>做一个 OpenClaw knowledge-layer 小实验：选一个项目，把 README、近期任务、状态 JSON、日报链接映射成统一 wiki/OKF 风格条目，再测试 agent 检索是否更稳。</p>
+        </div>
+
+        <div class="item">
+          <h3>Clem Delangue 转发 LongCat 2.0：开放 MoE 继续用许可证和架构取舍争夺开发者注意力</h3>
+          <p class="source">来源账号/机构：Clem Delangue / Hugging Face 社区；发布时间：2026-07-05 08:48 UTC；链接：<a href="https://nitter.net/ClementDelangue/status/2073690402503487902#m">公开 X 线索</a> / <a href="https://huggingface.co/meituan-longcat/LongCat-2.0">LongCat 2.0 on Hugging Face</a></p>
+          <p>Clem 转发的线索显示，LongCat 2.0 开放权重采用 MIT license，总参数约 1.6T、active 参数约 48B，并在专家数量和 embedding 参数上做了有意思的设计选择。单条转发本身不是完整评测，但它说明开放模型生态仍有高频新供给，尤其是大 MoE、低 active 参数和商用友好许可证方向。</p>
+          <p>对产业链观察来说，真正要跟的是三个问题：MIT 权重是否带来更低企业采用摩擦；48B active 参数是否在推理成本上有实际优势；配套 tokenizer、serving、量化和工具链是否成熟。</p>
+          <p class="why"><strong>为什么值得看：</strong>开放模型不只是 leaderboard。许可证、active 参数、推理部署、中文能力、生态托管和企业合规共同决定它是否能成为闭源 API 的替代底座。</p>
+          <p class="action"><strong>后续行动：</strong>把 LongCat 2.0 加入开放模型观察表，后续验证：模型卡、许可证、推理显存、vLLM/Transformers 支持、中文/代码 benchmark 和企业商用限制。</p>
+        </div>
+
+        <div class="item">
+          <h3>Nan Yu：代码作者有知识诅咒，读懂和演练代码会成为稀缺技能</h3>
+          <p class="source">来源账号/机构：Nan Yu；发布时间：2026-07-05 19:58-20:51 UTC；链接：<a href="https://nitter.net/thenanyu/status/2073859047921451058#m">知识诅咒线索</a> / <a href="https://nitter.net/thenanyu/status/2073872490363855238#m">读懂和演练代码线索</a></p>
+          <p>Nan Yu 延续前一天关于代码审查的观点：代码作者天然有知识诅咒，知道系统“应该怎么工作”，因此容易看不见它会如何被打破。他还指出，阅读、理解和演练代码是一项高度有价值但发展不足的能力。</p>
+          <p>这和 Simon 的 sqlite-utils 案例放在一起很有启发：agent 可以发现边界问题，但前提是有人会提出正确的审查目标、能理解模型的发现，并能把它转成真实产品质量。</p>
+          <p class="why"><strong>为什么值得看：</strong>AI 写代码越多，代码理解和演练反而越重要。团队不能只衡量生成速度，还要衡量 review 是否覆盖真实使用路径和作者盲区。</p>
+          <p class="action"><strong>后续行动：</strong>在代码评审模板中增加“作者盲区”一项：列出非作者用户可能怎么误用、什么状态最容易破坏、哪些路径必须手动演练。</p>
+        </div>
+
+        <div class="item">
+          <h3>Amanda Askell：概率沟通仍是 AI 产品和专业服务里的硬问题</h3>
+          <p class="source">来源账号/机构：Amanda Askell；发布时间：2026-07-05 15:09 UTC；链接：<a href="https://nitter.net/AmandaAskell/status/2073786264059625897#m">公开 X 线索</a></p>
+          <p>Amanda 讨论从医生那里得到概率判断的困难：即使请求一个区间化的主观概率，专业人士也往往不愿给出。虽然这条不是 AI 技术发布，但它触及 AI 产品里的一个长期问题：用户想要的是可行动的不确定性，而专业系统常常只给模糊措辞。</p>
+          <p>这和安全、医疗、金融、法律等高风险 AI 场景有关。模型可以生成概率语言，但产品必须区分数据支持的概率、专家主观判断、模型置信和责任边界。</p>
+          <p class="why"><strong>为什么值得看：</strong>AI 助理要做决策支持，不能只输出“可能/也许/建议咨询专业人士”。更好的形态是给出区间、依据、未知项、下一步验证，并明确哪些不是确定事实。</p>
+          <p class="action"><strong>后续行动：</strong>为高风险总结加入不确定性模板：结论、置信来源、区间/等级、缺失证据、验证动作、何时必须找专业人士。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>Simon Willison：</strong>继续提供 coding agent 一线实践样本，从“模型会写代码”推进到“模型能做发布前风险评审”。</li>
+          <li><strong>Hamel Husain：</strong>关注 Claude Code 实用配置和写作质量，今天最高信号是 remote-control 默认开启。</li>
+          <li><strong>Harrison Chase / LangChain：</strong>把讨论从 agent framework 推向 harness、wiki、OKF、deepagents 和长期知识层。</li>
+          <li><strong>Clem Delangue / Hugging Face 社区：</strong>放大 LongCat 2.0 开放权重线索，继续服务开放模型生态发现。</li>
+          <li><strong>Nan Yu：</strong>延续 AI 时代代码审查主题，强调代码理解、演练和产品 ownership。</li>
+          <li><strong>Amanda Askell：</strong>用概率沟通问题提醒：AI 安全和产品表达都绕不开不确定性。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>发布前 agent 评审流程：</strong>为重要发布建立 Claude/GPT 交叉复审、事务/数据安全、文档一致性、changelog 检查。</li>
+          <li><strong>远控 agent 状态面板：</strong>记录后台任务的当前目标、等待点、外部动作风险、取消方式和可恢复命令。</li>
+          <li><strong>OpenClaw 知识层实验：</strong>用 OKF/OpenWiki 思路整理一个项目的长期上下文，测试检索和更新效果。</li>
+          <li><strong>LongCat 2.0 验证表：</strong>补齐模型卡、许可证、推理成本、中文能力、工具链支持和商用约束。</li>
+          <li><strong>代码评审手测模板：</strong>强制列出作者盲区、误用路径、状态破坏路径和真实运行证据。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>Simon 的 Fable/sqlite-utils 案例是强实证样本，但不能直接外推到所有代码库；需要区分维护者能力、测试质量和模型上下文质量。</li>
+          <li>Claude Code remote-control 配置来自公开 X 经验帖，具体行为、稳定性和订阅限制应以 Claude Code 官方文档/本机实测为准。</li>
+          <li>“framework 转向 harness”是 Harrison Chase 的行业判断，方向有参考价值，但各厂商术语尚未统一。</li>
+          <li>LongCat 2.0 的参数规模、active 参数和 MIT 许可来自社区转发与模型页入口，本报告未做 benchmark 或本地部署验证。</li>
+          <li>Nitter RSS 可读但可能漏掉登录态、删除帖或限流内容；本次未使用私密 cookie、token 或账号内部信息。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul class="noise">
+          <li>Sam Altman、swyx、Nathan Lambert 等多条独立日/美国叙事相关内容保留为文化背景，不展开为 AI 技术主线。</li>
+          <li>Nan Yu 的足球讨论、Amanda Askell 的生日玩笑、Jeff Dean 相关体育转发属于低优先级社交内容。</li>
+          <li>Shreya/Hamel 关于 proof digestion 的主线已在 2026-07-05 报告中覆盖，本次未重复展开。</li>
+          <li>explainx.ai sitemap 本窗口未见 2026-07-05 新增；AI 播客索引 JSON 更新时间仍为 2026-07-02。</li>
+          <li>Google/Anthropic/OpenAI 官方 RSS 本窗口未抓到足以替代上述主线的新官方发布。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul>
+          <li><a href="https://simonwillison.net/2026/Jul/5/sqlite-utils-fable/">Simon Willison: sqlite-utils 4.0rc2, mostly written by Claude Fable</a></li>
+          <li><a href="https://nitter.net/simonw/status/2073574214280544746#m">Simon Willison X/Nitter 线索</a></li>
+          <li><a href="https://nitter.net/HamelHusain/status/2073807874036543728#m">Hamel Husain: Claude Code remote-control</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2073793142739132625#m">Harrison Chase: agent frameworks to harnesses</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2073805140738609176#m">Harrison Chase: Open Knowledge Format for wikis</a></li>
+          <li><a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md">Open Knowledge Format specification</a></li>
+          <li><a href="https://github.com/varunyn/wiki-langGraph">wiki-langGraph</a></li>
+          <li><a href="https://nitter.net/ClementDelangue/status/2073690402503487902#m">Clem Delangue / LongCat 2.0 线索</a></li>
+          <li><a href="https://huggingface.co/meituan-longcat/LongCat-2.0">LongCat 2.0 on Hugging Face</a></li>
+          <li><a href="https://nitter.net/thenanyu/status/2073859047921451058#m">Nan Yu: code authors and curse of knowledge</a></li>
+          <li><a href="https://nitter.net/thenanyu/status/2073872490363855238#m">Nan Yu: reading, understanding, exercising code</a></li>
+          <li><a href="https://nitter.net/AmandaAskell/status/2073786264059625897#m">Amanda Askell: probability communication</a></li>
+          <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+          <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
