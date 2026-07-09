@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="WorkBuddy 演示案例使用指南：面向 CEMOY/澳诗茉全渠道美妆零售业务的37个可直接复制使用的演示案例，涵盖角色案例、行业场景、通用办公与智能体应用.">
+<meta name="theme-color" content="#042C53">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23042C53'/%3E%3Cpath d='M6 9l4 14 4-10 4 10 4-14' stroke='%23ffffff' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<title>WorkBuddy 演示案例使用指南 · 美妆护肤全渠道零售定制版</title>
+<style>
+:root {
+  --bg-page: #F4F6F9;
+  --bg-card: #FFFFFF;
+  --bg-nav: #FFFFFF;
+  --border-c: #E3E8EF;
+  --text-primary: #10233F;
+  --text-secondary: #4B5B70;
+  --text-tertiary: #8A96A5;
+  --blue-50: #E6F1FB;
+  --blue-100: #B5D4F4;
+  --blue-400: #378ADD;
+  --blue-600: #185FA5;
+  --blue-800: #0C447C;
+  --blue-900: #042C53;
+  --amber-50: #FAEEDA;
+  --amber-600: #854F0B;
+  --amber-800: #633806;
+  --teal-50: #E1F5EE;
+  --teal-600: #0F6E56;
+  --teal-800: #085041;
+  --purple-50: #EEEDFE;
+  --purple-600: #534AB7;
+  --purple-800: #3C3489;
+  --purple-900: #26215C;
+  --rose-50: #FBE7EC;
+  --rose-600: #C23A63;
+  --rose-800: #8E2649;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+strong { font-weight: 600; color: var(--text-primary); }
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 300;
+  background: var(--blue-900); color: #fff; padding: 10px 18px;
+  border-radius: 0 0 var(--radius-md) 0; font-size: 13px; font-weight: 500;
+}
+.skip-link:focus { left: 0; }
+.layout { display: flex; min-height: 100dvh; }
+.sidebar {
+  width: 300px; flex-shrink: 0; background: var(--bg-nav);
+  border-right: 1px solid var(--border-c); position: sticky; top: 0;
+  height: 100dvh; overflow-y: auto; padding: 24px 0 40px;
+  transition: transform 0.25s ease;
+}
+.sidebar-brand { padding: 0 20px 16px; border-bottom: 1px solid var(--border-c); margin-bottom: 16px; }
+.sidebar-brand .brand-title { font-size: 15px; font-weight: 600; color: var(--blue-900); margin: 0 0 4px; }
+.sidebar-brand .brand-sub { font-size: 12px; color: var(--text-tertiary); margin: 0; }
+.nav-search { padding: 0 20px 16px; }
+.nav-search input {
+  width: 100%; padding: 8px 12px; font-size: 13px; border: 1px solid var(--border-c);
+  border-radius: var(--radius-md); background: #F8FAFC; color: var(--text-primary);
+  outline: none; font-family: inherit; transition: border-color 0.15s, box-shadow 0.15s;
+}
+.nav-search input:focus { border-color: var(--blue-400); box-shadow: 0 0 0 3px rgba(55,138,221,.15); }
+.nav-group { padding: 2px 12px; margin-bottom: 2px; }
+.nav-main {
+  display: flex; align-items: center; gap: 8px; padding: 8px 8px;
+  border-radius: var(--radius-md); font-size: 13px; font-weight: 600; color: var(--text-primary);
+  transition: background 0.15s;
+}
+.nav-main:hover { background: #F1F5F9; }
+.nav-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.dot-role { background: var(--blue-400); }
+.dot-scenario { background: #BA7517; }
+.dot-general { background: #1D9E75; }
+.dot-agent { background: var(--purple-600); }
+.nav-sub-list { display: flex; flex-direction: column; margin-left: 21px; border-left: 1px solid var(--border-c); }
+.nav-sub { padding: 5px 12px; font-size: 12px; color: var(--text-secondary); border-radius: 0 var(--radius-md) var(--radius-md) 0; transition: background 0.15s, color 0.15s; }
+.nav-sub:hover { background: #F1F5F9; color: var(--blue-800); }
+.nav-sub.active { background: var(--blue-50); color: var(--blue-800); font-weight: 600; }
+.nav-toggle {
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 120;
+  width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-c);
+  background: var(--bg-card); color: var(--blue-900); align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(12,68,124,0.15); cursor: pointer;
+}
+.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(4,44,83,0.45); z-index: 90; }
+.main { flex: 1; min-width: 0; padding: 40px 64px 80px; }
+.doc-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-c); }
+.doc-header h1 { font-size: 28px; font-weight: 600; color: var(--blue-900); margin: 0 0 8px; letter-spacing: -0.01em; }
+.doc-header .doc-sub { font-size: 13px; color: var(--text-secondary); margin: 0 0 16px; }
+.stat-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border-c); border-radius: var(--radius-md); padding: 10px 16px; min-width: 100px; box-shadow: 0 1px 3px rgba(12,68,124,0.05); }
+.stat-card .stat-num { font-size: 22px; font-weight: 600; color: var(--blue-800); font-variant-numeric: tabular-nums; }
+.stat-card.stat-ma .stat-num { color: var(--purple-800); }
+.stat-card.stat-cron .stat-num { color: #633806; }
+.stat-card.stat-agent .stat-num { color: var(--teal-800); }
+.stat-card .stat-label { font-size: 12px; color: var(--text-tertiary); }
+.doc-note { margin-top: 16px; padding: 12px 16px; background: var(--blue-50); border-radius: var(--radius-md); font-size: 12.5px; color: var(--blue-900); line-height: 1.7; }
+.doc-note strong { font-weight: 600; color: var(--blue-900); }
+.group-section { margin-bottom: 48px; padding-top: 8px; }
+.group-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.group-badge { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; flex-shrink: 0; display: inline-flex; align-items: center; gap: 4px; }
+.badge-role { background: var(--blue-50); color: var(--blue-800); }
+.badge-scenario { background: var(--amber-50); color: var(--amber-800); }
+.badge-general { background: var(--teal-50); color: var(--teal-800); }
+.badge-agent { background: var(--purple-50); color: var(--purple-800); }
+.group-title { font-size: 18px; font-weight: 600; color: var(--text-primary); margin: 0; }
+.group-desc { font-size: 13px; color: var(--text-secondary); margin: 0 0 8px; }
+.case-grid { display: flex; flex-direction: column; gap: 20px; }
+.case-card { background: var(--bg-card); border: 1px solid var(--border-c); border-radius: var(--radius-lg); padding: 20px; scroll-margin-top: 20px; box-shadow: 0 1px 3px rgba(12,68,124,0.05); transition: box-shadow 0.2s; }
+.case-card:hover { box-shadow: 0 4px 16px rgba(12,68,124,0.10); }
+.case-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.case-code { font-size: 12px; font-weight: 600; color: var(--blue-600); background: var(--blue-50); padding: 2px 8px; border-radius: var(--radius-md); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.case-title { font-size: 15px; font-weight: 600; margin: 0; color: var(--text-primary); }
+.case-tag { font-size: 11px; color: var(--text-tertiary); border: 1px solid var(--border-c); padding: 2px 8px; border-radius: var(--radius-md); }
+.cron-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--amber-800); background: var(--amber-50); padding: 3px 9px; border-radius: var(--radius-md); }
+.ma-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--purple-800); background: var(--purple-50); padding: 5px 10px; border-radius: var(--radius-md); margin-bottom: 12px; }
+.ma-badge svg { flex-shrink: 0; }
+.case-block { margin-bottom: 16px; }
+.case-block:last-child { margin-bottom: 0; }
+.block-label { font-size: 12px; font-weight: 600; color: var(--text-tertiary); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+.sub-label { font-size: 12px; font-weight: 600; color: var(--text-tertiary); margin-bottom: 6px; }
+.cron-block { padding-top: 14px; border-top: 1px dashed var(--border-c); }
+.cron-label { color: var(--amber-800); }
+.ma-block { padding-top: 14px; border-top: 1px dashed var(--purple-600); }
+.ma-label { color: var(--purple-800); }
+.ext-block { padding-top: 14px; border-top: 1px dashed var(--teal-600); }
+.ext-label { color: var(--teal-800); }
+.prompt-box.ext-prompt { background: var(--teal-50); border-color: #B8E5D6; }
+.next-step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.next-step-card { background: var(--teal-50); border: 1px solid #B8E5D6; border-radius: var(--radius-md); padding: 12px 14px; }
+.next-step-title { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--teal-800); margin-bottom: 6px; }
+.next-step-text { font-size: 12.5px; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+@media (max-width: 700px) { .next-step-grid { grid-template-columns: 1fr; } }
+.mat-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.mat-empty { font-size: 12.5px; color: var(--text-tertiary); padding: 6px 0; }
+.mat-chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border: 1px solid var(--border-c); border-radius: var(--radius-md); font-size: 12.5px; color: var(--text-primary); background: #F8FAFC; transition: border-color 0.15s, background 0.15s, transform 0.1s; }
+.mat-chip:hover { border-color: var(--blue-400); background: var(--blue-50); color: var(--blue-800); transform: translateY(-1px); }
+.mat-chip:active { transform: scale(0.96); }
+.mat-icon { display: flex; color: var(--blue-600); flex-shrink: 0; }
+.mat-label { max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mat-ext { font-size: 10.5px; color: var(--text-tertiary); background: #EDF1F5; padding: 1px 5px; border-radius: 4px; flex-shrink: 0; }
+.mat-dl { display: flex; color: var(--text-tertiary); flex-shrink: 0; }
+.mat-chip:hover .mat-dl { color: var(--blue-600); }
+.prompt-box { position: relative; background: #F8FAFC; border: 1px solid var(--border-c); border-radius: var(--radius-md); padding: 12px 14px; padding-right: 64px; }
+.prompt-box.cron-prompt { background: #FEFBF3; border-color: #F0DDB0; }
+.prompt-box.ma-prompt { background: var(--purple-50); border-color: #D4CFF5; }
+.prompt-text { font-size: 13px; color: var(--text-primary); margin: 0; line-height: 1.7; white-space: pre-wrap; }
+.copy-btn { position: absolute; top: 10px; right: 10px; font-size: 11.5px; padding: 4px 10px; border: 1px solid var(--border-c); border-radius: var(--radius-md); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-family: inherit; transition: border-color 0.15s, color 0.15s, transform 0.1s; }
+.copy-btn:hover { border-color: var(--blue-400); color: var(--blue-800); transform: translateY(-1px); }
+.copy-btn:active { transform: scale(0.96); }
+.copy-btn.copied { border-color: var(--teal-600); color: var(--teal-800); background: var(--teal-50); }
+.output-text { font-size: 13px; color: var(--text-secondary); margin: 0; line-height: 1.7; }
+.meta-row { display: flex; gap: 10px; font-size: 12.5px; margin-bottom: 8px; align-items: flex-start; }
+.meta-label { flex-shrink: 0; color: var(--text-tertiary); font-weight: 600; width: 62px; }
+.meta-val { color: var(--text-secondary); }
+.meta-val.eff { color: var(--teal-800); font-weight: 600; }
+.meta-val.eff strong { color: var(--teal-800); }
+.agent-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.agent-table th { text-align: left; font-weight: 600; color: var(--text-tertiary); padding: 6px 10px; border-bottom: 1px solid var(--border-c); }
+.agent-table td { padding: 7px 10px; border-bottom: 1px solid var(--border-c); color: var(--text-secondary); vertical-align: top; }
+.agent-table tr:last-child td { border-bottom: none; }
+.cfg-table .cfg-key { color: var(--purple-800); font-weight: 600; white-space: nowrap; width: 130px; }
+.skill-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.skill-table th { text-align: left; font-weight: 600; color: var(--text-tertiary); padding: 8px 10px; border-bottom: 1px solid var(--border-c); }
+.skill-table td { padding: 8px 10px; border-bottom: 1px solid var(--border-c); color: var(--text-secondary); vertical-align: top; line-height: 1.8; }
+.skill-table .skill-name { font-weight: 600; color: var(--blue-800); white-space: nowrap; }
+.skill-table .skill-name strong { color: inherit; }
+.skill-table tr:last-child td { border-bottom: none; }
+.mcp-box { background: var(--bg-card); border: 1px solid var(--border-c); border-radius: var(--radius-lg); padding: 16px 20px; margin-top: 20px; box-shadow: 0 1px 3px rgba(12,68,124,0.05); }
+.mcp-box-header { display: flex; align-items: center; gap: 8px; color: var(--rose-800); margin-bottom: 4px; }
+.mcp-box-header h3 { font-size: 14px; font-weight: 600; margin: 0; color: var(--rose-800); }
+.mcp-intro { margin-bottom: 12px; }
+.mcp-table .mcp-name { font-weight: 600; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+.mcp-table .mcp-name strong { color: inherit; }
+.mcp-table .mcp-note { color: var(--text-tertiary); font-size: 12px; }
+.mcp-summary-box { background: var(--rose-50); color: var(--rose-800); }
+.mcp-summary-box strong { color: var(--rose-800); }
+.toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--blue-900); color: #fff; font-size: 12.5px; padding: 8px 18px; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; z-index: 50; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.footer-note { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-c); font-size: 12px; color: var(--text-tertiary); line-height: 1.8; }
+.footer-note h3 { font-size: 13px; color: var(--text-secondary); font-weight: 600; margin: 0 0 8px; }
+.skill-box { background: var(--bg-card); border: 1px solid var(--border-c); border-radius: var(--radius-lg); padding: 16px 20px; margin-top: 16px; box-shadow: 0 1px 3px rgba(12,68,124,0.05); }
+.skill-summary-box { margin-top: 16px; padding: 12px 14px; background: var(--blue-50); border-radius: var(--radius-md); font-size: 12px; color: var(--blue-900); line-height: 1.7; }
+.skill-summary-box strong { color: var(--blue-900); }
+.agent-card { border: 1px solid var(--purple-600); }
+.agent-code { background: var(--purple-50); color: var(--purple-800); }
+.agent-real-tag { display: inline-flex; align-items: center; gap: 5px; color: var(--teal-800); border-color: var(--teal-600); background: var(--teal-50); }
+.agent-url-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--purple-600); border-radius: var(--radius-md); font-size: 13px; color: var(--purple-800); background: var(--purple-50); transition: background 0.15s, transform 0.1s; }
+.agent-url-btn:hover { background: #fff; transform: translateY(-1px); }
+.agent-url-btn:active { transform: scale(0.96); }
+.agent-shots { display: flex; gap: 12px; flex-wrap: wrap; }
+.agent-shot { margin: 0; flex: 1 1 260px; max-width: 320px; }
+.agent-shot img { width: 100%; border: 1px solid var(--border-c); border-radius: var(--radius-md); display: block; cursor: zoom-in; transition: opacity 0.15s; }
+.agent-shot img:hover { opacity: 0.92; }
+.agent-shot figcaption { font-size: 11.5px; color: var(--text-tertiary); margin-top: 6px; text-align: center; }
+.agent-risk-block { padding: 12px 14px; background: var(--amber-50); border-radius: var(--radius-md); }
+.agent-risk-label { color: var(--amber-800); }
+.agent-risk-text { color: var(--amber-800); }
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(4,44,83,0.92); z-index: 200; align-items: center; justify-content: center; padding: 40px; }
+.lightbox.show { display: flex; }
+.lightbox-img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: var(--radius-md); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+.lightbox-close { position: fixed; top: 20px; right: 24px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.12); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
+.lightbox-close:hover { background: rgba(255,255,255,0.22); }
+.back-to-top {
+  position: fixed; bottom: 28px; right: 28px; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--blue-900); color: #fff; display: none; align-items: center; justify-content: center;
+  border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(4,44,83,0.3); transition: transform 0.15s, opacity 0.2s;
+  opacity: 0; z-index: 60;
+}
+.back-to-top.show { display: flex; opacity: 1; }
+.back-to-top:hover { transform: translateY(-2px); }
+.back-to-top:active { transform: scale(0.94); }
+@media (max-width: 900px) {
+  .layout { position: relative; }
+  .sidebar { position: fixed; left: 0; top: 0; z-index: 110; transform: translateX(-100%); box-shadow: 4px 0 24px rgba(0,0,0,0.15); }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-overlay.show { display: block; }
+  .nav-toggle { display: flex; }
+  .main { padding: 72px 20px 60px; }
+  .agent-shot { flex: 1 1 100%; max-width: 100%; }
+}
+@media print {
+  .sidebar, .nav-toggle, .copy-btn, .back-to-top, .toast, .lightbox, .skip-link { display: none !important; }
+  .layout { display: block; }
+  .main { padding: 0; max-width: 100%; }
+  .case-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  body { background: #fff; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">跳转到主要内容</a>
+<button class="nav-toggle" id="navToggle" aria-label="打开导航菜单"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-brand">
+<p class="brand-title">WorkBuddy 演示案例指南</p>
+<p class="brand-sub">美妆护肤全渠道零售定制版 · 共39个案例（含4个智能体应用 + 6个多Agent协同版）</p>
+</div>
+<div class="nav-search">
+<input type="text" id="navSearch" placeholder="搜索案例关键词...">
+</div>
+<div id="navList">
+<div class="nav-group"><a class="nav-main" href="#role-01"><span class="nav-dot dot-role"></span>ROLE 01 · 产品经理（品牌/产品企划岗）</a><div class="nav-sub-list"><a class="nav-sub" href="#role-01-c0">Case 01-1 竞品/赛道分析</a><a class="nav-sub" href="#role-01-c1">Case 01-2 新品企划案撰写</a><a class="nav-sub" href="#role-01-c2">Case 01-3 消费者调研数据整理</a></div></div><div class="nav-group"><a class="nav-main" href="#role-02"><span class="nav-dot dot-role"></span>ROLE 02 · 运营（全渠道/内容运营）</a><div class="nav-sub-list"><a class="nav-sub" href="#role-02-c0">Case 02-1 全渠道销售日报/周报自动生成</a><a class="nav-sub" href="#role-02-c1">Case 02-2 大促活动方案一键生成</a><a class="nav-sub" href="#role-02-c2">Case 02-3 种草内容批量创作</a></div></div><div class="nav-group"><a class="nav-main" href="#role-03"><span class="nav-dot dot-role"></span>ROLE 03 · 管理层（多品牌矩阵管理层）</a><div class="nav-sub-list"><a class="nav-sub" href="#role-03-c0">Case 03-1 多品牌经营简报一键生成</a><a class="nav-sub" href="#role-03-c1">Case 03-2 行业研究报告秒读摘要</a><a class="nav-sub" href="#role-03-c2">Case 03-3 全渠道经营看板定时推送</a></div></div><div class="nav-group"><a class="nav-main" href="#role-04"><span class="nav-dot dot-role"></span>ROLE 04 · 销售/售前（渠道招商 &amp; 品牌合作岗）</a><div class="nav-sub-list"><a class="nav-sub" href="#role-04-c0">Case 04-1 品牌入驻/合作方案定制</a><a class="nav-sub" href="#role-04-c1">Case 04-2 招商/代运营标书智能撰写</a><a class="nav-sub" href="#role-04-c2">Case 04-3 客户会议纪要自动整理</a></div></div><div class="nav-group"><a class="nav-main" href="#role-05"><span class="nav-dot dot-role"></span>ROLE 05 · HR（导购/BA 团队管理）</a><div class="nav-sub-list"><a class="nav-sub" href="#role-05-c0">Case 05-1 BA/导购简历智能筛选</a><a class="nav-sub" href="#role-05-c1">Case 05-2 品牌知识库问答构建</a><a class="nav-sub" href="#role-05-c2">Case 05-3 新员工培训材料自动生成</a></div></div><div class="nav-group"><a class="nav-main" href="#role-06"><span class="nav-dot dot-role"></span>ROLE 06 · 财务（多渠道/多品牌结算）</a><div class="nav-sub-list"><a class="nav-sub" href="#role-06-c0">Case 06-1 发票智能识别录入</a><a class="nav-sub" href="#role-06-c1">Case 06-2 全渠道财务报表自动生成</a><a class="nav-sub" href="#role-06-c2">Case 06-3 营销预算偏差智能预警</a></div></div><div class="nav-group"><a class="nav-main" href="#role-07"><span class="nav-dot dot-role"></span>ROLE 07 · 法务（化妆品合规专岗）</a><div class="nav-sub-list"><a class="nav-sub" href="#role-07-c0">Case 07-1 品牌授权/代运营合同审查</a><a class="nav-sub" href="#role-07-c1">Case 07-2 化妆品功效宣称合规检索</a><a class="nav-sub" href="#role-07-c2">Case 07-3 营销文案合规自动扫描</a></div></div><div class="nav-group"><a class="nav-main" href="#scenario-08"><span class="nav-dot dot-scenario"></span>第二部分 · 行业专属场景（美妆护肤全渠道零售）</a><div class="nav-sub-list"><a class="nav-sub" href="#scenario-08-c0">场景 08-1 全域经营看板</a><a class="nav-sub" href="#scenario-08-c1">场景 08-2 达人/KOL 投放效果分析</a><a class="nav-sub" href="#scenario-08-c2">场景 08-3 新品上市全案策划</a><a class="nav-sub" href="#scenario-08-c3">场景 08-4 私域会员运营 SOP</a><a class="nav-sub" href="#scenario-08-c4">场景 08-5 化妆品成分/功效合规审查</a><a class="nav-sub" href="#scenario-08-c5">场景 08-6 导购/BA 话术与知识库</a><a class="nav-sub" href="#scenario-08-c6">场景 08-7 竞品与赛道趋势监测</a><a class="nav-sub" href="#scenario-08-c7">场景 08-8 全渠道库存与断货预警</a></div></div><div class="nav-group"><a class="nav-main" href="#general-09"><span class="nav-dot dot-general"></span>第三部分 · 日常办公通用演示</a><div class="nav-sub-list"><a class="nav-sub" href="#general-09-c0">通用 09-1 AI 生成招聘海报</a><a class="nav-sub" href="#general-09-c1">通用 09-2 AI 生成品牌介绍 PPT</a><a class="nav-sub" href="#general-09-c2">通用 09-3 全渠道销售数据分析</a><a class="nav-sub" href="#general-09-c3">通用 09-4 外文资料翻译</a><a class="nav-sub" href="#general-09-c4">通用 09-5 文档内容润色</a><a class="nav-sub" href="#general-09-c5">通用 09-6 多 Excel 加工数据生成报表</a></div></div><div class="nav-group"><a class="nav-main" href="#agent-10"><span class="nav-dot dot-agent"></span>第四部分 · 智能体应用</a><div class="nav-sub-list"><a class="nav-sub" href="#agent-10-c0">智能体 10-1 智能客服（美妆咨询顾问）</a><a class="nav-sub" href="#agent-10-c1">智能体 10-2 客户留言自动回复</a><a class="nav-sub" href="#agent-10-c2">智能体 10-3 TAPD 待办与项目情况定时推送</a><a class="nav-sub" href="#agent-10-c3">智能体 10-4 会议总结拉群转待办（分阶段执行）</a></div></div><div class="nav-group"><a class="nav-main" href="#appendix-skill"><span class="nav-dot dot-scenario"></span>附录 · Skill 能力索引</a><div class="nav-sub-list"></div></div>
+</div>
+</nav>
+<main class="main" id="main-content">
+<header class="doc-header">
+<h1>WorkBuddy 演示案例使用指南</h1>
+<p class="doc-sub">CEMOY / 澳诗茉全渠道美妆零售业务定制版</p>
+<div class="stat-row">
+<div class="stat-card"><div class="stat-num">39</div><div class="stat-label">案例总数</div></div>
+<div class="stat-card"><div class="stat-num">21</div><div class="stat-label">角色案例</div></div>
+<div class="stat-card"><div class="stat-num">8</div><div class="stat-label">行业场景</div></div>
+<div class="stat-card"><div class="stat-num">6</div><div class="stat-label">通用演示</div></div>
+<div class="stat-card stat-agent"><div class="stat-num">4</div><div class="stat-label">智能体应用</div></div>
+<div class="stat-card stat-ma"><div class="stat-num">6</div><div class="stat-label">含多Agent版</div></div>
+<div class="stat-card stat-cron"><div class="stat-num">6</div><div class="stat-label">可设定时任务</div></div>
+</div>
+<div class="doc-note">
+<strong>使用说明：</strong>前三部分每个案例的"完整输入文字"可直接点击右上角"复制"按钮，粘贴到 WorkBuddy 对话框中使用；若标注了配套素材，请先点击素材名称下载并上传到对话中，再发送输入文字。所有 Excel/Word/图片素材均为<strong>仿真模拟数据</strong>。<strong>第四部分「智能体应用」性质不同</strong>——前 3 个（10-1/10-2/10-3）是已在管理后台真实搭建并上线的 Agent/自动化，截图为真实运行效果（点击可放大查看），可直接打开体验地址让客户实操；第 4 个（10-4）是对话内<strong>分阶段执行的跨系统写操作链</strong>（生成纪要→飞书建群发纪要→飞书建待办），演示时必须逐阶段人工确认后再继续，严禁一次性发送全部提示词。业务背景统一设定：代理分销 <strong>CEMOY</strong>（新西兰山羊奶护肤品牌）与<strong>澳诗茉</strong>（精华/淡斑品牌），核心运营渠道为<strong>抖音 + 天猫</strong>。标注"含多Agent协同版"的案例在卡片底部有紫色区块；标注"★ 强烈推荐设置定时任务"的案例在卡片底部有琥珀色区块；文末附录新增<strong>MCP / 连接器索引</strong>，列出案例依赖的企业微信/乐享知识库/飞书等第三方连接。
+</div>
+</header>
+<section class="group-section" id="role-01">
+<div class="group-header"><span class="group-badge badge-role">角色案例</span><h2 class="group-title">ROLE 01 · 产品经理（品牌/产品企划岗）</h2></div>
+<p class="group-desc"></p>
+<div class="case-grid"><div class="case-card" id="role-01-c0">
+<div class="case-head"><span class="case-code">Case 01-1</span><h3 class="case-title">Case 01-1　竞品/赛道分析</h3><span class="case-tag">无需素材·联网检索型</span></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row mat-empty">无需素材 · 可直接使用输入文字</div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">我们公司代理分销 CEMOY（山羊奶护肤）和澳诗茉（烟酰胺淡斑精华）两个美妆护肤品牌，主战场是抖音和天猫。请帮我分析近半年国货精华类目 TOP10 品牌的情况，重点关注：1）各品牌的核心成分卖点和价格带；2）主要渠道布局（抖音/天猫/小红书占比）；3）近期声量和达人投放趋势。请输出一份对比矩阵表，并结合我们澳诗茉烟酰胺淡斑精华（159-299元价格带）的定位，给出差异化建议和潜在机会点。最终整理成一份包含表格和结论的报告。</p>
+  <button class="copy-btn" data-copy-target="role-01-c0-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-01-c0-prompt" hidden>我们公司代理分销 CEMOY（山羊奶护肤）和澳诗茉（烟酰胺淡斑精华）两个美妆护肤品牌，主战场是抖音和天猫。请帮我分析近半年国货精华类目 TOP10 品牌的情况，重点关注：1）各品牌的核心成分卖点和价格带；2）主要渠道布局（抖音/天猫/小红书占比）；3）近期声量和达人投放趋势。请输出一份对比矩阵表，并结合我们澳诗茉烟酰胺淡斑精华（159-299元价格带）的定位，给出差异化建议和潜在机会点。最终整理成一份包含表格和结论的报告。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">品牌定价/成分/渠道对比矩阵表（可导出Excel）、赛道 SWOT 分析图、结合澳诗茉定位的差异化建议、结论与建议报告（PPT/Word）。</p></div>
+
+
+
+</div><div class="case-card" id="role-01-c1">
+<div class="case-head"><span class="case-code">Case 01-2</span><h3 class="case-title">Case 01-2　新品企划案撰写</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/新品成分卖点资料.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">新品成分卖点资料.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是我们 CEMOY 品牌新品&quot;山羊奶次抛精华&quot;的内部立项资料草稿。请基于这份资料，帮我生成一份完整的新品上市企划案，需要包含：1）产品定位与核心卖点提炼（注意资料里提到功效备案范围的限制，卖点表述不要超出'保湿'备案范围，除非我确认可以使用'修护屏障'表述）；2）目标人群画像；3）分渠道（抖音/天猫/小红书）上市节奏表，从产品定稿到双11预热的完整时间轴；4）预算分配建议。请输出一份结构规范、可直接用于内部评审的企划案文档。</p>
+  <button class="copy-btn" data-copy-target="role-01-c1-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-01-c1-prompt" hidden>附件是我们 CEMOY 品牌新品&quot;山羊奶次抛精华&quot;的内部立项资料草稿。请基于这份资料，帮我生成一份完整的新品上市企划案，需要包含：1）产品定位与核心卖点提炼（注意资料里提到功效备案范围的限制，卖点表述不要超出'保湿'备案范围，除非我确认可以使用'修护屏障'表述）；2）目标人群画像；3）分渠道（抖音/天猫/小红书）上市节奏表，从产品定稿到双11预热的完整时间轴；4）预算分配建议。请输出一份结构规范、可直接用于内部评审的企划案文档。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">含卖点话术的新品企划案、分渠道上市节奏矩阵、标准化企划文档；AI 应识别出资料中&quot;功效备案范围&quot;的限制条件并在卖点表述中体现谨慎措辞。</p></div>
+
+
+
+</div><div class="case-card" id="role-01-c2">
+<div class="case-head"><span class="case-code">Case 01-3</span><h3 class="case-title">Case 01-3　消费者调研数据整理</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/消费者调研问卷原始数据.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">消费者调研问卷原始数据.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是我们最近做的一份美妆消费者调研问卷原始数据，样本量300人，覆盖年龄段、肌肤类型、成分关注度、渠道偏好等维度。请帮我分析这份数据，生成：1）消费者画像（年龄/城市等级/肌肤类型分布）；2）成分偏好排行和渠道偏好分析；3）价格敏感度与复购意愿的交叉分析；4）近3月购买品牌分布中，我们 CEMOY 和澳诗茉的渗透情况。最后输出一份带图表的可视化分析报告和关键洞察建议。</p>
+  <button class="copy-btn" data-copy-target="role-01-c2-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-01-c2-prompt" hidden>附件是我们最近做的一份美妆消费者调研问卷原始数据，样本量300人，覆盖年龄段、肌肤类型、成分关注度、渠道偏好等维度。请帮我分析这份数据，生成：1）消费者画像（年龄/城市等级/肌肤类型分布）；2）成分偏好排行和渠道偏好分析；3）价格敏感度与复购意愿的交叉分析；4）近3月购买品牌分布中，我们 CEMOY 和澳诗茉的渗透情况。最后输出一份带图表的可视化分析报告和关键洞察建议。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">用户画像与趋势图表（可视化）、渠道/成分交叉分析、CEMOY与澳诗茉渗透率专项分析、关键洞察与行动建议。</p></div>
+
+
+
+</div></div>
+</section><section class="group-section" id="role-02">
+<div class="group-header"><span class="group-badge badge-role">角色案例</span><h2 class="group-title">ROLE 02 · 运营（全渠道/内容运营）</h2></div>
+<p class="group-desc"></p>
+<div class="case-grid"><div class="case-card" id="role-02-c0">
+<div class="case-head"><span class="case-code">Case 02-1</span><h3 class="case-title">Case 02-1　全渠道销售日报/周报自动生成</h3><span class="cron-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>★ 强烈推荐设置定时任务</span></span></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/全渠道销售数据.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">全渠道销售数据.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是我们 CEMOY 和澳诗茉过去一周（6月29日-7月5日）在抖音旗舰店、抖音达人矩阵、天猫旗舰店、天猫超市、小红书号五个渠道的销售明细数据。请帮我：1）按渠道和品牌汇总本周销量、销售额、退款额；2）识别爆款SKU和滞销/断货风险SKU（留意备注列中提到的断货风险信息）；3）计算各渠道销售额环比趋势；4）用图表方式呈现渠道占比和趋势。最终生成一份可以发给管理层的可视化周报。</p>
+  <button class="copy-btn" data-copy-target="role-02-c0-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-02-c0-prompt" hidden>附件是我们 CEMOY 和澳诗茉过去一周（6月29日-7月5日）在抖音旗舰店、抖音达人矩阵、天猫旗舰店、天猫超市、小红书号五个渠道的销售明细数据。请帮我：1）按渠道和品牌汇总本周销量、销售额、退款额；2）识别爆款SKU和滞销/断货风险SKU（留意备注列中提到的断货风险信息）；3）计算各渠道销售额环比趋势；4）用图表方式呈现渠道占比和趋势。最终生成一份可以发给管理层的可视化周报。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">全渠道GMV汇总表、爆款/滞销SKU高亮标注（特别是CEMOY山羊奶身体乳的断货预警）、渠道趋势+环比分析图。</p></div>
+
+
+<div class="case-block cron-block">
+  <div class="block-label cron-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>第二段提示词（效果确认后追加发送，用于创建定时任务）</div>
+  <div class="prompt-box cron-prompt">
+  <p class="prompt-text">建一个每周一早上8:30的定时任务：自动汇总上一周（周一至周日）CEMOY和澳诗茉在抖音旗舰店、抖音达人矩阵、天猫旗舰店、天猫超市、小红书号五个渠道的销售数据，按渠道和品牌汇总销量、销售额、退款额，识别爆款SKU和滞销/断货风险SKU，生成可视化周报并推送到我们的企业微信群。</p>
+  <button class="copy-btn" data-copy-target="role-02-c0-prompt-cron" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-02-c0-prompt-cron" hidden>建一个每周一早上8:30的定时任务：自动汇总上一周（周一至周日）CEMOY和澳诗茉在抖音旗舰店、抖音达人矩阵、天猫旗舰店、天猫超市、小红书号五个渠道的销售数据，按渠道和品牌汇总销量、销售额、退款额，识别爆款SKU和滞销/断货风险SKU，生成可视化周报并推送到我们的企业微信群。</textarea>
+</div>
+</div>
+
+</div><div class="case-card" id="role-02-c1">
+<div class="case-head"><span class="case-code">Case 02-2</span><h3 class="case-title">Case 02-2　大促活动方案一键生成</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/达人投放预算执行表.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">达人投放预算执行表.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">请帮我策划一场 CEMOY 精华类新品的&quot;7月大促&quot;活动方案，预算总额30万元（达人投放+信息流广告），主打成分卖点（山羊奶提取物），需要覆盖抖音直播、私域会员触达、天猫渠道联动三个渠道。请输出：1）活动整体框架（目标GMV、目标人群、核心卖点话术）；2）预算分配表（按渠道/达人层级细分）；3）执行时间轴（从筹备到复盘的完整节点）；4）各渠道分工表。请特别注意，之前有过身体乳类目断货的情况，方案中要考虑库存协同的提前预警机制。</p>
+  <button class="copy-btn" data-copy-target="role-02-c1-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-02-c1-prompt" hidden>请帮我策划一场 CEMOY 精华类新品的&quot;7月大促&quot;活动方案，预算总额30万元（达人投放+信息流广告），主打成分卖点（山羊奶提取物），需要覆盖抖音直播、私域会员触达、天猫渠道联动三个渠道。请输出：1）活动整体框架（目标GMV、目标人群、核心卖点话术）；2）预算分配表（按渠道/达人层级细分）；3）执行时间轴（从筹备到复盘的完整节点）；4）各渠道分工表。请特别注意，之前有过身体乳类目断货的情况，方案中要考虑库存协同的提前预警机制。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">完整活动策划方案、预算分配表、执行时间轴+分工表；应体现对库存风险的提前规避考虑。</p></div>
+
+
+
+</div><div class="case-card" id="role-02-c2">
+<div class="case-head"><span class="case-code">Case 02-3</span><h3 class="case-title">Case 02-3　种草内容批量创作</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/种草文案库待合规扫描.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">种草文案库待合规扫描.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">请为我们澳诗茉烟酰胺淡斑精华新一轮种草campaign生成10版不同风格的种草文案，需要覆盖小红书、抖音、朋友圈三个渠道，突出&quot;烟酰胺+377成分&quot;和&quot;改善肌肤暗沉&quot;的卖点。请注意：文案中不能出现&quot;祛斑&quot;&quot;美白见效X天&quot;&quot;医美级&quot;等超出化妆品功效宣称合规范围的绝对化表述，改用&quot;改善暗沉、提亮肤色外观&quot;等合规措辞。请按渠道分类整理，并给出配图/短视频脚本建议。</p>
+  <button class="copy-btn" data-copy-target="role-02-c2-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-02-c2-prompt" hidden>请为我们澳诗茉烟酰胺淡斑精华新一轮种草campaign生成10版不同风格的种草文案，需要覆盖小红书、抖音、朋友圈三个渠道，突出&quot;烟酰胺+377成分&quot;和&quot;改善肌肤暗沉&quot;的卖点。请注意：文案中不能出现&quot;祛斑&quot;&quot;美白见效X天&quot;&quot;医美级&quot;等超出化妆品功效宣称合规范围的绝对化表述，改用&quot;改善暗沉、提亮肤色外观&quot;等合规措辞。请按渠道分类整理，并给出配图/短视频脚本建议。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">10+版本种草文案、多渠道多风格适配、配图/短视频脚本建议；文案应自动规避不合规的功效宣称表述。</p></div>
+
+
+
+</div></div>
+</section><section class="group-section" id="role-03">
+<div class="group-header"><span class="group-badge badge-role">角色案例</span><h2 class="group-title">ROLE 03 · 管理层（多品牌矩阵管理层）</h2></div>
+<p class="group-desc"></p>
+<div class="case-grid"><div class="case-card" id="role-03-c0">
+<div class="case-head"><span class="case-code">Case 03-1</span><h3 class="case-title">Case 03-1　多品牌经营简报一键生成</h3><span class="cron-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>★ 强烈推荐设置定时任务</span></span></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/各品牌线周报数据.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">各品牌线周报数据.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是 CEMOY 和澳诗茉两条品牌线本周（第27周）的经营周报数据，包含GMV、库存周转天数、滞销SKU数、客诉数、复购率等指标。请帮我提炼核心进展和风险点，生成一份管理层经营简报，需要：1）各品牌线一页纸摘要（本周GMV及环比、核心亮点）；2）风险预警清单（重点关注库存周转天数和备注中提到的具体风险）；3）针对性的建议措施。请输出一份适合直接汇报给管理层的简报文档。</p>
+  <button class="copy-btn" data-copy-target="role-03-c0-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-03-c0-prompt" hidden>附件是 CEMOY 和澳诗茉两条品牌线本周（第27周）的经营周报数据，包含GMV、库存周转天数、滞销SKU数、客诉数、复购率等指标。请帮我提炼核心进展和风险点，生成一份管理层经营简报，需要：1）各品牌线一页纸摘要（本周GMV及环比、核心亮点）；2）风险预警清单（重点关注库存周转天数和备注中提到的具体风险）；3）针对性的建议措施。请输出一份适合直接汇报给管理层的简报文档。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">各品牌线进展一页纸、风险预警+建议措施（应识别出CEMOY山羊奶身体乳的库存告急风险）、关键指标趋势图。</p></div>
+
+
+<div class="case-block cron-block">
+  <div class="block-label cron-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>第二段提示词（效果确认后追加发送，用于创建定时任务）</div>
+  <div class="prompt-box cron-prompt">
+  <p class="prompt-text">建一个每周一早上8:30的定时任务：自动汇总CEMOY和澳诗茉两条品牌线上一周的经营数据（GMV、库存周转天数、滞销SKU数、客诉数、复购率），提炼核心进展和风险点，生成管理层经营简报（各品牌线一页纸摘要+风险预警清单+建议措施），并推送到我们的企业微信群。</p>
+  <button class="copy-btn" data-copy-target="role-03-c0-prompt-cron" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-03-c0-prompt-cron" hidden>建一个每周一早上8:30的定时任务：自动汇总CEMOY和澳诗茉两条品牌线上一周的经营数据（GMV、库存周转天数、滞销SKU数、客诉数、复购率），提炼核心进展和风险点，生成管理层经营简报（各品牌线一页纸摘要+风险预警清单+建议措施），并推送到我们的企业微信群。</textarea>
+</div>
+</div>
+
+</div><div class="case-card" id="role-03-c1">
+<div class="case-head"><span class="case-code">Case 03-2</span><h3 class="case-title">Case 03-2　行业研究报告秒读摘要</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/美妆行业研究报告节选.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">美妆行业研究报告节选.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是一份美妆护肤行业研究报告节选，请帮我通读全文并提取：1）与我们业务最相关的核心观点（尤其是成分党趋势、渠道格局变化、监管合规趋势三部分）；2）行业趋势图谱（可视化呈现关键数据）；3）针对我们这种'多品牌全渠道代运营服务商'定位的可行动建议清单。请用一页纸呈现核心观点精华，便于快速汇报。</p>
+  <button class="copy-btn" data-copy-target="role-03-c1-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-03-c1-prompt" hidden>附件是一份美妆护肤行业研究报告节选，请帮我通读全文并提取：1）与我们业务最相关的核心观点（尤其是成分党趋势、渠道格局变化、监管合规趋势三部分）；2）行业趋势图谱（可视化呈现关键数据）；3）针对我们这种'多品牌全渠道代运营服务商'定位的可行动建议清单。请用一页纸呈现核心观点精华，便于快速汇报。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">核心观点精华（1页）、行业趋势图谱、结合&quot;全渠道代运营服务商&quot;定位的行动建议清单，应重点提炼监管合规趋势部分。</p></div>
+
+
+
+</div><div class="case-card" id="role-03-c2">
+<div class="case-head"><span class="case-code">Case 03-3</span><h3 class="case-title">Case 03-3　全渠道经营看板定时推送</h3><span class="cron-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>★ 强烈推荐设置定时任务</span></span></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/全渠道经营看板数据源.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">全渠道经营看板数据源.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是过去一周全渠道GMV、同环比、库存断货SKU数、客诉数的每日数据。请先基于这份数据帮我生成一份可视化经营看板样例（包含GMV趋势图、同环比对比、异常指标高亮）。确认样式没问题后，请帮我设置一个自动化任务：每天早上9点，自动汇总前一天的全渠道GMV、库存异常和客诉情况，生成简报并推送到我们的企业微信群。</p>
+  <button class="copy-btn" data-copy-target="role-03-c2-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-03-c2-prompt" hidden>附件是过去一周全渠道GMV、同环比、库存断货SKU数、客诉数的每日数据。请先基于这份数据帮我生成一份可视化经营看板样例（包含GMV趋势图、同环比对比、异常指标高亮）。确认样式没问题后，请帮我设置一个自动化任务：每天早上9点，自动汇总前一天的全渠道GMV、库存异常和客诉情况，生成简报并推送到我们的企业微信群。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">每日经营数据摘要样例、异常指标自动预警展示、同环比趋势分析图；并演示自动化定时任务的设置流程（现场需说明数据源目前为模拟数据，实时对接电商平台API为后续二期工作）。</p></div>
+
+
+<div class="case-block cron-block">
+  <div class="block-label cron-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>第二段提示词（若第一段仅用于确认看板样式，可用以下独立指令单独创建定时任务）</div>
+  <div class="prompt-box cron-prompt">
+  <p class="prompt-text">建一个每个工作日早上9:00的定时任务：自动汇总前一天全渠道（抖音、天猫、小红书）的GMV、同环比、库存断货SKU数、客诉数，生成经营简报并推送到我们的企业微信群，异常指标需高亮标注。</p>
+  <button class="copy-btn" data-copy-target="role-03-c2-prompt-cron" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-03-c2-prompt-cron" hidden>建一个每个工作日早上9:00的定时任务：自动汇总前一天全渠道（抖音、天猫、小红书）的GMV、同环比、库存断货SKU数、客诉数，生成经营简报并推送到我们的企业微信群，异常指标需高亮标注。</textarea>
+</div>
+</div>
+
+</div></div>
+</section><section class="group-section" id="role-04">
+<div class="group-header"><span class="group-badge badge-role">角色案例</span><h2 class="group-title">ROLE 04 · 销售/售前（渠道招商 &amp; 品牌合作岗）</h2></div>
+<p class="group-desc"></p>
+<div class="case-grid"><div class="case-card" id="role-04-c0">
+<div class="case-head"><span class="case-code">Case 04-1</span><h3 class="case-title">Case 04-1　品牌入驻/合作方案定制</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/客户品牌需求说明.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">客户品牌需求说明.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是一份新客户（某新锐国货护肤品牌）的需求说明，他们目前只有天猫店铺，想借助我们的达人资源和运营经验拓展抖音渠道。请基于这份需求，帮我从我们的服务模板库中匹配并生成一份定制化的全渠道代运营合作方案 PPT 大纲，需要包含：1）针对该客户核心诉求（低预算试错、复用达人资源、强合规要求）的匹配度分析；2）具体的服务内容与渠道打法建议；3）阶段性合作节奏（1个月搭建期+3个月验证期）；4）参考CEMOY/澳诗茉过往达人合作案例作为可信度支撑。</p>
+  <button class="copy-btn" data-copy-target="role-04-c0-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-04-c0-prompt" hidden>附件是一份新客户（某新锐国货护肤品牌）的需求说明，他们目前只有天猫店铺，想借助我们的达人资源和运营经验拓展抖音渠道。请基于这份需求，帮我从我们的服务模板库中匹配并生成一份定制化的全渠道代运营合作方案 PPT 大纲，需要包含：1）针对该客户核心诉求（低预算试错、复用达人资源、强合规要求）的匹配度分析；2）具体的服务内容与渠道打法建议；3）阶段性合作节奏（1个月搭建期+3个月验证期）；4）参考CEMOY/澳诗茉过往达人合作案例作为可信度支撑。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">定制化全渠道合作方案PPT大纲、客户需求匹配度分析、渠道组合推荐；应体现对客户&quot;预算敏感+合规敏感&quot;两大核心诉求的针对性回应。</p></div>
+
+
+
+</div><div class="case-card" id="role-04-c1">
+<div class="case-head"><span class="case-code">Case 04-2</span><h3 class="case-title">Case 04-2　招商/代运营标书智能撰写</h3></div>
+<span class="ma-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg><span>含多Agent协同版（见下方）</span></span>
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/美妆代运营招标文件节选.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">美妆代运营招标文件节选.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是一份美妆品牌全渠道代运营服务采购项目的招标文件节选，请帮我：1）解析并列出其评分标准和各项分值；2）逐项撰写投标响应内容，重点突出我们在CEMOY、澳诗茉两个品牌上积累的行业经验与业绩（近2年GMV规模、达人矩阵资源）、团队配置、合规审查机制（我们有专门的功效宣称合规审查流程）；3）按招标文件的评分点顺序，生成一份结构化的投标响应文档，确保逐项对应不漏项。</p>
+  <button class="copy-btn" data-copy-target="role-04-c1-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-04-c1-prompt" hidden>附件是一份美妆品牌全渠道代运营服务采购项目的招标文件节选，请帮我：1）解析并列出其评分标准和各项分值；2）逐项撰写投标响应内容，重点突出我们在CEMOY、澳诗茉两个品牌上积累的行业经验与业绩（近2年GMV规模、达人矩阵资源）、团队配置、合规审查机制（我们有专门的功效宣称合规审查流程）；3）按招标文件的评分点顺序，生成一份结构化的投标响应文档，确保逐项对应不漏项。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">结构化投标响应书、评分点逐项应答（尤其是&quot;合规能力&quot;评分项需重点体现）、资质与案例材料清单。</p></div>
+
+
+
+<div class="case-block ma-block">
+  <div class="block-label ma-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg>多Agent协同版（建议在单Agent版演示完毕后追加发送）· 协同集成型</div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">Agent 分工方案</div>
+    <table class="agent-table"><thead><tr><th>Agent</th><th>负责评分项</th><th>输出</th></tr></thead><tbody><tr><td>Agent 1</td><td>行业经验与业绩（30分）</td><td>该项应答内容</td></tr><tr><td>Agent 2</td><td>团队配置（20分）</td><td>该项应答内容</td></tr><tr><td>Agent 3</td><td>服务方案合理性（25分）</td><td>该项应答内容</td></tr><tr><td>Agent 4</td><td>合规能力（10分）</td><td>该项应答内容</td></tr><tr><td>汇总 Agent</td><td>按报价（15分）补充+合并四项应答，生成结构化标书</td><td>完整投标响应文档</td></tr></tbody></table>
+  </div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">多Agent版完整输入文字（可直接复制粘贴）</div>
+    <div class="prompt-box ma-prompt">
+  <p class="prompt-text">附件是一份美妆品牌全渠道代运营服务采购项目的招标文件节选，评分标准共5项。请你先解析出这5项评分点和分值，然后针对分值最高的4项分别用独立 Agent 撰写应答内容：Agent 1 负责&quot;行业经验与业绩&quot;（30分），重点突出我们在CEMOY、澳诗茉两个品牌上积累的GMV规模和达人矩阵资源；Agent 2 负责&quot;团队配置&quot;（20分），说明运营/达人对接/内容制作/客服团队的人员配置；Agent 3 负责&quot;服务方案合理性&quot;（25分），给出渠道打法、达人矩阵策略、私域运营方案；Agent 4 负责&quot;合规能力&quot;（10分），重点说明我们的功效宣称合规审查机制。四个 Agent 完成后，请你补充&quot;报价&quot;（15分）部分，并将全部内容按招标文件的评分点顺序合并成一份结构化的投标响应文档，确保逐项对应不漏项。</p>
+  <button class="copy-btn" data-copy-target="role-04-c1-prompt-ma" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-04-c1-prompt-ma" hidden>附件是一份美妆品牌全渠道代运营服务采购项目的招标文件节选，评分标准共5项。请你先解析出这5项评分点和分值，然后针对分值最高的4项分别用独立 Agent 撰写应答内容：Agent 1 负责&quot;行业经验与业绩&quot;（30分），重点突出我们在CEMOY、澳诗茉两个品牌上积累的GMV规模和达人矩阵资源；Agent 2 负责&quot;团队配置&quot;（20分），说明运营/达人对接/内容制作/客服团队的人员配置；Agent 3 负责&quot;服务方案合理性&quot;（25分），给出渠道打法、达人矩阵策略、私域运营方案；Agent 4 负责&quot;合规能力&quot;（10分），重点说明我们的功效宣称合规审查机制。四个 Agent 完成后，请你补充&quot;报价&quot;（15分）部分，并将全部内容按招标文件的评分点顺序合并成一份结构化的投标响应文档，确保逐项对应不漏项。</textarea>
+</div>
+  </div>
+  <div>
+    <div class="sub-label">预期效果对比</div>
+    <p class="output-text">标书撰写天然是&quot;按评分项分工&quot;的真实工作模式，多Agent版能让客户看到每个评分项都有专属内容深度，而不是笼统地写一段应付所有评分点，尤其适合展示&quot;合规能力&quot;这类容易被忽略但恰恰是本客户差异化优势的评分项。</p>
+  </div>
+</div>
+</div><div class="case-card" id="role-04-c2">
+<div class="case-head"><span class="case-code">Case 04-3</span><h3 class="case-title">Case 04-3　客户会议纪要自动整理</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/客户会议沟通记录原始文本.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">客户会议沟通记录原始文本.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是今天和 CEMOY 品牌方关于7月大促节奏沟通的会议速记原文（未整理）。请帮我：1）提炼会议核心要点（库存问题、达人专场安排、合规审查要求、预算控制要求）；2）整理成结构化会议纪要；3）提取所有 Action Items 并明确负责人（王工/赵经理/李经理）和截止时间；4）标注下次跟进计划（品牌方要求下周三对进度）。</p>
+  <button class="copy-btn" data-copy-target="role-04-c2-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-04-c2-prompt" hidden>附件是今天和 CEMOY 品牌方关于7月大促节奏沟通的会议速记原文（未整理）。请帮我：1）提炼会议核心要点（库存问题、达人专场安排、合规审查要求、预算控制要求）；2）整理成结构化会议纪要；3）提取所有 Action Items 并明确负责人（王工/赵经理/李经理）和截止时间；4）标注下次跟进计划（品牌方要求下周三对进度）。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">结构化会议纪要、Action Items+负责人+截止时间清单（如&quot;赵经理需在7月10日前提供达人报价和排期方案&quot;）、下次跟进计划提醒。</p></div>
+
+
+
+</div></div>
+</section><section class="group-section" id="role-05">
+<div class="group-header"><span class="group-badge badge-role">角色案例</span><h2 class="group-title">ROLE 05 · HR（导购/BA 团队管理）</h2></div>
+<p class="group-desc"></p>
+<div class="case-grid"><div class="case-card" id="role-05-c0">
+<div class="case-head"><span class="case-code">Case 05-1</span><h3 class="case-title">Case 05-1　BA/导购简历智能筛选</h3></div>
+<span class="ma-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg><span>含多Agent协同版（见下方）</span></span>
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/导购候选人信息汇总表.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">导购候选人信息汇总表.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a><a class="mat-chip" href="素材文件/Word/导购BA岗位JD.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">导购BA岗位JD.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件包含一份&quot;高级美妆导购/BA&quot;岗位JD，以及100份候选人的结构化信息汇总表（含从业年限、曾服务品牌渠道、最高业绩、期望薪资等字段）。请按照JD的任职要求，对这100位候选人进行匹配度评分，筛选出TOP10候选人并排序，说明每人的评分理由（重点参考美妆零售经验、最高业绩GMV、期望薪资与预算的匹配度）。最后给出针对TOP10候选人的面试问题建议。</p>
+  <button class="copy-btn" data-copy-target="role-05-c0-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-05-c0-prompt" hidden>附件包含一份&quot;高级美妆导购/BA&quot;岗位JD，以及100份候选人的结构化信息汇总表（含从业年限、曾服务品牌渠道、最高业绩、期望薪资等字段）。请按照JD的任职要求，对这100位候选人进行匹配度评分，筛选出TOP10候选人并排序，说明每人的评分理由（重点参考美妆零售经验、最高业绩GMV、期望薪资与预算的匹配度）。最后给出针对TOP10候选人的面试问题建议。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">TOP10候选人排名、每人匹配度评分及理由、面试问题建议（可包含产品知识测试、话术模拟等针对性问题）。</p></div>
+
+
+
+<div class="case-block ma-block">
+  <div class="block-label ma-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg>多Agent协同版（建议在单Agent版演示完毕后追加发送）· 并行处理型</div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">Agent 分工方案</div>
+    <table class="agent-table"><thead><tr><th>Agent</th><th>负责范围</th><th>输出</th></tr></thead><tbody><tr><td>Agent 1</td><td>候选人 C001-C025 打分</td><td>25人评分明细</td></tr><tr><td>Agent 2</td><td>候选人 C026-C050 打分</td><td>25人评分明细</td></tr><tr><td>Agent 3</td><td>候选人 C051-C075 打分</td><td>25人评分明细</td></tr><tr><td>Agent 4</td><td>候选人 C076-C100 打分</td><td>25人评分明细</td></tr><tr><td>汇总 Agent</td><td>合并4份评分明细，排序取TOP10，生成面试问题建议</td><td>最终排名报告</td></tr></tbody></table>
+  </div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">多Agent版完整输入文字（可直接复制粘贴）</div>
+    <div class="prompt-box ma-prompt">
+  <p class="prompt-text">附件包含一份&quot;高级美妆导购/BA&quot;岗位JD，以及100份候选人的结构化信息汇总表。这份名单量比较大，请你启动多个 Agent 并行处理：把100位候选人平均分成4组（每组25人），分别用4个 Agent 并行对每组候选人按JD的任职要求打分（重点参考美妆零售经验、最高业绩GMV、期望薪资与预算的匹配度），每个 Agent 输出各自负责的25人评分明细。全部完成后，请你汇总这4组结果，排序筛选出TOP10候选人，并给出每人的评分理由和针对性的面试问题建议。</p>
+  <button class="copy-btn" data-copy-target="role-05-c0-prompt-ma" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-05-c0-prompt-ma" hidden>附件包含一份&quot;高级美妆导购/BA&quot;岗位JD，以及100份候选人的结构化信息汇总表。这份名单量比较大，请你启动多个 Agent 并行处理：把100位候选人平均分成4组（每组25人），分别用4个 Agent 并行对每组候选人按JD的任职要求打分（重点参考美妆零售经验、最高业绩GMV、期望薪资与预算的匹配度），每个 Agent 输出各自负责的25人评分明细。全部完成后，请你汇总这4组结果，排序筛选出TOP10候选人，并给出每人的评分理由和针对性的面试问题建议。</textarea>
+</div>
+  </div>
+  <div>
+    <div class="sub-label">预期效果对比</div>
+    <p class="output-text">单Agent顺序处理100份简历约需完整读完全表后统一打分；多Agent并行版可明显观察到4组评分同时推进、耗时大幅缩短，且候选人数量越大（如500人、1000人）优势越明显。</p>
+  </div>
+</div>
+<div class="case-block ext-block">
+  <div class="block-label ext-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>第二步提示词（TOP10结果生成后追加发送，追问补充筛选维度）</div>
+  <div class="prompt-box ext-prompt">
+  <p class="prompt-text">还有哪些维度，可以进行比较和筛选？</p>
+  <button class="copy-btn" data-copy-target="role-05-c0-prompt-ext2" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-05-c0-prompt-ext2" hidden>还有哪些维度，可以进行比较和筛选？</textarea>
+</div>
+  <p class="output-text" style="margin-top:10px;">WorkBuddy 不会简单重复"经验年限/业绩/薪资匹配"等第一步已用的维度，而是主动补充三类容易被忽略但对HR决策有实际价值的新增视角：① <strong>派生效率类指标</strong>（业绩效率=最高业绩÷经验年限，识别"资历浅但业绩猛"的潜力候选人；薪资性价比=最高业绩÷期望薪资，识别低成本高产出候选人）；② <strong>一致性/交叉标签</strong>（渠道字段+亮点摘要关键词合并的二元标签如"具备直播经验"、自评分与业绩百分位的背离度，识别"自评可能虚高"的候选人）；③ <strong>数据质量筛查</strong>（年龄与经验年限反推入行年龄，识别简历真实性风险；姓名重复排查，提醒面试排期须用候选人编号而非姓名）。</p>
+</div>
+<div class="case-block ext-block">
+  <div class="block-label ext-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h5"/></svg>第三步提示词（沉淀为可复用技能，效果确认后追加发送）</div>
+  <div class="prompt-box ext-prompt">
+  <p class="prompt-text">请把刚才这套"候选人JD匹配评分+追问补充维度"的完整方法整理成一个技能（Skill），保存在当前项目里，以后遇到类似的候选人筛选任务可以直接复用，不用每次重新设计。</p>
+  <button class="copy-btn" data-copy-target="role-05-c0-prompt-ext3" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-05-c0-prompt-ext3" hidden>请把刚才这套"候选人JD匹配评分+追问补充维度"的完整方法整理成一个技能（Skill），保存在当前项目里，以后遇到类似的候选人筛选任务可以直接复用，不用每次重新设计。</textarea>
+</div>
+  <p class="output-text" style="margin-top:10px;">WorkBuddy 在当前项目 <code>.workbuddy/skills/</code> 目录下创建一份结构化的 SKILL.md（含 When to use 触发场景说明、Steps 可执行步骤、易踩的坑、校验方法四大板块），后续在本项目中再遇到"候选人表+JD 评分筛选"类任务会自动识别加载并复用，不需要重新从零设计评分模型。<strong>这是本案例区别于其他 Case 的独特价值——不仅完成了一次性任务，还把方法论转化成了团队可持续复用的资产</strong>，现场演示"WorkBuddy 会越用越懂你的业务"这一差异化能力时，本案例是最直观的素材。</p>
+</div>
+</div><div class="case-card" id="role-05-c1">
+<div class="case-head"><span class="case-code">Case 05-2</span><h3 class="case-title">Case 05-2　品牌知识库问答构建</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/产品成分说明手册.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">产品成分说明手册.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是 CEMOY 和澳诗茉两大品牌全部产品的成分与功效说明手册，包含每款产品的核心成分、功效、适用肌肤和话术要点（含合规注意事项）。请基于这份手册帮我构建一个产品知识问答库，之后我们的导购可以直接用自然语言提问获取标准答案。请先测试几个典型问题：1）&quot;CEMOY奇迹再生面霜的核心成分是什么，可以说抗皱吗？&quot;2）&quot;澳诗茉烟酰胺淡斑精华孕妇能用吗？&quot;3）&quot;哪些产品适合敏感肌？&quot;请给出带原文引用的精准回答，并特别注意合规话术边界。</p>
+  <button class="copy-btn" data-copy-target="role-05-c1-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-05-c1-prompt" hidden>附件是 CEMOY 和澳诗茉两大品牌全部产品的成分与功效说明手册，包含每款产品的核心成分、功效、适用肌肤和话术要点（含合规注意事项）。请基于这份手册帮我构建一个产品知识问答库，之后我们的导购可以直接用自然语言提问获取标准答案。请先测试几个典型问题：1）&quot;CEMOY奇迹再生面霜的核心成分是什么，可以说抗皱吗？&quot;2）&quot;澳诗茉烟酰胺淡斑精华孕妇能用吗？&quot;3）&quot;哪些产品适合敏感肌？&quot;请给出带原文引用的精准回答，并特别注意合规话术边界。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">智能产品知识问答机器人效果展示、带原文引用的精准回答、对&quot;能否说抗皱&quot;&quot;孕妇能否用&quot;等合规敏感问题的谨慎准确回应。</p></div>
+
+
+
+</div><div class="case-card" id="role-05-c2">
+<div class="case-head"><span class="case-code">Case 05-3</span><h3 class="case-title">Case 05-3　新员工培训材料自动生成</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/新员工入职培训大纲.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">新员工入职培训大纲.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是我们新员工（导购/BA）入职培训的大纲，分三天：品牌产品知识、渠道话术实操、合规红线与考核。请基于这份大纲，帮我生成：1）一份完整的培训PPT内容框架（每天的核心知识点、配图建议）；2）结业考核题库（覆盖产品知识题和合规知识题，包含单选、判断、简答题型）；3）培训效果评估模板。</p>
+  <button class="copy-btn" data-copy-target="role-05-c2-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-05-c2-prompt" hidden>附件是我们新员工（导购/BA）入职培训的大纲，分三天：品牌产品知识、渠道话术实操、合规红线与考核。请基于这份大纲，帮我生成：1）一份完整的培训PPT内容框架（每天的核心知识点、配图建议）；2）结业考核题库（覆盖产品知识题和合规知识题，包含单选、判断、简答题型）；3）培训效果评估模板。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">完整培训课件PPT框架、课后考核题库（需包含&quot;哪些表述属于违规功效宣称&quot;类合规题目）、培训效果评估模板。</p></div>
+
+
+
+</div></div>
+</section><section class="group-section" id="role-06">
+<div class="group-header"><span class="group-badge badge-role">角色案例</span><h2 class="group-title">ROLE 06 · 财务（多渠道/多品牌结算）</h2></div>
+<p class="group-desc"></p>
+<div class="case-grid"><div class="case-card" id="role-06-c0">
+<div class="case-head"><span class="case-code">Case 06-1</span><h3 class="case-title">Case 06-1　发票智能识别录入</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/图片/发票样本01_原料采购.png" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></span><span class="mat-label">发票样本01_原料采购.png</span><span class="mat-ext">图片</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a><a class="mat-chip" href="素材文件/图片/发票样本02_包材采购.png" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></span><span class="mat-label">发票样本02_包材采购.png</span><span class="mat-ext">图片</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a><a class="mat-chip" href="素材文件/图片/发票样本03_达人服务费.png" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></span><span class="mat-label">发票样本03_达人服务费.png</span><span class="mat-ext">图片</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是三张本月的采购/服务发票图片（原料采购、包材采购、达人服务费）。请帮我识别这些发票中的关键信息：发票代码、发票号码、开票日期、销售方名称、金额、税率、税额，并整理成一张结算登记表，按费用类别（原料/包材/推广服务）分类汇总。如果发现金额或税率异常（比如税率不一致），请标注提示。</p>
+  <button class="copy-btn" data-copy-target="role-06-c0-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-06-c0-prompt" hidden>附件是三张本月的采购/服务发票图片（原料采购、包材采购、达人服务费）。请帮我识别这些发票中的关键信息：发票代码、发票号码、开票日期、销售方名称、金额、税率、税额，并整理成一张结算登记表，按费用类别（原料/包材/推广服务）分类汇总。如果发现金额或税率异常（比如税率不一致），请标注提示。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">发票信息自动提取表格、按费用类别分类汇总（原料13%税率、包材13%税率、推广服务6%税率应被正确区分识别）、异常发票标注提示。</p></div>
+
+
+
+</div><div class="case-card" id="role-06-c1">
+<div class="case-head"><span class="case-code">Case 06-2</span><h3 class="case-title">Case 06-2　全渠道财务报表自动生成</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/6月各渠道财务原始数据.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">6月各渠道财务原始数据.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是本月（6月）各渠道（抖音旗舰店/抖音达人矩阵/天猫旗舰店/天猫超市/小红书号）× 两个品牌的原始财务数据，包含销售收入、平台佣金、推广费/达人费、退货成本、物流成本。请帮我：1）按渠道和品牌分类汇总，生成月度利润表；2）计算各渠道的费用占比结构；3）标注推广费占比异常（超过28%）的渠道并提示核查；4）生成同环比分析图表。</p>
+  <button class="copy-btn" data-copy-target="role-06-c1-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-06-c1-prompt" hidden>附件是本月（6月）各渠道（抖音旗舰店/抖音达人矩阵/天猫旗舰店/天猫超市/小红书号）× 两个品牌的原始财务数据，包含销售收入、平台佣金、推广费/达人费、退货成本、物流成本。请帮我：1）按渠道和品牌分类汇总，生成月度利润表；2）计算各渠道的费用占比结构；3）标注推广费占比异常（超过28%）的渠道并提示核查；4）生成同环比分析图表。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">月度利润表+渠道分摊表、异常项高亮标注（推广费占比过高的渠道会被自动识别提示）、同环比分析图表。</p></div>
+
+
+
+</div><div class="case-card" id="role-06-c2">
+<div class="case-head"><span class="case-code">Case 06-3</span><h3 class="case-title">Case 06-3　营销预算偏差智能预警</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/营销预算基线与执行表.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">营销预算基线与执行表.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是CEMOY和澳诗茉两条品牌线本季度（Q3）达人投放费、信息流广告费、平台活动坑位费、内容制作费四类营销费用的预算基线与实际执行数据。请帮我监控执行率，对超支10%以上的费用类别自动标注预警，并分析超支的可能原因，生成一份预算偏差分析报告，同时给出后续预算调整建议。</p>
+  <button class="copy-btn" data-copy-target="role-06-c2-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-06-c2-prompt" hidden>附件是CEMOY和澳诗茉两条品牌线本季度（Q3）达人投放费、信息流广告费、平台活动坑位费、内容制作费四类营销费用的预算基线与实际执行数据。请帮我监控执行率，对超支10%以上的费用类别自动标注预警，并分析超支的可能原因，生成一份预算偏差分析报告，同时给出后续预算调整建议。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">实时预算执行看板、超支类别自动标注预警、偏差原因分析报告及调整建议。</p></div>
+
+
+
+</div></div>
+</section><section class="group-section" id="role-07">
+<div class="group-header"><span class="group-badge badge-role">角色案例</span><h2 class="group-title">ROLE 07 · 法务（化妆品合规专岗）</h2></div>
+<p class="group-desc"></p>
+<div class="case-grid"><div class="case-card" id="role-07-c0">
+<div class="case-head"><span class="case-code">Case 07-1</span><h3 class="case-title">Case 07-1　品牌授权/代运营合同审查</h3></div>
+<span class="ma-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg><span>含多Agent协同版（见下方）</span></span>
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/品牌代运营授权合同待审查.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">品牌代运营授权合同待审查.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是一份《品牌全渠道代运营授权合同》待审查文本，我方是乙方（代运营服务商）。请帮我全文审查这份合同，重点标注对我方存在潜在风险的条款，特别关注：1）第二条的GMV对赌条款（低于目标值60%时甲方可单方解除合同并索赔）；2）第三条的结算周期与逾期处理条款；3）第五条的违约金比例（30%）是否合理；4）第四条中乙方对甲方违规营销内容的责任承担范围是否过重。请与常见的行业标准合同条款对比，列出差异点和修改建议清单。</p>
+  <button class="copy-btn" data-copy-target="role-07-c0-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-07-c0-prompt" hidden>附件是一份《品牌全渠道代运营授权合同》待审查文本，我方是乙方（代运营服务商）。请帮我全文审查这份合同，重点标注对我方存在潜在风险的条款，特别关注：1）第二条的GMV对赌条款（低于目标值60%时甲方可单方解除合同并索赔）；2）第三条的结算周期与逾期处理条款；3）第五条的违约金比例（30%）是否合理；4）第四条中乙方对甲方违规营销内容的责任承担范围是否过重。请与常见的行业标准合同条款对比，列出差异点和修改建议清单。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">风险条款红色标注（GMV对赌条款应被重点标出）、与标准模板差异对比、修改建议清单（如建议将违约金比例、责任范围进行更明确的界定）。</p></div>
+
+
+
+<div class="case-block ma-block">
+  <div class="block-label ma-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg>多Agent协同版（建议在单Agent版演示完毕后追加发送）· 专家会诊型</div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">Agent 分工方案</div>
+    <table class="agent-table"><thead><tr><th>Agent</th><th>审查视角</th><th>关注条款</th></tr></thead><tbody><tr><td>Agent 1（商务谈判视角）</td><td>GMV对赌条款、合作期限、终止条款是否对我方公平</td><td>第二条、第六条</td></tr><tr><td>Agent 2（财务结算视角）</td><td>结算周期、逾期处理、违约金比例是否合理</td><td>第三条、第五条</td></tr><tr><td>Agent 3（合规法务视角）</td><td>知识产权归属、违规营销内容责任划分是否过重</td><td>第四条、第七条</td></tr><tr><td>汇总 Agent</td><td>综合三份视角报告，生成统一的风险等级排序和修改建议清单</td><td>多维度合同风险报告</td></tr></tbody></table>
+  </div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">多Agent版完整输入文字（可直接复制粘贴）</div>
+    <div class="prompt-box ma-prompt">
+  <p class="prompt-text">附件是一份《品牌全渠道代运营授权合同》待审查文本，我方是乙方（代运营服务商）。这份合同风险点分布在多个维度，请你用三个不同专业视角的 Agent 分别审查：Agent 1 从商务谈判视角审查第二条GMV对赌条款（低于目标值60%时甲方可单方解除合同并索赔）和第六条终止条款是否对我方公平；Agent 2 从财务结算视角审查第三条结算周期与逾期处理条款、第五条违约金比例（30%）是否合理；Agent 3 从合规法务视角审查第四条知识产权与违规营销内容责任划分、第七条争议解决条款是否存在对我方不利之处。三个 Agent 分别输出各自视角的风险清单后，请你汇总成一份统一的多维度风险报告，按风险等级排序，并给出与行业标准合同的差异对比和修改建议清单。</p>
+  <button class="copy-btn" data-copy-target="role-07-c0-prompt-ma" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-07-c0-prompt-ma" hidden>附件是一份《品牌全渠道代运营授权合同》待审查文本，我方是乙方（代运营服务商）。这份合同风险点分布在多个维度，请你用三个不同专业视角的 Agent 分别审查：Agent 1 从商务谈判视角审查第二条GMV对赌条款（低于目标值60%时甲方可单方解除合同并索赔）和第六条终止条款是否对我方公平；Agent 2 从财务结算视角审查第三条结算周期与逾期处理条款、第五条违约金比例（30%）是否合理；Agent 3 从合规法务视角审查第四条知识产权与违规营销内容责任划分、第七条争议解决条款是否存在对我方不利之处。三个 Agent 分别输出各自视角的风险清单后，请你汇总成一份统一的多维度风险报告，按风险等级排序，并给出与行业标准合同的差异对比和修改建议清单。</textarea>
+</div>
+  </div>
+  <div>
+    <div class="sub-label">预期效果对比</div>
+    <p class="output-text">单Agent审查容易在同一遍阅读中顾此失彼（比如盯着GMV对赌条款时忽略了结算周期的风险）；三视角会诊版能让客户直观看到&quot;AI像找了三个不同背景的专家分别看合同&quot;，审查颗粒度明显更细，这是本案例最推荐的现场演示（客户曾有真实的GMV对赌合同纠纷经历，说服力最强）。</p>
+  </div>
+</div>
+</div><div class="case-card" id="role-07-c1">
+<div class="case-head"><span class="case-code">Case 07-2</span><h3 class="case-title">Case 07-2　化妆品功效宣称合规检索</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row mat-empty">无需素材 · 可直接使用输入文字</div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">请帮我查询化妆品功效宣称与广告用语相关的最新监管要求（包括《化妆品监督管理条例》及国家药监局近期的执法动态），重点关注：1）哪些用语属于明确禁止或高风险表述（如&quot;医美级&quot;&quot;祛斑&quot;&quot;抗菌抑菌&quot;等）；2）功效宣称与产品备案类别的对应关系要求；3）近期是否有平台或监管部门对美妆行业营销文案的专项整治案例。请整理成一份适合发给内容团队参考的《产品文案合规检查清单》，并附上最新政策变化摘要。</p>
+  <button class="copy-btn" data-copy-target="role-07-c1-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-07-c1-prompt" hidden>请帮我查询化妆品功效宣称与广告用语相关的最新监管要求（包括《化妆品监督管理条例》及国家药监局近期的执法动态），重点关注：1）哪些用语属于明确禁止或高风险表述（如&quot;医美级&quot;&quot;祛斑&quot;&quot;抗菌抑菌&quot;等）；2）功效宣称与产品备案类别的对应关系要求；3）近期是否有平台或监管部门对美妆行业营销文案的专项整治案例。请整理成一份适合发给内容团队参考的《产品文案合规检查清单》，并附上最新政策变化摘要。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">相关法规条款精准引用、《产品文案合规检查清单》、最新政策变化摘要（重点体现对&quot;医美级&quot;&quot;堪比XX医美项目&quot;等表述的监管态度）。</p></div>
+
+
+
+</div><div class="case-card" id="role-07-c2">
+<div class="case-head"><span class="case-code">Case 07-3</span><h3 class="case-title">Case 07-3　营销文案合规自动扫描</h3></div>
+<span class="ma-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg><span>含多Agent协同版（见下方）</span></span>
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/种草文案库待合规扫描.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">种草文案库待合规扫描.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是我们CEMOY和澳诗茉两个品牌近期在小红书和抖音发布的8条种草文案。请帮我逐条扫描，检查是否存在功效宣称违规风险（比如&quot;堪比医美&quot;&quot;堪比热玛吉&quot;&quot;抗菌抑菌&quot;等超出备案范围的绝对化或医疗化表述），对每条文案标注风险等级（高/中/低），并给出具体的合规改写建议。最后生成一份合规扫描报告，附整改时间表。</p>
+  <button class="copy-btn" data-copy-target="role-07-c2-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-07-c2-prompt" hidden>附件是我们CEMOY和澳诗茉两个品牌近期在小红书和抖音发布的8条种草文案。请帮我逐条扫描，检查是否存在功效宣称违规风险（比如&quot;堪比医美&quot;&quot;堪比热玛吉&quot;&quot;抗菌抑菌&quot;等超出备案范围的绝对化或医疗化表述），对每条文案标注风险等级（高/中/低），并给出具体的合规改写建议。最后生成一份合规扫描报告，附整改时间表。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">文案合规风险扫描报告（应准确识别出&quot;堪比热玛吉&quot;&quot;医美级&quot;&quot;抗菌抑菌&quot;等高风险表述）、风险等级分类标注、每条文案的整改建议+时间表。</p></div>
+
+
+
+<div class="case-block ma-block">
+  <div class="block-label ma-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg>多Agent协同版（建议在单Agent版演示完毕后追加发送）· 专家会诊型</div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">Agent 分工方案</div>
+    <table class="agent-table"><thead><tr><th>Agent</th><th>审查视角</th><th>关注点</th></tr></thead><tbody><tr><td>Agent 1（合规专员视角）</td><td>逐条比对《化妆品监督管理条例》，识别绝对化/医疗化违规表述</td><td>风险等级标注</td></tr><tr><td>Agent 2（市场文案视角）</td><td>评估改写后的合规文案是否还保留原有的营销力度和转化力</td><td>改写效果评分</td></tr><tr><td>汇总 Agent</td><td>综合两方意见，输出&quot;既合规又有营销力度&quot;的最终改写建议</td><td>最终文案合规扫描报告</td></tr></tbody></table>
+  </div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">多Agent版完整输入文字（可直接复制粘贴）</div>
+    <div class="prompt-box ma-prompt">
+  <p class="prompt-text">附件是我们CEMOY和澳诗茉两个品牌近期在小红书和抖音发布的8条种草文案。请你用两个 Agent 交叉审查：Agent 1 以合规专员视角逐条扫描，依据化妆品功效宣称监管要求，识别&quot;堪比医美&quot;&quot;堪比热玛吉&quot;&quot;抗菌抑菌&quot;等超出备案范围的绝对化或医疗化表述，标注风险等级（高/中/低）并给出合规改写建议；Agent 2 以市场文案视角评估 Agent 1 给出的合规改写版本，判断改写后是否还保留原文案的营销吸引力和转化力，如果改写后力度不足，请提出既合规又有说服力的优化版本。两个 Agent 完成后，请你汇总生成一份最终的合规扫描报告，每条文案附上原文、风险等级、最终推荐改写版本和整改时间表。</p>
+  <button class="copy-btn" data-copy-target="role-07-c2-prompt-ma" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="role-07-c2-prompt-ma" hidden>附件是我们CEMOY和澳诗茉两个品牌近期在小红书和抖音发布的8条种草文案。请你用两个 Agent 交叉审查：Agent 1 以合规专员视角逐条扫描，依据化妆品功效宣称监管要求，识别&quot;堪比医美&quot;&quot;堪比热玛吉&quot;&quot;抗菌抑菌&quot;等超出备案范围的绝对化或医疗化表述，标注风险等级（高/中/低）并给出合规改写建议；Agent 2 以市场文案视角评估 Agent 1 给出的合规改写版本，判断改写后是否还保留原文案的营销吸引力和转化力，如果改写后力度不足，请提出既合规又有说服力的优化版本。两个 Agent 完成后，请你汇总生成一份最终的合规扫描报告，每条文案附上原文、风险等级、最终推荐改写版本和整改时间表。</textarea>
+</div>
+  </div>
+  <div>
+    <div class="sub-label">预期效果对比</div>
+    <p class="output-text">单Agent直接改写容易出现&quot;合规但没有营销力&quot;的一刀切问题；双视角交叉版能体现WorkBuddy在合规和商业效果之间做平衡，而不是简单粗暴地删词。</p>
+  </div>
+</div>
+</div></div>
+</section>
+<section class="group-section" id="scenario-08">
+<div class="group-header"><span class="group-badge badge-scenario">行业场景</span><h2 class="group-title">第二部分 · 行业专属场景（美妆护肤全渠道零售）</h2></div>
+<p class="group-desc">本部分为原《演示内容稿-美妆零售行业定制版.md》中&quot;场景说明级&quot;内容的完整结构补全，按角色案例统一格式（Prompt/操作步骤/输出效果/效能对比）呈现。</p>
+<div class="case-grid"><div class="case-card" id="scenario-08-c0">
+<div class="case-head"><span class="case-code">场景 08-1</span><h3 class="case-title">场景 08-1　全域经营看板</h3><span class="cron-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>★ 强烈推荐设置定时任务</span></span></div>
+<span class="ma-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg><span>含多Agent协同版（见下方）</span></span>
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/全渠道销售数据.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">全渠道销售数据.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">我们在天猫、抖音、小红书都有店铺在卖CEMOY和澳诗茉的产品，附件是过去一周的渠道销售明细。请帮我打通这些渠道数据，生成一个全域经营看板，包含：各渠道GMV占比、动销SKU排行、库存断货预警（重点看备注列信息）。这个看板未来希望能每天自动更新推送，今天先基于这份数据做一版效果演示。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c0-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c0-prompt" hidden>我们在天猫、抖音、小红书都有店铺在卖CEMOY和澳诗茉的产品，附件是过去一周的渠道销售明细。请帮我打通这些渠道数据，生成一个全域经营看板，包含：各渠道GMV占比、动销SKU排行、库存断货预警（重点看备注列信息）。这个看板未来希望能每天自动更新推送，今天先基于这份数据做一版效果演示。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">多渠道GMV占比图、动销/滞销SKU排行、库存断货预警标注</p></div>
+<div class="meta-row"><span class="meta-label">操作步骤</span><span class="meta-val">上传多渠道数据 → AI 自动识别渠道/品牌维度 → 交叉汇总建模 → 输出可视化看板</span></div><div class="meta-row"><span class="meta-label">效能对比</span><span class="meta-val eff">传统方式人工汇总多渠道后台数据 <strong>约6h/次</strong> → WorkBuddy <strong>约20min</strong>，提效 <strong>94%+</strong></span></div>
+
+<div class="case-block cron-block">
+  <div class="block-label cron-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>第二段提示词（效果确认后追加发送，用于创建定时任务）</div>
+  <div class="prompt-box cron-prompt">
+  <p class="prompt-text">建一个每个工作日早上8:30的定时任务：自动打通天猫、抖音、小红书渠道的CEMOY和澳诗茉销售数据，生成全域经营看板（各渠道GMV占比、动销SKU排行、库存断货预警），并推送到我们的企业微信群。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c0-prompt-cron" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c0-prompt-cron" hidden>建一个每个工作日早上8:30的定时任务：自动打通天猫、抖音、小红书渠道的CEMOY和澳诗茉销售数据，生成全域经营看板（各渠道GMV占比、动销SKU排行、库存断货预警），并推送到我们的企业微信群。</textarea>
+</div>
+</div>
+
+<div class="case-block ma-block">
+  <div class="block-label ma-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg>多Agent协同版（建议在单Agent版演示完毕后追加发送）· 并行处理型</div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">Agent 分工方案</div>
+    <table class="agent-table"><thead><tr><th>Agent</th><th>负责范围</th><th>输出</th></tr></thead><tbody><tr><td>Agent 1</td><td>抖音旗舰店 + 抖音达人矩阵 数据清洗与异常检测</td><td>抖音渠道汇总+异常清单</td></tr><tr><td>Agent 2</td><td>天猫旗舰店 + 天猫超市 数据清洗与异常检测</td><td>天猫渠道汇总+异常清单</td></tr><tr><td>Agent 3</td><td>小红书号 数据清洗与异常检测</td><td>小红书渠道汇总+异常清单</td></tr><tr><td>汇总 Agent</td><td>合并3组渠道结果，交叉建模生成全域看板</td><td>全域经营看板（GMV占比/动销排行/断货预警）</td></tr></tbody></table>
+  </div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">多Agent版完整输入文字（可直接复制粘贴）</div>
+    <div class="prompt-box ma-prompt">
+  <p class="prompt-text">我们在天猫、抖音、小红书都有店铺在卖CEMOY和澳诗茉的产品，附件是过去一周的渠道销售明细。请你启动多个 Agent 并行处理：按渠道分成3组（抖音系/天猫系/小红书），分别用独立 Agent 对每组渠道数据做清洗、汇总和异常检测（重点关注备注列中的断货风险信息），各自输出该组的渠道汇总表和异常清单。全部完成后，请你汇总这3组结果，交叉建模生成一个完整的全域经营看板，包含各渠道GMV占比、动销SKU排行、库存断货预警。这个看板未来希望能每天自动更新推送，今天先基于这份数据做一版效果演示。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c0-prompt-ma" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c0-prompt-ma" hidden>我们在天猫、抖音、小红书都有店铺在卖CEMOY和澳诗茉的产品，附件是过去一周的渠道销售明细。请你启动多个 Agent 并行处理：按渠道分成3组（抖音系/天猫系/小红书），分别用独立 Agent 对每组渠道数据做清洗、汇总和异常检测（重点关注备注列中的断货风险信息），各自输出该组的渠道汇总表和异常清单。全部完成后，请你汇总这3组结果，交叉建模生成一个完整的全域经营看板，包含各渠道GMV占比、动销SKU排行、库存断货预警。这个看板未来希望能每天自动更新推送，今天先基于这份数据做一版效果演示。</textarea>
+</div>
+  </div>
+  <div>
+    <div class="sub-label">预期效果对比</div>
+    <p class="output-text">渠道数越多（比如接入更多直播间账号、更多平台店铺），单Agent顺序清洗汇总的耗时会线性增长，而多Agent并行版耗时基本不随渠道数增加而显著上升，适合向客户强调&quot;未来渠道扩张后系统依然能扛得住&quot;。</p>
+  </div>
+</div>
+</div><div class="case-card" id="scenario-08-c1">
+<div class="case-head"><span class="case-code">场景 08-2</span><h3 class="case-title">场景 08-2　达人/KOL 投放效果分析</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/达人投放预算执行表.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">达人投放预算执行表.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是我们6月份8位达人的投放数据，包含报价、实际支付、带货GMV。请帮我计算每位达人的ROI，按ROI从高到低排序，找出表现最好和最差的达人，并给出后续复投建议（哪些达人值得追加预算，哪些应该谨慎合作）。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c1-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c1-prompt" hidden>附件是我们6月份8位达人的投放数据，包含报价、实际支付、带货GMV。请帮我计算每位达人的ROI，按ROI从高到低排序，找出表现最好和最差的达人，并给出后续复投建议（哪些达人值得追加预算，哪些应该谨慎合作）。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">达人ROI排行榜、复投/止损建议清单、投放策略优化方向</p></div>
+<div class="meta-row"><span class="meta-label">操作步骤</span><span class="meta-val">上传投放数据 → AI 建模计算ROI → 排序分析 → 输出复投建议</span></div><div class="meta-row"><span class="meta-label">效能对比</span><span class="meta-val eff">传统方式人工核算多位达人ROI <strong>约3h</strong> → WorkBuddy <strong>约10min</strong>，提效 <strong>94%+</strong></span></div>
+
+
+</div><div class="case-card" id="scenario-08-c2">
+<div class="case-head"><span class="case-code">场景 08-3</span><h3 class="case-title">场景 08-3　新品上市全案策划</h3></div>
+<span class="ma-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg><span>含多Agent协同版（见下方）</span></span>
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/新品成分卖点资料.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">新品成分卖点资料.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是CEMOY山羊奶次抛精华的产品资料。请帮我策划一份新品上市全案，需要覆盖选品定价建议、卖点提炼（注意功效备案限制）、上市节奏（从产品定稿到双11预热）、以及天猫/抖音/小红书三渠道的分发计划。请把研发、市场、渠道各环节的关键节点整合进一张完整的时间轴。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c2-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c2-prompt" hidden>附件是CEMOY山羊奶次抛精华的产品资料。请帮我策划一份新品上市全案，需要覆盖选品定价建议、卖点提炼（注意功效备案限制）、上市节奏（从产品定稿到双11预热）、以及天猫/抖音/小红书三渠道的分发计划。请把研发、市场、渠道各环节的关键节点整合进一张完整的时间轴。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">含节奏表的新品上市全案、渠道分发计划、多部门协同时间轴</p></div>
+<div class="meta-row"><span class="meta-label">操作步骤</span><span class="meta-val">输入产品资料 → AI 生成全案框架 → 细化多方协同节奏 → 输出完整全案</span></div><div class="meta-row"><span class="meta-label">效能对比</span><span class="meta-val eff">传统方式多部门协同编写全案 <strong>约3天</strong> → WorkBuddy <strong>约2h</strong>，提效 <strong>90%+</strong></span></div>
+
+
+<div class="case-block ma-block">
+  <div class="block-label ma-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5"/></svg>多Agent协同版（建议在单Agent版演示完毕后追加发送）· 协同集成型</div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">Agent 分工方案</div>
+    <table class="agent-table"><thead><tr><th>Agent</th><th>负责子任务</th><th>输出</th></tr></thead><tbody><tr><td>Agent 1（研发线）</td><td>卖点提炼与功效备案边界核查</td><td>合规卖点清单</td></tr><tr><td>Agent 2（市场线）</td><td>目标人群画像与传播节奏建议</td><td>人群画像+传播节点建议</td></tr><tr><td>Agent 3（渠道线）</td><td>天猫/抖音/小红书三渠道分发计划</td><td>分渠道排期表</td></tr><tr><td>汇总 Agent</td><td>整合三条线产出，拼装成完整时间轴</td><td>新品上市全案（含时间轴）</td></tr></tbody></table>
+  </div>
+  <div style="margin-bottom:12px;">
+    <div class="sub-label">多Agent版完整输入文字（可直接复制粘贴）</div>
+    <div class="prompt-box ma-prompt">
+  <p class="prompt-text">附件是CEMOY山羊奶次抛精华的产品资料。这份新品上市全案涉及研发、市场、渠道三条线协同，请你用三个 Agent 分别负责：Agent 1（研发线）负责提炼产品卖点并核查是否超出功效备案范围（资料中提到目前备案为&quot;保湿&quot;，需谨慎处理&quot;修护屏障&quot;类表述）；Agent 2（市场线）负责梳理目标人群画像，并给出从产品定稿到双11预热的传播节奏建议；Agent 3（渠道线）负责设计天猫/抖音/小红书三个渠道的具体分发计划和排期。三个 Agent 分别产出后，请你把三条线的结果整合拼装成一张完整的新品上市全案时间轴，确保研发、市场、渠道的关键节点相互衔接不冲突。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c2-prompt-ma" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c2-prompt-ma" hidden>附件是CEMOY山羊奶次抛精华的产品资料。这份新品上市全案涉及研发、市场、渠道三条线协同，请你用三个 Agent 分别负责：Agent 1（研发线）负责提炼产品卖点并核查是否超出功效备案范围（资料中提到目前备案为&quot;保湿&quot;，需谨慎处理&quot;修护屏障&quot;类表述）；Agent 2（市场线）负责梳理目标人群画像，并给出从产品定稿到双11预热的传播节奏建议；Agent 3（渠道线）负责设计天猫/抖音/小红书三个渠道的具体分发计划和排期。三个 Agent 分别产出后，请你把三条线的结果整合拼装成一张完整的新品上市全案时间轴，确保研发、市场、渠道的关键节点相互衔接不冲突。</textarea>
+</div>
+  </div>
+  <div>
+    <div class="sub-label">预期效果对比</div>
+    <p class="output-text">这是最接近&quot;真实团队分工协作&quot;的场景——单Agent顺序输出容易让三条线的时间节点出现衔接问题（比如渠道排期早于产品定稿），多Agent分工后由汇总环节统一校验衔接逻辑，体现WorkBuddy对&quot;多部门协同&quot;场景的还原能力。</p>
+  </div>
+</div>
+</div><div class="case-card" id="scenario-08-c3">
+<div class="case-head"><span class="case-code">场景 08-4</span><h3 class="case-title">场景 08-4　私域会员运营 SOP</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/私域会员数据样本.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">私域会员数据样本.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是我们企微私域社群200位会员的数据样本，包含累计消费、订单数、最近购买日期、会员等级。请帮我：1）按会员等级分层，设计对应的运营话术和权益策略；2）找出最近购买日期超过90天的沉睡会员，生成复购唤醒文案；3）设计一套生日权益触达的话术模板。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c3-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c3-prompt" hidden>附件是我们企微私域社群200位会员的数据样本，包含累计消费、订单数、最近购买日期、会员等级。请帮我：1）按会员等级分层，设计对应的运营话术和权益策略；2）找出最近购买日期超过90天的沉睡会员，生成复购唤醒文案；3）设计一套生日权益触达的话术模板。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">会员分层运营SOP、沉睡会员复购唤醒文案、生日权益触达话术模板</p></div>
+<div class="meta-row"><span class="meta-label">操作步骤</span><span class="meta-val">上传会员数据 → AI 分层建模 → 生成分层SOP与话术库 → 输出唤醒文案</span></div><div class="meta-row"><span class="meta-label">效能对比</span><span class="meta-val eff">传统方式人工梳理会员分层运营方案 <strong>约1天</strong> → WorkBuddy <strong>约1h</strong>，提效 <strong>87%+</strong></span></div>
+
+
+</div><div class="case-card" id="scenario-08-c4">
+<div class="case-head"><span class="case-code">场景 08-5</span><h3 class="case-title">场景 08-5　化妆品成分/功效合规审查</h3><span class="cron-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>★ 强烈推荐设置定时任务</span></span></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/种草文案库待合规扫描.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">种草文案库待合规扫描.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">请帮我对附件中的种草文案库做一次全面合规巡检，依据《化妆品监督管理条例》及功效宣称备案要求，标注每条文案的合规风险等级，并统计本次巡检发现的高风险表述类型分布（比如&quot;医美级&quot;类占比多少，&quot;抗菌抑菌&quot;类占比多少），生成一份月度合规巡检统计报告，供法务和市场部门共同参考。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c4-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c4-prompt" hidden>请帮我对附件中的种草文案库做一次全面合规巡检，依据《化妆品监督管理条例》及功效宣称备案要求，标注每条文案的合规风险等级，并统计本次巡检发现的高风险表述类型分布（比如&quot;医美级&quot;类占比多少，&quot;抗菌抑菌&quot;类占比多少），生成一份月度合规巡检统计报告，供法务和市场部门共同参考。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">月度合规巡检统计报告、风险类型分布统计、跨部门整改协同建议</p></div>
+<div class="meta-row"><span class="meta-label">操作步骤</span><span class="meta-val">配置检查规则 → AI 批量扫描文案库 → 风险等级分类统计 → 输出巡检报告</span></div><div class="meta-row"><span class="meta-label">效能对比</span><span class="meta-val eff">传统方式人工逐条比对文案合规性 <strong>约1天/批次</strong> → WorkBuddy <strong>约30min</strong>，提效 <strong>93%+</strong></span></div>
+
+<div class="case-block cron-block">
+  <div class="block-label cron-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>第二段提示词（效果确认后追加发送，用于创建定时任务）</div>
+  <div class="prompt-box cron-prompt">
+  <p class="prompt-text">建一个每月1号早上9:00的定时任务：自动扫描当月新发布的种草文案库，依据《化妆品监督管理条例》及功效宣称备案要求标注合规风险等级，统计高风险表述类型分布，生成月度合规巡检统计报告并推送到我们的企业微信群，供法务和市场部门共同参考。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c4-prompt-cron" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c4-prompt-cron" hidden>建一个每月1号早上9:00的定时任务：自动扫描当月新发布的种草文案库，依据《化妆品监督管理条例》及功效宣称备案要求标注合规风险等级，统计高风险表述类型分布，生成月度合规巡检统计报告并推送到我们的企业微信群，供法务和市场部门共同参考。</textarea>
+</div>
+</div>
+
+</div><div class="case-card" id="scenario-08-c5">
+<div class="case-head"><span class="case-code">场景 08-6</span><h3 class="case-title">场景 08-6　导购/BA 话术与知识库</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/产品成分说明手册.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">产品成分说明手册.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是CEMOY和澳诗茉的产品成分说明手册。请帮我提炼出一套标准化的&quot;竞品对比话术&quot;和&quot;异议处理话术&quot;，比如当顾客说&quot;这个和XX品牌的烟酰胺精华有什么区别&quot;或&quot;价格比XX贵，为什么值这个价&quot;时，导购应该如何标准化应答，确保话术既有说服力又符合合规要求。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c5-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c5-prompt" hidden>附件是CEMOY和澳诗茉的产品成分说明手册。请帮我提炼出一套标准化的&quot;竞品对比话术&quot;和&quot;异议处理话术&quot;，比如当顾客说&quot;这个和XX品牌的烟酰胺精华有什么区别&quot;或&quot;价格比XX贵，为什么值这个价&quot;时，导购应该如何标准化应答，确保话术既有说服力又符合合规要求。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">竞品对比标准话术、异议处理话术库、话术合规边界说明</p></div>
+<div class="meta-row"><span class="meta-label">操作步骤</span><span class="meta-val">上传产品资料 → AI 提炼标准话术 → 覆盖常见异议场景 → 输出话术库</span></div><div class="meta-row"><span class="meta-label">效能对比</span><span class="meta-val eff">传统方式培训主管人工整理话术 <strong>约4h</strong> → WorkBuddy <strong>约15min</strong>，提效 <strong>93%+</strong></span></div>
+
+
+</div><div class="case-card" id="scenario-08-c6">
+<div class="case-head"><span class="case-code">场景 08-7</span><h3 class="case-title">场景 08-7　竞品与赛道趋势监测</h3><span class="cron-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>★ 强烈推荐设置定时任务</span></span></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row mat-empty">无需素材 · 可直接使用输入文字</div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">请帮我监测一下近期精华/身体乳赛道的竞品动态，重点关注：1）有没有新锐品牌在抖音/小红书声量快速上升；2）主流竞品的价格带和促销动作变化；3）有没有新的爆款成分或概念（比如新的&quot;XX肽&quot;或&quot;XX因子&quot;）正在被市场热议。请整理成一份简报，方便我们品牌线快速判断是否需要调整策略。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c6-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c6-prompt" hidden>请帮我监测一下近期精华/身体乳赛道的竞品动态，重点关注：1）有没有新锐品牌在抖音/小红书声量快速上升；2）主流竞品的价格带和促销动作变化；3）有没有新的爆款成分或概念（比如新的&quot;XX肽&quot;或&quot;XX因子&quot;）正在被市场热议。请整理成一份简报，方便我们品牌线快速判断是否需要调整策略。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">竞品动态简报、新兴成分/概念预警、策略调整建议</p></div>
+<div class="meta-row"><span class="meta-label">操作步骤</span><span class="meta-val">输入监测需求 → AI 定期抓取行业信息 → 结构化整理 → 输出简报</span></div><div class="meta-row"><span class="meta-label">效能对比</span><span class="meta-val eff">传统方式人工日常跟踪行业动态 <strong>约2h/周</strong> → WorkBuddy <strong>约15min/周</strong>，提效 <strong>87%+</strong></span></div>
+
+<div class="case-block cron-block">
+  <div class="block-label cron-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>第二段提示词（效果确认后追加发送，用于创建定时任务）</div>
+  <div class="prompt-box cron-prompt">
+  <p class="prompt-text">建一个每周一早上8:30的定时任务：自动监测精华/身体乳赛道的竞品动态，包括新锐品牌声量变化、主流竞品价格带和促销动作、新兴爆款成分或概念，整理成简报并推送到我们的企业微信群。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c6-prompt-cron" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c6-prompt-cron" hidden>建一个每周一早上8:30的定时任务：自动监测精华/身体乳赛道的竞品动态，包括新锐品牌声量变化、主流竞品价格带和促销动作、新兴爆款成分或概念，整理成简报并推送到我们的企业微信群。</textarea>
+</div>
+</div>
+
+</div><div class="case-card" id="scenario-08-c7">
+<div class="case-head"><span class="case-code">场景 08-8</span><h3 class="case-title">场景 08-8　全渠道库存与断货预警</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/全渠道库存监控数据.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">全渠道库存监控数据.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是CEMOY和澳诗茉全部SKU在总仓、抖音仓、天猫仓的库存分配数据，以及日均销量。请帮我计算每个SKU的可售天数，对可售天数低于7天的SKU标注&quot;断货风险&quot;，低于15天的标注&quot;库存偏低&quot;，并给出对应的补货优先级建议和跨仓调拨建议。</p>
+  <button class="copy-btn" data-copy-target="scenario-08-c7-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="scenario-08-c7-prompt" hidden>附件是CEMOY和澳诗茉全部SKU在总仓、抖音仓、天猫仓的库存分配数据，以及日均销量。请帮我计算每个SKU的可售天数，对可售天数低于7天的SKU标注&quot;断货风险&quot;，低于15天的标注&quot;库存偏低&quot;，并给出对应的补货优先级建议和跨仓调拨建议。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">库存预警分级清单、补货优先级建议、跨仓调拨建议</p></div>
+<div class="meta-row"><span class="meta-label">操作步骤</span><span class="meta-val">配置库存阈值规则 → AI 实时计算可售天数 → 分级预警 → 输出补货/调拨建议</span></div><div class="meta-row"><span class="meta-label">效能对比</span><span class="meta-val eff">传统方式人工核对多仓库存数据 <strong>约2h/次</strong> → WorkBuddy <strong>约10min</strong>，提效 <strong>91%+</strong></span></div>
+
+
+</div></div>
+</section>
+<section class="group-section" id="general-09">
+<div class="group-header"><span class="group-badge badge-general">通用演示</span><h2 class="group-title">第三部分 · 日常办公通用演示</h2></div>
+<p class="group-desc"></p>
+<div class="case-grid"><div class="case-card" id="general-09-c0">
+<div class="case-head"><span class="case-code">通用 09-1</span><h3 class="case-title">通用 09-1　AI 生成招聘海报</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/抖音主播招聘信息结构化内容.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">抖音主播招聘信息结构化内容.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是我们抖音直播主播/助播岗位的招聘信息结构化内容（公司简介、岗位职责、任职要求、薪资待遇）。请基于这份内容，帮我生成一份完整的招聘海报文案和排版建议，风格要求年轻、有活力、贴近美妆行业调性，同时生成一份可以直接发送给候选人的招聘邮件文案。</p>
+  <button class="copy-btn" data-copy-target="general-09-c0-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="general-09-c0-prompt" hidden>附件是我们抖音直播主播/助播岗位的招聘信息结构化内容（公司简介、岗位职责、任职要求、薪资待遇）。请基于这份内容，帮我生成一份完整的招聘海报文案和排版建议，风格要求年轻、有活力、贴近美妆行业调性，同时生成一份可以直接发送给候选人的招聘邮件文案。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">完整招聘海报文案与视觉建议、招聘邮件文案、可直接给设计或HR过审的成品。</p></div>
+
+
+
+</div><div class="case-card" id="general-09-c1">
+<div class="case-head"><span class="case-code">通用 09-2</span><h3 class="case-title">通用 09-2　AI 生成品牌介绍 PPT</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/CEMOY品牌简介资料.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">CEMOY品牌简介资料.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是CEMOY品牌的简介资料。请联网补充一些关于山羊奶护肤成分的行业背景信息和市场认知度数据，然后帮我生成一份完整的品牌介绍PPT，需要包含：品牌背景、核心产品线、成分卖点、渠道经营数据、竞品对比，风格要求现代简洁、有科技感和信任感，最终产出可以直接用于向新客户/新品牌方展示的PPT。</p>
+  <button class="copy-btn" data-copy-target="general-09-c1-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="general-09-c1-prompt" hidden>附件是CEMOY品牌的简介资料。请联网补充一些关于山羊奶护肤成分的行业背景信息和市场认知度数据，然后帮我生成一份完整的品牌介绍PPT，需要包含：品牌背景、核心产品线、成分卖点、渠道经营数据、竞品对比，风格要求现代简洁、有科技感和信任感，最终产出可以直接用于向新客户/新品牌方展示的PPT。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">联网补充行业背景信息、完整品牌介绍PPT（含成分卖点/渠道数据/竞品对比板块）、按品牌视觉规范排版。</p></div>
+
+
+
+</div><div class="case-card" id="general-09-c2">
+<div class="case-head"><span class="case-code">通用 09-3</span><h3 class="case-title">通用 09-3　全渠道销售数据分析</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/全渠道销售数据.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">全渠道销售数据.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是CEMOY和澳诗茉过去一周在5个渠道的销售明细数据。请帮我做一份完整的数据分析：1）清洗数据、计算各渠道各品牌的GMV、动销率；2）生成渠道占比饼图和每日趋势折线图；3）撰写一份包含关键发现和建议的分析报告。请支持导出为Excel汇总文件，方便我后续复核和二次加工。</p>
+  <button class="copy-btn" data-copy-target="general-09-c2-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="general-09-c2-prompt" hidden>附件是CEMOY和澳诗茉过去一周在5个渠道的销售明细数据。请帮我做一份完整的数据分析：1）清洗数据、计算各渠道各品牌的GMV、动销率；2）生成渠道占比饼图和每日趋势折线图；3）撰写一份包含关键发现和建议的分析报告。请支持导出为Excel汇总文件，方便我后续复核和二次加工。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">数据清洗与指标计算、可视化图表（渠道占比/趋势）、分析报告，支持导出Excel/PDF/PPT，中间产物保留在本地便于复核。</p></div>
+
+
+
+</div><div class="case-card" id="general-09-c3">
+<div class="case-head"><span class="case-code">通用 09-4</span><h3 class="case-title">通用 09-4　外文资料翻译</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/CEMOY品牌方英文技术资料.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">CEMOY品牌方英文技术资料.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是 CEMOY 品牌方新西兰总部发来的英文版产品技术资料，包含品牌故事、核心成分科学说明、产品使用指南、功效宣称等内容。请帮我翻译成中文，注意：1）专业术语（如成分名 Capra Milk Extract、功效术语、法规术语）需准确翻译并在首次出现时保留英文原文对照；2）翻译风格要符合中文美妆行业的表达习惯，避免生硬机翻感；3）第4节&quot;Efficacy Claims&quot;中出现的&quot;anti-aging&quot;&quot;whitening&quot;&quot;medical-grade&quot;&quot;antibacterial&quot;等表述，需在翻译时特别标注是否符合中国《化妆品监督管理条例》的合规要求，并给出中文合规替代措辞建议。最终输出一份中英对照的翻译文档，可直接用于内部团队培训参考。</p>
+  <button class="copy-btn" data-copy-target="general-09-c3-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="general-09-c3-prompt" hidden>附件是 CEMOY 品牌方新西兰总部发来的英文版产品技术资料，包含品牌故事、核心成分科学说明、产品使用指南、功效宣称等内容。请帮我翻译成中文，注意：1）专业术语（如成分名 Capra Milk Extract、功效术语、法规术语）需准确翻译并在首次出现时保留英文原文对照；2）翻译风格要符合中文美妆行业的表达习惯，避免生硬机翻感；3）第4节&quot;Efficacy Claims&quot;中出现的&quot;anti-aging&quot;&quot;whitening&quot;&quot;medical-grade&quot;&quot;antibacterial&quot;等表述，需在翻译时特别标注是否符合中国《化妆品监督管理条例》的合规要求，并给出中文合规替代措辞建议。最终输出一份中英对照的翻译文档，可直接用于内部团队培训参考。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">中英对照翻译文档、专业术语准确翻译并保留原文对照、功效宣称合规风险标注（anti-aging/whitening/medical-grade/antibacterial 等表述需被识别并给出合规中文替代措辞）、符合中文美妆行业表达习惯（非生硬机翻）。</p></div>
+
+
+
+</div><div class="case-card" id="general-09-c4">
+<div class="case-head"><span class="case-code">通用 09-5</span><h3 class="case-title">通用 09-5　文档内容润色</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/运营周报初稿待润色.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">运营周报初稿待润色.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是我们运营同事写的一份本周工作周报初稿，写得比较口语化、逻辑也不够清晰，但核心事实信息是完整的。请帮我润色这份周报，要求：1）梳理逻辑结构，按&quot;本周核心数据-主要工作进展-问题与风险-下周计划&quot;的标准周报格式重新组织；2）语言专业化、规范化，避免口语化表述（如&quot;还行吧&quot;&quot;搞得&quot;&quot;没什么水花&quot;&quot;感觉大家&quot;&quot;想想办法&quot;&quot;看看能不能&quot;等需替换为专业表述）；3）数据表述准确统一（如&quot;GMV&quot;&quot;环比&quot;&quot;同比&quot;等术语使用规范，不要混用&quot;销售额&quot;和&quot;GMV&quot;，&quot;差不多50万&quot;&quot;多了几万&quot;&quot;占了快一半&quot;等模糊表述需基于原文事实给出更规范的数字呈现方式，若原文数字模糊就保留模糊但用专业措辞包装）；4）补充必要的结构化呈现（如关键数据用表格、进展用条目化列表）；5）保留原文的核心信息和事实，不要添加未提及的内容。最终输出一份可以直接发送给管理层的润色版周报。</p>
+  <button class="copy-btn" data-copy-target="general-09-c4-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="general-09-c4-prompt" hidden>附件是我们运营同事写的一份本周工作周报初稿，写得比较口语化、逻辑也不够清晰，但核心事实信息是完整的。请帮我润色这份周报，要求：1）梳理逻辑结构，按&quot;本周核心数据-主要工作进展-问题与风险-下周计划&quot;的标准周报格式重新组织；2）语言专业化、规范化，避免口语化表述（如&quot;还行吧&quot;&quot;搞得&quot;&quot;没什么水花&quot;&quot;感觉大家&quot;&quot;想想办法&quot;&quot;看看能不能&quot;等需替换为专业表述）；3）数据表述准确统一（如&quot;GMV&quot;&quot;环比&quot;&quot;同比&quot;等术语使用规范，不要混用&quot;销售额&quot;和&quot;GMV&quot;，&quot;差不多50万&quot;&quot;多了几万&quot;&quot;占了快一半&quot;等模糊表述需基于原文事实给出更规范的数字呈现方式，若原文数字模糊就保留模糊但用专业措辞包装）；4）补充必要的结构化呈现（如关键数据用表格、进展用条目化列表）；5）保留原文的核心信息和事实，不要添加未提及的内容。最终输出一份可以直接发送给管理层的润色版周报。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">按&quot;核心数据-进展-风险-下周计划&quot;标准结构重组、口语化表述全部替换为专业表述（如&quot;搞得&quot;→&quot;完成&quot;、&quot;没什么水花&quot;→&quot;互动数据低于预期&quot;）、数据术语统一规范（GMV/环比等）、关键数据表格化与进展条目化、保留原文事实未添加虚构内容。</p></div>
+
+
+
+</div><div class="case-card" id="general-09-c5">
+<div class="case-head"><span class="case-code">通用 09-6</span><h3 class="case-title">通用 09-6　多 Excel 加工数据生成报表</h3></div>
+
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Excel/抖音渠道销售导出表.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">抖音渠道销售导出表.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a><a class="mat-chip" href="素材文件/Excel/天猫渠道销售导出表.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">天猫渠道销售导出表.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a><a class="mat-chip" href="素材文件/Excel/小红书渠道销售导出表.xlsx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span><span class="mat-label">小红书渠道销售导出表.xlsx</span><span class="mat-ext">Excel</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div></div>
+<div class="case-block"><div class="block-label">完整输入文字（可直接复制粘贴）</div><div class="prompt-box ">
+  <p class="prompt-text">附件是我们从抖音、天猫、小红书三个渠道后台分别导出的销售数据 Excel 文件，三个文件的字段名、数据粒度和格式都不一样：抖音是订单级明细（含达人字段），天猫是按日按SKU汇总（无达人字段），小红书是按日按商品汇总且字段名是英文、金额单位是分。请帮我：1）识别三个文件中的字段对应关系（如实付金额=支付金额=sales_amount/100），并统一字段名；2）统一数据粒度，将三个文件都汇总到&quot;日期×商品&quot;级别；3）统一日期格式和金额单位；4）合并成一张全渠道销售总表，增加&quot;渠道&quot;列标识来源；5）基于合并后的总表生成一份全渠道销售报表，包含各渠道GMV占比、各商品销售排行、每日趋势图。最终输出合并后的 Excel 总表（含原始数据 sheet 和汇总 sheet）和一份可视化报表。</p>
+  <button class="copy-btn" data-copy-target="general-09-c5-prompt" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="general-09-c5-prompt" hidden>附件是我们从抖音、天猫、小红书三个渠道后台分别导出的销售数据 Excel 文件，三个文件的字段名、数据粒度和格式都不一样：抖音是订单级明细（含达人字段），天猫是按日按SKU汇总（无达人字段），小红书是按日按商品汇总且字段名是英文、金额单位是分。请帮我：1）识别三个文件中的字段对应关系（如实付金额=支付金额=sales_amount/100），并统一字段名；2）统一数据粒度，将三个文件都汇总到&quot;日期×商品&quot;级别；3）统一日期格式和金额单位；4）合并成一张全渠道销售总表，增加&quot;渠道&quot;列标识来源；5）基于合并后的总表生成一份全渠道销售报表，包含各渠道GMV占比、各商品销售排行、每日趋势图。最终输出合并后的 Excel 总表（含原始数据 sheet 和汇总 sheet）和一份可视化报表。</textarea>
+</div></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">字段映射关系表（实付金额↔支付金额↔sales_amount/100）、统一粒度后的全渠道销售总表（含渠道列）、各渠道GMV占比图、各商品销售排行、每日趋势图；AI 应正确识别三个文件的格式差异（日期格式、金额单位、字段名、商品名称写法）并完成统一化处理。</p></div>
+
+
+
+</div></div>
+</section>
+<section class="group-section agent-section" id="agent-10">
+<div class="group-header"><span class="group-badge badge-agent"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/></svg>智能体应用</span><h2 class="group-title">第四部分 · 智能体应用（企业级 Agent 真实搭建与部署）</h2></div>
+<p class="group-desc">与前三部分&quot;复制提示词到对话框即时问答&quot;的演示方式不同，本部分 4 个案例展示的都是<strong>已配置好、长期自主运行</strong>或<strong>跨系统多步骤协同</strong>的能力：前 2 个案例（10-1、10-2）是通过 <strong>WorkBuddy 管理后台「企业智能体 → Agents」</strong> 真实创建的 Agent，并已挂载<strong>乐享知识库</strong>（品牌/产品/成分知识）、真实对接到客户侧前端产品（问答挂件 / 留言板）；第 3 个案例（10-3）是通过管理后台<strong>「自动化」</strong>功能创建的定时任务，仅靠&quot;TAPD + 企业微信&quot;两个连接器 + 一段精确的提示词即可实现每日自动推送；第 4 个案例（10-4）则是<strong>对话内分阶段执行的跨系统写操作链</strong>，依次调用飞书（Lark）的通讯录/即时通讯/任务连接器，将会议录音/文字稿一步步转化为群内纪要+每人名下的待办任务。现场演示时均可直接展示真实运行效果，属于&quot;眼见为实&quot;的真实系统演示，而非仿真数据模拟，建议作为压轴或开场亮点，与前三部分&quot;即时问答能力&quot;形成&quot;平时对话 vs 常驻业务系统 vs 跨系统写操作协同&quot;的三层能力对比。</p>
+<div class="case-grid"><div class="case-card agent-card" id="agent-10-c0">
+<div class="case-head"><span class="case-code agent-code">智能体 10-1</span><h3 class="case-title">智能体 10-1　智能客服（美妆咨询顾问）</h3><span class="case-tag agent-real-tag"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/></svg>真实系统 · 非仿真演示</span></div>
+<div class="case-block"><div class="block-label">体验地址</div>
+<a class="agent-url-btn" href="http://119.28.239.109:8082/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14l4-4M8 12a4 4 0 0 1 0-5.6l1-1a4 4 0 0 1 5.6 5.6l-1 1M16 12a4 4 0 0 1 0 5.6l-1 1a4 4 0 0 1-5.6-5.6l1-1"/></svg><span>http://119.28.239.109:8082/</span></a>
+</div>
+<div class="case-block"><div class="block-label">配套截图</div>
+<div class="agent-shots"><figure class="agent-shot"><img src="素材文件/智能体案例截图/智能客服-管理后台Agent配置.png" alt="WorkBuddy 管理后台 Agent 基础配置页" loading="lazy"><figcaption>WorkBuddy 管理后台 Agent 基础配置页</figcaption></figure><figure class="agent-shot"><img src="素材文件/智能体案例截图/智能客服-用户端问答界面.png" alt="前端页签问答助手真实问答效果" loading="lazy"><figcaption>前端页签问答助手真实问答效果</figcaption></figure></div>
+</div>
+<div class="case-block"><div class="block-label">Agent 搭建要点</div><table class="agent-table cfg-table"><thead><tr><th>配置项</th><th>内容</th></tr></thead><tbody><tr><td class="cfg-key">Agent 名称</td><td>美妆咨询顾问</td></tr><tr><td class="cfg-key">模型</td><td>Deepseek-V4-Pro</td></tr><tr><td class="cfg-key">System Prompt 核心设定</td><td>定位&quot;专业美妆护肤顾问&quot;，基于用户肤质/需求/预算给出个性化建议；核心能力覆盖肤质判断与护理方案、成分认知与搭配建议（烟酰胺/玻尿酸/视黄醇等）、产品推荐与选购指导、使用顺序/用量/频率建议；咨询流程固定为&quot;了解诉求→分析判断并说明依据→提供1-3个可执行方案→提示风险（patch test、避光、叠加注意事项）&quot;；沟通风格要求专业温和、通俗易懂、结论先行、控制在3步以内、不绝对化承诺</td></tr><tr><td class="cfg-key">挂载能力</td><td>技能/专家 2 项、高级配置 2 项（含乐享知识库连接，用于检索 CEMOY/澳诗茉品牌成分与产品资料，确保回答有据可查而非模型幻觉）</td></tr><tr><td class="cfg-key">渠道接入</td><td>页签问答助手应用（网页嵌入式对话挂件），供终端消费者/导购在选购页面直接提问</td></tr></tbody></table></div>
+<div class="case-block"><div class="block-label">真实效果（见截图）</div><p class="output-text">用户提问&quot;熬夜后皮肤暗黄，用什么急救精华？&quot;，Agent 给出结构化回答——先分析暗黄成因（血液循环变差/代谢变慢/水分流失），再用表格给出核心成分（维生素C/烟酰胺/传明酸/视黄醇视黄醛）对应的作用和适合人群，专业度和结构化程度明显高于通用聊天机器人。</p></div>
+<div class="case-block"><div class="block-label">现场演示建议</div><p class="output-text">直接打开体验地址 http://119.28.239.109:8082/ 让客户当场提问（比如换成 CEMOY/澳诗茉相关的具体问题，如&quot;CEMOY山羊奶身体乳适合敏感肌吗&quot;），展示知识库检索+专业话术生成的真实响应能力；再切回管理后台展示 Agent 的 System Prompt 设计和知识库挂载配置，说明&quot;这不是一个黑盒聊天窗口，而是客户自己可控、可迭代的智能体&quot;。</p></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">结构化专业回答（成因分析+成分对照表+适用人群）、基于乐享知识库的准确成分/产品信息检索、专业且不绝对化的建议话术。</p></div>
+
+</div><div class="case-card agent-card" id="agent-10-c1">
+<div class="case-head"><span class="case-code agent-code">智能体 10-2</span><h3 class="case-title">智能体 10-2　客户留言自动回复</h3><span class="case-tag agent-real-tag"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/></svg>真实系统 · 非仿真演示</span></div>
+<div class="case-block"><div class="block-label">体验地址</div>
+<a class="agent-url-btn" href="http://119.28.239.109:8080/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14l4-4M8 12a4 4 0 0 1 0-5.6l1-1a4 4 0 0 1 5.6 5.6l-1 1M16 12a4 4 0 0 1 0 5.6l-1 1a4 4 0 0 1-5.6-5.6l1-1"/></svg><span>http://119.28.239.109:8080/</span></a>
+</div>
+<div class="case-block"><div class="block-label">配套截图</div>
+<div class="agent-shots"><figure class="agent-shot"><img src="素材文件/智能体案例截图/留言自动回复-管理后台Agent配置.png" alt="WorkBuddy 管理后台 Agent 基础配置页" loading="lazy"><figcaption>WorkBuddy 管理后台 Agent 基础配置页</figcaption></figure><figure class="agent-shot"><img src="素材文件/智能体案例截图/留言自动回复-前端留言效果.png" alt="品牌官网留言板真实自动回复效果" loading="lazy"><figcaption>品牌官网留言板真实自动回复效果</figcaption></figure></div>
+</div>
+<div class="case-block"><div class="block-label">Agent 搭建要点</div><table class="agent-table cfg-table"><thead><tr><th>配置项</th><th>内容</th></tr></thead><tbody><tr><td class="cfg-key">Agent 名称</td><td>美妆留言自动回复</td></tr><tr><td class="cfg-key">模型</td><td>Deepseek-V4-Pro</td></tr><tr><td class="cfg-key">System Prompt 核心设定</td><td>角色定位&quot;[品牌名]美妆顾问&quot;——专业、亲和、值得信赖的美妆与护肤咨询助手，专注护肤/彩妆知识，负责任地给出美妆护肤建议，并在合适时机推荐匹配的产品品类或具体单品；明确&quot;不是医生，不提供医疗诊断或治疗方案，是产品与日常护理层面的专业顾问&quot;；专业能力范围覆盖护肤（肤质判断/基础护理流程）、成分认知（活性成分作用与适用人群）、彩妆（产品类型选择/基础手法建议）、产品选购（按肤质/预算/使用场景推荐并说明理由）、使用习惯（正确使用顺序/用量/频率/保存方式/过敏测试提醒）</td></tr><tr><td class="cfg-key">挂载能力</td><td>技能/专家 3 项（比智能客服多 1 项，用于支撑&quot;留言场景&quot;下更细粒度的产品匹配与情感化回应）</td></tr><tr><td class="cfg-key">触发方式</td><td><strong>定时任务扫描</strong>——Agent 定期扫描品牌官网 Feedback 留言板中的新增客户留言，识别问题类型后自动生成回复并发布，无需人工逐条处理</td></tr></tbody></table></div>
+<div class="case-block"><div class="block-label">真实效果（见截图）</div><p class="output-text">品牌官网留言板（FEEDBACK 页面）中，测试用户留言&quot;这个粉底液遮瑕效果怎么样？混油皮能用吗？&quot;，Agent 在同一时间戳内自动生成回复：先感谢关注，说明遮瑕力度和叠涂效果，再针对&quot;混油皮&quot;具体肤质给出控油持妆卖点（&quot;可持续6-8小时不暗沉、不脱妆&quot;），最后建议&quot;到专柜试色找到最适合自己肤色的色号&quot;，回复语气亲和（带表情符号），既专业又不生硬。</p></div>
+<div class="case-block"><div class="block-label">现场演示建议</div><p class="output-text">直接打开体验地址 http://119.28.239.109:8080/，现场在留言板提交一条新留言（可以是关于 CEMOY/澳诗茉产品的真实提问），实时展示&quot;留言提交 → Agent 扫描识别 → 自动生成回复 → 发布&quot;的完整链路耗时；再切回管理后台展示&quot;定时任务&quot;配置逻辑，说明这本质是&quot;Agent + 定时扫描&quot;组合出的自动化客服能力，覆盖了留言板/工单类场景下&quot;人工回复不及时、非工作时间无人值守&quot;的真实运营痛点。</p></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">针对具体产品和肤质的个性化留言回复、亲和专业的语气风格、&quot;感谢+专业解答+行动建议&quot;三段式结构、无需人工介入的全自动扫描-回复链路。</p></div>
+<div class="case-block agent-risk-block">
+<div class="block-label agent-risk-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>关键技术边界提醒（现场必须说明）</div>
+<p class="output-text agent-risk-text">当前留言板的&quot;定时扫描&quot;针对的是官网 Feedback 表单这类<strong>可直接读取的结构化留言数据源</strong>，与此前核验过的&quot;电商平台评论/客服工单&quot;场景不同——若客户希望覆盖抖音/天猫评论区或客服工单系统的自动回复，需要先确认对应平台是否有可用的数据接口，不能直接等同于本案例的技术实现路径。</p>
+</div>
+</div><div class="case-card agent-card" id="agent-10-c2">
+<div class="case-head"><span class="case-code agent-code">智能体 10-3</span><h3 class="case-title">智能体 10-3　TAPD 待办与项目情况定时推送</h3><span class="case-tag agent-real-tag"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/></svg>真实系统 · 非仿真演示</span><span class="cron-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>已真实上线的定时任务</span></span></div>
+<div class="case-block"><div class="block-label">体验方式</div>
+<p class="output-text">无独立体验网址，效果直接体现在企业微信消息中——通过 WorkBuddy 管理后台「自动化」功能创建定时任务，无需搭建独立 Agent 或对接前端页面，是本部分中<strong>配置门槛最低、最易现场复现</strong>的一个案例。</p>
+</div>
+<div class="case-block"><div class="block-label">配套截图</div>
+<div class="agent-shots"><figure class="agent-shot"><img src="素材文件/智能体案例截图/待办定时推送-自动化配置页.png" alt="WorkBuddy 管理后台「自动化」配置页面" loading="lazy"><figcaption>WorkBuddy 管理后台「自动化」配置页面</figcaption></figure><figure class="agent-shot"><img src="素材文件/智能体案例截图/待办定时推送-企业微信推送效果.png" alt="企业微信真实收到的推送消息" loading="lazy"><figcaption>企业微信真实收到的推送消息</figcaption></figure></div>
+</div>
+<div class="case-block"><div class="block-label">自动化配置要点</div><table class="agent-table cfg-table"><thead><tr><th>配置项</th><th>内容</th></tr></thead><tbody><tr><td class="cfg-key">名称</td><td>TAPD 每日待办与项目情况推送</td></tr><tr><td class="cfg-key">触发频率</td><td>每天早上 9:00（<code>FREQ=DAILY;BYHOUR=9;BYMINUTE=0</code>）</td></tr><tr><td class="cfg-key">工作空间</td><td>客户企业工作空间</td></tr><tr><td class="cfg-key">核心逻辑（第一部分·待办清单）</td><td>调用 TAPD MCP 的 <code>get_user_participant_projects</code> 查询用户参与的全部项目，过滤掉组织类目录；对剩余每个项目分别用 <code>get_todo</code> 查 task/story 两类待办；汇总成带可点击链接的文本清单，并统计待办总数与各项目待办数；若当前无待办也要显式注明&quot;暂无待办任务&quot;，不允许跳过</td></tr><tr><td class="cfg-key">核心逻辑（第二部分·项目情况总结）</td><td>对每个真实项目调用 <code>get_story_or_task_count</code>/<code>get_bug_count</code>/<code>get_iterations</code>，计算需求/任务完成率、缺陷数、当前迭代起止日期及是否逾期；对完成率低/迭代已逾期的项目自动标注&quot;⚠️已逾期 N 天&quot;风险提示</td></tr><tr><td class="cfg-key">推送方式</td><td>通过企业微信连接器单聊发送给指定负责人；单条消息受 2048 字节上限约束，超限时按项目/部分边界自动拆分为多条依次发送，确保内容不因超限被丢弃</td></tr></tbody></table></div>
+<div class="case-block"><div class="block-label">真实效果（见截图）</div><p class="output-text">企业微信实际收到的推送消息分两部分——第一部分列出具体待办条目（如&quot;深度研究模式-增加联网搜索和知识库搜索&quot;，标注状态/优先级并附可点击 TAPD 链接）；第二部分按项目汇总需求/任务/缺陷数据（如 iothubdemo 项目&quot;需求:67 已完成27(40.3%) | 任务:49 已完成27(55.1%) | 缺陷:3&quot;），并对逾期项目自动生成风险提示（如&quot;迭代逾期42天，仍有40条需求未关闭，遗留3个缺陷，建议优先收口告警/设备模块&quot;）。</p></div>
+<div class="case-block"><div class="block-label">现场演示建议</div><p class="output-text">先打开管理后台的「自动化」配置页面，展示名称/工作空间/触发频率/完整提示词四要素——重点说明提示词里已经把&quot;调用哪些 TAPD 接口、如何过滤项目、如何计算完成率、超限如何分段发送&quot;等执行细节写清楚，WorkBuddy 会严格按提示词逐步执行而不是随意发挥；再展示企业微信里真实收到的推送效果，强调这条消息是<strong>每天 9 点无人值守自动生成并送达</strong>，不是提前准备好的素材。适合与前两个&quot;Agent 应用&quot;案例形成对比——同样是&quot;配置一次、长期自动运行&quot;，本案例完全不需要搭建 Agent 或对接前端，只用「自动化」功能 + 已连接的 TAPD/企业微信连接器即可实现，门槛最低、最容易让客户理解&quot;回去自己也能配一个&quot;。</p></div>
+<div class="case-block"><div class="block-label">预期输出要点</div><p class="output-text">每日固定时间自动生成的双部分内容（待办清单+项目进度总结）、待办条目附可点击 TAPD 链接、逾期项目自动标注风险提示、超长内容自动分段发送、全程无需人工触发。</p></div>
+<div class="case-block agent-risk-block">
+<div class="block-label agent-risk-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>关键技术边界提醒（现场必须说明）</div>
+<p class="output-text agent-risk-text">本案例依赖 TAPD 和企业微信两个连接器均处于&quot;已连接&quot;状态（参见文末附录 MCP 索引），且提示词中查询的是&quot;当前登录用户参与的项目&quot;，若要推送给其他负责人或多人分别推送，需要为每个人单独配置一份自动化任务（当前实现是&quot;一人对一个企业微信账号&quot;的单聊模式，非群播）。</p>
+</div>
+</div><div class="case-card agent-card" id="agent-10-c3">
+<div class="case-head"><span class="case-code agent-code">智能体 10-4</span><h3 class="case-title">智能体 10-4　会议总结拉群转待办（分阶段执行的跨系统写操作协同）</h3><span class="case-tag agent-real-tag"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/></svg>真实系统 · 分阶段执行</span><span class="cron-badge" style="color:var(--rose-800);background:var(--rose-50);"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>不可逆写操作 · 需逐阶段确认</span></span></div>
+<div class="case-block"><div class="block-label">案例定位</div>
+<p class="output-text">与前 3 个案例不同，本案例<strong>不是&quot;配置一次长期运行&quot;，而是在对话内按阶段依次执行</strong>的一条跨系统链路：会议录音/文字稿 → 结构化纪要 → 飞书建群发纪要 → 逐人创建飞书待办。前两步（生成纪要）是只读操作，后两步（建群发消息、建待办）是对飞书系统的<strong>写操作且不可逆</strong>——群一旦建立、消息一旦发出、待办一旦分配到具体某人名下，都无法&quot;撤回&quot;。因此本案例<strong>必须拆成三个阶段，每个阶段之间设置人工确认点</strong>，不能用一段提示词让 AI 自动串联执行到底，这也是本案例区别于其他&quot;一句话出结果&quot;案例的核心演示价值——体现 WorkBuddy 对高风险写操作的可控性设计。</p>
+</div>
+<div class="case-block"><div class="block-label">配套素材</div><div class="mat-row"><a class="mat-chip" href="素材文件/Word/全渠道运营周会会议记录待生成纪要.docx" download><span class="mat-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></span><span class="mat-label">全渠道运营周会会议记录待生成纪要.docx</span><span class="mat-ext">Word</span><span class="mat-dl"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></span></a></div>
+<p class="output-text" style="margin-top:8px;">CEMOY/澳诗茉全渠道运营周会录音转写稿，含罗冬水/左晓龙/高铭宇三位真实参会人的说话人标注，内容涵盖库存断货风险、达人投放复盘、客诉处理、月度简报计划四个议题，其中隐含 3 条待办：左晓龙-渠道限购落地（周五前）、罗冬水-对齐品牌方（下周一前）、高铭宇-达人投放复盘（本周内）。</p>
+</div>
+<div class="case-block"><div class="block-label">依赖的连接器</div>
+<p class="output-text"><code>lark-contact</code>（按姓名解析飞书 open_id）、<code>lark-im</code>（建群/发送消息）、<code>lark-task</code>（创建待办任务）——三位参会人（罗冬水、左晓龙、高铭宇）均为飞书真实联系人，现场执行前需确认这三位在当前登录租户的通讯录中可被精确检索到，否则阶段二会在&quot;建群&quot;这一步直接失败。</p>
+</div>
+<div class="case-block">
+  <div class="block-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>阶段一 · 生成会议纪要与待办清单（当前可执行）</div>
+  <div class="prompt-box">
+  <p class="prompt-text">附件是我们 CEMOY/澳诗茉全渠道运营周会（第28周）的录音转写稿，参会人是罗冬水、左晓龙、高铭宇。请你完成两件事：1）生成一份结构化的会议纪要，按&quot;会议信息、讨论议题、关键结论&quot;整理，每个议题下用简洁书面语总结讨论过程和结论（不要逐字复述口语原文，但不能遗漏或编造原文未提及的信息）；2）单独整理一张&quot;待办清单&quot;表格，字段为&quot;待办内容 / 负责人 / 截止时间 / 关联议题&quot;，从原文中提取所有明确指派了负责人和时间的口头待办事项。请先把这两部分内容完整输出给我看，我确认无误后会再告诉你下一步操作。</p>
+  <button class="copy-btn" data-copy-target="agent-10-c3-prompt-s1" onclick="copyPrompt(this)">复制</button>
+  <textarea class="prompt-raw" id="agent-10-c3-prompt-s1" hidden>附件是我们 CEMOY/澳诗茉全渠道运营周会（第28周）的录音转写稿，参会人是罗冬水、左晓龙、高铭宇。请你完成两件事：1）生成一份结构化的会议纪要，按"会议信息、讨论议题、关键结论"整理，每个议题下用简洁书面语总结讨论过程和结论（不要逐字复述口语原文，但不能遗漏或编造原文未提及的信息）；2）单独整理一张"待办清单"表格，字段为"待办内容 / 负责人 / 截止时间 / 关联议题"，从原文中提取所有明确指派了负责人和时间的口头待办事项。请先把这两部分内容完整输出给我看，我确认无误后会再告诉你下一步操作。</textarea>
+  </div>
+</div>
+<div class="case-block"><div class="block-label">预期输出要点（阶段一）</div><p class="output-text">结构化会议纪要（信息栏+四个议题+结论）；独立的待办清单表格，应准确提取出 3 条待办（左晓龙-渠道限购/周五前、罗冬水-对齐品牌方/下周一前、高铭宇-达人复盘/本周内），负责人和截止时间与原文口语表述一致，不遗漏、不编造。</p></div>
+<div class="case-block" style="padding-top:14px;border-top:1px dashed var(--rose-600);">
+<div class="block-label" style="color:var(--rose-800);"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 8l6 6M15 8l-6 6"/></svg>阶段二 · 建群并发送纪要（待阶段一确认无误后追加发送）</div>
+<div class="prompt-box" style="background:var(--rose-50);border-color:#F3C6D3;">
+<p class="prompt-text">纪要内容我已确认无误。请你执行以下操作：1）用飞书通讯录查找 罗冬水、左晓龙、高铭宇 三人的信息；2）新建一个飞书群聊，群名为&quot;CEMOY澳诗茉全渠道运营周会-0709&quot;，把这三人加入群聊；3）将刚才确认的会议纪要全文，作为群内第一条消息发送到这个群里。完成后请告诉我群聊创建结果和消息发送状态，我确认发送成功后会再告诉你下一步操作。</p>
+<button class="copy-btn" data-copy-target="agent-10-c3-prompt-s2" onclick="copyPrompt(this)">复制</button>
+<textarea class="prompt-raw" id="agent-10-c3-prompt-s2" hidden>纪要内容我已确认无误。请你执行以下操作：1）用飞书通讯录查找 罗冬水、左晓龙、高铭宇 三人的信息；2）新建一个飞书群聊，群名为"CEMOY澳诗茉全渠道运营周会-0709"，把这三人加入群聊；3）将刚才确认的会议纪要全文，作为群内第一条消息发送到这个群里。完成后请告诉我群聊创建结果和消息发送状态，我确认发送成功后会再告诉你下一步操作。</textarea>
+</div>
+</div>
+<div class="case-block"><div class="block-label">预期输出要点（阶段二）</div><p class="output-text">三位参会人姓名均被正确解析为飞书联系人；新建群聊名称含日期、三人均在群成员列表中；纪要全文以完整格式发送为群内第一条消息（无截断、无格式错乱）；明确回报&quot;群聊已创建，消息已发送&quot;的执行结果，而不是含糊的&quot;已完成&quot;。</p></div>
+<div class="case-block" style="padding-top:14px;border-top:1px dashed var(--rose-600);">
+<div class="block-label" style="color:var(--rose-800);"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 8l6 6M15 8l-6 6"/></svg>阶段三 · 逐人创建飞书待办（待阶段二确认建群发送成功后追加发送）</div>
+<div class="prompt-box" style="background:var(--rose-50);border-color:#F3C6D3;">
+<p class="prompt-text">群消息已确认发送成功。请你依据刚才确认的待办清单表格，为每条待办分别创建一个飞书待办任务：1）左晓龙 —— 标题&quot;CEMOY山羊奶身体乳渠道限购落地&quot;，描述中说明天猫旗舰店和抖音自播间均设置每人限购2件，截止时间为本周五；2）罗冬水 —— 标题&quot;对齐品牌方渠道限购信息&quot;，描述中说明需将渠道端限购规则同步给品牌方联系人，截止时间为下周一；3）高铭宇 —— 标题&quot;澳诗茉淡斑精华达人投放复盘&quot;，描述中说明需整理评论区/弹幕反馈并核查功效宣称合规性，截止时间为本周内。每条待办请分别关联到刚才创建的会议群或纪要消息，方便三人点击待办时能直接回溯到会议背景。创建完成后，请逐条告诉我每个待办任务的创建结果（负责人/标题/截止时间），不要只说&quot;已完成&quot;。</p>
+<button class="copy-btn" data-copy-target="agent-10-c3-prompt-s3" onclick="copyPrompt(this)">复制</button>
+<textarea class="prompt-raw" id="agent-10-c3-prompt-s3" hidden>群消息已确认发送成功。请你依据刚才确认的待办清单表格，为每条待办分别创建一个飞书待办任务：1）左晓龙 —— 标题"CEMOY山羊奶身体乳渠道限购落地"，描述中说明天猫旗舰店和抖音自播间均设置每人限购2件，截止时间为本周五；2）罗冬水 —— 标题"对齐品牌方渠道限购信息"，描述中说明需将渠道端限购规则同步给品牌方联系人，截止时间为下周一；3）高铭宇 —— 标题"澳诗茉淡斑精华达人投放复盘"，描述中说明需整理评论区/弹幕反馈并核查功效宣称合规性，截止时间为本周内。每条待办请分别关联到刚才创建的会议群或纪要消息，方便三人点击待办时能直接回溯到会议背景。创建完成后，请逐条告诉我每个待办任务的创建结果（负责人/标题/截止时间），不要只说"已完成"。</textarea>
+</div>
+</div>
+<div class="case-block"><div class="block-label">预期输出要点（阶段三）</div><p class="output-text">三条独立的飞书待办任务，分别归属左晓龙/罗冬水/高铭宇名下；标题、描述、截止时间与待办清单表格内容一致，不遗漏、不篡改；每条待办均关联到阶段二的会议群或纪要消息；最终逐条回报创建结果，便于现场核对而非笼统汇报。</p></div>
+<div class="case-block agent-risk-block">
+<div class="block-label agent-risk-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>关键风险提醒（现场必须说明）</div>
+<p class="output-text agent-risk-text">阶段二、三是不可逆的外部系统写操作——群创建后无法静默撤销、消息发出后所有群成员都会看到、待办创建后会出现在对应负责人的飞书任务列表里。因此严禁把三段提示词一次性发给 WorkBuddy 要求&quot;自动执行到底&quot;，必须逐阶段人工确认后再继续；如果阶段一纪要或待办清单有误，应直接要求 WorkBuddy 重新生成阶段一内容，而不是带着错误内容进入阶段二。</p>
+</div>
+<div class="case-block ext-block">
+<div class="block-label ext-label"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>下一步可做</div>
+<div class="next-step-grid">
+<div class="next-step-card">
+<div class="next-step-title"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.8 7.1 18.2l.9-5.5-4-3.9L9.5 8 12 3z"/></svg>沉淀成专家</div>
+<p class="next-step-text">把&quot;纪要结构 / 待办提取规则 / 建群命名逻辑&quot;固化为可复用的专家或 Skill，后续任何会议只需上传录音/文字稿一句话触发全流程，不必每次重新说明规则，团队内可共享复用，降低对&quot;会写提示词的人&quot;的依赖。</p>
+</div>
+<div class="next-step-card">
+<div class="next-step-title"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>智能体任务催办</div>
+<p class="next-step-text">待办创建后接入智能体做定时催办：临近截止时间自动检查飞书任务完成状态，未完成则自动生成提醒消息推送给负责人，形成&quot;建待办 → 追进度 → 催办&quot;的闭环，与智能体 10-3（TAPD 待办推送）同属自动化闭环能力。</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section class="group-section" id="appendix-skill">
+<div class="group-header"><span class="group-badge badge-scenario">附录</span><h2 class="group-title">案例涉及的 Skill / MCP 能力索引</h2></div>
+<p class="group-desc">以下按 WorkBuddy 能力维度分类，列出每个能力被哪些案例使用，便于&quot;想演示某个能力时快速选案例&quot;。其中 <strong>xlsx / docx / pptx</strong> 为独立安装的文档处理 Skill，<strong>WebSearch / automation / Agent</strong> 为平台内置能力，<strong>可视化图表 / 数据分析 / 文本创作 / 知识库 / 图片识别</strong> 为 WorkBuddy 通用处理能力；下方另设<strong>MCP / 连接器</strong>表格，专门列出案例中涉及的第三方系统连接（企业微信、乐享知识库等），这类能力<strong>需要在 WorkBuddy 连接器管理中单独授权/连接后才能真正生效</strong>，与前述文档处理 Skill 属于不同的配置机制。</p>
+<div class="skill-box">
+<table class="skill-table">
+<thead><tr><th style="width:180px;">Skill / 能力</th><th style="width:220px;">说明</th><th>涉及案例</th></tr></thead>
+<tbody><tr><td class="skill-name"><strong>xlsx</strong></td><td class="skill-desc">Excel 文件读写、公式计算、多表处理</td><td class="skill-cases">Case 01-3、02-1、02-2(可选)、02-3(可选)、03-1、03-3、05-1、06-2、06-3、07-3、08-1、08-2、08-4、08-5、08-8、09-3、09-6</td></tr><tr><td class="skill-name"><strong>docx</strong></td><td class="skill-desc">Word 文档读写、格式化、表格/图片嵌入</td><td class="skill-cases">Case 01-2、03-2、04-1、04-2、04-3、05-1、05-2、05-3、07-1、07-2、07-3、08-3、08-6、09-1、09-2、09-4、09-5</td></tr><tr><td class="skill-name"><strong>pptx</strong></td><td class="skill-desc">PPT 幻灯片生成与编辑</td><td class="skill-cases">Case 04-1（合作方案PPT大纲）、05-3（培训课件PPT）、09-2（品牌介绍PPT）</td></tr><tr><td class="skill-name"><strong>WebSearch</strong></td><td class="skill-desc">联网搜索，补充行业数据/法规/竞品信息</td><td class="skill-cases">Case 01-1（竞品分析）、07-2（法规检索）、08-7（竞品监测）、09-2（品牌PPT联网补充）</td></tr><tr><td class="skill-name"><strong>图片识别 / OCR</strong></td><td class="skill-desc">识别图片中的文字信息</td><td class="skill-cases">Case 06-1（发票图片OCR识别录入）</td></tr><tr><td class="skill-name"><strong>可视化图表</strong></td><td class="skill-desc">生成柱状图/饼图/折线图/看板等可视化呈现</td><td class="skill-cases">Case 01-3、02-1、03-2、03-3、06-2、08-1、09-3、09-6</td></tr><tr><td class="skill-name"><strong>数据分析 / 建模</strong></td><td class="skill-desc">数据清洗、指标计算、评分建模、交叉分析</td><td class="skill-cases">Case 01-3（调研交叉分析）、05-1（简历评分建模）、08-2（达人ROI建模）</td></tr><tr><td class="skill-name"><strong>文本创作</strong></td><td class="skill-desc">文案/话术/邮件/种草内容批量生成</td><td class="skill-cases">Case 02-3（种草文案）、08-4（会员唤醒文案）、08-6（导购话术）、09-1（招聘海报文案）</td></tr><tr><td class="skill-name"><strong>知识库构建</strong></td><td class="skill-desc">基于文档构建自然语言问答库</td><td class="skill-cases">Case 05-2（品牌产品知识库问答）</td></tr><tr><td class="skill-name" style="color:var(--teal-800);background:var(--teal-50);"><strong>企业智能体（Agent 管理后台搭建）</strong></td><td class="skill-desc">通过 WorkBuddy 管理后台创建常驻 Agent，配置 System Prompt/模型/挂载知识库，真实部署到前端产品</td><td class="skill-cases">智能体 10-1（智能客服）、智能体 10-2（留言自动回复）</td></tr><tr><td class="skill-name" style="color:#854F0B;background:var(--amber-50);"><strong>automation</strong></td><td class="skill-desc">定时任务/自动化推送（附第二段提示词的6个案例 + 1个真实上线的智能体应用案例）</td><td class="skill-cases">Case 02-1（周报）、03-1（简报）、03-3（看板）、08-1（全域看板）、08-5（合规巡检）、08-7（竞品监测）、智能体 10-3（TAPD待办与项目情况推送）</td></tr><tr><td class="skill-name" style="color:var(--purple-800);background:var(--purple-50);"><strong>Agent / 多Agent协同</strong></td><td class="skill-desc">拆分子任务/子角色并行处理后再汇总</td><td class="skill-cases">Case 04-2（标书）、05-1（简历）、07-1（合同）、07-3（文案扫描）、场景 08-1（全域看板）、08-3（新品全案）</td></tr><tr><td class="skill-name" style="color:var(--rose-800);background:var(--rose-50);"><strong>跨系统分阶段写操作协同</strong></td><td class="skill-desc">对话内依次调用多个第三方连接器完成有先后依赖、不可逆的写操作链，每阶段人工确认后再继续</td><td class="skill-cases">智能体 10-4（会议总结拉群转待办：生成纪要→飞书建群发纪要→飞书建待办，三阶段执行）</td></tr></tbody>
+</table>
+<div class="skill-summary-box"><strong>Skill 覆盖度小结：</strong><p><strong>xlsx 覆盖最广</strong>（17 个案例），其次是 <strong>docx</strong>（18 个案例，含新增的会议记录素材），这两个能力是美妆零售场景中最高频使用的。</p><p><strong>pptx</strong> 集中在方案展示类场景（3 个案例），<strong>WebSearch</strong> 集中在需要外部信息补充的场景（4 个案例）。</p><p><strong>automation</strong> 和 <strong>Agent（对话内多Agent协同）</strong> 是 WorkBuddy 的&quot;能力进阶&quot;维度，分别覆盖 7 个定时任务/自动化案例和 6 个多 Agent 协同版案例，建议在基础能力演示完毕后作为压轴环节展示。<strong>其中智能体 10-3 是唯一一个已真实上线运行的 automation 案例</strong>（其余 6 个仅在文档中标注&quot;★ 强烈推荐设置定时任务&quot;，需现场创建），现场如时间允许可优先展示 10-3 的真实推送效果，再回头演示其余案例&quot;如何创建&quot;的过程，形成&quot;这是真实效果 → 现在教你怎么配&quot;的完整叙事。</p><p><strong>企业智能体（管理后台 Agent 搭建）</strong> 与前几项能力维度不同——前几项均是&quot;对话内一次性任务处理&quot;，而企业智能体是&quot;常驻业务系统&quot;，覆盖 2 个真实上线案例，建议作为整场演示的最终压轴，向客户传递&quot;WorkBuddy 不仅能帮你处理单次任务，还能帮你搭建 7×24 小时在线的业务系统&quot;这一层能力升维。</p><p><strong>跨系统分阶段写操作协同</strong>是本文档中唯一一个&quot;对话内多步骤、每步都要人工确认&quot;的案例（智能体 10-4），与&quot;多Agent协同&quot;（并行/会诊/集成，但都是只读产出）本质不同——这里的每一步都会真实改变外部系统状态（建群/发消息/建待办），演示时建议明确讲清楚&quot;为什么必须分阶段&quot;，这是体现 WorkBuddy 操作严谨性的关键点，不要为了节省演示时间把三段提示词连续发送。</p></div>
+</div>
+<div class="mcp-box" id="appendix-mcp">
+<div class="mcp-box-header"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v4M15 3v4M6 7h12l-1 5a5 5 0 0 1-10 0L6 7z"/><path d="M12 16v5"/></svg><h3>案例涉及的 MCP / 连接器索引</h3></div>
+<p class="group-desc mcp-intro">MCP（连接器）是 WorkBuddy 对接第三方系统（企业微信、飞书、乐享知识库、TAPD 等）的标准方式，需在&quot;连接器管理&quot;中单独授权/连接，<strong>授权状态与上方 Skill 能力是两套独立机制</strong>——Skill 装好即可用，MCP 连接器则要求目标系统账号已授权，现场演示前务必确认对应连接器处于&quot;已连接&quot;状态，否则定时任务/知识库检索等环节会直接失败。</p>
+<table class="skill-table mcp-table">
+<thead><tr><th style="width:170px;">MCP / 连接器</th><th style="width:210px;">用途</th><th style="width:250px;">涉及案例</th><th>现场依赖说明</th></tr></thead>
+<tbody><tr><td class="mcp-name" style="color:var(--rose-800);background:var(--rose-50);"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v4M15 3v4M6 7h12l-1 5a5 5 0 0 1-10 0L6 7z"/><path d="M12 16v5"/></svg><span><strong>企业微信（WeCom）</strong></span></td><td class="skill-desc">定时任务生成的简报/看板/报告推送到企业微信群或个人</td><td class="skill-cases">Case 02-1（周报推送）、03-1（简报推送）、03-3（看板推送）、场景 08-1（全域看板推送）、场景 08-5（合规巡检报告推送）、场景 08-7（竞品简报推送）、智能体 10-3（待办与项目情况推送，已真实上线）</td><td class="mcp-note">前 6 个案例的第二段提示词均以&quot;推送到我们的企业微信群&quot;结尾，现场创建定时任务前需确认企业微信连接器已连接且目标群已配置；智能体 10-3 已验证过真实推送链路（单聊模式，非群播），可作为&quot;企业微信推送确实能跑通&quot;的现场证据</td></tr><tr><td class="mcp-name" style="color:var(--rose-800);background:var(--rose-50);"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v4M15 3v4M6 7h12l-1 5a5 5 0 0 1-10 0L6 7z"/><path d="M12 16v5"/></svg><span><strong>乐享知识库（Lexiang）</strong></span></td><td class="skill-desc">Agent 挂载品牌/产品/成分知识库，供检索问答时引用真实资料而非模型幻觉</td><td class="skill-cases">智能体 10-1（智能客服·检索CEMOY/澳诗茉成分与产品资料）、智能体 10-2（留言自动回复·同一知识库支撑更细粒度产品匹配）</td><td class="mcp-note">这 2 个案例是&quot;管理后台真实搭建&quot;的智能体应用，知识库内容需提前在乐享中维护好品牌/产品资料，现场演示效果直接取决于知识库内容的完整度和准确度</td></tr><tr><td class="mcp-name" style="color:var(--rose-800);background:var(--rose-50);"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v4M15 3v4M6 7h12l-1 5a5 5 0 0 1-10 0L6 7z"/><path d="M12 16v5"/></svg><span><strong>TAPD</strong></span></td><td class="skill-desc">查询项目待办任务、需求/任务/缺陷统计、迭代进度，用于自动生成待办清单与项目情况总结</td><td class="skill-cases">智能体 10-3（TAPD待办与项目情况推送）</td><td class="mcp-note">依赖的是罗冬水本人在 TAPD 的登录授权，查询范围是&quot;当前登录用户参与的项目&quot;；若要推送给其他负责人，需要用对应负责人的 TAPD 账号重新授权或调整查询逻辑，不能直接套用同一份配置</td></tr><tr><td class="mcp-name" style="color:var(--rose-800);background:var(--rose-50);"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3v4M15 3v4M6 7h12l-1 5a5 5 0 0 1-10 0L6 7z"/><path d="M12 16v5"/></svg><span><strong>飞书（Lark）</strong></span></td><td class="skill-desc"><code>lark-contact</code> 按姓名解析真实联系人 open_id；<code>lark-im</code> 新建会议群并发送纪要消息；<code>lark-task</code> 为指定负责人创建待办任务</td><td class="skill-cases">智能体 10-4（会议总结拉群转待办，三阶段中的阶段二、三）</td><td class="mcp-note">依赖参会人（罗冬水、左晓龙、高铭宇）均为当前登录租户飞书通讯录中真实存在的联系人，且账号已授权飞书连接器；若参会人姓名在通讯录中无法精确匹配，阶段二建群会直接失败，需提前核实姓名/花名拼写</td></tr></tbody>
+</table>
+<div class="skill-summary-box mcp-summary-box"><strong>MCP 覆盖度小结：</strong><p>企业微信连接器覆盖面最广，是本文档&quot;自动化推送&quot;能力链路中不可或缺的最后一环——智能体 10-3 已验证该链路真实可用，其余 6 个定时任务案例如果只演示&quot;创建成功&quot;而不验证实际推送到群，说服力会打折。</p><p>乐享知识库连接器专属于智能体 10-1/10-2，是这 2 个案例&quot;真实系统&quot;属性的核心支撑——如果知识库连接异常或内容缺失，Agent 会退化成普通聊天机器人，失去&quot;基于知识库检索&quot;的差异化价值，建议演示前务必抽查一次真实问答效果。</p><p><strong>TAPD 连接器专属于智能体 10-3</strong>，是本文档中除企业智能体外唯一另一类&quot;对接客户内部系统&quot;的连接器示例——如果客户自己使用 TAPD 或类似的项目管理系统，这个案例最能直接引发&quot;我们也可以这样用&quot;的共鸣。</p><p><strong>飞书（Lark）连接器专属于智能体 10-4</strong>，且是本文档中唯一涉及&quot;新建群/发消息/建待办&quot;三类写操作的连接器——现场演示前务必确认参会人姓名能在飞书通讯录精确解析，且务必按阶段逐步执行，不要一次性把三段提示词连续发出。</p><p>前三部分中标注&quot;联网检索型&quot;的案例（Case 01-1、07-2、场景 08-7、通用 09-2）依赖的是 WorkBuddy 内置 WebSearch 能力，不需要额外的 MCP 连接器授权，与本表所列连接器机制不同。</p></div>
+</div>
+</section>
+<div class="footer-note">
+<h3>演示前必须确认的事项</h3>
+<p>1. <strong>数据真实性口径统一</strong>：本文档所有 Excel/Word/图片素材均为仿真模拟数据，现场演示时不应表述为&quot;系统实时读取真实抖音/天猫后台数据&quot;，应统一说明为&quot;以历史/仿真数据模拟真实业务场景&quot;。</p><p>2. <strong>技术可行性交叉核对</strong>：涉及&quot;自动化定时推送&quot;（如 Case 03-3、场景08-1）、&quot;客服工单自动流转&quot;类描述时，需与此前的演示场景技术可行性核验结论交叉确认——当前无标准化电商平台/客服系统连接器，现场只能展示&quot;数据已就位后的自动化处理效果&quot;，不可承诺&quot;实时对接真实平台&quot;。</p><p>3. <strong>合规类案例（07-1/07-2/07-3/08-5）优先级建议</strong>：鉴于客户曾有GMV对赌合同纠纷经历，且行业强监管属性明显，建议将法务合规相关案例作为重点演示内容，体现WorkBuddy对行业风险点的理解深度。</p><p>4. <strong>素材文件核对</strong>：演示前请确认 `演示案例完整素材包/素材文件/` 下 Excel（12个）、Word（13个）、图片（3个）文件均可正常打开，必要时提前在WorkBuddy中测试一轮上传。</p><p>5. <strong>效能对比数据</strong>：本文档中新增的8个行业专属场景效能对比数据为参考估算值，正式对外使用前建议与业务方核实合理性。</p><p>6. <strong>多Agent演示节奏建议</strong>：6个含多Agent协同版的案例（Case 04-2、05-1、07-1、07-3、场景 08-1、08-3）建议在单Agent版演示完毕后，作为&quot;能力进阶&quot;环节展示，突出&quot;同样的任务，WorkBuddy 可以像一个团队一样分工协作&quot;，避免一开场就用多Agent概念，导致客户对基础功能的认知被稀释。</p><p>7. <strong>定时任务演示节奏建议</strong>：标注&quot;★ 强烈推荐设置定时任务&quot;的 6 个案例（Case 02-1、Case 03-1、Case 03-3、场景 08-1、场景 08-5、场景 08-7），现场演示时应先发送第一段完整输入文字、确认输出效果后，再发送第二段提示词创建定时任务，让客户看到&quot;从一次性分析到自动化运营&quot;的完整升级路径。创建定时任务时同样要说明当前数据源为仿真数据，真正投入生产使用前需先打通电商平台数据的自动更新机制（参见第2条）。</p><p>8. <strong>外文翻译案例（通用 09-4）</strong>所用英文素材为模拟文档，真实使用时替换为品牌方提供的英文资料即可；翻译时需特别注意功效宣称类表述在中国《化妆品监督管理条例》下的合规性，不能直译。</p><p>9. <strong>文档润色案例（通用 09-5）</strong>所用周报初稿为模拟文档，真实使用时替换为运营同事实际写的初稿即可；润色的核心是&quot;保留事实信息+提升表达专业度&quot;，AI 不应添加原文未提及的内容。</p><p>10. <strong>多 Excel 加工案例（通用 09-6）</strong>的三个渠道导出表刻意设计了字段名/数据粒度/日期格式/金额单位/商品名称写法五类差异，真实使用时替换为各渠道后台实际导出的文件即可；演示重点是让客户看到 WorkBuddy 自动识别字段对应关系并统一格式的能力。</p><p>11. <strong>智能体应用案例（智能体 10-1/10-2）性质特殊，务必单独说明</strong>：这 2 个案例展示的是<strong>已在管理后台真实搭建、真实上线的 Agent</strong>，与前三部分&quot;复制提示词做即时问答&quot;完全不同——现场演示前务必确认体验地址（http://119.28.239.109:8082/、http://119.28.239.109:8080/）可正常访问；留言自动回复案例的&quot;定时扫描&quot;目前仅验证了官网 Feedback 表单这一结构化数据源，不可等同宣传为&quot;已支持电商平台评论区/客服工单自动回复&quot;，避免现场承诺超出实际实现范围。</p><p>12. <strong>待办定时推送案例（智能体 10-3）依赖 TAPD 与企业微信双连接器</strong>：现场演示前需确认这两个连接器均处于&quot;已连接&quot;状态；该案例查询的是&quot;当前登录用户参与的项目&quot;，推送对象也固定为已授权的企业微信账号（单聊），如需演示&quot;推送给其他人&quot;效果，需提前用对应负责人的账号重新配置一份自动化任务，不要在现场临时承诺&quot;随便改个收件人就行&quot;。</p><p>13. <strong>会议总结拉群转待办案例（智能体 10-4）必须分阶段现场执行，严禁一次性发送三段提示词</strong>：阶段一（生成纪要）是只读操作，可反复重来；阶段二（飞书建群发纪要）、阶段三（飞书建待办）都是不可逆的外部写操作，现场演示时必须先展示阶段一效果并口头/文字确认无误后，才继续发送阶段二提示词；阶段二确认群消息发送成功后，才继续发送阶段三提示词。演示前需确认参会人（罗冬水、左晓龙、高铭宇）均为当前飞书租户通讯录中可精确检索到的真实联系人，否则阶段二建群会直接失败。</p>
+</div>
+</main>
+</div>
+<div class="toast" id="toast">已复制到剪贴板</div>
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="关闭"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+</div>
+<button class="back-to-top" id="backToTop" aria-label="返回顶部"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<script>
+function copyPrompt(btn) {
+  var targetId = btn.getAttribute("data-copy-target");
+  var raw = document.getElementById(targetId);
+  if (!raw) return;
+  var text = raw.value;
+  function showToast() {
+    var toast = document.getElementById("toast");
+    toast.classList.add("show");
+    setTimeout(function() { toast.classList.remove("show"); }, 1600);
+    btn.textContent = "已复制";
+    btn.classList.add("copied");
+    setTimeout(function() { btn.textContent = "复制"; btn.classList.remove("copied"); }, 1600);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(showToast).catch(function() {
+      fallbackCopy(text); showToast();
+    });
+  } else {
+    fallbackCopy(text); showToast();
+  }
+}
+function fallbackCopy(text) {
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); } catch (e) {}
+  document.body.removeChild(ta);
+}
+var navSearch = document.getElementById("navSearch");
+navSearch.addEventListener("input", function() {
+  var q = this.value.trim().toLowerCase();
+  document.querySelectorAll(".nav-group").forEach(function(group) {
+    var subs = group.querySelectorAll(".nav-sub");
+    var mainEl = group.querySelector(".nav-main");
+    var mainText = mainEl ? mainEl.textContent.toLowerCase() : "";
+    var anyMatch = mainText.indexOf(q) !== -1;
+    subs.forEach(function(sub) {
+      var match = sub.textContent.toLowerCase().indexOf(q) !== -1;
+      sub.style.display = (q === "" || match) ? "block" : "none";
+      if (match) anyMatch = true;
+    });
+    group.style.display = (q === "" || anyMatch) ? "block" : "none";
+  });
+});
+var subLinks = document.querySelectorAll(".nav-sub");
+var caseCards = document.querySelectorAll(".case-card");
+var navUpdateTicking = false;
+function updateActiveNav() {
+  var scrollY = window.scrollY + 100;
+  var activeId = null;
+  caseCards.forEach(function(card) {
+    if (card.offsetTop <= scrollY) activeId = card.id;
+  });
+  subLinks.forEach(function(link) {
+    link.classList.toggle("active", link.getAttribute("href") === "#" + activeId);
+  });
+  var backToTop = document.getElementById("backToTop");
+  if (backToTop) backToTop.classList.toggle("show", window.scrollY > 600);
+  navUpdateTicking = false;
+}
+window.addEventListener("scroll", function() {
+  if (!navUpdateTicking) {
+    navUpdateTicking = true;
+    requestAnimationFrame(updateActiveNav);
+  }
+}, { passive: true });
+updateActiveNav();
+
+// ---- mobile drawer navigation ----
+var sidebar = document.getElementById("sidebar");
+var navToggle = document.getElementById("navToggle");
+var sidebarOverlay = document.getElementById("sidebarOverlay");
+function openSidebar() {
+  sidebar.classList.add("open");
+  sidebarOverlay.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+function closeSidebar() {
+  sidebar.classList.remove("open");
+  sidebarOverlay.classList.remove("show");
+  document.body.style.overflow = "";
+}
+if (navToggle) {
+  navToggle.addEventListener("click", function() {
+    if (sidebar.classList.contains("open")) closeSidebar(); else openSidebar();
+  });
+}
+if (sidebarOverlay) sidebarOverlay.addEventListener("click", closeSidebar);
+document.querySelectorAll(".nav-sub, .nav-main").forEach(function(link) {
+  link.addEventListener("click", function() {
+    if (window.innerWidth <= 900) closeSidebar();
+  });
+});
+
+// ---- lightbox for agent screenshots ----
+var lightbox = document.getElementById("lightbox");
+var lightboxImg = document.getElementById("lightboxImg");
+var lightboxClose = document.getElementById("lightboxClose");
+function openLightbox(src, alt) {
+  lightboxImg.src = src;
+  lightboxImg.alt = alt || "";
+  lightbox.classList.add("show");
+}
+function closeLightbox() {
+  lightbox.classList.remove("show");
+  lightboxImg.src = "";
+}
+document.querySelectorAll(".agent-shot img").forEach(function(img) {
+  img.addEventListener("click", function() {
+    openLightbox(img.getAttribute("src"), img.getAttribute("alt"));
+  });
+});
+if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
+if (lightbox) lightbox.addEventListener("click", function(e) {
+  if (e.target === lightbox) closeLightbox();
+});
+
+// ---- back to top ----
+var backToTopBtn = document.getElementById("backToTop");
+if (backToTopBtn) {
+  backToTopBtn.addEventListener("click", function() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+// ---- ESC key: close lightbox first, then sidebar ----
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    if (lightbox.classList.contains("show")) {
+      closeLightbox();
+    } else if (sidebar.classList.contains("open")) {
+      closeSidebar();
+    }
+  }
+});
+</script>
+</body>
+</html>
