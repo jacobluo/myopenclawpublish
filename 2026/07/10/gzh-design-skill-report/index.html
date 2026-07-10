@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../assets/research-brief.css">
+    <script src="../../../../assets/research-brief.js" defer></script>
+    <title>gzh-design-skill 仓库分析报告</title>
+    <meta name="description" content="分析 isjiamu/gzh-design-skill：微信公众号排版 Agent Skill 的定位、质量、风险、适配建议和安装判断。">
+  </head>
+  <body>
+    <main>
+      <nav class="rb-topbar" aria-label="页面导航">
+        <div class="rb-brand">
+          <strong>OpenClaw Publish</strong>
+          <span>Repository Brief</span>
+        </div>
+        <a class="rb-back" href="../../../../">返回索引</a>
+      </nav>
+
+      <article class="rb-layout">
+        <aside class="rb-panel">
+          <p class="eyebrow">GitHub Repo Review</p>
+          <h1>gzh-design-skill 仓库分析报告</h1>
+          <p>把 Markdown 一键排成可粘贴进微信公众号编辑器的 HTML。核心价值不是“写文章”，而是把公众号平台限制、主题组件和质量校验沉淀成 Agent 可执行流程。</p>
+          <div class="meta">
+            <span>生成日期：2026-07-10</span>
+            <span>核验对象：isjiamu/gzh-design-skill</span>
+            <span>本地浅克隆 + GitHub API + 脚本试跑</span>
+          </div>
+        </aside>
+
+        <section class="rb-report">
+          <section>
+            <h2>一页结论</h2>
+            <p><strong>判断：</strong>这是一个值得关注、也值得试装的中文 Agent Skill。它的亮点在于把“公众号排版”这个高度经验化、容易粘贴掉样式的工作，拆成了主题组件库、装配规则、平台红线和脚本校验四层。它不是普通前端项目，也不是 npm/Python 包，更像一套给 Claude Code、Codex、Cursor、OpenClaw 这类 Agent 调用的可执行排版规范。</p>
+            <p><strong>建议：</strong>如果你的目标是把长文、报告、教程快速变成微信公众号可粘贴 HTML，可以安装试用；如果要商用改造、二次分发或并入闭源产品，需要先注意 AGPL-3.0 的合规边界。</p>
+
+            <div class="grid">
+              <div class="card">
+                <h3>我给的评级</h3>
+                <p><strong>实用性：高。</strong>场景清晰，痛点真实，样例和校验脚本都能跑。</p>
+                <p><strong>工程成熟度：中上。</strong>结构完整，但仍是 2026-07 初的新仓库，生态反馈刚开始。</p>
+                <p><strong>可装价值：高。</strong>尤其适合你的“报告发布 + 微信公众号复用”工作流。</p>
+              </div>
+              <div class="card">
+                <h3>最核心的风险</h3>
+                <p><strong>许可证是 AGPL-3.0。</strong>自己本地使用问题不大；如果改造成联网服务、商业闭源排版引擎或内嵌到产品，需要认真处理开源义务。</p>
+                <p><strong>安装体系仍偏 Agent 生态。</strong>不是传统包管理项目，没有 package.json、pyproject 或 requirements。</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>仓库快照</h2>
+            <table>
+              <tbody>
+                <tr><th>仓库</th><td><a href="https://github.com/isjiamu/gzh-design-skill">isjiamu/gzh-design-skill</a></td></tr>
+                <tr><th>定位</th><td>Markdown 到微信公众号可粘贴 HTML 的 Agent Skill</td></tr>
+                <tr><th>创建时间</th><td>2026-07-01</td></tr>
+                <tr><th>最近 push</th><td>2026-07-08</td></tr>
+                <tr><th>最新 release</th><td><a href="https://github.com/isjiamu/gzh-design-skill/releases/tag/v1.0.0">v1.0.0 · 联名首发</a>，2026-07-06 发布</td></tr>
+                <tr><th>GitHub 热度</th><td>约 1,802 stars、204 forks、3 watchers（2026-07-10 快照）</td></tr>
+                <tr><th>许可证</th><td>AGPL-3.0-or-later，GitHub API 显示为 Other，但 LICENSE 正文为 AGPL-3.0</td></tr>
+                <tr><th>打开事项</th><td>1 个 open issue、2 个 open PR：快速试用入口、两阶段排版模式、背景检查</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section>
+            <h2>它解决了什么</h2>
+            <p>公众号排版的麻烦不是“生成 HTML”本身，而是公众号编辑器会过滤样式：禁用 <code>&lt;style&gt;</code>、<code>&lt;div&gt;</code>、<code>class/id</code>、部分 CSS 布局，还要求大量样式内联。这个仓库的价值是把这些规则写进 Skill 和校验脚本，让 Agent 不只是“凭感觉排版”，而是按固定主题组件装配，然后用脚本兜底。</p>
+            <p>仓库当前提供 6 套主题：摸鱼绿、红白、石墨极简、留白禅意、摸鱼票据、橄榄手记，并带主题生成器。每套主题不是单张 CSS，而是包含设计变量、组件、文章模板骨架、文章类型配方表和 Markdown 映射规则。</p>
+          </section>
+
+          <section>
+            <h2>结构与资产</h2>
+            <table>
+              <thead>
+                <tr><th>目录/文件</th><th>作用</th><th>评价</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>SKILL.md</code></td><td>Agent 工作流入口：格式归一化、选主题、读组件库、装配、校验、输出</td><td>写得很像可执行 SOP，适合 Agent 读取</td></tr>
+                <tr><td><code>references/theme-*.md</code></td><td>主题组件库</td><td>内容厚，单主题数百到近千行，不是空模板</td></tr>
+                <tr><td><code>references/theme-generator.md</code></td><td>按描述或参考图生成新主题</td><td>对二次扩展很关键</td></tr>
+                <tr><td><code>scripts/validate_gzh_html.py</code></td><td>最终 HTML 合规校验</td><td>能检查禁用标签、属性、CSS、span leaf 包裹和半角标点</td></tr>
+                <tr><td><code>scripts/component_lint.py</code></td><td>组件库源头检查</td><td>把常见反模式前置到组件层</td></tr>
+                <tr><td><code>docs/gallery/</code></td><td>主题预览 HTML</td><td>便于肉眼看效果，也能用脚本回归</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section>
+            <h2>本地核验</h2>
+            <p>我做了本地浅克隆，并运行了仓库自带的两个校验脚本。结果如下：</p>
+            <pre><code>python3 scripts/component_lint.py .
+结果：11 个组件库，ERROR x 0，WARN x 2
+
+python3 scripts/validate_gzh_html.py docs/gallery/moyu-green.html
+结果：完全合规
+
+python3 scripts/validate_gzh_html.py docs/gallery/red-white.html
+结果：完全合规
+
+python3 scripts/validate_gzh_html.py docs/gallery/graphite-minimal.html
+结果：完全合规</code></pre>
+            <p>两个 WARN 来自 <code>theme-moyu-green</code> 和 <code>theme-olive-journal</code> 的四周虚线框提示，属于源头检查器的风格提醒，不是致命错误。最终 gallery 产物能通过校验，说明它的“组件源头检查 + 最终 HTML 检查”闭环是可用的。</p>
+          </section>
+
+          <section>
+            <h2>和 OpenClaw/Codex 的适配</h2>
+            <p>从仓库结构看，它天然适合 Agent Skill 体系：根目录有 <code>SKILL.md</code>，任务流程明确，引用资料都在 <code>references/</code>，脚本不依赖复杂包。对 OpenClaw/Codex 来说，最实际的接入方式有两种：</p>
+            <ol>
+              <li><strong>作为外部 skill 安装：</strong>按仓库 README 的 <code>npx skills add https://github.com/isjiamu/gzh-design-skill</code> 或手动 clone 到合适的 skills 目录。</li>
+              <li><strong>作为报告发布链路的一环：</strong>先在本地生成 Markdown/HTML 报告，再用这个 skill 生成一份公众号可粘贴版。</li>
+            </ol>
+            <p>我更推荐第二种：它和你现在的 GitHub Pages 报告流互补。Pages 负责公开长报告，gzh-design-skill 负责把同一份内容转换成微信公众号版本。</p>
+          </section>
+
+          <section>
+            <h2>风险与不足</h2>
+            <ul>
+              <li><strong>AGPL-3.0 风险：</strong>本地自用和开源共创没问题；如果改成私有 SaaS 或嵌入商业闭源产品，要先处理源码开放义务。</li>
+              <li><strong>新仓库风险：</strong>仓库创建于 2026-07-01，生态反馈还少，open issue/PR 数量不多，仍处于快速打磨期。</li>
+              <li><strong>非传统包：</strong>没有 package.json、pyproject、requirements.txt，不能按普通库的依赖治理方式评估。</li>
+              <li><strong>效果依赖 Agent 执行质量：</strong>组件和规则很完整，但最后仍需要 Agent 正确读取主题库、完整转换原文、跑脚本并修 warning。</li>
+              <li><strong>公众号平台可能变化：</strong>微信编辑器过滤规则若变化，校验脚本需要跟着维护。</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>最终建议</h2>
+            <p><strong>可以装，而且值得试跑。</strong>它和你的工作流很贴：你经常做报告、分析、文章沉淀，这个库能把“发布到网页”和“复制到公众号”之间的最后一段人工排版压缩掉。</p>
+            <p>下一步建议不是马上深度改造，而是先拿一篇现有报告做试验：把 Markdown 输入给 skill，生成公众号 HTML，复制到公众号编辑器，看样式保真度、图片处理、关键词下划线和签名区是否符合你的口味。试跑通过后，再考虑把它接入固定的报告发布流程。</p>
+          </section>
+        </section>
+
+        <aside class="rb-panel rb-side">
+          <h2>快速判断</h2>
+          <ul>
+            <li>值得试装：是</li>
+            <li>适合本地报告转公众号：是</li>
+            <li>适合闭源商用内嵌：需谨慎</li>
+            <li>工程验证：脚本可跑</li>
+            <li>主要风险：AGPL-3.0 + 新仓库</li>
+          </ul>
+
+          <h2>来源</h2>
+          <ul>
+            <li><a href="https://github.com/isjiamu/gzh-design-skill">GitHub 仓库</a></li>
+            <li><a href="https://github.com/isjiamu/gzh-design-skill/releases/tag/v1.0.0">v1.0.0 Release</a></li>
+            <li>本地浅克隆：2026-07-10</li>
+            <li>脚本核验：component_lint / validate_gzh_html</li>
+          </ul>
+        </aside>
+      </article>
+    </main>
+  </body>
+</html>
