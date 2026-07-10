@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../assets/research-brief.css">
+    <title>Follow 深度日报：GPT-5.6 把 Agent 竞争推向工作入口、记忆与成本战</title>
+    <meta name="description" content="Follow List 公开来源整理：OpenAI GPT-5.6/ChatGPT Work/Microsoft 365 Copilot，Fidji Simo 转任顾问，Gemini 用户反馈路线图，OpenWiki Brains，LangSmith Terraform/evals，FrontierFinance benchmark，Hugging Face 开放音频与视频数据，开放模型监管讨论。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>GPT-5.6 把 Agent 竞争推向工作入口、记忆与成本战</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-07-09 00:00 UTC 至 2026-07-10 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。抓取优先级按 Status=active、Priority=high、Cadence=daily/weekly/manual 排序，主要使用公开 Nitter RSS、OpenAI RSS、作者/机构公开页面和源站链接。</p>
+        <div class="meta">
+          <span>发布时间：2026-07-10 08:00 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、OpenAI、Sam Altman、Greg Brockman、Simon Willison、Josh Woodward、Harrison Chase、LangChain、Jeff Dean、Clem Delangue、Andrew Ng、Francois Chollet、公开 X/Nitter RSS</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天的 Follow 流几乎被“工作型 agent”占满。OpenAI 用 GPT-5.6、ChatGPT Work、Microsoft 365 Copilot 和 Codex 组合，把模型发布从单点能力升级变成办公入口、开发入口和企业成本叙事；Google/Gemini 则通过 Josh Woodward 的公开反馈清单暴露了用户真正关心的问题：Workspace 集成、工具调用、项目组织、MCP/skills、Deep Research 和移动体验。LangChain/OpenWiki 把 agent memory 从代码库 wiki 扩展到个人/通用 brain，LangSmith Terraform 则让 eval/monitoring 更像基础设施；Jeff Dean 转发的 FrontierFinance benchmark 表明金融 agent 正从抽取题走向长流程投资工作流。开放生态侧，Hugging Face 的 Netflix 视频资源、MOSS Transcribe Diarize 和 Reachy Mini 语音成本线索，叠加 Andrew Ng 对开放模型监管的提醒，说明“谁拥有模型、数据、语音栈和运行成本”正在成为下一轮产业链主线。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. GPT-5.6 不只是模型发布，而是工作入口重组</h3>
+            <p>OpenAI 同时推 GPT-5.6、ChatGPT Work、Microsoft 365 Copilot preferred model 和 Codex 叙事，目标是把长任务 agent 放进办公、开发和移动入口。</p>
+          </div>
+          <div class="card">
+            <h3>2. Agent 产品的真实短板回到集成和可靠性</h3>
+            <p>Gemini 用户反馈集中在 Workspace、tool calling、项目组织、MCP/skills、Deep Research 和移动 bug，说明用户不只要更强模型，而要稳定闭环。</p>
+          </div>
+          <div class="card">
+            <h3>3. 记忆、wiki、eval 正在基础设施化</h3>
+            <p>OpenWiki Brains、LLM Wikis、LangSmith Terraform provider 都指向同一趋势：agent 的上下文、评测和监控要能持续维护、版本化和自动化。</p>
+          </div>
+          <div class="card">
+            <h3>4. 开放模型进入成本、数据与监管战场</h3>
+            <p>Hugging Face、Andrew Ng、Nemotron/FrontierFinance 相关讨论都在提醒：开放栈的价值正在从“可下载”扩展到“可部署、可审计、可负担”。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>OpenAI：GPT-5.6、ChatGPT Work 与 Codex 组合成新工作入口</h3>
+          <p class="source">来源账号/机构：OpenAI、Sam Altman、Greg Brockman、Simon Willison、Kevin Weil；发布时间：2026-07-09 10:00-23:36 UTC；链接：<a href="https://openai.com/index/gpt-5-6">OpenAI GPT-5.6</a> / <a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work">ChatGPT Work</a> / <a href="https://openai.com/index/gpt-5-6-preferred-model-microsoft-365-copilot">Microsoft 365 Copilot</a> / <a href="https://nitter.net/sama/status/2075293792048136572#m">Sam Altman</a> / <a href="https://nitter.net/gdb/status/2075276416686723110#m">Greg Brockman</a> / <a href="https://simonwillison.net/2026/Jul/9/gpt-5-6/">Simon Willison</a></p>
+          <p>OpenAI 官方在同一天发布 GPT-5.6、ChatGPT Work 和 Microsoft 365 Copilot preferred model 相关页面，定位从“更强模型”扩展为“能跨应用、文件和项目持续工作的 agent”。Sam Altman 明确说 Codex 是新 work product 的核心，Greg Brockman 则强调 ChatGPT 和 Codex 已经合流，用户可以从 mobile、web 和 desktop 进入长任务。</p>
+          <p>Simon Willison 的技术记录特别关注 API 新增的 programmatic tool calling 和 multi-agent 能力，以及 Luna/Terra/Sol 三档模型的价格/能力分层。Greg 还提到 Sol 能加速工程工作流，并转述“Sol autonomously post-trained Luna”这一信号，暗示模型辅助模型训练/后训练会成为新叙事。</p>
+          <p class="why"><strong>为什么值得看：</strong>OpenAI 正把模型、Codex、ChatGPT Work、Copilot 办公入口和 hosted sites 串成一个平台故事。对 OpenClaw/个人工作台来说，关键不是单个模型分数，而是后台任务、文件权限、工具调用、桌面/移动入口和审计如何组合。</p>
+          <p class="action"><strong>后续行动：</strong>跟踪 GPT-5.6 API 文档、ChatGPT Work 可用性、Codex 与 Work 的边界、hosted sites 的部署模式，并把 Sol/Terra/Luna 纳入任务路由成本表。</p>
+        </div>
+
+        <div class="item">
+          <h3>OpenAI 人事：Fidji Simo 因健康原因转任兼职顾问</h3>
+          <p class="source">来源账号/机构：Sam Altman、Fidji Simo；发布时间：2026-07-09 23:01 UTC；链接：<a href="https://nitter.net/sama/status/2075354679031067058#m">Sam Altman 转述</a></p>
+          <p>Sam Altman 转发 Fidji Simo 的公开说明：她将离开 OpenAI 全职岗位，转为兼职顾问，原因是慢性疾病急性加重后的恢复周期比预期更长。Sam 对她在 OpenAI 的贡献表达感谢，并祝愿恢复顺利。</p>
+          <p>这条不是产品更新，但对 OpenAI 组织节奏值得记录。Fidji 的背景偏消费互联网、平台和商业化，她转为顾问后，OpenAI 在 ChatGPT Work、企业协作和消费/办公产品的执行链条可能需要观察是否有新的负责人或组织调整。</p>
+          <p class="why"><strong>为什么值得看：</strong>今天 OpenAI 正把 ChatGPT Work、Codex 和 Microsoft 365 Copilot 推向更重的企业/办公入口，关键产品负责人变动会影响节奏、叙事和外部合作。</p>
+          <p class="action"><strong>后续行动：</strong>关注 OpenAI 是否公布接任安排，以及 ChatGPT Work/企业产品路线是否出现优先级变化。</p>
+        </div>
+
+        <div class="item">
+          <h3>Gemini：Josh Woodward 公开用户反馈 Top 10，短板集中在可靠集成</h3>
+          <p class="source">来源账号/机构：Josh Woodward；发布时间：2026-07-09 15:32 UTC；链接：<a href="https://nitter.net/joshwoodward/status/2075241749048401936#m">Josh Woodward 反馈清单</a></p>
+          <p>Josh Woodward 汇总 1,400 多条回复，列出 Gemini 用户最关注的 Top 10：Google Workspace 集成可靠性、tool calling、项目/文件夹组织、MCP 和 custom skills、Deep Research 导出到 NotebookLM、聊天内切换 Deep Research/Flash/Pro、移除 Nano Banana 水印、编辑历史消息、语音输入准确率、移动滚动 bug，以及 celebrity likeness guardrails。</p>
+          <p>这份清单的价值在于，它把“AI 超级应用”的真实摩擦暴露得很直接：用户的痛点不是没有模型，而是集成断、工具调用不稳、信息组织弱、研究结果不易进入下一步、移动体验卡。Gemini Spark 已经有早期 MCP/custom skills/connected apps，但 Woodward 明确说需要更广泛可用和更多连接。</p>
+          <p class="why"><strong>为什么值得看：</strong>这是 Google AI 产品路线的公开需求排序，也能反推 agent 产品的通用竞争点：可靠工具、项目记忆、研究导出、权限连接、移动可用性。</p>
+          <p class="action"><strong>后续行动：</strong>把这 10 项转成 OpenClaw/个人 agent 产品检查表，尤其关注 Workspace 类集成、custom skill 安装、Deep Research 输出沉淀和移动端交互。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangChain：OpenWiki Brains 把代码 wiki 扩展为个人/通用 agent memory</h3>
+          <p class="source">来源账号/机构：Harrison Chase、Brace Sproul、LangChain；发布时间：2026-07-09 17:52-20:43 UTC；链接：<a href="https://nitter.net/hwchase17/status/2075277641066938454#m">Harrison Chase</a> / <a href="https://nitter.net/BraceSproul/status/2075276912134631484#m">OpenWiki Brains</a> / <a href="https://events.langchain.com/webinar/llm-wiki/">LLM Wikis webinar</a></p>
+          <p>Harrison Chase 表示 OpenWiki 现在支持两种模式：code brain 用于代码库 wiki，personal brain 用于更通用的任务、邮件、网页等上下文。Brace Sproul 的发布帖把 OpenWiki Brains 描述为从已有来源生成和维护 wiki memory 的方式，目标是让 agent 记住你正在做什么、关心什么，并随时间自我修正。</p>
+          <p>这延续了过去一周 LangChain 对 LLM Wikis、OpenWiki、DeepWiki、AutoWiki 的讨论。重点不是“把所有东西塞进向量库”，而是把上下文整理成可读、可更新、层次化、可追踪的 wiki，让 agent memory 接近一个长期维护的工作资产。</p>
+          <p class="why"><strong>为什么值得看：</strong>OpenClaw 本身也依赖 workspace memory、skills 和项目文件。OpenWiki Brains 的方向和个人助理长期记忆高度相关，可以作为“知识库自动维护”能力的外部参照。</p>
+          <p class="action"><strong>后续行动：</strong>试跑 OpenWiki Brains 或阅读源码，评估它对 Obsidian、项目仓库、邮件摘要和 Follow 日报状态文件的适配可能。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangSmith：eval/monitoring 开始 Terraform 化，agent 质量控制进入 IaC</h3>
+          <p class="source">来源账号/机构：Harrison Chase、Adam Łucek；发布时间：2026-07-09 14:22-14:37 UTC；链接：<a href="https://nitter.net/hwchase17/status/2075227862920282222#m">Harrison Chase</a> / <a href="https://nitter.net/AdamRLucek/status/2075224176902684984#m">Adam Łucek</a></p>
+          <p>Harrison 转发 LangSmith Terraform provider 线索，核心是把 online evals 和 monitoring alerts 纳入 Terraform 配置。换句话说，agent 的评测、监控和告警不再只是 dashboard 手工配置，而可以进入基础设施变更流程。</p>
+          <p>这与 LangSmith trace、Claude Code session tracing、OpenWiki memory update 和生产 trace 反馈形成闭环：线上 agent 行为可观测，失败可进入 eval，eval 和 alert 可版本化部署，memory/harness 可据此更新。</p>
+          <p class="why"><strong>为什么值得看：</strong>企业 agent 真正上线后，最贵的问题往往不是第一次 demo，而是持续质量控制。Terraform 化意味着 eval/monitoring 可以纳入代码评审、环境隔离和变更审计。</p>
+          <p class="action"><strong>后续行动：</strong>记录 LangSmith provider 的资源类型，关注是否支持 dataset、evaluator、alert、project、trace sampling 和跨环境 promotion。</p>
+        </div>
+
+        <div class="item">
+          <h3>FrontierFinance：金融 agent benchmark 开始覆盖完整投资工作流</h3>
+          <p class="source">来源账号/机构：Jeff Dean 转发 Maithra Raghu；发布时间：2026-07-09 15:28 UTC；链接：<a href="https://nitter.net/maithra_raghu/status/2075240565625757730#m">FrontierFinance 线索</a></p>
+          <p>Jeff Dean 转发 FrontierFinance benchmark：它定位为评估 AI agents 覆盖完整投资工作流的开放 benchmark，任务包括筛选发现、公司研究、行业/宏观、财报事件和 coverage/catalyst monitoring，而不是只做数据抽取。公开线索称数据集包含 220 个例子和 11,543 条专家 rubrics，用于评估输出背后的推理和步骤。</p>
+          <p>发帖方还提到，Samaya 的 AI system 在该 benchmark 上达到 50.8%，高于 Fable 5、Opus 4.8、GPT 5.5 等结果，并且推理成本更低。由于这属于发布方自述，需要等待 benchmark、方法和完整结果公开后复核。</p>
+          <p class="why"><strong>为什么值得看：</strong>这对 AI 投资研究尤其相关：金融 agent 的价值不在“摘要一篇财报”，而在跨筛选、研究、事件、催化剂监控的长链条工作流。如果 benchmark 设计靠谱，会成为评估投研 agent 的好入口。</p>
+          <p class="action"><strong>后续行动：</strong>等 benchmark 发布后下载/阅读，检查任务定义、rubric 质量、是否允许外部工具、成本计算方式和结果可复现性。</p>
+        </div>
+
+        <div class="item">
+          <h3>开放模型与开放数据：Hugging Face 放大 Netflix 视频资源、MOSS ASR 和低成本语音栈</h3>
+          <p class="source">来源账号/机构：Clem Delangue、Hugging Face 社区；发布时间：2026-07-09 03:27-19:01 UTC；链接：<a href="https://nitter.net/ClementDelangue/status/2075294232001093977#m">Netflix on Hugging Face</a> / <a href="https://huggingface.co/netflix">Netflix 主页</a> / <a href="https://nitter.net/MosiAI_Official/status/2075059157443756245#m">MOSS Transcribe Diarize</a> / <a href="https://huggingface.co/spaces/HuggingFaceM4/hugging-voice">Hugging Voice</a></p>
+          <p>Clem Delangue 提到 Netflix 正在 Hugging Face 发布视频数据集和模型，并希望他们开源更多资源；同一天，他还放大了 MOSS-Transcribe-Diarize-0.9B 的开放发布，以及 Reachy Mini 场景下自建开放语音栈的成本对比。</p>
+          <p>MOSS 线索强调 0.9B ASR、Apache 2.0、128k 长上下文、约 90 分钟音频、说话人标签和时间戳；Reachy Mini 线索则把 GPT-realtime 类方案的月成本与自建开放语音方案做对比，给出“机器人/硬件产品高频语音交互必须自控成本”的现实约束。</p>
+          <p class="why"><strong>为什么值得看：</strong>开放模型竞争不只发生在文本 LLM，也在视频数据、ASR、语音交互和机器人端侧成本。Netflix 的视频资源与低成本语音栈都可能影响多模态/机器人数据供给。</p>
+          <p class="action"><strong>后续行动：</strong>关注 Netflix 发布的具体 dataset/model license；测试 MOSS ASR 对中文、多人会议和长音频的效果；把开放语音栈纳入 OpenClaw 语音能力备选。</p>
+        </div>
+
+        <div class="item">
+          <h3>开放模型监管：Andrew Ng 再次强调 permissionless innovation</h3>
+          <p class="source">来源账号/机构：Andrew Ng、Adam Thierer；发布时间：2026-07-09 17:31 UTC；链接：<a href="https://nitter.net/AndrewYNg/status/2075271586400403567#m">Andrew Ng</a></p>
+          <p>Andrew Ng 转述 Adam Thierer 对美国 AI 治理走向的担忧，强调开放源代码 AI 是 permissionless innovation 的关键部分。原帖关注的是缺乏清晰国会框架和行政规则时，模型审查可能变成不透明、任意的事实许可制度。</p>
+          <p>这条与 Hugging Face、开放权重、企业主权、Nemotron/DeepSeek/GLM benchmark 讨论连接起来看，监管不是外围背景，而会直接影响开放模型是否能继续作为企业 agent 成本控制和技术主权的基础。</p>
+          <p class="why"><strong>为什么值得看：</strong>对 AI 产业链和股票研究来说，开放模型监管会影响云厂商、模型平台、芯片需求、企业私有部署和创业公司进入门槛。</p>
+          <p class="action"><strong>后续行动：</strong>持续跟踪美国开放模型政策、出口管制、模型审查和“自愿协议”走向，单独维护一条政策风险时间线。</p>
+        </div>
+
+        <div class="item">
+          <h3>ARC-AGI-3：GPT-5.6 Sol 在新基准上取得早期 SOTA 信号</h3>
+          <p class="source">来源账号/机构：Francois Chollet 转发 ARC Prize；发布时间：2026-07-09 17:28 UTC；链接：<a href="https://nitter.net/arcprize/status/2075270869992264003#m">ARC Prize</a></p>
+          <p>Francois Chollet 转发 ARC Prize 线索：GPT-5.6 Sol 在 ARC-AGI-3 上达到 7.8%，被描述为首个通过验证、能攻克一个 ARC-AGI-3 game 的 frontier model。发帖方把这归因于模型面对未见情境时的定位能力。</p>
+          <p>这个数值绝对不高，但对 ARC 这类强调抽象和泛化的测试来说，早期突破值得记录。由于这是 benchmark 方的社媒发布，仍需要等待完整评测设置、模型配置和可复现结果。</p>
+          <p class="why"><strong>为什么值得看：</strong>它为 GPT-5.6 的“长任务/新情境能力”提供了不同于 coding 或办公 demo 的信号，也能帮助区分模型在记忆、模式匹配和抽象泛化上的真实进展。</p>
+          <p class="action"><strong>后续行动：</strong>跟踪 ARC-AGI-3 官方报告，比较 Sol、Fable、Gemini、开放模型在相同设置下的表现。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>OpenAI：</strong>GPT-5.6、ChatGPT Work、Microsoft 365 Copilot preferred model 同日发布；Sam/Greg/Kevin Weil 都在放大 Codex 与 Work 的结合。</li>
+          <li><strong>Google / Gemini：</strong>Josh Woodward 公开处理用户反馈，显示 Gemini Spark、MCP/custom skills、Deep Research、Workspace 集成会继续推进。</li>
+          <li><strong>LangChain：</strong>OpenWiki Brains、LLM Wikis、LangSmith Terraform provider 和 Claude Code tracing 组成 agent memory/eval/observability 的连续产品线。</li>
+          <li><strong>Hugging Face：</strong>Clem 放大 Netflix、MOSS ASR、Reachy Mini 低成本语音和开放模型监管，开放生态覆盖范围继续外扩。</li>
+          <li><strong>OpenAI 组织：</strong>Fidji Simo 由全职转为兼职顾问，需观察企业/办公产品线组织承接。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><a href="https://openai.com/index/gpt-5-6">GPT-5.6 Luna/Terra/Sol</a>：价格、上下文、tool calling、multi-agent、Codex/Work 集成。</li>
+          <li><a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work">ChatGPT Work</a>：能否成为跨应用、文件和项目的长期 agent 工作台。</li>
+          <li><a href="https://events.langchain.com/webinar/llm-wiki/">OpenWiki Brains / LLM Wikis</a>：agent memory 的 wiki 化、可维护性和个人知识库适配。</li>
+          <li><a href="https://nitter.net/AdamRLucek/status/2075224176902684984#m">LangSmith Terraform provider</a>：eval/monitoring as code。</li>
+          <li><a href="https://nitter.net/maithra_raghu/status/2075240565625757730#m">FrontierFinance</a>：投研 agent benchmark，尤其适合后续 AI 产业链研究。</li>
+          <li><a href="https://huggingface.co/spaces/HuggingFaceM4/hugging-voice">Hugging Voice</a> 与 <a href="https://nitter.net/MosiAI_Official/status/2075059157443756245#m">MOSS Transcribe Diarize</a>：开放语音/ASR 成本曲线。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>FrontierFinance benchmark 的完整数据、rubrics、评测 harness 和成本计算方式尚需公开复核；当前只按发布方社媒说明记录。</li>
+          <li>LangChain/NVIDIA/Nemotron 成本-性能线索涉及联盟成员、内部 benchmark 和第三方转述，需等待中立复现。</li>
+          <li>GPT-5.6 “Sol autonomously post-trained Luna”是发布会/转述信号，需官方技术报告或系统卡进一步确认。</li>
+          <li>OpenWiki Brains 的效果取决于 source connectors、更新策略和冲突处理，不能仅凭发布帖判断可用于长期个人记忆。</li>
+          <li>开放模型监管走向仍不确定，需要跟踪正式政策文本，而不是只看社媒争论。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul>
+          <li>围绕 GPT-5.6 的大量体验型转发、玩笑和品牌命名吐槽，只保留能反映产品定位、API 能力或成本结构的部分。</li>
+          <li>Amanda Askell 今天关于纽约建筑倒塌概率的个人观察有思维方式价值，但与 AI/agent 主线关系弱，未列为重点。</li>
+          <li>Nan Yu 关于融资宣传视频、对比页面的产品吐槽有创业审美价值，但缺少可执行新信息，作为低优先级观察。</li>
+          <li>swyx 今天的技术写作、Modal agent-native cloud、OpenAI 发布转发适合作为发现入口，但重点内容已被源站/原帖覆盖。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul>
+          <li><a href="https://openai.com/index/gpt-5-6">OpenAI: GPT-5.6</a></li>
+          <li><a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work">OpenAI: ChatGPT Work</a></li>
+          <li><a href="https://openai.com/index/gpt-5-6-preferred-model-microsoft-365-copilot">OpenAI: GPT-5.6 preferred model in Microsoft 365 Copilot</a></li>
+          <li><a href="https://openai.com/index/bio-bug-bounty">OpenAI: GPT-5.5 Bio Bug Bounty</a></li>
+          <li><a href="https://simonwillison.net/2026/Jul/9/gpt-5-6/">Simon Willison: The new GPT-5.6 family</a></li>
+          <li><a href="https://nitter.net/sama/status/2075293792048136572#m">Sam Altman on ChatGPT Work / Codex</a></li>
+          <li><a href="https://nitter.net/gdb/status/2075276416686723110#m">Greg Brockman on ChatGPT Work</a></li>
+          <li><a href="https://nitter.net/sama/status/2075354679031067058#m">Sam Altman on Fidji Simo transition</a></li>
+          <li><a href="https://nitter.net/joshwoodward/status/2075241749048401936#m">Josh Woodward: Gemini feedback Top 10</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2075277641066938454#m">Harrison Chase: OpenWiki Brains modes</a></li>
+          <li><a href="https://nitter.net/BraceSproul/status/2075276912134631484#m">Brace Sproul: Introducing OpenWiki Brains</a></li>
+          <li><a href="https://events.langchain.com/webinar/llm-wiki/">LangChain: LLM Wikis webinar</a></li>
+          <li><a href="https://nitter.net/AdamRLucek/status/2075224176902684984#m">LangSmith Terraform provider thread</a></li>
+          <li><a href="https://nitter.net/maithra_raghu/status/2075240565625757730#m">FrontierFinance benchmark thread</a></li>
+          <li><a href="https://nitter.net/arcprize/status/2075270869992264003#m">ARC Prize: GPT-5.6 Sol on ARC-AGI-3</a></li>
+          <li><a href="https://huggingface.co/netflix">Netflix on Hugging Face</a></li>
+          <li><a href="https://nitter.net/MosiAI_Official/status/2075059157443756245#m">MOSS Transcribe Diarize open model</a></li>
+          <li><a href="https://huggingface.co/spaces/HuggingFaceM4/hugging-voice">Hugging Voice</a></li>
+          <li><a href="https://nitter.net/AndrewYNg/status/2075271586400403567#m">Andrew Ng on open source AI and permissionless innovation</a></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
