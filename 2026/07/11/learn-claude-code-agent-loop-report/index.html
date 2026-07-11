@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../assets/research-brief.css">
+    <script src="../../../../assets/research-brief.js" defer></script>
+    <title>Learn Claude Code s01 Agent Loop 分析总结报告</title>
+    <meta name="description" content="分析 learn.shareai.run 的 Learn Claude Code s01 Agent Loop：最小 Agent 循环、教学版与生产版差异、工程启发和学习路线。">
+  </head>
+  <body>
+    <main>
+      <nav class="rb-topbar" aria-label="页面导航">
+        <div class="rb-brand">
+          <strong>OpenClaw Publish</strong>
+          <span>Course Brief</span>
+        </div>
+        <a class="rb-back" href="../../../../">返回索引</a>
+      </nav>
+
+      <article class="rb-layout">
+        <aside class="rb-panel">
+          <p class="eyebrow">Learn Claude Code · s01</p>
+          <h1>Agent Loop 分析总结报告</h1>
+          <p>这章的核心判断很直接：最小可用 Agent 不是一堆复杂框架，而是一个能让模型持续调用工具、接收结果、继续推理的循环。</p>
+          <div class="meta">
+            <span>生成日期：2026-07-11</span>
+            <span>来源：learn.shareai.run/zh/s01/</span>
+            <span>主题：Agent Harness</span>
+          </div>
+        </aside>
+
+        <section class="rb-report">
+          <section>
+            <h2>一页结论</h2>
+            <p><strong>这不是一篇“Claude Code 使用教程”，而是一篇 Agent 运行时入门课。</strong>它用一个不到 30 行的 while-loop 解释了代码 Agent 的最小内核：把用户请求发给模型，模型要用工具就执行工具，把结果再塞回上下文；模型不再请求工具时，本轮结束。</p>
+            <p><strong>真正重要的不是 bash，而是闭环。</strong>没有 loop，模型只能给出建议；有了 loop，模型才能把建议变成动作，并根据动作结果继续修正。这个差异就是普通聊天机器人和可执行 Agent 的分界线。</p>
+
+            <div class="grid">
+              <div class="card">
+                <h3>我给这章的定位</h3>
+                <p><strong>Agent 工程的第一块地基。</strong>它不追求生产级完整性，而是把“模型为什么能自己干活”讲清楚。</p>
+                <p><strong>适合对象：</strong>想理解 Claude Code、Codex、OpenClaw、Devin 这类工具底层形态的人。</p>
+              </div>
+              <div class="card">
+                <h3>一句话模型</h3>
+                <p><code>while model asks for tool: run tool, append result, call model again</code></p>
+                <p>所有权限、记忆、压缩、恢复、并发、子代理，本质上都是在这个循环外面或里面加保护层。</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>课程内容拆解</h2>
+            <table>
+              <tbody>
+                <tr><th>问题</th><td>LLM 能写命令，但不会自动执行，也不会看到执行结果后继续推理。人如果手动复制命令、粘贴结果，其实就在扮演 agent harness。</td></tr>
+                <tr><th>解法</th><td>写一个循环：模型返回工具调用就执行，执行结果作为下一条消息回传；没有工具调用就退出。</td></tr>
+                <tr><th>最小工具</th><td>页面从一个 bash 工具开始，因为它能读文件、列目录、执行脚本，足够展示真实世界动作。</td></tr>
+                <tr><th>观察重点</th><td>模型何时决定调用工具、工具结果如何改变下一步推理、循环何时终止。</td></tr>
+                <tr><th>进阶方向</th><td>s02 起会把单一 bash 扩展为更结构化的工具；后续章节再加入权限、hooks、todo、subagent、context compact、memory、scheduler、MCP 等。</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section>
+            <h2>最小 Agent Loop</h2>
+            <p>教学版逻辑可以压缩成五步：</p>
+            <ol>
+              <li>把用户问题放进 <code>messages</code>。</li>
+              <li>连同系统提示和工具 schema 一起发给模型。</li>
+              <li>把模型响应追加进 <code>messages</code>。</li>
+              <li>如果响应里有工具调用，执行工具并收集结果。</li>
+              <li>把工具结果作为新消息追加，然后回到第 2 步。</li>
+            </ol>
+            <p>这解释了一个常被说复杂的概念：Agent 的“自主性”不是魔法，而是模型决策和程序执行之间有一个稳定的反馈回路。模型负责决定下一步，harness 负责让这一步真的发生。</p>
+          </section>
+
+          <section>
+            <h2>教学版和生产版差异</h2>
+            <p>页面把教学版 loop 与 Claude Code 源码中的生产级 query loop 做了对照。关键差异不是“生产版更长”，而是生产版必须处理大量边界情况。</p>
+            <table>
+              <thead>
+                <tr><th>维度</th><th>教学版</th><th>生产级运行时</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>循环判断</td><td>依赖 <code>stop_reason == "tool_use"</code></td><td>流式响应中 <code>stop_reason</code> 可能滞后，因此更可靠的是检查内容里是否出现 <code>tool_use</code> 块</td></tr>
+                <tr><td>状态管理</td><td>主要维护 <code>messages</code></td><td>还要维护工具上下文、压缩状态、token 恢复次数、hook 状态、turn count、继续原因等</td></tr>
+                <tr><td>退出路径</td><td>模型不调工具就结束</td><td>还要处理 max turns、abort、prompt too long、模型错误、hook stop、token budget continuation、reactive compact retry 等</td></tr>
+                <tr><td>工具执行</td><td>串行执行命令</td><td>可流式、可并发，也要区分 concurrency-safe 工具和独占工具</td></tr>
+                <tr><td>目标</td><td>概念清楚</td><td>可靠、可恢复、可观测、能在真实项目里抗错误</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section>
+            <h2>对 OpenClaw/Codex 的启发</h2>
+            <p>这章很适合拿来校准我们理解 Agent 平台的层次。一个可用平台至少有三层：</p>
+            <ol>
+              <li><strong>Loop 层：</strong>负责持续调用模型、执行工具、回传结果，是所有能力的最小承载结构。</li>
+              <li><strong>Control 层：</strong>负责权限、沙箱、超时、预算、并发、恢复和可观测性，决定它能不能安全地跑。</li>
+              <li><strong>Memory/Workflow 层：</strong>负责任务计划、上下文压缩、长期记忆、子代理和调度，决定它能不能长时间做复杂工作。</li>
+            </ol>
+            <p>这也解释了为什么简单 demo 看起来很容易，但真实 Agent 产品做起来很难：demo 只要证明 loop 成立；产品要证明 loop 在错误、权限、成本和上下文压力下仍然可靠。</p>
+          </section>
+
+          <section>
+            <h2>值得记住的判断</h2>
+            <ul>
+              <li><strong>Agent = LLM + Tools + Loop。</strong>少了 loop，工具只是建议；有了 loop，工具才成为动作系统。</li>
+              <li><strong>Harness 是能力放大器，不是智能本身。</strong>智能来自模型的判断，harness 让判断能被执行、被观察、被修正。</li>
+              <li><strong>最小实现应该先保持粗糙。</strong>过早引入权限、子代理、记忆和调度，反而会遮住核心机制。</li>
+              <li><strong>生产系统的复杂度主要来自失败路径。</strong>真正拉开差距的是恢复、限流、压缩、并发、安全和审计。</li>
+              <li><strong>后续 19 章可以理解为围绕这个 loop 的增强包。</strong>工具、权限、hooks、todo、subagent、memory、scheduler、MCP 都是在增强这个闭环。</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>学习建议</h2>
+            <p>如果要系统读这套 Learn Claude Code，我建议按“运行时主线”来读，而不是按功能清单平铺：</p>
+            <ol>
+              <li><strong>s01-s04：</strong>先搞懂 loop、工具、权限、hooks，这是 Agent 能跑且能被约束的基础。</li>
+              <li><strong>s05-s11：</strong>再看 todo、subagent、skills、context compact、memory、system prompt、error recovery，这是复杂任务的协调和恢复能力。</li>
+              <li><strong>s12-s20：</strong>最后看任务系统、后台任务、cron、agent teams、worktree、MCP 和完整 turn，这是平台化和多 Agent 化。</li>
+            </ol>
+            <p>对轮机长目前的 OpenClaw 工作流来说，最值得优先深挖的是 s01、s02、s03、s08、s09、s11、s12、s14、s19、s20。它们正好对应工具执行、权限、记忆压缩、长期记忆、错误恢复、任务化、调度和 MCP 扩展。</p>
+          </section>
+
+          <section>
+            <h2>最终评价</h2>
+            <p><strong>这章值得保存。</strong>它的价值在于把 Agent 运行时从“看起来神奇”还原成“可以亲手写出来的程序结构”。只要理解这一个循环，后面的 Claude Code、Codex、OpenClaw、Multi-Agent、MCP、后台任务，本质上都能放回同一张图里理解。</p>
+            <p>我的建议是把它作为 Agent 工程学习路线的第一课，同时把“loop 本身很简单，生产化全在边界条件”这句话记下来。以后看任何 Agent 框架，都可以先问：它的 loop 在哪里？工具结果怎么回传？失败怎么恢复？权限怎么守住？上下文满了怎么办？</p>
+          </section>
+        </section>
+
+        <aside class="rb-panel rb-summary-panel">
+          <h2>快速判断</h2>
+          <ul>
+            <li>内容质量：高</li>
+            <li>技术深度：入门到中阶</li>
+            <li>实用价值：高</li>
+            <li>适合人群：Agent 工程学习者</li>
+            <li>核心关键词：loop、tool_use、harness、state、recovery</li>
+          </ul>
+
+          <h2>来源</h2>
+          <ul>
+            <li><a href="https://learn.shareai.run/zh/s01/">Learn Claude Code s01 Agent Loop</a></li>
+            <li>网页读取时间：2026-07-11</li>
+            <li>分析对象：s01 正文及导航结构</li>
+          </ul>
+        </aside>
+      </article>
+    </main>
+  </body>
+</html>
