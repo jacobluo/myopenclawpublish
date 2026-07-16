@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 前沿日报 — 2026-07-16</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.72; color: #1d1d1f; background: #fafafa; padding: 2rem; max-width: 920px; margin: 0 auto; }
+  h1 { font-size: 1.9rem; margin-bottom: 0.35rem; color: #111; }
+  .meta { color: #666; font-size: 0.92rem; margin-bottom: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
+  h2 { font-size: 1.32rem; margin: 2.1rem 0 0.85rem; color: #202020; border-left: 4px solid #2563eb; padding-left: 0.65rem; }
+  h3 { font-size: 1.08rem; margin: 1.25rem 0 0.5rem; color: #333; }
+  p { margin: 0.35rem 0; }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.9rem; margin: 1rem 0; }
+  .overview-item, .card { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 1rem; }
+  .overview-item h4 { font-size: 0.96rem; margin-bottom: 0.3rem; color: #1d4ed8; }
+  .overview-item p, .noise p { font-size: 0.9rem; color: #555; }
+  .card { margin: 1rem 0; }
+  .source { font-size: 0.86rem; color: #666; margin-bottom: 0.45rem; }
+  .tag { display: inline-block; background: #eff6ff; color: #2563eb; padding: 0.12rem 0.45rem; border-radius: 4px; font-size: 0.78rem; margin-right: 0.25rem; }
+  .summary { margin: 0.55rem 0; }
+  .why { font-size: 0.9rem; color: #555; margin-top: 0.55rem; padding-top: 0.55rem; border-top: 1px dashed #e5e5e5; }
+  .why strong { color: #2563eb; }
+  .action { font-size: 0.86rem; color: #047857; margin-top: 0.35rem; }
+  .noise { background: #f9fafb; border-style: dashed; }
+  ul { padding-left: 1.25rem; }
+  li { margin: 0.35rem 0; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #ddd; color: #888; font-size: 0.82rem; text-align: center; }
+</style>
+</head>
+<body>
+<h1>AI 前沿日报</h1>
+<div class="meta">
+  <strong>2026年7月16日（周四）</strong> · 覆盖窗口：2026-07-15 08:00 – 2026-07-16 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；公开 RSS、官网页面、博客与公开搜索。未使用 Folo CLI，未使用私密 cookie/token；本轮 Nitter RSS 对重点账号返回空内容，因此 X-only 账号覆盖不完整。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Prompt injection 安全进入自动红队阶段</h4><p>OpenAI 发布 GPT-Red，用自博弈训练红队模型寻找 prompt injection、工具输出投毒和 agent 外泄漏洞，并把攻击样本反哺 GPT-5.6 鲁棒性。</p></div>
+  <div class="overview-item"><h4>治理叙事从州法走向全国框架</h4><p>OpenAI 同日提出以州法推动事实上的全国标准，同时强调联邦层面的前沿模型测试、独立审计、事故报告和安全标准。</p></div>
+  <div class="overview-item"><h4>Agent 需要自己的可控电脑</h4><p>LangChain 连发 Fleet Slack 入口和 sandbox 长文，把 agent 从“聊天窗口”推向可运行、可审计、可限权、可协作的工作环境。</p></div>
+  <div class="overview-item"><h4>开放模型竞争回到大多模态</h4><p>Thinking Machines 的 Inkling 在 Hugging Face 上公开，主打 1T 级参数、1M context、图像/音频/文本原生输入和 day-0 推理生态支持。</p></div>
+  <div class="overview-item"><h4>真实世界 voice eval 补足文字指标盲区</h4><p>Real World VoiceEQ 强调语音 AI 不只是 WER 和延迟，还要衡量情绪、身份、噪声、口音和自然交互中的人类质量。</p></div>
+  <div class="overview-item"><h4>高风险行业 agent 给出架构样本</h4><p>Ai2 Shippy 把 maritime agent 拆成 soul、skills、config 和可验证 live data，说明 agent 产品化的关键常常不是模型，而是边界、证据与验证。</p></div>
+</div>
+
+<h2>核心主题</h2>
+<h3>一、安全：从人工审查转向可扩展自动红队</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI</span><strong>GPT-Red</strong> · 2026-07-15 10:00 UTC · <a href="https://openai.com/index/unlocking-self-improvement-gpt-red/">文章</a></div>
+  <div class="summary"><p>OpenAI 发布 GPT-Red，把红队攻击从人工构造升级为自博弈强化学习：攻击模型和防守模型同时训练，攻击方尝试诱导 prompt injection、工具输出投毒、外泄或越权，防守方则要保持原任务并抵抗攻击。文章给出的关键信号是，GPT-Red 不只是评测工具，也被纳入生产模型训练，使 GPT-5.6 在直接 prompt injection、开发者工具和浏览场景上的失败率显著下降。更值得注意的是，OpenAI 将 GPT-Red 与真实 agent 系统相连，测试了售货机 agent 和 Codex 类 agent 的数据外泄场景。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Agent 安全不再能靠静态 policy 或少量红队样本覆盖。只要 agent 能读网页、文件、邮件、日志或工具输出，攻击面就是动态的；自动红队会成为模型后训练、安全评测和企业验收的基础设施。</div>
+  <div class="action">后续行动：为 OpenClaw/Codex 类工作流建立一个小型 prompt-injection regression set，覆盖网页抓取、文件搜索、日志解析、邮件草稿和 shell 输出五类入口。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Prompt Injection</span><strong>Simon Willison</strong> · 2026-07-15 14:21 UTC · <a href="https://simonwillison.net/2026/Jul/15/claude-web-fetch-exfiltration/">博客</a></div>
+  <div class="summary"><p>Simon 记录 Ayush Paul 发现的 Claude web_fetch 外泄漏洞：Claude 原本限制 web_fetch 只能访问用户给定 URL 或 web_search 返回 URL，但攻击者可以通过已抓取页面内嵌的一串链接，引导模型逐字母导航并泄露记忆中的个人信息。Anthropic 表示已关闭该洞，方式是取消 web_fetch 跟随自身抓取内容中额外链接的能力。这个案例和 GPT-Red 同日出现，说明“工具可达 URL”是 agent 安全中非常具体、非常脆弱的边界。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这不是抽象的 jailbreak，而是工具路由规则里的产品漏洞。对任何带浏览器、RSS 抓取、网页摘要或客服知识库的 agent 来说，URL 白名单、跳转规则、工具返回内容可信度都必须被当成安全边界。</div>
+  <div class="action">后续行动：检查本地抓取/浏览技能是否允许模型根据页面内容继续访问未由用户或可信搜索直接给出的 URL；把“从工具输出构造外发请求”列为禁止动作。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">政策</span><strong>OpenAI Global Affairs</strong> · 2026-07-15 12:00 UTC · <a href="https://openai.com/index/advancing-ai-safety-through-state-and-federal-action/">文章</a></div>
+  <div class="summary"><p>OpenAI 讨论美国 AI 安全治理，提出一种“reverse federalism”路径：州法先形成方向一致的事实标准，再推动全国框架统一。文章支持联邦政府主导最先进模型测试，强调独立审计、事故报告、强安全标准、吹哨人保护，以及让 CAISI 这类机构具备持续评估能力。对行业来说，重点不是某个州法细节，而是前沿模型安全正从企业自律走向可重复的官方测试和合规结构。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>监管框架会影响模型发布节奏、企业采购、开源权重讨论和安全评测市场。OpenAI 的立场也提示：未来 frontier model 的竞争会同时发生在能力、合规、国家安全和可信访问上。</div>
+  <div class="action">后续行动：建立“AI 安全治理雷达”：美国联邦框架、州法、CAISI 测试、EU AI Act、开源权重政策和企业事故报告制度分别跟踪。</div>
+</div>
+
+<h3>二、Agent 产品：从通用聊天走向工作入口、权限和运行环境</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain</span><strong>LangSmith Fleet Slack</strong> · 2026-07-15 · <a href="https://www.langchain.com/blog/new-in-langsmith-fleet-bring-agents-into-slack-in-one-click">文章</a></div>
+  <div class="summary"><p>LangChain 发布 Fleet agents 一键进入 Slack：团队成员可以用自然语言构建专用 agent，再让它以独立 Slack 身份进入频道和线程。重点是每个 agent 有清晰角色、描述、图标、权限和连接范围，能在同一线程追问、请求批准、返回文件或结果。它把 agent 从“个人聊天助手”放进团队协作流里，强调专用 agent 比通用 chat 更适合稳定重复工作。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent 的默认入口很可能不是新 app，而是 Slack/Teams/飞书这类既有协作面。真正的护城河会落在权限、审批、上下文、身份和管理面，而不是单次回答质量。</div>
+  <div class="action">后续行动：把 OpenClaw 的飞书私聊/群聊能力按 Fleet 思路拆成：agent 身份、可用工具、审批点、成本限制、输出回写位置和审计日志。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Agent Runtime</span><strong>LangChain / Amy Ru</strong> · 2026-07-15 · <a href="https://www.langchain.com/blog/agents-need-their-own-computer">文章</a></div>
+  <div class="summary"><p>LangChain 的 conceptual guide 直说：agent 需要自己的电脑，也就是具备文件系统、shell、包管理器、网络访问和持久状态的真实环境。文章把 coding、数据分析、研究 agent 的共同点归纳为“能运行真实步骤并检查真实结果”，同时警告不能直接把 agent 放到本地机或生产 infra 上，需要隔离、可丢弃、安全可控的 sandbox。这个观点和昨天的 coding-agent traces、今天的 GPT-Red 正好拼成一条完整链：能执行，才有价值；能执行，就必须隔离和观测。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>多数 agent demo 卡在“建议很好但不能动手”。一旦给它动手能力，运行环境就成为产品的核心：镜像、凭证、网络、文件、成本、审计、清理和复现都要设计。</div>
+  <div class="action">后续行动：梳理 OpenClaw/Codex 当前运行环境清单，标出哪些任务需要持久状态，哪些必须一次性 sandbox，哪些工具调用需要单独审批。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">High-stakes Agent</span><strong>Ai2 / Shippy</strong> · 2026-07-13，HF feed 窗口内再分发 · <a href="https://allenai.org/blog/shippy-deep-dive">文章</a></div>
+  <div class="summary"><p>Ai2 公开 Shippy maritime agent 的架构经验。Shippy 面向海事态势这类高风险决策，回答需要带边界来源、数据截止时间、查询时间和回到 Skylight 地图的验证链接。Ai2 将 agent 拆成 soul、skills 和 config：系统提示定义行为边界，skills 用 markdown/Agent Skills 规范描述任务能力，config 管模型、harness、运行时设置和密钥注入。文章明确说真正困难的不是模型，而是让系统保持正确、知道边界，并基于 live data 验证。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 agent 工程从“聊天”走向行业系统的好样本。高风险领域需要可追溯证据、实时数据、版本化技能、运行时可替换配置和人工核验入口。</div>
+  <div class="action">后续行动：把 Shippy 的 soul/skills/config 拆法映射到本地技能体系，形成一个“行业 agent 发布前检查表”：来源、数据时效、拒答边界、地图/系统回链、审计和回滚。</div>
+</div>
+
+<h3>三、开放模型与多模态：Inkling 把开源竞争拉向 1T/1M context</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models</span><strong>Hugging Face / Thinking Machines</strong> · 2026-07-15 · <a href="https://huggingface.co/blog/thinkingmachines-inkling">文章</a></div>
+  <div class="summary"><p>Hugging Face 发布 Thinking Machines 的 Inkling 介绍：这是一个约 1T 参数的开放多模态模型，原生接收图像、文本和音频，支持 1M context，采用 decoder-only multimodal MoE，约 975B 总参数、41B active parameters、256 experts。文章强调 day-0 支持 transformers、SGLang、vLLM、llama.cpp/Unsloth，以及 BF16 和 NVFP4 版本。它的定位不是“小模型本地跑”，而是开放生态在超大多模态、长上下文和 agentic coding 上争夺前沿能力。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>如果 Inkling 的开放权重、推理栈和微调路径可用，它会给闭源多模态模型、企业私有部署和研究复现带来压力。Thinking Machines 由 Mira Murati 牵引，其首个开放模型也会成为观察新 frontier lab 策略的窗口。</div>
+  <div class="action">后续行动：等待独立 benchmark、license、推理成本和实际部署报告；优先关注 agentic coding、长上下文检索、音频理解和多模态领域微调表现。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Voice</span><strong>Hume AI / Hugging Face</strong> · 2026-07-15 · <a href="https://huggingface.co/blog/real-world-voiceeq">文章</a></div>
+  <div class="summary"><p>Real World VoiceEQ 提出语音 AI 的评估不应只看 word error rate、延迟或标准 benchmark。它覆盖 ASR、TTS、speech-to-speech 和 speech understanding，强调语调、情绪、说话人身份、背景噪声、口音和自然对话中的稳定性。文章称评估包含 40 多个 proprietary/open-source voice models、15+ 维度、60+ 指标，并基于超过百万个人类评分。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>GPT-Live、Gemini 语音和实时 voice agent 竞争会把评估从“听得清”推到“听得懂人”。客服、教育、医疗、陪伴和交易场景都需要更细颗粒的 voice quality 指标。</div>
+  <div class="action">后续行动：把 VoiceEQ 纳入语音 agent 评测候选，尤其关注中文/口音/噪声/情绪识别是否有公开数据和可复现实验。</div>
+</div>
+
+<h3>四、工程细节：AI 自动化放大依赖、文档和 shared understanding 的债</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering</span><strong>Simon Willison</strong> · 2026-07-14/15 · <a href="https://simonwillison.net/2026/Jul/14/github-changeling/">Dependabot cooldown</a> · <a href="https://simonwillison.net/2026/Jul/14/armin-ronacher/">Armin Ronacher 引文</a></div>
+  <div class="summary"><p>Simon 继续记录两条和 agent 工程强相关的小信号：GitHub Dependabot 默认对新版本等待三天再开 PR，降低供应链刚发布版本带来的噪音；Armin Ronacher 则提醒大型代码库的 shared understanding 不只是英文或 Python，而是边界、概念、所有权、约束和代码评审中形成的共同语言。AI coding agent 会降低改动摩擦，也会削弱人之间同步理解的机会。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>当 agent 生成 PR、更新依赖、重构代码的频率上升，组织需要新的摩擦机制：冷却期、评审清单、架构文档、ownership 和 trace，而不是盲目追求所有改动更快合并。</div>
+  <div class="action">后续行动：在自己的 agent 产出流程里加入“理解同步”检查：为什么改、边界是什么、谁拥有、风险在哪里、是否需要人类讨论。</div>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI：</strong>同日发布 GPT-Red 和 AI 安全治理文章，安全、政策与 agent 鲁棒性成为主线。</li>
+  <li><strong>Simon Willison：</strong>继续高信号跟踪 prompt injection、依赖治理和 agentic engineering 的组织影响。</li>
+  <li><strong>LangChain / Harrison Chase 生态：</strong>Fleet 进入 Slack，sandbox 叙事补齐，配合此前 trace/cost/eval 形成 agent 平台完整拼图。</li>
+  <li><strong>Thinking Machines / Hugging Face：</strong>Inkling 公开发布，成为开放多模态 frontier 模型的重要新变量。</li>
+  <li><strong>Ai2：</strong>Shippy 展示 OpenClaw + skills 规范在海事高风险场景的落地样本。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<div class="card">
+  <p><strong>GPT-Red 方法：</strong>重点读 self-play 场景设计、attack success 定义和如何避免红队能力外泄。</p>
+  <p><strong>Agent URL 安全：</strong>建立 URL provenance 规则：用户给定、可信搜索返回、工具返回、页面内链接分别不同权限。</p>
+  <p><strong>Fleet/Feishu agent：</strong>按 Slack 入口模型设计飞书 agent 身份、权限、审批和线程回写。</p>
+  <p><strong>Inkling：</strong>跟踪模型卡、license、推理成本、vLLM/SGLang 支持成熟度和独立评测。</p>
+  <p><strong>Shippy 架构：</strong>把 soul/skills/config 与本地 OpenClaw skills 对齐，整理行业 agent 模板。</p>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <p><strong>Inkling 实际能力：</strong>HF 文章是发布介绍，需等待第三方 benchmark、license 细则和部署成本验证。</p>
+  <p><strong>GPT-Red 泛化：</strong>OpenAI 给出强结果，但企业自己的工具链、私有数据和 harness 仍需独立红队。</p>
+  <p><strong>LangChain Fleet Slack：</strong>公开文章说明产品能力，实际权限边界、审计粒度、成本控制和企业集成质量需要试用确认。</p>
+  <p><strong>Nitter/X 覆盖：</strong>本轮 Nitter RSS 对重点账号返回空内容；X-only 人物动态未能完整覆盖，只采用可公开核验的网页/RSS线索。</p>
+</div>
+
+<h2>低优先级噪音</h2>
+<div class="card noise">
+  <p>Google Images 25 周年属于 AI 搜索和视觉入口背景信息，但与本轮 agent、安全、开放模型主线关系较弱，未展开。HF 社区文章中的 3D agent/wallet、模型路由等值得扫一眼，但本轮优先级低于 Inkling、GPT-Red、LangChain runtime 和 Shippy。</p>
+</div>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/index/unlocking-self-improvement-gpt-red/">OpenAI: GPT-Red: Unlocking Self-Improvement for Robustness</a></li>
+  <li><a href="https://openai.com/index/advancing-ai-safety-through-state-and-federal-action/">OpenAI: The US is advancing AI safety through state and federal action</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/15/claude-web-fetch-exfiltration/">Simon Willison: Claude web_fetch exfiltration</a></li>
+  <li><a href="https://www.langchain.com/blog/new-in-langsmith-fleet-bring-agents-into-slack-in-one-click">LangChain: New in Fleet, deploy agents to Slack</a></li>
+  <li><a href="https://www.langchain.com/blog/agents-need-their-own-computer">LangChain: Agents need their own computer</a></li>
+  <li><a href="https://allenai.org/blog/shippy-deep-dive">Ai2: What building Shippy taught us about building agents</a></li>
+  <li><a href="https://huggingface.co/blog/thinkingmachines-inkling">Hugging Face: Welcome Inkling by Thinking Machines</a></li>
+  <li><a href="https://huggingface.co/blog/real-world-voiceeq">Hugging Face: Real World VoiceEQ</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/14/github-changeling/">Simon Willison: GitHub Dependabot cooldown</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/14/armin-ronacher/">Simon Willison: Armin Ronacher on shared understanding</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom feed</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-15T00:00:00Z / 2026-07-16T00:00:00Z.</footer>
+</body>
+</html>
