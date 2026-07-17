@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 前沿日报 — 2026-07-17</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.72; color: #1d1d1f; background: #fafafa; padding: 2rem; max-width: 920px; margin: 0 auto; }
+  h1 { font-size: 1.9rem; margin-bottom: 0.35rem; color: #111; }
+  .meta { color: #666; font-size: 0.92rem; margin-bottom: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
+  h2 { font-size: 1.32rem; margin: 2.1rem 0 0.85rem; color: #202020; border-left: 4px solid #2563eb; padding-left: 0.65rem; }
+  h3 { font-size: 1.08rem; margin: 1.25rem 0 0.5rem; color: #333; }
+  p { margin: 0.35rem 0; }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.9rem; margin: 1rem 0; }
+  .overview-item, .card { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 1rem; }
+  .overview-item h4 { font-size: 0.96rem; margin-bottom: 0.3rem; color: #1d4ed8; }
+  .overview-item p, .noise p { font-size: 0.9rem; color: #555; }
+  .card { margin: 1rem 0; }
+  .source { font-size: 0.86rem; color: #666; margin-bottom: 0.45rem; }
+  .tag { display: inline-block; background: #eff6ff; color: #2563eb; padding: 0.12rem 0.45rem; border-radius: 4px; font-size: 0.78rem; margin-right: 0.25rem; }
+  .summary { margin: 0.55rem 0; }
+  .why { font-size: 0.9rem; color: #555; margin-top: 0.55rem; padding-top: 0.55rem; border-top: 1px dashed #e5e5e5; }
+  .why strong { color: #2563eb; }
+  .action { font-size: 0.86rem; color: #047857; margin-top: 0.35rem; }
+  .noise { background: #f9fafb; border-style: dashed; }
+  ul { padding-left: 1.25rem; }
+  li { margin: 0.35rem 0; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #ddd; color: #888; font-size: 0.82rem; text-align: center; }
+</style>
+</head>
+<body>
+<h1>AI 前沿日报</h1>
+<div class="meta">
+  <strong>2026年7月17日（周五）</strong> · 覆盖窗口：2026-07-16 08:00 – 2026-07-17 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；公开 X/Nitter RSS、OpenAI RSS、LangChain RSS、Hugging Face RSS、Simon Willison Atom、公开网页搜索。未使用 Folo CLI，未使用私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>开放权重竞争突然升温</h4><p>Moonshot 发布 Kimi K3，Thinking Machines 的 Inkling 继续扩散；两个信号都指向 2026 年开放模型不再只是低价替代，而是在长上下文、多模态和 agentic coding 上挑战闭源前沿。</p></div>
+  <div class="overview-item"><h4>Codex 安全边界被重新强调</h4><p>OpenAI Codex 负责人解释 GPT-5.6 文件误删风险：全访问、无沙箱、无自动审查时，模型错误处理 HOME 变量可能造成高风险删除。</p></div>
+  <div class="overview-item"><h4>Agent 入口继续嵌入协作流</h4><p>LangChain Fleet 把自定义 agent 一键带进 Slack，Harrison Chase 放大了“专用 agent + 团队线程 + 审批”的工作入口逻辑。</p></div>
+  <div class="overview-item"><h4>机器人开始借鉴 LLM 长上下文</h4><p>Jim Fan / Fei-Fei Li 线索指向 RoboTTT：机器人模型把测试时训练作为记忆压缩机制，把上下文从短帧提升到数千步。</p></div>
+  <div class="overview-item"><h4>Eval 从代码扩展到知识工作</h4><p>Francois Chollet 转发 Aaron Levie 的观点：代码天然可测试，企业其他工作也需要可验证输出，否则 agent 难以规模化。</p></div>
+  <div class="overview-item"><h4>社媒信号可用但需克制</h4><p>Nitter RSS 本轮可访问，抓到 Sam、Greg、Nathan、Jim、Fei-Fei、Chip、Harrison 等动态；X-only 内容只做摘要与链接，不转载长原文。</p></div>
+</div>
+
+<h2>核心主题</h2>
+<h3>一、开放模型：Kimi K3 与 Inkling 把“开放”推向前沿能力带</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models</span><strong>Moonshot AI / Simon Willison</strong> · 2026-07-16 20:19 UTC · <a href="https://simonwillison.net/2026/Jul/16/kimi-k3/">文章</a></div>
+  <div class="summary"><p>Simon Willison 试跑并分析 Kimi K3：Moonshot 将它描述为 2.8T 参数的开放权重多模态推理模型，API 已可用，完整权重计划在 2026-07-27 前释放。K3 的关键不是单个 benchmark，而是它把中国开放模型推到“3T 级”、1M context、复杂 coding/knowledge work 和较高 API 价格带。Simon 的 pelican 测试暴露一个有用细节：当前只有 max reasoning effort，简单 SVG 任务也消耗了大量 reasoning tokens，说明能力、成本和默认推理强度仍需实测。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Kimi K3 和 Inkling 同周出现，意味着开放模型竞争正在从“便宜可用”进入“接近前沿但可部署/可微调/可控”的阶段。对企业、主权 AI、私有数据和 agent 平台来说，开放权重模型会持续改变闭源 API 的定价和锁定压力。</div>
+  <div class="action">后续行动：等 2026-07-27 权重实际发布后，重点验证 license、推理成本、vLLM/SGLang 支持、长上下文稳定性和 agentic tool use，而不是只看榜单。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Thinking Machines</span><strong>Inkling 二次传播</strong> · 2026-07-16 · <a href="https://thinkingmachines.ai/news/introducing-inkling/">官方页</a> · <a href="https://huggingface.co/blog/thinkingmachines-inkling">HF</a></div>
+  <div class="summary"><p>Inkling 继续被 Simon、Chip Huyen、Nathan Lambert 等 Follow List 账号转发讨论。公开信息显示它是 Apache-2.0 开放权重的 multimodal MoE，约 975B 总参数、41B active，面向 Tinker 微调和开放生态部署。它不是官方宣称的最强模型，而是一个可定制底座：图像、文本、音频、多模态训练和 1M context 是核心卖点。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Thinking Machines 选择“开放权重 + 微调平台”作为首个模型叙事，和 OpenAI/Anthropic 的闭源前沿路径形成对照。它也给美国开放模型生态补上一个新高端候选，和 NVIDIA Nemotron、Gemma、Kimi、DeepSeek 同台比较。</div>
+  <div class="action">后续行动：把 Inkling 纳入开放模型雷达，单独跟踪 model card、training data 文档、Tinker 微调体验、实际部署门槛和中文/多模态能力。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Open Model Thesis</span><strong>Nathan Lambert</strong> · 2026-07-16 · <a href="https://nitter.net/natolambert/status/2077606226356548060#m">公开镜像</a></div>
+  <div class="summary"><p>Nathan Lambert 借 Inkling 讨论开放模型生态，核心观点是“开放模型的整合不会很快发生”。只要 AI 资金继续涌入，就会有多支团队持续训练开放或近开放模型；企业也会为了数据控制、部署自主权和避免供应商未来竞争而接受一定能力折中。这个判断与 Kimi K3 的高端开放路线形成互证。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>投资和产业判断上，开放模型不是短期噪音，而是一条会长期牵引算力、工具链、推理服务、私有部署和合规市场的主线。</div>
+  <div class="action">后续行动：把开放模型生态拆成四类观察：模型权重、推理基础设施、微调平台、企业私有知识/agent harness。</div>
+</div>
+
+<h3>二、Agent 安全：全访问模式、沙箱和自动审查不能再当附属功能</h3>
+<div class="card">
+  <div class="source"><span class="tag">Codex</span><strong>Thibault Sottiaux / OpenAI</strong> · 2026-07-16 17:45 UTC · <a href="https://simonwillison.net/2026/Jul/16/bad-codex-bug/">Simon 摘录</a> · <a href="https://nitter.net/thsottiaux/status/2077630111499882637#m">公开镜像</a></div>
+  <div class="summary"><p>OpenAI Codex 工程负责人解释了 GPT-5.6 意外删除文件的少数报告：常见条件是 full access 模式、没有沙箱保护、没有 auto review，模型又试图改写 HOME 环境变量作为临时目录，最后误删了 HOME。OpenAI 表示会更新 developer message、引导更多用户使用更安全的权限模式，并加入额外 harness safeguards，后续会发布更详细 post-mortem。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条是 Codex/Claude Code/OpenClaw 类工具的硬边界提醒。越强的 coding agent 越需要最小权限、可恢复操作、危险命令审查和默认沙箱；“模型会小心”不是安全策略。</div>
+  <div class="action">后续行动：本地 agent 工作流默认避免 full access；对 `rm`、HOME、根目录、批量删除、环境变量改写和跨项目路径访问加显式审查或可恢复策略。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Coding Agent</span><strong>xAI Grok Build / Simon Willison</strong> · 2026-07-16 · <a href="https://simonwillison.net/2026/Jul/16/grok-mermaid/">grok-mermaid</a> · <a href="https://simonwillison.net/2026/Jul/15/grok-build/">Grok Build 开源分析</a></div>
+  <div class="summary"><p>Simon 在 xAI Grok Build 开源代码里发现一个 Rust 写的 Mermaid 终端渲染器，并用 Claude Code for web 把它编译到 WebAssembly 做成浏览器工具。更大的背景是 Grok Build 因数据上传争议后开源，Simon 观察到它包含大量 Rust 代码、工具实现和 agent prompt 结构，复杂度接近 Codex 这类终端 coding agent。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>终端 coding agent 的竞争已经进入“完整本地工具链 + prompt/harness + 隐私承诺 + 可审计代码”的阶段。开源能增加信任，但也暴露出权限、数据保留和工具复制的治理问题。</div>
+  <div class="action">后续行动：单独抽样阅读 Grok Build 的 prompt、工具权限和数据上传模块，与 Codex/OpenClaw 的权限模型对比。</div>
+</div>
+
+<h3>三、工作入口：Agent 正进入 Slack、Notebook 和团队线程</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain</span><strong>Fleet in Slack</strong> · 2026-07-16 18:11 UTC · <a href="https://www.langchain.com/blog/new-in-langsmith-fleet-bring-agents-into-slack-in-one-click">文章</a> · <a href="https://nitter.net/hwchase17/status/2077443161585287290#m">Harrison</a></div>
+  <div class="summary"><p>LangChain RSS 窗口内发布 Fleet in Slack：团队可以把无代码构建的专用 agent 一键部署到 Slack，给它自定义身份，在频道和线程中工作，并通过批准、文件交接和上下文保留完成协作。Harrison Chase 的公开动态也强调这个入口降低了团队使用自定义 agent 的门槛。它的真实产品含义是：agent 不只是模型能力，而是团队空间里的身份、权限、审批和长期上下文。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent 采用的摩擦点往往不是“会不会回答”，而是“能不能在现有工作流里被叫到、被约束、被审查、被追踪”。Slack/Teams/飞书会是第一批 agent-native 工作入口。</div>
+  <div class="action">后续行动：为飞书私聊/群聊设计 OpenClaw agent 的最小产品形态：身份卡片、可用技能、审批动作、线程记忆、日志链接和失败回退。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Google</span><strong>Josh Woodward / Gemini Notebook</strong> · 2026-07-16 · <a href="https://nitter.net/joshwoodward/status/2077771121841226089#m">公开镜像</a></div>
+  <div class="summary"><p>Josh Woodward 转发 Gemini Notebook 更名线索：NotebookLM 正式变为 Gemini Notebook，称用户规模已超过 3000 万、组织超过 60 万，并从被动资料空间发展为研究 companion。它还提到未来会进入 Gemini App 和 Google Search。这个信号说明 Google 正把“资料/研究工作台”放进 Gemini 统一品牌和搜索入口。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI research workspace 是 agent 的重要落点：资料输入、音视频转写、问答、知识组织和搜索入口会逐步合并。对个人知识库和企业情报工作流来说，这会直接竞争 Obsidian/Notion/自建 agent。</div>
+  <div class="action">后续行动：观察 Gemini Notebook 与 Search 的结合方式，尤其是来源引用、可导出性、多用户协作和 API/自动化入口。</div>
+</div>
+
+<h3>四、机器人与 eval：从代码可测试走向现实工作可验证</h3>
+<div class="card">
+  <div class="source"><span class="tag">Robotics</span><strong>Jim Fan / Fei-Fei Li</strong> · 2026-07-16 · <a href="https://nitter.net/DrJimFan/status/2077414142340988962#m">Jim Fan</a> · <a href="https://nitter.net/drfeifei/status/2077458752949911764#m">Fei-Fei Li</a></div>
+  <div class="summary"><p>Jim Fan 发布 RoboTTT 线索，称机器人模型通过 test-time training 把传感历史压缩进一个小模型状态，把上下文扩展到 8,000 timesteps，约 5 分钟“肌肉记忆”，同时保持固定推理成本。Fei-Fei Li 转发并强调这项机器人学习合作。核心思想是把 LLM 的 context scaling 迁移到 embodied AI：机器人在部署中不断把错误修正和环境经验写进可持续更新的内部状态。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>机器人和世界模型正在从短时反应走向长程经验压缩。若 TTT 路径成立，真实世界 agent 的壁垒会从“模型会看”变成“模型能持续记住、修正、适应并验证”。</div>
+  <div class="action">后续行动：查论文/项目页，重点看是否有开源代码、仿真/真实机器人任务、失败恢复定义和 context scaling 曲线的可复现性。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Evals</span><strong>Francois Chollet / Aaron Levie</strong> · 2026-07-16 · <a href="https://nitter.net/fchollet/status/2077291858937553000#m">公开镜像</a></div>
+  <div class="summary"><p>Francois Chollet 转发 Aaron Levie 关于企业 agent eval 的观点：代码之所以适合 agent，是因为它能快速运行和测试；销售、合同、交易、运营分析等知识工作缺少类似的测试机制。未来要让 agent 深入企业流程，需要为“非代码工作”建立可验证输出、回归测试和质量反馈。Francois 的评论把这个观点压缩为一句：如果把更多工作变成“可执行/可测试的代码式对象”，agent 价值会放大。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这正好连接 Follow List 近期的 eval、harness、agent traces 和工作入口主线。投资线索不只在模型，还在把知识工作结构化、测试化、审计化的工具。</div>
+  <div class="action">后续行动：把企业知识工作拆成可测对象：输入、约束、评分器、人工验收、反例集、回滚标准；优先从报告、邮件、研究、客户跟进四类开始。</div>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Sam Altman：</strong>表示自己现在和 ChatGPT 说话多过打字，并称新语音模型跨过了阈值；同时转发 Codex 文件误删解释，说明 voice 与 coding safety 都是 OpenAI 当下公开叙事重点。</li>
+  <li><strong>Greg Brockman：</strong>转发 benchmark 饱和讨论，强调 benchmark 迭代速度追不上模型进展；这与 Kimi K3、GPT-5.6、Claude Fable 5 的榜单竞争互相呼应。</li>
+  <li><strong>Harrison Chase：</strong>继续推 Fleet Slack 和 agent harness 讨论，LangChain 正把 agent 平台叙事从框架推向入口、运行时和观测。</li>
+  <li><strong>Chip Huyen：</strong>转发 Inkling，开放权重与可微调底座进入 AI engineering 人群视野。</li>
+  <li><strong>Jim Fan / Fei-Fei Li：</strong>RoboTTT 让机器人长上下文和测试时适应成为本轮世界模型/physical AI 的高优先级线索。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<div class="card">
+  <p><strong>Kimi K3：</strong>等待完整权重，验证 license、API 价格、推理成本、agentic coding、中文长上下文和多模态能力。</p>
+  <p><strong>Codex full-access 风险：</strong>整理本地安全检查：HOME、根目录、跨项目路径、批量删除、环境变量覆盖和危险 shell 命令。</p>
+  <p><strong>Fleet/Slack → 飞书：</strong>设计一个飞书原生 agent 协作模板，包含身份、权限、审批、线程上下文和日志。</p>
+  <p><strong>RoboTTT：</strong>查项目论文与可复现实验，判断它是机器人学习通用路径还是特定任务技巧。</p>
+  <p><strong>知识工作 eval：</strong>把 Follow 日报、投资线索、客户邮件和会议纪要做成可回归评测的输出对象。</p>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <p><strong>Kimi K3 权重：</strong>目前公开信息显示权重计划在 2026-07-27 前发布，今天还不能按“已可下载权重”处理。</p>
+  <p><strong>Kimi K3 独立能力：</strong>Moonshot 自述、Artificial Analysis、Arena.ai 和 Simon 试跑都很强，但 agent tool use、稳定性和真实成本还需独立复现。</p>
+  <p><strong>Codex 误删 post-mortem：</strong>当前只有负责人公开解释和承诺，详细根因、影响范围和修复清单待 OpenAI 正式 post-mortem。</p>
+  <p><strong>RoboTTT：</strong>社媒线程信息量高，但需要论文、代码和实验细节验证 8K timesteps、固定推理成本和泛化能力。</p>
+  <p><strong>Gemini Notebook：</strong>用户/组织规模来自公开社媒转述，需等待 Google 官方博客或产品页进一步确认。</p>
+</div>
+
+<h2>低优先级噪音</h2>
+<div class="card noise">
+  <p>Kevin Weil 的“there is no they”转发、Amanda Askell 的纽约建筑倒塌讨论、Karpathy 的 Bun/Rust 转发都有趣，但与本轮 agent、安全、开放模型和投资线索关系较弱，暂不展开。Simon 的 Firefox-in-WASM 和 Mermaid ASCII 工具值得收藏为 AI-assisted programming 案例，但今天主线优先级低于 Kimi K3、Codex 安全和 Fleet Slack。</p>
+</div>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://simonwillison.net/2026/Jul/16/kimi-k3/">Simon Willison: Kimi K3, and what we can still learn from the pelican benchmark</a></li>
+  <li><a href="https://www.kimi.com/blog/kimi-k3">Moonshot AI: Kimi K3</a></li>
+  <li><a href="https://openrouter.ai/moonshotai/kimi-k3">OpenRouter: Kimi K3 model page</a></li>
+  <li><a href="https://thinkingmachines.ai/news/introducing-inkling/">Thinking Machines: Inkling</a></li>
+  <li><a href="https://huggingface.co/blog/thinkingmachines-inkling">Hugging Face: Welcome Inkling by Thinking Machines</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/16/bad-codex-bug/">Simon Willison: Codex deletion bug quote</a></li>
+  <li><a href="https://nitter.net/thsottiaux/status/2077630111499882637#m">Thibault Sottiaux: Codex deletion explanation</a></li>
+  <li><a href="https://www.langchain.com/blog/new-in-langsmith-fleet-bring-agents-into-slack-in-one-click">LangChain: New in Fleet, deploy agents to Slack</a></li>
+  <li><a href="https://nitter.net/hwchase17/status/2077443161585287290#m">Harrison Chase: Fleet in Slack</a></li>
+  <li><a href="https://nitter.net/DrJimFan/status/2077414142340988962#m">Jim Fan: RoboTTT thread</a></li>
+  <li><a href="https://nitter.net/drfeifei/status/2077458752949911764#m">Fei-Fei Li: RoboTTT comment</a></li>
+  <li><a href="https://nitter.net/fchollet/status/2077291858937553000#m">Francois Chollet: knowledge work eval signal</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom feed</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://openai.com/news/rss">OpenAI News RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-16T00:00:00Z / 2026-07-17T00:00:00Z.</footer>
+</body>
+</html>
