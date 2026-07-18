@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>awesome-claude-md 项目分析报告</title>
+    <meta name="description" content="分析 awesome-claude-md 项目，解读 CLAUDE.md 的可复用方式和几个代表案例。">
+  </head>
+  <body>
+    <main>
+      <nav><a href="../../../..">返回 OpenClaw Publish</a></nav>
+      <article>
+        <h1>awesome-claude-md 项目分析报告</h1>
+        <p class="meta">生成日期：2026-06-19 ｜ 项目地址：<a href="https://github.com/josix/awesome-claude-md">github.com/josix/awesome-claude-md</a></p>
+        <p class="lead">这份报告分析 <code>awesome-claude-md</code> 的定位、可复用价值，并解读几个有代表性的 <code>CLAUDE.md</code> 案例，重点判断这些 Claude 相关内容能否迁移到 OpenClaw、Codex、Copilot 或其他 AI coding agent 工作流。</p>
+
+        <h2>1. 核心结论</h2>
+        <p><code>awesome-claude-md</code> 不是一个 Claude 运行时项目，也不是 Claude Code 的插件集合。它更像一个“AI 编程助手项目说明书案例库”：收集公开项目里的高质量 <code>CLAUDE.md</code>，并按项目类型整理分析，帮助开发者学习如何把项目上下文、工作规则、命令、测试、边界和协作方式写给 AI agent。</p>
+        <div class="callout">
+          <p><strong>判断：</strong><code>CLAUDE.md</code> 可以复用，但建议复用结构和方法，不建议直接复制内容。</p>
+        </div>
+        <ol>
+          <li>每个 <code>CLAUDE.md</code> 都高度绑定原项目的目录、命令、工具链和团队规则。</li>
+          <li>仓库自身强调不要复制原始 <code>CLAUDE.md</code>，而应链接原始来源、保留署名和 license 信息。</li>
+          <li>Claude Code 的 <code>.claude/agents</code>、<code>.claude/commands</code> 是 Claude Code 特定约定，不能在 Codex/OpenClaw 中原样生效，但可转写成 <code>AGENTS.md</code>、OpenClaw skill 或项目工作流。</li>
+        </ol>
+        <p>最值得复用的是它背后的“上下文工程”：项目地图、命令清单、风格约束、禁止事项、验证路径和协作边界。</p>
+
+        <h2>2. 项目结构与定位</h2>
+        <p>仓库主 README 将案例按技术栈和场景分类，包括 TypeScript/JavaScript、Python、Rust、Go、Swift、Java 等，也按用途分成复杂项目、库/框架、开发工具、基础设施、getting started、项目交接等。</p>
+        <p>仓库自身的 <code>CLAUDE.md</code> 说明了几个关键事实：它是高质量 <code>CLAUDE.md</code> 的 curated collection；<code>scenarios/</code> 下保存的是分析文档，而不是原始全文；新增案例时要写来源、原始链接、license、为什么值得学习和 takeaway；评估标准偏内容质量，不是只看 star。</p>
+        <p>这说明它不是“模板仓库”，而是“案例研究仓库”。直接复制会失真，抽象成自己的模板才有价值。</p>
+
+        <h2>3. 可复用性判断</h2>
+        <h3>可以直接复用</h3>
+        <ul>
+          <li><code>CLAUDE.md</code> 的章节设计思路。</li>
+          <li>README 中的案例分类方式。</li>
+          <li>质量评分标准：内容深度、教育价值、AI 可用性、项目成熟度、社区认可。</li>
+          <li>搜索策略：用 GitHub 搜索 <code>filename:CLAUDE.md "## Architecture"</code>、<code>"## Testing" filename:CLAUDE.md</code> 等。</li>
+          <li>“不要编辑生成文件”“必须用指定包管理器”“提交前跑什么检查”这类规则表达方式。</li>
+        </ul>
+
+        <h3>需要改写后复用</h3>
+        <ul>
+          <li>Claude Code 专属的 <code>.claude/agents</code> 可以改写成 OpenClaw skill 或 Codex 子任务角色说明。</li>
+          <li><code>.claude/commands</code> 可以改写成脚本、Makefile target、OpenClaw 工作流或 prompt 模板。</li>
+          <li>项目里的 <code>CLAUDE.md</code> 可以改写成 <code>AGENTS.md</code>、<code>.github/copilot-instructions.md</code>、项目 README 的 AI section。</li>
+        </ul>
+
+        <h3>不建议复用</h3>
+        <ul>
+          <li>不要复制其他项目的完整 <code>CLAUDE.md</code> 作为自己的配置。</li>
+          <li>不要照搬别人项目的命令、路径、架构描述。</li>
+          <li>不要把 Claude Code 的命令格式当成通用标准。</li>
+          <li>不要忽视 license 和 attribution。</li>
+        </ul>
+
+        <h2>4. 代表案例解读</h2>
+        <h3>4.1 OpenAI Agents Python</h3>
+        <p class="source-list">来源：<a href="https://github.com/josix/awesome-claude-md/blob/main/scenarios/complex-projects/openai_openai-agents-python/README.md">分析页</a> ｜ <a href="https://github.com/openai/openai-agents-python">原项目</a> ｜ <a href="https://github.com/openai/openai-agents-python/blob/f20aa40f56ec374841dfe6e4f3d6118c8e32fb2b/CLAUDE.md">原始 CLAUDE.md</a></p>
+        <p>这个案例的价值在于“复杂 AI 框架如何向 AI 助手解释自己”。它不是简单列命令，而是强调多 agent 框架的架构、组件关系、生产部署、扩展和运维思路。</p>
+        <ul>
+          <li>对复杂系统，先解释系统边界，再解释组件。</li>
+          <li>对 AI 框架，必须说明 agent、tool、workflow、handoff、trace 等核心概念的关系。</li>
+          <li>生产级项目的 AI 指南不能只写开发命令，还要写部署、监控、扩展和 operational guidance。</li>
+        </ul>
+        <pre><code>## Project Model
+
+- Core concepts
+- Component relationships
+- Execution flow
+- Extension points
+- Production concerns</code></pre>
+
+        <h3>4.2 Basic Memory</h3>
+        <p class="source-list">来源：<a href="https://github.com/josix/awesome-claude-md/blob/main/scenarios/complex-projects/basicmachines-co_basic-memory/README.md">分析页</a> ｜ <a href="https://github.com/basicmachines-co/basic-memory">原项目</a> ｜ <a href="https://github.com/basicmachines-co/basic-memory/blob/main/CLAUDE.md">原始 CLAUDE.md</a></p>
+        <p>这个案例很适合 OpenClaw，因为它关注 MCP、持久记忆和 AI-human collaborative workflow。它的重点不是“怎么写代码”，而是“AI 如何作为长期协作者理解项目、调用工具、维护上下文”。</p>
+        <ul>
+          <li>把工具按能力分组，而不是平铺。</li>
+          <li>同时写“产品怎么用”和“代码怎么改”，但要分清两者边界。</li>
+          <li>明确 AI 在协作中的角色：不是只生成代码，而是参与 issue、记忆、项目管理、知识沉淀。</li>
+          <li>对长期上下文系统，要写清楚信息如何保存、检索、连接。</li>
+        </ul>
+        <pre><code>## Tooling Model
+
+- Available tools
+- When to use each tool
+- Data persistence rules
+- Collaboration workflow
+- Context recovery process</code></pre>
+
+        <h3>4.3 Overreacted.io</h3>
+        <p class="source-list">来源：<a href="https://github.com/josix/awesome-claude-md/blob/main/scenarios/complex-projects/gaearon_overreacted.io/README.md">分析页</a> ｜ <a href="https://github.com/gaearon/overreacted.io">原项目</a> ｜ <a href="https://github.com/gaearon/overreacted.io/blob/main/CLAUDE.md">原始 CLAUDE.md</a></p>
+        <p>这是一个非常好的“带人格的技术项目说明”案例。它来自 Dan Abramov 的个人博客，特点是技术细节足够具体，同时保留作者自己的表达标准和内容气质。</p>
+        <ul>
+          <li>AI 不只要知道技术栈，还要知道项目的表达风格。</li>
+          <li>对内容型项目，风格约束和代码约束一样重要。</li>
+          <li>明确文件到功能的映射，降低 AI 乱找入口的概率。</li>
+          <li>对非标准机制，比如 MDX 插件、可执行代码块、主题切换，要专门解释。</li>
+        </ul>
+        <pre><code>## Voice and Style
+
+- Writing tone
+- Commit message style
+- Content conventions
+- Things that would feel off-brand</code></pre>
+
+        <h3>4.4 Pydantic GenAI Prices</h3>
+        <p class="source-list">来源：<a href="https://github.com/josix/awesome-claude-md/blob/main/scenarios/libraries-frameworks/pydantic_genai-prices/README.md">分析页</a> ｜ <a href="https://github.com/pydantic/genai-prices">原项目</a> ｜ <a href="https://github.com/pydantic/genai-prices/blob/main/CLAUDE.md">原始 CLAUDE.md</a></p>
+        <p>这个案例的强项是数据流水线说明。它把 YAML、JSON、Python package、外部 API 同步、价格差异检测、自动生成文件、pre-commit 等串成完整流程。</p>
+        <ul>
+          <li>对数据项目，要先写数据流，而不是先写命令。</li>
+          <li>对生成文件，要明确“不要直接编辑”，并告诉 AI 正确更新入口。</li>
+          <li>对外部数据源，要写清同步命令、校验命令、异常处理。</li>
+          <li>对严格工程项目，要写清 lint、format、typecheck、test 的权威命令。</li>
+        </ul>
+        <pre><code>## Data Flow
+
+source files -> build step -> generated data -> package/report output
+
+## Generated Files
+
+Do not edit:
+- ...
+
+To update:
+- ...</code></pre>
+
+        <h3>4.5 Cloudflare Workers SDK</h3>
+        <p class="source-list">来源：<a href="https://github.com/josix/awesome-claude-md/blob/main/scenarios/developer-tooling/cloudflare_workers-sdk/README.md">分析页</a> ｜ <a href="https://github.com/cloudflare/workers-sdk">原项目</a> ｜ <a href="https://github.com/cloudflare/workers-sdk/blob/main/CLAUDE.md">原始 CLAUDE.md</a></p>
+        <p>这个案例适合学习大型 monorepo 的约束表达。它非常强调包管理器、工作区命令、测试分层、凭证要求和质量门禁。</p>
+        <ul>
+          <li>对 monorepo，要明确每个 package 的职责。</li>
+          <li>对工具链，要敢于写硬约束，比如只能用 pnpm，不能用 npm/yarn。</li>
+          <li>对测试，要区分 unit、integration、E2E，以及哪些需要真实凭证。</li>
+          <li>对提交前检查，要给一个“权威入口”，不要让 AI 猜。</li>
+        </ul>
+        <pre><code>## Monorepo Rules
+
+- Package manager
+- Workspace layout
+- Build all
+- Build one package
+- Test tiers
+- Required credentials
+- Pre-commit quality gate</code></pre>
+
+        <h3>4.6 Claude Flow</h3>
+        <p class="source-list">来源：<a href="https://github.com/josix/awesome-claude-md/blob/main/scenarios/complex-projects/ruvnet_claude-flow/README.md">分析页</a> ｜ <a href="https://github.com/ruvnet/claude-flow">原项目</a> ｜ <a href="https://github.com/ruvnet/claude-flow/blob/main/CLAUDE.md">原始 CLAUDE.md</a></p>
+        <p>这个案例的价值在于“多 agent 编排”的组织方式。它强调大量专业 agent、职责边界、协调协议、并行任务和平台模块化。</p>
+        <ul>
+          <li>多 agent 系统必须先定义角色边界。</li>
+          <li>agent 之间的通信、委派、合并结果要有规则。</li>
+          <li>越复杂的 agent 系统，越需要测试、日志、监控和失败恢复。</li>
+          <li>agent 数量多不是重点，重点是责任清晰和协调成本可控。</li>
+        </ul>
+        <pre><code>## Agent Roles
+
+- Orchestrator
+- Researcher
+- Implementer
+- Reviewer
+- Publisher
+
+## Coordination Rules
+
+- Task handoff
+- Shared state
+- Conflict resolution
+- Completion criteria</code></pre>
+
+        <h2>5. 一份适合我们复用的通用模板</h2>
+        <p>下面是一份适合 Codex/OpenClaw/Claude/Copilot 共用的项目 AI 指南骨架：</p>
+        <pre><code># AGENTS.md / CLAUDE.md
+
+## Project Overview
+## Repository Map
+## First Files To Read
+## Development Commands
+## Verification Rules
+## Architecture Notes
+## Data Flow
+## Generated Files
+## Style Rules
+## Safety Rules
+## Known Pitfalls
+## Release / Deploy</code></pre>
+
+        <h2>6. 对 OpenClaw 的建议</h2>
+        <p>这个仓库对我们最有价值的用法，不是“安装 Claude”，而是建立一套项目接手标准。</p>
+        <ol>
+          <li><strong>工作区级：</strong>维护 <code>/home/ubuntu/.openclaw/workspace/AGENTS.md</code>、<code>TOOLS.md</code>、<code>MEMORY.md</code>，记录长期规则和本机环境。</li>
+          <li><strong>项目级：</strong>每个重要仓库放自己的 <code>AGENTS.md</code>，只写该项目真实命令、目录和风险边界。</li>
+          <li><strong>能力级：</strong>把可重复流程做成 OpenClaw skill，例如“分析 GitHub 项目并生成 AGENTS.md”“从 README/Makefile/package.json 自动提取项目指令”。</li>
+        </ol>
+        <p>最适合优先做的 skill 是 <code>project-ai-onboarding</code>：输入一个 GitHub 仓库或本地项目路径，输出项目地图、架构摘要、常用命令、测试/验证策略、生成文件和危险操作、推荐 AGENTS.md/CLAUDE.md 草稿。</p>
+
+        <h2>7. 最终判断</h2>
+        <p><code>awesome-claude-md</code> 里的 Claude 内容可以复用，但它的正确复用方式是“学习结构，改写成自己的项目上下文”，不是“复制粘贴别人项目的 Claude 配置”。</p>
+        <p>对我们来说，它最有用的启发是：每个项目都应该有给 AI 看的入口文件；入口文件要写命令、边界、验证，而不只是项目介绍；复杂项目要写架构和数据流；内容项目要写语气和风格；工具/monorepo 要写包管理器、测试层级和质量门禁；多 agent 项目要写角色、交接和完成标准。</p>
+        <p>这套思路完全可以迁移到 OpenClaw、Codex、Claude Code、Copilot。名字叫 <code>CLAUDE.md</code>，本质上是 AI-native project onboarding。</p>
+      </article>
+      <footer>Repository: jacobluo/myopenclawpublish</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

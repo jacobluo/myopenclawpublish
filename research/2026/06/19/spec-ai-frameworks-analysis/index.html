@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Spec-based AI 编程框架对比报告</title>
+    <meta name="description" content="对比 OpenSpec、GitHub Spec Kit、BMAD Method、Matt Pocock skills、Addy Osmani agent-skills 的使用方法、业务场景和组合建议。">
+  </head>
+  <body>
+    <main>
+      <div class="topbar">
+        <div class="brand">
+          <strong>OpenClaw Research Brief</strong>
+          <span>AI、软件与市场的公开研究简报</span>
+        </div>
+        <a class="back" href="../../../..">返回首页</a>
+      </div>
+      <div class="layout">
+      <aside class="panel toc" aria-label="文章目录">
+        <h2 class="panel-title">目录</h2>
+        <a href="#1-核心结论">1. 核心结论</a>
+        <a href="#2-为什么-spec-based-ai-编程重要">2. 为什么重要</a>
+        <a href="#3-openspec轻量变更管理适合-brownfield">3. OpenSpec</a>
+        <a href="#4-github-spec-kit正式-sdd-工具包">4. Spec Kit</a>
+        <a href="#5-bmad-methodai-敏捷团队">5. BMAD</a>
+        <a href="#6-matt-pocock-skills个人工程师技能库">6. Matt skills</a>
+        <a href="#7-addy-osmani-agent-skills生产级工程纪律包">7. Addy skills</a>
+        <a href="#8-横向对比">8. 横向对比</a>
+        <a href="#10-推荐组合">10. 推荐组合</a>
+        <a href="#12-总结">12. 总结</a>
+      </aside>
+      <article class="report">
+        <header class="report-header">
+          <p class="eyebrow">Research Brief / AI 编程方法论</p>
+          <h1>Spec-based AI 编程框架对比报告：OpenSpec、Spec Kit、BMAD、Matt Skills、Addy Agent Skills</h1>
+          <p class="deck">对比五类 spec-based / skill-based AI 编程框架的使用方法、业务场景、成熟度和组合路线，给日常开发、正式项目和从 0 到 1 产品建立不同重量级的工作流。</p>
+          <p class="meta"><span>2026-06-19</span><span>Methodology</span><span>AI Coding</span><span>5 Frameworks</span></p>
+        </header>
+          <div class="lead">
+            <p><strong>核心判断：</strong>OpenSpec 是日常变更档案；Spec Kit 是正式规格工厂；BMAD 是 AI 产品团队；Matt skills 是个人工程肌肉；Addy agent-skills 是团队工程纪律包。它们不是简单竞品，最好的用法是分层组合。</p>
+          </div>
+        <h2 id="1-核心结论">1. 核心结论</h2>
+        <p>这几类工具不能简单看成同一赛道的竞品。更准确的分层是：</p>
+        <ul>
+          <li><strong>Spec / Method 层：</strong>OpenSpec、GitHub Spec Kit、BMAD Method，解决“需求、方案、任务、实现怎么流转”。</li>
+          <li><strong>Skill / Discipline 层：</strong>Matt Pocock skills、Addy Osmani agent-skills，解决“agent 写代码时怎么保持工程纪律”。</li>
+        </ul>
+        <p>不建议只选一个。更好的做法是：日常开发用 OpenSpec + Matt skills；正式项目用 Spec Kit + Addy agent-skills；从 0 到 1 产品用 BMAD + Matt/Addy 精选 skills。</p>
+
+        <h2 id="2-为什么-spec-based-ai-编程重要">2. 为什么 spec-based AI 编程重要</h2>
+        <p>AI coding 的早期形态是 prompt-driven：用户描述需求，agent 直接写代码。这种方式在 demo 和小改动里很快，但在真实项目里容易出现需求只存在聊天上下文、agent 自动补假设、实现与意图不可追踪、文档与代码分叉等问题。</p>
+        <p>spec-based 方法的核心是把“意图”变成可版本化的工程资产：</p>
+        <pre><code>Idea → Spec → Plan → Tasks → Implementation → Verification → Archive</code></pre>
+        <p>它不是回到传统瀑布，而是把 AI 最容易出错的部分前移：先澄清、先定边界、先拆任务，再写代码。</p>
+
+        <h2 id="3-openspec轻量变更管理适合-brownfield">3. OpenSpec：轻量变更管理，适合 brownfield</h2>
+        <p>项目：<a href="https://github.com/Fission-AI/OpenSpec">Fission-AI/OpenSpec</a>。OpenSpec 的核心理念是 fluid not rigid、iterative not waterfall、easy not complex、brownfield-first。</p>
+        <pre><code>openspec/
+├── specs/      # 当前系统真实行为的 source of truth
+└── changes/    # 每个变更一个文件夹，含 proposal/spec/design/tasks</code></pre>
+        <p>使用：</p>
+        <pre><code>npm install -g @fission-ai/openspec@latest
+cd your-project
+openspec init</code></pre>
+        <pre><code>/opsx:propose add-dark-mode
+/opsx:apply
+/opsx:archive</code></pre>
+        <p>适合已有项目中新增功能、修 bug、中小型改造、多 change 并行，以及希望低成本获得 spec discipline 的团队。不太适合大型企业审批链和从 0 到 1 产品发现。</p>
+
+        <h2 id="4-github-spec-kit正式-sdd-工具包">4. GitHub Spec Kit：正式 SDD 工具包</h2>
+        <p>项目：<a href="https://github.com/github/spec-kit">github/spec-kit</a>。Spec Kit 强调 spec 不再是代码辅助材料，而是代码生成和演化的主驱动。</p>
+        <pre><code>uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@vX.Y.Z
+specify init my-project --integration copilot</code></pre>
+        <pre><code>/speckit.constitution
+/speckit.specify
+/speckit.clarify
+/speckit.plan
+/speckit.tasks
+/speckit.analyze
+/speckit.implement
+/speckit.converge</code></pre>
+        <p>适合正式项目启动、重大功能、企业团队、合规/审计/可追踪要求强的项目。它支持 extensions、presets 和 project-local overrides，适合企业模板化。</p>
+        <p>缺点是偏重，小需求容易过度流程化；如果没人维护 spec，会变成“AI 生成文档堆”。</p>
+
+        <h2 id="5-bmad-methodai-敏捷团队">5. BMAD Method：AI 敏捷团队</h2>
+        <p>项目：<a href="https://github.com/bmad-code-org/bmad-method">bmad-code-org/bmad-method</a>。BMAD 不是单纯 spec 工具，而是一套 AI-native agile development framework，覆盖从想法到交付的全过程。</p>
+        <pre><code>npx bmad-method install</code></pre>
+        <pre><code>bmad-help</code></pre>
+        <p>核心流程：</p>
+        <pre><code>1. Analysis       # brainstorming / research / product brief / PRFAQ
+2. Planning       # PRD 或 spec
+3. Solutioning    # architecture / epics / stories / readiness check
+4. Implementation # sprint planning / create story / dev story / code review</code></pre>
+        <p>适合从 0 到 1 的新产品、AI 扮演产品/架构/研发团队、复杂产品规划。缺点是最重，方法论感最强，小 feature 会显得过度。</p>
+
+        <h2 id="6-matt-pocock-skills个人工程师技能库">6. Matt Pocock skills：个人工程师技能库</h2>
+        <p>项目：<a href="https://github.com/mattpocock/skills">mattpocock/skills</a>。它不想让大框架接管整个流程，而是把真实工程师每天用的习惯做成可组合 skill。</p>
+        <pre><code>npx skills@latest add mattpocock/skills</code></pre>
+        <pre><code>/setup-matt-pocock-skills</code></pre>
+        <p>代表性 skills：</p>
+        <pre><code>/grill-me
+/grill-with-docs
+/to-prd
+/to-issues
+/tdd
+/diagnosing-bugs
+/improve-codebase-architecture
+/triage</code></pre>
+        <p>适合个人工程师、小团队、已有项目、日常开发、bug 诊断、TDD、issue triage、架构改善、领域语言和 ADR 沉淀。它不是完整 lifecycle 管理工具，但非常适合长期塑造 AI 工程习惯。</p>
+
+        <h2 id="7-addy-osmani-agent-skills生产级工程纪律包">7. Addy Osmani agent-skills：生产级工程纪律包</h2>
+        <p>项目：<a href="https://github.com/addyosmani/agent-skills">addyosmani/agent-skills</a>。定位是 production-grade engineering skills for AI coding agents，把开发流程分成 DEFINE → PLAN → BUILD → VERIFY → REVIEW → SHIP。</p>
+        <pre><code>/plugin marketplace add addyosmani/agent-skills
+/plugin install agent-skills@addy-agent-skills</code></pre>
+        <p>核心命令：</p>
+        <pre><code>/spec
+/plan
+/build
+/test
+/review
+/code-simplify
+/ship</code></pre>
+        <p>它覆盖 spec-driven-development、planning-and-task-breakdown、incremental-implementation、test-driven-development、context-engineering、source-driven-development、doubt-driven-development、security-and-hardening、performance-optimization、ci-cd-and-automation、observability-and-instrumentation 等 skills。</p>
+        <p>适合团队想把 senior engineer 的质量门禁写进 agent，尤其是 production code、安全、性能、发布、可观测性要求较高的场景。</p>
+
+        <h2 id="8-横向对比">8. 横向对比</h2>
+        <h3>最适合已有项目日常变更</h3>
+        <pre><code>OpenSpec > Matt skills > Addy agent-skills > Spec Kit > BMAD</code></pre>
+        <h3>最适合正式企业项目</h3>
+        <pre><code>Spec Kit > Addy agent-skills > BMAD > OpenSpec > Matt skills</code></pre>
+        <h3>最适合从 0 到 1 产品</h3>
+        <pre><code>BMAD > Spec Kit > OpenSpec > Addy agent-skills > Matt skills</code></pre>
+        <h3>最适合个人开发者立刻提升效率</h3>
+        <pre><code>Matt skills > OpenSpec > Addy agent-skills > BMAD > Spec Kit</code></pre>
+        <h3>最适合团队工程规范化</h3>
+        <pre><code>Addy agent-skills > Spec Kit > BMAD > OpenSpec > Matt skills</code></pre>
+
+        <h2 id="9-业务使用情况和成熟度">9. 业务使用情况和成熟度</h2>
+        <ul>
+          <li><strong>Spec Kit：</strong>GitHub 官方项目，star 超 11 万，fork 超 1 万，企业背书最强。</li>
+          <li><strong>OpenSpec：</strong>star 超 5.5 万，fork 约 3900，npm 包和文档完整，定位轻量、brownfield-first。</li>
+          <li><strong>BMAD：</strong>star 约 4.9 万，fork 约 5700，文档和社区活跃，模块生态明确。</li>
+          <li><strong>Matt skills：</strong>star 超 13 万，fork 超 1.1 万，个人影响力强，适合工程师社区扩散。</li>
+          <li><strong>Addy agent-skills：</strong>star 超 6.3 万，fork 约 6900，生产级工程主题清晰，跨工具支持好。</li>
+        </ul>
+
+        <h2 id="10-推荐组合">10. 推荐组合</h2>
+        <h3>日常开发组合：OpenSpec + Matt skills</h3>
+        <p>OpenSpec 管变更：proposal / specs / tasks / archive。Matt skills 管执行：grill-with-docs / tdd / diagnosing-bugs / codebase-design。</p>
+
+        <h3>正式项目组合：Spec Kit + Addy agent-skills</h3>
+        <p>Spec Kit 管正式 SDD：constitution / specify / plan / tasks / analyze / implement。Addy 管生产质量：security / performance / review / observability / ship。</p>
+
+        <h3>从 0 到 1 产品组合：BMAD + Addy/Matt 精选 skills</h3>
+        <p>BMAD 管产品生命周期：brainstorming → PRD → architecture → epics/stories → implementation。Matt/Addy 管局部工程纪律：TDD / review / security / performance。</p>
+
+        <h2 id="11-建议工作流">11. 建议工作流</h2>
+        <p>可以建立三档：</p>
+        <ul>
+          <li><strong>轻量档：</strong>Matt /grill-with-docs + /tdd + /diagnosing-bugs，用于小改动、bug、局部优化。</li>
+          <li><strong>标准档：</strong>OpenSpec /opsx:propose → apply → archive + Matt/Addy 工程 skills，用于大多数日常功能。</li>
+          <li><strong>重量档：</strong>企业/合规/正式 SDD 选 Spec Kit；从 0 到 1 产品/多角色协作选 BMAD；production quality gates 用 Addy。</li>
+        </ul>
+
+        <h2 id="12-总结">12. 总结</h2>
+        <p>spec-based AI 编程不是让开发变慢，而是把 AI coding 最容易失控的地方收进结构化流程里。现在的问题不是“要不要写 spec”，而是“什么任务需要多重的 spec”。</p>
+        <p><strong>一句话：</strong>OpenSpec 是日常变更档案；Spec Kit 是正式规格工厂；BMAD 是 AI 产品团队；Matt skills 是个人工程肌肉；Addy agent-skills 是团队工程纪律包。</p>
+
+        <h2>参考来源</h2>
+        <ul>
+          <li><a href="https://github.com/Fission-AI/OpenSpec">OpenSpec</a></li>
+          <li><a href="https://openspec.dev/">OpenSpec docs</a></li>
+          <li><a href="https://github.com/github/spec-kit">GitHub Spec Kit</a></li>
+          <li><a href="https://github.github.io/spec-kit/">Spec Kit docs</a></li>
+          <li><a href="https://github.com/bmad-code-org/bmad-method">BMAD Method</a></li>
+          <li><a href="https://docs.bmad-method.org/">BMAD docs</a></li>
+          <li><a href="https://github.com/mattpocock/skills">Matt Pocock skills</a></li>
+          <li><a href="https://github.com/addyosmani/agent-skills">Addy Osmani agent-skills</a></li>
+          <li><a href="https://addyosmani.com/blog/agent-skills/">Addy Osmani Agent Skills article</a></li>
+        </ul>
+      </article>
+      <aside class="panel summary-panel" aria-label="报告摘要">
+        <h2 class="panel-title">报告摘要</h2>
+        <ul class="summary-list">
+          <li><strong>默认路线</strong><span>日常开发用 OpenSpec + Matt skills。</span></li>
+          <li><strong>正式项目</strong><span>Spec Kit 做规格治理，Addy 做工程质量门禁。</span></li>
+          <li><strong>从 0 到 1</strong><span>BMAD 更像一支 AI 产品研发团队。</span></li>
+          <li><strong>使用原则</strong><span>小任务不要过度流程化，重大项目不要只靠聊天上下文。</span></li>
+        </ul>
+      </aside>
+      </div>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

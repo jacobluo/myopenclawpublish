@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Phoenix Yin：Loop Engineering 原帖阅读报告</title>
+    <meta name="description" content="阅读 Phoenix Yin 关于 Loop Engineering 的 X Article，保留原文入口，结合 Addy Osmani、O'Reilly、Business Insider 和 OpenAI Codex 官方文档做交叉分析。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">X Article 阅读报告</div>
+        <h1>Phoenix Yin：Loop Engineering 原帖阅读报告</h1>
+        <p class="muted">基于 Phoenix Yin 2026-06-22 发布的 X Article，保留原文入口与来源信息；正文为中文整理、交叉核验和落地判断。</p>
+        <div class="meta">
+          <span>发布时间：2026-06-24</span>
+          <span>主题：Loop Engineering</span>
+          <span>结论：值得学，但必须先做验证与预算边界</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>一句话结论：</strong>原帖抓住了 2026 年 6 月 AI coding 圈的一个真实变化：开发者的杠杆点正在从“写 prompt”转向“设计能反复发现、分派、执行、验证和记录的循环系统”。但这不是把 agent 放飞，而是把工程纪律前移到 loop 设计里：状态文件、worktree 隔离、maker-checker 分离、测试回压、预算熔断和人工 checkpoint 一个都不能少。
+      </section>
+
+      <section>
+        <h2>原文保留</h2>
+        <table>
+          <tbody>
+            <tr><th>原文标题</th><td>Anthropic 8倍代码产量的秘密：Loop Engineering 完整落地指南</td></tr>
+            <tr><th>作者</th><td>Phoenix Yin / @Phoenixyin13</td></tr>
+            <tr><th>发布时间</th><td>2026-06-22 08:43 UTC</td></tr>
+            <tr><th>原始链接</th><td><a href="https://x.com/Phoenixyin13/status/2068978101833388093">https://x.com/Phoenixyin13/status/2068978101833388093</a></td></tr>
+            <tr><th>说明</th><td>应“保留原文”要求，本页保留原文入口、标题和来源元数据；公开页不全文转载长文，正文采用摘要、分析和短摘录方式处理。</td></tr>
+          </tbody>
+        </table>
+        <blockquote>
+          <p>短摘录：原帖把 Loop Engineering 概括为从手写 prompt 迁移到设计可循环运行的 agent 系统。</p>
+        </blockquote>
+      </section>
+
+      <section>
+        <h2>原帖主张</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. 范式变化</h3>
+            <p>过去是人反复 prompt coding agent；现在是人设计 loop，让系统自己发现任务、提示 agent、验证结果并决定下一步。人的角色从“操作者”变成“系统设计者和 reviewer”。</p>
+          </div>
+          <div class="card">
+            <h3>2. 核心组件</h3>
+            <p>原帖沿用 Addy Osmani 的 5+1 框架：automations、worktrees、skills、plugins/connectors、sub-agents，加上持久状态或记忆。</p>
+          </div>
+          <div class="card">
+            <h3>3. 效率想象</h3>
+            <p>它引用 Anthropic / Claude Code 圈层中的高杠杆案例，强调 loop 能把工程师从逐步指挥中解放出来，形成“睡前下任务，醒来看 PR”的工作流。</p>
+          </div>
+          <div class="card">
+            <h3>4. 风险提示</h3>
+            <p>原帖并没有只讲兴奋剂：它反复提到 token 成本、context rot、无限循环、缺少验证、并行冲突和过早全自动化这些坑。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>外部核验</h2>
+        <table>
+          <thead>
+            <tr><th>问题</th><th>核验结果</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Loop Engineering 是不是确有其说？</th>
+              <td>是。Addy Osmani 在 2026-06-07 的文章中把它定义为让系统替代人去提示 agent，并认为它可能是 coding agents 的未来工作方式之一。</td>
+            </tr>
+            <tr>
+              <th>5+1 框架是否来自公开来源？</th>
+              <td>基本吻合。Addy / O'Reilly 版本列出 automations、worktrees、skills、plugins/connectors、subagents，以及外部 state/memory。</td>
+            </tr>
+            <tr>
+              <th>Boris / Peter 的说法是否有媒体交叉报道？</th>
+              <td>Business Insider 2026-06-20 报道了 Boris Cherny 不再主要手写 prompt，而转向 loop；也报道了 Peter Steinberger 关于不要再只 prompt coding agents、应设计 loops 的公开表述。</td>
+            </tr>
+            <tr>
+              <th>Codex 侧的工具原语是否支撑这套说法？</th>
+              <td>OpenAI 官方文档显示 Codex 已有 skills、subagents、worktrees、automations、Git/MCP 等相关能力，足以构成 loop 的基础部件。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>我的判断</h2>
+        <div class="item">
+          <h3>这不是 prompt engineering 的替代品，而是外层控制系统</h3>
+          <p>prompt 仍然重要，但它从一次性手写指令，变成 skills、任务模板、验证规则和调度器里的可维护资产。Loop 的价值不在“自动重复调用模型”，而在把发现、执行、验证、记录、升级这些环节标准化。</p>
+        </div>
+        <div class="item">
+          <h3>最容易被低估的是 state</h3>
+          <p>TODO.md、progress.json、issue board、run log 看起来土，但它们是跨会话连续性的核心。没有外部状态，agent 每次醒来都像新人接班；有状态，loop 才能知道上轮做了什么、哪里失败、下轮该避开什么。</p>
+        </div>
+        <div class="item">
+          <h3>最容易被高估的是全自动</h3>
+          <p>成熟 loop 的方向不是“人不用管”，而是“人只管高价值判断”。一开始应做 report-only 或 draft-only，等验证信号稳定，再放开低风险写入、PR、通知和发布动作。</p>
+        </div>
+        <div class="item">
+          <h3>真正的瓶颈会转移到 review 带宽</h3>
+          <p>并行 agent 可以多开 worktree，但人的审查能力不会同步 8 倍增长。好的 loop 必须帮人减少 review 面积：小 diff、清晰测试结果、风险摘要、失败记录、可回滚路径。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>落地路线</h2>
+        <table>
+          <thead>
+            <tr><th>阶段</th><th>建议动作</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>第 1 周：观察型 loop</th>
+              <td>每天定时扫描项目状态、CI、未读 issue、待办和 recent commits，只生成报告，不改代码。目标是把输入源和状态文件跑顺。</td>
+            </tr>
+            <tr>
+              <th>第 2 周：低风险修复 loop</th>
+              <td>只处理 lint、格式化、文档链接、测试快照等低风险任务。每个任务独立 worktree，必须有测试或 diff 摘要，默认只开草稿 PR。</td>
+            </tr>
+            <tr>
+              <th>第 3 周：maker-checker 分离</th>
+              <td>实现 agent 负责修改，review agent 负责质疑，第三步跑测试和类型检查。失败超过两轮就停止并写入 run log。</td>
+            </tr>
+            <tr>
+              <th>第 4 周：连接真实工作流</th>
+              <td>接入 GitHub、Linear/Notion、Feishu 或内部数据库，但保留人工批准门槛。外部发送、合并、部署都应先人工确认。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>最小模板</h2>
+        <pre><code>project/
+├── AGENTS.md              # 项目规则、构建命令、代码风格、红线
+├── TODO.md                # 当前目标、优先级、阻塞项
+├── memory/
+│   └── loop-state.json    # 每次运行状态、失败原因、预算
+├── skills/
+│   ├── triage/SKILL.md    # 如何归类 issue、CI、日志
+│   └── review/SKILL.md    # 如何审查 diff 和风险
+└── loops/
+    └── daily-triage.md    # 调度提示词或 automation 说明</code></pre>
+        <div class="notice">
+          <p>最低可行 loop：读取 TODO 和项目状态，挑一个小任务，在独立 worktree 修改，运行测试，写 run log，生成 PR 草稿或交给人确认。先让它少做一点，但每一步都可验证。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>适合大哥的下一步</h2>
+        <ol>
+          <li>先把 OpenClaw 的“报告发布流程”做成一个 report-only loop：定时发现素材、拉取来源、生成草稿、检查链接和版权风险，只在你确认后发布。</li>
+          <li>给每个项目补齐 AGENTS.md / TODO.md / run log，让 agent 不再每次重新猜项目背景。</li>
+          <li>把高风险外部动作列成红线：发消息、发邮件、发公开内容、合并 PR、部署、改 cron/systemd，都必须有明确确认。</li>
+          <li>为长期跑的 loop 加预算上限、最大轮数、失败熔断和人工升级条件。没有这些，loop 越勤奋越危险。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>参考来源</h2>
+        <ul class="source-list">
+          <li><a href="https://x.com/Phoenixyin13/status/2068978101833388093">Phoenix Yin X Article</a>：原帖入口。</li>
+          <li><a href="https://addyosmani.com/blog/loop-engineering/">Addy Osmani：Loop Engineering</a>：定义与 5+1 框架。</li>
+          <li><a href="https://www.oreilly.com/radar/loop-engineering/">O'Reilly Radar：Loop Engineering</a>：Addy 文章授权转载版本。</li>
+          <li><a href="https://www.businessinsider.com/what-are-loops-ai-engineering-tips-2026-6">Business Insider：Forget prompt engineering</a>：Boris Cherny、Peter Steinberger 与 loop engineering 趋势报道。</li>
+          <li><a href="https://developers.openai.com/codex/skills">OpenAI Codex：Agent Skills</a>：skills 的官方说明。</li>
+          <li><a href="https://developers.openai.com/codex/subagents">OpenAI Codex：Subagents</a>：subagents 的官方说明。</li>
+          <li><a href="https://developers.openai.com/codex/app/worktrees">OpenAI Codex app：Worktrees</a>：worktree 隔离的官方说明。</li>
+          <li><a href="https://developers.openai.com/codex/app/features">OpenAI Codex app features</a>：Codex app 的 worktree、automation 与 Git 能力概览。</li>
+        </ul>
+      </section>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

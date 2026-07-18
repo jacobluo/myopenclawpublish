@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：Agent 竞争进入语音、开放栈与成本可控阶段</title>
+    <meta name="description" content="2026-07-09 Follow List 深度日报：GPT-Live、GPT-5.6 Sol、LangChain/NVIDIA NemoClaw Deep Agents、Hugging Face/SkyPilot zero-egress storage、Prime Intellect、Cognition SWE-1.7、OpenWiki、Shreya/Simon 对 harness 与 AI 生成提交说明的反思。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>Agent 竞争进入语音、开放栈与成本可控阶段</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-07-08 00:00 UTC 至 2026-07-09 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。抓取优先级按 Status=active、Priority=high、Cadence=daily/weekly/manual 排序，主要使用公开 Nitter RSS、作者博客/Atom、LangChain/Hugging Face/Restate/Simon Willison 官方页面和公开来源自带页面。</p>
+        <div class="meta">
+          <span>发布时间：2026-07-09 08:00 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、OpenAI、Sam Altman、Greg Brockman、Harrison Chase、LangChain、Clement Delangue、Hugging Face、swyx、Shreya Shankar、Simon Willison、Thomas Wolf、Nan Yu、公开 X/Nitter RSS</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天的主线从“agent 能不能做事”转向“agent 能否更自然、更开放、更便宜、更可控地进入生产”。OpenAI 一边预告 GPT-5.6 Sol/Terra/Luna 公共发布，一边推出 GPT-Live，把实时语音体验推向 ChatGPT，并暗示未来进入 API 与 Codex；LangChain 与 NVIDIA 发布 NemoClaw Deep Agents Blueprint，强调开源 agent harness、Nemotron 3 Ultra、模型-harness-eval-runtime 联调和更低推理成本；Hugging Face 与 SkyPilot 把模型/数据集存储做成跨云零出站费路径，Clem 同时放大 ZML/LLMD、llama.cpp DFlash、LeRobot/GR00T 和企业开放模型 token share；Prime Intellect 融资建设开放 superintelligence stack，Cognition 的 SWE-1.7 则把 RL、低成本高速推理和中文模型生产化放到台面。工程治理侧，Shreya、Thomas Wolf、Simon Willison 共同指向一个反直觉结论：agent 时代不是越堆 system prompt、skills、tools 越好，harness、提交说明和评审上下文必须保持克制、可解释和成本敏感。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. 语音入口开始接入更深任务</h3>
+            <p>GPT-Live 不只是“更像真人说话”，重点是语音会把复杂任务委托给更强模型并保持对话连续，后续若进入 API/Codex，会改变 agent 的交互入口。</p>
+          </div>
+          <div class="card">
+            <h3>2. 开放 agent 栈开始比成本</h3>
+            <p>LangChain/NVIDIA、Prime Intellect、Cognition、Hugging Face 今天都在讲同一件事：企业要能拥有模型、harness、eval、runtime、数据和优化循环。</p>
+          </div>
+          <div class="card">
+            <h3>3. 数据可移动性成为 AI 基建战场</h3>
+            <p>Hugging Face + SkyPilot、Restate BYOC、Traces 数据导出和 HF 集成，说明模型与 trace 数据的归属、迁移成本和私有部署正在变成采购决策变量。</p>
+          </div>
+          <div class="card">
+            <h3>4. Harness 需要减法而非只加法</h3>
+            <p>Shreya 和 Thomas Wolf 关注 harness 成本/准确率，Simon 关注 AI 生成提交说明缺少高层意图，这些都提醒：agent 工程的价值来自判断，不来自堆叠。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>OpenAI：GPT-Live 进入 ChatGPT，GPT-5.6 Sol/Terra/Luna 公共发布在即</h3>
+          <p class="source">来源账号/机构：Sam Altman、Greg Brockman、OpenAI；发布时间：2026-07-08 03:59-17:35 UTC；链接：<a href="https://nitter.net/OpenAI/status/2074704958419792299#m">GPT-5.6 Sol/Terra/Luna 线索</a> / <a href="https://nitter.net/sama/status/2074909079450050629#m">Sam Altman: GPT-Live</a> / <a href="https://nitter.net/gdb/status/2074910365377568948#m">Greg Brockman: GPT-Live to API/Codex</a> / <a href="https://simonwillison.net/2026/Jul/8/introducing-gptlive/">Simon Willison 体验记录</a></p>
+          <p>OpenAI 官方公开线索显示 GPT-5.6 Sol、Terra、Luna 将在本周四公开发布，并扩大全球预览；Sam Altman 随后表示 GPT-Live 作为下一代语音模型已经进入 ChatGPT。Greg Brockman 的补充更关键：GPT-Live 正在 ChatGPT rollout，并计划带到 API 和 Codex。</p>
+          <p>Simon Willison 的体验记录提到，新语音模型可在对话中把需要搜索、更深推理或复杂工作的请求委托给更强前沿模型，再把结果带回语音流。若这个模式稳定，语音就不再只是轻量问答入口，而会成为长任务 agent 的自然控制面。</p>
+          <p class="why"><strong>为什么值得看：</strong>这会影响 OpenClaw/工作流产品的交互形态：文字适合精确任务和审计，语音适合快速 steer、复盘、故事化解释和移动场景。API/Codex 适配后，语音 agent 与 coding/work agent 的边界会变薄。</p>
+          <p class="action"><strong>后续行动：</strong>等官方 API 文档可用后，补一张 GPT-Live 能力表：延迟、可中断性、后台委托、工具调用、Codex 集成、日志可审计性和成本。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangChain / NVIDIA：NemoClaw Deep Agents Blueprint 把开源 agent harness 推向企业成本战</h3>
+          <p class="source">来源账号/机构：Harrison Chase、LangChain、NVIDIA；发布时间：2026-07-08 15:11-19:00 UTC；链接：<a href="https://nitter.net/hwchase17/status/2074874140776169485#m">Harrison Chase 线索</a> / <a href="https://nitter.net/LangChain/status/2074889720308339025#m">LangChain cost/performance 线索</a> / <a href="https://www.langchain.com/blog/langchain-and-nvidia-launch-the-nemoclaw-deep-agents-blueprint">LangChain 官方文章</a></p>
+          <p>LangChain 与 NVIDIA 发布 NemoClaw Deep Agents Blueprint，定位是企业可拥有、可定制的开放 agent 系统参考架构。Harrison 强调 Deep Agents 是开源、模型无关的 agent harness，并正在为开放模型调优；LangChain 公开线索称 Nemotron 3 Ultra 加 tuned Deep Agents harness 在其 eval 中达到更低推理成本，核心结论是模型、harness、eval 和 runtime 要一起调。</p>
+          <p>这次发布还被 Box、Baseten、多家推理/云厂商放大，说明它不是单纯框架更新，而是在试图把“企业 agent 的成本-性能-可拥有性”变成生态叙事。它也和昨天 Deep Agents、LLM Wikis、ATIF trace 的方向连续：agent 基础设施正在形成“harness + trace + memory + open model + inference partner”的组合。</p>
+          <p class="why"><strong>为什么值得看：</strong>如果 open-weight model 配合 tuned harness 能在长任务上接近闭源 frontier，而成本低一个数量级，企业采购会从“买最强 API”转向“按任务路由：闭源处理最难问题，开放栈承接大部分 token”。</p>
+          <p class="action"><strong>后续行动：</strong>把 NemoClaw 加入平台对比表，重点核对 eval 数据集、任务类型、成本假设、Nemotron 版本、Baseten/Fireworks/DeepInfra 等部署路径，以及是否可迁移到自有工作流。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hugging Face / SkyPilot：零出站费存储把模型和数据从云锁定里解出来</h3>
+          <p class="source">来源账号/机构：Clement Delangue、Hugging Face、SkyPilot；发布时间：2026-07-08 13:05-18:24 UTC；链接：<a href="https://nitter.net/ClementDelangue/status/2074842187011862571#m">Clem Delangue 线索</a> / <a href="https://huggingface.co/blog/skypilot-hf-storage">Hugging Face 官方文章</a> / <a href="https://nitter.net/skypilot_org/status/2074907421835944196#m">SkyPilot 线索</a></p>
+          <p>Hugging Face private storage 与 SkyPilot 合作，目标是让模型和数据集留在 HF Hub，计算可以跑在不同云、Kubernetes、Slurm 或本地集群上，读取数据到 GPU 时不再因跨云迁移产生出站费。Clem 把这件事概括为打破 AI 中最强的云锁定之一：模型、数据集和 checkpoint 难搬，企业就很难真正按性能、可靠性和成本选择 GPU。</p>
+          <p>这条线索和同日的 ZML/LLMD、llama.cpp DFlash、LeRobot/GR00T、企业开放模型 token share 讨论放在一起看，Hugging Face 正把开放模型的竞争焦点从“下载权重”扩展到“存储、推理、数据移动、机器人数据和企业可用性”。</p>
+          <p class="why"><strong>为什么值得看：</strong>AI 产业链里，数据出站费和 checkpoint 迁移成本会直接影响训练、微调、评测和多云推理策略。零出站路径若稳定，会削弱单一云的锁定，提升 SkyPilot、HF Hub、开放推理栈和 spot GPU 市场的价值。</p>
+          <p class="action"><strong>后续行动：</strong>为 AI 基建研究新增“模型/数据可移动性”维度：存储层、跨云挂载、出站费、HF_TOKEN 权限、缓存策略、checkpoint 一致性、企业审计。</p>
+        </div>
+
+        <div class="item">
+          <h3>Prime Intellect / Cognition：开放 superintelligence stack 与 SWE-1.7 把 RL 生产化推到前台</h3>
+          <p class="source">来源账号/机构：swyx、Harrison Chase、Clement Delangue、Prime Intellect、Cognition；发布时间：2026-07-08 16:52-18:11 UTC；链接：<a href="https://nitter.net/PrimeIntellect/status/2074899489190785419#m">Prime Intellect Series A 线索</a> / <a href="https://nitter.net/vincentweisser/status/2074909109229584400#m">swyx 转发 Prime Intellect 长帖</a> / <a href="https://nitter.net/swyx/status/2074919183947808881#m">swyx on Cognition SWE-1.7</a></p>
+          <p>Prime Intellect 宣布 1.3 亿美元 Series A，定位为开放 superintelligence stack：训练、部署和持续改进自有模型，覆盖 compute、大规模 RL、environments、sandboxes、evals 和 deployment。Harrison 和 Clem 都放大了这条线，说明它已经进入 Follow List 里 LangChain/Hugging Face/open-model 生态的交叉区域。</p>
+          <p>同日，swyx 评价 Cognition SWE-1.7，重点不是单一 benchmark，而是其把中文模型使用、propaganda/censorship eval、post-training 修正和 1000 tok/s 低成本服务作为生产能力展示。这里的共同主题是：RL 和可验证任务把“前沿能力”从少数闭源预训练实验室扩散到垂直产品和开放训练栈。</p>
+          <p class="why"><strong>为什么值得看：</strong>这可能是 agent 公司未来护城河的核心：不是简单调用通用模型，而是拥有自己的任务环境、反馈数据、RL 优化循环、沙箱、评测和部署路径。</p>
+          <p class="action"><strong>后续行动：</strong>建立“开放 RL/agent training stack”观察表，跟踪 Prime Intellect、Cognition、LangChain Labs、Factory、Harvey、open-weight model 路由和企业 self-improvement loop。</p>
+        </div>
+
+        <div class="item">
+          <h3>Shreya / Thomas Wolf：harness 越堆越厚会带来成本和准确率债务</h3>
+          <p class="source">来源账号/机构：Shreya Shankar、Thomas Wolf、Matei Zaharia；发布时间：2026-07-08 20:43-21:47 UTC；链接：<a href="https://nitter.net/Thom_Wolf/status/2074957639239225834#m">Thomas Wolf 线索</a> / <a href="https://nitter.net/sh_reya/status/2074973561002115241#m">Shreya Shankar 线索</a></p>
+          <p>Thomas Wolf 转发 Matei Zaharia 对 harness cost-performance 的观察：一个更简单的 Pi harness 在某些任务上可以达到与大厂 harness 类似的成功率，但成本更低，原因可能主要来自更短输入。Shreya 进一步指出，开发者和前沿模型供应商都在不断往 harness 里添加 system prompt、skills、tools；在六个月以上尺度上，新模型发布后成本上升、准确率影响却不清楚，这种趋势值得警惕。</p>
+          <p>这与 LangChain/NVIDIA 的模型-harness-eval-runtime 联调并不矛盾。真正的差异在于：harness 不是越重越好，而是要围绕任务、成本、失败模式和可解释性做工程化裁剪。</p>
+          <p class="why"><strong>为什么值得看：</strong>OpenClaw 也有 skills、memory、工具、prompt 和长上下文，最容易犯的错误就是把每个失败都补成一段新规则。长期看，这会造成 token 成本、冲突规则、慢启动和难评估。</p>
+          <p class="action"><strong>后续行动：</strong>给技能/系统提示建立“新增规则预算”：每条规则必须对应失败样本、预期收益、评估方式和回滚条件；定期做规则删减而不是只增不减。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison / Kenton Varda：AI 生成提交说明的问题是缺少高层意图</h3>
+          <p class="source">来源账号/机构：Simon Willison、Kenton Varda；发布时间：2026-07-08 20:03-20:06 UTC；链接：<a href="https://simonwillison.net/2026/Jul/8/kenton-varda/">Simon 引用 Kenton Varda</a> / <a href="https://nitter.net/simonw/status/2074948137182257284#m">Simon 公开讨论</a></p>
+          <p>Simon 引用 Kenton Varda 对 AI-written change descriptions 的批评：AI 生成的 PR/commit/issue 描述常常复述代码细节，却遗漏 reviewer 真正需要的高层 framing。Simon 也承认自己最近让 Claude 和 GLT-5.5 写了大量 commit messages，但对这个问题并不满意，因为模型有时会猜错 rationale，这比不写 rationale 更糟。</p>
+          <p>这条不算大新闻，但非常贴近日常工程。AI 适合整理 diff、列边界和补测试点，但“为什么这样改、取舍是什么、reviewer 应该重点看哪里”仍需要人或 agent 从任务上下文中提取，而不是从 diff 表面猜。</p>
+          <p class="why"><strong>为什么值得看：</strong>它直接影响我们使用 coding agent 的方式。生成式文本看起来专业，不代表对协作有帮助；代码评审需要可追溯意图、风险和验证，不需要漂亮但空泛的摘要。</p>
+          <p class="action"><strong>后续行动：</strong>把 PR/commit 模板改成三段：用户目标、关键取舍、验证证据。AI 可填草稿，但必须从 issue、对话和测试输出取证，不允许只从 diff 猜理由。</p>
+        </div>
+
+        <div class="item">
+          <h3>OpenWiki / PromptQL / Restate：企业 agent 正围绕知识、记忆和私有工作流落地</h3>
+          <p class="source">来源账号/机构：Harrison Chase、Shreya Shankar、swyx、Restate；发布时间：2026-07-08 14:47-19:30 UTC；链接：<a href="https://nitter.net/BraceSproul/status/2074930496874889677#m">OpenWiki 0.0.3 线索</a> / <a href="https://nitter.net/sh_reya/status/2074921697564938479#m">PromptQL / DAB 线索</a> / <a href="https://nitter.net/StephanEwen/status/2074868085295640976#m">Restate BYOC 线索</a> / <a href="https://www.restate.dev/blog/announcing-restate-byoc">Restate BYOC 官方文章</a></p>
+          <p>OpenWiki 0.0.3 发布，增加 openai-compatible provider、无代码变更时确定性跳过更新、GitLab CI 示例等修复，Harrison 预告后续会有更大更新。Shreya 则把 PromptQL 定位到 AI agents for knowledge management and team collaboration，并提到其团队参与的数据 agent benchmark 已有 25+ submissions。</p>
+          <p>同日 swyx 转发 Restate BYOC：全托管 Restate 部署在客户自己的云账号和 VPC 中，数据不离开客户基础设施，并已用于 AI agents 与 workflow backends 的高吞吐 durable actions。这三条线合起来说明，企业 agent 落地不会只靠聊天 UI，而要处理代码/wiki 记忆、团队知识管理、数据 benchmark、工作流状态和私有部署边界。</p>
+          <p class="why"><strong>为什么值得看：</strong>OpenClaw 的日报、Obsidian、GitHub Pages、state JSON 和 memory 文件其实就是小型知识/工作流系统。企业版机会在于把这些状态结构化、可回放、可权限控制，并接入 team collaboration。</p>
+          <p class="action"><strong>后续行动：</strong>为 OpenClaw 设计“工作流状态对象”：任务、来源、artifact、memory、review、publish、notification 分层保存，为之后接入 wiki/团队协作留接口。</p>
+        </div>
+
+        <div class="item">
+          <h3>Nan Yu / Kevin Weil / Josh Woodward：产品叙事、执行纪律和用户反馈仍是 AI 产品基本功</h3>
+          <p class="source">来源账号/机构：Nan Yu、Kevin Weil、Josh Woodward、Demis Hassabis；发布时间：2026-07-08 13:25-17:25 UTC；链接：<a href="https://nitter.net/joshwoodward/status/2074847444823674883#m">Josh Woodward 用户反馈问题</a> / <a href="https://nitter.net/kevinweil/status/2074866941454639200#m">Kevin Weil on Stoke Space</a> / <a href="https://nitter.net/thenanyu/status/2074907752829223043#m">Nan Yu PMM 线索</a></p>
+          <p>Josh Woodward 直接向用户询问 GeminiApp 有哪些“早该修好却还做不好”的能力，Demis Hassabis 也转发放大。这类问题比宣传更有产品价值，因为它把用户长期不满暴露成优先级输入。</p>
+          <p>Kevin Weil 加入 Stoke Space 董事会时提到创始团队长期以月度投资人更新承诺具体目标，并在月末逐项交付；Nan Yu 则从 Paul Graham 的产品描述观点延伸出 PMM 的传播链条：好叙事要能被销售、客户、用户、champion 继续转述给他们的受众。</p>
+          <p class="why"><strong>为什么值得看：</strong>AI 产品很容易沉迷模型能力和 demo，但真正扩散靠两个朴素系统：用户反馈闭环和可复述的产品叙事。Follow 日报自身也应该做到“别人看完能复述今天最重要的三件事”。</p>
+          <p class="action"><strong>后续行动：</strong>日报飞书摘要继续限制在 5 条以内，并优先写成可转述句子；产品/项目研究也要记录用户反复抱怨的问题，而不是只追发布公告。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>OpenAI / Sam Altman / Greg Brockman：</strong>一边推进 GPT-5.6 Sol/Terra/Luna，一边把 GPT-Live 作为实时语音和未来 API/Codex 入口。</li>
+          <li><strong>Harrison Chase / LangChain：</strong>围绕 Deep Agents、NemoClaw、OpenWiki 和技能/CLI 打包方式持续构建开源 agent 基础设施叙事。</li>
+          <li><strong>Clement Delangue / Hugging Face：</strong>从开放权重延伸到跨云存储、开放推理、机器人数据、企业 token share 和国会开放科学叙事。</li>
+          <li><strong>swyx：</strong>继续扮演开放 agent stack、Cognition SWE-1.7、Prime Intellect 和 agent engineering 观点的发现/解释节点。</li>
+          <li><strong>Shreya Shankar：</strong>把关注点从 eval 自动化推进到 data agent benchmark、knowledge collaboration 和 harness 成本/准确率债务。</li>
+          <li><strong>Simon Willison：</strong>继续用日常工程实践提醒 AI 辅助编程的边界：模型可以写草稿，但不能替代意图表达。</li>
+          <li><strong>Thomas Wolf：</strong>放大简单 harness 的成本优势，和 Hugging Face 开放模型效率主线相呼应。</li>
+          <li><strong>Josh Woodward / Demis Hassabis：</strong>公开征集 GeminiApp 长期短板，体现产品反馈优先级信号。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>GPT-Live API/Codex：</strong>跟踪官方文档、价格、可用区域、工具调用、后台委托和语音日志审计。</li>
+          <li><strong>NemoClaw Deep Agents：</strong>复核 eval、成本、Nemotron 3 Ultra、部署伙伴和是否可复用于 OpenClaw 长任务。</li>
+          <li><strong>HF + SkyPilot zero-egress：</strong>做一张跨云 AI 数据移动成本表，比较 HF Hub、S3/GCS/Azure、on-prem、spot GPU。</li>
+          <li><strong>开放 RL/agent training stack：</strong>跟踪 Prime Intellect、Cognition、Factory、Harvey、LangChain Labs 与企业自有优化循环。</li>
+          <li><strong>Harness governance：</strong>建立 prompt/skills/tools 的新增、评估、回滚和删减机制，避免上下文膨胀。</li>
+          <li><strong>PR/commit 协作模板：</strong>把 AI 生成描述约束到目标、取舍、验证证据，避免只复述 diff。</li>
+          <li><strong>OpenWiki/PromptQL/Restate：</strong>把知识管理、工作流状态、私有 VPC、durable actions 纳入企业 agent 落地图谱。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>GPT-5.6 Sol/Terra/Luna 和 GPT-Live 的公开信息主要来自公开 X/Nitter 线索与 Simon 体验记录；具体 API、模型卡、价格、限制和 Codex 接入需要官方文档确认。</li>
+          <li>NemoClaw Deep Agents 的成本与 benchmark 结论来自 LangChain/NVIDIA 公告与社交帖；需核对任务集、基线模型、token 价格、运行环境和可复现代码。</li>
+          <li>HF + SkyPilot zero-egress 的真实成本优势取决于企业账户、私有存储、缓存、GPU 云位置和数据访问模式；不能只按发布帖估算。</li>
+          <li>Prime Intellect 融资、Cognition SWE-1.7 和 open superintelligence stack 是强信号，但实际能力要看可用产品、客户案例、开放程度、eval 和安全边界。</li>
+          <li>Matei/Shreya/Thomas 关于 simple harness 的成本优势是重要观察，不代表所有任务都应极简；复杂长任务仍可能需要文件、memory、subagents 和工具。</li>
+          <li>Nitter RSS 本轮可读，但可能漏掉登录态内容、删除帖、限流内容或原帖上下文；本次未使用私密 cookie、token 或账号内部信息。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul class="noise">
+          <li>Logan Kilpatrick 的乐观短句和部分活动转发没有新增产品/技术信息，保留为背景不展开。</li>
+          <li>Clem 关于开放权重的呼吁和国会证词回顾有生态意义，但今天真正可操作的是 SkyPilot/HF storage、ZML/LLMD 与 open inference 线索。</li>
+          <li>Kevin Weil 的 Stoke Space 董事会消息主要是执行纪律案例，不属于 AI/agent 核心更新。</li>
+          <li>Harrison 多条招聘、活动、webinar 转发重复放大 NemoClaw/OpenWiki 主线，报告中已合并。</li>
+          <li>swyx 对演讲幻灯片风格的评论有审美参考，但不进入今日重点。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul>
+          <li><a href="https://nitter.net/OpenAI/status/2074704958419792299#m">OpenAI: GPT-5.6 Sol/Terra/Luna public launch preview</a></li>
+          <li><a href="https://nitter.net/sama/status/2074709023807664454#m">Sam Altman: GPT-5.6 Sol launches Thursday</a></li>
+          <li><a href="https://nitter.net/gdb/status/2074889855704973388#m">Greg Brockman: GPT-5.6 Sol for Next.js</a></li>
+          <li><a href="https://nitter.net/sama/status/2074909079450050629#m">Sam Altman: GPT-Live launches in ChatGPT</a></li>
+          <li><a href="https://nitter.net/gdb/status/2074910365377568948#m">Greg Brockman: GPT-Live to API and Codex</a></li>
+          <li><a href="https://simonwillison.net/2026/Jul/8/introducing-gptlive/">Simon Willison: Introducing GPT-Live</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2074874140776169485#m">Harrison Chase: NemoClaw Deep Agents Blueprint</a></li>
+          <li><a href="https://nitter.net/LangChain/status/2074889720308339025#m">LangChain: Nemotron 3 Ultra tuned Deep Agents cost/performance</a></li>
+          <li><a href="https://www.langchain.com/blog/langchain-and-nvidia-launch-the-nemoclaw-deep-agents-blueprint">LangChain: NemoClaw Deep Agents Blueprint official post</a></li>
+          <li><a href="https://nitter.net/ClementDelangue/status/2074842187011862571#m">Clem Delangue: HF private storage + SkyPilot</a></li>
+          <li><a href="https://huggingface.co/blog/skypilot-hf-storage">Hugging Face: Run AI workloads on any cloud, store on Hugging Face</a></li>
+          <li><a href="https://nitter.net/skypilot_org/status/2074907421835944196#m">SkyPilot: zero-egress HF storage</a></li>
+          <li><a href="https://nitter.net/steeve/status/2074772062023950814#m">ZML/LLMD alpha inference server</a></li>
+          <li><a href="https://nitter.net/PrimeIntellect/status/2074899489190785419#m">Prime Intellect Series A</a></li>
+          <li><a href="https://nitter.net/vincentweisser/status/2074909109229584400#m">Prime Intellect open superintelligence stack thread</a></li>
+          <li><a href="https://nitter.net/swyx/status/2074919183947808881#m">swyx: Cognition SWE-1.7 productionization note</a></li>
+          <li><a href="https://nitter.net/Thom_Wolf/status/2074957639239225834#m">Thomas Wolf: simple harness cost-performance surprise</a></li>
+          <li><a href="https://nitter.net/sh_reya/status/2074973561002115241#m">Shreya Shankar: harnesses only getting bigger</a></li>
+          <li><a href="https://simonwillison.net/2026/Jul/8/kenton-varda/">Simon Willison quoting Kenton Varda on AI-written change descriptions</a></li>
+          <li><a href="https://nitter.net/simonw/status/2074948137182257284#m">Simon Willison: AI commit messages and missing framing</a></li>
+          <li><a href="https://nitter.net/BraceSproul/status/2074930496874889677#m">OpenWiki 0.0.3 update</a></li>
+          <li><a href="https://nitter.net/sh_reya/status/2074921697564938479#m">Shreya Shankar: PromptQL and data agent benchmark</a></li>
+          <li><a href="https://nitter.net/StephanEwen/status/2074868085295640976#m">Restate BYOC launch</a></li>
+          <li><a href="https://www.restate.dev/blog/announcing-restate-byoc">Restate: Announcing BYOC</a></li>
+          <li><a href="https://nitter.net/joshwoodward/status/2074847444823674883#m">Josh Woodward: GeminiApp user feedback</a></li>
+          <li><a href="https://nitter.net/kevinweil/status/2074866941454639200#m">Kevin Weil: Stoke Space board and execution cadence</a></li>
+          <li><a href="https://nitter.net/thenanyu/status/2074907752829223043#m">Nan Yu: product marketing as transmissible story</a></li>
+        </ul>
+      </section>
+
+      <footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer>
+    </main>
+  </body>
+</html>

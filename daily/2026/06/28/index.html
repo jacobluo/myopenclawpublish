@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：前沿模型发布进入监管闸门，Agent 工程继续向成本与治理下沉</title>
+    <meta name="description" content="2026-06-28 Follow List 深度日报：OpenAI GPT-5.6 Sol/Terra/Luna、Anthropic Mythos 5 部分恢复、LangChain Deep Agents、Google AI Studio 部署、开放模型监管争论。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>前沿模型发布进入监管闸门，Agent 工程继续向成本与治理下沉</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-06-27 00:00 UTC 至 2026-06-28 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。抓取优先级按 Status=active、Priority=high、Cadence=daily/weekly/manual 排序，主要使用官方网页、公开 X/Nitter RSS、博客/RSS 与网页搜索。</p>
+        <div class="meta">
+          <span>发布时间：2026-06-28 08:00 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、OpenAI、Anthropic、LangChain、Google AI Studio、Hamel Husain、Nathan Lambert、Hugging Face</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天的主线很清楚：前沿模型不再只是“能力发布”，而是进入了政府审查、分阶段授权、系统卡与安全评估同台出现的新阶段。OpenAI GPT-5.6 Sol/Terra/Luna 预览强调 Codex/API、coding、science、cyber 和长程 agent 能力，但初期只给可信伙伴；Anthropic 则在 6 月 12 日暂停 Fable 5/Mythos 5 后，获得 Mythos 5 面向部分美国关键基础设施组织的恢复通道。工程侧，LangChain 与 Harrison Chase 继续把 Deep Agents 的缓存、子代理、记忆和课程化训练推到前台；Google AI Studio 的“近 20 万个应用部署”说明低门槛 app/agent 生成工具正在进入规模化使用。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. 模型发布开始带监管闸门</h3>
+            <p>OpenAI 与 Anthropic 的最新动作都显示，前沿模型发布正在从产品节奏变成“产品 + 安全评估 + 政府沟通 + 访问许可”的组合流程。</p>
+          </div>
+          <div class="card">
+            <h3>2. Cyber 能力成为发布边界</h3>
+            <p>GPT-5.6 system card、Mythos 5 恢复限制、Fable 5 待恢复，都把 cybersecurity 能力放在模型可用性讨论中心。</p>
+          </div>
+          <div class="card">
+            <h3>3. Agent 工程竞争转向运行经济</h3>
+            <p>LangChain Deep Agents 的 prompt caching、子代理、长期记忆与课程化内容继续说明，框架层的价值正在变成成本、状态、调试和治理。</p>
+          </div>
+          <div class="card">
+            <h3>4. 开放模型叙事卷入监管捕获争论</h3>
+            <p>Nathan Lambert 对开放模型限制与 regulatory capture 的批评值得跟踪。强安全叙事如果只利好闭源大厂，会影响开放生态的长期空间。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>OpenAI：GPT-5.6 Sol/Terra/Luna 进入受限预览，Codex 与 API 先行</h3>
+          <p class="source">来源账号/机构：OpenAI；发布时间：2026-06-27；链接：<a href="https://openai.com/index/previewing-gpt-5-6-sol/">OpenAI 官方文章</a> / <a href="https://help.openai.com/en/articles/20001325-a-preview-of-gpt-56-sol-terra-and-luna">OpenAI Help Center</a> / <a href="https://deploymentsafety.openai.com/gpt-5-6-preview">GPT-5.6 Preview System Card</a></p>
+          <p>OpenAI 公开 GPT-5.6 系列预览，包含旗舰 Sol、较低成本 Terra 与最快/最低成本 Luna。官方帮助文档说明预览阶段覆盖 API 与 Codex，不包含 ChatGPT，并计划在未来数周扩展到 ChatGPT、Codex 与 API 的更广泛可用。</p>
+          <p>这次发布的重点不只是模型性能，而是访问方式。公开信息与媒体报道都指向一个更窄的初期准入：可信伙伴、组织级审批、安全监控和政府沟通并行。对开发者来说，真正要等的是 API 文档、配额、地区限制、价格细节和 Codex 中的实际可用形态。</p>
+          <p class="why"><strong>为什么值得看：</strong>GPT-5.6 把 coding、scientific reasoning、cybersecurity、long-horizon planning 和 agentic workflows 放在同一条产品线里，是 Codex/agent 能力下一阶段的重要锚点。</p>
+          <p class="action"><strong>后续行动：</strong>持续跟踪 GA 日期、Codex 支持方式、缓存/价格文档与 system card 细节；一旦可用，用固定 coding-agent benchmark 测试长任务、工具调用、缓存命中和失败恢复。</p>
+        </div>
+
+        <div class="item">
+          <h3>OpenAI：系统卡强调高能力模型的安全缓释，外界聚焦 cyber 与 bio 风险</h3>
+          <p class="source">来源账号/机构：OpenAI Deployment Safety Hub；发布时间：2026-06-27；链接：<a href="https://deploymentsafety.openai.com/gpt-5-6-preview">GPT-5.6 Preview System Card</a></p>
+          <p>OpenAI 同步发布 GPT-5.6 Preview System Card，说明这一系列模型的安全评估、部署缓释和监控策略。公开摘要提到 GPT-5.6 是 Sol、Terra、Luna 三模型家族，并将安全栈作为发布叙事的一部分。</p>
+          <p>值得注意的是，系统卡本身正在成为产品可用性的核心材料。对企业和开发者来说，模型是否能接入生产，不仅取决于 benchmark，还取决于安全等级、政策边界、确认机制、工具权限和审计能力。</p>
+          <p class="why"><strong>为什么值得看：</strong>前沿模型以后很可能先通过 system card 与受控预览塑造可信度，再逐步扩展使用面。读 system card 将变成 agent 产品选型的必修课。</p>
+          <p class="action"><strong>后续行动：</strong>把 GPT-5.6 system card 与 Anthropic Fable/Mythos 暂停事件并读，整理一份“高能力 agent 模型上线前检查表”：权限、外发、沙箱、日志、人工确认、异常停机。</p>
+        </div>
+
+        <div class="item">
+          <h3>Anthropic：Mythos 5 获得部分恢复，Fable 5 仍待进一步放开</h3>
+          <p class="source">来源账号/机构：AnthropicAI / Anthropic；发布时间：2026-06-27；链接：<a href="https://x.com/AnthropicAI/status/2070665903440871779">Anthropic X 公告</a> / <a href="https://www.anthropic.com/news/fable-mythos-access">6 月 12 日暂停声明</a> / <a href="https://www.axios.com/2026/06/27/commerce-anthropic-mythos-restrictions-lift">Axios 报道</a></p>
+          <p>Anthropic 在 X 上表示，自 6 月 12 日以来一直与美国政府合作恢复 Claude Mythos 5 与 Fable 5 的访问；最新进展是 Mythos 5 可面向一组美国组织恢复部署。多家媒体称范围包括关键基础设施、防御相关组织或受审批实体，Fable 5 的一般恢复仍未完成。</p>
+          <p>这条动态与 OpenAI GPT-5.6 的受限预览构成同一组信号：前沿模型的能力、尤其是 cyber 相关能力，已经足以触发政府介入和分级开放。Anthropic 事件还会影响客户对“模型突然不可用”的风险预期。</p>
+          <p class="why"><strong>为什么值得看：</strong>模型供应链风险不再只是价格、延迟和质量，还包括政策可用性。企业如果把关键流程绑死在单一前沿模型上，可能遭遇非技术性中断。</p>
+          <p class="action"><strong>后续行动：</strong>为核心 agent 工作流设计 fallback：模型替代、能力降级、任务排队、人工接管和缓存结果复用；跟踪 Fable 5 是否恢复以及 Anthropic 对客户补偿/迁移的安排。</p>
+        </div>
+
+        <div class="item">
+          <h3>Harrison Chase / LangChain：Deep Agents 课程与缓存实践继续扩散</h3>
+          <p class="source">来源账号/机构：Harrison Chase / LangChain；发布时间：2026-06-27；链接：<a href="https://nitter.net/hwchase17/status/2070950766815428898#m">Harrison Chase Nitter 镜像</a> / <a href="https://www.langchain.com/blog/deep-agents-prompt-caching">Deep Agents Prompt Caching</a></p>
+          <p>Harrison Chase 转发并推荐了一个 3 小时 Deep Agents 课程，覆盖任务规划、文件系统式上下文管理、子代理生成和长期记忆。当天他还继续强调 Deep Agents 的缓存能力，呼应此前 LangChain 对 prompt caching middleware 的产品化。</p>
+          <p>这说明 LangChain 正在把 Deep Agents 做成一种可教学、可复用的 agent 工程范式，而不只是框架 API。课程内容的四个关键词非常实用：planning、filesystem context、subagents、long-term memory，基本就是长程 agent 的四个核心部件。</p>
+          <p class="why"><strong>为什么值得看：</strong>agent 工程真正落地时，问题往往不在“能不能调用模型”，而在上下文如何长期管理、任务如何拆分、成本如何控制、失败如何复盘。</p>
+          <p class="action"><strong>后续行动：</strong>抽时间看课程目录即可先做笔记；把 OpenClaw/Codex 任务拆成 Deep Agents 风格：planner、workspace files、subagent boundaries、memory write policy。</p>
+        </div>
+
+        <div class="item">
+          <h3>Logan Kilpatrick：Google AI Studio 一个月近 20 万个 app 被部署和分享</h3>
+          <p class="source">来源账号/机构：Logan Kilpatrick / Google AI Studio；发布时间：2026-06-27 03:04 UTC；链接：<a href="https://nitter.net/OfficialLoganK/status/2070704787444887998#m">Nitter 镜像</a></p>
+          <p>Logan Kilpatrick 表示，过去一个月里，接近 20 万个由 Google AI Studio 构建的应用被成功部署并分享，而且是免费完成。他还补充说这与 Google Cloud Run 团队协作有关。</p>
+          <p>这个数字值得看，因为它衡量的不是模型榜单，而是“从想法到部署”的低摩擦程度。Google 如果继续把 AI Studio、Gemini、Cloud Run 和分享链路打通，会直接影响非专业开发者和企业内部小工具的 agent/app 生产方式。</p>
+          <p class="why"><strong>为什么值得看：</strong>AI app builder 的竞争会越来越看重发布链路，而不是只看聊天体验。低门槛部署意味着更多原型会绕过传统软件开发流程直接进入团队试用。</p>
+          <p class="action"><strong>后续行动：</strong>跟踪 Google AI Studio 是否开放更强的后端、鉴权、数据连接和监控能力；与 OpenClaw/GitHub Pages 自动发布工作流做对比。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hamel Husain：GLM 5.2 在 coding harness 中的多模态绕行现象</h3>
+          <p class="source">来源账号/机构：Hamel Husain；发布时间：2026-06-27 04:46 UTC；链接：<a href="https://nitter.net/HamelHusain/status/2070730390915235959#m">Nitter 镜像</a></p>
+          <p>Hamel 提到，GLM 5.2 本身没有 vision capability，但某些 coding harness 会把图片先路由给另一个模型处理，所以用户仍然感觉“能用图像”；而 opencode 会直接提示 GLM 不支持图片。</p>
+          <p>这条短动态很有工程价值：当我们评测 agent 或 coding 工具时，结果可能来自模型能力，也可能来自 harness 的隐藏路由、工具补偿或多模型编排。不同工具给出的“同一个模型表现”不一定可比。</p>
+          <p class="why"><strong>为什么值得看：</strong>agent benchmark 如果不记录 harness 行为，很容易把系统能力误归因给模型本身。开放模型尤其需要透明评测。</p>
+          <p class="action"><strong>后续行动：</strong>以后记录模型评测结果时固定写清楚：模型、工具、harness、是否自动视觉路由、是否调用 fallback、是否使用缓存。</p>
+        </div>
+
+        <div class="item">
+          <h3>Nathan Lambert：开放模型政策争论升温，担心“安全”叙事演化为监管捕获</h3>
+          <p class="source">来源账号/机构：Nathan Lambert；发布时间：2026-06-27 15:28-19:00 UTC；链接：<a href="https://nitter.net/natolambert/status/2070891931362799834#m">Nitter 镜像 1</a> / <a href="https://nitter.net/natolambert/status/2070944386754691121#m">Nitter 镜像 2</a></p>
+          <p>Nathan 连续发帖批评针对开放模型和 distillation 的政治压力，认为其中存在 regulatory capture 风险。他还提到自己因为公开谈论开放模型监管问题，承受了更多负面反馈。</p>
+          <p>这不是一条单纯的情绪帖。结合 OpenAI/Anthropic 的受限发布，未来的政策框架如果按“强能力即高门槛”设计，开放模型、开源工具和小团队可能会承受更高合规成本，而大厂更容易吸收这种成本。</p>
+          <p class="why"><strong>为什么值得看：</strong>开放模型生态的优势是可部署、可审计、可本地化。如果监管把这些优势压到只剩大公司能运营，AI 供应链会更集中。</p>
+          <p class="action"><strong>后续行动：</strong>持续跟踪美国 frontier model 审查流程、distillation 政策、开放权重限制；把“模型能力风险”和“市场集中风险”分开分析。</p>
+        </div>
+
+        <div class="item">
+          <h3>Polymarket 收购 Craft Agents：Agent 产品人才与交易市场结合</h3>
+          <p class="source">来源账号/机构：Hamel Husain 转发 / Gergely Orosz；发布时间：2026-06-27 15:04 UTC；链接：<a href="https://nitter.net/GergelyOrosz/status/2070886113179558157#m">Nitter 镜像</a></p>
+          <p>Hamel 转发 Gergely Orosz 的消息：Polymarket 收购 Craft Agents，Balint Orosz 将负责 Product Engineering。原文还提到 Craft Agents 与 Claude Cowork 有相似理念，并且开源。</p>
+          <p>这条动态的投资线索在于：预测市场/金融交易产品对 agent 工作流天然有需求，包括研究、摘要、监控、下单前分析、风险提示和事件响应。Craft Agents 的产品工程经验可能帮助 Polymarket 做更强的自动化用户工作流。</p>
+          <p class="why"><strong>为什么值得看：</strong>Agent startup 的退出路径不只面向模型公司，也可能进入金融、数据、市场情报和垂直 SaaS。</p>
+          <p class="action"><strong>后续行动：</strong>查看 Craft Agents 开源项目与 Polymarket 后续招聘/产品更新，判断它是内部生产力工具还是用户侧 agent 功能。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>OpenAI：</strong>GPT-5.6 系列受限预览成为今日最高优先级信号，Codex/API 先行，ChatGPT 暂未纳入预览。</li>
+          <li><strong>Anthropic：</strong>Mythos 5 获得部分恢复，Fable 5 仍待后续；模型可用性风险值得企业重新评估。</li>
+          <li><strong>Harrison Chase / LangChain：</strong>继续围绕 Deep Agents 的缓存、课程、子代理和记忆输出实践信号。</li>
+          <li><strong>Logan Kilpatrick / Google AI Studio：</strong>用“近 20 万 app 部署”展示 AI Studio 到 Cloud Run 的低门槛发布能力。</li>
+          <li><strong>Hamel Husain：</strong>提醒评测 coding harness 时要区分模型能力与工具路由能力。</li>
+          <li><strong>Nathan Lambert：</strong>把开放模型监管与 regulatory capture 风险推到前台，值得持续跟踪。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>GPT-5.6 Codex 可用性：</strong>关注是否进入普通 Codex、API 如何申请、是否有地区或组织限制。</li>
+          <li><strong>高能力模型 fallback：</strong>为 OpenClaw/Codex 关键任务设计模型替换、排队、降级和人工接管方案。</li>
+          <li><strong>Deep Agents 课程：</strong>提炼 planning、filesystem context、subagents、long-term memory 四块作为本地 agent 工作流模板。</li>
+          <li><strong>Google AI Studio 部署链路：</strong>观察是否成为非工程用户生成内部 app/agent 的主入口。</li>
+          <li><strong>开放模型评测记录格式：</strong>为 GLM/Qwen/Gemma 等模型测试固定记录 harness、工具路由、视觉 fallback、缓存与成本。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>GPT-5.6 的完整价格、缓存行为、地区限制和一般可用时间仍以 OpenAI 后续 API 文档为准。</li>
+          <li>Anthropic Mythos 5 恢复范围来自公开公告与媒体报道，具体组织名单、许可条件和 Fable 5 时间线仍需官方后续确认。</li>
+          <li>Google AI Studio “近 20 万 app”是 Logan Kilpatrick 的公开表述，未见更细分的活跃使用、留存或生产使用数据。</li>
+          <li>Hamel 关于 GLM 5.2 的 harness 路由观察需要按具体工具复现，不能泛化到所有 coding agent 工具。</li>
+          <li>Nitter/RSS 镜像可用性不稳定，可能漏掉部分 X-only 动态；本报告避免使用无法交叉核验的私密或登录态信息。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul class="noise">
+          <li>大量 GPT-5.6 二手解读重复“更强、更安全、受限发布”，除非提供官方文档或新细节，本轮不展开。</li>
+          <li>课程、活动、转发类 agent 内容很多，优先保留与 Deep Agents 工程结构直接相关的内容。</li>
+          <li>开放模型政策争论情绪较重，报告只保留与监管、开放生态和供应链集中度相关的分析线索。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul>
+          <li><a href="https://openai.com/index/previewing-gpt-5-6-sol/">OpenAI: Previewing GPT-5.6 Sol</a></li>
+          <li><a href="https://help.openai.com/en/articles/20001325-a-preview-of-gpt-56-sol-terra-and-luna">OpenAI Help Center: GPT-5.6 Sol, Terra, Luna preview</a></li>
+          <li><a href="https://deploymentsafety.openai.com/gpt-5-6-preview">OpenAI Deployment Safety Hub: GPT-5.6 Preview System Card</a></li>
+          <li><a href="https://x.com/OpenAI/status/2070555273467687257">OpenAI X: broader availability in coming weeks</a></li>
+          <li><a href="https://x.com/AnthropicAI/status/2070665903440871779">AnthropicAI X: Mythos/Fable access update</a></li>
+          <li><a href="https://www.anthropic.com/news/fable-mythos-access">Anthropic: Statement on Fable 5 and Mythos 5 access</a></li>
+          <li><a href="https://www.axios.com/2026/06/27/commerce-anthropic-mythos-restrictions-lift">Axios: Commerce Department greenlights limited return of Anthropic's Mythos</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2070950766815428898#m">Harrison Chase: Deep Agents course</a></li>
+          <li><a href="https://www.langchain.com/blog/deep-agents-prompt-caching">LangChain: Prompt Caching with Deep Agents</a></li>
+          <li><a href="https://nitter.net/OfficialLoganK/status/2070704787444887998#m">Logan Kilpatrick: Google AI Studio app deployments</a></li>
+          <li><a href="https://nitter.net/HamelHusain/status/2070730390915235959#m">Hamel Husain: GLM 5.2 and vision routing</a></li>
+          <li><a href="https://nitter.net/natolambert/status/2070891931362799834#m">Nathan Lambert: regulatory capture comment</a></li>
+          <li><a href="https://nitter.net/GergelyOrosz/status/2070886113179558157#m">Gergely Orosz: Polymarket acquired Craft Agents</a></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

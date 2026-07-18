@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loop Engineering 海报</title>
+    <style>
+      * { box-sizing: border-box; }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #111318;
+        color: #16191f;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      body {
+        display: grid;
+        place-items: start center;
+      }
+
+      .stage {
+        width: min(100vw, 1200px);
+        height: min(133.333vw, 1600px);
+        overflow: hidden;
+      }
+
+      .poster {
+        width: 1200px;
+        height: 1600px;
+        overflow: hidden;
+        background:
+          linear-gradient(#eef0f4 1px, transparent 1px),
+          linear-gradient(90deg, #eef0f4 1px, transparent 1px),
+          #faf9f4;
+        background-size: 40px 40px;
+        transform-origin: top left;
+        transform: scale(var(--scale, 1));
+      }
+
+      .inner {
+        height: 100%;
+        padding: 42px 76px 34px;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 12px;
+      }
+
+      .topline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #4b5565;
+        font-size: 18px;
+        font-weight: 750;
+      }
+
+      .brand {
+        color: #16191f;
+        font-size: 23px;
+        font-weight: 900;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 42px;
+        align-items: end;
+        padding: 10px 0 16px;
+        border-bottom: 4px solid #16191f;
+      }
+
+      h1 {
+        margin: 0;
+        color: #16191f;
+        font-size: 66px;
+        line-height: 0.96;
+        font-weight: 950;
+        letter-spacing: 0;
+      }
+
+      .deck {
+        margin-top: 14px;
+        max-width: 760px;
+        color: #334155;
+        font-size: 22px;
+        line-height: 1.42;
+        font-weight: 720;
+      }
+
+      .thesis {
+        border: 3px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 18px 20px;
+        box-shadow: 10px 10px 0 #16191f;
+      }
+
+      .thesis .label {
+        color: #a54a1f;
+        font-size: 15px;
+        font-weight: 950;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .thesis p {
+        margin: 10px 0 0;
+        font-size: 19px;
+        line-height: 1.42;
+        font-weight: 900;
+      }
+
+      .body {
+        min-height: 0;
+        display: grid;
+        grid-template-rows: 220px 210px 255px 210px 128px;
+        gap: 10px;
+      }
+
+      .band {
+        display: grid;
+        grid-template-columns: 112px 1fr;
+        gap: 14px;
+        min-height: 0;
+      }
+
+      .band-head {
+        border: 3px solid #16191f;
+        border-radius: 8px;
+        background: #16191f;
+        color: #ffffff;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .band-head .num {
+        color: #f7d96f;
+        font-size: 46px;
+        line-height: 1;
+        font-weight: 950;
+      }
+
+      .band-head h2 {
+        display: block;
+        margin: 0;
+        color: inherit;
+        font-size: 24px;
+        line-height: 1.08;
+        letter-spacing: 0;
+        font-weight: 950;
+      }
+
+      .band-body {
+        min-height: 0;
+        display: grid;
+        gap: 14px;
+      }
+
+      .cards-5 {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .cards-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .cards-2 {
+        grid-template-columns: 1.04fr 0.96fr;
+      }
+
+      .card {
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 14px;
+        min-width: 0;
+      }
+
+      .card.blue { background: #e9f0ff; }
+      .card.green { background: #e8f4ed; }
+      .card.amber { background: #fff3d7; }
+      .card.red { background: #ffe9e4; }
+      .card.soft { background: #f4f0e4; }
+      .card.dark {
+        background: #16191f;
+        color: #ffffff;
+      }
+
+      .kicker {
+        color: #6b7280;
+        font-size: 13px;
+        line-height: 1.1;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .card h3 {
+        margin: 7px 0 7px;
+        color: #16191f;
+        font-size: 18px;
+        line-height: 1.14;
+        letter-spacing: 0;
+      }
+
+      .card.dark h3,
+      .card.dark p {
+        color: #ffffff;
+      }
+
+      .card p {
+        margin: 0;
+        color: #414956;
+        font-size: 14px;
+        line-height: 1.34;
+        font-weight: 620;
+      }
+
+      .mini-flow {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 9px;
+        align-items: stretch;
+      }
+
+      .node {
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 11px;
+        min-width: 0;
+      }
+
+      .node .mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        color: #ffffff;
+        background: #2d6cdf;
+        font-size: 17px;
+        font-weight: 950;
+      }
+
+      .node:nth-child(2) .mark { background: #1f8a5b; }
+      .node:nth-child(3) .mark { background: #b7791f; }
+      .node:nth-child(4) .mark { background: #bb4d2a; }
+      .node:nth-child(5) .mark { background: #6f54c7; }
+
+      .node strong {
+        display: block;
+        margin-top: 9px;
+        font-size: 18px;
+        line-height: 1.18;
+      }
+
+      .node span {
+        display: block;
+        margin-top: 4px;
+        color: #566172;
+        font-size: 12px;
+        line-height: 1.25;
+        font-weight: 700;
+      }
+
+      .equation {
+        border: 3px solid #16191f;
+        border-radius: 8px;
+        background: #16191f;
+        color: #ffffff;
+        padding: 16px;
+        font-size: 22px;
+        line-height: 1.38;
+        font-weight: 950;
+      }
+
+      .equation span {
+        color: #f7d96f;
+      }
+
+      .compare {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1.08fr;
+        gap: 14px;
+      }
+
+      .relation-map {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2px;
+        margin: 6px 0 0;
+      }
+
+      .relation-row {
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 5px 7px;
+        display: grid;
+        grid-template-columns: 82px 1fr;
+        gap: 6px;
+        align-items: center;
+      }
+
+      .relation-row strong {
+        display: block;
+        color: #16191f;
+        font-size: 11px;
+        line-height: 1.1;
+        font-weight: 950;
+      }
+
+      .relation-row span {
+        display: block;
+        color: #526071;
+        font-size: 10px;
+        line-height: 1.12;
+        font-weight: 730;
+      }
+
+      .relation-link {
+        color: #16191f;
+        font-size: 8px;
+        line-height: 1;
+        font-weight: 900;
+        text-align: center;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .practice {
+        display: grid;
+        grid-template-columns: 0.86fr 1.14fr;
+        gap: 14px;
+      }
+
+      .impl {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: 14px;
+      }
+
+      .stack {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+      }
+
+      .block {
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 10px 9px;
+        min-width: 0;
+      }
+
+      .block strong {
+        display: block;
+        color: #16191f;
+        font-size: 14px;
+        line-height: 1.12;
+        font-weight: 950;
+      }
+
+      .block span {
+        display: block;
+        margin-top: 5px;
+        color: #526071;
+        font-size: 10px;
+        line-height: 1.18;
+        font-weight: 720;
+      }
+
+      .route {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .level {
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 12px;
+      }
+
+      .level strong {
+        display: block;
+        color: #16191f;
+        font-size: 18px;
+        line-height: 1.1;
+        font-weight: 950;
+      }
+
+      .level span {
+        display: block;
+        margin-top: 7px;
+        color: #3d4654;
+        font-size: 12px;
+        line-height: 1.24;
+        font-weight: 720;
+      }
+
+      .checklist {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .check {
+        display: grid;
+        grid-template-columns: 26px 1fr;
+        gap: 8px;
+        align-items: start;
+      }
+
+      .check i {
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: #16191f;
+        color: #ffffff;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 950;
+      }
+
+      .check div {
+        color: #2f3744;
+        font-size: 14px;
+        line-height: 1.34;
+        font-weight: 730;
+      }
+
+      .case {
+        display: grid;
+        grid-template-columns: 112px 1fr;
+        gap: 14px;
+        min-height: 0;
+      }
+
+      .case .band-head {
+        background: #f7d96f;
+        color: #16191f;
+      }
+
+      .case .band-head .num {
+        color: #bb4d2a;
+      }
+
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 9px;
+      }
+
+      .case-step {
+        border: 2px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 10px 9px;
+      }
+
+      .case-step strong {
+        display: block;
+        color: #16191f;
+        font-size: 15px;
+        line-height: 1.15;
+      }
+
+      .case-step span {
+        display: block;
+        margin-top: 6px;
+        color: #526071;
+        font-size: 11px;
+        line-height: 1.28;
+        font-weight: 680;
+      }
+
+      .footer {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: end;
+        padding-top: 12px;
+        border-top: 4px solid #16191f;
+      }
+
+      .sources {
+        color: #4b5565;
+        font-size: 13px;
+        line-height: 1.42;
+        font-weight: 660;
+      }
+
+      .stamp {
+        border: 3px solid #16191f;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 10px 14px;
+        font-size: 17px;
+        font-weight: 950;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <article class="poster">
+        <div class="inner">
+          <div>
+            <div class="topline">
+              <div class="brand">OpenClaw Research Poster</div>
+              <div>2026-06-28 · AI Agent 工程方法论</div>
+            </div>
+            <header>
+              <div>
+                <h1>Loop Engineering</h1>
+                <div class="deck">把 Agent 从一次对话，变成可维护、可观察、可回放的任务闭环。</div>
+              </div>
+              <div class="thesis">
+                <div class="label">Core thesis</div>
+        <p>Loop 不是更长的 prompt；它是带模型能力、预算和审计边界的任务运行时。</p>
+              </div>
+            </header>
+          </div>
+
+          <main class="body">
+            <section class="band">
+              <div class="band-head">
+                <div class="num">01</div>
+                <h2>基础知识</h2>
+              </div>
+              <div class="band-body">
+                <div class="mini-flow">
+                  <div class="node"><div class="mark">1</div><strong>发现</strong><span>从 CI、PR、issue、日志或定时任务找到下一步。</span></div>
+                  <div class="node"><div class="mark">2</div><strong>计划</strong><span>决定分给谁、先做什么、用哪些工具和预算。</span></div>
+                  <div class="node"><div class="mark">3</div><strong>执行</strong><span>把任务交给 Agent、CLI、脚本或子代理处理。</span></div>
+                  <div class="node"><div class="mark">4</div><strong>验证</strong><span>用测试、证据、独立 reviewer 判断是否跑偏。</span></div>
+                  <div class="node"><div class="mark">5</div><strong>记录</strong><span>写回 state、run log、artifact、失败原因和下一步。</span></div>
+                </div>
+                <div class="equation">不是你去 prompt agent，<span>而是设计那个会 prompt agent 的 loop</span></div>
+              </div>
+            </section>
+
+            <section class="band">
+              <div class="band-head">
+                <div class="num">02</div>
+                <h2>对比关系</h2>
+              </div>
+              <div class="band-body compare">
+                <div class="card blue">
+                  <div class="kicker">Harness</div>
+                  <h3>单次执行的可靠性</h3>
+                  <p>关注一次 run：prompt、tools、sandbox、context policy、hooks、tests、output schema。核心问题：这次执行是否可控、可复现、可回滚。</p>
+                </div>
+                <div class="card green">
+                  <div class="kicker">Loop</div>
+                  <h3>跨时间的持续运营</h3>
+                  <p>关注多次 run：scheduler、state store、budget、queue、verification、notification、handoff、learning。核心问题：系统能否持续推进并停止。</p>
+                </div>
+                <div class="card amber">
+                  <div class="kicker">Relationship</div>
+                  <h3>不是二选一</h3>
+                  <div class="relation-map">
+                    <div class="relation-row"><strong>Environment</strong><span>定义可见世界、权限边界、失败成本</span></div>
+                    <div class="relation-link">constrains</div>
+                    <div class="relation-row"><strong>Harness</strong><span>承载一次 Agent run：工具、沙箱、测试</span></div>
+                    <div class="relation-link">scheduled by</div>
+                    <div class="relation-row"><strong>Loop</strong><span>调度多次 run；回写状态、指标、handoff</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="band">
+              <div class="band-head">
+                <div class="num">03</div>
+                <h2>具体实现</h2>
+              </div>
+              <div class="band-body impl">
+                <div class="card blue">
+                  <div class="kicker">Runtime sketch</div>
+                  <h3>CLI 调度 + LangGraph 状态流</h3>
+                  <p>外层用 cron / GitHub Actions / openclaw cron 周期触发；内层用 State、Node、Edge 建模 collect → classify → draft → verify → commit / handoff。每轮都读取 repo、CI、PR、issue、STATE.md，并写入 run log。</p>
+                </div>
+                <div class="card amber">
+                  <div class="kicker">Loop plumbing</div>
+                  <h3>五块工程积木</h3>
+                  <div class="stack">
+                    <div class="block"><strong>自动化</strong><span>重复跑；空结果归档；有结果进 triage。</span></div>
+                    <div class="block"><strong>隔离仓</strong><span>独立 checkout，避免任务互相踩文件。</span></div>
+                    <div class="block"><strong>技能</strong><span>项目规则、流程、脚本和资产写下来。</span></div>
+                    <div class="block"><strong>子代理</strong><span>research / write / verify 分开权限。</span></div>
+                    <div class="block"><strong>状态</strong><span>phase、evidence、attempt、budget 外置。</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="band">
+              <div class="band-head">
+                <div class="num">04</div>
+                <h2>实践落地</h2>
+              </div>
+              <div class="band-body practice">
+                <div class="card red">
+                  <div class="kicker">Rollout</div>
+                  <h3>先可信，再自动</h3>
+                  <div class="route">
+                    <div class="level"><strong>L1</strong><span>只读、归类、写报告、提醒。</span></div>
+                    <div class="level"><strong>L2</strong><span>可开低风险 PR，但不自动合并。</span></div>
+                    <div class="level"><strong>L3</strong><span>allowlist 内半无人值守，强 gate。</span></div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="kicker">Guardrails</div>
+                  <h3>必须显式写进系统</h3>
+                  <div class="checklist">
+                    <div class="check"><i>1</i><div>读写分级：读日志自动；写评论、开 PR、改配置进审批。</div></div>
+                    <div class="check"><i>2</i><div>副作用后置：collect / classify / draft / verify 之后再提交。</div></div>
+                    <div class="check"><i>3</i><div>停止条件：done、blocked、over budget、low confidence。</div></div>
+                    <div class="check"><i>4</i><div>指标：误报率、遗漏率、人工接管率、token 成本、恢复时间。</div></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="case">
+              <div class="band-head">
+                <div class="num">05</div>
+                <h2>案例</h2>
+              </div>
+              <div class="timeline">
+                <div class="case-step"><strong>触发</strong><span>CI job failed；写入 runId、repo、commit、PR、owner。</span></div>
+                <div class="case-step"><strong>收集</strong><span>拉取失败日志、最近 diff、依赖变更、历史相似失败。</span></div>
+                <div class="case-step"><strong>分类</strong><span>test / dependency / permission / infra / flaky / unknown。</span></div>
+                <div class="case-step"><strong>建议</strong><span>输出证据链、影响面、修复方向、可执行命令。</span></div>
+                <div class="case-step"><strong>验证</strong><span>复跑最小测试；权限、部署、账单、生产配置直接 handoff。</span></div>
+                <div class="case-step"><strong>提交</strong><span>L1 发分流报告；L2 开候选 PR；trace 进入后续规则改进。</span></div>
+              </div>
+            </section>
+          </main>
+
+          <footer class="footer">
+            <div class="sources">
+              基于 15 张 Loop Engineering 图片资料与站内报告整理：Addy Osmani、OpenAI Codex Automations/Worktrees/Skills、Claude Code、LangGraph、loop-audit / loop-init / loop-cost。<br>
+              适合沉淀为 agent-loop-runtime-audit skill，用于审查长任务 Agent 是否具备闭环骨架。
+            </div>
+            <div class="stamp">pages.cobuddy.cc</div>
+          </footer>
+        </div>
+      </article>
+    </div>
+    <script>
+      const stage = document.querySelector(".stage");
+      const poster = document.querySelector(".poster");
+      const resize = () => {
+        const scale = Math.min(stage.clientWidth / 1200, stage.clientHeight / 1600);
+        poster.style.setProperty("--scale", scale);
+      };
+      addEventListener("resize", resize);
+      resize();
+    </script>
+  </body>
+</html>

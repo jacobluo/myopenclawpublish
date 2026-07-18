@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：代码 Agent 进入成本、知识库与可参与治理阶段</title>
+    <meta name="description" content="2026-07-03 Follow List 深度日报：LangSmith coding agent 成本治理、OpenWiki 后续反馈、Simon Willison Fable coding agent 实验、DSPy 评测 SQL prompts、Hugging Face/Cerebras 实时语音、Fchollet 符号世界模型、开放模型主权与 agent 协调问题。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>代码 Agent 进入成本、知识库与可参与治理阶段</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-07-02 00:00 UTC 至 2026-07-03 00:20 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。抓取优先级按 Status=active、Priority=high、Cadence=daily/weekly/manual 排序，主要使用公开 Nitter RSS、官方博客/RSS、公开网页与来源自带 sitemap。</p>
+        <div class="meta">
+          <span>发布时间：2026-07-03 08:20 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、LangChain、Simon Willison、Hugging Face、公开 X/Nitter RSS、Anthropic 新闻页、explainx.ai sitemap</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天没有单一“大模型发布”压倒全场，主线更工程化：代码 agent 的成本、trace 和失败改进开始被产品化；repo wiki 从发布转入真实开发者试用反馈；Simon Willison 连发 Fable 5 实验，把 coding agent 从“神秘自动化”拉回可读、可改、可评测的小工具；Hugging Face/Cerebras 的实时语音开放栈和 Fchollet 的符号世界模型讨论，则分别把 agent 的交互延迟和长期推理形态推到前台。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. Coding agent 成本需要统一 trace</h3>
+            <p>团队一旦同时使用 Claude Code、Codex、Cursor、Copilot、OpenCode 等工具，成本和行为会分散在不同日志格式里，治理必须先统一观测层。</p>
+          </div>
+          <div class="card">
+            <h3>2. Repo 知识库开始从概念进入试用</h3>
+            <p>OpenWiki 的后续反馈显示，自动生成和持续更新 repo wiki 已经是 coding agent 的实用基础设施，而不只是文档自动化。</p>
+          </div>
+          <div class="card">
+            <h3>3. Agent 参与感比全自动更重要</h3>
+            <p>Simon 的“understand to participate”强调，人类需要理解 agent 正在改什么，才能继续提出好下一步，避免项目积累认知债。</p>
+          </div>
+          <div class="card">
+            <h3>4. 开放栈继续向语音、边缘和主权叙事扩展</h3>
+            <p>Hugging Face/Cerebras 实时语音、Qualcomm-HF 合作、Clem 的开放模型表态共同指向：开放模型竞争不只在文本能力，也在部署控制权。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>LangChain：把 coding agent 账单问题拆成跨工具 trace 与成本归因</h3>
+          <p class="source">来源账号/机构：LangChain / Harrison Chase；发布时间：2026-07-02 20:47 UTC；链接：<a href="https://www.langchain.com/blog/fix-your-coding-agent-bill">Your coding agent bill doubled. Here’s how to fix it.</a></p>
+          <p>LangChain 发布 coding agent 成本治理文章，核心问题是团队很快会同时使用 Claude Code、Codex、Cursor、Copilot、Pi、OpenCode 等工具，但这些工具的日志、trace 和会话结构各不相同。文章主张用 LangSmith 把不同 coding agent 的活动映射到同一套 trace tree、metadata 和查询语法，从而定位账单增长来自哪个工具、哪类任务、哪个失败循环。</p>
+          <p>这条更新延续昨天的 Harbor / eval / OpenWiki 组合：coding agent 不再只是个人效率工具，而是团队级生产系统。进入生产系统后，最先暴露的不是“能不能写代码”，而是成本、失败模式、上下文重复加载和多工具不可比。</p>
+          <p class="why"><strong>为什么值得看：</strong>如果一个团队的 agent 使用量从个人试验扩展到多人协作，账单飙升通常不是单价问题，而是缺少归因和反馈回路。统一 trace 是后续做 eval、缓存、任务路由和模型选择的前置条件。</p>
+          <p class="action"><strong>后续行动：</strong>为 OpenClaw/Codex 工作流设计一份最小 trace schema：任务、模型、工具调用、文件变更、失败重试、人工介入、估算成本和最终结果，先不绑定供应商。</p>
+        </div>
+
+        <div class="item">
+          <h3>OpenWiki 后续反馈：repo wiki 正在变成 coding agent 的外部记忆</h3>
+          <p class="source">来源账号/机构：LangChain / Harrison Chase 转发线；发布时间：2026-07-02 15:21-20:19 UTC；链接：<a href="https://www.langchain.com/blog/introducing-openwiki-an-open-source-agent-for-repo-documentation">OpenWiki 官方文章</a> / <a href="https://github.com/langchain-ai/openwiki/blob/main/examples/openwiki-update.yml">OpenWiki update workflow</a></p>
+          <p>OpenWiki 发布后，Harrison Chase 线索里出现了两类有价值反馈：一是开发者把它丢到真实 repo 上试跑，认为它能较好平衡细节和简洁；二是项目方强调 OpenWiki 可以在后台运行，生成 docs、更新 AGENTS.md，并通过 GitHub workflow 夜间更新 wiki。</p>
+          <p>这说明 OpenWiki 的产品定位不是替代 README，而是给 agent 建一个可维护的 repo context 层。AGENTS.md 只保存入口和读法，复杂的模块关系、代码路径、约定和变更历史放进 wiki，并随 commit 自动刷新。</p>
+          <p class="why"><strong>为什么值得看：</strong>长期 agent 质量很大程度取决于“它是否每次都重新摸索代码库”。OpenWiki 把外部记忆、文档漂移和 agent onboarding 放到同一个问题里，是值得跟踪的基础设施方向。</p>
+          <p class="action"><strong>后续行动：</strong>挑一个非敏感 repo 试跑 OpenWiki，重点观察三件事：是否写入过多 AGENTS.md 噪音、夜间更新是否产生错误文档、Codex 是否真的会优先使用 wiki。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison：用 Fable 5 近似 one-shot 写出 llm-coding-agent</h3>
+          <p class="source">来源账号/机构：Simon Willison；发布时间：2026-07-02 19:33 UTC；链接：<a href="https://simonwillison.net/2026/Jul/2/llm-coding-agent/">llm-coding-agent 0.1a0</a></p>
+          <p>Simon 发布 <code>llm-coding-agent</code> 0.1a0，这是一个构建在他 LLM Python library 之上的简单 coding agent。他把它作为 Fable 5 实验的一部分，重点不是宣称替代成熟工具，而是展示一个小型、可读、可拆开的 coding agent 应该如何组织命令行、模型调用和文件改动。</p>
+          <p>这条更新的价值在于“降低神秘感”。当前 coding agent 讨论容易被大型产品和封闭运行时主导，Simon 的实验把 agent 还原成普通工程师可以读源码、装依赖、跑命令、看行为的小工具。</p>
+          <p class="why"><strong>为什么值得看：</strong>对理解 Codex/Claude Code 的基本骨架有教育价值。一个小 agent 的失败模式更容易观察：怎么选文件、怎么传上下文、怎么执行命令、怎么避免危险操作、怎么把结果展示给人。</p>
+          <p class="action"><strong>后续行动：</strong>下载源码做一次快速走读，比较它与 Codex 当前工具循环的差异，特别是文件编辑、安全确认、测试运行和多轮修正部分。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison：用 DSPy 评估和改进 Datasette Agent 的 SQL system prompts</h3>
+          <p class="source">来源账号/机构：Simon Willison；发布时间：2026-07-02 18:25 UTC；链接：<a href="https://simonwillison.net/2026/Jul/2/dspy-datasette-agent-prompts/">Using DSPy to evaluate and improve Datasette Agent's SQL system prompts</a></p>
+          <p>Simon 记录了一个更贴近日常工程的 agent 改进实验：用 DSPy 评估和改进 Datasette Agent 的 SQL system prompts。这个方向不是追求更花哨的 agent UI，而是把 prompt 当成可测、可比较、可迭代的工程对象。</p>
+          <p>和 LangChain 的 coding-agent eval 线索放在一起看，今天的共识很明确：agent 质量提升不应靠感觉调 prompt，而要有任务集、失败样本、自动评测和可追踪版本变化。</p>
+          <p class="why"><strong>为什么值得看：</strong>SQL agent 是高风险又高价值场景，错误查询可能给出漂亮但错的结论。用 DSPy 这类工具把系统提示词放进评测回路，能把“提示词手艺”转成可复盘的工程资产。</p>
+          <p class="action"><strong>后续行动：</strong>为 Follow 日报的“筛选重点更新”环节建立小型 eval：给定候选链接和摘要，评测是否选中高价值 agent/research/infra 线索，并记录漏选与误选。</p>
+        </div>
+
+        <div class="item">
+          <h3>“Understand to participate”：协作 agent 需要降低认知债</h3>
+          <p class="source">来源账号/机构：Simon Willison / Geoffrey Litt 相关讨论；发布时间：2026-07-02 17:07 UTC；链接：<a href="https://simonwillison.net/2026/Jul/2/understand-to-participate/">Understand to participate</a></p>
+          <p>Simon 写下“understand to participate”这组框架，回应 agent 在大型项目中快速生成复杂改动带来的认知债。核心意思是，人类不是只等 agent 交付结果；人类必须理解系统和当前变更，才能有效提出下一步、判断方向和避免被自动化拖着走。</p>
+          <p>这与今天 Nan Yu 转发的“大家都更快，但朝不同方向移动”互相印证。agent 增加了个体吞吐，但团队若缺少协调结构，会放大 code thrash、agentic drift 和方向分叉。</p>
+          <p class="why"><strong>为什么值得看：</strong>这是 agent 管理的产品原则：真正的效率不是把人从 loop 中移走，而是让人用更少成本理解关键状态并参与决策。</p>
+          <p class="action"><strong>后续行动：</strong>在长任务报告模板中强制保留“我改了什么、为什么、还有哪些不确定”的短摘要，避免 agent 交付一堆 diff 后让人从零恢复上下文。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hugging Face / Cerebras：开放实时语音栈继续发酵</h3>
+          <p class="source">来源账号/机构：Thomas Wolf / Clem Delangue / Hugging Face；发布时间：2026-07-02 23:31 UTC；链接：<a href="https://huggingface.co/blog/cerebras-gemma4-voice-ai">Hugging Face and Cerebras bring Gemma 4 to real-time voice AI</a> / <a href="https://huggingface.co/spaces/smolagents/hf-realtime-voice">demo Space</a></p>
+          <p>Thomas Wolf 和 Clem Delangue 放大 Hugging Face 与 Cerebras 的实时 voice demo：用开放模型和可替换组件组成 speech-to-speech 流水线，强调端到端低延迟、可 fork、可修改。官方博客介绍的级联架构包括 ASR、Gemma 4 推理和 TTS，不把语音 agent 绑定在单一闭源大模型里。</p>
+          <p>这条线索对 OpenClaw 有直接启发。语音交互不像文本聊天，P95 延迟和打断体验决定产品是否自然；如果开放栈能达到接近实时，就会降低个人助理、机器人和现场工作流对闭源语音平台的依赖。</p>
+          <p class="why"><strong>为什么值得看：</strong>开放模型的竞争正在从“分数够不够”转到“能否在真实交互链路里跑得动”。实时语音是 agent 从屏幕走向环境的重要入口。</p>
+          <p class="action"><strong>后续行动：</strong>记录 demo 可用性、延迟、部署需求和 API 边界；若后续要做 OpenClaw 语音节点，可把它列为候选技术栈之一。</p>
+        </div>
+
+        <div class="item">
+          <h3>Fchollet：AI 可能收敛到“直觉引导的符号世界建模”</h3>
+          <p class="source">来源账号/机构：Francois Chollet；发布时间：2026-07-02 20:29-20:33 UTC；链接：<a href="https://nitter.net/fchollet/status/2072779641639875048#m">公开帖起点</a></p>
+          <p>Fchollet 连续讨论未来 AI 形态，认为很多系统会走向由深度学习直觉引导的符号世界建模，也就是用模型帮助进行程序综合和紧凑、可复用的世界模型构建。他补充说，短期内 LLM/LRM 仍是最好的 intuition guidance 和 codegen 方式，长期即使不是推理本体，也仍是人机沟通所需的语言模型。</p>
+          <p>这条观点与 ARC-AGI 主线一致，也和今天 agent 工程实践相互呼应：我们已经看到大量工作流变成“模型写/改程序，程序处理世界，模型再做归纳”的混合形态。</p>
+          <p class="why"><strong>为什么值得看：</strong>它为 Agentic MapReduce、DocETL、RLM、DSPy 这类系统提供了更高层解释：模型不是单独完成所有推理，而是在符号结构、程序和环境中充当搜索与生成的引导器。</p>
+          <p class="action"><strong>后续行动：</strong>后续跟踪 ARC-AGI-3 强 contender 是否确实采用 LRM-guided harness / symbolic program 操作路线，避免只看模型榜单。</p>
+        </div>
+
+        <div class="item">
+          <h3>开放模型与主权 AI：Hugging Face 线索继续升温</h3>
+          <p class="source">来源账号/机构：Clem Delangue / Thomas Wolf / Qualcomm-HF 相关转发；发布时间：2026-07-02 18:24-22:18 UTC；链接：<a href="https://nitter.net/ClementDelangue/status/2072780808679547313#m">Clem 公开帖</a> / <a href="https://nitter.net/cristianoamon/status/2072748263208616222#m">Qualcomm-HF 合作线索</a></p>
+          <p>Clem Delangue 用“Summer of Open-source AI”概括当前气氛，并多次转发开放模型、模型主权、Qualcomm-HF 端云协作和 Rampart 隐私模型的线索。Thomas Wolf 也转发美国政府客户开始切向开源 AI 的报道讨论。</p>
+          <p>这里需要克制判断：部分内容是观点或媒体报道，不等同于已验证采购趋势。但它们反映出开放模型讨论正从研究社区扩展到政府、金融、隐私、边缘设备和生产权重控制。</p>
+          <p class="why"><strong>为什么值得看：</strong>对投资和产业链观察而言，开放模型不只是 Hugging Face 的社区叙事，而是会影响芯片、端侧部署、企业合规、数据主权和推理成本结构。</p>
+          <p class="action"><strong>后续行动：</strong>把“开放模型生产部署”单独做观察标签，区分三类证据：官方合作公告、客户案例、社交媒体观点。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>Harrison Chase / LangChain：</strong>继续围绕 OpenWiki、coding agent 成本治理、LangSmith Engine 和 eval loop 打组合拳，方向非常明确：agent 生产化需要记忆、trace、eval 和持续改进。</li>
+          <li><strong>Simon Willison：</strong>今天高产输出多个 Fable/coding agent 实验，价值在于把 agent 能力变成可读源码、可复现实验和可评测 prompt。</li>
+          <li><strong>Hamel Husain：</strong>继续提供 AI 工程“品味”线索，强调非人工写作的空洞感和工程术语泛化问题；其中部分是观点噪音，但对识别 slop 有用。</li>
+          <li><strong>Nan Yu：</strong>放大 agent/human 协调问题，提醒团队可能出现“每个人都更快，但方向更散”的工程组织风险。</li>
+          <li><strong>Hugging Face / Clem / Thomas Wolf：</strong>开放模型、实时语音、端云协作和主权 AI 叙事继续集中出现，是今天开放生态主线。</li>
+          <li><strong>Francois Chollet：</strong>把 ARC/符号建模观点继续推进到 LRM-guided harness 和程序综合，对理解下一代推理系统有启发。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>OpenClaw trace schema：</strong>先做最小版本，统一记录任务、工具调用、文件变更、运行命令、失败重试和最终链接。</li>
+          <li><strong>OpenWiki 实测：</strong>找一个公开 repo 跑 nightly wiki 更新，评估它对 Codex/Claude Code 的上下文帮助是否超过维护成本。</li>
+          <li><strong>Simon 的 llm-coding-agent：</strong>做源码走读，记录一个极简 coding agent 需要哪些最小能力和安全边界。</li>
+          <li><strong>Follow 日报 eval：</strong>把“候选链接筛选是否高信号”变成小评测集，减少每天靠直觉选题。</li>
+          <li><strong>实时语音开放栈：</strong>测试 Hugging Face/Cerebras demo 的延迟和稳定性，判断是否适合未来语音助手原型。</li>
+          <li><strong>开放模型生产部署证据库：</strong>收集 Qualcomm-HF、政府/金融客户、隐私模型和端侧部署案例，区分公告、案例和观点。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>LangChain 的成本治理效果来自供应商叙述，需要真实团队数据验证它能否跨工具准确归因。</li>
+          <li>OpenWiki 的早期正反馈来自社交媒体试用，仍需看更长周期的文档漂移、误导和自动更新质量。</li>
+          <li>Simon 的 Fable 5 实验是小工具和研究记录，不能直接推导为 Fable 5 在复杂生产代码库上的通用能力。</li>
+          <li>Hugging Face/Cerebras 实时语音 demo 需要实测 P95 延迟、并发、成本和部署复杂度；单次演示不能代表生产稳定性。</li>
+          <li>Fchollet 关于符号世界建模的判断是方向性观点，不是已被证明的路线图。</li>
+          <li>公开 Nitter RSS 可能漏掉登录态可见内容；本报告未使用私密 cookie、token 或账号内部信息。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul class="noise">
+          <li>AI Engineer 活动现场打卡、生日祝福、合影、观众互动等只作为社区热度背景，不展开。</li>
+          <li>Sam Altman 的世界杯观赛帖与 Follow 主线关系弱，忽略。</li>
+          <li>Hamel 关于“prompt/harness/loop engineering”术语递归的玩笑有品味信号，但不构成独立更新。</li>
+          <li>部分转发的金融机构 fine-tuning 故事很有趣，但原始论文/报告未在本轮确认，暂列待后续深挖。</li>
+          <li>explainx.ai sitemap 今日显示若干 Fable/llama.cpp 页面更新，其中 Anthropic/Fable 主题已有官方来源支撑，未重复展开。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul>
+          <li><a href="https://www.langchain.com/blog/fix-your-coding-agent-bill">LangChain: Your coding agent bill doubled. Here’s how to fix it.</a></li>
+          <li><a href="https://www.langchain.com/blog/introducing-openwiki-an-open-source-agent-for-repo-documentation">LangChain: OpenWiki: Open Source Repo Documentation for Coding Agents</a></li>
+          <li><a href="https://github.com/langchain-ai/openwiki/blob/main/examples/openwiki-update.yml">OpenWiki nightly update workflow</a></li>
+          <li><a href="https://simonwillison.net/2026/Jul/2/llm-coding-agent/">Simon Willison: llm-coding-agent 0.1a0</a></li>
+          <li><a href="https://simonwillison.net/2026/Jul/2/dspy-datasette-agent-prompts/">Simon Willison: Using DSPy to evaluate and improve Datasette Agent's SQL system prompts</a></li>
+          <li><a href="https://simonwillison.net/2026/Jul/2/understand-to-participate/">Simon Willison: Understand to participate</a></li>
+          <li><a href="https://huggingface.co/blog/cerebras-gemma4-voice-ai">Hugging Face / Cerebras: Gemma 4 real-time voice AI</a></li>
+          <li><a href="https://huggingface.co/spaces/smolagents/hf-realtime-voice">Hugging Face realtime voice demo Space</a></li>
+          <li><a href="https://nitter.net/fchollet/status/2072779641639875048#m">Francois Chollet: intuition-guided symbolic world modeling</a></li>
+          <li><a href="https://nitter.net/thenanyu/status/2072714076614950961#m">Nan Yu: coordination headwind / agentic drift</a></li>
+          <li><a href="https://nitter.net/ClementDelangue/status/2072780808679547313#m">Clem Delangue: Summer of Open-source AI</a></li>
+          <li><a href="https://nitter.net/cristianoamon/status/2072748263208616222#m">Qualcomm / Hugging Face collaboration line</a></li>
+          <li><a href="https://nitter.net/Thom_Wolf/status/2072825424800006350#m">Thomas Wolf: open-source realtime voice demo</a></li>
+          <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+          <li><a href="https://www.anthropic.com/news">Anthropic Newsroom</a></li>
+        </ul>
+      </section>
+
+      <footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer>
+    </main>
+  </body>
+</html>

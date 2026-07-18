@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Claude Code 个人学习系统：从答案机到反馈环境</title>
+    <meta name="description" content="归纳总结微信文章“用 Claude Code 搭个人学习系统”的核心观点，并结合 AI 教育产品、学习科学和 AI 编程工作流做交叉分析。">
+    <style>
+      .notice {
+        border: 1px solid var(--gray-200);
+        border-left: 3px solid var(--blue-700);
+        border-radius: var(--radius-md);
+        background: var(--background-200);
+        margin: 18px 0;
+        padding: 14px 16px;
+      }
+
+      .notice p {
+        margin: 0;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .flow-step {
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius-md);
+        background: var(--background-100);
+        padding: 12px;
+      }
+
+      .flow-step strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .excerpt {
+        border-left: 3px solid var(--gray-500);
+        color: var(--secondary);
+        margin: 14px 0;
+        padding-left: 14px;
+      }
+
+      @media (max-width: 900px) {
+        .flow {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">AI Learning Workflow</div>
+        <h1>Claude Code 个人学习系统：从答案机到反馈环境</h1>
+        <p class="muted">基于微信公众号“架构师”2026-06-22 文章，归纳其 Claude Code 学习方法论，结合 OpenAI Study Mode、Claude Learning Mode、检索练习、护栏式 AI tutor 与 AI 编程工作流做交叉分析。</p>
+        <div class="meta">
+          <span>发布时间：2026-06-23</span>
+          <span>对象：个人学习 / AI Tutor / Claude Code</span>
+          <span>结论：学习稀缺的不是答案，而是暴露问题的环境</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>这篇文章真正有价值的地方，不是又给了一组 Claude Code 提示词，而是把“学习”重新定义成一个可维护的本地项目。作者的核心判断是：AI 已经很擅长解释和给答案，学习者更需要的是目标、资料、测验、错误记录和复盘。Claude Code 的独特性在于，它不只会聊天，还能读写本地文件、维护目录、持续更新记录，因此可以把个人学习做成一个小型 harness。
+      </section>
+
+      <section>
+        <h2>文章主张归纳</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. 从“答案机”切到“学习工作台”</h3>
+            <p>作者区分了两种 AI 学习方式：一种是随手问答案，另一种是让 Claude Code 维护学习目录、追踪错误、出题检查和整理复盘。前者快，但容易制造“我好像懂了”；后者慢，但更可能留下能力。</p>
+          </div>
+          <div class="card">
+            <h3>2. 学习需要暴露问题的系统</h3>
+            <p>文章把学习失败归因于现场缺少目标、测验和错误记录，而不是 AI 解释不够好。真正的学习发生在“自己说、自己做、自己解释、自己发现漏洞”的过程中。</p>
+          </div>
+          <div class="card">
+            <h3>3. 最小可用系统只要 4 个文件</h3>
+            <p>作者建议先建四个文件：学习契约、来源账本、测验记录、错误记录。它们分别约束目标、输入、验收和纠错，是个人学习版的 lightweight harness。</p>
+          </div>
+          <div class="card">
+            <h3>4. 资料要少而准，不要囤积</h3>
+            <p>文章强调资料不是越多越好。让 AI 筛 3 到 5 个权威来源，并明确哪些热门资源本轮不看，等于在做学习环境瘦身。</p>
+          </div>
+          <div class="card">
+            <h3>5. AI 默认应该先做考官</h3>
+            <p>作者反复提醒不要让答案提前出现。AI 应该一次问一道题，等学习者回答后再评分、追问和补漏，这样才能从“识别答案”转向“生成答案”。</p>
+          </div>
+          <div class="card">
+            <h3>6. 每轮只留下两样产物</h3>
+            <p>为了降低维护成本，作者把每轮学习产物压缩为一页学习卡和一条错误记录。学习卡负责恢复上下文，错误记录负责驱动下一轮。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>最小闭环</h2>
+        <div class="flow" aria-label="Claude Code 学习闭环">
+          <div class="flow-step">
+            <strong>学习契约</strong>
+            明确为什么学、学到哪、先不学什么。
+          </div>
+          <div class="flow-step">
+            <strong>来源账本</strong>
+            控制 3 到 5 个权威来源，标注用途。
+          </div>
+          <div class="flow-step">
+            <strong>测验记录</strong>
+            先回答、再评分、再追问，留下验收证据。
+          </div>
+          <div class="flow-step">
+            <strong>错误记录</strong>
+            把反复出错的判断和下一步动作写下来。
+          </div>
+          <div class="flow-step">
+            <strong>学习卡片</strong>
+            用 5 分钟恢复上下文，不重新读长文。
+          </div>
+        </div>
+        <p>这套闭环的关键不是文件名，而是把学习从“消费内容”改造成“产生可复查证据”。只要有目标、输入、测试、错误和复盘，系统就能滚动起来。</p>
+      </section>
+
+      <section>
+        <h2>与 AI 编程工作流的交叉分析</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>AI 编程</th>
+              <th>AI 学习</th>
+              <th>共同逻辑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>需求规格、测试、日志、Review</td>
+              <td>学习契约、测验、错误记录、复盘</td>
+              <td>不要只看模型输出，要设计反馈回路。</td>
+            </tr>
+            <tr>
+              <td>Harness 管理上下文和工具</td>
+              <td>学习目录管理资料和规则</td>
+              <td>环境设计会直接影响模型行为。</td>
+            </tr>
+            <tr>
+              <td>Agent 适合可验证任务</td>
+              <td>AI tutor 适合可检索、可练习、可评分任务</td>
+              <td>越能验收，越适合交给 AI 推进。</td>
+            </tr>
+            <tr>
+              <td>长 prompt 不如可执行规格</td>
+              <td>长解释不如先答题再纠错</td>
+              <td>高质量反馈比高密度输出更重要。</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>这和 Karpathy 关于 AI 编程“自主性滑杆”的观点能接上：在学习场景里，也不应该只有“AI 直接讲答案”和“人完全自学”两个极端。更好的模式是把 AI 的自主性调低一点，让它先提示、追问、评分、记录，再在必要时解释。</p>
+      </section>
+
+      <section>
+        <h2>与行业趋势的交叉分析</h2>
+        <h3>OpenAI Study Mode 与 Claude Learning Mode：产品开始主动制造摩擦</h3>
+        <p>OpenAI 的 Study Mode 和 Anthropic 的 Claude for Education 都在强调“不要直接给答案”，而是通过步骤、提问和引导帮助学习者参与思考。这个方向和文章高度一致：AI 教育产品正在从“答案分发器”转向“带护栏的练习环境”。</p>
+
+        <h3>学习科学：检索练习和间隔练习比重复阅读更可靠</h3>
+        <p>Karpicke 与 Roediger 的检索练习研究、Dunlosky 等人的学习技术综述，都支持一个朴素结论：反复回忆、测试和分布式练习，比单纯重读和划重点更能巩固学习。文章把“先让 AI 做考官”放在核心位置，是符合这个方向的。</p>
+
+        <h3>护栏式 AI tutor：无护栏的 AI 可能提高当场表现，却损害独立能力</h3>
+        <p>Bastani 等人在高中数学场景中的研究提醒：如果学生把 GPT-4 当拐杖，练习时表现可能变好，但离开 AI 后独立表现可能变差。带护栏的 AI tutor 通过追问、提示和不直接给完整答案，可以缓解这种风险。这正是文章要求“不要一次性给答案”的现实依据。</p>
+
+        <h3>Claude Code 的差异：它能把学习过程落到文件系统</h3>
+        <p>普通聊天工具也能提问和测验，但 Claude Code 的优势是能把规则、记录和材料留在本地目录中。它更像一个可以维护状态的学习工作台。对于工程师学习 Kubernetes、数据库、系统设计、论文复现，这种“目录化学习”比单轮聊天更有长期价值。</p>
+      </section>
+
+      <section>
+        <h2>值得采用的实践</h2>
+        <ol>
+          <li><strong>先写学习契约。</strong>把“我要学机器学习”改成“我要在 3 周内能解释推荐系统核心指标，并完成一个最小实验”。</li>
+          <li><strong>限制资料入口。</strong>每轮只选 3 到 5 个来源，要求 AI 说明每个来源负责哪一块。</li>
+          <li><strong>把测验提前。</strong>学完一个小范围就让 AI 出题，先自己答，AI 只补错漏。</li>
+          <li><strong>错误要可执行。</strong>不要写“我没懂网络”，要写“遇到 Service 不通时忘记先检查 endpoints”。</li>
+          <li><strong>每轮压缩成学习卡。</strong>用一页卡片恢复上下文，用错误记录决定下一轮练什么。</li>
+          <li><strong>事实回到一手来源。</strong>涉及标准、论文、考试、生产配置时，AI 只能辅助理解，不能代替原始材料。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>我的判断</h2>
+        <p>这篇文章的价值在于把 AI 学习从“提示词技巧”推进到“学习系统设计”。它不是让 Claude Code 变聪明，而是让学习现场变得可验证。这个思路比单纯收集 prompt 更耐用。</p>
+        <p>我会把它和前一篇 Karpathy AI 编程观点放在一起看：Karpathy 讲的是 AI 编程里如何调节控制权，这篇讲的是 AI 学习里如何设计反馈环境。两者指向同一件事：AI 越强，人越不能只追求更快输出，而要更会设计规格、约束、环境和验收。</p>
+      </section>
+
+      <section>
+        <h2>转载与来源</h2>
+        <div class="notice">
+          <p>转载/摘录声明：本文为原文内容的归纳整理与短摘录，保留原作者、发布时间和来源入口；完整内容以原发布页面为准。</p>
+        </div>
+        <ul>
+          <li>原文链接：<a href="https://mp.weixin.qq.com/s/YScRbcLfQYJWY7QLHXWp9A">https://mp.weixin.qq.com/s/YScRbcLfQYJWY7QLHXWp9A</a></li>
+          <li>公众号：架构师（JiaGouX）</li>
+          <li>作者：若飞</li>
+          <li>发布时间：2026-06-22 22:42</li>
+        </ul>
+        <div class="excerpt">“学习的关键就变成了：能不能给自己搭一个暴露问题的系统。”</div>
+        <div class="excerpt">“AI 可以提高当场完成度，不等于提高了长期学习。”</div>
+        <div class="excerpt">“更有价值的是一套有目标、有测验、有纠错、有复盘的个人学习系统。”</div>
+      </section>
+
+      <section>
+        <h2>参考资料</h2>
+        <ul>
+          <li>OpenAI: Introducing study mode: <a href="https://openai.com/index/chatgpt-study-mode/">https://openai.com/index/chatgpt-study-mode/</a></li>
+          <li>Anthropic: Introducing Claude for Education: <a href="https://www.anthropic.com/news/introducing-claude-for-education">https://www.anthropic.com/news/introducing-claude-for-education</a></li>
+          <li>Anthropic Claude Code overview: <a href="https://docs.anthropic.com/en/docs/claude-code/overview">https://docs.anthropic.com/en/docs/claude-code/overview</a></li>
+          <li>Karpicke & Roediger, The Critical Importance of Retrieval for Learning: <a href="https://www.science.org/doi/abs/10.1126/science.1152408">https://www.science.org/doi/abs/10.1126/science.1152408</a></li>
+          <li>Dunlosky et al., Improving Students' Learning With Effective Learning Techniques: <a href="https://journals.sagepub.com/doi/abs/10.1177/1529100612453266">https://journals.sagepub.com/doi/abs/10.1177/1529100612453266</a></li>
+          <li>Bastani et al., Generative AI without guardrails can harm learning: <a href="https://www.pnas.org/doi/10.1073/pnas.2422633122">https://www.pnas.org/doi/10.1073/pnas.2422633122</a></li>
+          <li>Bloom, The 2 Sigma Problem: <a href="https://journals.sagepub.com/doi/10.3102/0013189X013006004">https://journals.sagepub.com/doi/10.3102/0013189X013006004</a></li>
+        </ul>
+      </section>
+
+      <footer>Repository: jacobluo/myopenclawpublish</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

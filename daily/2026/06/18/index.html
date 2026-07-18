@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：AI 科学家、长程 Agent 与 Claude 韩国落地</title>
+    <meta name="description" content="2026-06-18 Follow List 公开来源深度日报。">
+  </head>
+  <body>
+    <main>
+      <article>
+        <a href="../../../..">← 返回索引</a>
+        <h1>Follow 深度日报：AI 科学家、长程 Agent 与 Claude 韩国落地</h1>
+        <p class="meta">2026-06-18 08:02 Asia/Shanghai · 窗口：2026-06-17 20:15 至 2026-06-18 08:02（北京时间）</p>
+        <p>
+          <span class="pill">OpenAI Science</span>
+          <span class="pill">LifeSciBench</span>
+          <span class="pill">Long-horizon agents</span>
+          <span class="pill">Claude enterprise</span>
+          <span class="pill">Open-weight models</span>
+          <span class="pill">Agent cost control</span>
+        </p>
+
+        <h2>总览</h2>
+        <p>今天高信号集中在三条线：OpenAI 把 frontier model 接入真实生命科学和化学实验闭环；GLM-5.2 把 1M context、coding agent 和开放权重竞争推到更实用的位置；Anthropic 在韩国用 NAVER、Nexon、LG、Samsung SDS 等客户案例展示 Claude Code / Claude Cowork 的企业落地。</p>
+        <p>抓取以 Follow List 的 active 账号为控制面板，优先检查 high priority 与 weekly/daily 来源。公开 X 页面本次没有返回可读正文，未使用 Folo CLI，也没有绕过 CAPTCHA；报告主要采用可公开访问的官方新闻、博客、Hugging Face、Simon Willison、Interconnects 与 LangChain 页面。</p>
+
+        <h2>核心主题</h2>
+        <ul>
+          <li><strong>AI 科学家开始进入真实实验闭环：</strong>OpenAI 的 AI chemist 案例不是纯 benchmark，而是模型、实验室自动化和人类专家共同完成可复现实验。</li>
+          <li><strong>生命科学评测从知识问答转向工作流判断：</strong>LifeSciBench 强调证据处理、实验设计、转化风险、沟通与操作性，贴近真实研发决策。</li>
+          <li><strong>长程 Agent 的开源压力上升：</strong>GLM-5.2 用 1M context、agentic RL 和 anti-hacking 机制把开放权重模型推向长任务执行。</li>
+          <li><strong>Claude 企业化继续从 coding 切入：</strong>Anthropic 韩国办公室公告里，NAVER、Nexon、Samsung SDS、LG CNS 都围绕 Claude Code、Claude Cowork 或知识工作展开。</li>
+          <li><strong>Agent 成本控制成为基础设施：</strong>LangChain 的 LLM Gateway 文章说明，coding agents 的预算、限额、追踪和归因已经是工程管理问题。</li>
+          <li><strong>软件工程价值讨论更务实：</strong>Simon Willison 转述的 Charity Majors 观点把焦点从“代码产出”移到工程纪律、所有权和验证。</li>
+        </ul>
+
+        <h2>重要更新</h2>
+        <div class="item">
+          <h3>OpenAI：近自主 AI chemist 改进药物化学反应</h3>
+          <p><strong>来源账号：</strong>OpenAI News / Follow List 相关：Sam Altman、Kevin Weil、Noam Brown 等 OpenAI 方向账号</p>
+          <p><strong>发布时间：</strong>2026-06-17 · <a href="https://openai.com/index/ai-chemist-improves-reaction/">原文链接</a></p>
+          <p>OpenAI 与 Molecule.one 的 Maria 系统合作，把 GPT-5.4 接入高通量实验室，用于改进 Chan-Lam coupling 中 primary sulfonamides 的反应表现。系统提出研究方案、设计实验、分析结果并生成后续实验，人类专家负责 steering、筛选、纠偏和手工复核。最终 TEMPO / 4-hydroxy-TEMPO 相关方案在多组底物上提高了产率，并进行了 bench-scale 复核。</p>
+          <p><strong>为什么值得看：</strong>这是“AI for science”从论文推理走向实验闭环的信号。对 agent 方向尤其重要，因为它展示了模型、专用工具、真实世界执行和人类审查如何组合，而不是只看模型单点能力。</p>
+          <p><strong>后续行动：</strong>跟踪论文、独立复现和更多反应类型；拆解其中的 agent harness、实验选择、风险控制和人类审查节点。</p>
+        </div>
+
+        <div class="item">
+          <h3>OpenAI：LifeSciBench 用真实生命科学工作流评估模型</h3>
+          <p><strong>来源账号：</strong>OpenAI News / Follow List 相关：OpenAI 产品与研究账号</p>
+          <p><strong>发布时间：</strong>2026-06-17 · <a href="https://openai.com/index/introducing-life-sci-bench/">原文链接</a></p>
+          <p>LifeSciBench 包含 750 个专家编写任务，覆盖七类工作流与七个生物领域，并配有 1,062 个任务附件和 19,020 条 rubric criteria。它评估的不只是生物知识问答，而是证据整合、实验设计、分析判断、验证操作、转化风险与科学沟通。任务由具有博士级训练和产业经验的生命科学家编写并经过专家复审。</p>
+          <p><strong>为什么值得看：</strong>这类 benchmark 更接近“模型能不能作为研究同事工作”，而不是“模型能不能答对单题”。它会影响生命科学 agent 的产品评估方式，也可能成为 labs 对外证明科学能力的模板。</p>
+          <p><strong>后续行动：</strong>对照现有 AI 股票/产业链研究框架，关注哪些公司拥有数据、实验平台、专家审核和合规优势。</p>
+        </div>
+
+        <div class="item">
+          <h3>Anthropic：首尔办公室与韩国 AI 生态伙伴</h3>
+          <p><strong>来源账号：</strong>Anthropic News / Follow List 相关：Alex Albert、Amanda Askell、Anthropic 方向账号</p>
+          <p><strong>发布时间：</strong>2026-06-17 · <a href="https://www.anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem">原文链接</a></p>
+          <p>Anthropic 宣布首尔办公室正式开放，并披露韩国企业、创业公司与研究机构的 Claude 使用案例。NAVER 已在整个工程组织部署 Claude Code；Nexon 用于在线游戏代码编写、审查和发布；LG CNS、Hanwha Solutions、Samsung SDS 则围绕员工知识工作、agentic workflows、数据驻留和安全要求推进 Claude 落地。Anthropic 还将向 NAIRL 相关研究者提供 Claude access，支持安全、评测、alignment 与 robustness 研究。</p>
+          <p><strong>为什么值得看：</strong>这不是单纯开办公室新闻，而是 Claude 从 coding assistant 进入大型亚洲企业工程与知识工作流的证据。韩国市场也能观察“模型能力 + 本地合规 + 企业服务”如何组合。</p>
+          <p><strong>后续行动：</strong>持续跟踪 Claude Code 在 NAVER、Samsung 这类组织中的采购、用量、权限、安全和 ROI 信息；留意韩国本土模型与 Claude 的竞争/互补关系。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hugging Face / Z.AI：GLM-5.2 面向长程任务与开放权重 agent</h3>
+          <p><strong>来源账号：</strong>Hugging Face / Follow List 相关：Clem Delangue、Thomas Wolf、Nathan Lambert 开放模型关注线</p>
+          <p><strong>发布时间：</strong>2026-06-17 · <a href="https://huggingface.co/blog/zai-org/glm-52-blog">原文链接</a></p>
+          <p>GLM-5.2 发布，主打 1M-token context、长程 coding agent、MIT license 和更强 agentic RL。文章声称模型在 FrontierSWE、PostTrainBench、Terminal-Bench 等长程与 coding benchmark 上进入接近闭源 frontier 的区间，并强调 IndexShare、speculative decoding、KV-cache 相关优化和 slime 训练/rollout 基础设施。比较值得注意的是 anti-hacking 模块：在 RL 训练和评测时识别 agent 读取隐藏答案、抓取上游解法等 reward hacking 行为。</p>
+          <p><strong>为什么值得看：</strong>开放权重模型竞争正在从“聊天/数学榜单”转向“长上下文、长任务、工具调用、训练防作弊和可本地部署”。如果这些能力可复现，会改变企业 agent 成本、安全和私有部署的选型。</p>
+          <p><strong>后续行动：</strong>优先验证 1M context 是否在真实 repo 任务中稳定；重点看 anti-hacking 是否降低 benchmark 污染，而不是只提高榜单分数。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangChain：coding agent 成本需要实时网关和可追踪限额</h3>
+          <p><strong>来源账号：</strong>LangChain Blog / Follow List 相关：Harrison Chase</p>
+          <p><strong>发布时间：</strong>2026-06-15，仍在本轮窗口内高相关 · <a href="https://www.langchain.com/blog/how-we-made-coding-agent-spend-predictable">原文链接</a></p>
+          <p>LangChain 介绍内部如何用 LangSmith LLM Gateway 控制 coding agent 成本：按组织、workspace、用户、API key 设置预算，并将 Claude Code、Codex、Deep Agents 等调用尽量集中接入网关。文章重点不是“省钱技巧”，而是把 spend 与 traces、agent、model calls 和 failure modes 连接起来，让超额成本可以被定位和改进。</p>
+          <p><strong>为什么值得看：</strong>agent 能力增强后，企业遇到的第一个硬问题往往是失控调用、难归因账单和权限边界。这个方向会变成 AI 工程平台的必备控制面。</p>
+          <p><strong>后续行动：</strong>为内部/研究 agent 设计最小成本治理：按任务限额、按用户限额、trace 归因、早期告警和可审计的提额流程。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison：AI 让代码生成变便宜，但工程纪律更重要</h3>
+          <p><strong>来源账号：</strong>Simon Willison（simonw）</p>
+          <p><strong>发布时间：</strong>2026-06-17 · <a href="https://simonwillison.net/2026/Jun/17/charity-majors/">原文链接</a></p>
+          <p>Simon 收录 Charity Majors 关于 AI-assisted programming 的观点：代码生成成本骤降之后，真正稀缺的不是“写出更多代码”，而是工程纪律、系统理解、验证和长期维护能力。这个信号与前几天“AI 没有替代软件工程师”的讨论相互呼应，说明高质量工程实践在 agent 时代并不会消失，反而更像约束系统风险的底座。</p>
+          <p><strong>为什么值得看：</strong>这能抵消市场上“代码免费，所以工程师不重要”的粗糙叙事。对投资和产品判断来说，值得关注的是哪些工具强化验证、可观测性和责任链，而不是只放大代码产出。</p>
+          <p><strong>后续行动：</strong>跟踪 observability、review、test generation、agent trace judge、code ownership 等工程质量工具。</p>
+        </div>
+
+        <div class="item">
+          <h3>Nathan Lambert：Interconnects 进入 mid-2026 复盘节点</h3>
+          <p><strong>来源账号：</strong>Nathan Lambert（natolambert）/ Interconnects</p>
+          <p><strong>发布时间：</strong>2026-06-17 · <a href="https://www.interconnects.ai/p/state-of-the-blog-mid-2026">原文链接</a></p>
+          <p>Nathan Lambert 发布 Interconnects mid-2026 状态更新，回顾自己离开 Ai2 后继续围绕 frontier model 演进、开放模型与行业理解输出内容。它不是单篇技术论文，但对 Follow List 有价值：Nathan 正在把博客定位为追踪模型能力、post-training、开放生态和 AI 产业判断的长期研究界面。</p>
+          <p><strong>为什么值得看：</strong>Interconnects 是 Follow List 里开放模型、post-training 和 frontier 产业判断的高信号来源。作者定位变化会影响后续内容的主题密度和研究方向。</p>
+          <p><strong>后续行动：</strong>把 Interconnects 设为每周固定抓取；重点提取 open-weight agent、post-training recipe、模型发布复盘和政策/产业判断。</p>
+        </div>
+
+        <h2>人物 / 机构动态</h2>
+        <ul>
+          <li><strong>OpenAI：</strong>同日发布 AI chemist 与 LifeSciBench，科学研究方向信号很强；与 6 月 16 日 Deployment Simulation 一起看，OpenAI 正在同时强化“真实世界评估”和“真实世界实验”。</li>
+          <li><strong>Anthropic：</strong>韩国办公室公告把 Claude Code、Claude Cowork 和 enterprise deployment 放在中心位置，说明 Anthropic 正在用区域办公室与本地伙伴扩展企业销售半径。</li>
+          <li><strong>Hugging Face / Z.AI：</strong>GLM-5.2 在 Hugging Face 发布并获得社区关注，开放模型阵营继续把 agent benchmark、MCP、长上下文和本地服务能力打包成一条主线。</li>
+          <li><strong>LangChain：</strong>从 loop engineering 到 gateway budgeting，正在把 agent 开发从框架层推进到运维与治理层。</li>
+          <li><strong>Simon Willison / Charity Majors：</strong>继续推动 AI coding 讨论回到工程验证、责任和系统理解。</li>
+        </ul>
+
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>AI chemist / Maria Lab：</strong>关注 OpenAI 论文、Molecule.one 后续案例、独立复现和实验安全边界。</li>
+          <li><strong>LifeSciBench：</strong>适合作为生命科学 agent 产品评测的参考模板，尤其是 rubric 和 artifact 设计。</li>
+          <li><strong>GLM-5.2：</strong>值得做一次实际 repo 长任务测试，观察 1M context、成本、速度和本地部署复杂度。</li>
+          <li><strong>LangSmith LLM Gateway：</strong>如果内部 agent 使用量上升，优先设计轻量版本的成本与 trace 归因。</li>
+          <li><strong>Anthropic Korea：</strong>跟踪韩国大型企业是否披露 Claude Code 的生产率、成本和治理结果。</li>
+        </ul>
+
+        <h2>待验证信息</h2>
+        <div class="note">
+          <ul>
+            <li>GLM-5.2 的 benchmark 数字来自发布方文章，需等待第三方复现，尤其是 long-horizon coding 与 anti-hacking 评测。</li>
+            <li>OpenAI AI chemist 的化学结果需要独立实验室复现，当前仍是早期研究信号。</li>
+            <li>Anthropic 韩国客户案例是官方披露，尚未看到客户侧独立 ROI、用量或安全治理细节。</li>
+            <li>公开 X 页面本次没有返回可读正文；没有使用 CAPTCHA 绕过或反爬规避，因此 X 原生帖子覆盖不足。</li>
+          </ul>
+        </div>
+
+        <h2>低优先级噪音</h2>
+        <ul>
+          <li>OpenAI 社区论坛的普通 bug、prompt tweak、图片活动帖暂不纳入主线，除非后续演变成 API/产品稳定性问题。</li>
+          <li>Hugging Face 首页多个机器人、CUDA profiling、小游戏类文章暂列发现池，本日报只保留 GLM-5.2 作为高优先级开放模型信号。</li>
+          <li>Android / Pixel / Gemini 消费端新闻与 Follow List 的高优先级 agent、AI engineering、研究方向相关性较低，本轮未展开。</li>
+        </ul>
+
+        <h2>原始链接</h2>
+        <ul class="source-list">
+          <li><a href="https://openai.com/news/">OpenAI News</a></li>
+          <li><a href="https://openai.com/index/ai-chemist-improves-reaction/">OpenAI: A near-autonomous AI chemist improves a challenging reaction in medicinal chemistry</a></li>
+          <li><a href="https://openai.com/index/introducing-life-sci-bench/">OpenAI: Introducing LifeSciBench</a></li>
+          <li><a href="https://openai.com/index/deployment-simulation/">OpenAI: Predicting model behavior before release by simulating deployment</a></li>
+          <li><a href="https://www.anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem">Anthropic: Seoul office and Korean AI ecosystem partnerships</a></li>
+          <li><a href="https://huggingface.co/blog/zai-org/glm-52-blog">Hugging Face: GLM-5.2 Built for Long-Horizon Tasks</a></li>
+          <li><a href="https://www.langchain.com/blog/how-we-made-coding-agent-spend-predictable">LangChain: How We Made Coding Agent Spend Predictable</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/17/charity-majors/">Simon Willison: A quote from Charity Majors</a></li>
+          <li><a href="https://www.interconnects.ai/p/state-of-the-blog-mid-2026">Interconnects: State of the blog, mid-2026</a></li>
+          <li><a href="https://huggingface.co/blog">Hugging Face Blog index</a></li>
+          <li><a href="https://www.anthropic.com/news">Anthropic Newsroom</a></li>
+        </ul>
+
+        <footer>
+          生成依据：/data/obsidian_docs/30_Maps/MOCs/Follow List.md（active entries, high priority first）与公开可访问来源。未使用 Folo CLI；未发布私密凭据或平台内部数据。
+        </footer>
+      </article>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

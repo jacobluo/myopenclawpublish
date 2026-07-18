@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Loop 工程实战：从任务循环到可维护闭环</title>
+    <meta name="description" content="分析微信公众号文章《Loop 工程实战：从任务循环到可维护闭环》：把 Agent Loop 从长 prompt 拆成状态、动作、验证、提交和日志的任务运行时。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">微信公众号文章分析报告</div>
+        <h1>Loop 工程实战：把 Agent 循环写成可维护的任务运行时</h1>
+        <p class="muted">基于“架构师”公众号若飞文章整理。公开页不全文转载原文，重点提炼工程结构、可复用规则、OpenClaw/Codex 落地建议和可沉淀 skill 方向。</p>
+        <div class="meta">
+          <span>报告日期：2026-06-28</span>
+          <span>主题：Loop Engineering / Agent Runtime</span>
+          <span>结论：可沉淀为长任务 Agent 闭环设计模板</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>一句话结论：</strong>这篇文章的价值在于把 Agent Loop 从“失败就继续修”的长 prompt 里拿出来，重新定义为一个有状态、有边界、有证据、有提交点、可回放的任务运行时。
+      </section>
+
+      <section>
+        <h2>来源信息</h2>
+        <table>
+          <tbody>
+            <tr><th>原文</th><td><a href="https://mp.weixin.qq.com/s/zOWRaGZUMWee2dRixmL-sA">Loop 工程实战：从任务循环到可维护闭环</a></td></tr>
+            <tr><th>作者/账号</th><td>若飞 / 架构师（JiaGouX）</td></tr>
+            <tr><th>导出状态</th><td>已导出 Markdown 到本地 source，并生成结构化 intake analysis JSON。</td></tr>
+            <tr><th>版权处理</th><td>本文只做分析与短摘录，不复制原文长段内容。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Article Intake 结果</h2>
+        <table>
+          <tbody>
+            <tr><th>主类型</th><td>开发实践</td></tr>
+            <tr><th>主题标签</th><td>AI Agent, Loop Engineering, Agent Loop, Harness, 状态机, 任务运行时, CI Pipeline, 前端副作用</td></tr>
+            <tr><th>价值判断</th><td>可沉淀 skill, 可写报告, 可加入知识库</td></tr>
+            <tr><th>分析模板</th><td>开发实践</td></tr>
+            <tr><th>路由</th><td>skill_candidate + knowledge_entry + full_report</td></tr>
+            <tr><th>下一步</th><td>提炼一个 Loop Runtime/Agent Task Loop 设计检查 skill。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>核心框架</h2>
+        <p>文章最重要的判断是：Agent Loop 不应被当成一条更长的 prompt，而应被当成任务运行时。传统工程里已有类似结构：任务队列、状态机、CI Pipeline、前端状态流、工作流引擎。Agent 带来的变化，是循环体里多了一个会规划、会调用工具、也会犯错的模型。</p>
+        <div class="grid">
+          <div class="card">
+            <h3>State</h3>
+            <p>保存当前任务事实。不能只靠聊天上下文记忆，因为长任务会压缩、遗忘和混淆历史。</p>
+          </div>
+          <div class="card">
+            <h3>Intent</h3>
+            <p>根据状态决定下一步。关键是把“该做什么”从模型临场发挥里部分拿出来。</p>
+          </div>
+          <div class="card">
+            <h3>Action</h3>
+            <p>访问文件、日志、issue、CI、PR、数据库等外部系统。读写权限要分级，写入动作要收口。</p>
+          </div>
+          <div class="card">
+            <h3>Verify</h3>
+            <p>检查结果是否可信。执行者不能只靠自我声明完成，需要独立测试、日志、链接、事实来源或人工复核。</p>
+          </div>
+          <div class="card">
+            <h3>Commit</h3>
+            <p>把候选结果写入真实系统。计划、diff、comment 草稿和真实提交应分开处理。</p>
+          </div>
+          <div class="card">
+            <h3>Trace</h3>
+            <p>记录每轮发生了什么。过程记录会成为改进 Skills、Memory、工具和提示词的材料。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>最小闭环</h2>
+        <p>文章给出的工程直觉可以压缩成一条链：</p>
+        <pre><code>state -> intent -> effect -> event -> state</code></pre>
+        <p>如果要写入真实系统，再加一道验证与提交：</p>
+        <pre><code>state -> intent -> effect -> verify -> commit</code></pre>
+        <p>这条链很朴素，但它解决了 Agent Loop 的几个核心问题：状态不是散在聊天里，副作用不是随手发生，重试不是无限循环，完成不是模型自己盖章。</p>
+      </section>
+
+      <section>
+        <h2>为什么 CI 失败分流适合做第一版</h2>
+        <p>文章推荐从 CI 失败分流这类小闭环开始，而不是让 Agent 直接“自动优化整个系统”。这个判断很稳，因为 CI 失败分流具备几个好条件：输入明确、日志可引用、结果容易人工复核、失败可接手、写入动作风险低。</p>
+        <table>
+          <thead>
+            <tr><th>候选场景</th><th>适合原因</th><th>OpenClaw/Codex 映射</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>CI 失败分流</th><td>日志明确，分类可验证，建议可人工确认。</td><td>读取失败 job、PR、commit，输出证据链和修复建议。</td></tr>
+            <tr><th>文档命令校验</th><td>读多改少，命令输出就是证据。</td><td>检查 README、技能说明、安装步骤是否还能跑通。</td></tr>
+            <tr><th>PR 风险预检</th><td>diff 明确，能输出候选风险清单。</td><td>在提交前做独立上下文 review 和测试建议。</td></tr>
+            <tr><th>依赖升级扫描</th><td>范围可限制，适合报告化输出。</td><td>扫描 package、lockfile、breaking changes 和影响目录。</td></tr>
+            <tr><th>changelog 候选生成</th><td>读 git history，结果由人编辑确认。</td><td>生成发布说明草稿，不直接发布。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>副作用要收口</h2>
+        <p>这篇文章把前端状态流经验迁移到 Agent Loop：先推导候选结果，再集中处理提交动作。这个观点对真实 agent 系统非常关键。</p>
+        <table>
+          <thead>
+            <tr><th>动作类型</th><th>建议边界</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>读文件、读日志、读 issue</th><td>默认允许，但要记录来源。</td></tr>
+            <tr><th>生成计划、diff、comment 草稿</th><td>候选结果，不直接提交。</td></tr>
+            <tr><th>写文档、开候选 PR</th><td>低风险写入，但 diff 必须可审。</td></tr>
+            <tr><th>改权限、部署、删数据、对外承诺</th><td>默认人工确认。</td></tr>
+            <tr><th>重试外部 API</th><td>必须有限流、退避和次数上限。</td></tr>
+          </tbody>
+        </table>
+        <p>如果把这些边界提前写进控制面，Agent 的能力就能在执行面释放，而不会变成难以审计的自由发挥。</p>
+      </section>
+
+      <section>
+        <h2>容易踩的坑</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>聊天记录当状态库</h3>
+            <p>聊天上下文会被压缩和遗忘，不能承担唯一事实源。长任务需要结构化状态记录。</p>
+          </div>
+          <div class="card">
+            <h3>权限全交给 Agent</h3>
+            <p>模型可以建议动作，但哪些命令只读、哪些 API 可写、哪些动作需确认，要写在系统里。</p>
+          </div>
+          <div class="card">
+            <h3>没有独立验证</h3>
+            <p>没有测试、lint、链接检查、事实来源或人工复核，就容易把“说得像完成”当成“真的完成”。</p>
+          </div>
+          <div class="card">
+            <h3>只看结果不看过程</h3>
+            <p>Trace 能暴露模型误判、工具不稳定、规则过宽和验证器过松，是后续改进的燃料。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>对 OpenClaw 的落地建议</h2>
+        <ol>
+          <li>为长任务建立统一状态文件：goal、phase、attempt、evidence、proposal、handoffReason、updatedAt。</li>
+          <li>把“候选输出”和“外部提交”分成两步；发消息、发邮件、改权限、部署、删除数据都走确认点。</li>
+          <li>给每类 Loop 定义最大步数、最大重试、停止条件和人工接管原因。</li>
+          <li>把过程 trace 写成可回放事件流，后续用于更新 memory、skills 和工具输出格式。</li>
+          <li>先从报告生成、文章分析、CI/文档校验这类读多改少场景开始，不急着做高风险自动修复。</li>
+          <li>沉淀一个 `agent-loop-runtime-audit` skill：输入一个任务循环设计，检查 State、Intent、Action、Verify、Commit、Trace 是否齐全。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>我的判断</h2>
+        <p>这篇文章比很多“Agent Loop”讨论更实用，因为它没有停在概念层，而是直接把 Loop 写成状态、事件、reducer、intent selector 和执行器。它真正想说的是：Agent 的智能应该被放进一个工程骨架里，而不是让工程骨架消失在自然语言 prompt 里。</p>
+        <p>对我们来说，它最适合作为 OpenClaw 长任务系统的设计参考。下一步可以把它沉淀成一个检查表：任何“让 Agent 持续做某事”的需求，都先问有没有状态源、证据链、验证器、提交点、重试上限和人工接管。答不出来，就先别放长线自动跑。</p>
+      </section>
+
+      <section>
+        <h2>原文入口</h2>
+        <p>完整文章请阅读原文。这里保留一个短摘录作为报告依据：</p>
+        <blockquote>
+          <p>Loop 更接近任务运行时，不只是一条更长的 prompt。</p>
+        </blockquote>
+        <table>
+          <tbody>
+            <tr><th>微信公众号原文</th><td><a href="https://mp.weixin.qq.com/s/zOWRaGZUMWee2dRixmL-sA">https://mp.weixin.qq.com/s/zOWRaGZUMWee2dRixmL-sA</a></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <footer>Source: 架构师（JiaGouX）微信公众号文章。Report generated by OpenClaw.</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

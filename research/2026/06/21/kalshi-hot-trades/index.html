@@ -1,0 +1,1246 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalshi 热门交易 Top 50</title>
+  <meta name="description" content="Kalshi 公共成交流 Top 50 热门交易监控，按最近成交合约量排序。">
+  <style>
+    :root {
+      --ink:#111317; --muted:#5b6372; --line:#d9dee8; --bg:#f7f8fa; --panel:#ffffff;
+      --green:#0f8f68; --blue:#1d5fd0; --red:#c84630; --amber:#9a6a05; --violet:#6a4bb7; --cyan:#007c89;
+      --shadow:0 14px 40px rgba(28,36,50,.08); --radius:8px;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size:14px; line-height:1.55; }
+    a { color:var(--blue); }
+    .shell { max-width:1440px; margin:0 auto; padding:22px 18px 54px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:14px; min-height:44px; border-bottom:1px solid var(--line); margin-bottom:18px; }
+    .brand { display:flex; gap:10px; align-items:baseline; color:var(--muted); }
+    .brand strong { color:var(--ink); font-size:14px; }
+    .back { text-decoration:none; color:var(--muted); font-weight:600; }
+    .hero { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(320px,.55fr); gap:18px; align-items:stretch; margin-bottom:18px; }
+    .hero-main, .side-panel, .toolbar, .table-wrap, .note { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); }
+    .hero-main { padding:26px; }
+    .eyebrow { margin:0 0 6px; color:var(--green); font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(30px,4vw,56px); line-height:1.02; letter-spacing:0; }
+    .deck { max-width:860px; margin:14px 0 0; color:var(--muted); font-size:16px; }
+    .metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-top:22px; }
+    .metric { border:1px solid var(--line); border-radius:8px; padding:12px; background:#fbfcfd; }
+    .metric b { display:block; font-size:22px; line-height:1.2; }
+    .metric span { color:var(--muted); font-size:12px; }
+    .side-panel { padding:18px; }
+    .side-panel h2 { margin:0 0 12px; font-size:16px; }
+    .pills { display:flex; flex-wrap:wrap; gap:8px; }
+    .pill { display:inline-flex; gap:6px; align-items:center; border:1px solid var(--line); border-radius:999px; padding:6px 9px; background:#fbfcfd; color:var(--muted); font-size:12px; }
+    .pill b { color:var(--ink); }
+    .toolbar { display:flex; justify-content:space-between; gap:12px; align-items:center; padding:12px; margin-bottom:14px; position:sticky; top:0; z-index:5; }
+    .filters { display:flex; gap:8px; flex-wrap:wrap; }
+    button.filter { border:1px solid var(--line); background:#fff; color:var(--muted); border-radius:6px; height:34px; padding:0 10px; font-weight:700; cursor:pointer; }
+    button.filter.active { color:#fff; background:var(--ink); border-color:var(--ink); }
+    .search { width:min(360px,100%); height:34px; border:1px solid var(--line); border-radius:6px; padding:0 10px; font:inherit; }
+    .table-wrap { overflow:auto; }
+    table { width:100%; border-collapse:separate; border-spacing:0; min-width:1180px; }
+    th,td { padding:12px 10px; border-bottom:1px solid var(--line); vertical-align:middle; }
+    th { background:#f0f3f7; color:#4c5564; text-align:left; font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+    tr:hover td { background:#fbfcfd; }
+    .rank { width:54px; color:var(--muted); font-weight:800; text-align:center; }
+    .market-cell { min-width:360px; }
+    .market-title { font-weight:750; line-height:1.35; }
+    .ticker { margin-top:4px; color:var(--muted); font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:11px; overflow-wrap:anywhere; }
+    .numeric { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .strong { font-weight:800; }
+    .spread,.time { color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .tag { display:inline-flex; justify-content:center; min-width:76px; border-radius:999px; padding:4px 8px; color:#fff; font-weight:800; font-size:12px; }
+    .tag-soccer { background:var(--green); } .tag-crypto { background:var(--blue); } .tag-combo { background:var(--violet); } .tag-tennis { background:var(--amber); } .tag-baseball { background:var(--cyan); } .tag-basketball { background:var(--red); } .tag-other { background:#566070; }
+    .bar-cell { width:130px; } .bar-cell.compact { width:90px; }
+    .bar { display:block; height:8px; background:#e8edf3; border-radius:999px; overflow:hidden; }
+    .bar i { display:block; height:100%; background:linear-gradient(90deg,var(--green),var(--blue)); border-radius:inherit; }
+    .bar.money i { background:linear-gradient(90deg,var(--amber),var(--red)); }
+    .note { margin-top:14px; padding:14px 16px; color:var(--muted); }
+    .note strong { color:var(--ink); }
+
+    .worldcup { margin:18px 0; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px; }
+    .wc-head { display:flex; justify-content:space-between; gap:18px; align-items:flex-start; border-bottom:1px solid var(--line); padding-bottom:14px; }
+    .wc-head h2 { margin:0; font-size:24px; line-height:1.2; }
+    .wc-head p:not(.eyebrow) { margin:8px 0 0; color:var(--muted); max-width:860px; }
+    .wc-stat { min-width:112px; border:1px solid var(--line); border-radius:8px; padding:12px; text-align:center; background:#fbfcfd; }
+    .wc-stat b { display:block; font-size:26px; line-height:1; }
+    .wc-stat span { color:var(--muted); font-size:12px; }
+    .wc-chips { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0; }
+    .wc-chip, .wc-kind { display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:999px; background:#fbfcfd; padding:5px 9px; color:var(--muted); font-size:12px; font-weight:700; white-space:nowrap; }
+    .wc-chip b { color:var(--ink); }
+    .wc-group { border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-top:10px; background:#fff; }
+    .wc-group summary { cursor:pointer; padding:12px 14px; font-weight:850; background:#f0f3f7; }
+    .wc-group summary span { margin-left:8px; color:var(--muted); font-weight:650; }
+    .wc-table-wrap { overflow:auto; }
+    .wc-table { min-width:980px; box-shadow:none; }
+    .wc-table th, .wc-table td { padding:10px; }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns:1fr; }
+      .metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .toolbar { position:static; align-items:stretch; flex-direction:column; }
+      .search { width:100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topbar" aria-label="导航">
+      <div class="brand"><strong>OpenClaw Market Monitor</strong><span>Kalshi public trades</span></div>
+      <a class="back" href="/">返回首页</a>
+    </nav>
+    <section class="hero">
+      <div class="hero-main">
+        <p class="eyebrow">Live public trade scan</p>
+        <h1>Kalshi 热门交易 Top 50</h1>
+        <p class="deck">基于 Kalshi 最近公开成交流聚合，按最近成交合约量排序，并展示估算成交额、最新价格、买卖报价与品类分布。适合快速判断当前平台交易注意力在哪里。</p>
+        <div class="metrics" aria-label="关键指标">
+          <div class="metric"><b>50</b><span>热门市场</span></div>
+          <div class="metric"><b>10,000</b><span>采样成交笔数</span></div>
+          <div class="metric"><b>920,084</b><span>Top 50 合约量</span></div>
+          <div class="metric"><b>$255,012</b><span>Top 50 估算成交额</span></div>
+        </div>
+      </div>
+      <aside class="side-panel">
+        <h2>品类分布</h2>
+        <div class="pills"><span class="pill">Soccer <b>39</b></span><span class="pill">Crypto <b>4</b></span><span class="pill">Tennis <b>2</b></span><span class="pill">Other <b>2</b></span><span class="pill">Baseball <b>1</b></span><span class="pill">Basketball <b>1</b></span><span class="pill">Combo <b>1</b></span></div>
+        <p class="deck" style="font-size:13px;margin-top:14px">抓取时间：2026-06-21 05:53:38 UTC<br>样本窗口：2026-06-21 05:51:06 至 2026-06-21 05:53:01</p>
+      </aside>
+    </section>
+
+    <section class="worldcup" id="worldcup-cn">
+      <div class="wc-head">
+        <div>
+          <p class="eyebrow">World Cup contracts, translated</p>
+          <h2>世界杯相关合约中文整理</h2>
+          <p>从当前 Top 50 中筛出足球/世界杯相关合约，按合约类型分组，并保留英文原文、成交量、估算成交额和最新概率。</p>
+        </div>
+        <div class="wc-stat"><b>39</b><span>相关合约</span></div>
+      </div>
+      <div class="wc-chips"><span class="wc-chip">总进球 <b>2</b></span><span class="wc-chip">精确比分 <b>3</b></span><span class="wc-chip">让球/净胜 <b>4</b></span><span class="wc-chip">胜负盘 <b>5</b></span><span class="wc-chip">球员/事件盘 <b>3</b></span><span class="wc-chip">冠军盘 <b>1</b></span><span class="wc-chip">多腿组合 <b>21</b></span></div>
+      <details class="wc-group" open>
+      <summary>总进球 <span>2 个合约</span></summary>
+      <div class="wc-table-wrap"><table class="wc-table"><thead><tr><th>#</th><th>中文整理</th><th>类型</th><th>Contracts</th><th>Est. $</th><th>Last</th><th>Bid / Ask</th></tr></thead><tbody><tr>
+          <td class="rank">1</td>
+          <td><div class="market-title">总进球数是否超过 4.5 球？</div><div class="ticker">原文：Will over 4.5 goals be scored?</div></td>
+          <td><span class="wc-kind">总进球</span></td>
+          <td class="numeric strong">120,507</td>
+          <td class="numeric">$17,572</td>
+          <td class="numeric">12.0%</td>
+          <td class="spread">11.0% / 12.0%</td>
+        </tr><tr>
+          <td class="rank">31</td>
+          <td><div class="market-title">突尼斯是否至少进 1 球？</div><div class="ticker">原文：Will Tunisia score over 0.5 goals?</div></td>
+          <td><span class="wc-kind">总进球</span></td>
+          <td class="numeric strong">8,877</td>
+          <td class="numeric">$494</td>
+          <td class="numeric">4.0%</td>
+          <td class="spread">3.0% / 5.0%</td>
+        </tr></tbody></table></div>
+    </details><details class="wc-group" open>
+      <summary>精确比分 <span>3 个合约</span></summary>
+      <div class="wc-table-wrap"><table class="wc-table"><thead><tr><th>#</th><th>中文整理</th><th>类型</th><th>Contracts</th><th>Est. $</th><th>Last</th><th>Bid / Ask</th></tr></thead><tbody><tr>
+          <td class="rank">3</td>
+          <td><div class="market-title">精确比分：日本是否以 4-0 战胜突尼斯？</div><div class="ticker">原文：Will the final score be Japan wins 4-0?</div></td>
+          <td><span class="wc-kind">精确比分</span></td>
+          <td class="numeric strong">74,477</td>
+          <td class="numeric">$64,846</td>
+          <td class="numeric">89.0%</td>
+          <td class="spread">88.0% / 89.0%</td>
+        </tr><tr>
+          <td class="rank">7</td>
+          <td><div class="market-title">精确比分：日本是否以 5-0 战胜突尼斯？</div><div class="ticker">原文：Will the final score be Japan wins 5-0?</div></td>
+          <td><span class="wc-kind">精确比分</span></td>
+          <td class="numeric strong">36,443</td>
+          <td class="numeric">$3,434</td>
+          <td class="numeric">9.0%</td>
+          <td class="spread">8.0% / 10.0%</td>
+        </tr><tr>
+          <td class="rank">12</td>
+          <td><div class="market-title">精确比分：日本是否以 4-1 战胜突尼斯？</div><div class="ticker">原文：Will the final score be Japan wins 4-1?</div></td>
+          <td><span class="wc-kind">精确比分</span></td>
+          <td class="numeric strong">19,707</td>
+          <td class="numeric">$815</td>
+          <td class="numeric">5.0%</td>
+          <td class="spread">3.0% / 5.0%</td>
+        </tr></tbody></table></div>
+    </details><details class="wc-group" open>
+      <summary>让球/净胜 <span>4 个合约</span></summary>
+      <div class="wc-table-wrap"><table class="wc-table"><thead><tr><th>#</th><th>中文整理</th><th>类型</th><th>Contracts</th><th>Est. $</th><th>Last</th><th>Bid / Ask</th></tr></thead><tbody><tr>
+          <td class="rank">4</td>
+          <td><div class="market-title">日本是否净胜超过 4.5 球？</div><div class="ticker">原文：Japan wins by more than 4.5 goals?</div></td>
+          <td><span class="wc-kind">让球/净胜</span></td>
+          <td class="numeric strong">63,334</td>
+          <td class="numeric">$8,278</td>
+          <td class="numeric">11.0%</td>
+          <td class="spread">11.0% / 13.0%</td>
+        </tr><tr>
+          <td class="rank">8</td>
+          <td><div class="market-title">日本是否净胜超过 3.5 球？</div><div class="ticker">原文：Japan wins by more than 3.5 goals?</div></td>
+          <td><span class="wc-kind">让球/净胜</span></td>
+          <td class="numeric strong">26,896</td>
+          <td class="numeric">$25,567</td>
+          <td class="numeric">96.0%</td>
+          <td class="spread">95.0% / 96.0%</td>
+        </tr><tr>
+          <td class="rank">18</td>
+          <td><div class="market-title">日本是否净胜超过 1.5 球？（下半场）</div><div class="ticker">原文：Japan wins by more than 1.5 goals in the 2nd Half?</div></td>
+          <td><span class="wc-kind">让球/净胜</span></td>
+          <td class="numeric strong">13,331</td>
+          <td class="numeric">$12,808</td>
+          <td class="numeric">96.0%</td>
+          <td class="spread">96.0% / 97.0%</td>
+        </tr><tr>
+          <td class="rank">28</td>
+          <td><div class="market-title">日本是否净胜超过 2.5 球？</div><div class="ticker">原文：Japan wins by more than 2.5 goals?</div></td>
+          <td><span class="wc-kind">让球/净胜</span></td>
+          <td class="numeric strong">9,716</td>
+          <td class="numeric">$9,619</td>
+          <td class="numeric">99.0%</td>
+          <td class="spread">99.0% / 100.0%</td>
+        </tr></tbody></table></div>
+    </details><details class="wc-group" open>
+      <summary>胜负盘 <span>5 个合约</span></summary>
+      <div class="wc-table-wrap"><table class="wc-table"><thead><tr><th>#</th><th>中文整理</th><th>类型</th><th>Contracts</th><th>Est. $</th><th>Last</th><th>Bid / Ask</th></tr></thead><tbody><tr>
+          <td class="rank">16</td>
+          <td><div class="market-title">西班牙 vs 沙特阿拉伯：谁获胜？</div><div class="ticker">原文：Spain vs Saudi Arabia Winner?</div></td>
+          <td><span class="wc-kind">胜负盘</span></td>
+          <td class="numeric strong">15,547</td>
+          <td class="numeric">$621</td>
+          <td class="numeric">4.0%</td>
+          <td class="spread">3.0% / 4.0%</td>
+        </tr><tr>
+          <td class="rank">19</td>
+          <td><div class="market-title">比利时 vs 伊朗：谁获胜？</div><div class="ticker">原文：Belgium vs IR Iran Winner?</div></td>
+          <td><span class="wc-kind">胜负盘</span></td>
+          <td class="numeric strong">12,659</td>
+          <td class="numeric">$1,645</td>
+          <td class="numeric">13.0%</td>
+          <td class="spread">12.0% / 13.0%</td>
+        </tr><tr>
+          <td class="rank">37</td>
+          <td><div class="market-title">西班牙 vs 沙特阿拉伯：谁获胜？</div><div class="ticker">原文：Spain vs Saudi Arabia Winner?</div></td>
+          <td><span class="wc-kind">胜负盘</span></td>
+          <td class="numeric strong">6,750</td>
+          <td class="numeric">$607</td>
+          <td class="numeric">8.0%</td>
+          <td class="spread">8.0% / 9.0%</td>
+        </tr><tr>
+          <td class="rank">39</td>
+          <td><div class="market-title">突尼斯 vs 日本：谁获胜？</div><div class="ticker">原文：Tunisia vs Japan Winner?</div></td>
+          <td><span class="wc-kind">胜负盘</span></td>
+          <td class="numeric strong">5,708</td>
+          <td class="numeric">$5,651</td>
+          <td class="numeric">99.0%</td>
+          <td class="spread">99.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">41</td>
+          <td><div class="market-title">突尼斯 vs 日本：谁获胜？</div><div class="ticker">原文：Tunisia vs Japan Winner?</div></td>
+          <td><span class="wc-kind">胜负盘</span></td>
+          <td class="numeric strong">5,009</td>
+          <td class="numeric">$50</td>
+          <td class="numeric">1.0%</td>
+          <td class="spread">0.0% / 1.0%</td>
+        </tr></tbody></table></div>
+    </details><details class="wc-group" open>
+      <summary>球员/事件盘 <span>3 个合约</span></summary>
+      <div class="wc-table-wrap"><table class="wc-table"><thead><tr><th>#</th><th>中文整理</th><th>类型</th><th>Contracts</th><th>Est. $</th><th>Last</th><th>Bid / Ask</th></tr></thead><tbody><tr>
+          <td class="rank">13</td>
+          <td><div class="market-title">双方是否都有进球？</div><div class="ticker">原文：Will both teams score?</div></td>
+          <td><span class="wc-kind">球员/事件盘</span></td>
+          <td class="numeric strong">18,365</td>
+          <td class="numeric">$1,107</td>
+          <td class="numeric">5.0%</td>
+          <td class="spread">4.0% / 5.0%</td>
+        </tr><tr>
+          <td class="rank">17</td>
+          <td><div class="market-title">久保建英是否至少进 1 球？</div><div class="ticker">原文：Takefusa Kubo: 1+ goals</div></td>
+          <td><span class="wc-kind">球员/事件盘</span></td>
+          <td class="numeric strong">13,699</td>
+          <td class="numeric">$2,475</td>
+          <td class="numeric">18.0%</td>
+          <td class="spread">18.0% / 19.0%</td>
+        </tr><tr>
+          <td class="rank">24</td>
+          <td><div class="market-title">角球数是否达到 9 个或更多？</div><div class="ticker">原文：9+ corners?</div></td>
+          <td><span class="wc-kind">球员/事件盘</span></td>
+          <td class="numeric strong">10,954</td>
+          <td class="numeric">$4,410</td>
+          <td class="numeric">33.0%</td>
+          <td class="spread">30.0% / 33.0%</td>
+        </tr></tbody></table></div>
+    </details><details class="wc-group" open>
+      <summary>冠军盘 <span>1 个合约</span></summary>
+      <div class="wc-table-wrap"><table class="wc-table"><thead><tr><th>#</th><th>中文整理</th><th>类型</th><th>Contracts</th><th>Est. $</th><th>Last</th><th>Bid / Ask</th></tr></thead><tbody><tr>
+          <td class="rank">40</td>
+          <td><div class="market-title">克罗地亚是否赢得 2026 男足世界杯？</div><div class="ticker">原文：Will the Croatia win the 2026 Men&#x27;s World Cup?</div></td>
+          <td><span class="wc-kind">冠军盘</span></td>
+          <td class="numeric strong">5,609</td>
+          <td class="numeric">$28</td>
+          <td class="numeric">0.5%</td>
+          <td class="spread">0.4% / 0.5%</td>
+        </tr></tbody></table></div>
+    </details><details class="wc-group" open>
+      <summary>多腿组合 <span>21 个合约</span></summary>
+      <div class="wc-table-wrap"><table class="wc-table"><thead><tr><th>#</th><th>中文整理</th><th>类型</th><th>Contracts</th><th>Est. $</th><th>Last</th><th>Bid / Ask</th></tr></thead><tbody><tr>
+          <td class="rank">6</td>
+          <td><div class="market-title">多腿组合：温德姆·克拉克胜；比利时胜</div><div class="ticker">原文：yes Wyndham Clark,yes Belgium</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">38,204</td>
+          <td class="numeric">$19,331</td>
+          <td class="numeric">50.6%</td>
+          <td class="spread">0.0% / 94.2%</td>
+        </tr><tr>
+          <td class="rank">9</td>
+          <td><div class="market-title">多腿组合：比利时胜；西班牙胜；埃及胜；日本胜；乌拉圭胜；阿根廷胜；法国胜；阿尔及利亚胜；……</div><div class="ticker">原文：yes Belgium,yes Spain,yes Egypt,yes Japan,yes Uruguay,yes Argentina,yes France,yes Algeria,yes Norway,yes Colombia,yes England,yes Croatia,yes Portugal,yes Bosnia and Herzegovina,yes Morocco,yes Korea Republic,yes Brazil,yes Switzerland,yes Ivory Coast,yes Germany,yes Japan,yes Paraguay,yes Netherlands,yes USA,yes Saudi Arabia,yes Egypt,yes France,yes Belgium,yes Senegal,yes Spain,yes Congo DR,yes Croatia,yes Argentina,yes England</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">22,273</td>
+          <td class="numeric">$45</td>
+          <td class="numeric">0.2%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">14</td>
+          <td><div class="market-title">多腿组合：比利时胜；西班牙胜</div><div class="ticker">原文：yes Belgium,yes Spain</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">16,208</td>
+          <td class="numeric">$9,822</td>
+          <td class="numeric">60.4%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">20</td>
+          <td><div class="market-title">多腿组合：双方都有进球；乌拉圭胜；阿根廷胜；阿尔及利亚胜；英格兰胜；克罗地亚胜；葡萄牙胜；墨西哥胜；……</div><div class="ticker">原文：yes Both Teams To Score,yes Uruguay,yes Argentina,yes Algeria,yes England,yes Croatia,yes Portugal,yes Mexico,yes Morocco,yes Brazil,yes Netherlands,yes USA,yes Senegal,yes Spain wins by more than 1.5 goals,yes New Zealand wins by more than 1.5 goals,yes France wins by more than 1.5 goals,yes Over 1.5 goals scored</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">12,273</td>
+          <td class="numeric">$25</td>
+          <td class="numeric">0.2%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">21</td>
+          <td><div class="market-title">多腿组合：平局；西班牙胜；平局；平局；乌拉圭胜</div><div class="ticker">原文：yes Tie,yes Spain,yes Tie,yes Tie,yes Uruguay</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">11,364</td>
+          <td class="numeric">$23</td>
+          <td class="numeric">0.2%</td>
+          <td class="spread">0.0% / 1.0%</td>
+        </tr><tr>
+          <td class="rank">22</td>
+          <td><div class="market-title">多腿组合：New York Y胜；Atlanta胜；Chicago WS胜；Miami胜；Tampa Bay胜；Houston胜；St. Louis胜；Toronto胜；……</div><div class="ticker">原文：yes New York Y,yes Atlanta,yes Chicago WS,yes Miami,yes Tampa Bay,yes Houston,yes St. Louis,yes Toronto,yes Texas,yes Belgium,yes Spain,yes Uruguay</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">11,364</td>
+          <td class="numeric">$23</td>
+          <td class="numeric">0.2%</td>
+          <td class="spread">0.0% / 2.3%</td>
+        </tr><tr>
+          <td class="rank">23</td>
+          <td><div class="market-title">多腿组合：阿根廷胜；法国胜；阿尔及利亚胜；哥伦比亚胜；英格兰胜；克罗地亚胜；葡萄牙胜；摩洛哥胜；……</div><div class="ticker">原文：yes Argentina,yes France,yes Algeria,yes Colombia,yes England,yes Croatia,yes Portugal,yes Morocco,yes Brazil,yes Ivory Coast,yes Germany,yes Japan,yes Netherlands</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">11,140</td>
+          <td class="numeric">$201</td>
+          <td class="numeric">1.8%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">25</td>
+          <td><div class="market-title">多腿组合：西班牙胜；阿根廷胜；法国胜；科特迪瓦胜；荷兰胜；阿根廷胜；总进球超过 1.5 球；总进球超过 1.5 球；……</div><div class="ticker">原文：yes Spain,yes Argentina,yes France,yes Ivory Coast,yes Netherlands,yes Argentina,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">10,309</td>
+          <td class="numeric">$93</td>
+          <td class="numeric">0.9%</td>
+          <td class="spread">0.0% / 33.3%</td>
+        </tr><tr>
+          <td class="rank">27</td>
+          <td><div class="market-title">多腿组合：New York Y胜；Chicago WS胜；San Francisco胜；Kansas City胜；Pittsburgh胜；Los Angeles D胜；Seattle胜；比利时胜；……</div><div class="ticker">原文：yes New York Y,yes Chicago WS,yes San Francisco,yes Kansas City,yes Pittsburgh,yes Los Angeles D,yes Seattle,yes Belgium,yes New Zealand,yes Uruguay</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">10,000</td>
+          <td class="numeric">$20</td>
+          <td class="numeric">0.2%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">30</td>
+          <td><div class="market-title">多腿组合：San Francisco胜；Tampa Bay胜；Pittsburgh胜；Los Angeles D胜；North Carolina胜；比利时胜；西班牙胜；乌拉圭胜</div><div class="ticker">原文：yes San Francisco,yes Tampa Bay,yes Pittsburgh,yes Los Angeles D,yes North Carolina,yes Belgium,yes Spain,yes Uruguay</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">9,164</td>
+          <td class="numeric">$275</td>
+          <td class="numeric">3.0%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">32</td>
+          <td><div class="market-title">多腿组合：New York Y胜；Chicago C胜；比利时胜；西班牙胜；乌拉圭胜</div><div class="ticker">原文：yes New York Y,yes Chicago C,yes Belgium,yes Spain,yes Uruguay</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">8,537</td>
+          <td class="numeric">$922</td>
+          <td class="numeric">10.8%</td>
+          <td class="spread">0.0% / 12.3%</td>
+        </tr><tr>
+          <td class="rank">33</td>
+          <td><div class="market-title">多腿组合：德国胜；日本胜</div><div class="ticker">原文：yes Germany,yes Japan</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">6,863</td>
+          <td class="numeric">$6,800</td>
+          <td class="numeric">99.0%</td>
+          <td class="spread">99.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">34</td>
+          <td><div class="market-title">多腿组合：双方都有进球；双方都有进球；比利时胜；乌拉圭胜；阿根廷胜；Dani Olmo: 1+胜；Lamine Yamal: 1+胜；Mohamed Salah: 1+胜；……</div><div class="ticker">原文：yes Both Teams To Score,yes Both Teams To Score,yes Belgium,yes Uruguay,yes Argentina,yes Dani Olmo: 1+,yes Lamine Yamal: 1+,yes Mohamed Salah: 1+,yes Darwin Nunez: 1+,yes Federico Valverde: 1+,yes Lionel Messi: 1+,yes Over 3.5 goals scored</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">6,818</td>
+          <td class="numeric">$14</td>
+          <td class="numeric">0.2%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">35</td>
+          <td><div class="market-title">多腿组合：比利时胜；埃及胜；阿根廷胜；阿尔及利亚胜；挪威胜；哥伦比亚胜；克罗地亚胜；西班牙净胜超过 1.5 球；……</div><div class="ticker">原文：yes Belgium,yes Egypt,yes Argentina,yes Algeria,yes Norway,yes Colombia,yes Croatia,yes Spain wins by more than 1.5 goals,yes Uruguay wins by more than 1.5 goals,yes France wins by more than 2.5 goals,yes England wins by more than 1.5 goals,yes Portugal wins by more than 1.5 goals</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">6,818</td>
+          <td class="numeric">$14</td>
+          <td class="numeric">0.2%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">38</td>
+          <td><div class="market-title">多腿组合：比利时胜；西班牙胜；埃及胜；乌拉圭胜</div><div class="ticker">原文：yes Belgium,yes Spain,yes Egypt,yes Uruguay</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">5,940</td>
+          <td class="numeric">$1,496</td>
+          <td class="numeric">25.0%</td>
+          <td class="spread">23.6% / 26.8%</td>
+        </tr><tr>
+          <td class="rank">43</td>
+          <td><div class="market-title">多腿组合：双方都有进球；双方都有进球；西班牙胜；Mikel Oyarzabal: 1+胜；Mohamed Salah: 1+胜；总进球超过 1.5 球；总进球超过 1.5 球；总进球超过 2.5 球；……</div><div class="ticker">原文：yes Both Teams To Score,yes Both Teams To Score,yes Spain,yes Mikel Oyarzabal: 1+,yes Mohamed Salah: 1+,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 2.5 goals scored,yes Over 2.5 goals scored</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">4,668</td>
+          <td class="numeric">$112</td>
+          <td class="numeric">2.4%</td>
+          <td class="spread">0.0% / 20.5%</td>
+        </tr><tr>
+          <td class="rank">44</td>
+          <td><div class="market-title">多腿组合：双方都有进球；比利时胜；埃及胜；乌拉圭胜；阿根廷胜；阿尔及利亚胜；英格兰胜；葡萄牙胜；……</div><div class="ticker">原文：yes Both Teams To Score,yes Belgium,yes Egypt,yes Uruguay,yes Argentina,yes Algeria,yes England,yes Portugal,yes Spain wins by more than 2.5 goals,yes France wins by more than 1.5 goals,yes Over 1.5 goals scored,yes Over 2.5 goals scored,yes Over 1.5 goals scored,yes Over 2.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">4,651</td>
+          <td class="numeric">$19</td>
+          <td class="numeric">0.4%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">45</td>
+          <td><div class="market-title">多腿组合：比利时胜；西班牙胜；埃及胜；乌拉圭胜；阿根廷胜；阿尔及利亚胜；克罗地亚胜；葡萄牙胜；……</div><div class="ticker">原文：yes Belgium,yes Spain,yes Egypt,yes Uruguay,yes Argentina,yes Algeria,yes Croatia,yes Portugal,yes Morocco,yes Brazil,yes Canada,yes Germany,yes Netherlands,yes USA,yes Congo DR,no Over 3.5 goals scored,no Over 4.5 goals scored</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">4,651</td>
+          <td class="numeric">$19</td>
+          <td class="numeric">0.4%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">46</td>
+          <td><div class="market-title">多腿组合：比利时净胜超过 1.5 球；乌拉圭净胜超过 1.5 球；阿根廷净胜超过 1.5 球；法国净胜超过 2.5 球；总进球超过 3.5 球；总进球超过 2.5 球；总进球超过 2.5 球；总进球超过 3.5 球</div><div class="ticker">原文：yes Belgium wins by more than 1.5 goals,yes Uruguay wins by more than 1.5 goals,yes Argentina wins by more than 1.5 goals,yes France wins by more than 2.5 goals,yes Over 3.5 goals scored,yes Over 2.5 goals scored,yes Over 2.5 goals scored,yes Over 3.5 goals scored</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">4,630</td>
+          <td class="numeric">$23</td>
+          <td class="numeric">0.5%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">49</td>
+          <td><div class="market-title">多腿组合：乌拉圭胜；阿根廷胜；哥伦比亚胜；英格兰胜；克罗地亚胜；葡萄牙胜；科特迪瓦胜；德国胜；……</div><div class="ticker">原文：yes Uruguay,yes Argentina,yes Colombia,yes England,yes Croatia,yes Portugal,yes Ivory Coast,yes Germany,yes Belgium wins by more than 2.5 goals,yes Over 3.5 goals scored,yes Over 2.5 goals scored,yes Over 2.5 goals scored,yes Over 3.5 goals scored,yes Over 2.5 goals scored</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">4,545</td>
+          <td class="numeric">$9</td>
+          <td class="numeric">0.2%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr><tr>
+          <td class="rank">50</td>
+          <td><div class="market-title">多腿组合：比利时胜；西班牙胜；埃及胜；乌拉圭胜；阿根廷胜；法国胜；阿尔及利亚胜；挪威胜；……</div><div class="ticker">原文：yes Belgium,yes Spain,yes Egypt,yes Uruguay,yes Argentina,yes France,yes Algeria,yes Norway,yes Colombia,yes England,yes Croatia,yes Portugal,yes Bosnia and Herzegovina,yes Morocco,yes Korea Republic,yes Brazil,yes Switzerland,yes Ivory Coast,yes Netherlands,yes Argentina</div></td>
+          <td><span class="wc-kind">多腿组合</span></td>
+          <td class="numeric strong">4,545</td>
+          <td class="numeric">$9</td>
+          <td class="numeric">0.2%</td>
+          <td class="spread">0.0% / 100.0%</td>
+        </tr></tbody></table></div>
+    </details>
+    </section>
+    <section class="toolbar" aria-label="筛选工具">
+      <div class="filters" id="filters">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="Soccer">Soccer</button><button class="filter" data-filter="Crypto">Crypto</button><button class="filter" data-filter="Tennis">Tennis</button><button class="filter" data-filter="Other">Other</button><button class="filter" data-filter="Baseball">Baseball</button><button class="filter" data-filter="Basketball">Basketball</button><button class="filter" data-filter="Combo">Combo</button>
+      </div>
+      <input class="search" id="search" type="search" placeholder="搜索市场、ticker 或类别" aria-label="搜索市场">
+    </section>
+    <section class="table-wrap" aria-label="Kalshi 热门交易 Top 50 表格">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Market</th><th>Category</th><th>Contracts</th><th>Activity</th><th>Est. $</th><th>$ bar</th><th>Last</th><th>Bid / Ask</th><th>Last trade</th></tr>
+        </thead>
+        <tbody id="rows">
+      <tr data-category="Soccer" data-search="will over 4.5 goals be scored? kxwctotal-26jun21tunjpn-5 soccer">
+        <td class="rank">1</td>
+        <td class="market-cell">
+          <div class="market-title">Will over 4.5 goals be scored?</div>
+          <div class="ticker">KXWCTOTAL-26JUN21TUNJPN-5</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">120,507</td>
+        <td class="bar-cell"><span class="bar"><i style="width:100%"></i></span></td>
+        <td class="numeric">$17,572</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:27%"></i></span></td>
+        <td class="numeric">12.0%</td>
+        <td class="spread">11.0% / 12.0%</td>
+        <td class="time">2026-06-21 05:53:01</td>
+      </tr>
+      <tr data-category="Crypto" data-search="btc price up in next 15 mins? kxbtc15m-26jun210200-00 crypto">
+        <td class="rank">2</td>
+        <td class="market-cell">
+          <div class="market-title">BTC price up in next 15 mins?</div>
+          <div class="ticker">KXBTC15M-26JUN210200-00</div>
+        </td>
+        <td><span class="tag tag-crypto">Crypto</span></td>
+        <td class="numeric strong">82,737</td>
+        <td class="bar-cell"><span class="bar"><i style="width:68%"></i></span></td>
+        <td class="numeric">$5,186</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:7%"></i></span></td>
+        <td class="numeric">5.7%</td>
+        <td class="spread">5.3% / 5.6%</td>
+        <td class="time">2026-06-21 05:53:01</td>
+      </tr>
+      <tr data-category="Soccer" data-search="will the final score be japan wins 4-0? kxwcscore-26jun21tunjpn-tun0jpn4 soccer">
+        <td class="rank">3</td>
+        <td class="market-cell">
+          <div class="market-title">Will the final score be Japan wins 4-0?</div>
+          <div class="ticker">KXWCSCORE-26JUN21TUNJPN-TUN0JPN4</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">74,477</td>
+        <td class="bar-cell"><span class="bar"><i style="width:61%"></i></span></td>
+        <td class="numeric">$64,846</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:100%"></i></span></td>
+        <td class="numeric">89.0%</td>
+        <td class="spread">88.0% / 89.0%</td>
+        <td class="time">2026-06-21 05:53:01</td>
+      </tr>
+      <tr data-category="Soccer" data-search="japan wins by more than 4.5 goals? kxwcspread-26jun21tunjpn-jpn5 soccer">
+        <td class="rank">4</td>
+        <td class="market-cell">
+          <div class="market-title">Japan wins by more than 4.5 goals?</div>
+          <div class="ticker">KXWCSPREAD-26JUN21TUNJPN-JPN5</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">63,334</td>
+        <td class="bar-cell"><span class="bar"><i style="width:52%"></i></span></td>
+        <td class="numeric">$8,278</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:12%"></i></span></td>
+        <td class="numeric">11.0%</td>
+        <td class="spread">11.0% / 13.0%</td>
+        <td class="time">2026-06-21 05:53:01</td>
+      </tr>
+      <tr data-category="Crypto" data-search="bitcoin price on jun 21, 2026? kxbtcd-26jun2102-t64199.99 crypto">
+        <td class="rank">5</td>
+        <td class="market-cell">
+          <div class="market-title">Bitcoin price on Jun 21, 2026?</div>
+          <div class="ticker">KXBTCD-26JUN2102-T64199.99</div>
+        </td>
+        <td><span class="tag tag-crypto">Crypto</span></td>
+        <td class="numeric strong">58,257</td>
+        <td class="bar-cell"><span class="bar"><i style="width:48%"></i></span></td>
+        <td class="numeric">$10,981</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:16%"></i></span></td>
+        <td class="numeric">18.0%</td>
+        <td class="spread">16.0% / 18.0%</td>
+        <td class="time">2026-06-21 05:53:01</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes wyndham clark,yes belgium kxmvesportsmultigameextended-s2026d04200d576d-aac6a101fde soccer">
+        <td class="rank">6</td>
+        <td class="market-cell">
+          <div class="market-title">yes Wyndham Clark,yes Belgium</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S2026D04200D576D-AAC6A101FDE</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">38,204</td>
+        <td class="bar-cell"><span class="bar"><i style="width:31%"></i></span></td>
+        <td class="numeric">$19,331</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:29%"></i></span></td>
+        <td class="numeric">50.6%</td>
+        <td class="spread">0.0% / 94.2%</td>
+        <td class="time">2026-06-21 05:52:53</td>
+      </tr>
+      <tr data-category="Soccer" data-search="will the final score be japan wins 5-0? kxwcscore-26jun21tunjpn-tun0jpn5 soccer">
+        <td class="rank">7</td>
+        <td class="market-cell">
+          <div class="market-title">Will the final score be Japan wins 5-0?</div>
+          <div class="ticker">KXWCSCORE-26JUN21TUNJPN-TUN0JPN5</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">36,443</td>
+        <td class="bar-cell"><span class="bar"><i style="width:30%"></i></span></td>
+        <td class="numeric">$3,434</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:5%"></i></span></td>
+        <td class="numeric">9.0%</td>
+        <td class="spread">8.0% / 10.0%</td>
+        <td class="time">2026-06-21 05:53:00</td>
+      </tr>
+      <tr data-category="Soccer" data-search="japan wins by more than 3.5 goals? kxwcspread-26jun21tunjpn-jpn4 soccer">
+        <td class="rank">8</td>
+        <td class="market-cell">
+          <div class="market-title">Japan wins by more than 3.5 goals?</div>
+          <div class="ticker">KXWCSPREAD-26JUN21TUNJPN-JPN4</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">26,896</td>
+        <td class="bar-cell"><span class="bar"><i style="width:22%"></i></span></td>
+        <td class="numeric">$25,567</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:39%"></i></span></td>
+        <td class="numeric">96.0%</td>
+        <td class="spread">95.0% / 96.0%</td>
+        <td class="time">2026-06-21 05:52:59</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes belgium,yes spain,yes egypt,yes japan,yes uruguay,yes argentina,yes france,yes algeria,yes norway,yes colombia,yes england,yes croatia,yes portugal,yes bosnia and herzegovina,yes morocco,yes korea republic,yes brazil,yes switzerland,yes ivory coast,yes germany,yes japan,yes paraguay,yes netherlands,yes usa,yes saudi arabia,yes egypt,yes france,yes belgium,yes senegal,yes spain,yes congo dr,yes croatia,yes argentina,yes england kxmvesportsmultigameextended-s2026268217c93a7-0a4b6aefae1 soccer">
+        <td class="rank">9</td>
+        <td class="market-cell">
+          <div class="market-title">yes Belgium,yes Spain,yes Egypt,yes Japan,yes Uruguay,yes Argentina,yes France,yes Algeria,yes Norway,yes Colombia,yes England,yes Croatia,yes Portugal,yes Bosnia and Herzegovina,yes Morocco,yes Korea Republic,yes Brazil,yes Switzerland,yes Ivory Coast,yes Germany,yes Japan,yes Paraguay,yes Netherlands,yes USA,yes Saudi Arabia,yes Egypt,yes France,yes Belgium,yes Senegal,yes Spain,yes Congo DR,yes Croatia,yes Argentina,yes England</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S2026268217C93A7-0A4B6AEFAE1</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">22,273</td>
+        <td class="bar-cell"><span class="bar"><i style="width:18%"></i></span></td>
+        <td class="numeric">$45</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.2%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:52:05</td>
+      </tr>
+      <tr data-category="Crypto" data-search="bitcoin price on jun 21, 2026? kxbtcd-26jun2102-t64099.99 crypto">
+        <td class="rank">10</td>
+        <td class="market-cell">
+          <div class="market-title">Bitcoin price on Jun 21, 2026?</div>
+          <div class="ticker">KXBTCD-26JUN2102-T64099.99</div>
+        </td>
+        <td><span class="tag tag-crypto">Crypto</span></td>
+        <td class="numeric strong">20,592</td>
+        <td class="bar-cell"><span class="bar"><i style="width:17%"></i></span></td>
+        <td class="numeric">$19,887</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:30%"></i></span></td>
+        <td class="numeric">97.0%</td>
+        <td class="spread">96.0% / 97.0%</td>
+        <td class="time">2026-06-21 05:53:00</td>
+      </tr>
+      <tr data-category="Tennis" data-search="will hoyoung roh win the dellavedova vs roh: m15 maanshan final match? kxitfmatch-26jun21delroh-roh tennis">
+        <td class="rank">11</td>
+        <td class="market-cell">
+          <div class="market-title">Will Hoyoung Roh win the Dellavedova vs Roh: M15 Maanshan Final match?</div>
+          <div class="ticker">KXITFMATCH-26JUN21DELROH-ROH</div>
+        </td>
+        <td><span class="tag tag-tennis">Tennis</span></td>
+        <td class="numeric strong">19,736</td>
+        <td class="bar-cell"><span class="bar"><i style="width:16%"></i></span></td>
+        <td class="numeric">$5,501</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:8%"></i></span></td>
+        <td class="numeric">16.0%</td>
+        <td class="spread">16.0% / 17.0%</td>
+        <td class="time">2026-06-21 05:53:01</td>
+      </tr>
+      <tr data-category="Soccer" data-search="will the final score be japan wins 4-1? kxwcscore-26jun21tunjpn-tun1jpn4 soccer">
+        <td class="rank">12</td>
+        <td class="market-cell">
+          <div class="market-title">Will the final score be Japan wins 4-1?</div>
+          <div class="ticker">KXWCSCORE-26JUN21TUNJPN-TUN1JPN4</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">19,707</td>
+        <td class="bar-cell"><span class="bar"><i style="width:16%"></i></span></td>
+        <td class="numeric">$815</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">5.0%</td>
+        <td class="spread">3.0% / 5.0%</td>
+        <td class="time">2026-06-21 05:52:58</td>
+      </tr>
+      <tr data-category="Soccer" data-search="will both teams score? kxwcbtts-26jun21tunjpn-btts soccer">
+        <td class="rank">13</td>
+        <td class="market-cell">
+          <div class="market-title">Will both teams score?</div>
+          <div class="ticker">KXWCBTTS-26JUN21TUNJPN-BTTS</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">18,365</td>
+        <td class="bar-cell"><span class="bar"><i style="width:15%"></i></span></td>
+        <td class="numeric">$1,107</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">5.0%</td>
+        <td class="spread">4.0% / 5.0%</td>
+        <td class="time">2026-06-21 05:53:00</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes belgium,yes spain kxmvesportsmultigameextended-s20260b0bd2e20f8-3faa012040e soccer">
+        <td class="rank">14</td>
+        <td class="market-cell">
+          <div class="market-title">yes Belgium,yes Spain</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S20260B0BD2E20F8-3FAA012040E</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">16,208</td>
+        <td class="bar-cell"><span class="bar"><i style="width:13%"></i></span></td>
+        <td class="numeric">$9,822</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:15%"></i></span></td>
+        <td class="numeric">60.4%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:52:59</td>
+      </tr>
+      <tr data-category="Tennis" data-search="will matthew dellavedova win the dellavedova vs roh: m15 maanshan final match? kxitfmatch-26jun21delroh-del tennis">
+        <td class="rank">15</td>
+        <td class="market-cell">
+          <div class="market-title">Will Matthew Dellavedova win the Dellavedova vs Roh: M15 Maanshan Final match?</div>
+          <div class="ticker">KXITFMATCH-26JUN21DELROH-DEL</div>
+        </td>
+        <td><span class="tag tag-tennis">Tennis</span></td>
+        <td class="numeric strong">15,559</td>
+        <td class="bar-cell"><span class="bar"><i style="width:12%"></i></span></td>
+        <td class="numeric">$11,349</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:17%"></i></span></td>
+        <td class="numeric">81.0%</td>
+        <td class="spread">81.0% / 82.0%</td>
+        <td class="time">2026-06-21 05:53:01</td>
+      </tr>
+      <tr data-category="Soccer" data-search="spain vs saudi arabia winner? kxwcgame-26jun21espksa-ksa soccer">
+        <td class="rank">16</td>
+        <td class="market-cell">
+          <div class="market-title">Spain vs Saudi Arabia Winner?</div>
+          <div class="ticker">KXWCGAME-26JUN21ESPKSA-KSA</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">15,547</td>
+        <td class="bar-cell"><span class="bar"><i style="width:12%"></i></span></td>
+        <td class="numeric">$621</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">4.0%</td>
+        <td class="spread">3.0% / 4.0%</td>
+        <td class="time">2026-06-21 05:52:59</td>
+      </tr>
+      <tr data-category="Soccer" data-search="takefusa kubo: 1+ goals kxwcgoal-26jun21tunjpn-jpntkubo14-1 soccer">
+        <td class="rank">17</td>
+        <td class="market-cell">
+          <div class="market-title">Takefusa Kubo: 1+ goals</div>
+          <div class="ticker">KXWCGOAL-26JUN21TUNJPN-JPNTKUBO14-1</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">13,699</td>
+        <td class="bar-cell"><span class="bar"><i style="width:11%"></i></span></td>
+        <td class="numeric">$2,475</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">18.0%</td>
+        <td class="spread">18.0% / 19.0%</td>
+        <td class="time">2026-06-21 05:52:57</td>
+      </tr>
+      <tr data-category="Soccer" data-search="japan wins by more than 1.5 goals in the 2nd half? kxwc2hspread-26jun21tunjpn-jpn2 soccer">
+        <td class="rank">18</td>
+        <td class="market-cell">
+          <div class="market-title">Japan wins by more than 1.5 goals in the 2nd Half?</div>
+          <div class="ticker">KXWC2HSPREAD-26JUN21TUNJPN-JPN2</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">13,331</td>
+        <td class="bar-cell"><span class="bar"><i style="width:11%"></i></span></td>
+        <td class="numeric">$12,808</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:19%"></i></span></td>
+        <td class="numeric">96.0%</td>
+        <td class="spread">96.0% / 97.0%</td>
+        <td class="time">2026-06-21 05:53:01</td>
+      </tr>
+      <tr data-category="Soccer" data-search="belgium vs ir iran winner? kxwcgame-26jun21beliri-iri soccer">
+        <td class="rank">19</td>
+        <td class="market-cell">
+          <div class="market-title">Belgium vs IR Iran Winner?</div>
+          <div class="ticker">KXWCGAME-26JUN21BELIRI-IRI</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">12,659</td>
+        <td class="bar-cell"><span class="bar"><i style="width:10%"></i></span></td>
+        <td class="numeric">$1,645</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">13.0%</td>
+        <td class="spread">12.0% / 13.0%</td>
+        <td class="time">2026-06-21 05:53:01</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes both teams to score,yes uruguay,yes argentina,yes algeria,yes england,yes croatia,yes portugal,yes mexico,yes morocco,yes brazil,yes netherlands,yes usa,yes senegal,yes spain wins by more than 1.5 goals,yes new zealand wins by more than 1.5 goals,yes france wins by more than 1.5 goals,yes over 1.5 goals scored kxmvesportsmultigameextended-s202642e018aadbe-0c222e90156 soccer">
+        <td class="rank">20</td>
+        <td class="market-cell">
+          <div class="market-title">yes Both Teams To Score,yes Uruguay,yes Argentina,yes Algeria,yes England,yes Croatia,yes Portugal,yes Mexico,yes Morocco,yes Brazil,yes Netherlands,yes USA,yes Senegal,yes Spain wins by more than 1.5 goals,yes New Zealand wins by more than 1.5 goals,yes France wins by more than 1.5 goals,yes Over 1.5 goals scored</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S202642E018AADBE-0C222E90156</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">12,273</td>
+        <td class="bar-cell"><span class="bar"><i style="width:10%"></i></span></td>
+        <td class="numeric">$25</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.2%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:52:56</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes tie,yes spain,yes tie,yes tie,yes uruguay kxmvesportsmultigameextended-s202621dafaae185-621f7e7a042 soccer">
+        <td class="rank">21</td>
+        <td class="market-cell">
+          <div class="market-title">yes Tie,yes Spain,yes Tie,yes Tie,yes Uruguay</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S202621DAFAAE185-621F7E7A042</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">11,364</td>
+        <td class="bar-cell"><span class="bar"><i style="width:9%"></i></span></td>
+        <td class="numeric">$23</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.2%</td>
+        <td class="spread">0.0% / 1.0%</td>
+        <td class="time">2026-06-21 05:52:57</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes new york y,yes atlanta,yes chicago ws,yes miami,yes tampa bay,yes houston,yes st. louis,yes toronto,yes texas,yes belgium,yes spain,yes uruguay kxmvesportsmultigameextended-s2026e1aabd729ab-814c0c21354 soccer">
+        <td class="rank">22</td>
+        <td class="market-cell">
+          <div class="market-title">yes New York Y,yes Atlanta,yes Chicago WS,yes Miami,yes Tampa Bay,yes Houston,yes St. Louis,yes Toronto,yes Texas,yes Belgium,yes Spain,yes Uruguay</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S2026E1AABD729AB-814C0C21354</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">11,364</td>
+        <td class="bar-cell"><span class="bar"><i style="width:9%"></i></span></td>
+        <td class="numeric">$23</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.2%</td>
+        <td class="spread">0.0% / 2.3%</td>
+        <td class="time">2026-06-21 05:52:37</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes argentina,yes france,yes algeria,yes colombia,yes england,yes croatia,yes portugal,yes morocco,yes brazil,yes ivory coast,yes germany,yes japan,yes netherlands kxmvesportsmultigameextended-s2026f9d2e264a51-d316ea3c5ca soccer">
+        <td class="rank">23</td>
+        <td class="market-cell">
+          <div class="market-title">yes Argentina,yes France,yes Algeria,yes Colombia,yes England,yes Croatia,yes Portugal,yes Morocco,yes Brazil,yes Ivory Coast,yes Germany,yes Japan,yes Netherlands</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S2026F9D2E264A51-D316EA3C5CA</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">11,140</td>
+        <td class="bar-cell"><span class="bar"><i style="width:9%"></i></span></td>
+        <td class="numeric">$201</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">1.8%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:52:22</td>
+      </tr>
+      <tr data-category="Soccer" data-search="9+ corners? kxwccorners-26jun21tunjpn-9 soccer">
+        <td class="rank">24</td>
+        <td class="market-cell">
+          <div class="market-title">9+ corners?</div>
+          <div class="ticker">KXWCCORNERS-26JUN21TUNJPN-9</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">10,954</td>
+        <td class="bar-cell"><span class="bar"><i style="width:9%"></i></span></td>
+        <td class="numeric">$4,410</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:6%"></i></span></td>
+        <td class="numeric">33.0%</td>
+        <td class="spread">30.0% / 33.0%</td>
+        <td class="time">2026-06-21 05:52:59</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes spain,yes argentina,yes france,yes ivory coast,yes netherlands,yes argentina,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored kxmvecrosscategory-s202620f60132080-9376e5df882 soccer">
+        <td class="rank">25</td>
+        <td class="market-cell">
+          <div class="market-title">yes Spain,yes Argentina,yes France,yes Ivory Coast,yes Netherlands,yes Argentina,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored</div>
+          <div class="ticker">KXMVECROSSCATEGORY-S202620F60132080-9376E5DF882</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">10,309</td>
+        <td class="bar-cell"><span class="bar"><i style="width:8%"></i></span></td>
+        <td class="numeric">$93</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.9%</td>
+        <td class="spread">0.0% / 33.3%</td>
+        <td class="time">2026-06-21 05:52:41</td>
+      </tr>
+      <tr data-category="Other" data-search="how many straight weeks will &#x27;iceman&#x27; be #1? kxtopalbumrecord-ice-dra-4 other">
+        <td class="rank">26</td>
+        <td class="market-cell">
+          <div class="market-title">How many straight weeks will &#x27;ICEMAN&#x27; be #1?</div>
+          <div class="ticker">KXTOPALBUMRECORD-ICE-DRA-4</div>
+        </td>
+        <td><span class="tag tag-other">Other</span></td>
+        <td class="numeric strong">10,286</td>
+        <td class="bar-cell"><span class="bar"><i style="width:8%"></i></span></td>
+        <td class="numeric">$205</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">2.0%</td>
+        <td class="spread">1.0% / 2.0%</td>
+        <td class="time">2026-06-21 05:52:54</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes new york y,yes chicago ws,yes san francisco,yes kansas city,yes pittsburgh,yes los angeles d,yes seattle,yes belgium,yes new zealand,yes uruguay kxmvesportsmultigameextended-s20263dc9259cdd3-1099727dbbe soccer">
+        <td class="rank">27</td>
+        <td class="market-cell">
+          <div class="market-title">yes New York Y,yes Chicago WS,yes San Francisco,yes Kansas City,yes Pittsburgh,yes Los Angeles D,yes Seattle,yes Belgium,yes New Zealand,yes Uruguay</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S20263DC9259CDD3-1099727DBBE</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">10,000</td>
+        <td class="bar-cell"><span class="bar"><i style="width:8%"></i></span></td>
+        <td class="numeric">$20</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.2%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:51:09</td>
+      </tr>
+      <tr data-category="Soccer" data-search="japan wins by more than 2.5 goals? kxwcspread-26jun21tunjpn-jpn3 soccer">
+        <td class="rank">28</td>
+        <td class="market-cell">
+          <div class="market-title">Japan wins by more than 2.5 goals?</div>
+          <div class="ticker">KXWCSPREAD-26JUN21TUNJPN-JPN3</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">9,716</td>
+        <td class="bar-cell"><span class="bar"><i style="width:8%"></i></span></td>
+        <td class="numeric">$9,619</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:14%"></i></span></td>
+        <td class="numeric">99.0%</td>
+        <td class="spread">99.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:53:01</td>
+      </tr>
+      <tr data-category="Baseball" data-search="yes san diego,yes new york y wins by over 1.5 runs,yes milwaukee wins by over 1.5 runs,yes las vegas,yes katerina siniakova,yes ajla tomljanovic kxmvesportsmultigameextended-s20266dc391a4dc4-aad1732c65a baseball">
+        <td class="rank">29</td>
+        <td class="market-cell">
+          <div class="market-title">yes San Diego,yes New York Y wins by over 1.5 runs,yes Milwaukee wins by over 1.5 runs,yes Las Vegas,yes Katerina Siniakova,yes Ajla Tomljanovic</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S20266DC391A4DC4-AAD1732C65A</div>
+        </td>
+        <td><span class="tag tag-baseball">Baseball</span></td>
+        <td class="numeric strong">9,585</td>
+        <td class="bar-cell"><span class="bar"><i style="width:7%"></i></span></td>
+        <td class="numeric">$173</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">1.8%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:51:30</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes san francisco,yes tampa bay,yes pittsburgh,yes los angeles d,yes north carolina,yes belgium,yes spain,yes uruguay kxmvesportsmultigameextended-s20261017a173856-d73559e2c2b soccer">
+        <td class="rank">30</td>
+        <td class="market-cell">
+          <div class="market-title">yes San Francisco,yes Tampa Bay,yes Pittsburgh,yes Los Angeles D,yes North Carolina,yes Belgium,yes Spain,yes Uruguay</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S20261017A173856-D73559E2C2B</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">9,164</td>
+        <td class="bar-cell"><span class="bar"><i style="width:7%"></i></span></td>
+        <td class="numeric">$275</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">3.0%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:51:14</td>
+      </tr>
+      <tr data-category="Soccer" data-search="will tunisia score over 0.5 goals? kxwcteamtotal-26jun21tunjpn-tun1 soccer">
+        <td class="rank">31</td>
+        <td class="market-cell">
+          <div class="market-title">Will Tunisia score over 0.5 goals?</div>
+          <div class="ticker">KXWCTEAMTOTAL-26JUN21TUNJPN-TUN1</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">8,877</td>
+        <td class="bar-cell"><span class="bar"><i style="width:7%"></i></span></td>
+        <td class="numeric">$494</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">4.0%</td>
+        <td class="spread">3.0% / 5.0%</td>
+        <td class="time">2026-06-21 05:52:57</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes new york y,yes chicago c,yes belgium,yes spain,yes uruguay kxmvesportsmultigameextended-s2026c2e47acb035-ab5e616cb59 soccer">
+        <td class="rank">32</td>
+        <td class="market-cell">
+          <div class="market-title">yes New York Y,yes Chicago C,yes Belgium,yes Spain,yes Uruguay</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S2026C2E47ACB035-AB5E616CB59</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">8,537</td>
+        <td class="bar-cell"><span class="bar"><i style="width:7%"></i></span></td>
+        <td class="numeric">$922</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">10.8%</td>
+        <td class="spread">0.0% / 12.3%</td>
+        <td class="time">2026-06-21 05:52:46</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes germany,yes japan kxmvesportsmultigameextended-s2026b633cfbc135-e5f6d9b9c62 soccer">
+        <td class="rank">33</td>
+        <td class="market-cell">
+          <div class="market-title">yes Germany,yes Japan</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S2026B633CFBC135-E5F6D9B9C62</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">6,863</td>
+        <td class="bar-cell"><span class="bar"><i style="width:5%"></i></span></td>
+        <td class="numeric">$6,800</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:10%"></i></span></td>
+        <td class="numeric">99.0%</td>
+        <td class="spread">99.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:52:59</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes both teams to score,yes both teams to score,yes belgium,yes uruguay,yes argentina,yes dani olmo: 1+,yes lamine yamal: 1+,yes mohamed salah: 1+,yes darwin nunez: 1+,yes federico valverde: 1+,yes lionel messi: 1+,yes over 3.5 goals scored kxmvesportsmultigameextended-s20264295cc24f34-2a4620e41e4 soccer">
+        <td class="rank">34</td>
+        <td class="market-cell">
+          <div class="market-title">yes Both Teams To Score,yes Both Teams To Score,yes Belgium,yes Uruguay,yes Argentina,yes Dani Olmo: 1+,yes Lamine Yamal: 1+,yes Mohamed Salah: 1+,yes Darwin Nunez: 1+,yes Federico Valverde: 1+,yes Lionel Messi: 1+,yes Over 3.5 goals scored</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S20264295CC24F34-2A4620E41E4</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">6,818</td>
+        <td class="bar-cell"><span class="bar"><i style="width:5%"></i></span></td>
+        <td class="numeric">$14</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.2%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:51:53</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes belgium,yes egypt,yes argentina,yes algeria,yes norway,yes colombia,yes croatia,yes spain wins by more than 1.5 goals,yes uruguay wins by more than 1.5 goals,yes france wins by more than 2.5 goals,yes england wins by more than 1.5 goals,yes portugal wins by more than 1.5 goals kxmvesportsmultigameextended-s20269b5afafa661-fe31d83bef7 soccer">
+        <td class="rank">35</td>
+        <td class="market-cell">
+          <div class="market-title">yes Belgium,yes Egypt,yes Argentina,yes Algeria,yes Norway,yes Colombia,yes Croatia,yes Spain wins by more than 1.5 goals,yes Uruguay wins by more than 1.5 goals,yes France wins by more than 2.5 goals,yes England wins by more than 1.5 goals,yes Portugal wins by more than 1.5 goals</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S20269B5AFAFA661-FE31D83BEF7</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">6,818</td>
+        <td class="bar-cell"><span class="bar"><i style="width:5%"></i></span></td>
+        <td class="numeric">$14</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.2%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:51:30</td>
+      </tr>
+      <tr data-category="Other" data-search="hype price up in next 15 mins? kxhype15m-26jun210200-00 other">
+        <td class="rank">36</td>
+        <td class="market-cell">
+          <div class="market-title">HYPE price up in next 15 mins?</div>
+          <div class="ticker">KXHYPE15M-26JUN210200-00</div>
+        </td>
+        <td><span class="tag tag-other">Other</span></td>
+        <td class="numeric strong">6,808</td>
+        <td class="bar-cell"><span class="bar"><i style="width:5%"></i></span></td>
+        <td class="numeric">$2,308</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">37.0%</td>
+        <td class="spread">39.0% / 42.0%</td>
+        <td class="time">2026-06-21 05:53:00</td>
+      </tr>
+      <tr data-category="Soccer" data-search="spain vs saudi arabia winner? kxwcgame-26jun21espksa-tie soccer">
+        <td class="rank">37</td>
+        <td class="market-cell">
+          <div class="market-title">Spain vs Saudi Arabia Winner?</div>
+          <div class="ticker">KXWCGAME-26JUN21ESPKSA-TIE</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">6,750</td>
+        <td class="bar-cell"><span class="bar"><i style="width:5%"></i></span></td>
+        <td class="numeric">$607</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">8.0%</td>
+        <td class="spread">8.0% / 9.0%</td>
+        <td class="time">2026-06-21 05:53:00</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes belgium,yes spain,yes egypt,yes uruguay kxmvesportsmultigameextended-s20265f0ba31f5d6-7b0ffc6b5ef soccer">
+        <td class="rank">38</td>
+        <td class="market-cell">
+          <div class="market-title">yes Belgium,yes Spain,yes Egypt,yes Uruguay</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S20265F0BA31F5D6-7B0FFC6B5EF</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">5,940</td>
+        <td class="bar-cell"><span class="bar"><i style="width:4%"></i></span></td>
+        <td class="numeric">$1,496</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">25.0%</td>
+        <td class="spread">23.6% / 26.8%</td>
+        <td class="time">2026-06-21 05:53:00</td>
+      </tr>
+      <tr data-category="Soccer" data-search="tunisia vs japan winner? kxwcgame-26jun21tunjpn-jpn soccer">
+        <td class="rank">39</td>
+        <td class="market-cell">
+          <div class="market-title">Tunisia vs Japan Winner?</div>
+          <div class="ticker">KXWCGAME-26JUN21TUNJPN-JPN</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">5,708</td>
+        <td class="bar-cell"><span class="bar"><i style="width:4%"></i></span></td>
+        <td class="numeric">$5,651</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:8%"></i></span></td>
+        <td class="numeric">99.0%</td>
+        <td class="spread">99.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:52:55</td>
+      </tr>
+      <tr data-category="Soccer" data-search="will the croatia win the 2026 men&#x27;s world cup? kxmenworldcup-26-hr soccer">
+        <td class="rank">40</td>
+        <td class="market-cell">
+          <div class="market-title">Will the Croatia win the 2026 Men&#x27;s World Cup?</div>
+          <div class="ticker">KXMENWORLDCUP-26-HR</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">5,609</td>
+        <td class="bar-cell"><span class="bar"><i style="width:4%"></i></span></td>
+        <td class="numeric">$28</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.5%</td>
+        <td class="spread">0.4% / 0.5%</td>
+        <td class="time">2026-06-21 05:52:25</td>
+      </tr>
+      <tr data-category="Soccer" data-search="tunisia vs japan winner? kxwcgame-26jun21tunjpn-tie soccer">
+        <td class="rank">41</td>
+        <td class="market-cell">
+          <div class="market-title">Tunisia vs Japan Winner?</div>
+          <div class="ticker">KXWCGAME-26JUN21TUNJPN-TIE</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">5,009</td>
+        <td class="bar-cell"><span class="bar"><i style="width:4%"></i></span></td>
+        <td class="numeric">$50</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">1.0%</td>
+        <td class="spread">0.0% / 1.0%</td>
+        <td class="time">2026-06-21 05:52:34</td>
+      </tr>
+      <tr data-category="Crypto" data-search="bitcoin price on jun 21, 2026? kxbtcd-26jun2102-t64299.99 crypto">
+        <td class="rank">42</td>
+        <td class="market-cell">
+          <div class="market-title">Bitcoin price on Jun 21, 2026?</div>
+          <div class="ticker">KXBTCD-26JUN2102-T64299.99</div>
+        </td>
+        <td><span class="tag tag-crypto">Crypto</span></td>
+        <td class="numeric strong">4,796</td>
+        <td class="bar-cell"><span class="bar"><i style="width:3%"></i></span></td>
+        <td class="numeric">$73</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">1.0%</td>
+        <td class="spread">0.0% / 1.0%</td>
+        <td class="time">2026-06-21 05:53:01</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes both teams to score,yes both teams to score,yes spain,yes mikel oyarzabal: 1+,yes mohamed salah: 1+,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 2.5 goals scored,yes over 2.5 goals scored kxmvesportsmultigameextended-s202601091d80c5e-5390802631d soccer">
+        <td class="rank">43</td>
+        <td class="market-cell">
+          <div class="market-title">yes Both Teams To Score,yes Both Teams To Score,yes Spain,yes Mikel Oyarzabal: 1+,yes Mohamed Salah: 1+,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 2.5 goals scored,yes Over 2.5 goals scored</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S202601091D80C5E-5390802631D</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">4,668</td>
+        <td class="bar-cell"><span class="bar"><i style="width:3%"></i></span></td>
+        <td class="numeric">$112</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">2.4%</td>
+        <td class="spread">0.0% / 20.5%</td>
+        <td class="time">2026-06-21 05:52:44</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes both teams to score,yes belgium,yes egypt,yes uruguay,yes argentina,yes algeria,yes england,yes portugal,yes spain wins by more than 2.5 goals,yes france wins by more than 1.5 goals,yes over 1.5 goals scored,yes over 2.5 goals scored,yes over 1.5 goals scored,yes over 2.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored,yes over 1.5 goals scored kxmvesportsmultigameextended-s20262290c036da3-e0bfe91775e soccer">
+        <td class="rank">44</td>
+        <td class="market-cell">
+          <div class="market-title">yes Both Teams To Score,yes Belgium,yes Egypt,yes Uruguay,yes Argentina,yes Algeria,yes England,yes Portugal,yes Spain wins by more than 2.5 goals,yes France wins by more than 1.5 goals,yes Over 1.5 goals scored,yes Over 2.5 goals scored,yes Over 1.5 goals scored,yes Over 2.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored,yes Over 1.5 goals scored</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S20262290C036DA3-E0BFE91775E</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">4,651</td>
+        <td class="bar-cell"><span class="bar"><i style="width:3%"></i></span></td>
+        <td class="numeric">$19</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.4%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:51:50</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes belgium,yes spain,yes egypt,yes uruguay,yes argentina,yes algeria,yes croatia,yes portugal,yes morocco,yes brazil,yes canada,yes germany,yes netherlands,yes usa,yes congo dr,no over 3.5 goals scored,no over 4.5 goals scored kxmvesportsmultigameextended-s20263f556f6f5aa-2e2dcc79350 soccer">
+        <td class="rank">45</td>
+        <td class="market-cell">
+          <div class="market-title">yes Belgium,yes Spain,yes Egypt,yes Uruguay,yes Argentina,yes Algeria,yes Croatia,yes Portugal,yes Morocco,yes Brazil,yes Canada,yes Germany,yes Netherlands,yes USA,yes Congo DR,no Over 3.5 goals scored,no Over 4.5 goals scored</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S20263F556F6F5AA-2E2DCC79350</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">4,651</td>
+        <td class="bar-cell"><span class="bar"><i style="width:3%"></i></span></td>
+        <td class="numeric">$19</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.4%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:51:24</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes belgium wins by more than 1.5 goals,yes uruguay wins by more than 1.5 goals,yes argentina wins by more than 1.5 goals,yes france wins by more than 2.5 goals,yes over 3.5 goals scored,yes over 2.5 goals scored,yes over 2.5 goals scored,yes over 3.5 goals scored kxmvesportsmultigameextended-s202650fbf92aee3-e1cbced5bdd soccer">
+        <td class="rank">46</td>
+        <td class="market-cell">
+          <div class="market-title">yes Belgium wins by more than 1.5 goals,yes Uruguay wins by more than 1.5 goals,yes Argentina wins by more than 1.5 goals,yes France wins by more than 2.5 goals,yes Over 3.5 goals scored,yes Over 2.5 goals scored,yes Over 2.5 goals scored,yes Over 3.5 goals scored</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S202650FBF92AEE3-E1CBCED5BDD</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">4,630</td>
+        <td class="bar-cell"><span class="bar"><i style="width:3%"></i></span></td>
+        <td class="numeric">$23</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.5%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:52:57</td>
+      </tr>
+      <tr data-category="Basketball" data-search="yes golden state,yes los angeles,yes washington,yes connecticut,yes phoenix kxmvesportsmultigameextended-s2026bb2ee3e708c-edf830c53ea basketball">
+        <td class="rank">47</td>
+        <td class="market-cell">
+          <div class="market-title">yes Golden State,yes Los Angeles,yes Washington,yes Connecticut,yes Phoenix</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S2026BB2EE3E708C-EDF830C53EA</div>
+        </td>
+        <td><span class="tag tag-basketball">Basketball</span></td>
+        <td class="numeric strong">4,630</td>
+        <td class="bar-cell"><span class="bar"><i style="width:3%"></i></span></td>
+        <td class="numeric">$23</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.5%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:51:25</td>
+      </tr>
+      <tr data-category="Combo" data-search="yes ir iran,yes tie,yes new zealand,yes tie kxmvesportsmultigameextended-s20265f0ba31f5d6-d498c130982 combo">
+        <td class="rank">48</td>
+        <td class="market-cell">
+          <div class="market-title">yes IR Iran,yes Tie,yes New Zealand,yes Tie</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S20265F0BA31F5D6-D498C130982</div>
+        </td>
+        <td><span class="tag tag-combo">Combo</span></td>
+        <td class="numeric strong">4,545</td>
+        <td class="bar-cell"><span class="bar"><i style="width:3%"></i></span></td>
+        <td class="numeric">$9</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.2%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:52:48</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes uruguay,yes argentina,yes colombia,yes england,yes croatia,yes portugal,yes ivory coast,yes germany,yes belgium wins by more than 2.5 goals,yes over 3.5 goals scored,yes over 2.5 goals scored,yes over 2.5 goals scored,yes over 3.5 goals scored,yes over 2.5 goals scored kxmvesportsmultigameextended-s2026926d0b38ea5-d7699474667 soccer">
+        <td class="rank">49</td>
+        <td class="market-cell">
+          <div class="market-title">yes Uruguay,yes Argentina,yes Colombia,yes England,yes Croatia,yes Portugal,yes Ivory Coast,yes Germany,yes Belgium wins by more than 2.5 goals,yes Over 3.5 goals scored,yes Over 2.5 goals scored,yes Over 2.5 goals scored,yes Over 3.5 goals scored,yes Over 2.5 goals scored</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S2026926D0B38EA5-D7699474667</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">4,545</td>
+        <td class="bar-cell"><span class="bar"><i style="width:3%"></i></span></td>
+        <td class="numeric">$9</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.2%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:52:10</td>
+      </tr>
+      <tr data-category="Soccer" data-search="yes belgium,yes spain,yes egypt,yes uruguay,yes argentina,yes france,yes algeria,yes norway,yes colombia,yes england,yes croatia,yes portugal,yes bosnia and herzegovina,yes morocco,yes korea republic,yes brazil,yes switzerland,yes ivory coast,yes netherlands,yes argentina kxmvesportsmultigameextended-s2026669b36e64c2-edbd8b48315 soccer">
+        <td class="rank">50</td>
+        <td class="market-cell">
+          <div class="market-title">yes Belgium,yes Spain,yes Egypt,yes Uruguay,yes Argentina,yes France,yes Algeria,yes Norway,yes Colombia,yes England,yes Croatia,yes Portugal,yes Bosnia and Herzegovina,yes Morocco,yes Korea Republic,yes Brazil,yes Switzerland,yes Ivory Coast,yes Netherlands,yes Argentina</div>
+          <div class="ticker">KXMVESPORTSMULTIGAMEEXTENDED-S2026669B36E64C2-EDBD8B48315</div>
+        </td>
+        <td><span class="tag tag-soccer">Soccer</span></td>
+        <td class="numeric strong">4,545</td>
+        <td class="bar-cell"><span class="bar"><i style="width:3%"></i></span></td>
+        <td class="numeric">$9</td>
+        <td class="bar-cell compact"><span class="bar money"><i style="width:3%"></i></span></td>
+        <td class="numeric">0.2%</td>
+        <td class="spread">0.0% / 100.0%</td>
+        <td class="time">2026-06-21 05:52:10</td>
+      </tr></tbody>
+      </table>
+    </section>
+    <p class="note"><strong>口径说明：</strong>本页使用 Kalshi 公共 <code>/markets/trades</code> 与 <code>/markets/{ticker}</code> API。热门度按采样窗口内成交合约量排序，估算成交额使用成交合约数乘 YES 成交价近似计算。该页面不是投资建议，实时盘变化可能非常快。</p>
+  </main>
+  <script>
+    const filters = document.querySelectorAll('.filter');
+    const search = document.getElementById('search');
+    const rows = Array.from(document.querySelectorAll('#rows tr'));
+    let active = 'all';
+    function applyFilters() {
+      const q = search.value.trim().toLowerCase();
+      rows.forEach(row => {
+        const okCategory = active === 'all' || row.dataset.category === active;
+        const okSearch = !q || row.dataset.search.includes(q);
+        row.style.display = okCategory && okSearch ? '' : 'none';
+      });
+    }
+    filters.forEach(btn => btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      active = btn.dataset.filter;
+      applyFilters();
+    }));
+    search.addEventListener('input', applyFilters);
+  </script>
+</body>
+</html>
