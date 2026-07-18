@@ -1,0 +1,184 @@
+---
+title: "Follow 深度日报：Agent 工程转向评审、记忆与开放数据飞轮"
+date: "2026-07-07"
+category: "daily"
+url: "/daily/2026/07/07/"
+summary: "Follow List 公开来源整理：Simon Willison sqlite-utils 4.0rc3 与模型交叉评审，Hamel/Shreya 自动化 eval，Thomas Wolf agent living wiki，LangChain/OpenWiki 记忆讨论，Hugging Face Xet 与 agent traces，Fchollet 成本化 benchmark，Gemini Robotics 数据闭环。"
+---
+<main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>Agent 工程转向评审、记忆与开放数据飞轮</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-07-06 00:00 UTC 至 2026-07-07 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。抓取优先级按 Status=active、Priority=high、Cadence=daily/weekly/manual 排序，主要使用公开 Nitter RSS、作者博客/Atom、Hugging Face RSS、项目页面和来源自带公开页面。</p>
+        <div class="meta">
+          <span>发布时间：2026-07-07 08:00 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、Simon Willison、Hamel Husain、Shreya Shankar、Thomas Wolf、Hugging Face、LangChain 社区、Google DeepMind、公开 X/Nitter RSS</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天的主线不是单一模型发布，而是 agent 工程的“操作系统化”：Simon Willison 的 sqlite-utils 4.0rc3 显示强模型之间的交叉评审正在成为真实发布流程的一部分；Hamel Husain 和 Shreya Shankar 把自动化 eval 的边界讲得更清楚，重点不是让 AI 一键判分，而是辅助发现未知失败模式；Thomas Wolf 用 agent 协作搭建 RL for LLMs living wiki，把“agent 写资料、互审、沉淀成 wiki”做成可观察的小型知识生产系统；LangChain/OpenWiki 继续围绕 agent 是否需要 wiki 展开讨论；Hugging Face 侧出现 Xet 数据规模、Factory agent traces、Kernels 更新和 Photoroom 数据策略，说明开放模型竞争正在从权重走向数据、traces、kernel 和本地应用生态。噪音主要是体育、会议预告和转发庆祝，保留为背景，不扩展成结论。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. 模型交叉评审进入真实发布流程</h3>
+            <p>Simon 的 sqlite-utils 4.0rc3 不是“AI 写了点代码”，而是 Claude Fable 与 GPT-5.5 分别承担实现、复审、文档和边界检查，最终由维护者合并判断。</p>
+          </div>
+          <div class="card">
+            <h3>2. 自动化 eval 的价值在发现失败模式</h3>
+            <p>Hamel/Shreya 强调 AI 可以帮助 error analysis 和 trace 标注，但不能把“找到未知未知”简化成让供应商工具自动给分。</p>
+          </div>
+          <div class="card">
+            <h3>3. Agent 记忆从文档走向协作系统</h3>
+            <p>Thomas Wolf 的 RL living wiki 与 LangChain/OpenWiki 讨论同频：长期 agent 需要共享知识、互审流程、出处和可更新结构。</p>
+          </div>
+          <div class="card">
+            <h3>4. 开放模型飞轮变成数据 + traces + kernels</h3>
+            <p>HF Xet、Factory agent traces、Kernels 更新和 Photoroom 数据策略说明，开放模型竞争的重点正在从“有没有权重”转向“有没有可复用训练和运行资产”。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>Simon Willison：sqlite-utils 4.0rc3 延续 Fable + GPT-5.5 的发布前交叉评审</h3>
+          <p class="source">来源账号/机构：Simon Willison；发布时间：2026-07-06 05:40 UTC；链接：<a href="https://simonwillison.net/2026/Jul/6/sqlite-utils/#atom-everything">Simon 原文</a></p>
+          <p>Simon 发布 sqlite-utils 4.0rc3，解释原本希望周末发 stable，但在 Claude Fable 5 和 GPT-5.5 的协助下，rc2 之后的 changelog 继续变大。主要变化包括 compound foreign keys 的 introspection/creation、大小写不敏感列名匹配，以及围绕 Python 3.12+ sqlite3 autocommit 行为的修复。</p>
+          <p>更重要的是流程信号：Simon 让 GPT-5.5 审查 rc2 之后的变更并确认 changelog，模型发现 <code>db.query()</code> 写语句副作用和 <code>INSERT ... RETURNING</code> 生成器提交语义问题；随后他把发现交给 Fable 复现实验并修复。这里的价值不是“谁替谁写代码”，而是把一个模型当实现者，另一个模型当审计者，再由维护者做最终发布判断。</p>
+          <p class="why"><strong>为什么值得看：</strong>这给重要软件发布提供了可复制模式：模型交叉评审尤其适合事务、数据持久化、兼容性、文档承诺和 changelog 一致性这类人类容易疲劳的边界检查。</p>
+          <p class="action"><strong>后续行动：</strong>为关键代码仓建立“异构模型发布前复审”模板：实现模型、审查模型、复现实验、文档 diff、changelog 对齐、维护者最终签字。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hamel Husain / Shreya Shankar：自动化 eval 的重点是迭代发现失败模式</h3>
+          <p class="source">来源账号/机构：Hamel Husain、Shreya Shankar；发布时间：2026-07-06 21:22 UTC；链接：<a href="https://nitter.net/HamelHusain/status/2074242605634949306#m">公开 X/Nitter 线索</a> / <a href="https://youtu.be/tqUDjc1HzO4">YouTube 视频</a></p>
+          <p>Hamel 发布与 Shreya 的新 session，主题是如何正确地用 AI 自动化 eval。核心信息很明确：eval workflow 里最重要的部分是发现问题，而不是把数据丢给工具自动打分；AI 可以辅助 error analysis、构建 review interface、标注 traces、形成 failure mode taxonomy，但需要人反复引导和检查。</p>
+          <p>这条内容和过去几天 Follow List 的“AI 生成物需要消化”“不能只信 vendor 自动 eval”形成连续主线。它也提醒，通用 agent 与专用 eval 工具的边界不同，产品团队不能把所有应用都套同一个 accuracy bar。</p>
+          <p class="why"><strong>为什么值得看：</strong>OpenClaw 的日报、代码修改和资料整理本质上也需要 eval。真正要自动化的是候选筛选、失败模式发现和证据整理，而不是让模型替人宣布“质量通过”。</p>
+          <p class="action"><strong>后续行动：</strong>给 Follow 日报加一个小型误差记录：每天记录漏选、误选、来源失败、事实待验证项，逐步形成日报筛选 eval 集。</p>
+        </div>
+
+        <div class="item">
+          <h3>Thomas Wolf：用 agents 维护 RL for LLMs living wiki，并把事件日志可视化成协作系统</h3>
+          <p class="source">来源账号/机构：Thomas Wolf / Hugging Face；发布时间：2026-07-06 09:36 UTC；链接：<a href="https://nitter.net/Thom_Wolf/status/2074064916089036916#m">公开 X/Nitter 线索</a></p>
+          <p>Thomas Wolf 展示了一个 Fable weekend project：围绕 Hugging Face 上的 Reinforcement Learning for training LLMs living wiki，构建一组协作 agents。agents 会阅读新旧论文、写 arXiv digest、互相 review PR，再把内容沉淀进人类可读的共享 wiki/book。</p>
+          <p>他还让 Fable 和 GPT Image 2 把事件日志变成一个等距小镇：不同建筑代表发消息、开 PR、审稿、更新 wiki 等动作。这不是单纯好看，而是在探索如何让多 agent 知识生产过程可观察、可调试、可解释。</p>
+          <p class="why"><strong>为什么值得看：</strong>这正好击中 OpenClaw 的知识库需求：不是让 agent 一次性总结一篇文章，而是让多个任务持续读取、互审、沉淀、更新，并给人类一个能看懂的运行状态。</p>
+          <p class="action"><strong>后续行动：</strong>为 Obsidian/Follow 日报试一个 living wiki 流程：抓取 agent、摘要 agent、复审 agent、主题 wiki agent 分开运行，中间状态全部可追踪。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangChain / OpenWiki：agent 是否需要 wiki 继续成为记忆层核心问题</h3>
+          <p class="source">来源账号/机构：Harrison Chase / LangChain 社区；发布时间：2026-07-06 16:15-17:15 UTC；链接：<a href="https://nitter.net/hwchase17/status/2074178331600454009#m">Harrison 线索</a> / <a href="https://nitter.net/devstein64/status/2074177555272503421#m">webinar 线索</a></p>
+          <p>Harrison Chase 继续围绕 LLM Wikis 和 OpenWiki 讨论 agent memory。今天的线索从“OpenWiki 很热”推进到更尖锐的问题：agent 到底需不需要 wiki？人和 agent 是否应该共享同一个 wiki？应该一个 wiki 还是多个 wiki？甚至有人提出 wiki 可能不是正确抽象。</p>
+          <p>这说明 memory 讨论正在变得更工程化。它不再只是“存不存上下文”，而是涉及权限、同步、粒度、schema、冲突、更新频率、人类可读性和 agent 可检索性。</p>
+          <p class="why"><strong>为什么值得看：</strong>OpenClaw 当前有 daily memory、MEMORY.md、skills、项目 README、状态 JSON 和报告索引。如果没有清晰边界，agent 很容易把日志、事实、偏好和长期规则混读。</p>
+          <p class="action"><strong>后续行动：</strong>把 OpenClaw 记忆分层写成小规范：运行日志、项目事实、长期偏好、技能规则、发布状态各自放在哪里，何时更新，谁能引用。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hugging Face 生态：Xet 数据规模、Factory agent traces、Kernels 更新和 Photoroom 数据策略形成开放飞轮</h3>
+          <p class="source">来源账号/机构：Clem Delangue / Hugging Face / Factory / Photoroom；发布时间：2026-07-06 15:30-22:03 UTC；链接：<a href="https://nitter.net/ClementDelangue/status/2074252946699694432#m">HF Xet 线索</a> / <a href="https://nitter.net/FactoryAI/status/2074252711860883746#m">Factory traces 线索</a> / <a href="https://huggingface.co/blog/revamped-kernels">HF Kernels 更新</a> / <a href="https://huggingface.co/blog/Photoroom/prx-part4-data">Photoroom PRX 数据策略</a></p>
+          <p>Clem Delangue 提到 AI builders 在 HF Xet 上存储的数据规模，并转发 Factory 与 Hugging Face 合作开放 agent traces 的线索：Droid agent traces 可以直接上传到 Hugging Face datasets。与此同时，Hugging Face Blog 在窗口内发布 Kernels 重大更新，Photoroom 也发布 PRX 系列的数据策略文章。</p>
+          <p>这些内容放在一起看，开放模型生态正在从“开放权重”扩展为“开放数据资产 + agent traces + 推理 kernel + 产品公司训练经验”。这会影响下一代开放 coding model、agent model 和垂直模型的训练素材与复现能力。</p>
+          <p class="why"><strong>为什么值得看：</strong>投资和产业链观察不能只盯模型发布。数据存储、trace 标准、kernel 优化、dataset 托管和产品数据策略，都是开放模型生态的基础设施环节。</p>
+          <p class="action"><strong>后续行动：</strong>建立“开放模型基础设施”观察表：数据托管、agent traces、kernel/serving、评测集、许可证、企业产品数据策略分别跟踪。</p>
+        </div>
+
+        <div class="item">
+          <h3>Francois Chollet：benchmark 必须带成本和耗时，否则单一分数失去意义</h3>
+          <p class="source">来源账号/机构：Francois Chollet；发布时间：2026-07-06 21:22-21:25 UTC；链接：<a href="https://nitter.net/fchollet/status/2074242671103889799#m">公开 X/Nitter 线索</a> / <a href="https://nitter.net/fchollet/status/2074243426854568122#m">后续说明</a></p>
+          <p>Chollet 指出，仅报告某 benchmark 的标量分数已经没有意义，必须同时报告效率，例如每个任务的成本。他的追问很直接：如果一个系统能完成 75% 的任务，仍然要问每个任务多少钱、需要多久。</p>
+          <p>这与 agent 评测尤其相关。长程 agent 可以用更多 token、更多工具调用、更多尝试来提高完成率，但如果不报告边际成本和延迟，结果很容易被误读。</p>
+          <p class="why"><strong>为什么值得看：</strong>Follow List 多个主题都在靠近同一个评价框架：模型能力、agent harness、eval、开放模型部署，最终都要回到质量、成本、延迟和可控性。</p>
+          <p class="action"><strong>后续行动：</strong>以后记录 agent/模型线索时固定加四列：任务成功率、每任务成本、耗时、人工介入次数；没有数据时标为待验证。</p>
+        </div>
+
+        <div class="item">
+          <h3>Google DeepMind / Apptronik：真实机器人数据进入 Gemini Robotics 训练闭环</h3>
+          <p class="source">来源账号/机构：Demis Hassabis 转发 / Google DeepMind；发布时间：2026-07-06 15:43 UTC；链接：<a href="https://nitter.net/GoogleDeepMind/status/2074157282477154597#m">公开 X/Nitter 线索</a></p>
+          <p>Demis Hassabis 转发 Google DeepMind 与 Apptronik 的线索：Apptronik 扩展 Robot Park facility，Apollo 2 humanoid 平台收集的真实世界数据将帮助训练和推进 Gemini Robotics。</p>
+          <p>这条不是纯软件 agent，但与 world models、physical AI 和多模态数据闭环相关。机器人方向的核心资产很可能不是单个模型，而是持续采集、清洗、反馈和仿真/现实对齐的数据系统。</p>
+          <p class="why"><strong>为什么值得看：</strong>Follow List 里 Jim Fan、Fei-Fei Li、DeepMind 等世界模型/机器人线索都指向同一趋势：真实数据飞轮会成为 embodied AI 的壁垒。</p>
+          <p class="action"><strong>后续行动：</strong>把 physical AI 观察表分成模型、数据采集设施、机器人平台、仿真环境、产业合作五列，后续持续补充。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>Simon Willison：</strong>继续用真实开源项目展示 coding agent 在发布前评审、文档审查和交叉模型复审中的高价值用法。</li>
+          <li><strong>Hamel Husain / Shreya Shankar：</strong>把 AI eval 自动化拉回 error analysis 和 failure taxonomy，而不是供应商式一键评分。</li>
+          <li><strong>Thomas Wolf / Hugging Face：</strong>探索多 agent 协作维护 RL for LLMs living wiki，并把运行事件转成可观察系统。</li>
+          <li><strong>Harrison Chase / LangChain：</strong>持续推动 OpenWiki、LLM Wikis 和 agent memory 的工程讨论。</li>
+          <li><strong>Clem Delangue / HF 社区：</strong>放大 Xet 数据、Factory traces、本地 apps 和开放模型基础设施信号。</li>
+          <li><strong>Francois Chollet：</strong>继续强调 benchmark 的成本和边际效率，避免只看标量分数。</li>
+          <li><strong>Google DeepMind / Apptronik：</strong>展示 humanoid 真实数据进入 Gemini Robotics 训练闭环的产业线索。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>异构模型代码评审模板：</strong>把 Claude/GPT 交叉复审落实到重要发布流程，先从事务、数据持久化、兼容性和文档承诺开始。</li>
+          <li><strong>日报 eval 集：</strong>记录每日候选链接、入选理由、漏选/误选和来源失败，形成可回放的筛选质量数据。</li>
+          <li><strong>OpenClaw living wiki：</strong>试验“抓取、摘要、复审、沉淀”多 agent 流程，并保留中间状态和引用来源。</li>
+          <li><strong>开放模型基础设施图谱：</strong>跟踪 HF Xet、agent traces、kernels、serving、dataset、许可证和产品公司训练策略。</li>
+          <li><strong>成本化 benchmark 模板：</strong>所有 agent/模型评测记录成功率、成本、延迟和人工介入次数。</li>
+          <li><strong>Physical AI 数据闭环：</strong>持续关注 Apptronik/DeepMind、World Labs、NVIDIA 等真实数据采集与仿真生态。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>Simon 的 sqlite-utils 4.0rc3 案例来自作者公开博客，本报告未复现其代码问题；对其他项目的可迁移性取决于测试质量、上下文和维护者审查能力。</li>
+          <li>Hamel/Shreya 的 eval session 当前依据公开 X 摘要和视频入口，完整方法论需要看完整视频或课程材料后再沉淀成操作手册。</li>
+          <li>Thomas Wolf 的 living wiki 项目是公开 X 线索，本报告未验证仓库结构、agent 日志格式和实际 PR 审查质量。</li>
+          <li>HF Xet 数据规模、Factory traces 与 Kernels 更新需要分别查官方文档、dataset 示例和实现细节，才能判断可直接用于本地 agent 训练/评测。</li>
+          <li>Google DeepMind/Apptronik 线索是公开社交帖，真实数据规模、授权方式、训练效果和 Gemini Robotics 进展仍待官方技术材料。</li>
+          <li>Nitter RSS 本轮可读，但可能漏掉登录态内容、删除帖、限流内容或原帖上下文；本次未使用私密 cookie、token 或账号内部信息。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul class="noise">
+          <li>Nathan Lambert 的美国队/体育庆祝、独立日延续话题和部分社交转发不进入技术主线。</li>
+          <li>Noam Brown 的 ICML booth Q&A 是会议提醒，有价值但缺少可总结技术内容，列为轻量跟进。</li>
+          <li>swyx 转发 AIEWF 社区会议文章，偏社区氛围，不重复展开昨天的 loops/AIEWF 主线。</li>
+          <li>Fei-Fei Li 相关线索主要是 Dwarkesh 线下活动提醒，值得关注访谈产出，但今天没有可引用的新观点。</li>
+          <li>Hugging Face Blog 的 PRX 数据策略和 Kernels 更新值得后续细读，本日报只提炼为开放基础设施主题，不大段转载。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul>
+          <li><a href="https://simonwillison.net/2026/Jul/6/sqlite-utils/#atom-everything">Simon Willison: sqlite-utils 4.0rc3</a></li>
+          <li><a href="https://nitter.net/HamelHusain/status/2074242605634949306#m">Hamel Husain: How to Automate Evals with AI</a></li>
+          <li><a href="https://youtu.be/tqUDjc1HzO4">How to Automate AI Evals (Correctly)</a></li>
+          <li><a href="https://nitter.net/Thom_Wolf/status/2074064916089036916#m">Thomas Wolf: RL for LLMs living wiki agents</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2074178331600454009#m">Harrison Chase: agent wiki abstraction discussion</a></li>
+          <li><a href="https://nitter.net/devstein64/status/2074177555272503421#m">LangChain / Dosu webinar: LLM Wikis and agent memory</a></li>
+          <li><a href="https://nitter.net/ClementDelangue/status/2074252946699694432#m">Clem Delangue: HF Xet data scale</a></li>
+          <li><a href="https://nitter.net/FactoryAI/status/2074252711860883746#m">Factory AI: Droid agent traces to Hugging Face datasets</a></li>
+          <li><a href="https://huggingface.co/blog/revamped-kernels">Hugging Face Blog: Kernels major updates</a></li>
+          <li><a href="https://huggingface.co/blog/Photoroom/prx-part4-data">Hugging Face Blog / Photoroom: PRX Part 4 data strategy</a></li>
+          <li><a href="https://nitter.net/fchollet/status/2074242671103889799#m">Francois Chollet: benchmark efficiency scores</a></li>
+          <li><a href="https://nitter.net/fchollet/status/2074243426854568122#m">Francois Chollet: marginal cost is the whole thing</a></li>
+          <li><a href="https://nitter.net/GoogleDeepMind/status/2074157282477154597#m">Google DeepMind / Apptronik: Gemini Robotics data loop</a></li>
+          <li><a href="https://nitter.net/thenanyu/status/2073920326304460847#m">Nan Yu: real-time strategy model of managing agents</a></li>
+          <li><a href="https://nitter.net/thenanyu/status/2074133468007587932#m">Nan Yu: founder work leverage and agents</a></li>
+          <li><a href="https://nitter.net/polynoamial/status/2074259788188541207#m">Noam Brown: ICML reasoning research Q&A</a></li>
+        </ul>
+      </section>
+
+      <footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer>
+    </main>

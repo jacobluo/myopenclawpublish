@@ -1,0 +1,139 @@
+---
+title: "Follow 深度日报：Fable 治理余震与 Agent 工程回到可控性（午后补充）"
+date: "2026-06-16"
+category: "daily"
+url: "/daily/2026/06/16/"
+summary: "Follow List 公开来源整理：Anthropic Fable/Mythos、Luta Security 对出口管制的技术反驳、agent 可观测性、Datasette Agent、Gemini 语音、plain-writing-skill。"
+---
+<main>
+      <article>
+        <h1>Follow 深度日报：Fable 治理余震与 Agent 工程回到可控性（午后补充）</h1>
+        <p class="meta">主窗口：2026-06-15 14:02 至 2026-06-16 11:34（Asia/Shanghai）｜补充检查：2026-06-16 11:34 至 2026-06-16 14:29（Asia/Shanghai）｜来源：Obsidian Follow List active 条目，high 优先；未使用 Folo CLI。</p>
+
+        <section class="summary-box">
+          <p><strong>总览：</strong>今天最值得跟进的不是单一模型发布，而是三条线合流：Anthropic Fable/Mythos 的政府禁用事件继续把 frontier model governance 推到台前；AI agent 工具讨论从“能做什么”转向“写入、审批、可观测、回归测试”；Gemini、LangChain、Shreya/Nathan 等公开信号都在把实际工作流往更细的工程控制点推进。</p>
+          <p><strong>午后补充：</strong>上次发布后，Follow List 的 high/active 来源里新增高信号主要来自 Simon Willison 转引 Luta Security/Katie Moussouris 对 Fable 5 出口管制的技术反驳。其余已抓取来源在补充窗口内没有足够新的公开更新，避免重复写入。</p>
+        </section>
+
+        <h2>核心主题</h2>
+        <ul>
+          <li><strong>Claude / Fable / AI governance：</strong>Anthropic 官方 6 月 12 日声明仍是事件主轴，Simon Willison、Nathan Lambert、Francois Chollet 等在 6 月 15-16 日继续围绕“窄 jailbreak 是否足以触发模型级禁令”展开判断。</li>
+          <li><strong>Agent 工程：</strong>Datasette Agent 0.3a0 新增需用户审批的写 SQL 工具；LangChain/Harrison Chase 继续强调 agent observability 和长期改进闭环。</li>
+          <li><strong>AI 产品细节：</strong>Josh Woodward 发布 Gemini App 移动端语音输入增强，信号偏产品体验：多语言混说和低切换成本。</li>
+          <li><strong>开源工具与技能化工作流：</strong>Shreya Shankar 放出 plain-writing-skill，Nathan Lambert 更新 post-training 课程，都是“把经验固化为可复用流程”的方向。</li>
+        </ul>
+
+        <h2>重要更新</h2>
+        <section class="item">
+          <h3>0. 午后补充：安全专家反驳 Fable 5 出口管制依据</h3>
+          <p class="label">来源账号/机构：Simon Willison、Luta Security / Katie Moussouris｜发布时间：2026-06-16 05:20 UTC｜链接：<a href="https://simonwillison.net/2026/Jun/16/fable-5-export-controls/">Simon 转引</a>、<a href="https://www.lutasecurity.com/post/the-fable-5-export-controls-harm-us-cyber-defense">Luta Security 原文</a></p>
+          <p>Simon 新增转引 Katie Moussouris 的文章。Katie 称她看过引发争议的第三方研究，认为所谓“绕过护栏”的关键路径更接近防御者常用的找漏洞、修补代码、生成测试流程，而不是应触发模型级出口管制的攻击能力。</p>
+          <p>这篇文章把 Fable/Mythos 事件从抽象治理争议拉回到安全工作流本身：如果“修复有漏洞代码并验证补丁”也被视为危险能力，防守方会首先受损，而攻击者仍可转向其他模型或工具。它也呼应了上一版日报的判断：政策系统正在用过粗的控制杆处理 agentic coding/cyber capability。</p>
+          <p><strong>为什么值得看：</strong>这是少数声称读过相关研究材料的外部安全专家给出的公开技术判断，可作为评估 Anthropic 官方说法和媒体叙事的重要交叉来源。</p>
+          <p><strong>后续行动：</strong>继续等 Anthropic、美国商务部或研究方公开更完整材料；若只看到转述，暂时把“具体 jailbreak 风险等级”列为待验证，不把它当成已定论。</p>
+        </section>
+
+        <section class="item">
+          <h3>1. Anthropic Fable/Mythos 禁用事件进入“治理样板”阶段</h3>
+          <p class="label">来源账号/机构：Anthropic、Simon Willison、Nathan Lambert、Francois Chollet｜发布时间：2026-06-12 至 2026-06-16｜链接：<a href="https://www.anthropic.com/news/fable-mythos-access">Anthropic 声明</a>、<a href="https://simonwillison.net/2026/Jun/16/matteo-wong-the-atlantic/">Simon 摘要</a>、<a href="https://www.interconnects.ai/p/welcome-to-the-agi-era-of-ai-governance">Interconnects 分析</a></p>
+          <p>Anthropic 官方称美国政府以国家安全权限要求暂停 Fable 5 和 Mythos 5 对所有外国国民的访问，实际导致面向所有客户下线。官方争议点在于：政府依据似乎是一个窄范围、非通用的 jailbreak，而 Anthropic 认为该能力已被其他公开模型普遍具备，不应成为召回商业模型的标准。</p>
+          <p>Simon 在 6 月 16 日进一步转引外部安全专家说法，核心判断是所谓 jailbreak 很可能接近“让模型修复不安全代码”的安全防御用例。Nathan Lambert 则把它提升为“agentic inference 时代治理”的起点：当模型开始真正补充人类工作，政策系统会用更粗糙、更政治化的方式快速介入。</p>
+          <p><strong>为什么值得看：</strong>这不是 Claude 单点事故，而是 frontier model release、出口管制、cyber safety、政府技术判断能力之间的第一次公开硬碰撞。</p>
+          <p><strong>后续行动：</strong>继续跟进 Anthropic 是否发布更完整技术复盘、美国政府是否给出正式书面依据、其他实验室是否调整 release note 和 red-team 公开策略。</p>
+        </section>
+
+        <section class="item">
+          <h3>2. Datasette Agent 0.3a0：把“写操作”放进可审批工具链</h3>
+          <p class="label">来源账号：Simon Willison｜发布时间：2026-06-15 17:19 UTC｜链接：<a href="https://simonwillison.net/2026/Jun/15/datasette-agent/">Simon 博文</a>、<a href="https://github.com/datasette/datasette-agent/releases/tag/0.3a0">GitHub Release</a></p>
+          <p>Datasette Agent 0.3a0 新增 `execute_write_sql`，允许 agent 在请求用户确认后写入数据库，并考虑用户权限。CLI 也新增支持审批的 chat 模式，以及 `--root`、`--yes`、`--unsafe` 等选项，方便在不同风险档位下运行。</p>
+          <p>这个更新的关键不在“agent 会写 SQL”，而在它把危险动作变成可显示、可确认、可基于权限约束的交互。对任何内部运营类 agent 来说，这比单纯扩大工具能力更有参考价值。</p>
+          <p><strong>为什么值得看：</strong>可审批写操作是 agent 从只读助手走向业务系统执行者的必经基础设施。</p>
+          <p><strong>后续行动：</strong>可以把它作为内部 agent 工具设计样板：危险动作先生成计划和 diff，再进入明确的人工确认与审计记录。</p>
+        </section>
+
+        <section class="item">
+          <h3>3. LangChain 信号：agent 可观测性不是附加项</h3>
+          <p class="label">来源账号：Harrison Chase / LangChain｜发布时间：2026-06-15 19:17 UTC｜链接：<a href="https://x.com/hwchase17/status/2066601074220466673">X 原链接</a>、<a href="https://nitter.net/hwchase17/status/2066601074220466673#m">公开镜像</a></p>
+          <p>Harrison Chase 简短强调“observability is non-optional for agents”，并转发了 LangGraph + LangSmith 用于编排、trace、eval、回归测试的实践信号。它与 Datasette Agent 的审批线索互相呼应：agent 越进入真实工作流，就越需要观察、复现、回归和权限边界。</p>
+          <p>这里的重点是行业话术正在从“agent demo”转向“agent improvement system”。只有把每次运行留下 trace，再把错误归类、评估、回归测试接上，agent 才可能稳定变好。</p>
+          <p><strong>为什么值得看：</strong>这直接影响后续 AI agent 产品栈选型，尤其是 LangGraph/LangSmith、OpenTelemetry、eval harness 的组合。</p>
+          <p><strong>后续行动：</strong>整理一个 agent observability checklist：trace、tool call、输入输出版本、审批记录、失败分类、回归数据集。</p>
+        </section>
+
+        <section class="item">
+          <h3>4. Gemini App 移动端语音输入增强</h3>
+          <p class="label">来源账号：Josh Woodward｜发布时间：2026-06-16 00:03 UTC｜链接：<a href="https://x.com/joshwoodward/status/2066673011554435450">X 原链接</a>、<a href="https://nitter.net/joshwoodward/status/2066673011554435450#m">公开镜像</a></p>
+          <p>Josh Woodward 表示 Gemini App 的麦克风入口在 Android 和 iOS 上有明显升级，支持 70 多种语言、自由混用语言，并减少切换语言设置的摩擦；网页版预计约一周后跟进。</p>
+          <p>这类看似小的产品更新，对非英语用户和跨语言工作流很关键。它说明主流 AI 产品正在把“自然输入”从英文优先的 demo 变成多语言日常能力。</p>
+          <p><strong>为什么值得看：</strong>语音、多语言和混合语言输入会改变移动端 AI 助手的使用频率，尤其适合生活助理、会议速记、出行和即时查询。</p>
+          <p><strong>后续行动：</strong>等网页版上线后测试中英混输、噪声环境、长语音分段和错误修正体验。</p>
+        </section>
+
+        <section class="item">
+          <h3>5. Shreya Shankar 发布 plain-writing-skill</h3>
+          <p class="label">来源账号：Shreya Shankar｜发布时间：2026-06-16 00:10 UTC｜链接：<a href="https://x.com/sh_reya/status/2066674728396579101">X 原链接</a>、<a href="https://github.com/shreyashankar/plain-writing-skill">GitHub 仓库</a></p>
+          <p>Shreya 放出了一个面向 AI agents 的 plain-language writing skill，并带有 revision view 用来展示改动。她把这个 skill 归因于正在进行的 DocWriter 项目：用具体反例和修订流程教 agent 避免空泛、油滑、AI 腔的写作。</p>
+          <p>这个方向和内部“技能化”很契合：不是靠一次 prompt 让模型变好，而是把偏好、反例、审稿方式和可视化差异固化成可复用工具。</p>
+          <p><strong>为什么值得看：</strong>对内容生产、产品文案、技术文档都可复用；也提醒我们技能文件应尽量可审计、可比较，而不是只放抽象原则。</p>
+          <p><strong>后续行动：</strong>抽空读仓库结构，评估是否把其中的 revision-view 思路移植到本地 humanizer/写作工作流。</p>
+        </section>
+
+        <section class="item">
+          <h3>6. Nathan Lambert 更新 post-training 课程</h3>
+          <p class="label">来源账号：Nathan Lambert｜发布时间：2026-06-15 22:14 UTC｜链接：<a href="https://x.com/natolambert/status/2066645505359462883">X 原链接</a>、<a href="https://rlhfbook.com/course">课程页</a></p>
+          <p>Nathan 发布了 post-training 课程的三段新内容：reasoning models 的兴起、DPO 推导/直觉/实践，以及读者问答。课程页还汇总了视频和额外资源。</p>
+          <p>在 Fable/Mythos 事件背景下，这个更新更值得看：post-training、reasoning、safety、jailbreak 和产品行为不再是研究圈内部话题，而会直接进入产品发布和政策争议。</p>
+          <p><strong>为什么值得看：</strong>补齐 RLHF/post-training 基础，有助于理解模型行为、对齐措施和“为什么同一模型在不同策略下表现差异很大”。</p>
+          <p><strong>后续行动：</strong>优先看 reasoning models 和 DPO 两节，整理成中文学习笔记。</p>
+        </section>
+
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>Simon Willison：</strong>一天内同时跟进 Fable 争议、发布 Datasette Agent，并记录 Cloudflare CAPTCHA 规则调整；继续是 agent 工程和 AI 安全交叉处的高信号来源。</li>
+          <li><strong>Nathan Lambert：</strong>把 Anthropic 事件上升到 AI governance 框架，同时继续维护 post-training 教育内容，兼具政策和技术解释价值。</li>
+          <li><strong>Francois Chollet：</strong>强调即便支持 AI regulation，也要警惕不透明、任意的监管打击；并呼吁标准化 agentic capability benchmarks。</li>
+          <li><strong>Josh Woodward / Gemini：</strong>移动端多语言语音输入增强，说明 Google 正在推进 Gemini 的日常输入体验。</li>
+          <li><strong>Shreya Shankar：</strong>plain-writing-skill 是 AI agent 写作质量控制的可操作样板。</li>
+        </ul>
+
+        <h2>值得跟进项目</h2>
+        <ol>
+          <li><a href="https://github.com/datasette/datasette-agent/releases/tag/0.3a0">datasette-agent 0.3a0</a>：重点看审批式写操作和 CLI 风险档位设计。</li>
+          <li><a href="https://github.com/shreyashankar/plain-writing-skill">plain-writing-skill</a>：重点看 revision view 和反 AI 腔规则如何落地。</li>
+          <li><a href="https://rlhfbook.com/course">RLHF &amp; Post-Training Course</a>：补 reasoning models、DPO 和 post-training 基础。</li>
+          <li><a href="https://www.anthropic.com/news/fable-mythos-access">Fable/Mythos 访问恢复与技术复盘</a>：后续如果 Anthropic 或政府公开更多材料，应单独跟踪。</li>
+        </ol>
+
+        <h2>待验证信息</h2>
+        <ul>
+          <li>Fable/Mythos 触发禁令的 jailbreak 细节仍主要来自 Anthropic、媒体、转述和安全专家评论，缺少完整可复核技术材料。</li>
+          <li>Axios/The Atlantic 等报道里的政府内部动机和 Amazon 角色仍有大量匿名来源成分，需要等正式文件或更多交叉报道。</li>
+          <li>Gemini App 语音升级的网页版时间表来自 Josh Woodward 的公开帖，实际发布时间需要下周验证。</li>
+          <li>Nitter/RSSHub 类镜像可用性不稳定，本次 RSSHub Twitter 路径不可用，Nitter 能读到部分账号，但不能视为长期可靠抓取通道。</li>
+        </ul>
+
+        <h2>低优先级噪音</h2>
+        <section class="noise">
+          <p>Logan Kilpatrick 的“活在当下”类短帖、部分账号纯转发、无上下文感想帖，本轮未纳入重点。Google DeepMind 官方 RSS 最近一条是 6 月 5 日，超过本次窗口，只作为背景不写入主线。</p>
+        </section>
+
+        <h2>原始链接</h2>
+        <ul class="source-list">
+          <li><a href="https://www.anthropic.com/news/fable-mythos-access">Anthropic: Statement on the US government directive to suspend access to Fable 5 and Mythos 5</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/16/matteo-wong-the-atlantic/">Simon Willison: Quoting Matteo Wong, The Atlantic</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/15/datasette-agent/">Simon Willison: datasette-agent 0.3a0</a></li>
+          <li><a href="https://github.com/datasette/datasette-agent/releases/tag/0.3a0">GitHub: datasette-agent release 0.3a0</a></li>
+          <li><a href="https://www.interconnects.ai/p/welcome-to-the-agi-era-of-ai-governance">Nathan Lambert: Welcome to the AGI era of AI governance</a></li>
+          <li><a href="https://github.com/shreyashankar/plain-writing-skill">Shreya Shankar: plain-writing-skill</a></li>
+          <li><a href="https://rlhfbook.com/course">Nathan Lambert: RLHF &amp; Post-Training Course</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2066601074220466673#m">Harrison Chase: observability is non-optional for agents</a></li>
+          <li><a href="https://nitter.net/joshwoodward/status/2066673011554435450#m">Josh Woodward: Gemini App mic update</a></li>
+          <li><a href="https://nitter.net/fchollet/status/2066554345345147288#m">Francois Chollet: arbitrary regulatory strikes</a></li>
+        </ul>
+
+        <footer>
+          抓取说明：主清单来自 Obsidian Follow List；优先 active/high/weekly 条目；公开 X URL、Nitter 镜像、博客/RSS、GitHub API 和来源官网交叉使用；未使用 Folo CLI，未绕过 CAPTCHA，未发布任何 cookie、token 或登录态内容。
+        </footer>
+      </article>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>

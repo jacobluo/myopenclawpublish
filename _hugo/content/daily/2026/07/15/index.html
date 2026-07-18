@@ -1,0 +1,144 @@
+---
+title: "Follow 深度日报：Agent ROI、Codex 视觉资产链路与可观测评估"
+date: "2026-07-15"
+category: "daily"
+url: "/daily/2026/07/15/"
+summary: "Follow List 公开来源整理：OpenAI 把 ChatGPT Work/Codex 叙事推向 useful work per dollar 和部门用例；Simon Willison 公开 Codex pet 的 GPT-5.6 Sol + gpt-image-2 sprite 生成链路；LangSmith 推 coding-agent traces；Hamel/Shreya 讨论自动 eval 与 AI 写作质量；Sam Altman 提示 Sol 增长和推理容量压力；Logan Kilpatrick 强化 AI Studio/ACE 开发者入口。"
+---
+<div class="meta">
+  <strong>2026年7月15日（周三）</strong> · 覆盖窗口：2026-07-14 08:00 – 2026-07-15 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；公开 RSS、官网页面、Nitter RSS 与公开链接。未使用 Folo CLI，未使用私密 cookie/token；OpenAI `/news/rss` 被 Cloudflare 拦截，改用可公开访问的 `/blog/rss.xml`。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>OpenAI 把 Agent 叙事推向 ROI</h4><p>OpenAI 新增 “agentic era” 投资管理文章和 ChatGPT Work 行业用例，重点从模型能力转向 useful work per dollar、团队流程和可扩展工作流。</p></div>
+  <div class="overview-item"><h4>Codex 进入可视化资产生成链路</h4><p>Simon Willison 逆向并公开 Codex pet 的 sprite 生成过程，展示 GPT-5.6 Sol + gpt-image-2 如何把提示、参考图、动画帧和 QA 产物串成可检查仓库。</p></div>
+  <div class="overview-item"><h4>Coding agent 需要统一追踪层</h4><p>LangChain/LangSmith 发布 coding-agent traces，覆盖 Claude Code、Codex、Cursor、Copilot、Pi、OpenCode 等，把多工具会话、成本、错误和重试统一进观测面。</p></div>
+  <div class="overview-item"><h4>自动 eval 不能替代产品判断</h4><p>Hamel/Shreya 继续把注意力放在真实生产 trace、AI 写作质量和人类 taste 上：自动 eval 有价值，但需要迭代、人类反馈和领域判断。</p></div>
+  <div class="overview-item"><h4>Sol 增长压力成为策略信号</h4><p>Sam Altman 转发 8M active users 说法并称 5.6 Sol 增长“insane”，提示新一代 agent 产品的瓶颈正在转向推理容量、限额和使用体验。</p></div>
+  <div class="overview-item"><h4>Google AI Studio 在补组织能力</h4><p>Logan Kilpatrick 招聘 AI Studio TPM lead，并提出 ACE 是 IDE 的自然后继，说明 Google 仍在强化开发者产品和 agentic coding 入口。</p></div>
+</div>
+
+<h2>核心主题</h2>
+<h3>一、从模型发布转向“单位成本有效工作”</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI</span><strong>OpenAI News RSS</strong> · 2026-07-14 10:00 UTC · <a href="https://openai.com/index/managing-ai-investments-in-agentic-era">文章</a></div>
+  <div class="summary"><p>OpenAI 发布 “How to manage AI investments in the agentic era”，把企业 AI 投资的核心指标从单纯部署模型，转向 measuring useful work per dollar、效率提升和高价值工作流规模化。这个表述很值得注意：它把 agent 从“新工具采购”放进 CFO/业务负责人能理解的投入产出框架。结合 ChatGPT Work 的发布节奏，OpenAI 正在把 Codex/Work/Sol 从技术热度导向企业预算语言。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这类文章往往不是技术 breakthrough，但它显示 OpenAI 在塑造企业采用模型：先定义指标，再把工作流、成本、治理和扩展性纳入采购讨论。</div>
+  <div class="action">后续行动：建立自己的 agent ROI 模板，至少记录完成任务数、人工节省时间、返工率、token/API 成本、验收失败率和业务结果。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">ChatGPT Work</span><strong>OpenAI Academy</strong> · 2026-07-14 · <a href="https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex">数据科学团队</a> · <a href="https://openai.com/academy/codex-for-work/how-sales-teams-use-codex">销售团队</a></div>
+  <div class="summary"><p>OpenAI Academy 连发两篇 ChatGPT Work 行业用例：数据科学团队可把真实工作输入变成 root-cause briefs、impact readouts、KPI memos、scoped analyses 和 dashboard specs；销售团队则对应 pipeline briefs、meeting prep、forecast reviews、account plans 和 stalled-deal diagnoses。这不是 coding agent 的典型叙事，而是把 Work 产品包装成跨职能知识工作台。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>ChatGPT Work 的竞争不是只和 IDE 里的 Codex 比，而是和 Excel、BI、CRM、文档协作和内部分析流程抢入口。数据科学与销售两个场景说明 OpenAI 正在用“部门模板”降低企业 adoption 门槛。</div>
+  <div class="action">后续行动：把这些用例拆成可复用的 OpenClaw/ChatGPT Work 工作流清单，尤其关注数据输入、权限边界、输出验收和是否可追溯。</div>
+</div>
+
+<h3>二、Codex 从写代码扩展到生成可审计视觉资产</h3>
+<div class="card">
+  <div class="source"><span class="tag">Codex</span><strong>Simon Willison</strong> · 2026-07-14 22:29 UTC · <a href="https://simonwillison.net/2026/Jul/14/pedalican/">博客</a> · <a href="https://github.com/simonw/pedalican-pet">GitHub</a></div>
+  <div class="summary"><p>Simon 记录自己在 Codex Desktop 里触发自定义 pet，并让 GPT-5.6 Sol xhigh 通过多轮 gpt-image-2 生成角色参考图、动画帧、sprite sheet、GIF 预览和过程说明。他公开了 prompts、运行目录、生成图像和 QA 预览，使这个例子不是“看起来很酷”的视频，而是可追溯的资产生成流水线。重点不在吉祥物本身，而在 Codex skill 如何把图像模型调用、文件组织、动画切片和产物说明自动化。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这把 coding agent 的边界往视觉生产推进了一步：它不只是改代码，也能组织多模态资产生产，并保留中间件让人检查质量、复现失败点和继续迭代。</div>
+  <div class="action">后续行动：抽取其中的“参考图 → 多动作帧 → sprite sheet → 预览 → QA notes”流程，用于游戏、演示、教程和品牌小组件的轻量资产生产。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">工程实践</span><strong>Simon Willison</strong> · 2026-07-14 00:56 UTC · <a href="https://til.simonwillison.net/github-actions/uvx-github-actions-cache">TIL</a></div>
+  <div class="summary"><p>Simon 分享了用 `uvx` 跑 GitHub Actions 时更 cache-friendly 的做法：通过 `UV_EXCLUDE_NEWER` 固定依赖解析时间点，并把日期纳入缓存 key，避免每次运行都从 PyPI 拉取新版本。它看似是小技巧，但和 Dependabot cooldown、agent 生成 PR 激增放在一起看，说明自动化越多，依赖漂移和供应链噪音越需要主动治理。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Agent 会放大 CI 执行频率；如果工具安装、依赖更新和缓存策略不稳，成本和偶发失败会被成倍放大。</div>
+  <div class="action">后续行动：检查当前 GitHub Actions/CI 中的 `uvx`、`npx`、`pipx`、`cargo install` 等临时工具调用，加入版本窗口或缓存策略。</div>
+</div>
+
+<h3>三、Agent 可观测与评估进入真实 trace 阶段</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain</span><strong>LangChain / Harrison Chase</strong> · 2026-07-13 22:19 UTC，窗口内传播 · <a href="https://www.langchain.com/blog/your-coding-agents-are-a-black-box-heres-how-to-crack-them-open">博客</a> · <a href="https://nitter.net/hwchase17/status/2077125815083606116#m">Harrison</a></div>
+  <div class="summary"><p>LangChain 发布 “How to Debug Coding Agents with LangSmith Traces”，目标是把 Claude Code、Codex、Cursor、Copilot、Pi、OpenCode 等 coding agent 的会话统一追踪。核心能力包括识别稳定 session key、查看完整 run tree、追踪 turns/model calls/tools/subagents、记录 token 与成本，以及查询错误和重试。Harrison Chase 在 X 上强调他们做了很多工作来标准化 coding agents 到 LangSmith 的 trace。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Agent 越像“黑盒外包工程师”，越需要统一审计日志。企业不会长期接受只能看最终 diff 的 agent；真正的生产系统要能回答它为什么改、调用了什么工具、花了多少钱、哪里失败过。</div>
+  <div class="action">后续行动：把 LangSmith tracing 与现有 Codex/OpenClaw 会话日志做能力对比，设计一个最小 trace schema：任务、模型、工具、文件变更、成本、失败、验收。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Evals</span><strong>Hamel Husain / Parlance Labs</strong> · 2026-07-14 X 传播，原文 2026-07-11 · <a href="https://parlance-labs.com/blog/posts/auto-evals/">文章</a> · <a href="https://nitter.net/HamelHusain/status/2077042379392213377#m">X</a></div>
+  <div class="summary"><p>Hamel 与 Antaripa Saha 的文章比较了 human-annotated traces 和自动 eval 系统。Hamel 在窗口内总结：自动 eval 能发现一些人类漏掉的问题，也能融入 trace 浏览和 LLM judge 创建流程；但它们常错过需要领域经验和 taste 的问题，缺乏从人类反馈学习的好机制，而且有些结果可以用 coding agent + 人在环里得到。结论不是不用，而是必须迭代、带人类反馈地用。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这和 LangSmith trace 是同一条线：先有真实 trace，再谈自动分析。没有人类标注、领域判断和反馈闭环，自动 eval 很容易变成另一个漂亮但脆弱的仪表盘。</div>
+  <div class="action">后续行动：选一个真实 OpenClaw/业务 agent 流程，收集 20-50 条 trace，先人工标注失败类型，再测试自动 eval 是否能稳定复现这些标注。</div>
+</div>
+
+<h3>四、能力过剩、增长压力与新入口争夺</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI</span><strong>Sam Altman</strong> · 2026-07-14 19:02/19:50 UTC · <a href="https://nitter.net/sama/status/2077106587307798989#m">Sol 增长</a> · <a href="https://nitter.net/sama/status/2077118672150388816#m">8M active users 转发</a></div>
+  <div class="summary"><p>Sam Altman 称 5.6 Sol 增长“insane”，推理团队正在支撑需求，但短期可能出现 hiccups；随后转发 Tibo 关于 Codex 和 ChatGPT Work 达到 8M active users、再次重置用量限制的说法。即便具体数字仍需以官方长期披露为准，社媒信号已经很清楚：Sol/Work 的竞争进入容量、限额、稳定性和用户探索边界阶段。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>模型能力发布只是第一天；真正的产品竞争发生在高并发使用、限额策略、成本控制和用户是否能连续完成复杂工作中。</div>
+  <div class="action">后续行动：持续观察 Sol 的限额、排队、成本与失败反馈；把“能力强但容量不足”的风险纳入企业 agent 选型。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Google</span><strong>Logan Kilpatrick</strong> · 2026-07-14 19:02 UTC · <a href="https://nitter.net/OfficialLoganK/status/2077106462648860739#m">招聘</a> · <a href="https://nitter.net/OfficialLoganK/status/2076750790031782155#m">ACE</a></div>
+  <div class="summary"><p>Logan Kilpatrick 为 Google AI Studio 招聘 TPM lead，职责横跨 product、GTM、engineering 等，以加速 AI Studio 进展。他前一日还提出 Agentic Coding Environment 是 IDE 的自然后继，并在窗口内强调 AI 时代每三个月都需要提高 ambition。与 Google AI RSS 中 7 月 7 日 Managed Agents 扩展相比，这些个人动态显示 Google 正在补产品组织和开发者入口。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI Studio 的竞争不只在 Gemini 模型本身，而在能否把 managed agents、部署、协作、样例和 GTM 组织起来，成为开发者默认入口之一。</div>
+  <div class="action">后续行动：把 Google AI Studio、ChatGPT Work/Codex、Claude Code、Cursor、LangChain/OpenSWE 放到同一张“ACE/agent workspace”对比表。</div>
+</div>
+
+<h3>五、AI 生成内容的质量债开始反噬</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI 写作</span><strong>Shreya Shankar / Hamel Husain</strong> · 2026-07-14 · <a href="https://nitter.net/sh_reya/status/2077065143687778485#m">Shreya 转发</a> · <a href="https://nitter.net/sh_reya/status/2077042379392213377#m">Shreya 长评</a> · <a href="https://nitter.net/HamelHusain/status/2077165638255304898#m">Hamel</a></div>
+  <div class="summary"><p>Shreya 认为 AI-assisted writing/communication 是当下最重要的问题之一，核心批评是 AI 写作会稀释个人或组织 brand、滥用修辞、制造过多术语，让读者更难判断什么重要。Hamel 则测试了 Distribution Fine Tuning 相关 demo，认为它对“de-sloppifying”社媒文本有明显帮助。这条线和 eval/tooling 一样重要：AI 系统不只要把任务做完，还要让输出具有真实信息密度和可读性。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent 的最终交付常常是文档、报告、邮件和说明；如果输出风格降低信任，自动化收益会被审核、重写和品牌损耗吃掉。</div>
+  <div class="action">后续行动：给日报、报告、客户材料建立“反 AI slop”检查表：信息密度、具体事实、术语克制、少套话、保留作者判断。</div>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI：</strong>新增 agentic-era 投资管理和 ChatGPT Work 行业用例，明确走向企业 ROI 与部门模板。</li>
+  <li><strong>Simon Willison：</strong>继续提供高质量可复现样本：Codex pet 多模态资产链路、`uvx` CI 缓存、Dependabot cooldown 观察。</li>
+  <li><strong>LangChain / Harrison Chase：</strong>把 coding agent 可观测推向统一 trace 层，目标覆盖多家 agent 工具。</li>
+  <li><strong>Hamel Husain / Shreya Shankar：</strong>重点转向自动 eval 的边界和 AI 写作质量，强调人类 taste 与反馈闭环。</li>
+  <li><strong>Sam Altman：</strong>强调 Sol 增长和推理容量压力，提示前沿 agent 产品的规模化挑战。</li>
+  <li><strong>Logan Kilpatrick：</strong>招聘 AI Studio TPM lead，并持续推动 ACE/AI Studio 作为开发者入口叙事。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<div class="card">
+  <p><strong>Agent ROI 模板：</strong>把 useful work per dollar 落到实际字段，避免只看 demo 和 token 花费。</p>
+  <p><strong>Codex pet / imagegen skill：</strong>研究其 prompt、sprite、QA 目录结构，评估能否迁移到游戏素材、课程动效或产品 mascot。</p>
+  <p><strong>LangSmith coding-agent traces：</strong>试接入一个 Codex/OpenClaw 类任务，比较 trace 粒度、成本记录和错误定位能力。</p>
+  <p><strong>自动 eval 实验：</strong>用真实 trace 做小规模人类标注，再测试自动 eval 工具的漏报/误报。</p>
+  <p><strong>ACE 能力矩阵：</strong>持续跟踪 ChatGPT Work/Codex、Claude Code、Google AI Studio、Cursor、LangChain/OpenSWE。</p>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <p><strong>8M active users：</strong>来自 Sam 转发的公开 X 信息，需等待 OpenAI 官方长期口径或产品数据披露。</p>
+  <p><strong>Sol 增长与容量：</strong>Sam 提到可能有 hiccups，但具体限额、峰值需求、推理成本和用户留存仍无公开细节。</p>
+  <p><strong>自动 eval 效果：</strong>Parlance Labs 文章基于真实 trace 对比，值得读原文方法；不能直接外推到所有行业和任务。</p>
+  <p><strong>LangSmith 多 agent 支持：</strong>博客声称覆盖多个 coding agent，但实际接入质量取决于各工具输出日志、API 和 session 标准化程度。</p>
+</div>
+
+<h2>低优先级噪音</h2>
+<div class="card noise">
+  <p>窗口内个人账号有不少短评、转发、招聘和轻量产品反馈；未能落到可验证链接、技术细节或明确后续行动的，没有展开。Google Images 25 周年属于 AI 搜索/视觉入口背景信息，但与本 Follow List 的 agent/工程主线关联较弱，作为低优先级处理。</p>
+</div>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/index/managing-ai-investments-in-agentic-era">OpenAI: How to manage AI investments in the agentic era</a></li>
+  <li><a href="https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex">OpenAI Academy: How data science teams use ChatGPT Work</a></li>
+  <li><a href="https://openai.com/academy/codex-for-work/how-sales-teams-use-codex">OpenAI Academy: How sales teams use ChatGPT Work</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/14/pedalican/">Simon Willison: simonw/pedalican</a></li>
+  <li><a href="https://github.com/simonw/pedalican-pet">GitHub: simonw/pedalican-pet</a></li>
+  <li><a href="https://til.simonwillison.net/github-actions/uvx-github-actions-cache">Simon Willison TIL: Using uvx in GitHub Actions in a cache-friendly way</a></li>
+  <li><a href="https://www.langchain.com/blog/your-coding-agents-are-a-black-box-heres-how-to-crack-them-open">LangChain: How to Debug Coding Agents with LangSmith Traces</a></li>
+  <li><a href="https://parlance-labs.com/blog/posts/auto-evals/">Parlance Labs: Do Automated Evals Work?</a></li>
+  <li><a href="https://nitter.net/sama/status/2077106587307798989#m">Sam Altman: 5.6 Sol growth</a></li>
+  <li><a href="https://nitter.net/sama/status/2077118672150388816#m">Sam Altman: Codex and ChatGPT Work 8M active users repost</a></li>
+  <li><a href="https://nitter.net/OfficialLoganK/status/2077106462648860739#m">Logan Kilpatrick: Google AI Studio TPM lead hiring</a></li>
+  <li><a href="https://nitter.net/OfficialLoganK/status/2076750790031782155#m">Logan Kilpatrick: Agentic Coding Environment</a></li>
+  <li><a href="https://nitter.net/sh_reya/status/2077042379392213377#m">Shreya Shankar: AI assisted writing and communication</a></li>
+  <li><a href="https://nitter.net/HamelHusain/status/2077165638255304898#m">Hamel Husain: DFT / de-sloppifying writing</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-14T00:00:00Z / 2026-07-15T00:00:00Z.</footer>

@@ -1,0 +1,170 @@
+---
+title: "Follow 深度日报：Agent 工程从调用工具走向编排、验证与本地隐私"
+date: "2026-06-30"
+category: "daily"
+url: "/daily/2026/06/30/"
+summary: "Follow List 公开来源整理：Deep Agents 动态子代理、Trace Judge 低成本轨迹评测、Hamel 的 eval 产品味道、Simon 关注 Ornith 开放权重 coding agent、OpenAI 欧洲劳动力报告与 Rampart 本地隐私模型。"
+---
+<main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>Agent 工程从调用工具走向编排、验证与本地隐私</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-06-29 00:00 UTC 至 2026-06-30 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。抓取优先级按 Status=active、Priority=high、Cadence=daily/weekly/manual 排序，主要使用官方网页、博客/RSS、公开 X/Nitter RSS 与网页搜索。</p>
+        <div class="meta">
+          <span>发布时间：2026-06-30 08:00 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、LangChain、Hamel Husain、Simon Willison、OpenAI、Hugging Face、Nathan Lambert、Clem Delangue、swyx</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天的主线是 agent 工程继续从“模型调用工具”升级到“程序化编排、可验证输出和可控数据边界”。LangChain 发布 Deep Agents 动态子代理，把大规模 fan-out、分阶段处理和覆盖率问题交给代码化 orchestration；Hamel Husain 则从产品设计角度提醒，难以评估通常意味着用户也难以验证。另一条主线是开放模型与本地隐私：Simon Willison 关注 Ornith-1.0 这种开放权重 self-scaffolding coding agent，Clem Delangue 放大美国 National Design Studio 在 Hugging Face 发布 Rampart 本地 PII 脱敏模型，OpenAI 则用欧洲劳动力报告继续推动政策与 adoption 叙事。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. Agent 编排开始代码化</h3>
+            <p>Deep Agents 动态子代理的关键不是“更多 agent”，而是让主 agent 写短脚本调度子代理，解决覆盖率、条件分支和多阶段合成。</p>
+          </div>
+          <div class="card">
+            <h3>2. Eval 前移到产品设计</h3>
+            <p>Hamel 的新文把“难评估”定义成产品味道：如果团队难以验证 AI 输出，用户通常也会被迫重做验证工作。</p>
+          </div>
+          <div class="card">
+            <h3>3. 开放权重 coding agent 升温</h3>
+            <p>Ornith-1.0 与 Rampart 分别代表开放模型在 coding agent 和隐私保护场景的两条路：能力开放与本地控制。</p>
+          </div>
+          <div class="card">
+            <h3>4. 政策叙事转向劳动力与开源</h3>
+            <p>OpenAI 强调欧洲工作岗位转型机会；Clem/Nathan 继续把开放模型从“风险对象”重新框定为竞争、透明和供应链弹性的基础。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>LangChain：Deep Agents 支持动态子代理，用代码调度大规模工作</h3>
+          <p class="source">来源账号/机构：LangChain / Harrison Chase；发布时间：2026-06-29 16:18-16:36 UTC；链接：<a href="https://www.langchain.com/blog/introducing-dynamic-subagents-in-deep-agents">LangChain 官方文章</a> / <a href="https://nitter.net/hwchase17/status/2071633874736804066#m">Harrison Chase Nitter 镜像</a></p>
+          <p>LangChain 发布 Deep Agents 动态子代理，核心做法是让主 agent 在轻量解释器里写 orchestration code，而不是逐轮通过 tool call 手动调用子代理。官方文章给出的典型场景包括 fan-out + synthesize、adversarial verification、多阶段 pipeline、条件分支和批量数据处理。</p>
+          <p>这条更新很值得重视，因为它把 agent 的可靠性问题从“提示词能不能记住流程”移动到“程序结构能不能保证覆盖”。例如处理 500 条记录时，dispatch loop 可以结构化保证每条都被处理，而不是让模型凭判断挑 75 条后宣布完成。</p>
+          <p class="why"><strong>为什么值得看：</strong>长程 agent 的瓶颈越来越像分布式任务编排，而不是聊天。动态子代理说明 agent 框架正在吸收传统软件工程里的循环、分支、并发、汇总和验证。</p>
+          <p class="action"><strong>后续行动：</strong>把 OpenClaw 的日报抓取、资料归档和代码审查任务拆成“主控脚本 + 子任务 + 合成器”的最小模板，优先验证 coverage、失败重试和重复去重。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangChain / Fireworks：Trace Judge 进入早期伙伴，目标是低成本识别 agent 轨迹错误</h3>
+          <p class="source">来源账号/机构：Harrison Chase / LangChain；发布时间：2026-06-29 16:24 UTC；链接：<a href="https://nitter.net/hwchase17/status/2071630837976822237#m">Harrison Chase Nitter 镜像</a> / <a href="https://www.langchain.com/blog/building-a-100x-cheaper-trace-judge-with-fireworks">LangChain 技术文章</a></p>
+          <p>Harrison Chase 表示 LangChain 开始向早期伙伴推出 Trace Judge 模型，用于检测 agent trajectory 中的错误，目标成本约为闭源大模型 judge 的 1/100。相关技术文章显示，LangChain 和 Fireworks 用 Qwen 微调“perceived error”分类器，在生产 trace 数据上接近或超过部分 frontier 模型表现。</p>
+          <p>这和昨天的 LangSmith/Harbor 沙箱评测形成连续信号：agent 可观测性正在从“看 trace”走向“批量挖 trace 里的错误”。如果这个方向成立，企业就可以用更低成本持续扫描线上 agent 运行轨迹，而不是只抽样人工复盘。</p>
+          <p class="why"><strong>为什么值得看：</strong>生产 agent 的质量问题通常藏在长轨迹里，单轮输出评测不够。低成本 trace judge 能让 eval 从离线实验进入持续监控。</p>
+          <p class="action"><strong>后续行动：</strong>在 OpenClaw 任务日志里预留 trace-level judge 字段：是否漏步骤、是否越权、是否重复、是否没有证据、是否未完成验证。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hamel Husain：“难评估”往往是产品味道，不只是 eval 技术问题</h3>
+          <p class="source">来源账号/机构：Hamel Husain / Shreya Shankar；发布时间：2026-06-29 21:41-21:53 UTC；链接：<a href="https://hamel.dev/blog/posts/eval-smell/">Hamel 官方博客</a> / <a href="https://nitter.net/HamelHusain/status/2071710766663979322#m">Hamel Nitter 镜像</a> / <a href="https://nitter.net/sh_reya/status/2071713645927784543#m">Shreya Nitter 镜像</a></p>
+          <p>Hamel 发布新文，观点很直接：如果 AI 输出难以被团队验证，通常也会让用户难以验证；在最差情况下，用户必须从头重做一遍工作才能知道 AI 结果是否可信。文章用 AI data agent、K-12 教案生成、工伤医疗报告草稿三个场景展示了“先让输出可验证，再谈自动化评测”的产品设计思路。</p>
+          <p>这补足了 eval 工程里经常缺的一层：很多团队急着写 judge、benchmark 和 dashboards，却没有先把产品输出设计成可检查、可追溯、可局部确认。Hamel 的重点不是反对 eval，而是把 eval 的前置条件拉回到用户体验和任务结构。</p>
+          <p class="why"><strong>为什么值得看：</strong>这是 AI 产品从 demo 到生产最常见的失败点。不可验证的输出会把模型风险转嫁给用户，也会让内部 eval 永远停留在主观争论。</p>
+          <p class="action"><strong>后续行动：</strong>检查日报、报告、代码修改、投资线索整理四类 OpenClaw 输出，给每类增加可验证结构：来源、证据、变化点、待确认项、下一步。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison：Ornith-1.0 把开放权重 self-scaffolding coding agent 带入观察范围</h3>
+          <p class="source">来源账号/机构：Simon Willison；发布时间：2026-06-29 16:17 UTC；链接：<a href="https://simonwillison.net/2026/Jun/29/ornith/">Simon Willison 文章</a></p>
+          <p>Simon 记录了 DeepReinforce 发布的 Ornith-1.0，并指出它是一个 MIT 许可的开放权重模型系列，定位是 self-scaffolding LLM for agentic coding。该系列包含不同大小的 dense/MoE 变体，最重要的信号不是单项 benchmark，而是开放权重模型开始更明确地瞄准 agentic coding 工作流。</p>
+          <p>这条线和 Follow List 对 Codex、Claude Code、Deep Agents、GLM/Qwen coding agent 的关注高度相关。开放模型如果能在脚手架生成、工具调用、代码验证和长程任务上形成可用能力，会给企业带来更多本地部署和成本控制选择。</p>
+          <p class="why"><strong>为什么值得看：</strong>coding agent 不会只由闭源模型定义。开放权重模型进入 self-scaffolding 和 agentic coding，意味着供应链、私有化部署、微调和评测都会有更多可选项。</p>
+          <p class="action"><strong>后续行动：</strong>把 Ornith 加入开放 coding agent 观察表，后续跟踪许可证、上下文长度、工具调用能力、SWE/Terminal 类评测、实际 repo 修改能力和推理成本。</p>
+        </div>
+
+        <div class="item">
+          <h3>OpenAI：发布欧洲 AI 劳动力机会报告，把 adoption 叙事推向政策层</h3>
+          <p class="source">来源账号/机构：OpenAI；发布时间：2026-06-29 07:00 UTC；链接：<a href="https://openai.com/index/mapping-ai-jobs-transition-eu">OpenAI 官方文章</a></p>
+          <p>OpenAI 发布 Mapping Europe’s AI Workforce Opportunity，讨论 AI 可能如何重塑欧盟工作岗位，强调哪些职业可能面临自动化、增长或工作流变化。这不是模型发布，但它属于 OpenAI 在企业、政府和劳动力政策中的重要叙事：把 AI 从单个产品能力推进到就业结构、培训和政策准备。</p>
+          <p>对 Follow List 的价值在于，它能帮助判断 OpenAI 下一阶段的非技术扩张方向。模型公司不仅在争 API 和 Codex 使用量，也在争取政府、教育、就业和产业转型的话语权。</p>
+          <p class="why"><strong>为什么值得看：</strong>政策与劳动力叙事会影响企业采购、监管姿态、政府合作和公众接受度。AI 公司越深入劳动市场讨论，越接近基础设施供应商角色。</p>
+          <p class="action"><strong>后续行动：</strong>把这类报告纳入“AI adoption / policy”跟踪，重点提取职业类别、培训建议、行业机会和可能影响企业 AI 服务市场的政策信号。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hugging Face / National Design Studio：Rampart 显示本地隐私模型的公共部门用例</h3>
+          <p class="source">来源账号/机构：Clem Delangue / National Design Studio / Hugging Face；发布时间：2026-06-29 16:55-20:04 UTC；链接：<a href="https://huggingface.co/nationaldesignstudio/rampart">Hugging Face 模型页</a> / <a href="https://nitter.net/ClementDelangue/status/2071686220548133048#m">Clem Nitter 镜像</a></p>
+          <p>美国 National Design Studio 在 Hugging Face 发布 Rampart，一个体积很小的本地隐私保护模型，用于在浏览器端识别和脱敏个人信息，再把数据发送到服务器之前先降低泄露风险。Clem Delangue 借此强调，政府与其限制开源 AI，不如训练和发布开源 AI。</p>
+          <p>Rampart 的技术细节还需要进一步实测，但方向很有代表性：隐私保护、浏览器本地执行、公共部门服务和开源发布可以结合起来。这和企业 agent 的数据边界问题也有关系，尤其是把用户输入、文档、日志或 trace 送给远程模型之前的本地处理。</p>
+          <p class="why"><strong>为什么值得看：</strong>本地 PII 脱敏是 agent 工作流进入政府、医疗、金融和企业内部系统的基础能力之一。小模型如果足够可靠，可以成为大模型前置安全层。</p>
+          <p class="action"><strong>后续行动：</strong>把 Rampart 加入“本地隐私/PII guardrail”观察清单，后续测试中文姓名、地址、手机号、邮箱、身份证样式和业务日志脱敏表现。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>Harrison Chase / LangChain：</strong>围绕 Deep Agents 动态子代理、Trace Judge、LangSmith 中立性持续输出，今天是 agent 工程化信号最密集来源。</li>
+          <li><strong>Hamel Husain / Shreya Shankar：</strong>把 eval 讨论继续上推到产品设计，强调用户可验证性是评测前提。</li>
+          <li><strong>Simon Willison：</strong>关注开放权重 agentic coding 模型 Ornith；Safari tab 计数 TIL 属低优先级工具小贴士。</li>
+          <li><strong>OpenAI：</strong>今日主要新增为欧洲劳动力机会报告；Greg Brockman 转发 Sol/Daybreak 和 YC/OpenAI 创业者活动，属于产品与生态热度信号。</li>
+          <li><strong>Clem Delangue / Hugging Face：</strong>继续强化开放模型与公共部门开放发布叙事，Rampart 是今天最具体的 artifact。</li>
+          <li><strong>Nathan Lambert：</strong>提到 Together AI 每月处理 400T tokens，以及中国实验室/AI2 式 underdog 能量，更多是产业观察线索。</li>
+          <li><strong>swyx / AI Engineer：</strong>World's Fair workshop day 热度高，Local AI、设计工程和 OpenAI workshop 是生态温度信号，但直接行动价值低于工程更新。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>动态子代理最小实验：</strong>用一个批量文档任务测试 fan-out + synthesize，强制记录输入总数、完成数、失败数、重复数和遗漏数。</li>
+          <li><strong>可验证输出模板：</strong>把 Hamel 的思路落到日报和研究报告，每条结论必须有来源、证据、限制、后续行动。</li>
+          <li><strong>Trace Judge 数据结构：</strong>先不急着训练模型，先统一 OpenClaw 任务 trace 的错误标签和人工复核入口。</li>
+          <li><strong>开放 coding agent 观察表：</strong>加入 Ornith-1.0，与 GLM、Qwen、DeepSeek、Gemma、Codex、Claude Code 做能力和部署方式对比。</li>
+          <li><strong>本地 PII guardrail：</strong>测试 Rampart 或同类模型能否在中文场景中作为抓取、日志和报告发布前的安全过滤层。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>Deep Agents 动态子代理的稳定性需要真实任务验证，尤其是子代理之间的上下文隔离、错误恢复和成本控制。</li>
+          <li>Trace Judge 的“1/100 成本”来自 LangChain 公开表述和技术文章，仍需确认在不同企业数据集上的迁移能力。</li>
+          <li>Hamel 的产品 smell 框架很有启发，但三个案例的交互设计效果需要结合具体用户任务验证。</li>
+          <li>Ornith-1.0 的真实 coding agent 能力不能只看发布叙事，需要跑开源 repo 修改、测试修复和长程任务。</li>
+          <li>Rampart 的 PII 检测范围、误报漏报、中文支持和浏览器性能仍需实测。</li>
+          <li>Nitter/RSS 镜像可能漏掉 X-only 内容；本报告未使用私密 cookie、token 或登录态内部数据。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul class="noise">
+          <li>AI Engineer World's Fair 的现场活动、swag、音乐角和报名热度说明生态活跃，但今天不展开成重点内容。</li>
+          <li>Greg Brockman 的 YC 免费咖啡/OpenAI startup 活动转发属于品牌曝光，不足以形成技术或投资判断。</li>
+          <li>Simon 的 Safari tabs AppleScript TIL 有趣但与 Follow List 的 AI agent/研究主线弱相关。</li>
+          <li>纯转发、活动提醒、缺少原始链接或无法交叉确认的短帖未纳入重点。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul>
+          <li><a href="https://www.langchain.com/blog/introducing-dynamic-subagents-in-deep-agents">LangChain: Introducing Dynamic Subagents in Deep Agents</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2071633874736804066#m">Harrison Chase: Dynamic subagents in Deep Agents</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2071630837976822237#m">Harrison Chase: Trace Judge early partners</a></li>
+          <li><a href="https://www.langchain.com/blog/building-a-100x-cheaper-trace-judge-with-fireworks">LangChain: Building a 100x Cheaper Trace Judge with Fireworks</a></li>
+          <li><a href="https://hamel.dev/blog/posts/eval-smell/">Hamel Husain: “It’s Hard to Eval” Is a Product Smell</a></li>
+          <li><a href="https://nitter.net/HamelHusain/status/2071710766663979322#m">Hamel Husain: Eval smell announcement</a></li>
+          <li><a href="https://simonwillison.net/2026/Jun/29/ornith/">Simon Willison: Ornith-1.0</a></li>
+          <li><a href="https://openai.com/index/mapping-ai-jobs-transition-eu">OpenAI: Mapping Europe’s AI Workforce Opportunity</a></li>
+          <li><a href="https://huggingface.co/nationaldesignstudio/rampart">Hugging Face: nationaldesignstudio/rampart</a></li>
+          <li><a href="https://nitter.net/ClementDelangue/status/2071686220548133048#m">Clem Delangue: Government releasing open-source AI</a></li>
+          <li><a href="https://nitter.net/natolambert/status/2071619260846387485#m">Nathan Lambert: Together AI 400T tokens/month</a></li>
+          <li><a href="https://nitter.net/swyx/status/2071634789669777716#m">swyx: AI Engineer workshop day signal</a></li>
+          <li><a href="https://huggingface.co/blog/allenai/discoformer">Hugging Face: DiScoFormer</a></li>
+        </ul>
+      </section>
+
+      <footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer>
+    </main>

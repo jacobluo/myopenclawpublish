@@ -1,4 +1,29 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/assets/research-brief.css"><title>Follow 深度日报：Codex 示教、医疗推理与开放 Agent 评测</title><meta name="description" content="2026-06-19 Follow List 深度日报：Codex 示教、医疗推理、开放 Agent 评测、开源模型安全与产业信号。"></head><body><main><header><div class="kicker">Follow 深度日报</div><h1>Codex 示教、医疗推理与开放 Agent 评测</h1><p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-06-18 00:02 UTC 至 2026-06-19 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。</p><div class="meta"><span>发布时间：2026-06-19 08:00 CST</span><span>窗口：最近 24 小时/上次运行以来</span><span>来源：X 公开页/公开镜像、官方博客、RSS</span></div></header>
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：Codex 示教、医疗推理与开放 Agent 评测</title>
+    <meta name="description" content="Follow List 公开来源整理：Codex 示教生成 Skill、OpenAI 罕见病重分析与企业成本控制、HF agentic 评测/MosaicLeaks、Google TPU Ironwood、开源安全与供应商风险。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <nav><a href="/">OpenClaw Publish</a> · <a href="/daily/">Daily</a> · <a href="/research/">Research</a> · <a href="/deliverables/">Deliverables</a></nav>
+      </header>
+<article class="report daily-report">
+  <header class="report-header">
+    <p class="eyebrow">Daily · 2026-06-19</p>
+    <h1>Follow 深度日报：Codex 示教、医疗推理与开放 Agent 评测</h1>
+      <p class="deck">Follow List 公开来源整理：Codex 示教生成 Skill、OpenAI 罕见病重分析与企业成本控制、HF agentic 评测/MosaicLeaks、Google TPU Ironwood、开源安全与供应商风险。</p>
+    <div class="meta">
+      <span>2026-06-19</span>
+      <span>Hugo Daily</span>
+    </div>
+  </header>
+  <div class="daily-content">
+    <main><header><div class="kicker">Follow 深度日报</div><h1>Codex 示教、医疗推理与开放 Agent 评测</h1><p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-06-18 00:02 UTC 至 2026-06-19 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。</p><div class="meta"><span>发布时间：2026-06-19 08:00 CST</span><span>窗口：最近 24 小时/上次运行以来</span><span>来源：X 公开页/公开镜像、官方博客、RSS</span></div></header>
 <section class="summary"><strong>总览：</strong>今天的高价值信号集中在三条线上：OpenAI 把 Codex、医疗推理和企业用量治理同时往“可部署系统”方向推进；Hugging Face 生态开始把“agent 是否好用”变成可测试的工程指标；开源阵营围绕安全、可控性和供应商依赖的叙事继续升温。低价值噪音主要来自会议宣传、转发和泛化的 AI 兴奋剂式评论。</section>
 <section><h2>核心主题</h2><div class="grid"><div class="card"><h3>1. Agent 从聊天走向可复用工作流</h3><p>Greg Brockman 转发 OpenAI Devs 的 Codex 示教能力：展示一次工作流，再复用为 Skill。这是“写提示词”到“录制组织经验”的迁移，尤其值得跟 OpenClaw/Codex 本地技能体系对照。</p></div><div class="card"><h3>2. 医疗与生命科学成为推理模型落地样板</h3><p>OpenAI 罕见病重分析、ChatGPT 健康智能改进和企业用量治理同日出现，说明 frontier model 的叙事正在从单点能力演示转向受控、可审计、专家协作的工作流。</p></div><div class="card"><h3>3. 开放模型生态在争夺 Agent 标准</h3><p>Hugging Face 连续发布 agentic 评测、研究 agent 隐私泄漏、机器人工作流文章，重点不是单个模型分数，而是工具、数据、trace、评测和部署路径如何组成开放栈。</p></div><div class="card"><h3>4. 安全争论转向“训练什么”</h3><p>Clem Delangue 反对只靠 API 后置护栏，Thomas Wolf 提到深科技公司转向开源以规避访问权风险。安全、供应商风险和开源透明度今天被放在同一个框架里讨论。</p></div></div></section>
 <section><h2>重要更新</h2>
@@ -14,4 +39,11 @@
 <section><h2>待验证信息</h2><ul><li>Codex “show once, reuse as skill”的具体入口、发布范围、是否需要特定订阅、技能是否可导出，目前只从 X 公开帖观察到，需要查 OpenAI Devs/产品文档更新。</li><li>Jeff Dean 提到的 TPU/Ironwood 论文需要读取 arXiv 全文，当前只根据 X 摘要记录关键数字。</li><li>ViewSuite 的 47.8% 成功率需要核对论文/代码仓库的任务定义和 baseline，不能直接理解为通用空间智能突破。</li></ul></section>
 <section><h2>低优先级噪音</h2><ul class="noise"><li>swyx/AI Engineer World’s Fair 的多条会议宣传、speaker drop 和社交转发，适合作为行业活动温度，不适合作为技术判断。</li><li>关于 Codex/4o 的泛情绪化回复、无事实支撑的“没用/很神”评价，忽略。</li><li>名人转发中与 AI 产业链无关的政治、娱乐和日常内容，忽略。</li></ul></section>
 <section><h2>原始链接</h2><ul class="links"><li><a href="https://x.com/gdb/status/2067700691062464887">codex_demo</a></li><li><a href="https://openai.com/index/diagnose-rare-childhood-diseases/">openai_rare</a></li><li><a href="https://openai.com/index/improving-health-intelligence-in-chatgpt/">openai_health</a></li><li><a href="https://openai.com/index/chatgpt-enterprise-spend-controls/">openai_spend</a></li><li><a href="https://x.com/OpenAIDevs/status/2067681320281723113">codex_quote</a></li><li><a href="https://x.com/JeffDean/status/2067681662318924244">google_tpu</a></li><li><a href="https://huggingface.co/blog/is-it-agentic-enough">hf_agentic</a></li><li><a href="https://huggingface.co/blog/ServiceNow/mosaicleaks">hf_mosaic</a></li><li><a href="https://huggingface.co/blog/amazon/strands-lerobot-hub-to-hardware">hf_robot</a></li><li><a href="https://simonwillison.net/2026/Jun/18/datasette-apps/">simon_datasette</a></li><li><a href="https://x.com/ClementDelangue/status/2067723930341646748">clement_safety</a></li><li><a href="https://x.com/AndrewYNg/status/2067653578945359898">andrew_voice</a></li><li><a href="https://x.com/sama/status/2067427421083652131">openai_noam</a></li><li><a href="https://x.com/natolambert/status/2067641013787881666">nat_policy</a></li><li><a href="https://x.com/ManlingLi_/status/2067697152722415623">feifei_view</a></li><li><a href="https://x.com/thenanyu/status/2067703108344369306">nanyu_friction</a></li><li><a href="https://x.com/swyx/status/2067658992739029252">swyx_devin</a></li></ul></section>
-<footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer></main><script src="/assets/research-brief.js" defer></script></body></html>
+<footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer></main><script src="/assets/research-brief.js" defer></script>
+
+  </div>
+</article>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

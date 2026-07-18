@@ -1,0 +1,118 @@
+---
+title: "Follow 深度日报：Sol 作品验证、编码代理产出证据与责任边界"
+date: "2026-07-14"
+category: "daily"
+url: "/daily/2026/07/14/"
+summary: "Follow List 公开来源整理：Simon Willison 复现 GPT-5.6 Sol Ultra 生成的 DOOMQL，把 SQL 游戏接入 Datasette Apps；Datasette code-frequency 图提供 coding agent 产出观察线索；DRI 讨论提醒 agent 不应承担最终责任；OpenAI/Anthropic/Google/LangChain 官方源本窗口无新增高优先级发布；X/Nitter 抓取不可用，社媒覆盖不完整。"
+---
+<div class="meta">
+  <strong>2026年7月14日（周二）</strong> · 覆盖窗口：2026-07-13 08:00 – 2026-07-14 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；公开博客/RSS、官网、公开 X 链接搜索结果。未使用 Folo CLI，未使用私密 cookie/token；Nitter/RSS 镜像本次不可用，因此社媒覆盖不完整。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Sol 进入作品验证期</h4><p>今天最清晰的新增信号不是又一个模型发布，而是 GPT-5.6 Sol Ultra 生成的 DOOMQL 被 Simon Willison 实测、复现并接入 Datasette Apps。</p></div>
+  <div class="overview-item"><h4>编码代理的证据从 benchmark 转向仓库痕迹</h4><p>Simon 用 Datasette 的 GitHub code-frequency 图展示近期代码变更峰值，把“代理提升产出”从主观体验拉向可观察的项目历史。</p></div>
+  <div class="overview-item"><h4>Agent 仍需要人类 DRI</h4><p>Simon 在接近窗口边界的一则短文里强调，代理可以执行任务，但项目最终责任人不应交给机器。</p></div>
+  <div class="overview-item"><h4>官方源今日偏安静</h4><p>OpenAI RSS、Anthropic News、Google AI RSS、LangChain Blog 在本窗口没有新的高优先级发布；上一轮 GPT-5.6/Claude/LangChain 消息仍是背景。</p></div>
+  <div class="overview-item"><h4>开放模型政策线继续悬而未决</h4><p>Nathan Lambert 的开放权重政策风险文章仍是过去 48 小时最重要的政策线，但本窗口未见新的公开长文更新。</p></div>
+  <div class="overview-item"><h4>抓取质量下降</h4><p>X/Nitter 类入口返回空或不可用，今天对个人账号动态的覆盖明显弱于博客/RSS 源，后续需要恢复可靠 X 抓取通道或补充官方个人博客。</p></div>
+</div>
+
+<h2>核心主题</h2>
+<h3>一、Sol 的真实用例：从发布稿走向可运行作品</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI 编程</span><strong>Simon Willison</strong> · 2026-07-13 22:34 UTC · <a href="https://simonwillison.net/2026/Jul/13/doomql/">博客</a> · <a href="https://github.com/petergpt/doomql">GitHub</a></div>
+  <div class="summary"><p>Simon 记录并试跑了 Peter Gostev 的 DOOMQL：一个 Doom-like 小游戏，把 SQLite 当成游戏引擎，用 SQL 处理移动、碰撞、敌人、战斗、进度和像素渲染。这个项目由 GPT-5.6 Sol Ultra 生成，最有意思的不是“AI 写了游戏”，而是它把一个故意不合理的约束做成了可运行系统。Simon 还进一步用 Datasette Apps 做了一个网页观察器，让游戏数据库状态以 HTML/JavaScript 方式刷新展示。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 Sol 发布后更有价值的一类样本：荒诞但完整、可复现、可被二次工具化。它说明前沿 coding agent 的优势不只在常规 CRUD，而在跨越抽象层、把数据库、终端、网页 UI 和生成代码串成一个可玩的 artifact。</div>
+  <div class="action">后续行动：把 DOOMQL 作为“复杂约束下生成可运行系统”的案例，观察 Sol/Fable/Codex 在同类任务里的可维护性、测试覆盖和后续修改成本。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">开发工具</span><strong>Peter Gostev / petergpt</strong> · 2026-07-13 公开传播 · <a href="https://x.com/petergostev/status/2076692164310884468">X</a> · <a href="https://github.com/petergpt/doomql">GitHub</a></div>
+  <div class="summary"><p>DOOMQL 的核心设计是让 SQL 查询承担游戏循环的一大部分：包括场景状态、射线投影、像素输出和玩家状态更新。公开仓库使这个 demo 从“社媒炫技”变成可检查对象，可以看 SQL、Python host、数据库 schema 和实际运行方式。它也展示了当前 coding agent 内容传播的一个典型路径：X 上先爆点，随后被高信任技术博客复现和拆解。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI 生成 demo 最大问题通常是不可复现；这个项目把代码放出来，信号质量更高。它适合用来测试模型是否只是拼出表面效果，还是能在非典型架构里保持可调试性。</div>
+  <div class="action">后续行动：后续可本地 clone 试跑，检查代码结构、SQL 可读性、性能瓶颈，以及用另一个模型修改功能时是否容易崩。</div>
+</div>
+
+<h3>二、编码代理的产出证据：从感觉到项目历史</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI 工程</span><strong>Simon Willison</strong> · 2026-07-13 21:45 UTC · <a href="https://simonwillison.net/2026/Jul/13/datasette-code-frequency/">博客</a></div>
+  <div class="summary"><p>Simon 用 Datasette 仓库的 GitHub code-frequency 图，观察 coding agents 与 Opus 4.8、GPT-5.5、Fable 5、GPT-5.6 Sol 这一代模型对自己开源产出的影响。图里 2026 年出现一个明显的增删代码峰值，他把它视为目前能找到的较直观证据。这个观察不是严格因果研究，但它比“我感觉更快了”更接近工程组织可以复制的度量方向。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业引入 coding agent 时容易盯着 benchmark 或 PR 数，但真实价值更接近“高质量维护者在已有项目里的吞吐和迭代节奏”。仓库历史、review 记录、回滚率、issue 关闭速度，会比单次 demo 更有解释力。</div>
+  <div class="action">后续行动：为自己的项目建立 agent adoption 观测面板：commit/PR 频率、review 修改轮次、测试失败率、回滚率、token 成本和维护者主观负荷。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">组织治理</span><strong>Simon Willison</strong> · 2026-07-12 23:57 UTC（窗口边界） · <a href="https://simonwillison.net/2026/Jul/12/directly-responsible-individuals/">博客</a></div>
+  <div class="summary"><p>Simon 查 GitLab handbook 里的 DRI 定义后，把它放到 LLM agents 的组织语境里：agent 可以承担执行，但不应成为项目最终责任人。这个观点与过去一周 coding agents 迅速增强的技术线形成互补：能力越强，越需要明确谁负责目标、验收、风险和后果。它也提醒企业不要把“自动完成任务”误读成“自动承担责任”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 agent 落地里的硬边界。随着 Codex/Claude Code/ChatGPT Work 进入长时任务，组织会自然想把更多项目交给代理，但责任、审计和决策权仍必须落在人身上。</div>
+  <div class="action">后续行动：在内部 agent 工作流模板里加 DRI 字段，要求每个自动化任务都有明确的人类 owner、验收标准和回滚路径。</div>
+</div>
+
+<h3>三、官方发布进入消化期，行业主线没有消失</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI</span><strong>OpenAI News RSS</strong> · lastBuildDate 2026-07-14 00:01 UTC · <a href="https://openai.com/news/rss">RSS</a></div>
+  <div class="summary"><p>OpenAI RSS 本窗口没有新条目；最新条目仍停留在 7 月 10 日 Deutsche Telekom AI-native telco 案例，以及 7 月 9 日 GPT-5.6、ChatGPT Work、Microsoft 365 Copilot 相关发布。今天的重点因此不是新增发布，而是 GPT-5.6 进入社区实测和用例筛选阶段。DOOMQL 与 Simon 的 code-frequency 观察，正好补上官方发布稿之外的“真实使用”证据。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>模型发布后的 3-7 天通常比发布当天更能看清 adoption：谁真的在用、哪些任务爆出、成本/体验问题是否出现、竞争对手如何回应。</div>
+  <div class="action">后续行动：继续跟踪 GPT-5.6 Sol 的社区项目、API 指南更新、Programmatic Tool Calling 与 multi-agent 的真实开发者反馈。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Anthropic</span><strong>Anthropic News</strong> · 抓取 2026-07-14 · <a href="https://www.anthropic.com/news">Newsroom</a></div>
+  <div class="summary"><p>Anthropic News 首页本窗口未见 7 月 13 日或 7 月 14 日新发布；最近高相关条目仍是 7 月 9 日 “Inviting hard questions”、7 月 9 日 “Reflect with Claude”、以及 7 月 6 日 Claude Code 制作故事。Claude/Fable/Mythos 线仍处在前期发布、恢复、解释和信任修复阶段。与 OpenAI 相比，Anthropic 今天没有新的产品发布信号。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>当 OpenAI 的 Sol 社区样本开始扩散，Anthropic 的竞争点可能转向 Claude Code 的可信执行、组织治理和产品体验，而不一定是当天发布更多模型。</div>
+  <div class="action">后续行动：关注 Alex Albert、Amanda Askell、Anthropic 官方博客是否补充 Claude Code/Fable 的实践指南或安全框架细节。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Google / LangChain</span><strong>Google AI RSS / LangChain Blog</strong> · 抓取 2026-07-14 · <a href="https://blog.google/innovation-and-ai/technology/ai/rss/">Google AI RSS</a> · <a href="https://www.langchain.com/blog">LangChain Blog</a></div>
+  <div class="summary"><p>Google AI RSS 最新仍是 7 月 7 日 Managed Agents in Gemini API；LangChain Blog 最新高相关条目仍是 7 月 10 日 OpenWiki Brains、7 月 8 日 NemoClaw Deep Agents 和 harness 相关内容。本窗口没有新发布，但这两条旧线仍构成 agent 平台竞争的背景：Google 偏托管 agent API，LangChain 偏开源/企业 harness、memory、sandboxes 和可观测。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Sol/Claude 的模型竞争会把压力传导到平台层，真正落地时仍要靠 managed background tasks、remote MCP、memory、sandbox、trace 和 eval。</div>
+  <div class="action">后续行动：把 Google Managed Agents、LangChain OpenWiki/NemoClaw 与 OpenAI Programmatic Tool Calling 放进同一张 agent runtime 能力矩阵。</div>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Simon Willison：</strong>今天是最强信号源，连续给出 Sol 作品复现、Datasette 代码产出证据和 agent 责任边界三类观察。</li>
+  <li><strong>Peter Gostev：</strong>DOOMQL 成为 GPT-5.6 Sol Ultra 发布后最值得跟踪的开源 demo 之一，价值在于可运行、可检查、可二次开发。</li>
+  <li><strong>OpenAI：</strong>官方没有新发布，但 GPT-5.6/ChatGPT Work 的后续社区反馈进入更关键阶段。</li>
+  <li><strong>Anthropic：</strong>Newsroom 无新增，Claude Code/Fable/Mythos 线今天以消化和信任修复为主。</li>
+  <li><strong>LangChain / Google：</strong>今日无新增，但 managed agents、OpenWiki、NemoClaw 仍是 agent runtime 观察重点。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<div class="card">
+  <p><strong>DOOMQL：</strong>本地试跑并拆解 SQL/game loop/database schema，评估 AI 生成的非典型架构是否可维护。</p>
+  <p><strong>Agent 产出度量：</strong>用 Datasette code-frequency 思路扩展到自己的仓库，建立可量化的 agent adoption 仪表板。</p>
+  <p><strong>DRI 模板：</strong>把 agent 工作流从“任务自动化”升级为“人类 owner + agent 执行 + 可审计产物”的标准流程。</p>
+  <p><strong>X 抓取恢复：</strong>Nitter/RSS 镜像本次不可用，需要验证替代公开镜像、RSSHub、自有登录态或官方来源补充方案。</p>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <p><strong>DOOMQL 的生成过程：</strong>公开信息显示它由 GPT-5.6 Sol Ultra 生成，但具体提示、迭代次数、人工修改比例和失败尝试尚未完全透明。</p>
+  <p><strong>code-frequency 与 agent 因果：</strong>Datasette 的代码峰值是强烈线索，不是严格因果证明；需要结合 issue、PR、测试、release 和人工时间记录一起看。</p>
+  <p><strong>社媒账号动态覆盖：</strong>本次 X/Nitter 抓取失败，个人账号 24 小时动态可能漏报；今天报告更偏公开博客/RSS。</p>
+</div>
+
+<h2>低优先级噪音</h2>
+<div class="card noise">
+  <p>今日没有把 GPT-5.6 发布稿、Nathan 开放模型政策文、LangChain OpenWiki/NemoClaw 等前几日已覆盖内容重复展开。公开源里关于 Sol 的转发和短评不少，但缺少可复现项目或长文分析的，均只作为传播强度参考。</p>
+</div>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://simonwillison.net/2026/Jul/13/doomql/">Simon Willison: DOOMQL</a></li>
+  <li><a href="https://github.com/petergpt/doomql">GitHub: petergpt/doomql</a></li>
+  <li><a href="https://x.com/petergostev/status/2076692164310884468">Peter Gostev: DOOMQL X post</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/13/datasette-code-frequency/">Simon Willison: datasette code-frequency chart on GitHub</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/12/directly-responsible-individuals/">Simon Willison: Directly Responsible Individuals</a></li>
+  <li><a href="https://openai.com/news/rss">OpenAI News RSS</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic Newsroom</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://www.langchain.com/blog">LangChain Blog</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-13T00:00:00Z / 2026-07-14T00:00:00Z.</footer>

@@ -1,15 +1,30 @@
-{{- $items := where site.Data.content "category" .category }}
-{{- $items = sort $items "date" "desc" }}
-{{- if .limit }}{{ $items = first .limit $items }}{{ end }}
 <section class="year" aria-labelledby="{{ .id }}">
   <h2 id="{{ .id }}">{{ .heading }}</h2>
-  {{- range $items }}
-    <article class="post">
-      <time datetime="{{ .date }}">{{ .date }}</time>
-      <div>
-        <a class="title" href="{{ .url }}">{{ .title }}</a>
-        <p class="summary">{{ .summary }}</p>
-      </div>
-    </article>
+  {{- if eq .category "daily" }}
+    {{- $pages := where site.RegularPages "Section" "daily" }}
+    {{- $pages = sort $pages "Date" "desc" }}
+    {{- if .limit }}{{ $pages = first .limit $pages }}{{ end }}
+    {{- range $pages }}
+      <article class="post">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        <div>
+          <a class="title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <p class="summary">{{ .Params.summary }}</p>
+        </div>
+      </article>
+    {{- end }}
+  {{- else }}
+    {{- $items := where site.Data.content "category" .category }}
+    {{- $items = sort $items "date" "desc" }}
+    {{- if .limit }}{{ $items = first .limit $items }}{{ end }}
+    {{- range $items }}
+      <article class="post">
+        <time datetime="{{ .date }}">{{ .date }}</time>
+        <div>
+          <a class="title" href="{{ .url }}">{{ .title }}</a>
+          <p class="summary">{{ .summary }}</p>
+        </div>
+      </article>
+    {{- end }}
   {{- end }}
 </section>

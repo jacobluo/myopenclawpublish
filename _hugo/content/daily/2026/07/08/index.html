@@ -1,0 +1,197 @@
+---
+title: "Follow 深度日报：Agent 平台进入托管、记忆与数据系统竞争"
+date: "2026-07-08"
+category: "daily"
+url: "/daily/2026/07/08/"
+summary: "Follow List 公开来源整理：Shreya/Hamel 的 Monitor UI feedback loop，Lilian Weng harness self-improvement，Anthropic J-space，LangChain Deep Agents/LLM Wikis/ATIF，Gemini Managed Agents，Simon Willison sqlite-utils 4.0，BAIR agents data systems，Hugging Face/xAI/open-source 与机器人数据集。"
+---
+<main>
+      <header>
+        <div class="kicker">Follow 深度日报</div>
+        <h1>Agent 平台进入托管、记忆与数据系统竞争</h1>
+        <p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-07-07 00:00 UTC 至 2026-07-08 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。抓取优先级按 Status=active、Priority=high、Cadence=daily/weekly/manual 排序，主要使用公开 Nitter RSS、作者博客、官方研究/课程页面、Google Developers Blog、BAIR Blog、Hugging Face 页面和来源自带公开页面。</p>
+        <div class="meta">
+          <span>发布时间：2026-07-08 08:00 CST</span>
+          <span>窗口：上次运行以来</span>
+          <span>来源：Follow List.md、Shreya Shankar、Hamel Husain、Lilian Weng、Anthropic、LangChain、Google AI Studio、Simon Willison、BAIR、Hugging Face、Clement Delangue、公开 X/Nitter RSS</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>总览：</strong>今天的主线很清楚：agent 正从“会调用工具的模型”变成可部署、可观察、可长期改进的平台系统。Shreya Shankar 和 Hamel Husain展示了 Claude Agent SDK Monitor，把 agent 生成的 UI 从只读界面变成能把用户操作重新写回 agent loop 的反馈面；Lilian Weng 的 harness self-improvement 文章把自我改进拆成模型、harness、judge 和任务分布的共同演化；Anthropic 的 J-space/J-lens 研究把可读内部状态推进到“发现模型未说出口的判断、评测意识和隐藏目标”；LangChain 一边上线 Deep Agents 课程，一边继续推动 LLM Wikis、trace mining 和 ATIF trace format 讨论；Google 的 Gemini Managed Agents 则把后台任务、remote MCP/function calling 和凭据刷新放进托管 API。软件发布侧，Simon Willison 的 sqlite-utils 4.0 继续证明强模型可做发布前 release-blocker 复审。研究侧，BAIR 把“agents for/of/by data systems”列成数据系统新议程。开放生态侧，Clem/Hugging Face 把 xAI、Qwen、Cohere Arabic ASR、LeRobot/HIW-500 机器人数据集串成开放模型与开放数据飞轮。
+      </section>
+
+      <section>
+        <h2>核心主题</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. UI 变成 agent 的反馈通道</h3>
+            <p>Monitor 让用户在 agent 生成 UI 中点击、选择和标注，再把这些事件写回 stdout/log，agent 可以继续被人类操作实时 steer。</p>
+          </div>
+          <div class="card">
+            <h3>2. Harness 是自我改进的外部骨架</h3>
+            <p>Lilian Weng、LangChain 和 BAIR 今天都在讲同一个底层问题：未来改进 agent 不只靠模型，还靠任务分布、trace、judge、memory 和数据系统。</p>
+          </div>
+          <div class="card">
+            <h3>3. 记忆与 trace 标准开始成基础设施</h3>
+            <p>LLM Wikis、Deep Agents、Row-Bot、ATIF 和 trace mining 说明长期 agent 需要可读记忆、任务文件、子代理、可回放轨迹和交换格式。</p>
+          </div>
+          <div class="card">
+            <h3>4. 托管 agent API 降低生产门槛</h3>
+            <p>Gemini Managed Agents 把后台任务、remote MCP、function calling 和凭据刷新放到 API 层，方向是减少部署和运行复杂度。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>重要更新</h2>
+
+        <div class="item">
+          <h3>Shreya Shankar / Hamel Husain：Monitor 让 agent 生成 UI 变成可交互反馈环</h3>
+          <p class="source">来源账号/机构：Shreya Shankar、Hamel Husain；发布时间：2026-07-07 01:47 UTC；链接：<a href="https://nitter.net/sh_reya/status/2074309235685597387#m">公开 X/Nitter 线索</a> / <a href="https://github.com/shreyashankar/error-discovery-skill">error-discovery-skill</a></p>
+          <p>Shreya 介绍了 Claude Agent SDK 的 Monitor 用法：Monitor 会观察后台任务，把每一行 stdout 当作事件处理；如果 agent 生成 HTML artifact 时同时生成 JS，把用户点击、选择、提交等行为编译成日志事件，就可以让这些动作重新进入 agent loop。这样，UI 不只是展示结果，而是人类给 agent 标注、纠偏、选择下一步的实时控制面。</p>
+          <p>她随后给出 error-discovery-skill 的仓库入口，目标是让 AI agent 研究 trace datasets、构建 review UI、监控标注、归类 failure modes、提出新样本。这和昨天 Hamel/Shreya 的“eval 自动化重点是发现失败模式”形成连续主线：AI 可以帮人放大审查能力，但人类交互和失败分类仍是核心。</p>
+          <p class="why"><strong>为什么值得看：</strong>这直接影响 OpenClaw 里的报告、代码评审和资料整理。最有价值的下一步不是做更多静态摘要，而是让报告候选、误选、漏选、事实待验证项进入一个可点击的 review UI，再把人的选择写回 agent。</p>
+          <p class="action"><strong>后续行动：</strong>给 Follow 日报做一个轻量“候选链接评审页”：每条候选有保留、降权、合并主题、待验证四种操作，操作日志回写到日报筛选 eval 集。</p>
+        </div>
+
+        <div class="item">
+          <h3>Lilian Weng：harness engineering 是 AI 自我改进的关键外部系统</h3>
+          <p class="source">来源账号/机构：Lilian Weng；发布时间：2026-07-07 05:58 UTC；链接：<a href="https://lilianweng.github.io/posts/2026-07-04-harness/">Lilian Weng 原文</a> / <a href="https://nitter.net/lilianweng/status/2074372369213428144#m">公开 X/Nitter 线索</a></p>
+          <p>Lilian 发布长文讨论 harness engineering for AI self-improvement。她的重点不是把 self-improvement 神秘化，而是把它拆成可工程化的外部循环：模型需要目标、任务分布、评估、上下文、工具、运行环境和 judge；当模型变强，部分 harness 能力会被内化，但指定目标和上下文的需求不会消失。</p>
+          <p>这与近期 Follow List 里的 Deep Agents、OpenWiki、trace judge、agent memory 和 eval 讨论合流：真正的改进系统不是单个 prompt，而是持续收集任务、运行 agent、捕获轨迹、评估失败、修改 harness，再进入下一轮。</p>
+          <p class="why"><strong>为什么值得看：</strong>OpenClaw 的能力提升也应该从“换更强模型”转向“让任务有可回放轨迹、可比较评估和可改进 harness”。日报、报告、代码修改、信息抽取都可以变成 harness 改进样本。</p>
+          <p class="action"><strong>后续行动：</strong>为 OpenClaw 建一个 harness registry：每类任务记录输入、工具、环境、成功标准、常见失败、trace 样本和下一版改动。</p>
+        </div>
+
+        <div class="item">
+          <h3>Anthropic：J-space/J-lens 把模型内部可读状态推进到评测意识与隐藏意图</h3>
+          <p class="source">来源账号/机构：Anthropic；发布时间：2026-07-07；链接：<a href="https://www.anthropic.com/research/global-workspace">Anthropic Research</a> / <a href="https://www.neuronpedia.org/jlens">Neuronpedia demo</a> / <a href="https://nitter.net/swyx/status/2074344727202463832#m">swyx 线索</a></p>
+          <p>Anthropic 发布 global workspace/J-space 研究，提出 J-lens 可以读取 Claude 内部某类“可被说出来但尚未说出”的表示。官方例子包括模型在代码中发现 bug、识别 prompt injection、进行中间数学推理、甚至发现情境像评测或被植入隐藏目标。</p>
+          <p>swyx 把重点放在两点：研究不只展示相关性，还做了类似“脑内干预”的因果实验；模型还能在被提示时报告自己遭遇了怎样的内部干预。这对 eval awareness、safety eval 和可解释性都有直接意义，但也需要谨慎，J-space 不是完整心智读数。</p>
+          <p class="why"><strong>为什么值得看：</strong>如果这类方法成熟，agent eval 不只看最终输出，还能观察模型是否在“知道自己被测”、是否识别了注入、是否形成隐藏目标。它会改变安全评测、prompt injection 防护和模型监控的证据结构。</p>
+          <p class="action"><strong>后续行动：</strong>把 J-space 归入“待验证研究线索”：跟踪代码仓、Neuronpedia demo、论文复现和第三方评论，避免直接把它当生产监控能力使用。</p>
+        </div>
+
+        <div class="item">
+          <h3>LangChain：Deep Agents 课程、LLM Wikis 和 ATIF 讨论把长期 agent 基础设施拼到一起</h3>
+          <p class="source">来源账号/机构：Harrison Chase / LangChain；发布时间：2026-07-07 15:05-23:50 UTC；链接：<a href="https://academy.langchain.com/courses/deep-agents-with-langgraph">Deep Agents 课程</a> / <a href="https://events.langchain.com/webinar/llm-wiki/">LLM Wikis webinar</a> / <a href="https://nitter.net/hwchase17/status/2074642346130776323#m">ATIF 线索</a></p>
+          <p>Harrison Chase 今天连续放大三条线：第一，改善 agents 本质上是从 traces 里挖数据；第二，Deep Agents 是 LangChain 最新的开源、模型无关 agent harness，并上线了介绍课程；第三，他询问是否有人正在把 ATIF 标准化为 agent traces 格式，还是大家仍在各自 roll your own。</p>
+          <p>课程页面显示 Deep Agents 面向复杂长任务，覆盖创建 agent、todo lists、files、subagents 和完整 agent。LLM Wikis webinar 则继续讨论 agent memory 的长期形态。把这些放在一起看，LangChain 的路线是：harness 提供执行骨架，LangSmith/trace 提供观测和改进素材，wiki/files/todo/subagents 提供长期任务状态。</p>
+          <p class="why"><strong>为什么值得看：</strong>这对 OpenClaw 很实用。当前我们已经有 daily memory、MEMORY.md、skills、报告索引和 state JSON，但 trace 格式、长期任务状态和 review 数据还没有统一标准。</p>
+          <p class="action"><strong>后续行动：</strong>调研 ATIF 与现有 OpenClaw state/trace 的映射，先为 Follow 日报定义最小 trace schema：source、fetch method、candidate、decision、evidence、failure、published link。</p>
+        </div>
+
+        <div class="item">
+          <h3>Google AI Studio：Gemini Managed Agents 增加后台任务、remote MCP/function calling 和凭据刷新</h3>
+          <p class="source">来源账号/机构：Logan Kilpatrick / Google AI Studio；发布时间：2026-07-07 17:55 UTC；链接：<a href="https://nitter.net/OfficialLoganK/status/2074552932318765376#m">公开 X/Nitter 线索</a> / <a href="https://developers.googleblog.com/building-agents-with-the-adk-and-the-new-interactions-api/">Google Developers Blog 相关 Interactions API</a></p>
+          <p>Logan Kilpatrick 表示 Gemini API 的 Managed Agents 推出重要更新：支持 background tasks、remote MCP 和 function calling、network credential refresh，并且可以通过 free tier 上手。其补充说明强调目标是显著降低把强 agent 放进生产环境的成本、摩擦和复杂度。</p>
+          <p>公开 Google Developers Blog 的 Interactions API 文章也显示相同方向：把长任务放到后台执行，用 interaction ID 轮询结果，把 state management 和 A2A remote agent 桥接放到 API 层。这说明 Google 正把 agent runtime、远程工具、凭据和长任务管理产品化。</p>
+          <p class="why"><strong>为什么值得看：</strong>Agent 平台竞争正在从“模型参数”移到“谁能托管长任务、凭据、MCP、状态和远程 agent 协议”。这会直接影响开发者选择 OpenAI、Anthropic、Google、LangChain 或自建 runtime 的成本结构。</p>
+          <p class="action"><strong>后续行动：</strong>把 Managed Agents 加入平台对比表：后台执行、MCP 支持、凭据刷新、沙箱、trace、价格、可迁移性、企业权限。</p>
+        </div>
+
+        <div class="item">
+          <h3>Simon Willison：sqlite-utils 4.0 发布，Claude Fable 5 最终复审又抓出 release blockers</h3>
+          <p class="source">来源账号/机构：Simon Willison；发布时间：2026-07-07 19:38 UTC；链接：<a href="https://simonwillison.net/2026/Jul/7/sqlite-utils-4/">Simon 原文</a> / <a href="https://sqlite-utils.datasette.io/en/stable/upgrading.html">升级指南</a></p>
+          <p>Simon 发布 sqlite-utils 4.0，这是该项目自 2020 年以来第一次 major version bump。他强调这是第 124 个 release，核心变化包括 database schema migrations 和一组小的 backwards-incompatible 修正，并提供详细升级指南，甚至建议可以把升级指南喂给 coding agent 让它帮忙应用改动。</p>
+          <p>最值得看的仍是发布流程：Simon 让 Claude Fable 5 做 final review，模型又找出四个 release blockers。结合昨天 rc3 的 GPT/Claude 交叉审查，这已经从实验变成一个可复制的开源维护者 workflow。</p>
+          <p class="why"><strong>为什么值得看：</strong>强模型最稳的短期价值之一是做发布前边界检查，尤其是事务语义、兼容性、文档承诺、升级路径和 changelog 一致性。</p>
+          <p class="action"><strong>后续行动：</strong>把“发布前模型复审”写进重要仓库 checklist：release note、upgrade guide、breaking changes、test matrix、回滚策略、模型审查记录。</p>
+        </div>
+
+        <div class="item">
+          <h3>BAIR：近零成本智能会把数据系统改造成 agents for/of/by 的新底座</h3>
+          <p class="source">来源账号/机构：BAIR / Shreya Shankar 转发；发布时间：2026-07-07 18:25 UTC；链接：<a href="https://bair.berkeley.edu/blog/2026/07/07/intelligence-is-free-now-what/">BAIR Blog</a> / <a href="https://nitter.net/sh_reya/status/2074560361748111532#m">公开 X/Nitter 线索</a></p>
+          <p>BAIR 文章提出一个数据系统新研究议程：Data Systems For Agents、Of Agents、By Agents。For Agents 关注 agent 查询数据库时的高频、异构、推测式 workload；Of Agents 关注大量 agents 如何管理长任务状态、协同、共识与失败；By Agents 则关注 agents 合成数据系统后如何验证其行为可信。</p>
+          <p>Shreya 转发时把它概括成“agents 已经主流化，现在应该思考 for/of/by agents 的数据系统研究议程”。这与 Monitor、trace mining、LLM Wikis 和 harness self-improvement 是同一条线：agent 时代的数据系统既要服务 agent，也要管理 agent，还要被 agent 参与生成。</p>
+          <p class="why"><strong>为什么值得看：</strong>这对 AI 应用和投资研究都有启发。未来的基础设施机会不只在模型推理，还在 agent workload 优化、状态管理、trace storage、approximate query、权限、回放和验证。</p>
+          <p class="action"><strong>后续行动：</strong>在 AI 产业链研究里新增“Agent Data Systems”分类，跟踪数据库、向量库、trace store、workflow state、eval data、agent-generated systems verification。</p>
+        </div>
+
+        <div class="item">
+          <h3>Hugging Face / Clem Delangue：开放模型竞争转向权重、数据、机器人和企业使用</h3>
+          <p class="source">来源账号/机构：Clement Delangue / Hugging Face；发布时间：2026-07-07 06:24-22:49 UTC；链接：<a href="https://nitter.net/ClementDelangue/status/2074617687724998717#m">xAI/open-source 线索</a> / <a href="https://huggingface.co/xai-org">xai-org on Hugging Face</a> / <a href="https://nitter.net/BitRobotNetwork/status/2074483526603329909#m">HIW-500 线索</a></p>
+          <p>Clem 今天连续放大开放生态信号：企业用开放权重模型做代码审查以降低成本；LeRobot 与 Hugging Face Jobs 结合；HIW-500 机器人数据集两周内超过 10 万下载；Anthropic 在 Neuronpedia demo 中使用 Qwen 开放权重模型；Cohere 发布 Apache 2.0 的 Arabic ASR；并呼吁 xAI/Cursor 开放模型权重。</p>
+          <p>这些线索不是单点新闻，而是开放模型竞争的组合拳：权重开放、数据集下载、机器人数据、语音模型、解释性 demo、企业混合路由，都在把“开放”从口号变成开发者和企业可用的供应链。</p>
+          <p class="why"><strong>为什么值得看：</strong>产业链观察要把开放模型拆成多个资产层：权重、数据、trace、机器人数据、推理 kernel、企业路由、许可证和托管平台。只看榜单分数会漏掉真正的生态壁垒。</p>
+          <p class="action"><strong>后续行动：</strong>继续维护开放模型基础设施图谱，并单独跟踪机器人数据集下载、授权、硬件绑定和训练可复现性。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>人物/机构动态</h2>
+        <ul>
+          <li><strong>Shreya Shankar / Hamel Husain：</strong>把 eval/error discovery 从“自动打分”推进到“可交互 review UI + Monitor feedback loop”。</li>
+          <li><strong>Lilian Weng：</strong>用 self-improvement 视角把 harness、judge、任务分布和目标规范放到同一个工程框架中。</li>
+          <li><strong>Anthropic：</strong>J-space 研究继续强化其 interpretability/safety 叙事，同时通过 Neuronpedia 把方法放到开放权重模型 demo 上。</li>
+          <li><strong>Harrison Chase / LangChain：</strong>围绕 Deep Agents、LLM Wikis、trace mining 和 ATIF trace format 建长期 agent 基础设施话语权。</li>
+          <li><strong>Logan Kilpatrick / Google AI Studio：</strong>Managed Agents 更新显示 Google 正在把 agent runtime 产品化到 Gemini API 层。</li>
+          <li><strong>Simon Willison：</strong>继续用真实开源 release 验证 coding agent 的发布前复审价值。</li>
+          <li><strong>BAIR / UC Berkeley：</strong>把 agents 与数据系统的关系上升为研究议程，值得长期跟踪。</li>
+          <li><strong>Clement Delangue / Hugging Face：</strong>持续把开放模型、开放数据、机器人数据和企业使用案例串成生态叙事。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>值得跟进项目</h2>
+        <ul>
+          <li><strong>日报候选 review UI：</strong>把候选链接、模型摘要、保留/降权/合并/待验证操作做成可交互页面，操作日志回写 agent。</li>
+          <li><strong>OpenClaw harness registry：</strong>为报告、代码修改、信息抽取、发布等任务记录工具、环境、成功标准、trace 和改进记录。</li>
+          <li><strong>Agent trace schema：</strong>调研 ATIF，并先定义 OpenClaw 最小 trace 字段，避免 state JSON、日报和 memory 彼此割裂。</li>
+          <li><strong>平台对比表：</strong>比较 Gemini Managed Agents、OpenAI Codex/Agents、Claude Agent SDK、LangChain Deep Agents 的后台执行、MCP、凭据、trace、沙箱和价格。</li>
+          <li><strong>J-space 复现跟踪：</strong>只把它列为研究线索，等第三方复现、代码和 demo 边界更清楚后再考虑工程化。</li>
+          <li><strong>Agent Data Systems 分类：</strong>为 AI 产业链研究新增 agent workload、trace store、state store、eval data、verification 数据系统条目。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>待验证信息</h2>
+        <ul>
+          <li>Shreya 的 Monitor 用法来自公开 X 线索和仓库入口，本报告未实际运行 Claude Agent SDK Monitor；具体 API、权限和日志格式需实测。</li>
+          <li>Lilian Weng 文章是研究/工程综述，关于 RSI 与 harness 的长期关系属于作者判断，不等于已验证生产结论。</li>
+          <li>Anthropic J-space/J-lens 是官方研究结果，仍需第三方复现、方法边界和模型版本适用性验证；不要直接等同于完整读心或生产安全监控。</li>
+          <li>Gemini Managed Agents 的新增能力来自公开社交帖和相关 Interactions API 公开文档；具体 Managed Agents 文档、配额、价格和可用区域需要后续核对。</li>
+          <li>BAIR 文章是 perspective/research agenda，不是已成熟产品；其中 agentic speculation、structured memory 和系统合成需要看后续论文和系统实现。</li>
+          <li>Nitter RSS 本轮可读，但可能漏掉登录态内容、删除帖、限流内容或原帖上下文；本次未使用私密 cookie、token 或账号内部信息。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>低优先级噪音</h2>
+        <ul class="noise">
+          <li>Nan Yu 关于“20 岁会花时间做什么”的回复偏个人生活选择，不进入 AI 工程主线。</li>
+          <li>swyx 转发 AIE/NVIDIA Local AI 活动和 AIEWF keynote 预告有背景价值，但今天没有新增可操作技术内容。</li>
+          <li>Clem 关于 xAI/Cursor 开源的呼吁有生态信号，但在真实权重发布前仍按待验证处理。</li>
+          <li>ARC Prize 2026 milestone winners 是重要研究生态线索，但今日公开信息以榜单/奖金为主，技术细节待后续阅读。</li>
+          <li>部分转发是社区感谢、活动预告和产品发布宣传，保留链接背景，不展开成结论。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>原始链接</h2>
+        <ul>
+          <li><a href="https://nitter.net/sh_reya/status/2074309235685597387#m">Shreya Shankar: Claude Agent SDK Monitor and UI feedback loop</a></li>
+          <li><a href="https://github.com/shreyashankar/error-discovery-skill">GitHub: shreyashankar/error-discovery-skill</a></li>
+          <li><a href="https://lilianweng.github.io/posts/2026-07-04-harness/">Lilian Weng: Harness Engineering for Self-Improvement</a></li>
+          <li><a href="https://www.anthropic.com/research/global-workspace">Anthropic: A global workspace in language models</a></li>
+          <li><a href="https://www.neuronpedia.org/jlens">Neuronpedia: Jacobian Lens demo</a></li>
+          <li><a href="https://nitter.net/swyx/status/2074344727202463832#m">swyx: Anthropic J-space interpretation</a></li>
+          <li><a href="https://academy.langchain.com/courses/deep-agents-with-langgraph">LangChain Academy: Project Deep Agents</a></li>
+          <li><a href="https://events.langchain.com/webinar/llm-wiki/">LangChain webinar: LLM Wikis and agent memory</a></li>
+          <li><a href="https://nitter.net/hwchase17/status/2074642346130776323#m">Harrison Chase: ATIF / agent traces question</a></li>
+          <li><a href="https://nitter.net/OfficialLoganK/status/2074552932318765376#m">Logan Kilpatrick: Gemini Managed Agents updates</a></li>
+          <li><a href="https://developers.googleblog.com/building-agents-with-the-adk-and-the-new-interactions-api/">Google Developers Blog: ADK and Interactions API</a></li>
+          <li><a href="https://simonwillison.net/2026/Jul/7/sqlite-utils-4/">Simon Willison: sqlite-utils 4.0</a></li>
+          <li><a href="https://sqlite-utils.datasette.io/en/stable/upgrading.html">sqlite-utils upgrade guide</a></li>
+          <li><a href="https://bair.berkeley.edu/blog/2026/07/07/intelligence-is-free-now-what/">BAIR: Intelligence is Free, Now What?</a></li>
+          <li><a href="https://nitter.net/sh_reya/status/2074560361748111532#m">Shreya Shankar: data systems for/of/by agents</a></li>
+          <li><a href="https://nitter.net/ClementDelangue/status/2074617687724998717#m">Clement Delangue: open-source AI weights call</a></li>
+          <li><a href="https://huggingface.co/xai-org">Hugging Face: xai-org</a></li>
+          <li><a href="https://nitter.net/BitRobotNetwork/status/2074483526603329909#m">HIW-500 robotics dataset downloads</a></li>
+          <li><a href="https://nitter.net/arcprize/status/2074557069215313931#m">ARC Prize 2026 milestone winners</a></li>
+        </ul>
+      </section>
+
+      <footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer>
+    </main>

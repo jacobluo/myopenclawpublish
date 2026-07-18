@@ -1,0 +1,141 @@
+---
+title: "Follow 深度日报：Sol 试用、开放模型政策风险与编码代理分化"
+date: "2026-07-13"
+category: "daily"
+url: "/daily/2026/07/13/"
+summary: "Follow List 公开来源整理：Sam Altman 征集 GPT-5.6 Sol 作品，OpenAI Programmatic Tool Calling 与 ultra 多代理进入试用期，Simon Willison 校准 GPT-5.6 成本和体验，Nathan Lambert 警告开放权重模型 6 个月政策窗口，Francois Chollet 认为强代码生成更放大高手，Microsoft CLI agent 研究显示采用者 PR 产出提升，Claude transcript/Claude Code 暴露 agent 产品边界，Logan Kilpatrick 强调 curated data 护城河。"
+---
+<div class="meta">
+  <strong>2026年7月13日（周一）</strong> · 覆盖窗口：2026-07-12 08:00 – 2026-07-13 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；公开 Nitter RSS、官方博客/论文、公开网页。未使用 Folo CLI，未使用私密 cookie/token。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Sol 生态从发布进入试用期</h4><p>OpenAI GPT-5.6 发布后的 24 小时，Sam Altman 开始征集 Sol 作品，Simon Willison 从定价、API 与真实编码体验角度做了冷静补充。</p></div>
+  <div class="overview-item"><h4>开源模型政策风险升温</h4><p>Nathan Lambert 发布长文，认为未来 6 个月可能出现让开放权重模型长期处于二等地位的监管动作。</p></div>
+  <div class="overview-item"><h4>编码代理价值更依赖高手</h4><p>Francois Chollet 认为强代码生成工具已从“抬低端地板”变成“放大高手”的 power tool，这与组织级采用研究互相印证。</p></div>
+  <div class="overview-item"><h4>工具链边界暴露</h4><p>Simon 指出 Claude 共享 transcript 反爬机制会挡住 Claude Code 自己访问，提示 agent 产品之间需要更好的授权与可携带上下文。</p></div>
+  <div class="overview-item"><h4>数据仍是模型护城河</h4><p>Logan Kilpatrick 强调高质量 curated data 的重要性，和 Sol/agent 竞争中的“模型之外的生产资料”主题一致。</p></div>
+  <div class="overview-item"><h4>低噪声日</h4><p>Follow List 里不少高优先级账号在本窗口无更新；explainx.ai sitemap 与 AI 播客索引无 24 小时新增。</p></div>
+</div>
+
+<h2>核心主题</h2>
+<h3>一、GPT-5.6 / Sol：发布后的真实采用信号</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI</span><strong>Sam Altman</strong> · 2026-07-12 20:08 UTC · <a href="https://nitter.net/sama/status/2076398253332140410#m">X/Nitter</a></div>
+  <div class="summary"><p>Sam 开始向社区征集用 5.6 Sol 做出的有趣作品，并承诺给最酷作品送 OpenAI archives 的特别礼物。这不是新产品发布，而是发布后拉动开发者实测与展示的增长动作。结合官方 GPT-5.6 页面强调的 Sol/Terra/Luna 三层、ultra 并行代理、Programmatic Tool Calling，OpenAI 正在把“模型能力”包装成“可展示的工作流成果”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Sol 的竞争重点不只是 benchmark，而是能否让用户展示可复用、可传播、可迁移到 Work/Codex/API 的成果。社区作品会比官方 demo 更快暴露真实边界。</div>
+  <div class="action">后续行动：跟踪获奖/高传播项目，优先筛选金融研究、代码迁移、长文档分析和前端生成相关案例。</div>
+</div>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI</span><strong>官方 GPT-5.6 发布页</strong> · 2026-07-09 · <a href="https://openai.com/index/gpt-5-6/">OpenAI</a></div>
+  <div class="summary"><p>官方把 GPT-5.6 定位为“每个 token 产出更多智能”，并公布 Sol、Terra、Luna 三档；Sol 主打 coding、knowledge work、cybersecurity、science，ultra 模式通过多代理并行处理复杂任务。发布页还强调 Programmatic Tool Calling：模型可编写并运行轻量程序来编排工具、过滤中间结果、减少模型往返。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Programmatic Tool Calling 是本轮最需要关注的 API 变化，它把“工具调用”从单步 RPC 拉向可组合的微型运行时，对 MCP、terminal agent、浏览器自动化都有影响。</div>
+  <div class="action">后续行动：单独评估 Programmatic Tool Calling 与当前 OpenClaw/Codex skill、subagent、exec 编排的重叠与差异。</div>
+</div>
+<div class="card">
+  <div class="source"><span class="tag">AI 工程</span><strong>Simon Willison</strong> · 2026-07-09 / 2026-07-12 相关讨论 · <a href="https://simonwillison.net/2026/Jul/9/gpt-5-6/">博客</a> · <a href="https://nitter.net/simonw/status/2076440861253218399#m">X/Nitter</a></div>
+  <div class="summary"><p>Simon 在博客里整理了 GPT-5.6 的价格、上下文窗口、API 新特性，并提醒“每百万 token 价格”已经不足以直接比较模型，因为不同模型在同一任务上的 reasoning token 消耗差异很大。他还说自己早期使用 Sol 的感觉是“很能干”，但暂未觉得在复杂编码任务上超过 Anthropic 的 Fable。随后他也继续追问 Anthropic Opus/Fable/Haiku 的相对命名与定位，说明模型品牌层级正在变得难懂。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这比发布稿更接近开发者购买决策：真实成本、模型分层、API 表面积、体验边界，而不是单一榜单分数。</div>
+  <div class="action">后续行动：后续报告里把“价格/任务完成率/重试次数/工具调用数”作为模型比较主指标。</div>
+</div>
+<div class="card">
+  <div class="source"><span class="tag">数学/验证</span><strong>OpenAI CDC proof PDF</strong> · 2026-07-12 公开传播 · <a href="https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf">PDF</a></div>
+  <div class="summary"><p>OpenAI 发布的 PDF 声称给出了 Cycle Double Cover Conjecture 的证明，文档说明证明由 GPT-5.6 Sol Ultra 完成，写作由 Codex 与 GPT-5.6 Sol 协助。文本把问题化约到三次图、nowhere-zero flow 与线性代数构造。该结论极重要，但目前仍应视作待独立数学社区验证的信息。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>如果成立，这是 AI 辅助数学证明进入“候选重大成果”的信号；如果不成立，也会成为评估模型数学自信、同行审查和形式化验证流程的典型案例。</div>
+  <div class="action">后续行动：追踪是否有 Lean/Coq 形式化仓库、组合数学专家公开 review、MathOverflow/专业论坛纠错。</div>
+</div>
+
+<h3>二、开放权重模型：政策窗口正在收紧</h3>
+<div class="card">
+  <div class="source"><span class="tag">开放模型</span><strong>Nathan Lambert</strong> · 2026-07-12 17:00 UTC · <a href="https://nitter.net/natolambert/status/2076351049926078681#m">X/Nitter</a> · <a href="https://www.interconnects.ai/p/6-months-to-live-for-open-models">Interconnects</a></div>
+  <div class="summary"><p>Nathan 发布《6 months to live for open models》，核心判断是：开放权重模型可能在未来 6 个月遇到把它们永久压成二等公民的政策行动。他把风险拆成两个交织问题：围绕中国模型/蒸馏的监管捕获叙事，以及 frontier open-weight 模型接近闭源前沿能力后的准入审查。文章也提醒，开放模型缺少一个足够强的经济代表来为整个生态游说。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这不是普通的“开源好/闭源坏”争论，而是模型许可、国家安全、API 安全、监管捕获和产业生态位的组合问题。对 Hugging Face、Meta、微软、Reflection AI、推理服务商和下游创业公司都有直接影响。</div>
+  <div class="action">后续行动：跟踪白宫/国会是否出现开放权重模型审查、进口限制、政府采购限制；把美国开放模型可用性作为 AI 基础设施风险变量。</div>
+</div>
+
+<h3>三、编码代理：效率提升开始分化人群</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI 编程</span><strong>Francois Chollet</strong> · 2026-07-12 14:20 UTC · <a href="https://nitter.net/fchollet/status/2076310779482317104#m">X/Nitter</a></div>
+  <div class="summary"><p>Chollet 认为，去年以前较弱的 AI code generation 主要对低技能程序员有用，是“抬高地板”；但现在更强的代码生成工具已经反过来，最能被高手利用，低技能用户反而可能用不好甚至被淹没。这个判断把 coding agent 从“替代初级劳动”重新框定为“放大专家杠杆”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>它解释了为什么同一工具在组织里会出现巨大方差：关键不是有没有 agent，而是谁能设计任务、写测试、审 diff、拆上下文、修 harness。</div>
+  <div class="action">后续行动：在企业落地评估中，把“高技能使用者的吞吐提升”和“低技能使用者的风险/培训成本”分开测量。</div>
+</div>
+<div class="card">
+  <div class="source"><span class="tag">研究</span><strong>Microsoft 早期 2026 CLI coding agent rollout 研究</strong> · 2026-07-01 · <a href="https://arxiv.org/abs/2607.01418">arXiv</a></div>
+  <div class="summary"><p>一篇研究 Microsoft 早期 2026 年 Claude Code 与 GitHub Copilot CLI 推广的论文发现，首次使用主要通过社交网络扩散，留存更依赖工程师本身的编码活动而不是人口统计属性；采用者合并的 PR 数约提升 24%。作者也明确提醒，merged PR 只是产出代理指标，不等同业务价值。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这给 Chollet 的观点提供组织级证据：agent 的价值会先在高活跃工程师和可见同伴使用中扩散，而不是平均落到所有员工身上。</div>
+  <div class="action">后续行动：关注该研究是否披露 token 成本、失败率、代码质量和 review 负担；不要只用 PR 数判断 ROI。</div>
+</div>
+<div class="card">
+  <div class="source"><span class="tag">Agent Infra</span><strong>Harrison Chase / LangChain 相关转发</strong> · 2026-07-12 01:23 UTC · <a href="https://nitter.net/JoshARosen/status/2076115255986401399#m">X/Nitter</a></div>
+  <div class="summary"><p>Harrison 转发的讨论强调，AI agent 不只是模型，infra 同样关键：LangSmith sandboxes、deployments、LangChain 模型集成、deep agents harness、tracing observability 和 recursive improvement 共同构成生产栈。另一个 OpenWiki 贡献者获得 Harrison 回复，说明 LangChain 仍在推动开放知识/记忆类基础设施的社区参与。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>模型升级会降低单点难度，但真正生产化仍依赖 sandbox、trace、部署、评测、权限和反馈循环。</div>
+  <div class="action">后续行动：继续跟踪 LangSmith sandboxes/deployments 是否变成 agent 平台的标准模块。</div>
+</div>
+
+<h3>四、Agent 产品边界与数据护城河</h3>
+<div class="card">
+  <div class="source"><span class="tag">Claude Code</span><strong>Simon Willison</strong> · 2026-07-12 15:47 UTC · <a href="https://nitter.net/simonw/status/2076332567511581158#m">X/Nitter</a></div>
+  <div class="summary"><p>Simon 指出一个尴尬问题：用户不能把共享的 Claude transcript 链接直接贴进 Claude Code 会话，因为 Anthropic 的反爬措施会阻止自家工具访问自家工具的输出。这不是严重故障，但暴露了 agent 产品之间“分享、授权、上下文可携带性”的缝隙。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>当 agent 从聊天界面扩展到 CLI、浏览器、工作区和团队协作，内容访问边界会直接影响工作流顺滑程度。反爬和安全策略如果没有产品级授权通道，会伤到一等用例。</div>
+  <div class="action">后续行动：关注 Claude/ChatGPT/Codex 是否提供官方 transcript export/import、signed fetch 或 workspace-scoped context sharing。</div>
+</div>
+<div class="card">
+  <div class="source"><span class="tag">数据</span><strong>Logan Kilpatrick</strong> · 2026-07-12 19:47 UTC · <a href="https://nitter.net/OfficialLoganK/status/2076393038843375810#m">X/Nitter</a></div>
+  <div class="summary"><p>Logan 强调，很多人仍低估了高质量 curated data 对模型的重要性；找到新的数据创建或获取方式本身就是巨大优势。这与过去几天围绕 GPT-5.6、开放模型、agent workflow 的讨论形成呼应：模型架构之外，数据、评测和反馈回路仍是核心生产资料。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>当模型 API 越来越同质化，企业差异化会转向数据飞轮、领域标注、工作流 trace、用户反馈和专有评测。</div>
+  <div class="action">后续行动：把“可持续获得高质量数据”的能力纳入 AI 公司/项目分析框架。</div>
+</div>
+<div class="card">
+  <div class="source"><span class="tag">AI 产业</span><strong>swyx</strong> · 2026-07-12 04:04 UTC · <a href="https://nitter.net/swyx/status/2076155833428431012#m">X/Nitter</a></div>
+  <div class="summary"><p>swyx 延续 Sam Altman 关于 AI 净创造工作的讨论，强调 Jevons paradox 不只适用于软件需求：当能驾驭 coding agents 的人把单位知识工作成本压低后，总知识工作需求反而会上升。他认为 coding 不是例外，而是其他知识工作的先兆。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这给“AI 是否毁掉工作”的讨论提供更细的机制：某些岗位会被压缩，但可交付工作总量和复杂度可能快速扩大，尤其先利好能组织 agent 的人。</div>
+  <div class="action">后续行动：跟踪真实组织中 AI engineer / agent operator / workflow designer 是否成为新岗位族。</div>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Sam Altman：</strong>发布后继续推动 Sol 社区作品展示，重点从“能力宣告”转向“用例发现”。</li>
+  <li><strong>Nathan Lambert / Interconnects：</strong>把开放模型政策风险提升为短期主线，未来几周大概率会继续高频写政策向内容。</li>
+  <li><strong>Simon Willison：</strong>继续从开发者角度拆模型定价、API 功能和实际体验，仍是高价值校准源。</li>
+  <li><strong>LangChain / Harrison Chase：</strong>围绕 LangSmith、OpenWiki、deep agents 的基础设施叙事继续推进。</li>
+  <li><strong>Google / Logan Kilpatrick：</strong>本窗口没有新产品发布，但关于 curated data 的判断值得作为 Gemini/AI Studio 后续观察线索。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<div class="card">
+  <p><strong>Programmatic Tool Calling / Multi-agent API：</strong>评估它是否会替代一部分外部编排代码，还是更适合作为模型回合内的轻量数据过滤与工具调度层。</p>
+  <p><strong>CDC proof 验证链：</strong>等待独立数学审稿、形式化证明仓库和专业社区反馈。当前只适合列为“重大待验证”。</p>
+  <p><strong>开放模型政策：</strong>建立美国开放权重模型风险 watchlist：行政令、政府采购、模型进口/下载限制、API 蒸馏指控、Meta/Microsoft 是否发布强开放模型。</p>
+  <p><strong>企业 coding agent ROI：</strong>把 PR 数、review 负担、bug 率、token 成本和专家/新手差异放在同一张表里。</p>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <p><strong>Cycle Double Cover 证明：</strong>OpenAI PDF 给出完整证明文本，但数学正确性、是否已有漏洞、是否有 Lean 形式化版本，仍需外部专家确认。</p>
+  <p><strong>“未来 6 个月开放模型会被卡住”：</strong>Nathan 的判断基于政策风向与行业结构推断，方向值得警惕，但不是已落地政策。</p>
+  <p><strong>Microsoft CLI agent 论文：</strong>merged PR 提升 24% 是有价值信号，但不等同净业务价值或代码质量提升。</p>
+</div>
+
+<h2>低优先级噪音</h2>
+<div class="card noise">
+  <p>多数转发/互动类帖子没有新增事实，只作为情绪和传播强度参考。explainx.ai sitemap 在窗口内无新增 URL；AI 播客索引 JSON 最近更新时间仍为 2026-07-02，不纳入今日重点。若后续官方 RSS 或结构化数据恢复新增，再重新纳入。</p>
+</div>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://nitter.net/sama/status/2076398253332140410#m">Sam Altman: Sol 作品征集</a></li>
+  <li><a href="https://openai.com/index/gpt-5-6/">OpenAI: GPT-5.6 官方发布页</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/9/gpt-5-6/">Simon Willison: The new GPT-5.6 family</a></li>
+  <li><a href="https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf">OpenAI: CDC proof PDF</a></li>
+  <li><a href="https://www.interconnects.ai/p/6-months-to-live-for-open-models">Nathan Lambert: 6 months to live for open models</a></li>
+  <li><a href="https://nitter.net/fchollet/status/2076310779482317104#m">Francois Chollet: strong AI code gen as power tool</a></li>
+  <li><a href="https://arxiv.org/abs/2607.01418">arXiv: Microsoft CLI coding agents rollout</a></li>
+  <li><a href="https://nitter.net/simonw/status/2076332567511581158#m">Simon Willison: Claude transcript / Claude Code boundary</a></li>
+  <li><a href="https://nitter.net/OfficialLoganK/status/2076393038843375810#m">Logan Kilpatrick: curated data</a></li>
+  <li><a href="https://nitter.net/swyx/status/2076155833428431012#m">swyx: Jevons paradox and AI engineers</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-12T00:00:00Z / 2026-07-13T00:00:00Z.</footer>

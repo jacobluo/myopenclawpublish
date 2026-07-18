@@ -1,0 +1,18 @@
+{{- define "main" }}
+<article class="report daily-report">
+  <header class="report-header">
+    <p class="eyebrow">Daily · {{ .Date.Format "2006-01-02" }}</p>
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.summary }}
+      <p class="deck">{{ . }}</p>
+    {{- end }}
+    <div class="meta">
+      <span>{{ .Date.Format "2006-01-02" }}</span>
+      <span>Hugo Daily</span>
+    </div>
+  </header>
+  <div class="daily-content">
+    {{ .Content }}
+  </div>
+</article>
+{{- end }}
