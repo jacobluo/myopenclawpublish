@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="FDE 智能体标准交付 SOP">
+  <title>FDE 智能体标准交付 SOP</title>
+  <style>
+:root {
+  --ink: #1d2129;
+  --muted: #5a6572;
+  --paper: #fcfdff;
+  --panel: #f2f5fb;
+  --line: #dbe1ea;
+  --accent: #0052D9;
+  --accent-soft: #e6f1fb;
+  --warn: #8a5517;
+  --warn-soft: #fff2dc;
+  --danger: #8b2d2d;
+  --danger-soft: #fbe7e5;
+  --nav-width: 300px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.72;
+}
+.topbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 22px;
+  color: #fff;
+  background: #003cab;
+  box-shadow: 0 2px 12px rgba(0,0,0,.14);
+}
+.topbar strong { letter-spacing: .02em; }
+.topbar-actions { display: flex; gap: 8px; }
+button, .toplink {
+  border: 1px solid rgba(255,255,255,.42);
+  border-radius: 7px;
+  padding: 7px 11px;
+  color: #fff;
+  background: transparent;
+  font: inherit;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+button:hover, .toplink:hover { background: rgba(255,255,255,.13); }
+nav {
+  position: fixed;
+  top: 56px;
+  bottom: 0;
+  left: 0;
+  width: var(--nav-width);
+  overflow-y: auto;
+  padding: 22px 18px 48px;
+  border-right: 1px solid var(--line);
+  background: #f2f5fb;
+}
+nav .nav-title { margin: 0 0 12px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+nav a {
+  display: block;
+  margin: 1px 0;
+  border-radius: 6px;
+  padding: 7px 9px;
+  color: #2b3a4d;
+  font-size: 14px;
+  line-height: 1.35;
+  text-decoration: none;
+}
+nav a:hover { color: var(--accent); background: var(--accent-soft); }
+nav .toc-depth-3 { padding-left: 24px; color: var(--muted); font-size: 13px; }
+main {
+  width: min(1080px, calc(100% - var(--nav-width)));
+  margin-left: var(--nav-width);
+  padding: 92px 54px 90px;
+}
+article { max-width: 960px; margin: 0 auto; }
+h1 { margin: 0 0 28px; font-size: clamp(32px, 5vw, 54px); line-height: 1.12; letter-spacing: -.035em; }
+h2 { margin: 64px 0 22px; border-top: 1px solid var(--line); padding-top: 30px; font-size: 30px; line-height: 1.25; }
+h3 { margin: 38px 0 15px; font-size: 22px; line-height: 1.35; }
+h4 { margin: 27px 0 10px; color: var(--accent); font-size: 17px; }
+.heading-link { margin-left: 8px; color: transparent; font-weight: 400; text-decoration: none; }
+h1:hover .heading-link, h2:hover .heading-link, h3:hover .heading-link, h4:hover .heading-link { color: #9aa7b8; }
+p, li { max-width: 78ch; }
+a { color: var(--accent); text-underline-offset: 3px; }
+blockquote {
+  margin: 24px 0 34px;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 15px 20px;
+  color: #17335f;
+  background: var(--accent-soft);
+}
+blockquote p { margin: 3px 0; }
+code { border-radius: 4px; padding: 2px 5px; color: #0a4bb0; background: #eaf1fc; font-size: .92em; }
+pre { overflow-x: auto; border-radius: 9px; padding: 16px; background: #1d2129; color: #f5f6f4; }
+pre code { padding: 0; color: inherit; background: transparent; }
+.table-wrap { width: 100%; overflow-x: auto; margin: 18px 0 28px; border: 1px solid var(--line); border-radius: 9px; }
+table { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 14px; line-height: 1.5; }
+.wide-table { width: max-content; min-width: 100%; }
+.wide-table th, .wide-table td { min-width: 136px; max-width: 260px; }
+.wide-table th:first-child, .wide-table td:first-child { min-width: 96px; }
+th { position: sticky; top: 0; color: #17335f; background: #dfeafc; text-align: left; }
+th, td { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 10px 12px; vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th:last-child, td:last-child { border-right: 0; }
+tbody tr:nth-child(even) { background: #f7faff; }
+ul, ol { padding-left: 1.45em; }
+li + li { margin-top: 5px; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
+.page-footer { margin-top: 72px; border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 13px; }
+.back-top { position: fixed; right: 20px; bottom: 20px; border-color: var(--line); color: var(--accent); background: var(--paper); box-shadow: 0 2px 12px rgba(0,0,0,.12); }
+@media (max-width: 900px) {
+  :root { --nav-width: 0px; }
+  nav { display: none; }
+  main { width: 100%; margin-left: 0; padding: 84px 20px 70px; }
+  .topbar { padding: 0 14px; }
+  .topbar strong { max-width: 58vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  h2 { margin-top: 48px; }
+}
+@media print {
+  @page { size: A4; margin: 16mm 13mm 17mm; }
+  body { color: #000; background: #fff; font-size: 10.5pt; }
+  .topbar, nav, .back-top { display: none !important; }
+  main { width: 100%; margin: 0; padding: 0; }
+  article { max-width: none; }
+  h1 { font-size: 25pt; }
+  h2 { break-before: page; margin-top: 0; font-size: 19pt; }
+  h3 { break-after: avoid; font-size: 14pt; }
+  h4 { break-after: avoid; }
+  .heading-link { display: none; }
+  .table-wrap { overflow: visible; border-color: #999; break-inside: auto; }
+  table { min-width: 0; font-size: 8pt; }
+  .wide-table { width: 100%; min-width: 0; }
+  .wide-table th, .wide-table td { min-width: 0; max-width: none; }
+  tr { break-inside: avoid; }
+  a { color: #000; text-decoration: none; }
+  blockquote { background: #f4f4f4; border-color: #444; }
+}
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <strong>标准交付 SOP</strong>
+  </header>
+  <nav aria-label="文档目录">
+    <p class="nav-title">目录</p>
+    <a class="toc-depth-2" href="#1-如何使用本-sop">1. 如何使用本 SOP</a>
+<a class="toc-depth-3" href="#1-1-阶段评审结论">1.1 阶段评审结论</a>
+<a class="toc-depth-3" href="#1-2-不可省略的工程原则">1.2 不可省略的工程原则</a>
+<a class="toc-depth-2" href="#2-角色与责任">2. 角色与责任</a>
+<a class="toc-depth-2" href="#3-八阶段标准流程">3. 八阶段标准流程</a>
+<a class="toc-depth-3" href="#3-1-启动准备">3.1 启动准备</a>
+<a class="toc-depth-3" href="#3-2-业务调研">3.2 业务调研</a>
+<a class="toc-depth-3" href="#3-3-流程设计">3.3 流程设计</a>
+<a class="toc-depth-3" href="#3-4-数据与工具">3.4 数据与工具</a>
+<a class="toc-depth-3" href="#3-5-原型验证">3.5 原型验证</a>
+<a class="toc-depth-3" href="#3-6-受控试点">3.6 受控试点</a>
+<a class="toc-depth-3" href="#3-7-生产上线">3.7 生产上线</a>
+<a class="toc-depth-3" href="#3-8-交付接管">3.8 交付接管</a>
+<a class="toc-depth-2" href="#4-现场工作节奏">4. 现场工作节奏</a>
+<a class="toc-depth-3" href="#4-1-每日现场检查">4.1 每日现场检查</a>
+<a class="toc-depth-3" href="#4-2-每周价值与风险评审">4.2 每周价值与风险评审</a>
+<a class="toc-depth-3" href="#4-3-变更触发评审">4.3 变更触发评审</a>
+<a class="toc-depth-2" href="#5-现场访谈提问清单">5. 现场访谈提问清单</a>
+<a class="toc-depth-3" href="#5-1-面向业务负责人">5.1 面向业务负责人</a>
+<a class="toc-depth-3" href="#5-2-面向一线用户">5.2 面向一线用户</a>
+<a class="toc-depth-3" href="#5-3-面向数据和知识负责人">5.3 面向数据和知识负责人</a>
+<a class="toc-depth-3" href="#5-4-面向平台-安全和运维">5.4 面向平台、安全和运维</a>
+<a class="toc-depth-2" href="#6-风险信号-停止条件与降级动作">6. 风险信号、停止条件与降级动作</a>
+<a class="toc-depth-2" href="#7-fde-不应作出的承诺">7. FDE 不应作出的承诺</a>
+<a class="toc-depth-2" href="#8-交付完成的定义">8. 交付完成的定义</a>
+<a class="toc-depth-2" href="#附录-a-各阶段持续检查的-5-项内容">附录 A：各阶段持续检查的 5 项内容</a>
+<a class="toc-depth-2" href="#附录-b-阶段检查清单">附录 B：阶段检查清单</a>
+<a class="toc-depth-2" href="#附录-c-瓶颈诊断与工程动作">附录 C：瓶颈诊断与工程动作</a>
+  </nav>
+  <main id="top">
+    <article><h1 id="fde-智能体标准交付-sop">FDE 智能体标准交付 SOP<a class="heading-link" href="#fde-智能体标准交付-sop" aria-label="链接到本节">#</a></h1>
+<blockquote>
+<p>版本：1.0<br>适用范围：企业智能体项目的现场发现、原型、试点、生产上线与客户接管<br>配套文件：<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">FDE 智能体标准交付现场工作表</a></p>
+</blockquote>
+<h2 id="1-如何使用本-sop">1. 如何使用本 SOP<a class="heading-link" href="#1-如何使用本-sop" aria-label="链接到本节">#</a></h2>
+<p>本 SOP 用于指导 FDE 负责人把模糊的智能体设想转化为可验证、可运行、可治理、可由客户接管的生产能力。它不替代客户的安全、合规、采购、变更和生产管理制度；当本 SOP 与客户制度冲突时，应执行更严格的要求，并记录差异和责任人。</p>
+<p>执行时遵循三个规则：</p>
+<ol>
+<li>按阶段推进。没有达到阶段完成标准，不进入下一阶段。</li>
+<li>按证据决策。访谈意见、系统事实和未经验证的假设必须分开记录。</li>
+<li>每次阶段评审必须明确写成「通过」「缩小范围」或「暂停」，不使用「原则上通过」「后续补齐」等模糊结论。</li>
+</ol>
+<h3 id="1-1-阶段评审结论">1.1 阶段评审结论<a class="heading-link" href="#1-1-阶段评审结论" aria-label="链接到本节">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>评审结论</th>
+<th>适用情况</th>
+<th>需要记录的内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>通过</td>
+<td>必要证据已满足，可以进入下一阶段</td>
+<td>通过依据、批准人、适用范围、下一次复审触发</td>
+</tr>
+<tr>
+<td>缩小范围</td>
+<td>价值方向仍成立，但需要缩小任务、用户、数据、工具或自动化范围</td>
+<td>缩小内容、原因、保留风险、重新评审条件</td>
+</tr>
+<tr>
+<td>暂停</td>
+<td>缺少必要数据、责任人、价值证据或安全条件，继续投入会扩大风险</td>
+<td>暂停原因、已有材料、重新启动条件、后续责任人</td>
+</tr>
+</tbody></table></div>
+<h3 id="1-2-不可省略的工程原则">1.2 不可省略的工程原则<a class="heading-link" href="#1-2-不可省略的工程原则" aria-label="链接到本节">#</a></h3>
+<ul>
+<li>从真实业务流程开始，不从模型演示开始。</li>
+<li>先验证一个小而完整的任务，再扩大用户、数据和工具范围。</li>
+<li>默认采用「只读建议 + 人工确认」，写动作需要单独评审。</li>
+<li>没有业务基线，不承诺收益；没有评测集，不判断质量改善。</li>
+<li>没有身份和权限模型，不接入真实敏感数据。</li>
+<li>没有审计、告警、回退和人工接管，不进入生产。</li>
+<li>没有客户侧负责人和接管演练，不认定交付完成。</li>
+<li>客户仍保留业务决策、数据授权、风险接受和生产运行的最终责任。</li>
+</ul>
+<h2 id="2-角色与责任">2. 角色与责任<a class="heading-link" href="#2-角色与责任" aria-label="链接到本节">#</a></h2>
+<p>一个最小可运行的 FDE 项目至少需要以下责任角色。一个人可以承担多个角色，但每项责任必须明确到人，不能只写部门名称。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>主要职责</th>
+<th>需要确认的事项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>客户项目发起人（Sponsor）</td>
+<td>提供项目授权、资源和跨部门升级通道</td>
+<td>是否继续投资、是否接受重大业务风险</td>
+</tr>
+<tr>
+<td>客户业务负责人</td>
+<td>定义流程目标、验收样例、人工确认和运营规则</td>
+<td>业务指标、使用范围、例外处理和业务风险接受</td>
+</tr>
+<tr>
+<td>FDE 负责人</td>
+<td>组织现场发现、工程方案、交付节奏和阶段决策</td>
+<td>交付证据是否充分、建议「通过」「缩小范围」还是「暂停」</td>
+</tr>
+<tr>
+<td>数据负责人</td>
+<td>批准数据用途、字段范围、保留期和删除责任</td>
+<td>数据能否使用、能否进入模型和评测集</td>
+</tr>
+<tr>
+<td>安全或合规负责人</td>
+<td>评审身份、权限、审计、威胁和残余风险</td>
+<td>安全例外和合规风险是否可接受</td>
+</tr>
+<tr>
+<td>平台或运维负责人</td>
+<td>提供运行环境、发布、监控、值班和回退能力</td>
+<td>是否达到生产运行条件</td>
+</tr>
+<tr>
+<td>产品或领域负责人</td>
+<td>维护任务定义、提示、规则、知识和评测样本</td>
+<td>任务行为变更是否符合业务要求</td>
+</tr>
+<tr>
+<td>试点用户代表</td>
+<td>使用真实流程、提供修改和失败样本</td>
+<td>实际工作是否可用、人工操作是否可接受</td>
+</tr>
+</tbody></table></div>
+<p>发生以下情况时，FDE 必须暂停推进并要求客户补齐责任：</p>
+<ul>
+<li>没有人能批准数据用途。</li>
+<li>没有人能定义业务验收结果。</li>
+<li>没有人负责生产告警和事故处理。</li>
+<li>风险评审只有参与者，没有最终批准人。</li>
+<li>客户要求 FDE 代替业务负责人接受业务或合规风险。</li>
+</ul>
+<h2 id="3-八阶段标准流程">3. 八阶段标准流程<a class="heading-link" href="#3-八阶段标准流程" aria-label="链接到本节">#</a></h2>
+<p>下图给出八个阶段的推进顺序。相邻阶段之间为串行门控关系：未达到上一阶段的完成标准，不进入下一阶段。每个阶段结束时进行评审，结论只允许「通过」「缩小范围」或「暂停」；风险登记表在全程持续更新。</p>
+<div align="center">
+<svg viewBox="0 0 960 470" width="100%" style="max-width:960px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FDE 八阶段标准流程图">
+  <defs>
+    <marker id="fde-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0052D9"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="468" rx="14" fill="#F7FAFF" stroke="#DBE1EA"/>  <!-- 第一行 1-4 -->
+  <g>
+    <rect x="20" y="60" width="205" height="96" rx="12" fill="#E6F1FB" stroke="#0052D9" stroke-width="1.5"/>
+    <circle cx="122" cy="86" r="15" fill="#0052D9"/>
+    <text x="122" y="91" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">1</text>
+    <text x="122" y="115" text-anchor="middle" font-size="16" font-weight="600" fill="#042C53">启动准备</text>
+  </g>
+  <g>
+    <rect x="265" y="60" width="205" height="96" rx="12" fill="#E6F1FB" stroke="#0052D9" stroke-width="1.5"/>
+    <circle cx="367" cy="86" r="15" fill="#0052D9"/>
+    <text x="367" y="91" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">2</text>
+    <text x="367" y="115" text-anchor="middle" font-size="16" font-weight="600" fill="#042C53">业务调研</text>
+  </g>
+  <g>
+    <rect x="510" y="60" width="205" height="96" rx="12" fill="#E6F1FB" stroke="#0052D9" stroke-width="1.5"/>
+    <circle cx="612" cy="86" r="15" fill="#0052D9"/>
+    <text x="612" y="91" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">3</text>
+    <text x="612" y="115" text-anchor="middle" font-size="16" font-weight="600" fill="#042C53">流程设计</text>
+  </g>
+  <g>
+    <rect x="755" y="60" width="205" height="96" rx="12" fill="#E6F1FB" stroke="#0052D9" stroke-width="1.5"/>
+    <circle cx="857" cy="86" r="15" fill="#0052D9"/>
+    <text x="857" y="91" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">4</text>
+    <text x="857" y="115" text-anchor="middle" font-size="16" font-weight="600" fill="#042C53">数据与工具</text>
+  </g>  <!-- 第一行箭头 -->
+  <line x1="225" y1="108" x2="263" y2="108" stroke="#0052D9" stroke-width="2" marker-end="url(#fde-arrow)"/>
+  <line x1="470" y1="108" x2="508" y2="108" stroke="#0052D9" stroke-width="2" marker-end="url(#fde-arrow)"/>
+  <line x1="715" y1="108" x2="753" y2="108" stroke="#0052D9" stroke-width="2" marker-end="url(#fde-arrow)"/>
+  <!-- 折行箭头 4->5 -->
+  <path d="M857,156 L857,235" fill="none" stroke="#0052D9" stroke-width="2" marker-end="url(#fde-arrow)"/>  <!-- 第二行 5-8（自右向左） -->
+  <g>
+    <rect x="755" y="255" width="205" height="96" rx="12" fill="#E6F1FB" stroke="#0052D9" stroke-width="1.5"/>
+    <circle cx="857" cy="281" r="15" fill="#0052D9"/>
+    <text x="857" y="286" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">5</text>
+    <text x="857" y="310" text-anchor="middle" font-size="16" font-weight="600" fill="#042C53">原型验证</text>
+  </g>
+  <g>
+    <rect x="510" y="255" width="205" height="96" rx="12" fill="#E6F1FB" stroke="#0052D9" stroke-width="1.5"/>
+    <circle cx="612" cy="281" r="15" fill="#0052D9"/>
+    <text x="612" y="286" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">6</text>
+    <text x="612" y="310" text-anchor="middle" font-size="16" font-weight="600" fill="#042C53">受控试点</text>
+  </g>
+  <g>
+    <rect x="265" y="255" width="205" height="96" rx="12" fill="#E6F1FB" stroke="#0052D9" stroke-width="1.5"/>
+    <circle cx="367" cy="281" r="15" fill="#0052D9"/>
+    <text x="367" y="286" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">7</text>
+    <text x="367" y="310" text-anchor="middle" font-size="16" font-weight="600" fill="#042C53">生产上线</text>
+  </g>
+  <g>
+    <rect x="20" y="255" width="205" height="96" rx="12" fill="#0052D9" stroke="#003CAB" stroke-width="1.5"/>
+    <circle cx="122" cy="281" r="15" fill="#FFFFFF"/>
+    <text x="122" y="286" text-anchor="middle" font-size="16" font-weight="700" fill="#0052D9">8</text>
+    <text x="122" y="310" text-anchor="middle" font-size="16" font-weight="600" fill="#FFFFFF">交付接管</text>
+  </g>  <!-- 第二行箭头（自右向左） -->
+  <line x1="753" y1="303" x2="715" y2="303" stroke="#0052D9" stroke-width="2" marker-end="url(#fde-arrow)"/>
+  <line x1="508" y1="303" x2="470" y2="303" stroke="#0052D9" stroke-width="2" marker-end="url(#fde-arrow)"/>
+  <line x1="263" y1="303" x2="225" y2="303" stroke="#0052D9" stroke-width="2" marker-end="url(#fde-arrow)"/>  <!-- 底部说明 -->
+  <rect x="20" y="395" width="940" height="52" rx="10" fill="#EAF1FC" stroke="#DBE1EA"/>
+  <text x="40" y="418" font-size="13.5" font-weight="700" fill="#003CAB">阶段门控</text>
+  <text x="40" y="437" font-size="13" fill="#17335F">每阶段结束评审，结论仅限「通过 / 缩小范围 / 暂停」；未达完成标准不进入下一阶段。</text>
+  <text x="620" y="418" font-size="13.5" font-weight="700" fill="#003CAB">全程贯穿</text>
+  <text x="620" y="437" font-size="13" fill="#17335F">风险登记表在八个阶段中持续更新。</text>
+</svg>
+</div><h3 id="3-1-启动准备">3.1 启动准备<a class="heading-link" href="#3-1-启动准备" aria-label="链接到本节">#</a></h3>
+<h4 id="阶段目标">阶段目标<a class="heading-link" href="#阶段目标" aria-label="链接到本节">#</a></h4>
+<p>把项目目标、责任、决策权、工作节奏、访问边界和退出条件写成可执行约定，防止项目依靠临时承诺推进。</p>
+<h4 id="进入条件">进入条件<a class="heading-link" href="#进入条件" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>客户已指定项目发起人和初始业务联系人。</li>
+<li>双方确认可以开展现场访谈和只读检查。</li>
+<li>合同、保密或数据访问要求允许进入准备阶段。</li>
+</ul>
+<h4 id="参与角色">参与角色<a class="heading-link" href="#参与角色" aria-label="链接到本节">#</a></h4>
+<p>客户项目发起人、业务负责人、FDE 负责人、数据负责人、安全或合规负责人、平台或运维负责人。原型开发人员可以参加，但不得代替责任人做授权决定。</p>
+<h4 id="具体工作">具体工作<a class="heading-link" href="#具体工作" aria-label="链接到本节">#</a></h4>
+<ol>
+<li>召开 60–90 分钟启动会，逐项确认目标、非目标、预期用户和业务时间窗口。</li>
+<li>填写责任分工表（RACI），明确业务验收、数据授权、安全例外、发布、回退和事故响应的批准人。</li>
+<li>记录现场访问、系统访问、样本获取、截图、日志和会议材料的敏感级别及保存位置。</li>
+<li>确认每日检查、每周评审、阶段检查和紧急升级渠道。</li>
+<li>定义项目暂停、缩小和退出条件。</li>
+<li>对每个口头承诺指定记录位置、责任人和确认日期。</li>
+</ol>
+<h4 id="需要形成的材料">需要形成的材料<a class="heading-link" href="#需要形成的材料" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>项目启动卡</li>
+<li>利益相关方清单</li>
+<li>责任分工表（RACI）</li>
+<li>决策权限与升级路径</li>
+<li>初始风险清单</li>
+<li>会议与阶段评审日历</li>
+</ul>
+<h4 id="配套工作表">配套工作表<a class="heading-link" href="#配套工作表" aria-label="链接到本节">#</a></h4>
+<p>使用<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ①：项目启动与责任卡</a>。</p>
+<h4 id="完成标准">完成标准<a class="heading-link" href="#完成标准" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>每项关键决定都有明确的负责人。</li>
+<li>数据、生产和风险授权不会落到 FDE 或模型上。</li>
+<li>项目目标至少包含一个可测业务结果，而不是只有技术交付物。</li>
+<li>访问、记录、保存和删除要求已经说明。</li>
+<li>全部负责人已经确认「通过」「缩小范围」「暂停」三种评审结论的使用方式。</li>
+</ul>
+<h4 id="需要暂停或缩小范围的情况">需要暂停或缩小范围的情况<a class="heading-link" href="#需要暂停或缩小范围的情况" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>无业务负责人，或关键负责人连续无法参加决策。</li>
+<li>客户要求使用未批准数据、共享账号或不可审计访问。</li>
+<li>项目成功被定义为固定采购某模型或完成一次演示。</li>
+<li>客户拒绝指定事故、回退或风险接受责任人。</li>
+</ul>
+<p>默认动作：停止真实数据和系统访问，只保留公开资料研究与组织准备。</p>
+<h4 id="由谁负责">由谁负责<a class="heading-link" href="#由谁负责" aria-label="链接到本节">#</a></h4>
+<p>客户项目发起人对项目授权负责；FDE 负责人对启动证据完整性负责。</p>
+<h3 id="3-2-业务调研">3.2 业务调研<a class="heading-link" href="#3-2-业务调研" aria-label="链接到本节">#</a></h3>
+<h4 id="阶段目标-2">阶段目标<a class="heading-link" href="#阶段目标-2" aria-label="链接到本节">#</a></h4>
+<p>理解任务如何在真实现场发生，建立可复查的事实、约束、业务基线和未知项，避免把访谈意见直接转成产品需求。</p>
+<h4 id="进入条件-2">进入条件<a class="heading-link" href="#进入条件-2" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>启动准备完成。</li>
+<li>调研对象、时间和访问范围已获批准。</li>
+<li>记录、截图、样本和日志的处理规则已经明确。</li>
+</ul>
+<h4 id="参与角色-2">参与角色<a class="heading-link" href="#参与角色-2" aria-label="链接到本节">#</a></h4>
+<p>FDE 负责人、一线用户、业务主管、业务负责人、数据负责人、系统负责人、平台或运维人员。必要时包括安全、法务、审计或工会代表。</p>
+<h4 id="具体工作-2">具体工作<a class="heading-link" href="#具体工作-2" aria-label="链接到本节">#</a></h4>
+<ol>
+<li>制定调研计划，覆盖管理者、一线执行者、数据维护者和异常处理者。</li>
+<li>访谈每类关键角色，记录目标、判断规则、例外、指标、系统和已知问题。</li>
+<li>跟随真实任务，按时间顺序记录触发、输入、动作、等待、决策、输出和异常补救。</li>
+<li>抽样核验日志、工单、报表、数据查询或授权样本，区分事实、意见、假设和约束。</li>
+<li>计算或确认处理量、处理时长、等待时长、返工、错误、人工绕行和支持负担等基线。</li>
+<li>对口径冲突指定裁决负责人，不由 FDE 自行选择有利口径。</li>
+<li>把未知项转为明确验证动作，包含样本、方法、责任人和完成日期。</li>
+</ol>
+<h4 id="需要形成的材料-2">需要形成的材料<a class="heading-link" href="#需要形成的材料-2" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>业务调研计划和访谈记录</li>
+<li>实际流程观察记录</li>
+<li>现场地图</li>
+<li>业务基线指标</li>
+<li>事实、意见、假设与约束清单</li>
+<li>数据、系统和组织依赖初表</li>
+<li>调研结论和待验证事项</li>
+</ul>
+<h4 id="配套工作表-2">配套工作表<a class="heading-link" href="#配套工作表-2" aria-label="链接到本节">#</a></h4>
+<p>使用<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ②：业务与流程调研记录</a>记录访谈与现场流程观察；调研结论、业务基线和候选任务在<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ③：调研结论与任务选型定义</a>中收敛。</p>
+<h4 id="完成标准-2">完成标准<a class="heading-link" href="#完成标准-2" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>能用一页流程说明问题从哪里发生、谁处理、使用什么输入、产生什么输出。</li>
+<li>每个关键结论有来源、时间窗口、可信度和复查方式。</li>
+<li>至少完成一次真实任务观察，不能只依赖会议描述。</li>
+<li>业务基线有公式、数据来源、样本量、时间窗口和口径负责人。</li>
+<li>最大的不确定性已经转为下一阶段可执行实验。</li>
+</ul>
+<h4 id="需要暂停或缩小范围的情况-2">需要暂停或缩小范围的情况<a class="heading-link" href="#需要暂停或缩小范围的情况-2" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>只允许观看预设演示，不允许观察真实流程或抽样证据。</li>
+<li>关键数据无法授权，或使用目的与原始授权冲突。</li>
+<li>同一指标存在多种口径且无人裁决。</li>
+<li>目标问题发生频率过低，无法在合理窗口验证。</li>
+<li>主要问题来自政策、组织或权限，而非可由软件改变的任务。</li>
+</ul>
+<p>默认动作：缩小到可观察、可授权、可复查的单一任务；若仍不可验证，结束原型准备。</p>
+<h4 id="由谁负责-2">由谁负责<a class="heading-link" href="#由谁负责-2" aria-label="链接到本节">#</a></h4>
+<p>客户业务负责人对流程和指标口径负责；数据负责人对证据访问负责；FDE 负责人对事实与假设分离负责。</p>
+<h3 id="3-3-流程设计">3.3 流程设计<a class="heading-link" href="#3-3-流程设计" aria-label="链接到本节">#</a></h3>
+<h4 id="阶段目标-3">阶段目标<a class="heading-link" href="#阶段目标-3" aria-label="链接到本节">#</a></h4>
+<p>从完整流程中选择一个小而完整的智能体任务，明确用户、触发、输入、输出、使用入口、人工确认、失败处理、指标和不做事项。</p>
+<h4 id="进入条件-3">进入条件<a class="heading-link" href="#进入条件-3" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>已形成可复查的现场事实和流程。</li>
+<li>至少一个候选任务具备可授权输入和明确用户。</li>
+<li>业务负责人可以提供验收样例和试点用户。</li>
+</ul>
+<h4 id="参与角色-3">参与角色<a class="heading-link" href="#参与角色-3" aria-label="链接到本节">#</a></h4>
+<p>FDE 负责人、业务负责人、试点用户代表、产品或领域负责人、数据负责人、安全负责人、系统负责人。</p>
+<h4 id="具体工作-3">具体工作<a class="heading-link" href="#具体工作-3" aria-label="链接到本节">#</a></h4>
+<ol>
+<li>将流程拆成触发、状态、决策、动作、异常和补救步骤。</li>
+<li>列出候选任务，并按业务价值、发生频率、数据可用性、结果可验证性、集成复杂度和风险评分。</li>
+<li>优先选择「高频、可复查、可人工确认、错误可恢复」的任务。</li>
+<li>明确智能体只负责哪一步，不能用「处理全流程」作为首个切片。</li>
+<li>定义输入、输出格式、证据引用、拒答、人工接管和使用入口。</li>
+<li>写出不做事项，特别是未授权数据、写动作、外部发送和高风险决定。</li>
+<li>选取正常、长尾、失败和越权样例，形成初始验收样本。</li>
+</ol>
+<h4 id="需要形成的材料-3">需要形成的材料<a class="heading-link" href="#需要形成的材料-3" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>业务流程模型</li>
+<li>候选任务评分</li>
+<li>任务切片画布</li>
+<li>输入与输出契约草案</li>
+<li>验收样例</li>
+<li>范围与不做事项</li>
+<li>原型退出条件</li>
+</ul>
+<h4 id="配套工作表-3">配套工作表<a class="heading-link" href="#配套工作表-3" aria-label="链接到本节">#</a></h4>
+<p>使用<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ③：调研结论与任务选型定义</a>，在模板 A 完成候选任务打分排序，在模板 B 为选中任务定义范围并分配任务编号（T1 / T2 / T3……）。</p>
+<h4 id="完成标准-3">完成标准<a class="heading-link" href="#完成标准-3" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>一个任务可以在单次业务事件中从触发走到可使用结果。</li>
+<li>输出有明确使用人和使用入口，不是独立聊天演示。</li>
+<li>成功指标同时包含业务、用户、工程、成本和风险维度。</li>
+<li>错误结果能够被发现、拒绝、修改或撤销。</li>
+<li>不做事项和扩大范围的重新评审条件已获确认。</li>
+</ul>
+<h4 id="需要暂停或缩小范围的情况-3">需要暂停或缩小范围的情况<a class="heading-link" href="#需要暂停或缩小范围的情况-3" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>候选任务无法单独验收，必须依赖尚未完成的多个系统改造。</li>
+<li>输出没人使用，或用户仍需完全重复原流程。</li>
+<li>高风险写动作无法增加人工确认或补偿动作。</li>
+<li>任务价值只来自减少人员数量，且没有质量、风险和运营指标。</li>
+<li>所需数据质量或更新频率无法满足最小任务。</li>
+</ul>
+<p>默认动作：降级为只读建议、离线分析或更小的单步任务。</p>
+<h4 id="由谁负责-3">由谁负责<a class="heading-link" href="#由谁负责-3" aria-label="链接到本节">#</a></h4>
+<p>客户业务负责人对任务价值和业务边界负责；FDE 负责人对切片可验证性负责。</p>
+<h3 id="3-4-数据与工具">3.4 数据与工具<a class="heading-link" href="#3-4-数据与工具" aria-label="链接到本节">#</a></h3>
+<h4 id="阶段目标-4">阶段目标<a class="heading-link" href="#阶段目标-4" aria-label="链接到本节">#</a></h4>
+<p>把任务输入、企业知识、身份、权限、工具调用、审计和人工确认设计为可测试的系统边界。</p>
+<h4 id="进入条件-4">进入条件<a class="heading-link" href="#进入条件-4" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>任务切片、验收样例和不做事项已确认。</li>
+<li>关键数据、知识和系统都有明确负责人。</li>
+<li>可以开展只读接口、样本和权限验证。</li>
+</ul>
+<h4 id="参与角色-4">参与角色<a class="heading-link" href="#参与角色-4" aria-label="链接到本节">#</a></h4>
+<p>FDE 技术负责人、数据负责人、知识负责人、身份与安全人员、系统负责人、平台或运维负责人、业务负责人。</p>
+<h4 id="具体工作-4">具体工作<a class="heading-link" href="#具体工作-4" aria-label="链接到本节">#</a></h4>
+<ol>
+<li>建立数据源清单，记录来源、字段、用途、质量、更新、访问方式、保留和删除责任。</li>
+<li>建立知识目录，记录权威来源、适用范围、版本、更新时间、可信度和废止规则。</li>
+<li>明确用户身份、服务身份、租户、角色、字段和工具动作的权限。</li>
+<li>在检索前执行鉴权；不能只在生成结果后隐藏敏感内容。</li>
+<li>为每个工具定义 schema、输入校验、幂等、超时、重试、审批、补偿和审计字段。</li>
+<li>将工具分为只读、可逆写入和高风险写入；后两类必须定义人工确认和回退。</li>
+<li>定义 trace 中允许记录和禁止记录的字段、采样、保留、访问和删除规则。</li>
+<li>设计无权限、无知识、证据冲突、工具失败和模型不可用时的降级行为。</li>
+</ol>
+<h4 id="需要形成的材料-4">需要形成的材料<a class="heading-link" href="#需要形成的材料-4" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>数据源清单和数据契约</li>
+<li>知识目录和更新责任</li>
+<li>角色权限表和服务身份清单</li>
+<li>工具调用清单</li>
+<li>人工确认点和回退表</li>
+<li>审计与 trace 字段说明</li>
+<li>威胁和滥用案例初表</li>
+</ul>
+<h4 id="配套工作表-4">配套工作表<a class="heading-link" href="#配套工作表-4" aria-label="链接到本节">#</a></h4>
+<p>使用<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ④：数据·权限·知识清单</a>，按任务编号记录数据、权限与知识边界；调用外部工具或涉及写动作时增加条件表 C。</p>
+<h4 id="完成标准-4">完成标准<a class="heading-link" href="#完成标准-4" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>每个输入和知识来源都有负责人、用途和更新时间。</li>
+<li>越权访问在检索或工具执行前被阻断，并留下审计记录。</li>
+<li>每个写动作都有批准人、幂等标识、结果验证和补偿动作。</li>
+<li>无证据、证据冲突和工具失败时的行为可以重复测试。</li>
+<li>敏感数据不会进入未授权提示、日志、评测集或第三方服务。</li>
+</ul>
+<h4 id="需要暂停或缩小范围的情况-4">需要暂停或缩小范围的情况<a class="heading-link" href="#需要暂停或缩小范围的情况-4" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>依赖共享账号、长期静态密钥或无法追责的服务身份。</li>
+<li>知识来源没有负责人、版本或更新时间。</li>
+<li>工具写入无法撤销，也无法在执行前人工确认。</li>
+<li>供应商数据处理边界与客户要求不兼容。</li>
+<li>审计日志无法还原谁在何时代表谁执行了什么动作。</li>
+</ul>
+<p>默认动作：移除写工具，限制为离线或只读验证；必要时替换数据或模型服务。</p>
+<h4 id="由谁负责-4">由谁负责<a class="heading-link" href="#由谁负责-4" aria-label="链接到本节">#</a></h4>
+<p>数据负责人对数据用途负责；安全负责人对权限和残余风险负责；系统负责人对工具动作负责；FDE 技术负责人对工程实现和验证证据负责。</p>
+<h3 id="3-5-原型验证">3.5 原型验证<a class="heading-link" href="#3-5-原型验证" aria-label="链接到本节">#</a></h3>
+<h4 id="阶段目标-5">阶段目标<a class="heading-link" href="#阶段目标-5" aria-label="链接到本节">#</a></h4>
+<p>用最小实现验证最大不确定性，回答「方向是否值得继续」，而不是提前建设完整生产系统。</p>
+<h4 id="进入条件-5">进入条件<a class="heading-link" href="#进入条件-5" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>任务切片和原型退出标准已确认。</li>
+<li>样本用途、脱敏、访问和删除已获批准。</li>
+<li>输入、输出、人工确认和禁止动作已经定义。</li>
+</ul>
+<h4 id="参与角色-5">参与角色<a class="heading-link" href="#参与角色-5" aria-label="链接到本节">#</a></h4>
+<p>FDE 负责人、FDE 技术成员、业务负责人、领域负责人、少量试用人员、数据和安全代表。</p>
+<h4 id="具体工作-5">具体工作<a class="heading-link" href="#具体工作-5" aria-label="链接到本节">#</a></h4>
+<ol>
+<li>建立原型实验卡，只选择一到三个需要验证的高风险假设。</li>
+<li>使用授权样本构建可重复运行的端到端脚本。</li>
+<li>建立初始黄金集，覆盖正常、长尾、证据缺失、越权和高风险拒绝样本。</li>
+<li>记录模型、提示、检索、工具、规则和数据版本。</li>
+<li>对比基线方法，记录任务质量、人工修改、延迟、成本和失败类型。</li>
+<li>让真实用户完成任务，不以 FDE 演示代替用户操作。</li>
+<li>收集失败样本和用户修改，并决定继续、缩小或停止。</li>
+</ol>
+<h4 id="需要形成的材料-5">需要形成的材料<a class="heading-link" href="#需要形成的材料-5" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>原型实验卡</li>
+<li>可重复演示脚本</li>
+<li>初始黄金集和评测报告</li>
+<li>失败样本清单</li>
+<li>用户反馈和人工修改记录</li>
+<li>成本与延迟估算</li>
+<li>原型结束检查记录</li>
+</ul>
+<h4 id="配套工作表-5">配套工作表<a class="heading-link" href="#配套工作表-5" aria-label="链接到本节">#</a></h4>
+<p>使用<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ⑤：原型验证与回归</a>，按任务编号记录测试用例与失败样本，并在<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ⑥：运行期评审表</a>中记录原型阶段评审结论。</p>
+<h4 id="完成标准-5">完成标准<a class="heading-link" href="#完成标准-5" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>原型可以由非开发人员按固定脚本重复运行。</li>
+<li>关键输出可以追溯到输入、知识、工具和版本。</li>
+<li>至少覆盖一个主要失败路径和一个越权负例。</li>
+<li>质量结果不是只由开发者主观判断，业务负责人已确认评分规则。</li>
+<li>原型结束检查有明确的评审结论，记录为「通过」「缩小范围」或「暂停」。</li>
+</ul>
+<h4 id="需要暂停或缩小范围的情况-5">需要暂停或缩小范围的情况<a class="heading-link" href="#需要暂停或缩小范围的情况-5" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>只有精选成功样本，没有失败样本和稳定复现脚本。</li>
+<li>用户必须由 FDE 提示才能完成操作。</li>
+<li>输出无法引用证据，或关键数字无法复核。</li>
+<li>同一配置在黄金集上明显不稳定。</li>
+<li>成本、延迟或人工复核负担超过业务可接受范围。</li>
+</ul>
+<p>默认动作：缩小任务、改为结构化流程、增加规则或人工确认；若核心假设被证伪，则停止。</p>
+<h4 id="由谁负责-5">由谁负责<a class="heading-link" href="#由谁负责-5" aria-label="链接到本节">#</a></h4>
+<p>FDE 负责人对实验完整性负责；业务负责人对原型结果是否值得试点负责。</p>
+<h3 id="3-6-受控试点">3.6 受控试点<a class="heading-link" href="#3-6-受控试点" aria-label="链接到本节">#</a></h3>
+<h4 id="阶段目标-6">阶段目标<a class="heading-link" href="#阶段目标-6" aria-label="链接到本节">#</a></h4>
+<p>在真实用户、真实数据和真实工作入口中验证任务是否可用，同时限制影响范围并保留快速回退能力。</p>
+<h4 id="进入条件-6">进入条件<a class="heading-link" href="#进入条件-6" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>原型结束检查结论为「通过」或「缩小范围」。</li>
+<li>试点准备检查所需的数据、权限、评测、支持和回退证据已齐备。</li>
+<li>已确定试点用户、任务类型、时间窗口、支持人员和退出条件。</li>
+</ul>
+<h4 id="参与角色-6">参与角色<a class="heading-link" href="#参与角色-6" aria-label="链接到本节">#</a></h4>
+<p>业务负责人、试点用户、FDE 团队、数据负责人、安全负责人、平台或运维负责人、支持人员。</p>
+<h4 id="具体工作-6">具体工作<a class="heading-link" href="#具体工作-6" aria-label="链接到本节">#</a></h4>
+<ol>
+<li>限定用户、任务、数据、工具、自动化级别和时间窗口。</li>
+<li>上线前培训试点用户，演练拒绝、修改、人工接管和问题报告。</li>
+<li>默认使用人工审批；任何取消审批的建议必须重新评审工具和风险。</li>
+<li>每日检查失败、低置信度、人工修改、越权、工具错误、延迟和成本。</li>
+<li>每周评审业务指标、用户采用、工程健康、风险变化和下一步实验。</li>
+<li>把生产发现的新失败样本加入评测集，并在每次提示、模型、知识或工具变更前回归。</li>
+<li>遇到停止条件时，立即降级为只读、影子运行或旧流程。</li>
+</ol>
+<h4 id="需要形成的材料-6">需要形成的材料<a class="heading-link" href="#需要形成的材料-6" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>试点计划和用户范围</li>
+<li>培训与支持记录</li>
+<li>试点日报和问题队列</li>
+<li>线上反馈与失败样本</li>
+<li>版本化评测报告</li>
+<li>每周价值与风险评审</li>
+<li>试点退出或扩大范围决定</li>
+</ul>
+<h4 id="配套工作表-6">配套工作表<a class="heading-link" href="#配套工作表-6" aria-label="链接到本节">#</a></h4>
+<p>使用<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ⑥：运行期评审表</a>，在模板 A 制定试点计划、模板 B 记录每周价值与风险评审；问题详情优先进入客户现有系统，客户无系统时增加条件表 F。</p>
+<h4 id="完成标准-6">完成标准<a class="heading-link" href="#完成标准-6" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>真实用户能在正常工作入口独立使用。</li>
+<li>业务、用户、工程、成本和风险指标有基线与试点窗口。</li>
+<li>所有高风险输出都能被人工拒绝、修改或撤销。</li>
+<li>失败可以通过 trace、版本和输入样本重放。</li>
+<li>同类严重问题不再重复出现，或已通过范围限制被控制。</li>
+</ul>
+<h4 id="需要暂停或缩小范围的情况-6">需要暂停或缩小范围的情况<a class="heading-link" href="#需要暂停或缩小范围的情况-6" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>敏感数据暴露、越权检索或未经批准的工具写入。</li>
+<li>高风险错误无法被人工及时发现。</li>
+<li>用户大量绕过系统，或必须重复完成原任务。</li>
+<li>成本快速消耗且无法归因。</li>
+<li>关键系统不可用时没有人工接管或旧流程。</li>
+</ul>
+<p>默认动作：立即关闭写动作；必要时暂停试点，保留证据，启动事故流程。</p>
+<h4 id="由谁负责-6">由谁负责<a class="heading-link" href="#由谁负责-6" aria-label="链接到本节">#</a></h4>
+<p>客户业务负责人对试点范围和业务运行负责；平台或运维负责人对技术运行负责；FDE 负责人对试点证据和改进动作负责。</p>
+<h3 id="3-7-生产上线">3.7 生产上线<a class="heading-link" href="#3-7-生产上线" aria-label="链接到本节">#</a></h3>
+<h4 id="阶段目标-7">阶段目标<a class="heading-link" href="#阶段目标-7" aria-label="链接到本节">#</a></h4>
+<p>证明智能体能够在既定范围内长期、安全、可观测、可恢复地运行，并完成生产责任转移。</p>
+<h4 id="进入条件-7">进入条件<a class="heading-link" href="#进入条件-7" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>受控试点达到业务、质量、风险、成本和采用要求。</li>
+<li>上线准备检查的参与人和批准人已确定。</li>
+<li>发布、回滚、告警和事故演练已有时间窗口。</li>
+</ul>
+<h4 id="参与角色-7">参与角色<a class="heading-link" href="#参与角色-7" aria-label="链接到本节">#</a></h4>
+<p>业务负责人、平台或运维负责人、安全负责人、数据负责人、FDE 技术负责人、支持和值班人员、变更批准人。</p>
+<h4 id="具体工作-7">具体工作<a class="heading-link" href="#具体工作-7" aria-label="链接到本节">#</a></h4>
+<ol>
+<li>固定代码、模型、提示、检索索引、工具、规则、评测集和配置版本。</li>
+<li>建立自动构建、测试、评测、安全检查和发布阶段检查。</li>
+<li>定义面向业务任务的 SLI/SLO，不只监控进程和接口存活。</li>
+<li>建立质量、延迟、错误、工具失败、人工接管、成本和越权告警。</li>
+<li>进行灰度发布、回滚、模型不可用、知识过期、工具失败和人工接管演练。</li>
+<li>明确变更窗口、值班、事件等级、沟通模板和事故分析负责人。</li>
+<li>建立预算、归因、告警、硬上限和非关键功能降级策略。</li>
+<li>上线准备检查通过后，按批准范围发布，并在观察窗口内冻结非必要变更。</li>
+</ol>
+<h4 id="需要形成的材料-7">需要形成的材料<a class="heading-link" href="#需要形成的材料-7" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>生产阶段检查记录</li>
+<li>发布清单和版本清单</li>
+<li>SLO、看板和告警</li>
+<li>运行手册与回滚步骤</li>
+<li>成本预算和归因看板</li>
+<li>安全、权限和评测证据</li>
+<li>事故响应和沟通机制</li>
+</ul>
+<h4 id="配套工作表-7">配套工作表<a class="heading-link" href="#配套工作表-7" aria-label="链接到本节">#</a></h4>
+<p>使用<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ⑥：运行期评审表</a>记录上线阶段评审决定，并持续更新<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ⑦：风险登记表</a>；进入长期生产运行时增加条件表 E，客户没有事故管理系统时增加条件表 F。</p>
+<h4 id="完成标准-7">完成标准<a class="heading-link" href="#完成标准-7" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>每次生产行为可以还原到用户、服务身份、输入、版本、工具和结果。</li>
+<li>发布和回滚由客户平台或运维人员实际演练通过。</li>
+<li>质量、风险和成本告警都有接收人、时限和运行手册。</li>
+<li>模型、提示、知识、工具或权限变化会触发相应回归和复审。</li>
+<li>生产责任和支持边界已经书面确认。</li>
+</ul>
+<h4 id="需要暂停或缩小范围的情况-7">需要暂停或缩小范围的情况<a class="heading-link" href="#需要暂停或缩小范围的情况-7" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>缺少可执行回滚，或回滚后无法验证业务恢复。</li>
+<li>关键告警没有接收人或处理时限。</li>
+<li>生产密钥、账户或账单仍归属 FDE 个人。</li>
+<li>评测与生产版本无法对应。</li>
+<li>客户运维无法独立定位常见故障。</li>
+</ul>
+<p>默认动作：保持试点或影子运行，不扩大用户和写动作。</p>
+<h4 id="由谁负责-7">由谁负责<a class="heading-link" href="#由谁负责-7" aria-label="链接到本节">#</a></h4>
+<p>客户业务负责人对业务上线负责；平台或运维负责人对生产运行负责；安全负责人对残余风险批准负责；FDE 负责人对准入证据完整性负责。</p>
+<h3 id="3-8-交付接管">3.8 交付接管<a class="heading-link" href="#3-8-交付接管" aria-label="链接到本节">#</a></h3>
+<h4 id="阶段目标-8">阶段目标<a class="heading-link" href="#阶段目标-8" aria-label="链接到本节">#</a></h4>
+<p>验证客户能够独立使用、治理、发布、回退、排障和改进系统，使 FDE 从主导交付转为按约定支持。</p>
+<h4 id="进入条件-8">进入条件<a class="heading-link" href="#进入条件-8" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>生产系统完成约定观察窗口。</li>
+<li>运行资产、学习资产、治理资产和演进资产已指定客户维护人。</li>
+<li>客户接管演练已安排。</li>
+</ul>
+<h4 id="参与角色-8">参与角色<a class="heading-link" href="#参与角色-8" aria-label="链接到本节">#</a></h4>
+<p>客户项目发起人、业务负责人、平台或运维负责人、数据负责人、安全负责人、培训或支持负责人、FDE 负责人。</p>
+<h4 id="具体工作-8">具体工作<a class="heading-link" href="#具体工作-8" aria-label="链接到本节">#</a></h4>
+<ol>
+<li>移交代码、配置、提示、知识、评测、看板、告警、运行手册、密钥归属和供应商账户。</li>
+<li>让客户人员独立解释业务、质量、成本和风险看板。</li>
+<li>由客户主导完成一次告警处置、降级或回滚演练。</li>
+<li>由客户处理一个权限申请、一个风险例外和一个知识更新。</li>
+<li>核验每项开放风险都有负责人、补偿控制、到期日和复审触发。</li>
+<li>确认后续支持级别、响应时限、缺陷边界和升级路径。</li>
+<li>把现场发现的通用能力、限制和失败样本反馈到产品或平台计划。</li>
+<li>召开接管准备检查，记录退出、延长陪跑或缩小运行范围的决定。</li>
+</ol>
+<h4 id="需要形成的材料-8">需要形成的材料<a class="heading-link" href="#需要形成的材料-8" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>资产移交清单</li>
+<li>客户账号、权限和供应商账户确认</li>
+<li>培训和接管演练记录</li>
+<li>开放风险与后续计划</li>
+<li>支持边界和升级路径</li>
+<li>接管准备检查记录</li>
+<li>FDE 退出说明</li>
+</ul>
+<h4 id="配套工作表-8">配套工作表<a class="heading-link" href="#配套工作表-8" aria-label="链接到本节">#</a></h4>
+<p>使用<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ⑧：客户接管验收表</a>，并确认<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">表 ⑦：风险登记表</a>中的开放风险均有客户负责人。</p>
+<h4 id="完成标准-8">完成标准<a class="heading-link" href="#完成标准-8" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>客户能在 FDE 观察而不代操作的情况下完成接管演练。</li>
+<li>所有生产账户、密钥、账单和审批权归属客户授权主体。</li>
+<li>运行手册、看板、评测集和知识目录有客户维护人及复审周期。</li>
+<li>开放风险和后续改进有责任人和日期。</li>
+<li>FDE 支持范围、响应时限和退出日期已经确认。</li>
+</ul>
+<h4 id="需要暂停或缩小范围的情况-8">需要暂停或缩小范围的情况<a class="heading-link" href="#需要暂停或缩小范围的情况-8" aria-label="链接到本节">#</a></h4>
+<ul>
+<li>客户仍依赖 FDE 个人执行发布、回滚或解释告警。</li>
+<li>关键资产缺少客户访问权或维护人。</li>
+<li>生产供应商账号、密钥或费用仍绑定 FDE。</li>
+<li>重大开放风险无接受人或到期日。</li>
+<li>客户拒绝进行真实或模拟接管演练。</li>
+</ul>
+<p>默认动作：延长陪跑、缩小生产范围或移除写动作，不能以签收文档代替接管能力。</p>
+<h4 id="由谁负责-8">由谁负责<a class="heading-link" href="#由谁负责-8" aria-label="链接到本节">#</a></h4>
+<p>客户项目发起人对接管决定负责；业务和平台负责人对持续运行负责；FDE 负责人对移交证据和退出边界负责。</p>
+<h2 id="4-现场工作节奏">4. 现场工作节奏<a class="heading-link" href="#4-现场工作节奏" aria-label="链接到本节">#</a></h2>
+<h3 id="4-1-每日现场检查">4.1 每日现场检查<a class="heading-link" href="#4-1-每日现场检查" aria-label="链接到本节">#</a></h3>
+<p>试点期间建议每天用 15–30 分钟检查：</p>
+<ol>
+<li>昨日是否出现业务阻断、越权、敏感信息、错误写入或高风险误导。</li>
+<li>哪些任务被用户拒绝、修改、绕过或转人工。</li>
+<li>是否出现知识无结果、证据冲突、工具失败、延迟或成本异常。</li>
+<li>每个阻断项是否有当天责任人和处理决定。</li>
+<li>是否需要暂停写动作、缩小用户或切回旧流程。</li>
+</ol>
+<p>材料：更新问题队列、失败样本、风险清单和当天决定。每日检查不讨论长期路线图。</p>
+<h3 id="4-2-每周价值与风险评审">4.2 每周价值与风险评审<a class="heading-link" href="#4-2-每周价值与风险评审" aria-label="链接到本节">#</a></h3>
+<p>建议每周 45–60 分钟，由业务、数据、安全、运维和 FDE 共同参加：</p>
+<ul>
+<li>对比基线，查看业务结果和用户采用。</li>
+<li>查看黄金集与线上失败样本的变化。</li>
+<li>查看权限、数据、知识、工具和供应商边界是否改变。</li>
+<li>查看成本、延迟、告警和人工接管负担。</li>
+<li>对下一周做出「通过」「缩小范围」或「暂停」的决定。</li>
+</ul>
+<p>材料：指标窗口、风险变化、决定、责任人、完成日期和复审触发。只汇报完成了多少任务不算价值评审。</p>
+<h3 id="4-3-变更触发评审">4.3 变更触发评审<a class="heading-link" href="#4-3-变更触发评审" aria-label="链接到本节">#</a></h3>
+<p>以下变化不能等到例会，应立即触发评审：</p>
+<ul>
+<li>新增数据源、用户群、租户或敏感字段。</li>
+<li>从只读改为写入，从可逆写入改为不可逆动作。</li>
+<li>更换模型、提示、知识索引、工具 schema 或权限策略。</li>
+<li>扩大自动化范围或取消人工确认。</li>
+<li>发生越权、数据泄露、高风险误导、重大成本异常或生产事故。</li>
+</ul>
+<h2 id="5-现场访谈提问清单">5. 现场访谈提问清单<a class="heading-link" href="#5-现场访谈提问清单" aria-label="链接到本节">#</a></h2>
+<p>访谈时优先要求具体案例、最近一次发生时间和可复查证据，避免只问「有哪些痛点」。</p>
+<h3 id="5-1-面向业务负责人">5.1 面向业务负责人<a class="heading-link" href="#5-1-面向业务负责人" aria-label="链接到本节">#</a></h3>
+<ul>
+<li>这个流程为谁产生什么结果？</li>
+<li>最近一次失败或延误发生在什么时候？</li>
+<li>当前用什么指标判断好坏，指标口径由谁维护？</li>
+<li>哪些错误可以接受，哪些错误必须阻断？</li>
+<li>哪些决定必须由人承担，不能交给系统？</li>
+<li>如果只能改善一步，最希望改变哪一步？</li>
+<li>什么证据会支持停止项目？</li>
+</ul>
+<h3 id="5-2-面向一线用户">5.2 面向一线用户<a class="heading-link" href="#5-2-面向一线用户" aria-label="链接到本节">#</a></h3>
+<ul>
+<li>请按最近一次真实任务演示完整操作。</li>
+<li>哪些信息需要在多个系统之间复制？</li>
+<li>哪一步等待最长，为什么？</li>
+<li>哪些异常没有写进正式流程？</li>
+<li>什么时候会绕过系统或使用个人表格？</li>
+<li>什么样的建议会被直接拒绝？</li>
+<li>出错后通常找谁，如何恢复？</li>
+</ul>
+<h3 id="5-3-面向数据和知识负责人">5.3 面向数据和知识负责人<a class="heading-link" href="#5-3-面向数据和知识负责人" aria-label="链接到本节">#</a></h3>
+<ul>
+<li>来源系统和权威口径是什么？</li>
+<li>字段、文档或规则多久更新一次？</li>
+<li>哪些数据不能进入模型、日志或评测集？</li>
+<li>如何处理删除、更正、过期和冲突来源？</li>
+<li>访问控制发生在查询前还是结果展示后？</li>
+<li>谁能批准新增用途或扩大范围？</li>
+</ul>
+<h3 id="5-4-面向平台-安全和运维">5.4 面向平台、安全和运维<a class="heading-link" href="#5-4-面向平台-安全和运维" aria-label="链接到本节">#</a></h3>
+<ul>
+<li>用户、服务和工具分别使用什么身份？</li>
+<li>哪些动作允许自动执行，哪些必须审批？</li>
+<li>日志是否能还原用户、版本、工具和结果？</li>
+<li>模型或供应商不可用时，业务如何继续？</li>
+<li>发布、回滚、密钥、值班和事件响应由谁负责？</li>
+<li>哪些变化需要重新做安全或合规评审？</li>
+</ul>
+<h2 id="6-风险信号-停止条件与降级动作">6. 风险信号、停止条件与降级动作<a class="heading-link" href="#6-风险信号-停止条件与降级动作" aria-label="链接到本节">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>风险信号</th>
+<th>立即动作</th>
+<th>恢复推进的最低条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用未批准数据或共享账号</td>
+<td>停止访问并保留审计证据</td>
+<td>数据负责人批准用途；建立个人或服务身份</td>
+</tr>
+<tr>
+<td>越权检索或敏感信息泄露</td>
+<td>暂停相关入口和写动作，启动事故流程</td>
+<td>修复权限；越权负例回归通过；风险负责人批准</td>
+</tr>
+<tr>
+<td>未经审批执行写动作</td>
+<td>撤销或补偿，冻结工具</td>
+<td>工具权限、审批、幂等和回退验证通过</td>
+</tr>
+<tr>
+<td>高风险错误无法被发现</td>
+<td>降级为只读或影子运行</td>
+<td>增加人工确认、监控、评测和停止规则</td>
+</tr>
+<tr>
+<td>黄金集缺失或评分人不明确</td>
+<td>不进入真实用户试点</td>
+<td>业务负责人确认样本和评分标准</td>
+</tr>
+<tr>
+<td>关键指标没有基线</td>
+<td>不承诺价值和扩大范围</td>
+<td>明确公式、数据、窗口、样本和口径负责人</td>
+</tr>
+<tr>
+<td>成本无法归因或快速超预算</td>
+<td>暂停非关键调用</td>
+<td>建立归因、预算、告警、硬上限和降级策略</td>
+</tr>
+<tr>
+<td>客户无运维和接管责任人</td>
+<td>不进入生产</td>
+<td>指定负责人；完成告警、回滚和接管演练</td>
+</tr>
+</tbody></table></div>
+<p>推荐的降级顺序：</p>
+<ol>
+<li>关闭写动作，保留只读建议。</li>
+<li>关闭真实用户入口，保留影子运行。</li>
+<li>减少任务类型、用户、数据源和工具。</li>
+<li>切换到规则、搜索或人工流程。</li>
+<li>停止系统并保留调查证据。</li>
+</ol>
+<h2 id="7-fde-不应作出的承诺">7. FDE 不应作出的承诺<a class="heading-link" href="#7-fde-不应作出的承诺" aria-label="链接到本节">#</a></h2>
+<ul>
+<li>不承诺模型在所有输入上正确。</li>
+<li>不用外部案例数字替代客户现场基线和验收指标。</li>
+<li>不代替客户批准数据用途、业务风险、安全例外或生产发布。</li>
+<li>不把一次演示成功表述为生产可用。</li>
+<li>不承诺通过提示词解决权限、审计、数据质量或组织责任问题。</li>
+<li>不为赶进度跳过黄金集、越权负例、回退和人工接管。</li>
+<li>不使用个人账号、个人密钥或个人费用账户长期运行客户生产系统。</li>
+<li>不把客户长期依赖 FDE 视为项目成功。</li>
+</ul>
+<h2 id="8-交付完成的定义">8. 交付完成的定义<a class="heading-link" href="#8-交付完成的定义" aria-label="链接到本节">#</a></h2>
+<p>只有同时满足以下条件，才能认定标准 FDE 智能体交付完成：</p>
+<ol>
+<li>业务负责人能说明任务目标、适用范围、禁止用途和验收指标。</li>
+<li>数据和知识负责人能说明来源、用途、权限、更新、保留和删除责任。</li>
+<li>安全负责人能说明身份、权限、审计、残余风险和复审触发。</li>
+<li>平台或运维负责人能独立发布、监控、告警、降级和回滚。</li>
+<li>产品或领域负责人能维护提示、知识、工具规则和评测集。</li>
+<li>一线用户能识别低置信度、错误、越权和人工接管条件。</li>
+<li>客户主导完成至少一次接管演练，FDE 只观察和记录。</li>
+<li>所有开放风险都有责任人、补偿控制、到期日和复审日期。</li>
+<li>生产账户、密钥、账单、代码和运行资产归属客户授权主体。</li>
+<li>FDE 支持边界、响应时限和退出日期已经书面确认。</li>
+</ol>
+<p>下一步：打开配套的<a href="FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">现场工作表</a>，从「项目启动卡」开始填写，并把每张表作为对应阶段检查的证据。</p>
+<h2 id="附录-a-各阶段持续检查的-5-项内容">附录 A：各阶段持续检查的 5 项内容<a class="heading-link" href="#附录-a-各阶段持续检查的-5-项内容" aria-label="链接到本节">#</a></h2>
+<p>本附录用于跨阶段复查。每次范围、模型、知识、工具或权限变化时，检查五类证据是否仍然有效。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>调研阶段</th>
+<th>原型阶段</th>
+<th>试点阶段</th>
+<th>生产阶段</th>
+<th>接管阶段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>业务价值与基线</td>
+<td>流程、用户、基线、问题证据</td>
+<td>对比基线的实验结果</td>
+<td>真实用户、真实任务和指标窗口</td>
+<td>SLO 与业务指标共同运行</td>
+<td>客户能解释价值看板和下一步决定</td>
+</tr>
+<tr>
+<td>数据和知识可信度</td>
+<td>来源、负责人、用途、口径、更新</td>
+<td>授权样本、引用、证据冲突测试</td>
+<td>更新失败、过期和无答案反馈</td>
+<td>数据契约、知识更新 SLA、删除与回退</td>
+<td>客户能维护目录、权限和更新计划</td>
+</tr>
+<tr>
+<td>身份、权限与审计</td>
+<td>角色、数据分级、访问边界</td>
+<td>越权负例、服务身份、trace 样例</td>
+<td>真实身份、最小权限、写动作审批</td>
+<td>审计检索、密钥治理、事件证据</td>
+<td>客户独立处理授权、撤权和审计查询</td>
+</tr>
+<tr>
+<td>评测、反馈与版本</td>
+<td>验收样例、失败类型、评分人</td>
+<td>黄金集、版本、离线评测</td>
+<td>线上修改、拒绝和事故样本回流</td>
+<td>每次变更自动回归、发布阶段检查</td>
+<td>客户维护评测集和变更审批</td>
+</tr>
+<tr>
+<td>运行、成本与人工接管</td>
+<td>现有入口、支持和旧流程</td>
+<td>延迟与成本估算、失败降级</td>
+<td>日报、问题队列、人工接管</td>
+<td>SLO、告警、预算、回滚和值班</td>
+<td>客户完成告警、降级、回滚和成本检查</td>
+</tr>
+</tbody></table></div>
+<h2 id="附录-b-阶段检查清单">附录 B：阶段检查清单<a class="heading-link" href="#附录-b-阶段检查清单" aria-label="链接到本节">#</a></h2>
+<p>本附录用于阶段评审。只有必要证据完整、默认阻断项已处理且决策人明确确认后，项目才能进入下一阶段。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>阶段检查</th>
+<th>核心问题</th>
+<th>必要证据</th>
+<th>默认阻断项</th>
+<th>决策人</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>调研结束检查（Discovery Exit）</td>
+<td>是否知道正在改变什么以及如何验证</td>
+<td>真实流程、业务基线、事实清单、任务候选、负责人</td>
+<td>无真实观察、无数据授权、无指标口径</td>
+<td>业务负责人与 FDE 负责人</td>
+</tr>
+<tr>
+<td>原型结束检查（Prototype Exit）</td>
+<td>核心假设是否值得进入真实流程</td>
+<td>可重复脚本、黄金集、失败样本、用户反馈、成本估算</td>
+<td>只有成功演示、结果不可复查、没有拒答和接管</td>
+<td>业务负责人</td>
+</tr>
+<tr>
+<td>试点准备检查（Pilot Ready）</td>
+<td>是否能在有限真实范围内安全学习</td>
+<td>用户范围、真实身份、最小权限、回退、支持、评测</td>
+<td>越权负例失败、写动作无审批、无人支持</td>
+<td>业务、数据、安全和运维负责人</td>
+</tr>
+<tr>
+<td>上线准备检查（Production Ready）</td>
+<td>是否能被组织长期依赖</td>
+<td>SLO、告警、运行手册、回滚演练、成本与发布证据</td>
+<td>无回滚、无值班、版本不可追溯、关键风险无接受人</td>
+<td>业务、安全和运维负责人</td>
+</tr>
+<tr>
+<td>接管准备检查（Handover Ready）</td>
+<td>客户是否能独立运行和治理</td>
+<td>客户主导演练、资产归属、开放风险、支持边界</td>
+<td>密钥或账号仍归 FDE、客户不能排障或回滚</td>
+<td>客户项目发起人</td>
+</tr>
+</tbody></table></div>
+<h2 id="附录-c-瓶颈诊断与工程动作">附录 C：瓶颈诊断与工程动作<a class="heading-link" href="#附录-c-瓶颈诊断与工程动作" aria-label="链接到本节">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>瓶颈</th>
+<th>表面症状</th>
+<th>FDE 应执行的工程动作</th>
+<th>建议处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>问题不聚焦</td>
+<td>演示很强，生产无入口</td>
+<td>定义流程、角色、触发、输入、输出、人工确认和成功指标</td>
+<td>缩小范围</td>
+</tr>
+<tr>
+<td>知识不可用</td>
+<td>回答泛化、引用缺失</td>
+<td>建立知识目录、负责人、版本、更新机制、来源可信度和无答案策略</td>
+<td>缩小范围</td>
+</tr>
+<tr>
+<td>权限未建模</td>
+<td>模型看到不该看的数据</td>
+<td>检索前鉴权、字段过滤、服务身份、工具授权和审计记录</td>
+<td>暂停接入真实数据</td>
+</tr>
+<tr>
+<td>缺少评测</td>
+<td>只能凭感觉说效果好</td>
+<td>建立黄金集、评分规则、离线评测、线上反馈和变更回归</td>
+<td>暂停扩大试点</td>
+</tr>
+<tr>
+<td>责任不清</td>
+<td>出错后无人接管</td>
+<td>明确人工确认、业务负责人、运行负责人、回退和响应时限</td>
+<td>暂停上线</td>
+</tr>
+<tr>
+<td>数据不可用</td>
+<td>原型靠手工文件，现场无法更新</td>
+<td>核验来源、接口、质量、更新、用途和删除；必要时缩小任务</td>
+<td>缩小范围或暂停</td>
+</tr>
+<tr>
+<td>工具不可控</td>
+<td>智能体能写入，但无法撤销</td>
+<td>工具分级、最小权限、幂等、审批、结果核验和补偿动作</td>
+<td>移除写动作</td>
+</tr>
+<tr>
+<td>用户不采用</td>
+<td>用户仍重复原流程或绕过系统</td>
+<td>观察真实任务，调整入口、结果格式、时机和人工操作负担</td>
+<td>缩小范围</td>
+</tr>
+<tr>
+<td>成本失控</td>
+<td>调用量增加但无法归因</td>
+<td>按租户、功能、模型、工具归因；设置预算、告警和硬上限</td>
+<td>暂停非关键任务</td>
+</tr>
+<tr>
+<td>无法退出</td>
+<td>账号、知识和运行都依赖 FDE</td>
+<td>从第一天指定客户负责人；移交账户、资产、手册和演练</td>
+<td>延长陪跑</td>
+</tr>
+</tbody></table></div>
+
+      <footer class="page-footer">生成日期：2026/07/17 · 内容源：FDE-智能体标准交付-SOP.md</footer>
+    </article>
+  </main>
+  <a class="back-top" href="#top" aria-label="返回顶部">↑</a>
+</body>
+</html>
