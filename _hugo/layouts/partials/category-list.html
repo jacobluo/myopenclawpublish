@@ -1,0 +1,15 @@
+{{- $items := where site.Data.content "category" .category }}
+{{- $items = sort $items "date" "desc" }}
+{{- if .limit }}{{ $items = first .limit $items }}{{ end }}
+<section class="year" aria-labelledby="{{ .id }}">
+  <h2 id="{{ .id }}">{{ .heading }}</h2>
+  {{- range $items }}
+    <article class="post">
+      <time datetime="{{ .date }}">{{ .date }}</time>
+      <div>
+        <a class="title" href="{{ .url }}">{{ .title }}</a>
+        <p class="summary">{{ .summary }}</p>
+      </div>
+    </article>
+  {{- end }}
+</section>

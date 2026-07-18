@@ -1,0 +1,3 @@
+{{- define "main" }}
+  {{- partial "category-list.html" (dict "id" "archive" "heading" "Archive" "category" .Params.category "limit" 999) }}
+{{- end }}

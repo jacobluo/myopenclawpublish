@@ -1,0 +1,16 @@
+{{- define "main" }}
+  <section class="year" aria-labelledby="sections">
+    <h2 id="sections">Sections</h2>
+    {{- range slice
+      (dict "label" "Daily" "title" "日报板块" "url" "/daily/" "summary" "Follow 深度日报与日常公开更新，按日期归档。")
+      (dict "label" "Research" "title" "研究板块" "url" "/research/" "summary" "长期有效的分析报告、方法论、项目研究和专题材料。")
+      (dict "label" "Deliverables" "title" "项目交付" "url" "/deliverables/" "summary" "客户演示、海报、发布件、配套素材和需要公开链接的交付页面。")
+    }}
+      <article class="post"><time>{{ .label }}</time><div><a class="title" href="{{ .url }}">{{ .title }}</a><p class="summary">{{ .summary }}</p></div></article>
+    {{- end }}
+  </section>
+
+  {{- partial "category-list.html" (dict "id" "latest-daily" "heading" "Latest Daily" "category" "daily" "limit" 8) }}
+  {{- partial "category-list.html" (dict "id" "latest-research" "heading" "Latest Research" "category" "research" "limit" 8) }}
+  {{- partial "category-list.html" (dict "id" "latest-deliverables" "heading" "Deliverables" "category" "deliverables" "limit" 10) }}
+{{- end }}

@@ -1,0 +1,10 @@
+baseURL = "https://pages.cobuddy.cc/"
+languageCode = "zh-CN"
+title = "OpenClaw Publish"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "robotsTXT"]
+
+[params]
+description = "公开发布内容入口：日报、研究和项目交付。"
+
+[markup.goldmark.renderer]
+unsafe = true

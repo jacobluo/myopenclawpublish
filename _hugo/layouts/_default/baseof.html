@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="{{ site.LanguageCode }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  </head>
+  <body>
+    <main>
+      <header>
+        <nav><a href="/">OpenClaw Publish</a> · <a href="/daily/">Daily</a> · <a href="/research/">Research</a> · <a href="/deliverables/">Deliverables</a></nav>
+        <h1>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}</h1>
+        <p class="muted">{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}</p>
+      </header>
+      {{- block "main" . }}{{ end }}
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
