@@ -1,0 +1,172 @@
+---
+title: "Stanford OVAL STORM 项目分析报告"
+date: "2026-06-19"
+category: "research"
+url: "/research/2026/06/19/storm-analysis/"
+summary: "解读 stanford-oval/storm 的 STORM/Co-STORM 工作流、技术架构、搜索与模型适配、可审计输出、风险，以及对 OpenClaw 报告系统的复用路线。"
+layout: "raw"
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Stanford OVAL STORM 项目分析报告</title>
+    <meta name="description" content="分析 stanford-oval/storm 的定位、工作流、架构、Co-STORM、可复用价值、风险和 OpenClaw 落地建议。">
+  </head>
+  <body>
+    <main>
+      <a class="back" href="../../../..">返回首页</a>
+      <article>
+        <h1>Stanford OVAL STORM 项目分析报告</h1>
+        <p class="meta">发布时间：2026-06-19 · 分析对象：<a href="https://github.com/stanford-oval/storm">stanford-oval/storm</a> · 项目定位：LLM 驱动的知识整理、深度检索与长文报告生成系统</p>
+
+        <div class="lead">
+          <p><strong>核心判断：</strong>STORM 最值得复用的不是代码本身，而是它的研究流程：先做多视角问题发现，再做检索增强对话和资料归纳，最后生成大纲与带引用的长文。对 OpenClaw 来说，最佳路线是先把它固化成报告生成方法论，再考虑实验性接入 <code>knowledge-storm</code>。</p>
+        </div>
+
+        <h2>1. 核心结论</h2>
+        <p>STORM 是 Stanford OVAL 实验室开源的知识整理系统，全称是 <strong>Synthesis of Topic Outlines through Retrieval and Multi-perspective Question Asking</strong>。它的目标不是做一个普通搜索增强问答机器人，而是把“写一篇有引用的维基式长文”拆成可执行的研究流程：先围绕主题提出多视角问题，通过搜索收集资料，再生成大纲，最后写成带引用的长文。</p>
+        <p>这个仓库现在已经不只是论文 demo。它包含 Python 包 <code>knowledge-storm</code>、STORM pipeline、Co-STORM 协作式 pipeline、多个搜索后端、LiteLLM 模型适配、VectorRM 私有文档检索，以及一个轻量 Streamlit 前端。</p>
+        <ul>
+          <li>如果目标是快速体验，可以直接用 <code>pip install knowledge-storm</code> 或源码运行示例。</li>
+          <li>如果目标是接入 OpenClaw/Codex 报告工作流，不建议照搬整套包；更适合复用 STORM 的研究流程、输出结构和可审计日志设计。</li>
+          <li>如果目标是做企业级深度研究产品，需要补齐中文搜索、来源质量评分、事实核验、成本控制、任务恢复、权限和隐私边界。</li>
+        </ul>
+
+        <h2>2. 项目基本信息</h2>
+        <p>公开仓库信息截至 2026-06-19：</p>
+        <ul>
+          <li>GitHub：<code>stanford-oval/storm</code></li>
+          <li>描述：An LLM-powered knowledge curation system that researches a topic and generates a full-length report with citations.</li>
+          <li>License：MIT</li>
+          <li>默认分支：<code>main</code></li>
+          <li>仓库创建时间：2024-03-24</li>
+          <li>最近 main 提交：2025-09-30，commit <code>fb951af7744dab086e34962e9bc6fe878e145f83</code></li>
+          <li>GitHub stars：约 28,750；forks：约 2,639</li>
+          <li>Python 包名：<code>knowledge-storm</code></li>
+          <li><code>setup.py</code> 版本：<code>1.1.1</code>；<code>knowledge_storm/__init__.py</code> 版本：<code>1.1.0</code></li>
+        </ul>
+        <p>版本号不一致是一个小瑕疵，因为仓库的发布 workflow 明确会检查 <code>setup.py</code> 和 <code>knowledge_storm/__init__.py</code> 的版本一致性。它不影响我们理解项目，但说明当前 main 分支的发布工程纪律不是完全干净。</p>
+
+        <h2>3. 它到底做什么</h2>
+        <p>STORM 解决的是“复杂主题研究和长文生成”的问题。普通 RAG 通常是用户问一个问题，系统检索若干资料后回答；STORM 的思路更像人类写综述或百科文章：</p>
+        <ol>
+          <li>先理解主题可能有哪些观察角度。</li>
+          <li>让不同视角的“维基作者”提出问题。</li>
+          <li>让“专家”基于搜索结果回答这些问题。</li>
+          <li>把问答和资料整理成信息表。</li>
+          <li>生成文章大纲。</li>
+          <li>按大纲写出带引用的长文。</li>
+          <li>最后做 polish，加入摘要、去重或改善表达。</li>
+        </ol>
+        <p>所以它更接近 <strong>Deep Research / research agent / 自动综述写作系统</strong>，而不是传统 chat bot。</p>
+
+        <h2>4. STORM 工作流拆解</h2>
+        <h3>4.1 Knowledge Curation</h3>
+        <p>这一步负责收集资料。核心设计是模拟对话：<code>WikiWriter</code> 扮演有特定研究视角的维基作者，负责问问题；<code>TopicExpert</code> 把问题拆成搜索 query，用搜索后端取回资料，再基于资料回答；<code>ConvSimulator</code> 让 writer 和 expert 多轮互动。</p>
+        <p>这一步的关键不是“搜一下”，而是自动生成好问题。它把研究质量押在“问题是否覆盖不同视角”上，这是 STORM 最有价值的思想。</p>
+
+        <h3>4.2 Outline Generation</h3>
+        <p>系统会先生成一个直接大纲，再基于收集到的信息生成 STORM 大纲。输出包括 <code>direct_gen_outline.txt</code> 和 <code>storm_gen_outline.txt</code>。这个设计保留了“仅凭模型知识的大纲”和“检索增强后的大纲”，方便比较两者差异。</p>
+
+        <h3>4.3 Article Generation</h3>
+        <p>系统根据大纲逐节写文章，并从信息表中检索相关引用。输出包括 <code>storm_gen_article.txt</code> 和 <code>url_to_info.json</code>。每一节不是纯生成，而是用前面搜集到的来源作为依据。</p>
+
+        <h3>4.4 Article Polishing</h3>
+        <p>最后一步负责改写成更完整的最终稿，支持添加摘要和去重。输出为 <code>storm_gen_article_polished.txt</code>。从报告生产角度看，这一步相当于编辑台。</p>
+
+        <h2>5. Co-STORM：协作版 STORM</h2>
+        <p>Co-STORM 是后续扩展，论文发表于 EMNLP 2024。它从“系统自动写一篇文章”升级到“人和多个 LLM expert 一起探索主题”。</p>
+        <p>Co-STORM 的核心角色包括多个 expert agent、Moderator、Human user，以及动态 mind map。普通报告生成通常是“一次性输出”，Co-STORM 更像“边研究边开圆桌会”。如果接入 OpenClaw，可以变成：多个子 agent 分别从技术、商业、投资、安全、生态角度查资料，中途让用户插话调整重点，最后再收敛成公开报告。</p>
+
+        <h2>6. 技术架构</h2>
+        <pre><code>knowledge_storm/
+  storm_wiki/              # STORM 主流程
+  collaborative_storm/     # Co-STORM 协作流程
+  lm.py                    # LLM 封装，LiteLLM、OpenAI、Claude 等
+  rm.py                    # retrieval model，搜索和向量检索
+  interface.py             # 抽象接口和数据结构
+  dataclass.py             # conversation、knowledge base 等结构
+examples/
+  storm_examples/          # GPT、Claude、Gemini、Groq、Mistral、DeepSeek、Ollama 示例
+  costorm_examples/        # Co-STORM 示例
+frontend/demo_light/       # Streamlit 轻量 UI</code></pre>
+        <p>依赖层面，<code>dspy_ai==2.4.9</code> 是核心编排依赖，<code>litellm</code> 用来适配多模型供应商，<code>trafilatura</code> 用于网页正文抽取，<code>qdrant-client</code> 等用于自有语料向量检索。</p>
+
+        <h2>7. 模型与搜索后端</h2>
+        <p>STORM 允许不同阶段使用不同模型：便宜快速模型可以用于拆 query 和模拟对话，更强模型用于生成大纲、写正文和 polish。</p>
+        <p>检索后端在 <code>knowledge_storm/rm.py</code> 中包括 <code>YouRM</code>、<code>BingSearch</code>、<code>VectorRM</code>、<code>SerperRM</code>、<code>BraveRM</code>、<code>DuckDuckGoSearchRM</code>、<code>TavilySearchRM</code>、<code>GoogleSearch</code>、<code>AzureAISearch</code> 和 <code>SearXNG</code>。</p>
+        <p><code>VectorRM</code> 很重要。它允许不用互联网搜索，而是用自己的 CSV 语料和 Qdrant 向量库作为资料来源。这意味着 STORM 可以从“公开互联网研究工具”扩展成“企业内部知识库报告生成工具”。</p>
+
+        <h2>8. 输出与可审计性</h2>
+        <pre><code>topic_name/
+  conversation_log.json
+  raw_search_results.json
+  direct_gen_outline.txt
+  storm_gen_outline.txt
+  url_to_info.json
+  storm_gen_article.txt
+  storm_gen_article_polished.txt
+  run_config.json
+  llm_call_history.jsonl</code></pre>
+        <p>这是一个很好的设计。它让报告不是“凭空生成”，而是保留问过什么问题、搜过什么 query、搜到了哪些资料、大纲如何形成、哪些来源进入最终文章，以及 LLM 调用配置。</p>
+
+        <h2>9. 和 Deep Research、NotebookLM、Agent Reach 的区别</h2>
+        <p><strong>STORM vs Deep Research：</strong>Deep Research 更偏产品化，一般只给用户最终报告和引用；STORM 更偏研究框架，暴露 question asking、conversation log、outline、article generation 等中间层。</p>
+        <p><strong>STORM vs NotebookLM：</strong>NotebookLM 更强在用户给定材料后的理解、问答和摘要；STORM 更强在主题尚不明确时主动提出问题、上网搜索、扩展视角、生成结构化长文。</p>
+        <p><strong>STORM vs Agent Reach：</strong>Agent Reach 更像工具路由层，负责“去哪里拿资料”；STORM 更像研究写作层，负责“拿到资料后怎么研究和写报告”。两者可以互补。</p>
+
+        <h2>10. 对 OpenClaw / Codex 的复用价值</h2>
+        <ul>
+          <li><strong>多视角问题发现：</strong>把技术、产品、商业、风险、投资等视角显式拆开。</li>
+          <li><strong>研究过程落盘：</strong>为每篇报告保存 research log、sources、outline、draft 和 final 页面。</li>
+          <li><strong>大纲先行：</strong>复杂报告先生成大纲，再填充正文，减少跑偏。</li>
+          <li><strong>检索后端抽象：</strong>把 GitHub、网页、论文、新闻、社媒、知识库、本地文件统一成来源对象。</li>
+          <li><strong>Co-STORM 人机协作：</strong>支持用户中途追问和调整重点，而不是一次性写完。</li>
+        </ul>
+
+        <h2>11. 不建议直接照搬的地方</h2>
+        <ul>
+          <li>中文和本土资料支持不足，需要接招投标网站、交易所公告、巨潮资讯、中文媒体和本地知识库。</li>
+          <li>来源质量控制还不够，需要官方公告、论文、招标文件、财报优先的分级机制。</li>
+          <li>成本控制需要加强，多视角、多轮搜索、多阶段生成会消耗较多 token 和搜索 API 配额。</li>
+          <li>前端只是 Streamlit demo，不是完整产品。</li>
+          <li>工程维护状态要谨慎，main 分支最近提交在 2025-09-30，且存在版本号不一致。</li>
+        </ul>
+
+        <h2>12. 本地验证</h2>
+        <p>我成功 clone 最新 main，阅读 README、examples、核心 engine、retriever、LM 封装和 Streamlit demo，并使用以下命令做语法编译检查，通过：</p>
+        <pre><code>python3 -m compileall -q knowledge_storm examples/storm_examples examples/costorm_examples frontend/demo_light</code></pre>
+        <p>没有实际运行 STORM pipeline，因为需要外部 LLM API key 和搜索 API key，直接跑会产生费用和外部请求。</p>
+
+        <h2>13. 建议路线</h2>
+        <ol>
+          <li><strong>第一阶段：</strong>复用方法，不引入依赖。把 STORM 方法写成 OpenClaw 报告模板：主题识别、生成分析视角、生成问题、搜索权威来源、合并来源、生成大纲、写报告、发布 GitHub Pages。</li>
+          <li><strong>第二阶段：</strong>做一个 <code>storm-style-report</code> skill，触发条件是详细报告、项目分析、产业分析、公司分析。</li>
+          <li><strong>第三阶段：</strong>实验性接入 <code>knowledge-storm</code>，隔离环境测试中文主题、引用质量、幻觉率、成本和运行时长。</li>
+          <li><strong>第四阶段：</strong>和 Agent Reach 组合，让 Agent Reach 负责资料源，STORM-style pipeline 负责研究写作。</li>
+        </ol>
+
+        <h2>14. 总结</h2>
+        <p>STORM 是一个很值得研究的项目。它的核心贡献不是“自动写文章”，而是把复杂研究拆成：多视角提问、检索增强对话、资料整理、大纲生成、引用长文写作。这个结构非常适合迁移到我们的报告系统。</p>
+        <p>但它不是开箱即用的中文 Deep Research 替代品。它偏研究框架，默认英文语境，依赖外部模型和搜索 API，生产化还需要来源质量、成本控制、中文资料、隐私和任务恢复等工程补强。</p>
+        <p><strong>建议：</strong>不要直接把 STORM 当工具装进主工作流；先把它的方法论固化成 OpenClaw 的报告生成标准流程。这样收益最大，风险最小。</p>
+
+        <h2>参考来源</h2>
+        <ul>
+          <li><a href="https://github.com/stanford-oval/storm">GitHub 仓库</a></li>
+          <li><a href="https://storm.genie.stanford.edu/">在线研究预览</a></li>
+          <li><a href="https://storm-project.stanford.edu/">项目网站</a></li>
+          <li><a href="https://arxiv.org/abs/2402.14207">STORM 论文</a></li>
+          <li><a href="https://www.arxiv.org/abs/2408.15232">Co-STORM 论文</a></li>
+          <li><a href="https://oval.cs.stanford.edu/projects">Stanford OVAL 项目页</a></li>
+          <li><a href="https://huggingface.co/datasets/EchoShao8899/FreshWiki">FreshWiki 数据集</a></li>
+          <li><a href="https://huggingface.co/datasets/YuchengJiang/WildSeek">WildSeek 数据集</a></li>
+        </ul>
+      </article>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,174 @@
+---
+title: "微信公众号文章分析：Claude、Codex、Mira 都在讲 Loop，架构师更该看什么"
+date: "2026-06-25"
+category: "research"
+url: "/research/2026/06/25/wechat-loop-architecture-report/"
+summary: "保存并分析微信公众号“架构师”文章：从高可靠架构、状态机、SRE 信号和日常工作流边界理解 Agent Loop，并记录多个微信公众号读取 skill 的实测结果。"
+layout: "raw"
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>微信公众号文章分析：Claude、Codex、Mira 都在讲 Loop，架构师更该看什么</title>
+    <meta name="description" content="保存并分析微信公众号“架构师”文章：从高可靠架构、状态机、SRE 信号和日常工作流边界理解 Agent Loop。">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">微信公众号文章阅读报告</div>
+        <h1>Claude、Codex、Mira 都在讲 Loop，架构师更该看什么</h1>
+        <p class="muted">基于微信公众号“架构师”2026-06-24 文章整理。正文不全文转载，保留原文入口，并以摘要、结构化分析和工程判断为主。</p>
+        <div class="meta">
+          <span>报告日期：2026-06-25</span>
+          <span>主题：Agent Loop / 高可靠架构</span>
+          <span>结论：先设计反馈、状态和停止条件，再谈自动化</span>
+        </div>
+      </header>
+
+      <section class="summary">
+        <strong>一句话结论：</strong>这篇文章的价值不在于介绍某个新命令或新工具，而是把 Agent Loop 放回架构师熟悉的可靠性体系里看：持续执行必须有可信反馈、可追踪状态、明确停止条件、权限隔离和人工接管点。否则 Loop 只是“模型一直在忙”，不是可托付的生产机制。
+      </section>
+
+      <section>
+        <h2>原文信息</h2>
+        <table>
+          <tbody>
+            <tr><th>原文标题</th><td>Claude、Codex、Mira 都在讲 Loop，架构师更该看什么</td></tr>
+            <tr><th>公众号</th><td>架构师</td></tr>
+            <tr><th>作者</th><td>若飞</td></tr>
+            <tr><th>发布时间</th><td>2026-06-24 22:41:28</td></tr>
+            <tr><th>原文链接</th><td><a href="https://mp.weixin.qq.com/s/nl3JUGXmWkjYOUdc7K2aSA">https://mp.weixin.qq.com/s/nl3JUGXmWkjYOUdc7K2aSA</a></td></tr>
+            <tr><th>保存状态</th><td>已保存为本地 Markdown 与 JSON；公开页仅发布分析，不全文转载。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Skill 测试结果</h2>
+        <table>
+          <thead>
+            <tr><th>Skill</th><th>结果</th><th>判断</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>wechat-article-extractor-skill</th>
+              <td>成功提取标题、作者、公众号、发布时间和正文 HTML，正文转文本约 7,749 字。</td>
+              <td>本次主用方案。</td>
+            </tr>
+            <tr>
+              <th>wechat-article-reader</th>
+              <td>成功导出 Markdown，正文约 10,994 字符。</td>
+              <td>适合作为备份导出方案。</td>
+            </tr>
+            <tr>
+              <th>wechat-article-spider</th>
+              <td>成功抓取并下载 6 张图片，但标题和正文出现中文编码异常。</td>
+              <td>可取图，不适合作为主文本来源。</td>
+            </tr>
+            <tr>
+              <th>wechat-mp-reader</th>
+              <td>加 <code>?scene=1</code> 后轻量抓取可拿到标题、作者和公众号，但正文抽取不完整。</td>
+              <td>思路有用，但不如 extractor 稳。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>文章主张</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. Loop 不是工具名</h3>
+            <p>文章提醒读者不要被 Claude、Codex、Mira 这些入口带着走。真正要看的，是 AI 从“一次回答”变成“持续执行”以后，系统如何证明它没有跑偏。</p>
+          </div>
+          <div class="card">
+            <h3>2. 反馈是核心</h3>
+            <p>代码场景先跑起来，是因为测试、构建、类型检查、lint、diff 都能给外部反馈。日常工作流缺少硬标准，所以更需要人工确认、证据链和分级授权。</p>
+          </div>
+          <div class="card">
+            <h3>3. 状态机优于聊天记录</h3>
+            <p>长任务不能只靠上下文延续。文章建议把待触发、运行中、等待验证、验证失败、风险超界、无新增证据、完成等状态显式化。</p>
+          </div>
+          <div class="card">
+            <h3>4. 先写刹车</h3>
+            <p>文章最有工程味的判断是：Loop 的重点不是循环，而是何时停止、何时降级、何时交还给人，以及失败后能否复盘。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>架构分析</h2>
+        <p>这篇文章把 Agent Loop 翻译成了架构师熟悉的语言：SLO、错误预算、健康检查、熔断、隔舱、配额、降级、补偿和可观测性。这个转换很重要，因为它避免了把 Loop 讨论停留在“模型更聪明”或“入口更顺手”上。</p>
+        <p>在生产环境里，Loop 的风险主要来自三个地方。第一是反馈不可信，模型用自我评价代替外部验证；第二是状态不可审计，关键步骤藏在聊天记录和压缩上下文里；第三是权限过宽，原本应该停在草稿或建议层的动作被直接写入真实系统。</p>
+        <p>因此更稳的落地方式不是先做全自动，而是先做可接管的小闭环：限制输入范围，固定工具权限，记录每轮输入、动作、证据、未确认事项和是否继续，再把测试、日志、规则或人工复核接入验证层。</p>
+      </section>
+
+      <section>
+        <h2>对 OpenClaw 的启发</h2>
+        <table>
+          <thead>
+            <tr><th>问题</th><th>建议</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>长期任务如何避免跑偏？</th>
+              <td>Goal 要有验收条件；每轮都要写入状态、证据和阻塞原因，而不是只输出“已处理”。</td>
+            </tr>
+            <tr>
+              <th>消息、邮件、日程类 Loop 怎么分级？</th>
+              <td>摘要和整理可自动；草稿和工单建议需人确认；对外承诺、付款、删数据、改权限默认停止并请示。</td>
+            </tr>
+            <tr>
+              <th>如何把经验沉淀下来？</th>
+              <td>把稳定流程写成 Skill、Runbook 或项目文档，把一次性上下文转成可复用的操作规程。</td>
+            </tr>
+            <tr>
+              <th>应该先做什么 Loop？</th>
+              <td>从低风险、重复、可复核任务开始，例如 CI 失败分流、日报草稿、文章归档与摘要。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>可执行清单</h2>
+        <ol>
+          <li>给每个 Loop 写清楚目标、输入、可用工具、禁止动作和完成条件。</li>
+          <li>每轮保留五项账本：本轮输入、执行动作、证据链接、未确认事项、是否继续。</li>
+          <li>连续失败、无新增证据、触碰敏感权限、超过预算时自动停止。</li>
+          <li>把写权限拆成阶段：只读观察、草稿建议、人工确认后写入、有限自动写入。</li>
+          <li>监控四类信号：单轮耗时、触发量、验证失败率、token/API/人工审核积压。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>我的判断</h2>
+        <p>这篇文章适合作为团队讨论 Agent Loop 的入门材料，因为它不急着卖自动化，而是把问题拉回可靠性。它的核心提醒可以压成一句话：能循环不难，难的是每一轮都有证据、每一次失败都能停下、每一个结果都能被人接手。</p>
+        <p>如果要在 OpenClaw 或企业内部实践，建议先选“文章保存与分析”“CI 失败分流”“会议纪要草稿”这类低风险场景。等账本、验证和停止机制稳定后，再逐步接入更高权限工具。</p>
+      </section>
+
+      <section>
+        <h2>原文入口</h2>
+        <p>应版权边界，公开页不全文转载公众号原文；完整文本已在本地归档，公开页保留原文入口、元数据和短摘录。</p>
+        <table>
+          <tbody>
+            <tr><th>标题</th><td>Claude、Codex、Mira 都在讲 Loop，架构师更该看什么</td></tr>
+            <tr><th>作者</th><td>若飞</td></tr>
+            <tr><th>公众号</th><td>架构师</td></tr>
+            <tr><th>发布时间</th><td>2026-06-24 22:41:28</td></tr>
+            <tr><th>原文链接</th><td><a href="https://mp.weixin.qq.com/s/nl3JUGXmWkjYOUdc7K2aSA">https://mp.weixin.qq.com/s/nl3JUGXmWkjYOUdc7K2aSA</a></td></tr>
+          </tbody>
+        </table>
+        <blockquote>
+          <p>短摘录：反馈从哪里来，状态能不能留下，什么时候停，人能不能接手。</p>
+        </blockquote>
+      </section>
+
+      <footer>Source: 微信公众号“架构师”；Report generated by OpenClaw.</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+---
+title: "Vercel DESIGN.md：给 AI 执行的设计规范"
+date: "2026-06-23"
+category: "research"
+url: "/research/2026/06/23/vercel-design-md-ai-spec/"
+summary: "归纳总结小盖 X Article 对 Vercel DESIGN.md 的拆解：颜色、间距、字体、文案、动效和无障碍如何变成 AI 可执行的产品设计规则。"
+layout: "raw"
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Vercel DESIGN.md：给 AI 执行的设计规范</title>
+    <meta name="description" content="归纳总结小盖 X Article 对 Vercel DESIGN.md 的拆解：颜色、间距、字体、文案、动效和无障碍如何变成 AI 可执行的产品设计规则。">
+  </head>
+  <body>
+    <main>
+      <h1>Vercel DESIGN.md：给 AI 执行的设计规范</h1>
+
+      <section class="lead">
+        <p>这篇 X Article 的核心判断很直接：好的 AI 设计规范不是一张色值表，而是一套把设计判断提前结构化的执行系统。Vercel 的 `design.md` / `design.dark.md` 把颜色、间距、字体、文案、动效和无障碍写成稳定 token 与语义规则，让 AI 在生成界面时少猜测、多选择。</p>
+      </section>
+
+      <section>
+        <h2>一句话总结</h2>
+        <p>Vercel 的设计规范有价值，不只是因为它好看，而是因为它把“应该怎么设计”翻译成了 AI 可以稳定复用的规则：状态用颜色梯度表达，布局用少量间距控制节奏，文字用角色而不是随意字号，文案和动效也被纳入产品体验的一部分。</p>
+      </section>
+
+      <section>
+        <h2>核心观点</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. 颜色不是色号，而是状态系统</h3>
+            <p>文章最看重的是 Vercel 对颜色梯度的语义化处理。100 到 300 管背景状态，400 到 600 管边框状态，700 到 800 管实心色块，900 到 1000 管文字和图标层级。AI 不再需要临场判断 hover、active、border 应该如何变化。</p>
+          </div>
+          <div class="card">
+            <h3>2. 明暗主题共享同一套 token</h3>
+            <p>同一个 token 在亮色和暗色主题里可以映射到完全不同的色值，但语义保持不变。比如 `gray-1000` 在亮色里接近黑色，在暗色里接近白色，表达的都是“最重要的信息”。</p>
+          </div>
+          <div class="card">
+            <h3>3. 间距越克制，页面越稳定</h3>
+            <p>Vercel 的间距体系基于 4px 倍数，只保留少数常用值。文章认为这不是限制创造力，而是在定义页面节奏：组内、组间、板块间分别用稳定间距表达信息关系。</p>
+          </div>
+          <div class="card">
+            <h3>4. 字体从尺寸思维变成角色思维</h3>
+            <p>标题、标签、正文、按钮分别有固定角色和 token。AI 的任务变成判断文本角色，而不是随手挑 14px、15px 或某个行高。这会显著降低同一产品内的视觉漂移。</p>
+          </div>
+          <div class="card">
+            <h3>5. 文案也是设计系统的一部分</h3>
+            <p>文章特别强调按钮、错误提示和成功提示的规则。按钮应包含动作和对象，错误提示要说明发生了什么和下一步怎么办，完成提示不必重复“成功”。这些都在减少用户猜测。</p>
+          </div>
+          <div class="card">
+            <h3>6. 动效要克制，无障碍要前置</h3>
+            <p>Vercel 的思路不是动画越多越精致，而是能瞬时反馈就瞬时反馈，只有状态变化需要解释来源时才加短动画。同时，对比度、焦点态、不能只靠颜色传达状态，也被纳入基础规范。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>文章结构复盘</h2>
+        <table>
+          <tbody>
+            <tr>
+              <th>开篇</th>
+              <td>作者先指出 Vercel 的 DESIGN.md 是一份“给 AI 看的设计规范”，用于约束 AI 生成界面时的颜色、字号、间距和组件行为。</td>
+            </tr>
+            <tr>
+              <th>颜色</th>
+              <td>重点拆解颜色 token 的状态含义，以及亮色 / 暗色主题共用 token 名称的语义价值。</td>
+            </tr>
+            <tr>
+              <th>节奏</th>
+              <td>通过 4px 倍数和少量间距值，说明设计系统应主动限制选择，让页面形成一致的呼吸感。</td>
+            </tr>
+            <tr>
+              <th>字体</th>
+              <td>把字体看成信息角色系统。先判断文本承担什么角色，再套用对应样式。</td>
+            </tr>
+            <tr>
+              <th>文案</th>
+              <td>按钮、错误提示、完成提示都要有明确规则，让用户少猜一步。</td>
+            </tr>
+            <tr>
+              <th>动效与无障碍</th>
+              <td>动效服务于理解，不服务于炫技；无障碍不是附加项，而是产品可用性的底线。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>对 AI 产品开发的启发</h2>
+        <ol>
+          <li><strong>DESIGN.md 应该写语义，不只写数值。</strong>比如“主要文字用 `gray-1000`”，比“文字用 #171717”更适合跨主题、跨组件复用。</li>
+          <li><strong>状态映射要提前定好。</strong>默认、悬停、按下、禁用、聚焦等状态都应有明确 token，避免 AI 每次生成新风格。</li>
+          <li><strong>间距系统应少而稳定。</strong>可选值过多会让界面碎掉；固定节奏能让 AI 更容易生成一致布局。</li>
+          <li><strong>文案规范要进设计文件。</strong>AI 生成产品界面时，按钮和错误提示常常比配色更影响可用性。</li>
+          <li><strong>动效默认保守。</strong>状态反馈要快，只有弹窗、抽屉、上下文切换这类需要空间解释的场景才需要明显过渡。</li>
+          <li><strong>无障碍规则不能后补。</strong>对比度、键盘焦点、图标和文字双通道表达状态，应在规范中直接出现。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>可直接借鉴的 DESIGN.md 骨架</h2>
+        <pre><code>1. Design principles
+   - 产品气质、密度、边界、哪些效果不要用
+
+2. Tokens
+   - Colors: semantic roles + state mapping
+   - Spacing: allowed values + layout rhythm
+   - Typography: text roles + size/weight/line-height
+   - Radius, shadow, border, z-index
+
+3. Components
+   - Button, input, menu, modal, table, card
+   - Default / hover / active / disabled / focus states
+
+4. Motion
+   - When duration should be 0ms
+   - When to use 150ms / 200ms / 300ms
+   - Easing and reduced-motion rules
+
+5. Copy
+   - Button = verb + object
+   - Error = what happened + why + next step
+   - Toast = state change, no redundant success wording
+
+6. Accessibility
+   - Contrast
+   - Focus visibility
+   - Non-color-only status
+   - Keyboard navigation</code></pre>
+      </section>
+
+      <section>
+        <h2>我的判断</h2>
+        <p>这篇文章值得保存，因为它讲清了 AI 时代设计规范的真正变化：过去设计系统主要服务设计师和前端，现在还要服务 AI。给 AI 的规范不能停留在“风格参考”，必须变成可执行的约束。</p>
+        <p>如果后续要给自己的产品写 DESIGN.md，我会优先复制它的方法，而不是复制它的色值：用 token 表达语义，用少量选择稳定节奏，把文案、动效和无障碍一起写进去。这样 AI 生成的页面才更像同一个产品，而不是每次重开一套视觉。</p>
+      </section>
+
+      <section>
+        <h2>转载与来源</h2>
+        <div class="notice warn">
+          <p>转载/摘录声明：本文为原文内容的归纳整理与短摘录，保留原作者、发布时间和来源入口；完整内容以原发布页面为准。</p>
+        </div>
+        <ul>
+          <li>原作者：小盖（@xiaogaifun）</li>
+          <li>发布时间：2026-06-22 11:06 UTC，X 显示为 2026-06-22</li>
+          <li>原文标题：简直就是教科书级别的 AI 设计规范。</li>
+          <li>原文入口：<a href="https://x.com/xiaogaifun/status/2069014055579509117">https://x.com/xiaogaifun/status/2069014055579509117</a></li>
+          <li>文章讨论对象：<a href="https://vercel.com/design.md">Vercel design.md</a> 与 <a href="https://vercel.com/design.dark.md">Vercel design.dark.md</a></li>
+        </ul>
+        <blockquote>
+          <p>“Vercel 的设计系统规范，真的是我见过的教科书级样例。”</p>
+        </blockquote>
+        <blockquote>
+          <p>“从字号思维变成角色思维。”</p>
+        </blockquote>
+      </section>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

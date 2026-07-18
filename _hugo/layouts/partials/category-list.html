@@ -1,7 +1,8 @@
 <section class="year" aria-labelledby="{{ .id }}">
   <h2 id="{{ .id }}">{{ .heading }}</h2>
-  {{- if eq .category "daily" }}
+  {{- if in (slice "daily" "research") .category }}
     {{- $pages := where site.RegularPages "Section" "daily" }}
+    {{- if eq .category "research" }}{{ $pages = where site.RegularPages "Section" "research" }}{{ end }}
     {{- $pages = sort $pages "Date" "desc" }}
     {{- if .limit }}{{ $pages = first .limit $pages }}{{ end }}
     {{- range $pages }}
