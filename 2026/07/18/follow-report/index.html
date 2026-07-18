@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 前沿日报 — 2026-07-18</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.72; color: #1d1d1f; background: #fafafa; padding: 2rem; max-width: 920px; margin: 0 auto; }
+  h1 { font-size: 1.9rem; margin-bottom: 0.35rem; color: #111; }
+  .meta { color: #666; font-size: 0.92rem; margin-bottom: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
+  h2 { font-size: 1.32rem; margin: 2.1rem 0 0.85rem; color: #202020; border-left: 4px solid #2563eb; padding-left: 0.65rem; }
+  h3 { font-size: 1.08rem; margin: 1.25rem 0 0.5rem; color: #333; }
+  p { margin: 0.35rem 0; }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.9rem; margin: 1rem 0; }
+  .overview-item, .card { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 1rem; }
+  .overview-item h4 { font-size: 0.96rem; margin-bottom: 0.3rem; color: #1d4ed8; }
+  .overview-item p, .noise p { font-size: 0.9rem; color: #555; }
+  .card { margin: 1rem 0; }
+  .source { font-size: 0.86rem; color: #666; margin-bottom: 0.45rem; }
+  .tag { display: inline-block; background: #eff6ff; color: #2563eb; padding: 0.12rem 0.45rem; border-radius: 4px; font-size: 0.78rem; margin-right: 0.25rem; }
+  .summary { margin: 0.55rem 0; }
+  .why { font-size: 0.9rem; color: #555; margin-top: 0.55rem; padding-top: 0.55rem; border-top: 1px dashed #e5e5e5; }
+  .why strong { color: #2563eb; }
+  .action { font-size: 0.86rem; color: #047857; margin-top: 0.35rem; }
+  .noise { background: #f9fafb; border-style: dashed; }
+  ul { padding-left: 1.25rem; }
+  li { margin: 0.35rem 0; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #ddd; color: #888; font-size: 0.82rem; text-align: center; }
+</style>
+</head>
+<body>
+<h1>AI 前沿日报</h1>
+<div class="meta">
+  <strong>2026年7月18日（周六）</strong> · 覆盖窗口：2026-07-17 08:00 – 2026-07-18 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；公开 RSS、公开网页、Simon Willison Atom、OpenAI / Google / Hugging Face 官方源、Latent Space feed 与搜索校验。未使用 Folo CLI，未使用私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Kimi K3 成为当天主线</h4><p>Moonshot 把 Kimi K3 推到 2.8T、1M context、开放权重承诺和前端代码榜单第一的叙事上，触发技术圈、媒体和投资市场同时反应。</p></div>
+  <div class="overview-item"><h4>OpenAI 转向 ROI 语言</h4><p>Sarah Friar 发布 AI scorecard，把企业 AI 预算讨论从 token 单价转向 useful work、成功任务成本、可靠性和规模回报。</p></div>
+  <div class="overview-item"><h4>Agent 安全继续升温</h4><p>Codex 文件误删事件仍在发酵，Simon 的摘录把“全访问 + 无沙箱 + 无审查”的组合风险推到 Follow List 的高优先级安全议题。</p></div>
+  <div class="overview-item"><h4>开放工具链在微调和多模态下沉</h4><p>Hugging Face / NVIDIA 发布 NeMo AutoModel 与 Diffusers 的视频、图像模型规模化微调文章，说明开放模型生态正在补训练与 fine-tune 工程栈。</p></div>
+  <div class="overview-item"><h4>Agent 进入企业部署叙事</h4><p>Latent Space 除 Kimi K3 外，还继续跟踪 autoresearch、Git 化 agent 工作流和企业软件工厂，和 Cursor/FDE 主线相连。</p></div>
+  <div class="overview-item"><h4>X 抓取受限</h4><p>本轮 Nitter RSS 批量探测基本空响应，Anthropic RSS 404；报告以公开博客/RSS/新闻为主体，社媒只作为可验证链接的辅助，不补写未抓到的帖子。</p></div>
+</div>
+
+<h2>核心主题</h2>
+<h3>一、Kimi K3：开放模型从“性价比”进入前沿模型话语权</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models</span><strong>Moonshot AI</strong> · 2026-07-17 · <a href="https://www.kimi.com/blog/kimi-k3">官方技术博客</a></div>
+  <div class="summary"><p>Moonshot 发布 Kimi K3，官方描述为 2.8T 参数、原生视觉、1M token context 的“open 3T-class”模型，面向长程 coding、知识工作和 reasoning。它采用 Kimi Delta Attention 与 Attention Residuals，重点叙事是长上下文解码效率、训练效率和多模态输入。官方说法里最需要注意的是“开放权重”仍是承诺事项，权重计划在 2026-07-27 前释放，今天不应把它当作已经可自托管的完整开放模型。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这不是普通新模型发布，而是中国开放模型把规模、长上下文、多模态和 agentic coding 放在同一个产品叙事里，对 OpenAI、Anthropic、Google 和开源推理栈都有定价与生态压力。</div>
+  <div class="action">后续行动：7 月 27 日前后复查权重、license、推理配置、上下文成本、工具调用可靠性和中文/英文知识工作表现；不要只看参数量和榜单。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Independent Tryout</span><strong>Simon Willison</strong> · 2026-07-17 13:43 UTC / 2026-07-16 20:19 UTC · <a href="https://simonwillison.net/2026/Jul/17/kimi-k3/">短摘</a> · <a href="https://simonwillison.net/2026/Jul/16/kimi-k3/">实测文章</a></div>
+  <div class="summary"><p>Simon 对 Kimi K3 的实测给了一个比榜单更接地气的观察：模型能力强，但当前只有 max reasoning effort，简单 SVG 生成也可能烧掉大量 reasoning tokens。他还记录了 K3 拒绝泄露系统提示词的行为，把模型“个性”和安全边界作为观察点。对开发者而言，K3 的关键问题是实际任务成本、推理努力档位、视觉理解、SVG/前端生成与 agent 工具调用，而不是“参数越大越好”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Simon 的价值在于把模型发布变成可复现的开发者试跑：能不能跑、花多少钱、输出是否可用、哪里和 benchmark 不一致。</div>
+  <div class="action">后续行动：用同一组小型 agentic engineering prompts 对 Kimi K3、GPT-5.6、Claude Fable、Gemini 和 Inkling 做横向对比，记录成本和失败模式。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Industry Signal</span><strong>Latent Space / AINews</strong> · 2026-07-17 01:46 UTC · <a href="https://www.latent.space/p/ainews-kimi-k3-28t-a50b-the-largest">日报</a></div>
+  <div class="summary"><p>Latent Space 把 Kimi K3 放进“开放模型继续强势反击”的框架里，汇总 Moonshot、Arena、Artificial Analysis、社区工程师与价格讨论。它强调 K3 在 Frontend Code Arena 的强势表现、2.8T 参数与 open weights 承诺，也记录了模型仍落后 Claude Fable 5 / GPT-5.6 Sol 的用户体验差距说法。更重要的是，Latent Space 把这件事和企业 agent、软件工厂、open-source infra 连接起来，说明模型发布已直接影响产品与组织形态讨论。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 swyx/Latent Space 是高噪声但高发现率来源，这类汇总能快速定位社区真正讨论的 benchmark、定价、开发者入口和二级项目。</div>
+  <div class="action">后续行动：从 Latent Space 提到的 Arena、Artificial Analysis、OpenRouter、官方博客四条线抽取可验证数据，避免被二手转述带偏。</div>
+</div>
+
+<h3>二、OpenAI：企业 AI 从“模型费用”转为“成功任务成本”</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Adoption</span><strong>OpenAI / Sarah Friar</strong> · 2026-07-17 10:00 UTC · <a href="https://openai.com/index/a-scorecard-for-the-ai-age/">官方文章</a></div>
+  <div class="summary"><p>OpenAI CFO Sarah Friar 发布“AI age scorecard”，提出企业衡量 AI 投资应看四件事：完成了多少有用工作、成功任务实际成本、AI 把工作做对的频率、以及随着使用规模扩大每一美元是否买到更多工作。这个框架明显服务于 OpenAI 当前的 ChatGPT Work / Codex / agentic enterprise 叙事：不要只看 token 单价，而要把 AI 当作可度量产能来管理。Axios 同日也把它解读为 OpenAI 对企业 AI 成本焦虑的回应。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这套语言会影响企业采购、咨询报告、agent ROI 仪表盘和内部自动化项目立项。它也会迫使竞争者用“成功任务成本”而不是“更便宜 token”来讲故事。</div>
+  <div class="action">后续行动：把自己的 agent 项目也用四栏 scorecard 管起来：任务吞吐、成功率、人工返工时间、单位成功任务成本。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Safety</span><strong>Codex 删除文件事件后续</strong> · 2026-07-17 窗口内继续传播 · <a href="https://simonwillison.net/2026/Jul/16/bad-codex-bug/">Simon 摘录</a></div>
+  <div class="summary"><p>Codex 文件误删事件虽然源帖在前一窗口，但今天仍被 OpenAI 与开发者社区继续讨论。关键信息没有变化：高风险组合是 full access、无 sandbox、无 auto review，以及模型尝试改写 HOME 相关路径。这个事件的价值不在八卦，而在提醒 agent 产品的默认权限必须保守，且删除、路径、环境变量、跨项目写入都要有可恢复或人工确认机制。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OpenAI 正一边推动企业 ROI，一边补安全叙事。对任何本地 agent/cron 自动化来说，这件事都该转化为工程约束。</div>
+  <div class="action">后续行动：为 OpenClaw/Codex 自动任务增加一页“高风险文件操作清单”，至少覆盖 HOME、根目录、rm、批量删除、权限提升和 shell rc/config 修改。</div>
+</div>
+
+<h3>三、开放工具链：fine-tuning 工程栈补齐，模型竞争不只在权重</h3>
+<div class="card">
+  <div class="source"><span class="tag">Hugging Face</span><strong>NVIDIA NeMo AutoModel + Diffusers</strong> · 2026-07-17 15:57 UTC · <a href="https://huggingface.co/blog/nvidia/scale-diffusers-finetuning-nemo-automodel">文章</a></div>
+  <div class="summary"><p>Hugging Face 发布 NVIDIA 合作文章，介绍如何用 NeMo AutoModel 与 Diffusers 规模化微调视频和图像模型。它不是单纯模型新闻，而是训练工程栈新闻：开放模型生态需要高吞吐 fine-tuning、并行策略、Transformers/Diffusers 集成和可复用训练脚本。和 Kimi K3 / Inkling 放在一起看，开放生态的竞争正在从“谁放权重”扩展到“谁能让企业和研究者高效定制”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>真正能产生商业价值的是模型 + 数据 + 微调/评估/部署流水线。NVIDIA 和 Hugging Face 在这个层面继续加固开放生态基础设施。</div>
+  <div class="action">后续行动：跟踪 NeMo AutoModel 对 LLM/VLM/video 模型的实际易用性，尤其是多机训练、checkpoint 格式、HF Hub 发布和推理部署衔接。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Hugging Face</span><strong>NVIDIA Nemotron Embed</strong> · 2026-07-16 / 今日 feed 可见 · <a href="https://huggingface.co/blog/feed.xml">HF RSS</a></div>
+  <div class="summary"><p>HF RSS 今天仍显示 NVIDIA Nemotron 3 Embed 的检索榜单更新。虽然发布时间略早于本窗口，但它和 NeMo AutoModel 一起说明 NVIDIA 的开放 AI 策略并不只做生成模型，还在 embedding、retrieval、fine-tuning 和 agentic retrieval 上布局。对 RAG、企业知识库和 agent memory 来说，embedding 模型排名和真实检索质量值得持续看。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>agent 可靠性很大程度取决于检索与上下文组装，embedding/retrieval 模型的改进会直接影响企业私有知识库落地。</div>
+  <div class="action">后续行动：将 Nemotron Embed 与 BGE、E5、OpenAI、Voyage、Cohere 等做中文/英文混合检索小评测。</div>
+</div>
+
+<h3>四、AI 工程和内容质量：从“能生成”到“识别坏生成”</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Writing</span><strong>Simon Willison</strong> · 2026-07-17 12:11 UTC · <a href="https://simonwillison.net/2026/Jul/17/llm-cliche-highlighter/">LLM cliché highlighter</a></div>
+  <div class="summary"><p>Simon 发布一个小工具，用来标记 LLM 写作常见套话和模式，起因是他对“no fluff, no filler, no jargon”这类 AI 文风感到厌烦。这个工具本身很小，但它抓住了一个内容生产阶段的新需求：当 AI 写作进入默认工作流，编辑工作的价值会从“能不能写出来”转向“能不能删掉模板味、空话和不负责任的泛化”。这也和 Follow List 里 Hamel/Shreya 长期讨论的 eval、质量反馈与人类审稿一致。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI 生成内容越多，反模板化、风格审查和事实核验工具越有价值。日报、报告、销售材料和公众号文章都需要这类后处理。</div>
+  <div class="action">后续行动：把 humanizer 检查作为公开报告发布前的轻量步骤，重点处理套话、三段式空泛总结、夸张形容和无来源断言。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">AI Infrastructure</span><strong>Simon Willison / Puter Firefox WASM</strong> · 2026-07-17 02:58 UTC · <a href="https://simonwillison.net/2026/Jul/16/firefox-in-webassembly/">文章</a></div>
+  <div class="summary"><p>Simon 记录 Puter 把 Firefox 编译到 WebAssembly，让浏览器跑在浏览器里，并指出该项目大量借助 Claude/Fable 代码生成。它是一个“有趣但不主线”的工程信号：AI-assisted programming 正在推动复杂系统移植、WASM 工具链和浏览器沙箱实验。它对 agent 的启发在于：未来 sandbox/browser/runtime 可能以更轻量、更可复制的方式进入应用和自动化环境。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>agent 安全运行环境会越来越重要，浏览器内 WASM runtime 与代理网络限制提供了另一种 sandbox 思路。</div>
+  <div class="action">后续行动：低优先级收藏，后续可和 browser relay、Puter、WebContainer、E2B、Modal sandbox 等放在一起比较。</div>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Moonshot AI：</strong>Kimi K3 成为今天最大开放模型信号，技术博客、媒体报道和社区榜单同时放大。</li>
+  <li><strong>Simon Willison：</strong>连续输出 Kimi K3 实测、LLM cliché highlighter、Firefox WASM、Codex bug 摘录，是今天 AI engineering 信息密度最高的个人源。</li>
+  <li><strong>OpenAI / Sarah Friar：</strong>把企业 AI 叙事收束到 scorecard，服务 ChatGPT Work/Codex 的预算和 ROI 解释。</li>
+  <li><strong>Latent Space / swyx：</strong>用 AINews 把 Kimi K3 的官方发布、Arena/AA 评测、社区反应和 agent 产品语境串起来，适合作为线索发现源。</li>
+  <li><strong>Hugging Face / NVIDIA：</strong>继续补开放模型定制和训练工程栈，和开放权重模型发布形成上下游关系。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<div class="card">
+  <p><strong>Kimi K3 权重发布：</strong>2026-07-27 前后复查是否如期发布、许可证是否商业友好、推理栈是否成熟。</p>
+  <p><strong>AI ROI scorecard：</strong>把 OpenAI 的四项指标改造成自己的 agent 项目仪表盘，避免只记录“节省时间”的软描述。</p>
+  <p><strong>Codex 安全清单：</strong>把 full access、sandbox、auto review、危险命令和可恢复删除写成长期自动化准则。</p>
+  <p><strong>NeMo AutoModel：</strong>试跑一个小型视觉/视频微调 demo，验证它和 HF Hub、Diffusers、推理部署的衔接体验。</p>
+  <p><strong>反 AI 套话工具：</strong>把 LLM cliché highlighter / humanizer 变成报告发布前的质量闸门。</p>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <p><strong>Kimi K3 权重状态：</strong>官方承诺权重将在 2026-07-27 前发布，今天不能按已发布权重处理。</p>
+  <p><strong>Kimi K3 榜单泛化：</strong>Arena 前端代码和 Artificial Analysis 分数很强，但工具调用、企业知识工作、中文长文和低成本推理仍需独立验证。</p>
+  <p><strong>OpenAI scorecard 落地：</strong>OpenAI 给的是管理框架，不是可直接套用的财务模型；成功任务成本需要企业自己定义。</p>
+  <p><strong>Codex post-mortem：</strong>详细影响范围和具体修复还需等待 OpenAI 正式复盘，不应过度外推。</p>
+  <p><strong>Nitter/X 覆盖：</strong>本轮 Nitter RSS 空响应较多，X 账号日更覆盖不完整；报告未把不可验证社媒内容写入重点条目。</p>
+</div>
+
+<h2>低优先级噪音</h2>
+<div class="card noise">
+  <p>Google AI RSS 本窗口没有新的高优先级 AI engineering 条目，Anthropic RSS 路径返回 404，Follow List 中多位 X-only 账号因公共镜像不可用未能稳定抓取。Kimi K3 的二级媒体报道很多，但重复度高，今天只把 AP/Axios/BI 作为背景校验，不展开复述。</p>
+</div>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.kimi.com/blog/kimi-k3">Moonshot AI: Kimi K3: Open Frontier Intelligence</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/17/kimi-k3/">Simon Willison: Quoting Kimi K3</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/16/kimi-k3/">Simon Willison: Kimi K3, and what we can still learn from the pelican benchmark</a></li>
+  <li><a href="https://www.latent.space/p/ainews-kimi-k3-28t-a50b-the-largest">Latent Space: Kimi K3 2.8T-A50B</a></li>
+  <li><a href="https://openai.com/index/a-scorecard-for-the-ai-age/">OpenAI: A scorecard for the AI age</a></li>
+  <li><a href="https://www.axios.com/2026/07/17/openai-ai-costs-roi-metrics">Axios: OpenAI's CFO pitches a new way to measure AI's value</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/16/bad-codex-bug/">Simon Willison: Codex deletion bug quote</a></li>
+  <li><a href="https://huggingface.co/blog/nvidia/scale-diffusers-finetuning-nemo-automodel">Hugging Face: Fine-tune video and image models at scale with NVIDIA NeMo AutoModel and Diffusers</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/17/llm-cliche-highlighter/">Simon Willison: LLM cliché highlighter</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/16/firefox-in-webassembly/">Simon Willison: Firefox in WebAssembly</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://apnews.com/article/0d8a5e268deb11a673f4d444fc597cc5">AP: Kimi K3 industry reaction</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-17T00:00:00Z / 2026-07-18T00:00:00Z.</footer>
+</body>
+</html>
