@@ -16,6 +16,12 @@ Build the generated index pages with:
 ./scripts/build-hugo.sh
 ```
 
+Run the full local publish check with:
+
+```bash
+./scripts/check-site.sh
+```
+
 `content/index.json` is the source of truth for homepage and section listings. The build script copies it into `_hugo/data/content.json` before running Hugo.
 
 Historical HTML pages and uploaded assets remain in their existing paths under `daily/`, `research/`, and `deliverables/`.
