@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>站点视觉样稿 · 工程简报风</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f8fb;
+      --paper: #ffffff;
+      --ink: #18202b;
+      --muted: #647084;
+      --line: #d8e0ea;
+      --soft-line: #e8edf4;
+      --accent: #1f6feb;
+      --accent-ink: #0b3d91;
+      --accent-soft: #e9f1ff;
+      --green: #1f7a4f;
+      --green-soft: #e8f5ee;
+      --amber: #946200;
+      --amber-soft: #fff5d8;
+      --panel: #eef3f9;
+      --radius: 8px;
+      --shadow: 0 18px 50px rgba(40, 56, 80, .12);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(31, 111, 235, .06), transparent 420px),
+        var(--bg);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    .shell {
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(216, 224, 234, .88);
+      background: rgba(246, 248, 251, .92);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      min-height: 64px;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid #b9c8dc;
+      border-radius: var(--radius);
+      color: #fff;
+      background: #12315d;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.1;
+    }
+
+    .brand span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.1;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      border-radius: var(--radius);
+      padding: 8px 10px;
+      color: #334155;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-ink);
+      background: var(--accent-soft);
+    }
+
+    main {
+      padding: 44px 0 72px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, .88fr);
+      gap: 34px;
+      align-items: stretch;
+      min-height: 430px;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 34px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .label {
+      color: var(--accent-ink);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 18px 0 16px;
+      font-size: clamp(32px, 3.8vw, 48px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 58ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.68;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 9px 14px;
+      font-weight: 700;
+      line-height: 1;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button.primary {
+      border-color: #12315d;
+      color: #fff;
+      background: #12315d;
+    }
+
+    .button.secondary {
+      color: var(--accent-ink);
+      background: #fff;
+    }
+
+    .hero-panel {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #0f1f35;
+      box-shadow: var(--shadow);
+    }
+
+    .doc-board {
+      display: grid;
+      gap: 10px;
+      min-height: 230px;
+      padding: 18px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .10), transparent 44%),
+        #14253d;
+    }
+
+    .doc-card {
+      border: 1px solid rgba(219, 234, 254, .14);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .doc-card.wide {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 110px;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .doc-line {
+      height: 7px;
+      margin: 7px 0;
+      border-radius: 999px;
+      background: rgba(219, 234, 254, .28);
+    }
+
+    .doc-line.short {
+      width: 58%;
+    }
+
+    .chart {
+      display: flex;
+      align-items: end;
+      gap: 5px;
+      height: 76px;
+      border-left: 1px solid rgba(219, 234, 254, .18);
+      border-bottom: 1px solid rgba(219, 234, 254, .18);
+      padding: 0 0 7px 8px;
+    }
+
+    .chart span {
+      flex: 1;
+      min-width: 7px;
+      border-radius: 4px 4px 0 0;
+      background: #70a7ff;
+    }
+
+    .doc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .panel-body {
+      padding: 22px;
+      color: #dbeafe;
+    }
+
+    .panel-body h2 {
+      margin: 0 0 12px;
+      color: #fff;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .panel-body p {
+      margin: 0;
+      color: #b8c7db;
+      font-size: 14px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 22px;
+      border: 1px solid rgba(219, 234, 254, .16);
+      border-radius: var(--radius);
+    }
+
+    .metric {
+      padding: 13px;
+    }
+
+    .metric + .metric {
+      border-left: 1px solid rgba(219, 234, 254, .16);
+    }
+
+    .metric strong {
+      display: block;
+      color: #fff;
+      font-size: 22px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric span {
+      color: #a9bad0;
+      font-size: 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 28px;
+      margin-top: 36px;
+      align-items: start;
+    }
+
+    .side {
+      position: sticky;
+      top: 88px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: var(--paper);
+    }
+
+    .side a {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-radius: var(--radius);
+      padding: 9px 10px;
+      color: #334155;
+      font-size: 14px;
+    }
+
+    .side a:hover {
+      background: var(--accent-soft);
+    }
+
+    .side small {
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .content {
+      display: grid;
+      gap: 22px;
+    }
+
+    .section {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      border-bottom: 1px solid var(--soft-line);
+      padding: 22px 24px;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.25;
+    }
+
+    .section-head p {
+      max-width: 42ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .records {
+      display: grid;
+    }
+
+    .record {
+      display: grid;
+      grid-template-columns: 118px minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: start;
+      padding: 18px 24px;
+    }
+
+    .record + .record {
+      border-top: 1px solid var(--soft-line);
+    }
+
+    .date {
+      color: var(--muted);
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .record h3 {
+      margin: 0 0 6px;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .record p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.58;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 3px 7px;
+      color: #42526a;
+      background: #fafcff;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .status {
+      white-space: nowrap;
+      border-radius: var(--radius);
+      padding: 5px 8px;
+      color: var(--green);
+      background: var(--green-soft);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .status.review {
+      color: var(--amber);
+      background: var(--amber-soft);
+    }
+
+    .article-preview {
+      padding: 28px 34px 34px;
+    }
+
+    .article-preview h2 {
+      max-width: 740px;
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.12;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 26px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .article-preview p {
+      max-width: 76ch;
+      margin: 0 0 16px;
+      color: #334155;
+    }
+
+    .quote {
+      margin: 26px 0;
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      color: #17335f;
+      background: var(--accent-soft);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--soft-line);
+      padding: 11px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #17335f;
+      background: #edf4ff;
+      font-weight: 800;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .attachments {
+      display: grid;
+      gap: 10px;
+      padding: 18px 24px 24px;
+    }
+
+    .attachment {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      border: 1px solid var(--soft-line);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: #fbfdff;
+    }
+
+    .file-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: var(--radius);
+      color: var(--accent-ink);
+      background: var(--accent-soft);
+      font-weight: 800;
+    }
+
+    .attachment strong {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 15px;
+    }
+
+    .attachment span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer {
+      margin-top: 42px;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #121821;
+        --paper: #182231;
+        --ink: #e7edf6;
+        --muted: #9aa8ba;
+        --line: #2c3b4f;
+        --soft-line: #263447;
+        --accent: #70a7ff;
+        --accent-ink: #9fc2ff;
+        --accent-soft: rgba(112, 167, 255, .14);
+        --green: #76d39c;
+        --green-soft: rgba(118, 211, 156, .13);
+        --amber: #f3ca65;
+        --amber-soft: rgba(243, 202, 101, .14);
+        --panel: #1d2a3b;
+        --shadow: 0 18px 50px rgba(0, 0, 0, .26);
+      }
+
+      body {
+        background:
+          linear-gradient(180deg, rgba(112, 167, 255, .10), transparent 420px),
+          var(--bg);
+      }
+
+      .site-header {
+        background: rgba(18, 24, 33, .9);
+      }
+
+      .nav-links a,
+      .side a,
+      .record p,
+      .article-preview p {
+        color: #c3cedd;
+      }
+
+      .button.secondary,
+      .tag,
+      .attachment {
+        background: #151e2b;
+      }
+
+      .hero-panel {
+        background: #111827;
+      }
+
+      th {
+        color: #dbeafe;
+        background: #1c314f;
+      }
+
+      .quote {
+        color: #dbeafe;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .button {
+        transition: none;
+      }
+
+      .button:hover {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .shell {
+        width: min(100% - 28px, 720px);
+      }
+
+      .nav {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 0 12px;
+      }
+
+      .nav-links {
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        padding: 24px;
+      }
+
+      .side {
+        position: static;
+      }
+
+      .record {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .status {
+        width: fit-content;
+      }
+
+      .section-head {
+        display: grid;
+        gap: 8px;
+      }
+
+      .article-preview {
+        padding: 24px;
+      }
+
+      .attachment {
+        grid-template-columns: 42px minmax(0, 1fr);
+      }
+
+      .attachment .button {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell nav">
+      <a class="brand" href="/">
+        <span class="mark">C</span>
+        <span>
+          <strong>CoBuddy Pages</strong>
+          <span>统一站点视觉样稿</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="样稿导航">
+        <a class="active" href="#portal">Portal</a>
+        <a href="#daily">Daily</a>
+        <a href="#research">Research</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#article">Article</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell">
+      <section class="hero" id="portal">
+        <div class="hero-copy">
+          <div>
+            <div class="label">Engineering Brief Style</div>
+            <h1>把日报、研究和交付件收进一个清楚的发布门户</h1>
+            <p class="lead">视觉目标是稳定、克制、可扫描。重点放在标题、日期、摘要、附件和长期归档，而不是装饰。</p>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#daily">查看样稿</a>
+            <a class="button secondary" href="/">返回正式站点</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="站点概览">
+          <div class="doc-board" aria-hidden="true">
+            <div class="doc-card wide">
+              <div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line short"></div>
+              </div>
+              <div class="chart">
+                <span style="height: 42%"></span>
+                <span style="height: 76%"></span>
+                <span style="height: 55%"></span>
+                <span style="height: 88%"></span>
+                <span style="height: 64%"></span>
+              </div>
+            </div>
+            <div class="doc-grid">
+              <div class="doc-card">
+                <div class="doc-line"></div>
+                <div class="doc-line short"></div>
+              </div>
+              <div class="doc-card">
+                <div class="doc-line"></div>
+                <div class="doc-line short"></div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <h2>统一后的第一屏</h2>
+            <p>正式首页可以保留门户定位，同时让最新日报、精选研究和交付附件在一个视野里建立关系。</p>
+            <div class="metrics" aria-label="样稿指标">
+              <div class="metric"><strong>34</strong><span>Daily</span></div>
+              <div class="metric"><strong>30</strong><span>Research</span></div>
+              <div class="metric"><strong>3</strong><span>Deliverables</span></div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <div class="grid">
+        <aside class="side" aria-label="栏目侧栏">
+          <a href="#daily"><span>日报板块</span><small>Daily</small></a>
+          <a href="#research"><span>研究板块</span><small>Research</small></a>
+          <a href="#deliverables"><span>项目交付</span><small>Files</small></a>
+          <a href="#article"><span>正文样式</span><small>Article</small></a>
+        </aside>
+
+        <div class="content">
+          <section class="section" id="daily">
+            <div class="section-head">
+              <div>
+                <div class="label">Daily</div>
+                <h2>日报列表</h2>
+              </div>
+              <p>保留高密度时间线，日期、标题、摘要和状态各司其职。</p>
+            </div>
+            <div class="records">
+              <article class="record">
+                <time class="date" datetime="2026-07-18">2026-07-18</time>
+                <div>
+                  <h3><a href="/daily/2026/07/18/">Follow 深度日报：Kimi K3、AI ROI Scorecard 与 Agent 安全边界</a></h3>
+                  <p>Moonshot Kimi K3、OpenAI CFO AI age scorecard、Codex 文件误删事件和多模态微调工程栈。</p>
+                  <div class="tag-row">
+                    <span class="tag">OpenAI</span>
+                    <span class="tag">Agent Safety</span>
+                    <span class="tag">Models</span>
+                  </div>
+                </div>
+                <span class="status">已发布</span>
+              </article>
+              <article class="record">
+                <time class="date" datetime="2026-07-17">2026-07-17</time>
+                <div>
+                  <h3><a href="/daily/2026/07/17/">Follow 深度日报：Kimi K3、Codex 安全边界与 Agent 工作入口</a></h3>
+                  <p>Kimi K3、ChatGPT Work、RoboTTT 和知识工作 eval 的规模化前提。</p>
+                  <div class="tag-row">
+                    <span class="tag">Codex</span>
+                    <span class="tag">Workflow</span>
+                  </div>
+                </div>
+                <span class="status">已发布</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="section" id="research">
+            <div class="section-head">
+              <div>
+                <div class="label">Research</div>
+                <h2>研究列表</h2>
+              </div>
+              <p>研究页更强调长期引用价值，标签和摘要要比日报更突出。</p>
+            </div>
+            <div class="records">
+              <article class="record">
+                <time class="date" datetime="2026-07-11">2026-07-11</time>
+                <div>
+                  <h3><a href="/research/2026/07/11/learn-claude-code-agent-loop-report/">Learn Claude Code s01 Agent Loop 分析总结报告</a></h3>
+                  <p>最小 Agent Loop、工具调用闭环、教学版与生产运行时的差异，以及后续学习路线。</p>
+                  <div class="tag-row">
+                    <span class="tag">Agent Loop</span>
+                    <span class="tag">Claude Code</span>
+                    <span class="tag">OpenClaw</span>
+                  </div>
+                </div>
+                <span class="status">可引用</span>
+              </article>
+              <article class="record">
+                <time class="date" datetime="2026-06-22">2026-06-22</time>
+                <div>
+                  <h3><a href="/research/2026/06/22/claude-code-large-codebases/">Claude Code 大型代码库实践深度研究报告</a></h3>
+                  <p>从大型代码库任务切片、上下文选择、工具边界和审查策略看编码 Agent 的工程落地。</p>
+                  <div class="tag-row">
+                    <span class="tag">Codebase</span>
+                    <span class="tag">Engineering</span>
+                  </div>
+                </div>
+                <span class="status">可引用</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="section" id="deliverables">
+            <div class="section-head">
+              <div>
+                <div class="label">Deliverables</div>
+                <h2>交付件与附件</h2>
+              </div>
+              <p>交付件页面需要把下载入口做清楚，尤其是 Excel、PDF 和客户演示素材。</p>
+            </div>
+            <div class="attachments">
+              <a class="attachment" href="/deliverables/fde-standard-delivery/">
+                <span class="file-icon">HTML</span>
+                <span>
+                  <strong>FDE 智能体标准交付 SOP</strong>
+                  <span>页面发布件，配套现场工作表可下载</span>
+                </span>
+                <span class="button secondary">打开</span>
+              </a>
+              <a class="attachment" href="/deliverables/fde-standard-delivery/FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">
+                <span class="file-icon">XLSX</span>
+                <span>
+                  <strong>FDE 智能体标准交付现场工作表.xlsx</strong>
+                  <span>附件下载，保留文件名和浏览器下载行为</span>
+                </span>
+                <span class="button secondary">下载</span>
+              </a>
+            </div>
+          </section>
+
+          <section class="section" id="article">
+            <article class="article-preview">
+              <div class="label">Article Template</div>
+              <h2>报告详情页的统一正文节奏</h2>
+              <div class="article-meta">
+                <span>Research</span>
+                <span>2026-07-18</span>
+                <span>Agent Engineering</span>
+              </div>
+              <p>详情页不需要把所有旧页面强行重排。统一视觉可以先作用在顶部导航、标题区域、正文宽度、表格、引用块和页脚。</p>
+              <p>对于已有大量内联样式的研究页，可以继续用 raw 方式保留内容主体。新发布的研究报告再逐步使用统一模板。</p>
+              <div class="quote">建议路径：先统一入口和新页面，再对历史页面做按需升级。</div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>页面类型</th>
+                      <th>第一阶段处理</th>
+                      <th>第二阶段处理</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Daily</td>
+                      <td>统一 Hugo 模板</td>
+                      <td>增加月度归档和标签筛选</td>
+                    </tr>
+                    <tr>
+                      <td>Research</td>
+                      <td>raw 保留历史样式</td>
+                      <td>新文章进入统一研究模板</td>
+                    </tr>
+                    <tr>
+                      <td>Deliverables</td>
+                      <td>保留原交付页面</td>
+                      <td>统一附件、迁移提示和项目卡片</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          </section>
+        </div>
+      </div>
+
+      <footer class="footer">
+        样稿用途：仅用于确认统一站点视觉方向。正式栏目页和历史详情页暂未改变。
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
