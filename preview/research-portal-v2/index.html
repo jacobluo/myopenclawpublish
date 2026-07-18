@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Research Portal v2 · 视觉样稿</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #fafafa;
+      --surface: #ffffff;
+      --ink: #111111;
+      --muted: #666666;
+      --faint: #8a8a8a;
+      --line: #e5e5e5;
+      --strong-line: #cfcfcf;
+      --blue: #0068d6;
+      --blue-strong: #004fb8;
+      --blue-soft: #edf6ff;
+      --green: #087b4b;
+      --green-soft: #eaf8f0;
+      --amber: #8a5a00;
+      --amber-soft: #fff7df;
+      --radius: 6px;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-family: var(--sans);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--blue);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(1240px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(250, 250, 250, .92);
+      backdrop-filter: blur(16px);
+    }
+
+    .top-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      min-height: 62px;
+      gap: 24px;
+    }
+
+    .identity {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .logo {
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      border: 1px solid #1f1f1f;
+      border-radius: var(--radius);
+      color: #fff;
+      background: #111;
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .identity strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.1;
+    }
+
+    .identity span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.1;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      color: #333;
+      font-size: 13px;
+    }
+
+    .nav a {
+      border-radius: var(--radius);
+      padding: 7px 9px;
+    }
+
+    .nav a:hover,
+    .nav a.current {
+      color: var(--blue-strong);
+      background: var(--blue-soft);
+    }
+
+    main {
+      padding: 34px 0 64px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(420px, 1.05fr);
+      gap: 26px;
+      align-items: stretch;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 28px;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 360px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      background: var(--surface);
+    }
+
+    .kicker {
+      color: var(--blue-strong);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 730px;
+      margin: 16px 0 14px;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 58ch;
+      margin: 0;
+      color: #4f4f4f;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      border: 1px solid var(--strong-line);
+      border-radius: var(--radius);
+      padding: 8px 13px;
+      color: #111;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1;
+      transition: border-color .16s ease, background .16s ease, color .16s ease, transform .16s ease;
+    }
+
+    .btn:hover {
+      border-color: #b5b5b5;
+      transform: translateY(-1px);
+    }
+
+    .btn.primary {
+      border-color: #111;
+      color: #fff;
+      background: #111;
+    }
+
+    .btn.primary:hover {
+      color: #fff;
+      background: #242424;
+    }
+
+    .index-frame {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .frame-bar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding: 11px 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .frame-body {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      min-height: 316px;
+    }
+
+    .frame-side {
+      border-right: 1px solid var(--line);
+      padding: 16px 14px;
+      background: #fbfbfb;
+    }
+
+    .frame-side a {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-radius: var(--radius);
+      padding: 7px 8px;
+      color: #333;
+      font-size: 13px;
+    }
+
+    .frame-side a.active {
+      color: var(--blue-strong);
+      background: var(--blue-soft);
+    }
+
+    .frame-main {
+      padding: 16px;
+    }
+
+    .frame-title {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    .frame-title h2 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .count {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 6px 8px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .mini-list {
+      display: grid;
+      border-top: 1px solid var(--line);
+    }
+
+    .mini-item {
+      display: grid;
+      grid-template-columns: 78px minmax(0, 1fr);
+      gap: 14px;
+      border-bottom: 1px solid var(--line);
+      padding: 11px 0;
+    }
+
+    .mini-date {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .mini-item strong {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .mini-item span {
+      display: block;
+      overflow: hidden;
+      margin-top: 3px;
+      color: var(--muted);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+    }
+
+    .portal-grid {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+      align-items: start;
+    }
+
+    .rail {
+      position: sticky;
+      top: 84px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .rail-title {
+      border-bottom: 1px solid var(--line);
+      padding: 13px 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .rail a {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      border-bottom: 1px solid var(--line);
+      padding: 12px 14px;
+      font-size: 14px;
+    }
+
+    .rail a:last-child {
+      border-bottom: 0;
+    }
+
+    .rail small {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .main-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .section {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      padding: 17px 20px;
+    }
+
+    .section-head h2 {
+      margin: 4px 0 0;
+      font-size: 23px;
+      line-height: 1.22;
+    }
+
+    .section-head p {
+      max-width: 42ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .records {
+      display: grid;
+    }
+
+    .record {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr) 94px;
+      gap: 18px;
+      align-items: start;
+      border-bottom: 1px solid var(--line);
+      padding: 15px 20px;
+    }
+
+    .record:last-child {
+      border-bottom: 0;
+    }
+
+    .date {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .record h3 {
+      margin: 0 0 5px;
+      font-size: 17px;
+      line-height: 1.36;
+    }
+
+    .record p {
+      max-width: 76ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.58;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 9px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 2px 6px;
+      color: #444;
+      background: #fff;
+      font-family: var(--mono);
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .state {
+      width: fit-content;
+      justify-self: end;
+      border-radius: var(--radius);
+      padding: 5px 8px;
+      color: var(--green);
+      background: var(--green-soft);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .state.warn {
+      color: var(--amber);
+      background: var(--amber-soft);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .summary-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .panel-head {
+      border-bottom: 1px solid var(--line);
+      padding: 15px 18px;
+    }
+
+    .panel-head h2 {
+      margin: 4px 0 0;
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    .stat-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat {
+      padding: 14px 16px;
+    }
+
+    .stat + .stat {
+      border-left: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      font-family: var(--mono);
+      font-size: 24px;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .note-list {
+      display: grid;
+      padding: 8px 0;
+    }
+
+    .note-list a {
+      display: grid;
+      grid-template-columns: 82px minmax(0, 1fr);
+      gap: 12px;
+      padding: 10px 18px;
+      font-size: 13.5px;
+    }
+
+    .note-list time {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .attachments {
+      display: grid;
+      gap: 10px;
+      padding: 16px 18px 18px;
+    }
+
+    .file {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 11px;
+      background: #fff;
+    }
+
+    .file-type {
+      display: grid;
+      height: 38px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--blue-strong);
+      background: var(--blue-soft);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .file strong {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    .file span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .article {
+      padding: 24px 28px 28px;
+    }
+
+    .article h2 {
+      max-width: 720px;
+      margin: 6px 0 12px;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.08;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .article p {
+      max-width: 76ch;
+      margin: 0 0 15px;
+      color: #333;
+      font-size: 15px;
+      line-height: 1.78;
+    }
+
+    .callout {
+      max-width: 78ch;
+      margin: 22px 0;
+      border: 1px solid #bfdcff;
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      color: #123f75;
+      background: var(--blue-soft);
+      font-size: 14px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #222;
+      background: #f4f4f4;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .footer {
+      margin-top: 28px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .btn {
+        transition: none;
+      }
+
+      .btn:hover {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .wrap {
+        width: min(100% - 28px, 760px);
+      }
+
+      .top-inner {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 0 12px;
+      }
+
+      .nav {
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .hero,
+      .portal-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        min-height: 0;
+      }
+
+      .frame-body {
+        grid-template-columns: 1fr;
+      }
+
+      .frame-side {
+        display: flex;
+        overflow-x: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .frame-side a {
+        min-width: 126px;
+      }
+
+      .rail {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main {
+        padding-top: 24px;
+      }
+
+      .hero-copy,
+      .article {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: clamp(32px, 12vw, 42px);
+      }
+
+      .lead {
+        font-size: 16px;
+      }
+
+      .section-head {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .section-head p {
+        text-align: left;
+      }
+
+      .record {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .state {
+        justify-self: start;
+      }
+
+      .stat-list {
+        grid-template-columns: 1fr;
+      }
+
+      .stat + .stat {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .file {
+        grid-template-columns: 52px minmax(0, 1fr);
+      }
+
+      .file .btn {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="identity" href="/">
+        <span class="logo">CP</span>
+        <span>
+          <strong>CoBuddy Pages</strong>
+          <span>Research Portal v2 demo</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="样稿导航">
+        <a class="current" href="#overview">Overview</a>
+        <a href="#research">Research</a>
+        <a href="#daily">Daily</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#article">Article</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero" id="overview">
+        <div class="hero-copy">
+          <div>
+            <div class="kicker">Research Portal v2</div>
+            <h1>一个更精确的研究发布门户</h1>
+            <p class="lead">从 Vercel 的克制、Mintlify 的阅读、HashiCorp 的分区和 WIRED 的列表密度里取可用部分。</p>
+          </div>
+          <div class="hero-actions">
+            <a class="btn primary" href="#research">看研究列表</a>
+            <a class="btn" href="/preview/site-style-engineering-brief/">对比上一版</a>
+          </div>
+        </div>
+
+        <aside class="index-frame" aria-label="门户结构预览">
+          <div class="frame-bar">
+            <span>/pages.cobuddy.cc/research/</span>
+            <span>Hugo</span>
+          </div>
+          <div class="frame-body">
+            <nav class="frame-side" aria-label="结构预览侧栏">
+              <a class="active" href="#research"><span>Research</span><span>30</span></a>
+              <a href="#daily"><span>Daily</span><span>34</span></a>
+              <a href="#deliverables"><span>Files</span><span>3</span></a>
+              <a href="#article"><span>Templates</span><span>4</span></a>
+            </nav>
+            <div class="frame-main">
+              <div class="frame-title">
+                <h2>Latest Research</h2>
+                <span class="count">30 pages</span>
+              </div>
+              <div class="mini-list">
+                <a class="mini-item" href="/research/2026/07/11/learn-claude-code-agent-loop-report/">
+                  <span class="mini-date">07-11</span>
+                  <span><strong>Learn Claude Code s01 Agent Loop 分析总结报告</strong><span>Agent Loop, Claude Code, OpenClaw</span></span>
+                </a>
+                <a class="mini-item" href="/research/2026/07/10/fable-unknowns-report/">
+                  <span class="mini-date">07-10</span>
+                  <span><strong>《Fable 指南》分析总结报告</strong><span>Unknowns, evaluation, delivery</span></span>
+                </a>
+                <a class="mini-item" href="/research/2026/06/22/claude-code-large-codebases/">
+                  <span class="mini-date">06-22</span>
+                  <span><strong>Claude Code 大型代码库实践深度研究报告</strong><span>Codebase, review, context</span></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <div class="portal-grid">
+        <aside class="rail" aria-label="页面目录">
+          <div class="rail-title">Portal</div>
+          <a href="#research"><span>研究板块</span><small>Long-form</small></a>
+          <a href="#daily"><span>日报板块</span><small>Briefing</small></a>
+          <a href="#deliverables"><span>项目交付</span><small>Files</small></a>
+          <a href="#article"><span>正文模板</span><small>Reading</small></a>
+        </aside>
+
+        <div class="main-stack">
+          <section class="section" id="research">
+            <div class="section-head">
+              <div>
+                <div class="kicker">Research</div>
+                <h2>研究列表</h2>
+              </div>
+              <p>列表更像技术期刊和文档索引，优先服务查找、引用和复读。</p>
+            </div>
+            <div class="records">
+              <article class="record">
+                <time class="date" datetime="2026-07-11">2026-07-11</time>
+                <div>
+                  <h3><a href="/research/2026/07/11/learn-claude-code-agent-loop-report/">Learn Claude Code s01 Agent Loop 分析总结报告</a></h3>
+                  <p>最小 Agent Loop、工具调用闭环、教学版与生产运行时的差异，以及后续学习路线。</p>
+                  <div class="meta-row">
+                    <span class="chip">agent-loop</span>
+                    <span class="chip">claude-code</span>
+                    <span class="chip">openclaw</span>
+                  </div>
+                </div>
+                <span class="state">indexed</span>
+              </article>
+              <article class="record">
+                <time class="date" datetime="2026-07-10">2026-07-10</time>
+                <div>
+                  <h3><a href="/research/2026/07/10/gzh-design-skill-report/">gzh-design-skill 仓库分析报告</a></h3>
+                  <p>微信公众号排版 Agent Skill 的定位、工程质量、许可证风险和 OpenClaw 适配方式。</p>
+                  <div class="meta-row">
+                    <span class="chip">skill</span>
+                    <span class="chip">frontend</span>
+                  </div>
+                </div>
+                <span class="state">indexed</span>
+              </article>
+              <article class="record">
+                <time class="date" datetime="2026-06-22">2026-06-22</time>
+                <div>
+                  <h3><a href="/research/2026/06/22/claude-code-large-codebases/">Claude Code 大型代码库实践深度研究报告</a></h3>
+                  <p>大型代码库中的上下文选择、任务切片、审查策略和工程边界。</p>
+                  <div class="meta-row">
+                    <span class="chip">codebase</span>
+                    <span class="chip">engineering</span>
+                  </div>
+                </div>
+                <span class="state">indexed</span>
+              </article>
+            </div>
+          </section>
+
+          <div class="two-col">
+            <section class="summary-panel" id="daily">
+              <div class="panel-head">
+                <div class="kicker">Daily</div>
+                <h2>日报简报</h2>
+              </div>
+              <div class="stat-list">
+                <div class="stat"><strong>34</strong><span>reports</span></div>
+                <div class="stat"><strong>2</strong><span>months</span></div>
+                <div class="stat"><strong>Hugo</strong><span>template</span></div>
+              </div>
+              <div class="note-list">
+                <a href="/daily/2026/07/18/"><time>07-18</time><span>Follow 深度日报：Kimi K3、AI ROI Scorecard 与 Agent 安全边界</span></a>
+                <a href="/daily/2026/07/17/"><time>07-17</time><span>Follow 深度日报：Kimi K3、Codex 安全边界与 Agent 工作入口</span></a>
+                <a href="/daily/2026/07/16/"><time>07-16</time><span>Follow 深度日报：安全红队、Agent 工作入口与开放多模态模型</span></a>
+              </div>
+            </section>
+
+            <section class="summary-panel" id="deliverables">
+              <div class="panel-head">
+                <div class="kicker">Deliverables</div>
+                <h2>交付件</h2>
+              </div>
+              <div class="attachments">
+                <a class="file" href="/deliverables/fde-standard-delivery/">
+                  <span class="file-type">HTML</span>
+                  <span><strong>FDE 智能体标准交付 SOP</strong><span>页面发布件，配套工作表可下载</span></span>
+                  <span class="btn">打开</span>
+                </a>
+                <a class="file" href="/deliverables/fde-standard-delivery/FDE-%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%87%E5%87%86%E4%BA%A4%E4%BB%98-%E7%8E%B0%E5%9C%BA%E5%B7%A5%E4%BD%9C%E8%A1%A8.xlsx">
+                  <span class="file-type">XLSX</span>
+                  <span><strong>现场工作表.xlsx</strong><span>保持附件路径、文件名和下载行为</span></span>
+                  <span class="btn">下载</span>
+                </a>
+              </div>
+            </section>
+          </div>
+
+          <section class="section" id="article">
+            <article class="article">
+              <div class="kicker">Article Template</div>
+              <h2>报告详情页应该像一份可长期引用的工作文档</h2>
+              <div class="article-meta">
+                <span>Research</span>
+                <span>2026-07-18</span>
+                <span>Agent Engineering</span>
+              </div>
+              <p>这版视觉把标题、摘要、标签、状态和附件作为固定角色处理。Hugo 模板只需要选择内容类型，样式由 token 系统统一接管。</p>
+              <p>历史 Research 页面仍然可以通过 raw layout 保持原样。新发布的 Research 页面可以逐步进入统一模板，避免一次性重排带来的风险。</p>
+              <div class="callout">设计原则：入口统一，正文克制，附件清楚，历史链接不破坏。</div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>来源参考</th>
+                      <th>可借鉴部分</th>
+                      <th>用于本站</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Vercel</td>
+                      <td>黑白灰精度、语义 token、轻状态</td>
+                      <td>全站视觉基础和交互状态</td>
+                    </tr>
+                    <tr>
+                      <td>Mintlify</td>
+                      <td>文档阅读、目录、提示块</td>
+                      <td>Research 和 SOP 长文阅读</td>
+                    </tr>
+                    <tr>
+                      <td>HashiCorp</td>
+                      <td>工程门户、多产品结构</td>
+                      <td>Daily、Research、Deliverables 分区</td>
+                    </tr>
+                    <tr>
+                      <td>WIRED</td>
+                      <td>技术期刊密度、文章索引</td>
+                      <td>Research 列表和专题聚合</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          </section>
+        </div>
+      </div>
+
+      <footer class="footer">
+        Preview only. This page is not linked from the formal site navigation.
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
