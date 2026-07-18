@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Research Demo · Research Portal v2</title>
+  <link rel="stylesheet" href="../section-demo.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="identity" href="../">
+        <span class="logo">CP</span>
+        <span>
+          <strong>CoBuddy Pages</strong>
+          <span>Research section demo</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="样稿导航">
+        <a href="../">Overview</a>
+        <a class="current" href="./">Research</a>
+        <a href="../daily/">Daily</a>
+        <a href="/deliverables/">Deliverables</a>
+        <a href="../#article">Article</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="page-head">
+        <div>
+          <div class="kicker">Research</div>
+          <h1>研究页应该像可检索的专题库</h1>
+          <p class="lead">Research 不只是按时间倒序。它还需要专题、标签、摘要和引用入口，让长期报告能被再次找到。</p>
+        </div>
+        <aside class="head-panel" aria-label="研究统计">
+          <div class="row"><span>当前栏目</span><strong>Research</strong></div>
+          <div class="row"><span>Hugo 内容</span><strong>30</strong></div>
+          <div class="row"><span>公开路径</span><strong>/research/</strong></div>
+        </aside>
+      </section>
+
+      <div class="layout">
+        <aside class="rail" aria-label="研究目录">
+          <div class="rail-title">Research</div>
+          <a href="#featured"><span>精选研究</span><small>Featured</small></a>
+          <a href="#topics"><span>专题导航</span><small>Topics</small></a>
+          <a href="#archive"><span>全部研究</span><small>Archive</small></a>
+          <a href="#reading"><span>正文模板</span><small>Article</small></a>
+        </aside>
+
+        <div class="stack">
+          <div class="focus-grid" id="featured">
+            <article class="article-card">
+              <div class="article-body">
+                <div class="kicker">Featured</div>
+                <h2><a href="/research/2026/07/11/learn-claude-code-agent-loop-report/">Learn Claude Code s01 Agent Loop 分析总结报告</a></h2>
+                <p>这类文章适合放在 Research 首页顶部。它不是新闻，而是可以反复引用的工程方法分析。</p>
+                <p>视觉上应减少装饰，增加摘要、标签和上下文。读者进入前要知道这篇文章回答什么问题。</p>
+                <div class="meta-row">
+                  <span class="chip">agent-loop</span>
+                  <span class="chip">claude-code</span>
+                  <span class="chip">openclaw</span>
+                </div>
+              </div>
+            </article>
+            <aside class="mini-panel" id="topics">
+              <h2>专题导航</h2>
+              <div class="mini-list">
+                <a href="#archive"><span>Agent Engineering</span><small>14</small></a>
+                <a href="#archive"><span>Codex / Claude Code</span><small>9</small></a>
+                <a href="#archive"><span>Design / Skills</span><small>4</small></a>
+                <a href="#archive"><span>Market / Data</span><small>3</small></a>
+              </div>
+            </aside>
+          </div>
+
+          <section class="section" id="archive">
+            <div class="section-head">
+              <div>
+                <div class="kicker">Archive</div>
+                <h2>全部研究</h2>
+              </div>
+              <p>研究列表可以比日报更重摘要和标签，因为它服务长期查找。</p>
+            </div>
+            <div class="records">
+              <article class="record">
+                <time class="date" datetime="2026-07-11">2026-07-11</time>
+                <div>
+                  <h3><a href="/research/2026/07/11/learn-claude-code-agent-loop-report/">Learn Claude Code s01 Agent Loop 分析总结报告</a></h3>
+                  <p>分析最小 Agent Loop、工具调用闭环、教学版与生产级 Claude Code/Codex/OpenClaw 运行时差异。</p>
+                  <div class="meta-row">
+                    <span class="chip">agent-loop</span>
+                    <span class="chip">runtime</span>
+                    <span class="chip">education</span>
+                  </div>
+                </div>
+                <span class="state">featured</span>
+              </article>
+              <article class="record">
+                <time class="date" datetime="2026-07-10">2026-07-10</time>
+                <div>
+                  <h3><a href="/research/2026/07/10/fable-unknowns-report/">《Fable 指南》分析总结报告：把未知变成工程资产</a></h3>
+                  <p>总结四层 unknowns、八个方法，以及对 OpenClaw、Agent Harness 和 Context Engineering 的启发。</p>
+                  <div class="meta-row">
+                    <span class="chip">unknowns</span>
+                    <span class="chip">evaluation</span>
+                  </div>
+                </div>
+                <span class="state">indexed</span>
+              </article>
+              <article class="record">
+                <time class="date" datetime="2026-07-10">2026-07-10</time>
+                <div>
+                  <h3><a href="/research/2026/07/10/gzh-design-skill-report/">gzh-design-skill 仓库分析报告</a></h3>
+                  <p>微信公众号排版 Agent Skill 的定位、工程质量、许可证风险、OpenClaw/Codex 适配方式。</p>
+                  <div class="meta-row">
+                    <span class="chip">design</span>
+                    <span class="chip">skill</span>
+                  </div>
+                </div>
+                <span class="state">indexed</span>
+              </article>
+              <article class="record">
+                <time class="date" datetime="2026-06-22">2026-06-22</time>
+                <div>
+                  <h3><a href="/research/2026/06/22/claude-code-large-codebases/">Claude Code 大型代码库实践深度研究报告</a></h3>
+                  <p>从大型代码库任务切片、上下文选择、工具边界和审查策略看编码 Agent 工程落地。</p>
+                  <div class="meta-row">
+                    <span class="chip">codebase</span>
+                    <span class="chip">review</span>
+                    <span class="chip">context</span>
+                  </div>
+                </div>
+                <span class="state">indexed</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="section-head">
+              <div>
+                <div class="kicker">Matrix</div>
+                <h2>专题矩阵</h2>
+              </div>
+              <p>如果 Research 继续增长，专题矩阵会比单纯日期列表更有价值。</p>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>专题</th>
+                    <th>适合内容</th>
+                    <th>列表呈现</th>
+                    <th>详情呈现</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Agent Engineering</td>
+                    <td>Loop、Harness、评测、工具边界</td>
+                    <td>高密度摘要 + 标签</td>
+                    <td>正文 + 表格 + callout</td>
+                  </tr>
+                  <tr>
+                    <td>Codex / Claude Code</td>
+                    <td>编码代理、工作流、代码库实践</td>
+                    <td>突出任务场景</td>
+                    <td>保留代码块和证据链接</td>
+                  </tr>
+                  <tr>
+                    <td>Design / Skills</td>
+                    <td>设计规范、前端 Skill、发布流程</td>
+                    <td>突出可复用性</td>
+                    <td>模板和检查清单</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <article class="article-card" id="reading">
+            <div class="article-body">
+              <div class="kicker">Article Reading</div>
+              <h2>Research 详情页的重点是证据、结构和复用</h2>
+              <p>Research 详情页应该比 Daily 更稳定。标题、摘要、目录、引用块、表格和标签应该保持一致，帮助读者在几周后还能快速复读。</p>
+              <p>历史页面可以继续 raw 输出。新研究页面建议逐步套统一模板，让新增内容形成一致的长期资产。</p>
+              <div class="callout">推荐节奏：先统一 Research 列表页，再让新 Research 详情页进入统一模板，历史页面按需升级。</div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <footer class="footer">
+        Preview only. Research demo for Research Portal v2.
+      </footer>
+    </div>
+  </main>
+</body>
+</html>

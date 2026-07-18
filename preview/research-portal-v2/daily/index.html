@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Daily Demo · Research Portal v2</title>
+  <link rel="stylesheet" href="../section-demo.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="identity" href="../">
+        <span class="logo">CP</span>
+        <span>
+          <strong>CoBuddy Pages</strong>
+          <span>Daily section demo</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="样稿导航">
+        <a href="../">Overview</a>
+        <a href="../research/">Research</a>
+        <a class="current" href="./">Daily</a>
+        <a href="/deliverables/">Deliverables</a>
+        <a href="../#article">Article</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="page-head">
+        <div>
+          <div class="kicker">Daily</div>
+          <h1>日报页更像可复查的时间线</h1>
+          <p class="lead">每天一页，列表保持高密度，正文保持可读性。重点是日期、来源、主题标签和当天判断，不做花哨封面。</p>
+        </div>
+        <aside class="head-panel" aria-label="日报统计">
+          <div class="row"><span>当前栏目</span><strong>Daily</strong></div>
+          <div class="row"><span>已迁 Hugo</span><strong>34</strong></div>
+          <div class="row"><span>公开路径</span><strong>/daily/</strong></div>
+        </aside>
+      </section>
+
+      <div class="layout">
+        <aside class="rail" aria-label="日报目录">
+          <div class="rail-title">Archive</div>
+          <a href="#latest"><span>最新日报</span><small>Latest</small></a>
+          <a href="#month"><span>月度归档</span><small>2026-07</small></a>
+          <a href="#brief"><span>当天简报</span><small>Reading</small></a>
+          <a href="#signals"><span>信号分组</span><small>Topics</small></a>
+        </aside>
+
+        <div class="stack">
+          <section class="section" id="latest">
+            <div class="section-head">
+              <div>
+                <div class="kicker">Latest</div>
+                <h2>最新日报</h2>
+              </div>
+              <p>日报列表不需要大封面，读者最需要快速判断今天讲什么。</p>
+            </div>
+            <div class="records">
+              <article class="record">
+                <time class="date" datetime="2026-07-18">2026-07-18</time>
+                <div>
+                  <h3><a href="/daily/2026/07/18/">Follow 深度日报：Kimi K3、AI ROI Scorecard 与 Agent 安全边界</a></h3>
+                  <p>Moonshot Kimi K3、OpenAI CFO scorecard、Codex 文件误删事件、多模态微调工程栈。</p>
+                  <div class="meta-row">
+                    <span class="chip">models</span>
+                    <span class="chip">agent-safety</span>
+                    <span class="chip">openai</span>
+                  </div>
+                </div>
+                <span class="state">published</span>
+              </article>
+              <article class="record">
+                <time class="date" datetime="2026-07-17">2026-07-17</time>
+                <div>
+                  <h3><a href="/daily/2026/07/17/">Follow 深度日报：Kimi K3、Codex 安全边界与 Agent 工作入口</a></h3>
+                  <p>Kimi K3、ChatGPT Work、RoboTTT 和知识工作 eval 的规模化前提。</p>
+                  <div class="meta-row">
+                    <span class="chip">codex</span>
+                    <span class="chip">workflow</span>
+                  </div>
+                </div>
+                <span class="state">published</span>
+              </article>
+              <article class="record">
+                <time class="date" datetime="2026-07-16">2026-07-16</time>
+                <div>
+                  <h3><a href="/daily/2026/07/16/">Follow 深度日报：安全红队、Agent 工作入口与开放多模态模型</a></h3>
+                  <p>GPT-Red、安全治理、Fleet Slack 入口、Inkling 开放多模态模型和 VoiceEQ。</p>
+                  <div class="meta-row">
+                    <span class="chip">security</span>
+                    <span class="chip">multimodal</span>
+                  </div>
+                </div>
+                <span class="state">published</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="section" id="month">
+            <div class="section-head">
+              <div>
+                <div class="kicker">Monthly</div>
+                <h2>月度归档</h2>
+              </div>
+              <p>月份页可以做轻量统计，让读者看到主题变化。</p>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>月份</th>
+                    <th>日报数</th>
+                    <th>主要主题</th>
+                    <th>入口</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2026-07</td>
+                    <td>18</td>
+                    <td>Agent 工作入口、Codex、模型安全、开放模型</td>
+                    <td><a href="/daily/">查看</a></td>
+                  </tr>
+                  <tr>
+                    <td>2026-06</td>
+                    <td>16</td>
+                    <td>Loop Engineering、评测、数据边界、企业智能体</td>
+                    <td><a href="/daily/">查看</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <div class="focus-grid" id="brief">
+            <article class="article-card">
+              <div class="article-body">
+                <div class="kicker">Daily Reading</div>
+                <h2>当天日报正文预览</h2>
+                <p>日报详情页可以保留现有 Hugo Daily 模板的阅读方式，但顶部信息应该更统一：日期、来源范围、主题标签和本日判断。</p>
+                <p>正文区域保持较窄行宽，避免把日报变成大屏海报。列表和正文的关系应该清楚：列表负责扫描，详情负责阅读。</p>
+                <div class="callout">推荐做法：日报详情页不追求复杂视觉，只统一标题区、来源区、主题标签和页脚。</div>
+              </div>
+            </article>
+            <aside class="mini-panel" id="signals">
+              <h2>信号分组</h2>
+              <div class="mini-list">
+                <div><span>Agent Runtime</span><small>12</small></div>
+                <div><span>Model Release</span><small>9</small></div>
+                <div><span>Evaluation</span><small>7</small></div>
+                <div><span>Security</span><small>5</small></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        Preview only. Daily demo for Research Portal v2.
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
