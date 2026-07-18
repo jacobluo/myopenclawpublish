@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/assets/research-brief.css">
     <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}</title>
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Params.summary }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}{{ end }}">
+    {{- partial "analytics.html" . }}
   </head>
   <body class="portal-page {{ if .IsHome }}portal-home{{ else }}portal-section-{{ .Section }}{{ end }}">
     <header class="portal-top">

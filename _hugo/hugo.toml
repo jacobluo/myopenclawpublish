@@ -5,6 +5,7 @@ disableKinds = ["taxonomy", "term", "RSS", "sitemap", "robotsTXT"]
 
 [params]
 description = "公开发布内容入口：日报、研究和项目交付。"
+cloudflareAnalyticsToken = "7aa547f56ce04b83874490d54efa2b5b"
 
 [markup.goldmark.renderer]
 unsafe = true

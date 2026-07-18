@@ -1,5 +1,6 @@
 (function () {
   const STORAGE_KEY = "research-brief-theme";
+  const CLOUDFLARE_ANALYTICS_TOKEN = "7aa547f56ce04b83874490d54efa2b5b";
 
   function currentTheme() {
     return localStorage.getItem(STORAGE_KEY) || "light";
@@ -20,6 +21,15 @@
       .toLowerCase()
       .replace(/[^\p{Letter}\p{Number}]+/gu, "-")
       .replace(/^-+|-+$/g, "");
+  }
+
+  function ensureCloudflareAnalytics() {
+    if (document.querySelector('script[src*="static.cloudflareinsights.com/beacon.min.js"]')) return;
+    const script = document.createElement("script");
+    script.type = "module";
+    script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    script.setAttribute("data-cf-beacon", JSON.stringify({ token: CLOUDFLARE_ANALYTICS_TOKEN }));
+    document.head.appendChild(script);
   }
 
   function currentSection() {
@@ -157,6 +167,7 @@
   }
 
   applyTheme(currentTheme());
+  ensureCloudflareAnalytics();
   if (document.body.classList.contains("portal-page")) {
     return;
   }
