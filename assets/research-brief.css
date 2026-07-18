@@ -508,6 +508,22 @@ body:not(.rb-report-page) > main {
   width: min(980px, calc(100% - 32px));
 }
 
+body:has(.rb-layout) > main,
+body:has(.layout) > main {
+  width: min(1560px, calc(100% - 64px));
+}
+
+.rb-layout,
+.layout {
+  grid-template-columns: 240px minmax(0, 1fr) 280px;
+  gap: 28px;
+}
+
+.rb-report,
+.report {
+  padding: clamp(28px, 3.2vw, 44px);
+}
+
 .year {
   margin-top: 30px;
 }
@@ -662,7 +678,7 @@ footer {
   .summary-panel,
   .rb-summary-panel {
     display: block;
-    order: -1;
+    order: 0;
   }
 }
 
