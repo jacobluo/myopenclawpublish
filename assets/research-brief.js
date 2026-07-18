@@ -22,40 +22,50 @@
       .replace(/^-+|-+$/g, "");
   }
 
-  function makeTopbar(root) {
-    const topbar = document.createElement("div");
-    topbar.className = "rb-topbar";
+  function currentSection() {
+    if (location.pathname.startsWith("/research/")) return "research";
+    if (location.pathname.startsWith("/daily/")) return "daily";
+    if (location.pathname.startsWith("/deliverables/")) return "deliverables";
+    return "overview";
+  }
+
+  function makePortalTopbar() {
+    const section = currentSection();
+    const topbar = document.createElement("header");
+    topbar.className = "portal-top legacy-portal-top";
     topbar.innerHTML = `
-      <div class="rb-brand">
-        <strong>OpenClaw Research Brief</strong>
-        <span>AI、软件与市场的公开研究简报</span>
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/"${section === "overview" ? ' class="current"' : ""}>Overview</a>
+          <a href="/research/"${section === "research" ? ' class="current"' : ""}>Research</a>
+          <a href="/daily/"${section === "daily" ? ' class="current"' : ""}>Daily</a>
+          <a href="/deliverables/"${section === "deliverables" ? ' class="current"' : ""}>Deliverables</a>
+        </nav>
       </div>
-      <a class="rb-back" href="${root}">返回首页</a>
     `;
     return topbar;
   }
 
-  function makeThemeToggle() {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "theme-toggle";
-    button.addEventListener("click", () => {
-      applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
-    });
-    return button;
-  }
-
-  function ensureThemeToggle() {
-    const topbar = document.querySelector(".topbar, .rb-topbar");
-    if (!topbar || topbar.querySelector(".theme-toggle")) return;
-    topbar.appendChild(makeThemeToggle());
-    applyTheme(currentTheme());
-  }
-
-  function pageRootPath() {
-    const depth = location.pathname.split("/").filter(Boolean).length;
-    if (depth <= 1) return "./";
-    return "../".repeat(depth - 1);
+  function normalizeLegacyTopbar() {
+    if (document.querySelector(".portal-top")) return;
+    const main = document.querySelector("main");
+    const legacyTopbar = document.querySelector(".rb-topbar, .topbar");
+    const portalTopbar = makePortalTopbar();
+    if (legacyTopbar) {
+      legacyTopbar.remove();
+    }
+    if (main) {
+      document.body.insertBefore(portalTopbar, main);
+    } else {
+      document.body.insertBefore(portalTopbar, document.body.firstChild);
+    }
   }
 
   function enhanceReportPage() {
@@ -63,23 +73,21 @@
       document.body.classList.add("rb-index");
       const main = document.querySelector("main");
       if (main && !main.querySelector(".rb-topbar, .topbar")) {
-        main.insertBefore(makeTopbar("./"), main.firstChild);
+        document.body.insertBefore(makePortalTopbar(), main);
       }
-      ensureThemeToggle();
       return;
     }
 
     const main = document.querySelector("main");
     if (!main || main.querySelector(".rb-layout, .layout")) {
       document.body.classList.add("rb-report-page");
-      ensureThemeToggle();
+      normalizeLegacyTopbar();
       return;
     }
 
     document.body.classList.add("rb-report-page");
 
-    const root = pageRootPath();
-    const topbar = makeTopbar(root);
+    const topbar = makePortalTopbar();
     const layout = document.createElement("div");
     layout.className = "rb-layout";
     const toc = document.createElement("aside");
@@ -141,12 +149,11 @@
     `;
 
     main.textContent = "";
-    main.appendChild(topbar);
+    document.body.insertBefore(topbar, main);
     layout.appendChild(toc);
     layout.appendChild(article);
     layout.appendChild(summary);
     main.appendChild(layout);
-    ensureThemeToggle();
   }
 
   applyTheme(currentTheme());
