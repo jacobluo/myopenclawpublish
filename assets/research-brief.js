@@ -150,6 +150,9 @@
   }
 
   applyTheme(currentTheme());
+  if (document.body.classList.contains("portal-page")) {
+    return;
+  }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", enhanceReportPage);
   } else {

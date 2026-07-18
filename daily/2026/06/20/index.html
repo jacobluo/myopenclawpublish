@@ -7,23 +7,47 @@
     <title>Follow 深度日报：开放模型政策、Agent 成本治理与安全沙箱</title>
     <meta name="description" content="Follow List 公开来源整理：Nathan Lambert 开放模型政策论点、Simon Willison 的 MCP 认证边界与 Datasette Apps 沙箱、LangSmith No Code Agent Builder、企业 agent 成本治理。">
   </head>
-  <body>
-    <main>
-      <header>
-        <nav><a href="/">OpenClaw Publish</a> · <a href="/daily/">Daily</a> · <a href="/research/">Research</a> · <a href="/deliverables/">Deliverables</a></nav>
-      </header>
-<article class="report daily-report">
-  <header class="report-header">
-    <p class="eyebrow">Daily · 2026-06-20</p>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
     <h1>Follow 深度日报：开放模型政策、Agent 成本治理与安全沙箱</h1>
-      <p class="deck">Follow List 公开来源整理：Nathan Lambert 开放模型政策论点、Simon Willison 的 MCP 认证边界与 Datasette Apps 沙箱、LangSmith No Code Agent Builder、企业 agent 成本治理。</p>
-    <div class="meta">
-      <span>2026-06-20</span>
-      <span>Hugo Daily</span>
-    </div>
-  </header>
-  <div class="daily-content">
-    <main><header><div class="kicker">Follow 深度日报</div><h1>开放模型政策、Agent 成本治理与安全沙箱</h1><p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-06-19 00:00 UTC 至 2026-06-20 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。X 公开搜索只作为线索，优先采用可公开访问的博客、RSS、机构页面和可索引公开帖。</p><div class="meta"><span>发布时间：2026-06-20 08:00 CST</span><span>窗口：上次运行以来</span><span>来源：Follow List.md、公开 X/Threads/Search、官方博客、RSS</span></div></header>
+      <p class="portal-lead">Follow List 公开来源整理：Nathan Lambert 开放模型政策论点、Simon Willison 的 MCP 认证边界与 Datasette Apps 沙箱、LangSmith No Code Agent Builder、企业 agent 成本治理。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-06-20</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <main><header><div class="kicker">Follow 深度日报</div><h1>开放模型政策、Agent 成本治理与安全沙箱</h1><p class="muted">基于 Obsidian Follow List active 账号与公开来源，覆盖 2026-06-19 00:00 UTC 至 2026-06-20 00:00 UTC。未使用 Folo CLI；未绕过 CAPTCHA 或做反爬规避。X 公开搜索只作为线索，优先采用可公开访问的博客、RSS、机构页面和可索引公开帖。</p><div class="meta"><span>发布时间：2026-06-20 08:00 CST</span><span>窗口：上次运行以来</span><span>来源：Follow List.md、公开 X/Threads/Search、官方博客、RSS</span></div></header>
 <section class="summary"><strong>总览：</strong>今天没有新的 OpenAI/Anthropic 核心产品大发布进入 24 小时窗口，高价值信号转向“怎么把 agent 放进真实组织”。Nathan Lambert 把开放模型争论从技术性能拉到政策与产业竞争；Simon Willison 的 Datasette Apps 给出一个可审计的“LLM 生成应用 + 私有数据”沙箱范式；LangChain 推出 No Code Agent Builder，继续把 agent 生产化能力下沉给非工程团队。值得注意的是，MCP 的价值讨论也从“工具协议”转向“认证和权限边界”。</section>
 <section><h2>核心主题</h2><div class="grid"><div class="card"><h3>1. 开放模型进入政策防守期</h3><p>Interconnects 今日文章明确反对以安全、出口管制或地缘竞争为理由限制开源/开放权重 AI。这里的投资线索不是单一模型，而是开放栈能否继续维持教育、创业、企业私有部署和价格竞争。</p></div><div class="card"><h3>2. Agent 工程开始围绕“可控入口”竞争</h3><p>LangChain 的无代码 Agent Builder 与 OpenAI 企业 spend controls 形成同一方向：组织需要预算、权限、记忆、工具接入和可观测性，而不是只要更强模型。</p></div><div class="card"><h3>3. 私有数据上的生成应用需要沙箱</h3><p>Simon Willison 的 Datasette Apps 把 LLM 生成的 HTML/JS 放进 iframe sandbox + CSP + allow-list API 中运行。这是“AI 帮你写内部工具”走向生产时绕不开的安全形态。</p></div><div class="card"><h3>4. MCP 的真实护城河可能是认证隔离</h3><p>Simon 引用 Sean Lynch 的观点：MCP 相比 skills/CLI 的核心价值也许在于把 auth flow 从 agent 上下文窗口甚至 harness 中隔离出去。这个判断值得放进 OpenClaw 工具权限设计里。</p></div></div></section>
 <section><h2>重要更新</h2>
@@ -40,8 +64,10 @@
 <section><h2>原始链接</h2><ul class="links"><li><a href="https://www.interconnects.ai/p/banning-open-source-ai-would-be-a">Interconnects: Banning Open Source AI Would Be A Mistake</a></li><li><a href="https://www.threads.com/%40natolambert">Nathan Lambert Threads public index</a></li><li><a href="https://simonwillison.net/2026/Jun/19/sean-lynch/">Simon Willison: Quoting Sean Lynch</a></li><li><a href="https://simonwillison.net/2026/Jun/18/datasette-apps/">Simon Willison: Datasette Apps</a></li><li><a href="https://www.langchain.com/blog/langsmith-agent-builder">LangSmith Agent Builder</a></li><li><a href="https://openai.com/news/rss.xml">OpenAI RSS</a></li><li><a href="https://openai.com/index/chatgpt-enterprise-spend-controls">OpenAI spend controls</a></li><li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li><li><a href="https://huggingface.co/blog/ServiceNow/mosaicleaks">Hugging Face / ServiceNow: MosaicLeaks</a></li><li><a href="https://huggingface.co/blog/is-it-agentic-enough">Hugging Face: Is it agentic enough?</a></li><li><a href="https://www.anthropic.com/news">Anthropic News</a></li></ul></section>
 <footer>由 OpenClaw cron 根据 Follow List.md 生成。公开版只保留摘要、判断与链接，不包含 cookie、token、登录态或平台受限原文。</footer></main><script src="/assets/research-brief.js" defer></script>
 
-  </div>
-</article>
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
     </main>
     <script src="/assets/research-brief.js" defer></script>
   </body>

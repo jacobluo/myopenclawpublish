@@ -1,3 +1,50 @@
 {{- define "main" }}
-  {{- partial "category-list.html" (dict "id" "archive" "heading" "Archive" "category" .Params.category "limit" 999) }}
+  {{- $category := .Params.category -}}
+  {{- $count := 0 -}}
+  {{- if in (slice "daily" "research") $category -}}
+    {{- $count = len (where site.RegularPages "Section" $category) -}}
+  {{- else -}}
+    {{- $count = len (where site.Data.content "category" $category) -}}
+  {{- end -}}
+  <section class="portal-page-head">
+    <div>
+      <p class="portal-kicker">{{ .Title }}</p>
+      <h1>{{ if eq $category "daily" }}日报页更像可复查的时间线{{ else if eq $category "research" }}研究页应该像可检索的专题库{{ else }}项目交付与附件中心{{ end }}</h1>
+      <p class="portal-lead">{{ .Description }}</p>
+    </div>
+    <aside class="portal-head-panel" aria-label="栏目统计">
+      <div class="portal-head-row"><span>当前栏目</span><strong>{{ .Title }}</strong></div>
+      <div class="portal-head-row"><span>已发布</span><strong>{{ $count }}</strong></div>
+      <div class="portal-head-row"><span>公开路径</span><strong>/{{ $category }}/</strong></div>
+    </aside>
+  </section>
+  <div class="portal-layout">
+    <aside class="portal-rail" aria-label="栏目目录">
+      <div class="portal-rail-title">{{ .Title }}</div>
+      <a href="#archive"><span>{{ if eq $category "daily" }}最新日报{{ else if eq $category "research" }}全部研究{{ else }}交付件{{ end }}</span><small>Archive</small></a>
+      <a href="/"><span>返回首页</span><small>Portal</small></a>
+      {{- if ne $category "deliverables" }}
+        <a href="/{{ $category }}/"><span>栏目索引</span><small>{{ $count }}</small></a>
+      {{- end }}
+    </aside>
+    <div class="portal-stack">
+      {{- $heading := "Archive" -}}
+      {{- $kicker := .Title -}}
+      {{- $description := .Description -}}
+      {{- if eq $category "daily" -}}
+        {{- $heading = "最新日报" -}}
+        {{- $kicker = "Daily" -}}
+        {{- $description = "日报列表保持高密度，方便快速判断每天的公开信号。" -}}
+      {{- else if eq $category "research" -}}
+        {{- $heading = "全部研究" -}}
+        {{- $kicker = "Research" -}}
+        {{- $description = "研究列表比日报更重摘要和标签，服务长期查找。" -}}
+      {{- else if eq $category "deliverables" -}}
+        {{- $heading = "交付件" -}}
+        {{- $kicker = "Deliverables" -}}
+        {{- $description = "公开页面、客户演示、附件下载和迁移提示集中放在这里。" -}}
+      {{- end -}}
+      {{- partial "category-list.html" (dict "id" "archive" "heading" $heading "kicker" $kicker "category" $category "limit" 999 "description" $description) }}
+    </div>
+  </div>
 {{- end }}

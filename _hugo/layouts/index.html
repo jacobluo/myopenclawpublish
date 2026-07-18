@@ -1,16 +1,61 @@
 {{- define "main" }}
-  <section class="year" aria-labelledby="sections">
-    <h2 id="sections">Sections</h2>
-    {{- range slice
-      (dict "label" "Daily" "title" "日报板块" "url" "/daily/" "summary" "Follow 深度日报与日常公开更新，按日期归档。")
-      (dict "label" "Research" "title" "研究板块" "url" "/research/" "summary" "长期有效的分析报告、方法论、项目研究和专题材料。")
-      (dict "label" "Deliverables" "title" "项目交付" "url" "/deliverables/" "summary" "客户演示、海报、发布件、配套素材和需要公开链接的交付页面。")
-    }}
-      <article class="post"><time>{{ .label }}</time><div><a class="title" href="{{ .url }}">{{ .title }}</a><p class="summary">{{ .summary }}</p></div></article>
-    {{- end }}
+  {{- $dailyCount := len (where site.RegularPages "Section" "daily") -}}
+  {{- $researchCount := len (where site.RegularPages "Section" "research") -}}
+  {{- $deliverableCount := len (where site.Data.content "category" "deliverables") -}}
+  <section class="portal-hero" aria-labelledby="portal-title">
+    <div class="portal-hero-copy">
+      <div>
+        <p class="portal-kicker">Research Portal</p>
+        <h1 id="portal-title">一个更精确的研究发布门户</h1>
+        <p class="portal-lead">Daily 负责持续扫描，Research 负责长期沉淀，Deliverables 负责项目交付和附件下载。</p>
+      </div>
+      <div class="portal-actions">
+        <a class="portal-button primary" href="/research/">看研究页</a>
+        <a class="portal-button" href="/daily/">看日报页</a>
+      </div>
+    </div>
+    <aside class="portal-index-frame" aria-label="站点结构概览">
+      <div class="portal-frame-bar">
+        <span>/pages.cobuddy.cc/</span>
+        <span>Hugo</span>
+      </div>
+      <div class="portal-frame-body">
+        <nav class="portal-frame-side" aria-label="栏目概览">
+          <a class="active" href="/research/"><span>Research</span><span>{{ $researchCount }}</span></a>
+          <a href="/daily/"><span>Daily</span><span>{{ $dailyCount }}</span></a>
+          <a href="/deliverables/"><span>Files</span><span>{{ $deliverableCount }}</span></a>
+        </nav>
+        <div class="portal-frame-main">
+          <div class="portal-frame-title">
+            <h2>Latest Research</h2>
+            <span class="portal-count">{{ $researchCount }} pages</span>
+          </div>
+          <div class="portal-mini-list">
+            {{- range first 3 (sort (where site.RegularPages "Section" "research") "Date" "desc") }}
+              <a class="portal-mini-item" href="{{ .RelPermalink }}">
+                <span class="portal-mini-date">{{ .Date.Format "01-02" }}</span>
+                <span><strong>{{ .Title }}</strong><span>{{ .Params.summary }}</span></span>
+              </a>
+            {{- end }}
+          </div>
+        </div>
+      </div>
+    </aside>
   </section>
 
-  {{- partial "category-list.html" (dict "id" "latest-daily" "heading" "Latest Daily" "category" "daily" "limit" 8) }}
-  {{- partial "category-list.html" (dict "id" "latest-research" "heading" "Latest Research" "category" "research" "limit" 8) }}
-  {{- partial "category-list.html" (dict "id" "latest-deliverables" "heading" "Deliverables" "category" "deliverables" "limit" 10) }}
+  <div class="portal-layout">
+    <aside class="portal-rail" aria-label="页面目录">
+      <div class="portal-rail-title">Portal</div>
+      <a href="/research/"><span>研究板块</span><small>Long-form</small></a>
+      <a href="/daily/"><span>日报板块</span><small>Briefing</small></a>
+      <a href="/deliverables/"><span>项目交付</span><small>Files</small></a>
+    </aside>
+    <div class="portal-stack">
+      {{- partial "category-list.html" (dict "id" "latest-research" "heading" "研究列表" "kicker" "Research" "category" "research" "limit" 6 "description" "研究列表服务长期查找、引用和复读，摘要和标签比日期更重要。") }}
+      <div class="portal-two-col">
+        {{- partial "category-list.html" (dict "id" "latest-daily" "heading" "日报简报" "kicker" "Daily" "category" "daily" "limit" 4 "description" "日报保留时间线密度，快速说明每天发生了什么。") }}
+        {{- partial "category-list.html" (dict "id" "latest-deliverables" "heading" "交付件" "kicker" "Deliverables" "category" "deliverables" "limit" 4 "description" "交付页突出页面入口、附件和迁移提示。") }}
+      </div>
+    </div>
+  </div>
 {{- end }}

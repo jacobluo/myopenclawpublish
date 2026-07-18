@@ -1,18 +1,29 @@
 {{- define "main" }}
-<article class="report daily-report">
-  <header class="report-header">
-    <p class="eyebrow">Daily · {{ .Date.Format "2006-01-02" }}</p>
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
     <h1>{{ .Title }}</h1>
     {{- with .Params.summary }}
-      <p class="deck">{{ . }}</p>
+      <p class="portal-lead">{{ . }}</p>
     {{- end }}
-    <div class="meta">
-      <span>{{ .Date.Format "2006-01-02" }}</span>
-      <span>Hugo Daily</span>
-    </div>
-  </header>
-  <div class="daily-content">
-    {{ .Content }}
   </div>
-</article>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>{{ .Date.Format "2006-01-02" }}</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      {{ .Content }}
+    </div>
+  </article>
+</div>
 {{- end }}

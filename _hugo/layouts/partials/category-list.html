@@ -1,17 +1,29 @@
-<section class="year" aria-labelledby="{{ .id }}">
-  <h2 id="{{ .id }}">{{ .heading }}</h2>
+<section class="portal-section" aria-labelledby="{{ .id }}">
+  <div class="portal-section-head">
+    <div>
+      {{- with .kicker }}<p class="portal-kicker">{{ . }}</p>{{ end }}
+      <h2 id="{{ .id }}">{{ .heading }}</h2>
+    </div>
+    {{- with .description }}<p>{{ . }}</p>{{ end }}
+  </div>
+  <div class="portal-records">
   {{- if in (slice "daily" "research") .category }}
     {{- $pages := where site.RegularPages "Section" "daily" }}
     {{- if eq .category "research" }}{{ $pages = where site.RegularPages "Section" "research" }}{{ end }}
     {{- $pages = sort $pages "Date" "desc" }}
     {{- if .limit }}{{ $pages = first .limit $pages }}{{ end }}
     {{- range $pages }}
-      <article class="post">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      <article class="portal-record">
+        <time class="portal-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
         <div>
-          <a class="title" href="{{ .RelPermalink }}">{{ .Title }}</a>
-          <p class="summary">{{ .Params.summary }}</p>
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p>{{ .Params.summary }}</p>
+          <div class="portal-meta-row">
+            <span class="portal-chip">{{ .Section }}</span>
+            <span class="portal-chip">{{ .Date.Format "2006-01" }}</span>
+          </div>
         </div>
+        <span class="portal-state">indexed</span>
       </article>
     {{- end }}
   {{- else }}
@@ -19,13 +31,18 @@
     {{- $items = sort $items "date" "desc" }}
     {{- if .limit }}{{ $items = first .limit $items }}{{ end }}
     {{- range $items }}
-      <article class="post">
-        <time datetime="{{ .date }}">{{ .date }}</time>
+      <article class="portal-record">
+        <time class="portal-date" datetime="{{ .date }}">{{ .date }}</time>
         <div>
-          <a class="title" href="{{ .url }}">{{ .title }}</a>
-          <p class="summary">{{ .summary }}</p>
+          <h3><a href="{{ .url }}">{{ .title }}</a></h3>
+          <p>{{ .summary }}</p>
+          <div class="portal-meta-row">
+            <span class="portal-chip">{{ .category }}</span>
+          </div>
         </div>
+        <span class="portal-state">published</span>
       </article>
     {{- end }}
   {{- end }}
+  </div>
 </section>
