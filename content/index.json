@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：Kimi K3 扩散、Claude Fable 5 订阅稳定与 AI 工具质量",
+    "date": "2026-07-19",
+    "category": "daily",
+    "url": "/2026/07/19/follow-report/",
+    "summary": "Follow List 公开来源整理：Kimi K3 在媒体和市场层面继续扩散，Claude Fable 5 转为高阶订阅常驻能力，Simon Willison 当日关注 SQLite Query Explainer 与工具可解释性，OpenAI/LangChain/Google 官方源本窗口缺少新的高优先级发布，X/Nitter 覆盖仍不稳定。"
+  },
+  {
     "title": "FDE 智能体标准交付 SOP",
     "date": "2026-07-18",
     "category": "deliverables",
