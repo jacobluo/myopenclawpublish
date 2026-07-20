@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：AI 狂热治理、Claude Code 运行栈、开放模型可复现性</title>
+    <meta name="description" content="Follow List 公开来源整理：Simon Willison 连续两条高信号更新，一条指向企业 AI 狂热下的决策质量风险，一条验证 Claude Code 已使用 Rust 版 Bun；Hugging Face 当日出现 Aether-7B-5Attn 可复现开放模型线索；OpenAI Build Week 进入提交倒计时；Anthropic Fable 5 促销窗口在今日美国太平洋时间结束后需要重新确认。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：AI 狂热治理、Claude Code 运行栈、开放模型可复现性</h1>
+      <p class="portal-lead">Follow List 公开来源整理：Simon Willison 连续两条高信号更新，一条指向企业 AI 狂热下的决策质量风险，一条验证 Claude Code 已使用 Rust 版 Bun；Hugging Face 当日出现 Aether-7B-5Attn 可复现开放模型线索；OpenAI Build Week 进入提交倒计时；Anthropic Fable 5 促销窗口在今日美国太平洋时间结束后需要重新确认。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-07-20</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年7月20日（周一）</strong> · 覆盖窗口：2026-07-19 08:00 – 2026-07-20 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；公开网页、搜索索引、Simon Willison Atom/站点、Hugging Face 公开博客、OpenAI Build Week 页面、Anthropic 公开页面。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>企业 AI 狂热进入治理议题</h4><p>Simon Willison 7 月 19 日转述 Nik Suresh 对企业 AI mania 的批评，重点不在反 AI，而在预算、KPI 和组织叙事如何扭曲真实生产力判断。</p></div>
+  <div class="overview-item"><h4>Claude Code 运行栈继续透明化</h4><p>Simon 同日验证 Claude Code 二进制已使用 Rust 版 Bun，说明 coding agent 的性能、分发和供应链不只是模型问题，也包括本地 runtime 工程。</p></div>
+  <div class="overview-item"><h4>开放模型的标准从权重转向可复现</h4><p>Hugging Face 7 月 19 日社区文章 Aether-7B-5Attn 强调数据配方、训练代码、日志和检查点完整开放，把“主权 AI”定义推向可重建能力。</p></div>
+  <div class="overview-item"><h4>Codex 生态进入活动窗口末端</h4><p>OpenAI Build Week 的提交截止日是 7 月 21 日，今天适合观察 Codex 从工具到作品、挑战赛和社区样例的扩散情况。</p></div>
+  <div class="overview-item"><h4>Claude Fable 5 访问仍需复核</h4><p>Anthropic 此前延长的 Fable 5 / Claude Code 促销窗口在 7 月 19 日 PT 结束，今日以后实际配额和订阅分层需要重新确认。</p></div>
+  <div class="overview-item"><h4>X-only 覆盖仍不完整</h4><p>公开 Nitter/RSS 路径本轮无稳定返回；报告未把未能公开校验的 X 帖子写入事实，只列为待验证。</p></div>
+</div>
+
+<h2>核心主题</h2>
+<h3>一、企业 AI 狂热：从“是否用 AI”转向“谁为 AI 决策负责”</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering</span><strong>Simon Willison / Nik Suresh</strong> · 2026-07-19 05:06 UTC · <a href="https://simonwillison.net/2026/Jul/19/ai-mania/">Simon 摘录</a> · <a href="https://ludic.mataroa.blog/blog/ai-mania-is-eviscerating-global-decision-making/">原文</a></div>
+  <div class="summary"><p>Simon 转述 Nik Suresh 的长文，核心是大型组织正在把 AI 当成战略万能钥匙：从未真正使用过 AI 工具的高管也能写出全 AI 化技术战略，工程师甚至可能为了内部 token leaderboard 做无意义迁移。文章的价值在于把“AI 生产力”从模型能力问题拉回组织激励问题：当客户、高管、销售和内部 KPI 都押注夸张叙事时，反对不现实收益的人反而可能承担政治风险。</p><p>这不是“AI 没用”的观点，而是提醒：AI agent 进入企业后，真正稀缺的是可验证目标、成本纪律、责任人和反泡沫机制。Follow List 里 Hamel、Shreya、Simon 长期关注 eval 与质量反馈，今天这条正好把 eval 从模型层扩展到组织层。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>大哥关注 AI 产业链和应用落地，企业 AI 采购是否可持续，最终取决于真实 ROI 而不是“用了多少 token”或“多少流程标成 agent”。这也能帮助识别哪些 AI 公司只是讲故事，哪些能把流程、审计和业务指标闭环。</div>
+  <div class="action">后续行动：把后续企业 AI 案例按四列记录：业务目标、自动化前基线、AI 后可量化结果、责任人/审计机制；警惕只给 demo、token 数或“百倍效率”口号的项目。</div>
+</div>
+
+<h3>二、Claude Code 运行栈：coding agent 的护城河也在本地工程</h3>
+<div class="card">
+  <div class="source"><span class="tag">Claude Code</span><strong>Simon Willison / Jarred Sumner</strong> · 2026-07-19 03:54 UTC · <a href="https://simonwillison.net/2026/Jul/19/claude-code-in-bun-in-rust/">Simon 条目</a> · <a href="https://x.com/simonw/status/2078828540917940718">公开 X 线索</a></div>
+  <div class="summary"><p>Simon 根据 Jarred Sumner 的说法，检查本机 Claude Code 二进制，确认较新版本已使用 Rust 版 Bun，并观察到 Claude 暴露的 Bun 版本为 1.4.0。这个细节看似偏底层，但对 coding agent 很关键：当 agent 长时间运行、频繁启动、读写文件和调用工具时，本地 runtime 的启动速度、稳定性、打包方式和供应链透明度都会影响用户体验。</p><p>它也说明 Anthropic/Coding agent 生态在做“模型之外”的工程优化。Claude Code 是否强，不只看 Claude Fable 5 或 Sonnet 的推理能力，也看 CLI、runtime、权限、日志、恢复、插件和本地工具链的整体可靠性。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 中 Claude/Codex/agent 工程是重点主题。对 OpenClaw 和日常开发自动化来说，本地 agent 外壳的工程质量会直接决定能否放心跑长任务。</div>
+  <div class="action">后续行动：把 coding agent 对比从“模型能力”扩展为“端到端运行栈”：启动速度、沙箱/权限、文件恢复、工具调用日志、失败重试、CLI 可观测性和升级回滚。</div>
+</div>
+
+<h3>三、开放模型：可下载权重不等于可重建能力</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models</span><strong>Hugging Face / FINAL-Bench / VIDRAFT</strong> · 2026-07-19 · <a href="https://huggingface.co/blog/FINAL-Bench/opensource-llm">Aether-7B-5Attn 文章</a></div>
+  <div class="summary"><p>Hugging Face 社区文章发布 Aether-7B-5Attn，主张“主权 AI”不只是把权重下载到本地，而是能拿到数据配方、训练代码、完整日志、中间检查点和架构源码，从头重建模型。该模型约 6.59B 参数、MoE 架构、每 token 约 2.98B 激活参数，使用 49 层和五类 attention 机制，并用 7x7 Latin square 控制不同 attention 在层深上的分布。</p><p>文章最有价值的不是榜单成绩，而是方法论：把异构 attention 从灵感变成可做消融的实验设计，同时承认缺少快速 KV cache、batch size 限制和模型规模较小等不足。开放模型讨论正在从“参数多大、license 是否宽松”升级到“能不能审计、复现和继续训练”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条线索可用于跟踪开放模型产业链：训练硬件、数据配方、MoE 效率、可复现标准和国家/企业主权 AI。它比普通“又一个 7B 模型”更适合作为研究方向样本。</div>
+  <div class="action">后续行动：把 Aether 加入开放模型观察表，重点复查模型卡、训练代码、数据配方、检查点和 license；不要只看社区文章中的自我定位，后续需要第三方复现与基准。</div>
+</div>
+
+<h3>四、Codex Build Week：活动窗口可以反向观察真实使用场景</h3>
+<div class="card">
+  <div class="source"><span class="tag">Codex</span><strong>OpenAI Build Week</strong> · 2026-07-13 至 2026-07-21 · <a href="https://openai.com/build-week/">OpenAI 活动页</a></div>
+  <div class="summary"><p>OpenAI Build Week 鼓励开发者、创作者、创业者和学生使用 Codex 做项目，挑战赛提交截止日是 7 月 21 日。虽然这不是今天新发布的模型或产品，但在本窗口内已进入提交倒计时，值得观察社区会把 Codex 用在什么真实场景：小工具、自动化、站点、数据分析、内部流程还是纯 demo。</p><p>这类活动的价值不只是奖项，而是给 Codex 生态提供一批可公开检视的案例。若优秀项目集中在“可部署、可分享、可维护”的方向，说明 agentic coding 正在从个人效率工具转成应用生产入口。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Kevin Weil、Sam Altman、Josh Woodward 等 OpenAI 产品方向线索都指向同一个问题：Codex 如何进入普通工作流，而不只服务程序员。</div>
+  <div class="action">后续行动：7 月 21 日后复查提交项目和获奖名单，按“实际可用性、业务场景、是否有真实用户、是否依赖 OpenAI 专有能力”做二次筛选。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Simon Willison 当日两条高信号：</strong>一条聚焦企业 AI 狂热和决策质量，一条验证 Claude Code 的 Rust/Bun runtime 线索。</li>
+  <li><strong>Aether-7B-5Attn 发布：</strong>Hugging Face 社区新增“数据配方 + 训练代码 + 日志 + 检查点”导向的开放模型案例。</li>
+  <li><strong>OpenAI Build Week 临近截止：</strong>7 月 21 日提交截止，适合观察 Codex 社区作品，而不是只看官方发布。</li>
+  <li><strong>Fable 5 促销窗口结束：</strong>Anthropic 此前延长到 7 月 19 日 23:59 PT，今日起需要复查实际可用性、配额和价格。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Simon Willison：</strong>继续是本轮最高质量公开源，覆盖 AI 组织风险、Claude Code 底层工程和可验证技术细节。</li>
+  <li><strong>Anthropic / Claude Code：</strong>没有确认新的官方发布，但 Claude Code 使用 Rust 版 Bun 的线索说明其 CLI/runtime 工程在迭代。</li>
+  <li><strong>Hugging Face / FINAL-Bench / VIDRAFT：</strong>发布 Aether-7B-5Attn，把开放模型叙事从“开放权重”推向“可复现训练”。</li>
+  <li><strong>OpenAI：</strong>Build Week 持续进行，Codex 正被包装成开发者活动和社区作品入口。</li>
+  <li><strong>Google / LangChain / OpenAI 官方博客：</strong>本窗口未发现新的高优先级官方 AI 发布；保留为后续复查。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<div class="card">
+  <p><strong>企业 AI ROI 评分表：</strong>把“AI mania”案例转成采购/投资判断工具，重点看基线、结果、成本、责任人和可审计证据。</p>
+  <p><strong>Coding agent 运行栈矩阵：</strong>对 Claude Code、Codex、Cursor、OpenClaw 子任务分别记录 runtime、沙箱、权限、恢复、日志和升级策略。</p>
+  <p><strong>开放模型可复现清单：</strong>以 Aether、OLMo、Apertus、Kimi K3 等为样本，区分 weights-open、code-open、data-recipe-open、checkpoint-open 和 full-reproducible。</p>
+  <p><strong>Build Week 项目筛选：</strong>提交截止后筛选 5-10 个真正可运行的 Codex 项目，作为 agent app 形态观察样本。</p>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <p><strong>Fable 5 今日以后访问策略：</strong>7 月 19 日 PT 结束后的 Pro/Max/API/Team 实际配额需要用官方支持页或账号内界面再次确认。</p>
+  <p><strong>Aether 第三方验证：</strong>文章自称完整可复现，但仍需检查 repo、数据配方、训练日志、模型卡和独立 benchmark。</p>
+  <p><strong>Claude Code Bun 版本范围：</strong>Simon 的验证来自本机和公开线索，后续要确认不同平台、版本号和稳定版/Canary 差异。</p>
+  <p><strong>X-only 高优先级账号：</strong>Kevin Weil、Sam Altman、Alex Albert、Harrison Chase、Noam Brown 等未通过公共镜像稳定抓取，不能据此判断“无更新”。</p>
+</div>
+
+<h2>低优先级噪音</h2>
+<div class="card noise">
+  <p>今天没有把“AI agent 排行榜”“企业 AI 2026 大盘点”类 SEO 页面纳入重点内容，这类页面多为常青内容或二级汇总，缺少本窗口新增事实。Hugging Face 社区页的普通本地模型指南、论坛问答和非 AI 事件也未纳入。</p>
+</div>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://simonwillison.net/2026/Jul/19/ai-mania/">Simon Willison: AI Mania Is Eviscerating Global Decision-Making</a></li>
+  <li><a href="https://ludic.mataroa.blog/blog/ai-mania-is-eviscerating-global-decision-making/">Nik Suresh: AI Mania Is Eviscerating Global Decision-Making</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/19/claude-code-in-bun-in-rust/">Simon Willison: Claude Code uses Bun written in Rust now</a></li>
+  <li><a href="https://x.com/simonw/status/2078828540917940718">Simon Willison: public X note on Claude binary Bun version</a></li>
+  <li><a href="https://huggingface.co/blog/FINAL-Bench/opensource-llm">Hugging Face: Aether-7B-5Attn</a></li>
+  <li><a href="https://openai.com/build-week/">OpenAI Build Week</a></li>
+  <li><a href="https://www.anthropic.com/news/redeploying-fable-5">Anthropic: Redeploying Fable 5</a></li>
+  <li><a href="https://huggingface.co/blog/security-incident-july-2026">Hugging Face: Security incident disclosure - July 2026</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-19T00:00:00Z / 2026-07-20T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
