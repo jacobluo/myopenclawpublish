@@ -1,5 +1,12 @@
 [
   {
+    "title": "MigraQ 使用指南",
+    "date": "2026-07-20",
+    "category": "deliverables",
+    "url": "/deliverables/migraq-guide/",
+    "summary": "腾讯云迁移服务专家 MigraQ 使用指南：介绍云迁移全生命周期的能力、使用方法、输入输出与常见问题处理。"
+  },
+  {
     "title": "Follow 深度日报：Kimi K3 扩散、Claude Fable 5 订阅稳定与 AI 工具质量",
     "date": "2026-07-19",
     "category": "daily",
