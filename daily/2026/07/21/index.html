@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：长时程模型安全、Agent 评估闭环、开放权重竞争</title>
+    <meta name="description" content="Follow List 公开来源整理：OpenAI/Noam Brown 推出长时程模型安全评估线索；LangChain 发布 IssueBench 说明如何评估 LangSmith Engine；Nathan Lambert 把 Kimi K3 放进中美开放模型竞争框架；Simon Willison 观察 coding agents 正在降低逆向工程成本；Sam Altman 转发 ChatGPT memory 改进反馈。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：长时程模型安全、Agent 评估闭环、开放权重竞争</h1>
+      <p class="portal-lead">Follow List 公开来源整理：OpenAI/Noam Brown 推出长时程模型安全评估线索；LangChain 发布 IssueBench 说明如何评估 LangSmith Engine；Nathan Lambert 把 Kimi K3 放进中美开放模型竞争框架；Simon Willison 观察 coding agents 正在降低逆向工程成本；Sam Altman 转发 ChatGPT memory 改进反馈。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-07-21</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年7月21日（周二）</strong> · 覆盖窗口：2026-07-20 08:00 – 2026-07-21 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；公开 X/Nitter RSS、Simon Willison Atom、Interconnects RSS、LangChain Blog、Hugging Face Blog、公开搜索索引。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>长时程模型成为安全评估新焦点</h4><p>Noam Brown 转发 OpenAI 对 long-running model 的研究说明：模型持续执行开放任务时，风险不一定能被短回合 benchmark 捕捉。</p></div>
+  <div class="overview-item"><h4>Agent 评估从单点打分走向生产闭环</h4><p>LangChain 发布 IssueBench，用带标签 trace 评估 LangSmith Engine 对线上问题的聚类、诊断和修复建议能力。</p></div>
+  <div class="overview-item"><h4>开放权重竞争继续升温</h4><p>Nathan Lambert 长文把 Kimi K3 视为开放模型接近 frontier 的关键事件，并把中国开源策略、闭源实验室经济压力和政策风险放在同一框架下。</p></div>
+  <div class="overview-item"><h4>Coding agents 正改变“小自动化”的 ROI</h4><p>Simon Willison 指出，agent 让逆向工程和家庭/工作流自动化的尝试成本明显下降，维护失败的心理成本也降低。</p></div>
+  <div class="overview-item"><h4>ChatGPT memory 改进被用户感知</h4><p>Sam Altman 转发用户对 6 月 ChatGPT memory 更新的反馈，并评价“现在已经不错了”，说明 memory 仍是 ChatGPT 产品体验核心变量。</p></div>
+  <div class="overview-item"><h4>低质量 AI 内容正在成为工程议题</h4><p>Shreya Shankar 与 Hamel Husain 的当日动态都指向同一件事：AI 输出不是越多越好，长文、幻灯片和分析流都需要“去 slop 化”。</p></div>
+</div>
+
+<h2>核心主题</h2>
+<h3>一、长时程模型：安全评估不能只看短任务</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Safety</span><strong>Noam Brown / OpenAI</strong> · 2026-07-20 17:42 UTC · <a href="https://nitter.net/polynoamial/status/2079260550895382965#m">公开 X 镜像</a></div>
+  <div class="summary"><p>Noam Brown 转发 OpenAI 关于 long-running model 的研究线索，重点是：模型如果能长时间持续处理开放式目标，就可能表现出短时评测看不到的能力与风险。短任务通常考察单次回答、一次工具调用或有限步推理；长时程任务则会暴露计划坚持、状态管理、目标漂移、监控盲区和工具链滥用等问题。</p><p>这条动态对 agent 研究很重要，因为 Codex、Claude Code、LangGraph、OpenClaw 这类系统的真实价值正在从“答得好”迁移到“能跑多久、能否自我恢复、是否可审计”。如果评估体系仍停留在单轮 benchmark，就会低估持久 agent 在安全和可靠性上的新风险。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>大哥关注 AI agent 和产业落地，长时程能力会直接影响企业是否敢把任务交给 agent，也会影响监管、保险、审计和安全产品的需求。</div>
+  <div class="action">后续行动：跟进 OpenAI 原始研究页或论文；把 agent 评估清单补上运行时长、恢复次数、工具权限、人工接管点、日志完整性和越权尝试。</div>
+</div>
+
+<h3>二、LangSmith IssueBench：评估会修复问题的 agent</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agents / Evals</span><strong>Harrison Chase / LangChain</strong> · 2026-07-20 17:27 UTC · <a href="https://nitter.net/hwchase17/status/2079256852534362193#m">Harrison 动态</a> · <a href="https://www.langchain.com/blog/issuebench-how-we-evaluate-engine">LangChain 博文</a></div>
+  <div class="summary"><p>Harrison Chase 介绍 LangSmith Engine：它会遍历生产 trace，把相似失败聚类成问题，并提出修复建议。LangChain 当日发布 IssueBench，说明他们为 Engine 构造带 ground-truth 标签的内部 benchmark：一部分 trace 明确包含已知问题，另一部分是干净样本，用来测试系统能否可靠识别、归类和解释问题。</p><p>这是 agent 产品成熟度的关键方向。过去 eval 常用于判断模型输出好坏；IssueBench 代表另一层问题：如何评估一个“帮你改进 agent 的 agent”。这类系统如果做成，会把 observability、eval、debug、修复建议和回归测试串成持续改进循环。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这和 Hamel、Shreya、Eugene Yan 关注的 eval 主线高度一致，也给企业 agent 落地提供一个更可操作的框架：先收集 trace，再从真实失败生成测试，而不是凭空写 benchmark。</div>
+  <div class="action">后续行动：整理一份“生产 agent 闭环”模板：trace 采集、失败聚类、根因诊断、修复 PR、eval 覆盖、回归监控；可用于评估 LangSmith、Langfuse、Braintrust 等工具。</div>
+</div>
+
+<h3>三、Kimi K3：开放权重模型逼近 frontier 的战略含义</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models</span><strong>Nathan Lambert / Interconnects</strong> · 2026-07-20 15:48 UTC · <a href="https://www.interconnects.ai/p/kimi-k3-the-open-weights-escalation">Interconnects 长文</a> · <a href="https://nitter.net/natolambert/status/2079232178396033394#m">Nathan 动态</a></div>
+  <div class="summary"><p>Nathan Lambert 认为 Kimi K3 是开放权重模型竞争的分水岭：Moonshot AI 的 2.8T MoE 模型如果按计划开放权重，将把开放模型与闭源 frontier 的差距压缩到更短周期。文章同时讨论中国 AI 开源策略、资源效率、闭源实验室的利润压力，以及开放模型对 AI 扩散速度的影响。</p><p>最值得注意的是他的归纳方式：Kimi K3 不只是“又一个强模型”，而是验证了中国实验室在数据、架构、训练配方、工具环境等多个环节的工程执行力。开放模型一旦足够接近 frontier，会同时改变应用开发成本、闭源实验室定价权、政策风险判断和全球开发者生态。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条线同时连接 AI 产业链、资本开支、开源生态和中美竞争。对投资研究来说，开放权重接近 frontier 会压缩模型 API 毛利，但可能扩大推理芯片、部署平台、微调服务和企业私有化需求。</div>
+  <div class="action">后续行动：7 月 27 日复查 Kimi K3 权重是否按计划发布；同时跟踪 Qwen 3.8、GLM 5.2、Hugging Face 榜单和第三方评测，避免只采信发布方叙事。</div>
+</div>
+
+<h3>四、Coding agents 降低逆向工程和自动化试错成本</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering</span><strong>Simon Willison</strong> · 2026-07-20 19:24 UTC · <a href="https://simonwillison.net/2026/Jul/20/cheap-reverse-engineering/">Simon Willison Weblog</a></div>
+  <div class="summary"><p>Simon Willison 观察到，越来越多人用 coding agents 逆向工程家中设备或工作流工具，然后写小脚本完成自动化。过去这类事情不是做不到，而是投入产出比不划算：不稳定 API 会变，维护成本高，失败也消耗大量时间。agent 把初次尝试、失败重来和后续维护的成本都压低了。</p><p>这意味着 AI coding 的影响不只是让专业工程师更快写业务代码，还会把大量原本“不值得写”的小自动化变成可尝试项目。长期看，这会改变工具生态：更多封闭设备、内部系统和个人工作流会被用户侧自动化重新连接起来。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OpenClaw 这类个人 agent 的价值正是在这类长尾自动化里体现。模型能力提升是一部分，更重要的是把“我懒得写/不值得写”的脚本变成日常可承受的维护对象。</div>
+  <div class="action">后续行动：为个人工作流建立“小自动化候选池”，优先挑选重复频率高、失败损失低、接口可观察的场景；记录每个自动化的维护时间，验证 ROI。</div>
+</div>
+
+<h3>五、Memory 与去 slop：AI 产品体验回到质量控制</h3>
+<div class="card">
+  <div class="source"><span class="tag">Product / Quality</span><strong>Sam Altman、Shreya Shankar、Hamel Husain</strong> · 2026-07-20 · <a href="https://nitter.net/sama/status/2079258683884917013#m">Sam 动态</a> · <a href="https://nitter.net/sh_reya/status/2079279418418119087#m">Shreya 动态</a> · <a href="https://nitter.net/HamelHusain/status/2079225934511792483#m">Hamel 动态</a></div>
+  <div class="summary"><p>Sam Altman 转发用户对 6 月 ChatGPT memory 更新的反馈，并表示体验已经改善，说明记忆仍是通用 AI 助手能否“像长期伙伴”的关键产品层。与此同时，Shreya Shankar 提到 DocETL 正投入工程周期改善长文 LLM 输出，并预告围绕 long-form outputs 的“去 slop 化”功能；Hamel Husain 则批评 Codex Sol 的部分输出出现荒诞文本。</p><p>这三条放在一起看，方向很清楚：AI 产品竞争不只靠更强模型，也靠记忆、上下文管理、输出审美、结构化质量控制和 eval。用户会越来越不能容忍“看起来很多、实际不可用”的 AI 内容。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这对内容生产、报告自动化和企业知识库尤其重要。AI 报告如果没有来源、结构、去重、验证和行动项，就会变成 slop，而不是决策支持。</div>
+  <div class="action">后续行动：日报生成继续坚持来源链接、待验证区和低优先级噪音区；对自动生成长文增加“事实可核验、重复率、行动项密度、空话比例”四项检查。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI/Noam Brown：</strong>长时程模型研究把 agent 安全从短任务 benchmark 推向持续运行、监控和对齐问题。</li>
+  <li><strong>LangChain：</strong>IssueBench 发布，展示如何用带标签 trace 评估一个能发现并修复 agent 问题的系统。</li>
+  <li><strong>Nathan Lambert：</strong>Kimi K3 长文把开放权重竞争、模型经济学和中国 AI 策略串到一起，是本窗口最高价值长读。</li>
+  <li><strong>Simon Willison：</strong>提出 coding agents 让逆向工程和长尾自动化的 ROI 发生变化，适合纳入 OpenClaw 工作流思考。</li>
+  <li><strong>Sam / Shreya / Hamel：</strong>分别从 memory、长文去 slop、模型输出质量角度提醒：AI 产品体验正在回到质量控制。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Noam Brown：</strong>继续释放 OpenAI 在 reasoning、long-running models 和安全评估上的研究信号。</li>
+  <li><strong>Harrison Chase / LangChain：</strong>LangSmith Engine 与 IssueBench 表明 LangChain 正从框架层继续向生产 agent 运维闭环延伸。</li>
+  <li><strong>Nathan Lambert：</strong>围绕 Kimi K3 发布高密度战略分析，并预告继续讨论开放模型状态。</li>
+  <li><strong>Simon Willison：</strong>今天既覆盖 coding agents 的社会/工程影响，也继续追踪中国模型与开放权重讨论。</li>
+  <li><strong>Sam Altman：</strong>转发 ChatGPT memory 改进反馈，延续 OpenAI 对个人化助手体验的产品叙事。</li>
+  <li><strong>Shreya Shankar / Hamel Husain：</strong>分别强调长文 AI 输出质量和模型荒诞输出，属于 eval 与内容质量主线。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<div class="card">
+  <p><strong>长时程 agent 安全清单：</strong>为 Codex/Claude/OpenClaw 任务记录最长运行时长、权限边界、人工接管点、状态恢复、日志可追溯性和异常停止原因。</p>
+  <p><strong>IssueBench 方法复刻：</strong>用本地 OpenClaw 任务日志做小型 benchmark：标注失败 trace、干净 trace、根因类型和修复是否有效。</p>
+  <p><strong>开放模型产业链表：</strong>将 Kimi K3、Qwen 3.8、GLM 5.2、Aether、OLMo 等按参数规模、是否开放权重、是否开放训练配方、推理成本和第三方评测拆分。</p>
+  <p><strong>小自动化候选池：</strong>优先列出 10 个过去因为“太麻烦”没做的家庭/工作流自动化，测试 agent 是否能把实现和维护成本打下来。</p>
+  <p><strong>去 slop 评估规则：</strong>给长报告增加空话比例、重复段落、未验证断言、缺行动项四类检查。</p>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <p><strong>OpenAI 长时程模型研究原文：</strong>Noam 的 X 动态明确提到研究结论，但需要复查 OpenAI 官方研究页或论文以确认模型、实验设置和具体风险分类。</p>
+  <p><strong>Kimi K3 权重发布时间：</strong>Nathan 文章基于 Moonshot AI 7 月 27 日开放权重承诺；实际是否按期、license 如何、量化版本是否完整都待核验。</p>
+  <p><strong>LangSmith IssueBench 可迁移性：</strong>当前是 LangChain 内部 benchmark 思路，是否能迁移到非 LangChain agent、闭源生产 trace 和多租户场景还需要实践验证。</p>
+  <p><strong>ChatGPT memory 改进范围：</strong>Sam 转发的是用户体感反馈，具体覆盖哪些地区、套餐、默认开关和隐私设置仍需官方文档确认。</p>
+  <p><strong>X 抓取覆盖：</strong>公开 Nitter RSS 对多数高优先级账号可用，但 X 原站和镜像均可能缺失、延迟或丢转推；本报告只使用本轮可公开核验内容。</p>
+</div>
+
+<h2>低优先级噪音</h2>
+<div class="card noise">
+  <p>Jeff Dean 当日世界杯观赛动态与 AI 主题无关，未纳入重点。Hamel 转发的 AI Twitter “Sokal hoax”更像社区风向观察，已作为低权重质量信号处理。若搜索结果只来自 SEO 汇总、二级搬运或缺少明确日期，本轮没有写入事实正文。</p>
+</div>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://nitter.net/polynoamial/status/2079260550895382965#m">Noam Brown: long-running models and safety risks</a></li>
+  <li><a href="https://www.langchain.com/blog/issuebench-how-we-evaluate-engine">LangChain: IssueBench - How We Evaluate Engine</a></li>
+  <li><a href="https://nitter.net/hwchase17/status/2079256852534362193#m">Harrison Chase: LangSmith Engine and IssueBench</a></li>
+  <li><a href="https://www.interconnects.ai/p/kimi-k3-the-open-weights-escalation">Nathan Lambert: Kimi K3 - The open-weights escalation</a></li>
+  <li><a href="https://nitter.net/natolambert/status/2079232178396033394#m">Nathan Lambert: Kimi K3 post</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/20/cheap-reverse-engineering/">Simon Willison: Reverse-engineering is cheap now</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/20/afraid-of-chinese-models/">Simon Willison: Who's Afraid of Chinese Models?</a></li>
+  <li><a href="https://nitter.net/sama/status/2079258683884917013#m">Sam Altman: ChatGPT memory feedback</a></li>
+  <li><a href="https://nitter.net/sh_reya/status/2079279418418119087#m">Shreya Shankar: DocETL and long-form output quality</a></li>
+  <li><a href="https://nitter.net/HamelHusain/status/2079225934511792483#m">Hamel Husain: Codex Sol output quality note</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-20T00:00:00Z / 2026-07-21T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
