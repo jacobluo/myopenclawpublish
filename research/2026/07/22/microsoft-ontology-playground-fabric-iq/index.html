@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <script src="/assets/research-brief.js" defer></script>
+    <title>Microsoft Ontology Playground 研究简报</title>
+    <meta name="description" content="研究 Microsoft 开源 Ontology Playground 与 Fabric IQ Ontology：产品能力、技术结构、企业 AI Agent 价值和 WorkBuddy 可借鉴点。">
+  </head>
+  <body>
+    <main>
+      <nav class="rb-topbar" aria-label="页面导航">
+        <div class="rb-brand">
+          <strong>OpenClaw Publish</strong>
+          <span>Research Brief</span>
+        </div>
+        <a class="rb-back" href="/">返回索引</a>
+      </nav>
+
+      <article class="rb-layout">
+        <aside class="rb-panel">
+          <p class="eyebrow">Microsoft Fabric IQ · Ontology</p>
+          <h1>Ontology Playground 研究简报</h1>
+          <p>微软把“企业业务语义层”做成了一个可浏览、可编辑、可导出、可贡献的开源 Playground。它真正值得看的不是图谱可视化本身，而是企业 Agent 需要一层可治理、可复用、可绑定数据的业务语言。</p>
+          <div class="meta">
+            <span>生成日期：2026-07-22</span>
+            <span>对象：microsoft/Ontology-Playground</span>
+            <span>来源：GitHub + Microsoft Learn + GitHub API 快照</span>
+          </div>
+        </aside>
+
+        <section class="rb-report">
+          <section>
+            <h2>一页结论</h2>
+            <p><strong>判断：</strong>Ontology Playground 是一个面向 Microsoft Fabric IQ Ontology 的开源学习和设计工具。它把本体从抽象概念变成了可视化图谱、目录案例、设计器、RDF/XML 导入导出、教学课程、可嵌入组件和社区 PR 流程。对企业 AI 来说，它展示了一个方向：Agent 不应只靠提示词理解业务，而应连接一套明确的实体、属性、关系、约束和数据绑定。</p>
+            <p><strong>对 WorkBuddy 的启发：</strong>这类工具适合放在“行业知识建模 / 业务语义层 / Agent 上下文工程”叙事里。WorkBuddy 如果要从办公助手走向行业场景交付，也需要把案例、字段、指标、角色、流程、权限和动作沉淀成可维护的业务本体，而不是散落在 prompt、文档和演示话术里。</p>
+
+            <div class="grid">
+              <div class="card">
+                <h3>为什么现在值得看</h3>
+                <p>Microsoft Learn 已把 Fabric IQ 描述为 Microsoft IQ 体系中的企业数据语境层；Ontology 是 Fabric IQ 的 preview 核心项之一，用来统一业务概念并给人和 AI Agent 提供一致语义。</p>
+              </div>
+              <div class="card">
+                <h3>最重要的边界</h3>
+                <p>Playground 本身是开源静态前端和学习工具，不等于 Fabric IQ 产品全能力。真正的数据治理、OneLake 数据绑定、权限和企业查询执行仍属于 Microsoft Fabric 体系。</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>项目快照</h2>
+            <table>
+              <tbody>
+                <tr><th>项目</th><td><a href="https://github.com/microsoft/Ontology-Playground">microsoft/Ontology-Playground</a></td></tr>
+                <tr><th>在线体验</th><td><a href="https://microsoft.github.io/Ontology-Playground/">microsoft.github.io/Ontology-Playground</a></td></tr>
+                <tr><th>定位</th><td>学习、浏览、设计、校验、导出和分享 Fabric IQ 风格本体的开源 Web 应用</td></tr>
+                <tr><th>创建时间</th><td>2026-02-17</td></tr>
+                <tr><th>最近 push</th><td>2026-06-19</td></tr>
+                <tr><th>GitHub 热度</th><td>2,121 stars、251 forks、16 open issues（2026-07-22 API 快照）</td></tr>
+                <tr><th>许可证</th><td>MIT</td></tr>
+                <tr><th>技术栈</th><td>React 19、TypeScript 5、Vite、Cytoscape.js、Zustand、Framer Motion、Lucide Icons</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section>
+            <h2>Fabric IQ 背景</h2>
+            <p>微软官方文档把 Fabric IQ 放在 Microsoft IQ 体系中：Work IQ 负责员工工作语境，Foundry IQ 负责政策和权威文档，Web IQ 负责 Web 语境，Fabric IQ 负责业务实体和数据语境。它的核心目标是把企业数据提升到业务语言层，让人和 Agent 用“客户、订单、资产、发货、风险”等业务概念推理，而不是只理解表、列和查询语法。</p>
+            <p>Ontology 在 Fabric IQ 中处于 preview 状态。官方定义里，本体由 entity types、entity instances、properties、relationships、data bindings、ontology graph 和 NL2Ontology 查询层构成。换句话说，它不是单纯画知识图谱，而是把概念定义、数据绑定、图关系、自然语言查询和治理约束连起来。</p>
+          </section>
+
+          <section>
+            <h2>Playground 能力拆解</h2>
+            <table>
+              <thead>
+                <tr><th>能力</th><th>说明</th><th>价值</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>图谱浏览</td><td>用 Cytoscape.js 渲染本体节点和关系，支持平移、缩放、搜索和节点属性查看</td><td>把“业务概念之间的关系”变成能讨论的对象</td></tr>
+                <tr><td>本体目录</td><td>内置零售、电商、医疗、金融、制造、教育等官方和社区案例</td><td>降低从空白开始建模的门槛</td></tr>
+                <tr><td>可视化设计器</td><td>添加实体类型、属性、关系、基数、颜色、图标，带实时校验和预览</td><td>让业务和数据团队可以共同审阅模型</td></tr>
+                <tr><td>RDF/XML 导入导出</td><td>支持 OWL class、datatype property、object property 和 cardinality 的往返</td><td>和标准语义 Web/本体工具链保持兼容</td></tr>
+                <tr><td>Ontology School</td><td>提供课程、实验、presentation mode 和 quiz</td><td>把工具做成 enablement 资产，不只是 demo</td></tr>
+                <tr><td>嵌入组件</td><td>提供自包含 JS widget，可把交互图谱嵌入其他页面</td><td>适合报告、门户、培训材料复用</td></tr>
+                <tr><td>社区贡献</td><td>可通过 GitHub device flow 发起 catalogue PR</td><td>把行业模板逐步积累成公共资产</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section>
+            <h2>企业 Agent 的真实含义</h2>
+            <p>很多企业 Agent 项目的问题不是模型不会回答，而是业务语义没有统一：同一个“客户”在 CRM、订单、工单、合同和财务系统里含义不同；同一个“收入”在销售、交付和财务视角里口径不同。靠 prompt 写一段“请理解我们的业务”只能短期补丁，不能长期治理。</p>
+            <p>本体层的价值在于把这些内容变成显式资产：有哪些业务对象、对象有哪些属性、对象之间如何连接、哪些字段是标识、哪些关系有方向和基数、哪些数据源绑定到哪个概念。Agent 再调用工具或回答问题时，至少有机会沿着统一语义推理，而不是每次重新猜。</p>
+          </section>
+
+          <section>
+            <h2>对 WorkBuddy 的借鉴</h2>
+            <div class="grid">
+              <div class="card">
+                <h3>1. 行业包从案例升级为本体</h3>
+                <p>现在的行业演示往往由案例、截图、话术和 prompt 组成。下一步可以把“角色、对象、指标、动作、风险、产出物”抽成行业本体，例如零售的门店、SKU、会员、活动、订单、库存、渠道和毛利。</p>
+              </div>
+              <div class="card">
+                <h3>2. 让 Agent 有稳定业务词典</h3>
+                <p>WorkBuddy 的智能体如果共享同一套业务词典，就能减少“同义词、指标口径、流程边界”带来的漂移。销售 Agent、运营 Agent、合同 Agent 和客服 Agent 可以围绕同一批实体协作。</p>
+              </div>
+              <div class="card">
+                <h3>3. 交付物可以变成可视化资产</h3>
+                <p>客户不一定愿意读厚文档，但愿意一起看图。用图谱说明业务对象和关系，适合作为售前澄清、需求访谈、交付验收和培训材料的一部分。</p>
+              </div>
+              <div class="card">
+                <h3>4. 知识治理要前置</h3>
+                <p>如果没有版本、权限、字段来源、更新时间和负责人，本体也会变成另一份失控文档。WorkBuddy 可借鉴的是“建模 + 校验 + 发布 + 贡献”的闭环，而不只是画图。</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>可落地方案</h2>
+            <table>
+              <thead>
+                <tr><th>阶段</th><th>动作</th><th>产出</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>第一周</td><td>选一个行业场景，例如美妆零售或制造销售，整理 15-30 个核心实体和 30-60 条关系</td><td>行业本体草图、字段表、术语表</td></tr>
+                <tr><td>第二周</td><td>把现有 WorkBuddy 案例映射到实体和动作，标出每个 prompt 依赖哪些业务对象</td><td>案例-本体映射矩阵</td></tr>
+                <tr><td>第三周</td><td>做一个静态可视化页面，支持浏览实体、筛选关系、复制示例问题</td><td>售前演示版行业知识地图</td></tr>
+                <tr><td>第四周</td><td>把本体接入 Agent 配置和检索流程，评估回答一致性和口径错误率</td><td>Agent grounding 小闭环验证</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section>
+            <h2>风险与注意事项</h2>
+            <ul>
+              <li><strong>Preview 风险：</strong>Fabric IQ Ontology 仍是 preview，产品形态、API 和文档口径可能继续变化。</li>
+              <li><strong>不要过度建模：</strong>本体不是越大越好。先覆盖高频业务问题和跨系统歧义点，再扩展长尾概念。</li>
+              <li><strong>数据绑定是难点：</strong>静态图谱容易做，真正难的是字段口径、数据质量、权限和更新机制。</li>
+              <li><strong>Agent 不能只靠本体：</strong>本体提供语义框架，还需要检索、工具、权限、审计、评测和人工确认配合。</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>资料来源</h2>
+            <ul>
+              <li><a href="https://github.com/microsoft/Ontology-Playground">GitHub：microsoft/Ontology-Playground</a></li>
+              <li><a href="https://microsoft.github.io/Ontology-Playground/">Ontology Playground 在线体验</a></li>
+              <li><a href="https://learn.microsoft.com/en-us/fabric/iq/overview">Microsoft Learn：What is Fabric IQ?</a></li>
+              <li><a href="https://learn.microsoft.com/en-us/fabric/iq/ontology/overview">Microsoft Learn：What is ontology (preview)?</a></li>
+              <li><a href="https://learn.microsoft.com/en-us/training/modules/create-ontology-with-fabric-iq/">Microsoft Learn Training：Create an Ontology with Fabric IQ</a></li>
+            </ul>
+          </section>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

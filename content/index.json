@@ -1,5 +1,12 @@
 [
   {
+    "title": "Microsoft Ontology Playground 研究简报",
+    "date": "2026-07-22",
+    "category": "research",
+    "url": "/research/2026/07/22/microsoft-ontology-playground-fabric-iq/",
+    "summary": "研究 Microsoft 开源 Ontology Playground 与 Fabric IQ Ontology：它为什么突然值得看、产品能力拆解、对企业 AI Agent 和 WorkBuddy 知识建模的启发。"
+  },
+  {
     "title": "MigraQ 使用指南",
     "date": "2026-07-20",
     "category": "deliverables",
