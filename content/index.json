@@ -1,5 +1,19 @@
 [
   {
+    "title": "Follow 深度日报：ChatGPT Health、GitHub Agent 工作流与 MCP Stateless",
+    "date": "2026-07-24",
+    "category": "daily",
+    "url": "/daily/2026/07/24/",
+    "summary": "Follow List 公开来源整理：OpenAI 将 Health 接入 ChatGPT，GitHub 把 Copilot cloud agent 扩展到 Linear、移动端 CI 修复和 Issues 自动化审计，GitHub MCP Server 提前支持 stateless MCP；Simon Willison 继续把 OpenAI/Hugging Face 事件拆成 agent 安全基础设施问题，Hugging Face/NVIDIA 的 Nemotron 3 Embed 说明 agent memory 和检索层正在成为生产重点。"
+  },
+  {
+    "title": "Follow 深度日报：OpenAI Presence、Anthropic 经济研究、Copilot 采用度量",
+    "date": "2026-07-23",
+    "category": "daily",
+    "url": "/daily/2026/07/23/",
+    "summary": "Follow List 公开来源整理：OpenAI 推出企业级 agent 部署产品 Presence，并继续展示媒体行业 AI 工作流；Anthropic 把经济影响研究推向大额外部资助和 Claude 内置数据连接器；GitHub Copilot 新增采用影响仪表盘；Nathan Lambert 继续拆解 Kimi K3、Qwen、DeepSeek 与中美开放模型竞争；Simon Willison 把 OpenAI/Hugging Face 安全事件定位为 agent eval 基础设施警报。"
+  },
+  {
     "title": "Microsoft Ontology Playground 研究简报",
     "date": "2026-07-22",
     "category": "research",
