@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：Claude Opus 5、Agent Evals 与编码入口扩张</title>
+    <meta name="description" content="Follow List 公开来源整理：Anthropic 发布 Claude Opus 5，GitHub Copilot 同日接入，Simon Willison 快速拆解其能力与安全边界；LangChain 同日发布 Deep Agents benchmark、月度 newsletter 与 eval engineering skill，说明 agent 平台竞争正从模型选择进入评测、沙箱、记忆和治理；ExplainX sitemap 出现 Claude/agent workspace/安全/算力类聚合线索。X 公共镜像本轮返回空内容，人物动态以可公开核验来源为准。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：Claude Opus 5、Agent Evals 与编码入口扩张</h1>
+      <p class="portal-lead">Follow List 公开来源整理：Anthropic 发布 Claude Opus 5，GitHub Copilot 同日接入，Simon Willison 快速拆解其能力与安全边界；LangChain 同日发布 Deep Agents benchmark、月度 newsletter 与 eval engineering skill，说明 agent 平台竞争正从模型选择进入评测、沙箱、记忆和治理；ExplainX sitemap 出现 Claude/agent workspace/安全/算力类聚合线索。X 公共镜像本轮返回空内容，人物动态以可公开核验来源为准。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-07-25</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年7月25日（周六）</strong> · 覆盖窗口：2026-07-24 08:00 – 2026-07-25 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Anthropic、Simon Willison Weblog、GitHub Changelog、LangChain Blog、Hugging Face Blog、Interconnects、Google AI RSS、explainx.ai sitemap 与公开 X/Nitter 镜像抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Claude Opus 5 成为今日主线</h4><p>Anthropic 发布 Opus 5，定位为面向长时程 agent、编码、专业工作和可视化产出的 Opus 层升级。官方称其接近 Claude Fable 5 的 frontier intelligence，价格约为 Fable 5 的一半。</p></div>
+  <div class="overview-item"><h4>GitHub Copilot 当天接入 Opus 5</h4><p>GitHub 在 Copilot 中开放 Claude Opus 5，覆盖 VS Code、CLI、cloud agent、github.com、Mobile、JetBrains 等入口。模型发布和开发者入口正在更紧密地同步。</p></div>
+  <div class="overview-item"><h4>LangChain 把 Deep Agents 评测摆到台前</h4><p>LangChain 发布 Deep Agents benchmark 文章、月度 newsletter 与 eval engineering skill，重点从“如何调用模型”转向如何用 repo context、traces、Harbor task 和沙箱持续改进 agent。</p></div>
+  <div class="overview-item"><h4>Simon 继续承担快速实测与安全解释层</h4><p>Simon Willison 第一时间记录 Opus 5，并把它与 Fable 5、Opus 4.8、cyber safeguard、prompting guide 和实际生成效果放在一起看。</p></div>
+  <div class="overview-item"><h4>开放模型线索今天不是新增主线</h4><p>Interconnects 和 Hugging Face RSS 本窗口无新的 24 小时高优先级 open-model 长文；Kimi K3、GLM、Nemotron、HF 安全事件仍作为背景保留。</p></div>
+  <div class="overview-item"><h4>X 覆盖继续不足</h4><p>Nitter/RSSHub 类公开镜像对高优先级 X 账号本轮返回空内容。日报不把不可核验 X 贴文写成事实，只在待验证里记录缺口。</p></div>
+</div>
+
+<h2>核心主题</h2>
+<h3>一、Claude Opus 5：长时程 agent 竞争继续上探，但安全边界被明确写入发布叙事</h3>
+<div class="card">
+  <div class="source"><span class="tag">Anthropic / Claude</span><strong>Anthropic</strong> · 2026-07-24 · <a href="https://www.anthropic.com/news/claude-opus-5">官方发布</a></div>
+  <div class="summary"><p>Anthropic 发布 Claude Opus 5，称其是 Opus tier 的 step change improvement，面向 long-running agents、coding 和 professional work。官方将它描述为更 thoughtful/proactive 的模型，接近 Claude Fable 5 的 frontier intelligence，同时价格约为 Fable 5 的一半；与 Opus 4.8 同价，并继续提供更高成本的 fast mode。</p><p>官方强调 Opus 5 在软件工程、计算机使用、科研、金融、法律、视觉输出和更长任务中的稳定性提升，尤其是能更认真地验证自己的工作、迭代到成功。安全部分同样重要：Anthropic 表示 Opus 5 在发现漏洞方面更强，但没有针对 exploitation 训练，仍落后于 Mythos 5 的漏洞武器化能力。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Claude/Codex/AI agent 是主线。Opus 5 的意义不是单点 benchmark，而是“更接近 Fable 5 + 更便宜 + 可进入日常开发者入口”，这会影响 Claude Code、Cursor、Copilot、Devin 和企业 agent 的默认模型选择。</div>
+  <div class="action">后续行动：用同一套 coding-agent 任务对比 Opus 5、Fable 5、GPT-5.6 Sol、GLM/Kimi：长任务完成率、验证行为、token 成本、出错后的恢复能力、是否过度主动。</div>
+</div>
+
+<h3>二、GitHub Copilot 接入 Claude Opus 5：模型能力被直接推到编码工作入口</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Copilot</span><strong>GitHub Changelog</strong> · 2026-07-24 16:40 UTC · <a href="https://github.blog/changelog/2026-07-24-claude-opus-5-is-now-available-in-github-copilot">Changelog</a></div>
+  <div class="summary"><p>GitHub 宣布 Claude Opus 5 已进入 GitHub Copilot，面向复杂、长时程编码任务，强调 careful reasoning、tool use 和多步骤可靠执行。GitHub 早测里提到 Opus 5 在 agentic coding workflows 上表现强，包括自主代码更改、回归验证、多工具协调、定向修改和减少复杂任务中的不必要执行开销。</p><p>可用入口覆盖 VS Code、Visual Studio、Copilot CLI、GitHub Copilot cloud agent、GitHub Copilot app、github.com、GitHub Mobile、JetBrains、Xcode、Eclipse 等。Copilot Pro+、Max、Business、Enterprise 用户可用，企业和 Business 管理员需要在 Copilot settings 中启用 Claude Opus 5 policy。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>昨天日报刚写 Copilot cloud agent 接入 Linear、Mobile CI 和 Issues automation；今天 Opus 5 进入 Copilot，说明 GitHub 的 agent 工作流正在快速叠加更强模型。入口、权限、计费和模型策略会比单纯模型能力更影响采用速度。</div>
+  <div class="action">后续行动：检查 Copilot model policy 与 usage-based billing；为团队制定“普通任务默认便宜模型、长时程/高风险任务人工选择 Opus 5”的策略。</div>
+</div>
+
+<h3>三、Simon Willison 快速记录 Opus 5：实测入口、价格和安全边界比发布口号更重要</h3>
+<div class="card">
+  <div class="source"><span class="tag">Simon Willison / Claude</span><strong>Simon Willison</strong> · 2026-07-24 23:48 UTC · <a href="https://simonwillison.net/2026/Jul/24/introducing-claude-opus-5/">文章</a></div>
+  <div class="summary"><p>Simon Willison 当天记录 Claude Opus 5，引用 Anthropic 的定位并指出外部 buzz 偏正面，Artificial Analysis leaderboard 上 Opus 5 暂时领先，甚至排在 Fable 5 前面。他还注意到 Opus 5 价格与 Opus 4.8 相同，fast mode 仍是基础模型的两倍成本。</p><p>Simon 特别抓住两个点：一是 Opus 5 看起来继承了 Fable 式的 proactive 行为，例如官方案例里模型在没有直接查看图片的条件下自己写视觉 pipeline 提取几何信息；二是 cyber 能力边界，Opus 5 更会发现漏洞，但 Anthropic 声称没有训练它去利用漏洞。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Simon 的价值在于把模型发布转换成工程问题：价格、默认行为、prompting guide、leaderboard 是否可信、实际 artifact 质量、安全 guardrail 是否会影响安全研究和代码审计。</div>
+  <div class="action">后续行动：跟进 Simon 后续实测，尤其是他常用的工具链：llm-anthropic、SVG/HTML 生成、CLI coding agent、prompt injection 与 sandbox 行为。</div>
+</div>
+
+<h3>四、LangChain Deep Agents Benchmark：agent 质量进入“运行数据 + eval 工程”阶段</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Evals</span><strong>LangChain</strong> · 2026-07-24 02:31 UTC · <a href="https://www.langchain.com/blog/how-we-benchmark-deep-agents">Blog</a></div>
+  <div class="summary"><p>LangChain 发布“How We Benchmark Deep Agents”，描述他们如何在 Harbor 里重新组织 Deep Agents 的评测，覆盖 coding、conversation、retrieval 等场景，并把结果用于实际发版决策。重点不只是跑 benchmark，而是用评测解释 agent 在复杂任务中的失败模式。</p><p>这条和过去几周的 IssueBench、trace judge、LangSmith coding-agent traces、agent sandbox 文章连起来看，LangChain 正把 agent 平台的竞争点从 framework API 扩展到可观测性、沙箱环境、trace mining、评测构造和部署治理。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Hamel、Shreya、Harrison Chase 长期提醒：agent 不是靠一次 demo 判断好坏，而是靠任务集、失败分类、可复现环境和反馈闭环。LangChain 今天的更新正好把这条线产品化。</div>
+  <div class="action">后续行动：为 Follow 日报和 OpenClaw coding tasks 建一个小型 eval：输入候选链接/issue/trace，评估筛选、摘要、行动建议和引用完整性。</div>
+</div>
+
+<h3>五、LangChain Eval Engineering Skill：eval 从专家手工活变成可访谈、可生成、可运行的 agent workflow</h3>
+<div class="card">
+  <div class="source"><span class="tag">Eval Engineering</span><strong>LangChain</strong> · 2026-07-23 07:36 UTC · <a href="https://www.langchain.com/blog/towards-automating-eval-engineering">Blog</a></div>
+  <div class="summary"><p>LangChain 的 Eval Engineering Skill 会读取 agent repo 和 traces，通过访谈收集用户意图，提出 eval，并输出可运行的 Harbor tasks。发布时间略早于本窗口，但昨天日报没有展开，今天与 Deep Agents benchmark 一起形成完整主线。</p><p>这说明 eval engineering 正在从“少数工程师写脚本”变成 agent-assisted workflow：先读取代码和真实轨迹，再把失败样例、评测标准、任务环境和用户判断组织成可执行测试。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent 最大风险不是没有模型，而是不知道怎样证明 agent 变好了。能自动生成和维护 eval 的工具，会成为 agent 平台的核心护城河之一。</div>
+  <div class="action">后续行动：把 OpenClaw 常见任务拆成 Harbor-like task：网页抓取、Feishu 发布、GitHub Pages 发布、报告生成、状态文件防重复，并记录失败样例。</div>
+</div>
+
+<h3>六、LangChain July Newsletter：agent 生态把沙箱、Slack、OpenWiki、RLM 和 voice tracing 串起来</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Platform</span><strong>LangChain</strong> · 2026-07-24 02:31 UTC · <a href="https://www.langchain.com/blog/july-2026-langchain-newsletter">Blog</a></div>
+  <div class="summary"><p>LangChain 7 月 newsletter 汇总 NemoClaw Deep Agents blueprint、LangSmith Sandboxes free trial、Fleet Slack integration、voice tracing、OpenWiki Brains、Deep Agents 中的 RLMs 等更新。单看像产品月报，连起来看则是 agent 生产栈：安全执行环境、协作入口、记忆层、递归/子代理、语音交互和可观测性。</p><p>这和 Follow List 关注的“agent 进入真实工作流”一致。未来的竞争不是谁有一个 agent demo，而是谁能把 agent 放进 Slack、Linear、GitHub、企业知识库和受控沙箱里，并持续知道它做得对不对。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>LangChain 的路线越来越像企业 agent OS：入口、工具、环境、记忆、trace、eval 全部要有。这对 WorkBuddy/OpenClaw 的产品拆解有直接参考价值。</div>
+  <div class="action">后续行动：把当前 OpenClaw 能力映射到同一张表：入口、状态、工具、沙箱、记忆、可观测、审批、发布，找最薄弱的一环。</div>
+</div>
+
+<h3>七、ExplainX sitemap 新增 agent/security/算力聚合线索：可作发现源，不作事实锚点</h3>
+<div class="card">
+  <div class="source"><span class="tag">Discovery / Sitemap</span><strong>explainx.ai</strong> · 2026-07-24 · <a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">Blog sitemap</a></div>
+  <div class="summary"><p>explainx.ai 的 blog sitemap 在 2026-07-24 出现多条与 Follow List 主线相关的新条目，包括 Claude voice/mode/tools、Claude/SharedRoot sandbox escape、ChatGPT AgentForger workspace agents、Block Buzz/Nostr agent workspace、Hugging Face The Stack v3、AMD/Anthropic 2GW MI450 等。</p><p>这些条目像是新闻聚合和 SEO 型解释文章，适合作为发现源，不适合作为事实锚点。正文未采用其中具体说法，避免把二手聚合当成一手发布；但它暴露了市场正在集中追逐的关键词：agent workspace、sandbox escape、Claude tools、AI infra capex、open data stack。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 不只跟踪权威来源，也要观察“什么主题正在被内容市场放大”。这能帮助提前发现创业/投资叙事，但必须回到官方、论文、代码或一手公告验证。</div>
+  <div class="action">后续行动：挑 2 条做溯源验证：Claude/SharedRoot sandbox escape 是否有 CVE/官方公告；AMD/Anthropic MI450/2GW 是否有公司公告或 SEC/新闻稿支撑。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Anthropic：</strong>Claude Opus 5 发布，定位长时程 agent、编码、专业任务和可视化输出；官方将其放在接近 Fable 5、但成本更低的位置。</li>
+  <li><strong>GitHub：</strong>Claude Opus 5 进入 Copilot 多入口，包含 Copilot cloud agent 和移动端，企业管理员需启用模型 policy。</li>
+  <li><strong>Simon Willison：</strong>快速记录 Opus 5 的价格、leaderboard、prompting guide、proactive 行为和 cyber 安全边界，是本窗口最有价值的个人解读。</li>
+  <li><strong>LangChain：</strong>Deep Agents benchmark 与 July newsletter 同日发布，凸显 agent 平台正围绕 eval、沙箱、记忆、Slack/协作入口和 trace 可观测性竞争。</li>
+  <li><strong>ExplainX：</strong>sitemap 出现多条 agent workspace、sandbox、Claude tools、AI infra 关键词聚合，可作为线索池但需二次验证。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Anthropic / Alex Albert 线：</strong>官方发布 Opus 5，开发者生态几乎同步响应；Follow List 中 Anthropic 产品/Claude 方向今天权重最高。</li>
+  <li><strong>GitHub Copilot：</strong>继 Linear GA、Mobile CI、Issues automation、MCP stateless 后，Copilot 又接入 Opus 5，说明 coding agent 的入口和模型层在同时加速。</li>
+  <li><strong>Harrison Chase / LangChain 线：</strong>Deep Agents、LangSmith、Harbor、OpenWiki、Fleet、Sandboxes 的组合越来越清晰，核心是企业 agent 运行栈。</li>
+  <li><strong>Simon Willison：</strong>继续提供高价值实测和安全解释，是本日报里最可靠的个人来源之一。</li>
+  <li><strong>Nathan Lambert / Interconnects：</strong>RSS 本窗口无 24 小时新增长文；Kimi K3、Qwen、GLM、开放模型政策和 RLHF book 继续作为背景跟踪。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>Opus 5 实测矩阵：</strong>coding、前端、调试、长文档、数据分析、工具调用、拒答与安全边界，和 Fable 5/GPT-5.6 Sol/Kimi K3 对照。</li>
+  <li><strong>Copilot 模型策略：</strong>记录 Opus 5 在 Copilot CLI、cloud agent、Mobile CI 中的可用性、计费、policy 和 rollout 差异。</li>
+  <li><strong>Agent eval pipeline：</strong>参考 LangChain，把真实 trace 转成可复跑测试，不再只靠主观体感评价 agent 质量。</li>
+  <li><strong>Sandbox threat model：</strong>结合 OpenAI/HF 事件、LangChain sandboxes、ExplainX 的 sandbox escape 线索，整理 agent 运行环境的最低安全要求。</li>
+  <li><strong>OpenClaw 产品映射：</strong>把入口、工具、记忆、审批、发布、可观测、eval 七层画成一张产品架构表，寻找可复用 skill/workflow。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>Opus 5 在不同产品中的真实可用性仍取决于 rollout、地区、账户等级和管理员 policy；本日报只确认 Anthropic/GitHub 公开发布。</li>
+  <li>GitHub Copilot 中 Opus 5 的使用成本按 provider API list price/usage-based billing 计，实际团队账单影响需要看 Copilot 账户和模型定价页。</li>
+  <li>Anthropic RSS 路径本轮返回 404/Next.js not found；使用官方新闻页面和 Simon 链接交叉确认。</li>
+  <li>X/Nitter/RSSHub 抽样账号本轮返回空内容，不能宣称 Follow List 高优先级 X 账号“无更新”。</li>
+  <li>ExplainX sitemap 新条目只作为发现线索；涉及 CVE、投资金额、算力合作、模型能力等内容必须回到一手来源验证。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Google AI RSS 本窗口无 24 小时内新增 AI 主线，最新为 2026-07-22 Galaxy Unpacked 相关产品更新，今日不展开。</li>
+  <li>Hugging Face RSS 最新项为 2026-07-23 Nunchaku/Diffusers，偏推理优化和图像模型生态，本日报只保留在背景源里。</li>
+  <li>Interconnects 最新长文为 2026-07-22 开放模型 recap，价值高但已超出本窗口，今天不重复长篇展开。</li>
+  <li>大量 Claude Opus 5 二手转述和 leaderboard 截图缺少可复核上下文，未纳入重点。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.anthropic.com/news/claude-opus-5">Anthropic · Introducing Claude Opus 5</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-24-claude-opus-5-is-now-available-in-github-copilot">GitHub · Claude Opus 5 is now available in GitHub Copilot</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/24/introducing-claude-opus-5/">Simon Willison · Introducing Claude Opus 5</a></li>
+  <li><a href="https://www.langchain.com/blog/how-we-benchmark-deep-agents">LangChain · How We Benchmark Deep Agents</a></li>
+  <li><a href="https://www.langchain.com/blog/towards-automating-eval-engineering">LangChain · Eval Engineering Skill</a></li>
+  <li><a href="https://www.langchain.com/blog/july-2026-langchain-newsletter">LangChain · July 2026 Newsletter</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai · Blog sitemap</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects AI RSS</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/ai/rss/">Google AI RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-24T00:00:00Z / 2026-07-25T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
