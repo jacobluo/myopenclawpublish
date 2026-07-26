@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：Opus 5 安全边界、GPT-5.6 Agent 栈与 Physical AI 边缘模型</title>
+    <meta name="description" content="Follow List 公开来源整理：本窗口没有新的大规模模型发布，重点转向发布后的工程解释与生态响应。Simon Willison 记录 Boris Cherny 对 Claude Opus 5 prompt-injection 抗性的强调；OpenAI GPT-5.6 页面与 harness engineering 文章继续把 Codex/ChatGPT Work 推向 agent-first 软件生产；GitHub Copilot 标签页显示 Opus 5 已进入 Copilot 主入口；Hugging Face/NVIDIA Cosmos 3 Edge 则把 world model 和 physical AI 推向边缘侧。X 公共页面仍只能提供有限 profile/search snippet，本期不把不可打开的 X 贴文写成事实。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：Opus 5 安全边界、GPT-5.6 Agent 栈与 Physical AI 边缘模型</h1>
+      <p class="portal-lead">Follow List 公开来源整理：本窗口没有新的大规模模型发布，重点转向发布后的工程解释与生态响应。Simon Willison 记录 Boris Cherny 对 Claude Opus 5 prompt-injection 抗性的强调；OpenAI GPT-5.6 页面与 harness engineering 文章继续把 Codex/ChatGPT Work 推向 agent-first 软件生产；GitHub Copilot 标签页显示 Opus 5 已进入 Copilot 主入口；Hugging Face/NVIDIA Cosmos 3 Edge 则把 world model 和 physical AI 推向边缘侧。X 公共页面仍只能提供有限 profile/search snippet，本期不把不可打开的 X 贴文写成事实。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-07-26</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年7月26日（周日）</strong> · 覆盖窗口：2026-07-25 08:00 – 2026-07-26 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Simon Willison Weblog、OpenAI 官方页面、GitHub Changelog/Copilot 标签页、Hugging Face Blog、Interconnects RSS、Anthropic News、LangChain Blog、Google AI RSS、公开 X 搜索 snippet 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Opus 5 发布后的第一天，安全解释比能力宣传更有价值</h4><p>Simon Willison 在 7 月 25 日收录 Boris Cherny 对 Opus 5 prompt-injection 抗性的评论，并直接指向系统卡第 73 页。这说明 Anthropic/Claude 线今天的重点从“发布了什么”转到“怎样证明更难被注入”。</p></div>
+  <div class="overview-item"><h4>OpenAI 的 agent 叙事继续落在工程组织形态</h4><p>GPT-5.6 官方页强调 Codex、ChatGPT Work、Programmatic Tool Calling 和 multi-agent；harness engineering 文章则把软件团队的工作重心改写成设计环境、表达意图、建立反馈回路。</p></div>
+  <div class="overview-item"><h4>Copilot 入口争夺仍在延续</h4><p>GitHub Copilot 标签页显示 7 月 24 日 Opus 5 已进入 Copilot，紧邻 Linear cloud agent、MCP spec、Issues automation 等更新。模型更新正在快速变成开发入口和管理策略问题。</p></div>
+  <div class="overview-item"><h4>Physical AI 出现可跟进开源线索</h4><p>Hugging Face 上 NVIDIA Cosmos 3 Edge 发布，把 4B world/action model 放到 Jetson/RTX 边缘设备场景，和 Jim Fan、Fei-Fei Li 线的机器人、world model、spatial intelligence 主题相关。</p></div>
+  <div class="overview-item"><h4>开放模型主线今天没有 24 小时新长文</h4><p>Interconnects 最新长文仍是 7 月 22 日 open-model recap，Hugging Face 常规 RSS 里最新强相关项为 Cosmos 3 Edge。Kimi K3/Qwen/GLM 继续作为背景，不重复展开。</p></div>
+  <div class="overview-item"><h4>X 抓取仍是覆盖短板</h4><p>X 公开页面和镜像源可用性不稳定。本轮只采用可公开搜索到的 Alex Albert/Anthropic 相关 snippet 作为线索，不把未能打开核验的贴文写成完整事实。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Claude Opus 5：发布后最值得看的不是榜单，而是 prompt injection 抗性</h3>
+<div class="card">
+  <div class="source"><span class="tag">Claude / Safety</span><strong>Simon Willison Weblog</strong> · 2026-07-25 00:42 · <a href="https://simonwillison.net/2026/Jul/25/boris-cherny/">文章</a></div>
+  <div class="summary"><p>Simon Willison 收录 Boris Cherny 关于 Opus 5 的安全评论，重点是 Anthropic 在系统卡里声称 Opus 5 在 prompt-injection 评测和 red teaming 中更难被成功注入。Simon 的页面直接链接到 Anthropic system card 对应章节，给了后续验证入口。</p><p>这条不是新模型发布本身，而是发布后一日最有价值的工程补充：如果 Opus 5 真能显著降低 prompt injection 成功率，它对 Claude Code、Copilot、企业 agent 和浏览器/文件系统工具调用的影响，会比单个 coding benchmark 更持久。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 长期关注 agent 进入真实工作流。真实工作流里最脆的环节往往不是模型会不会写代码，而是它是否会被网页、文档、issue、日志里的恶意指令带偏。</div>
+  <div class="action">后续行动：把 Anthropic system card 第 73 页列出的 prompt-injection eval 项拆成内部 checklist，用同一批网页/文档/邮件样例测试 Claude、Codex 和 Gemini agent。</div>
+</div>
+
+<h3>二、OpenAI GPT-5.6：从“更强模型”转向 Programmatic Tool Calling 与 multi-agent 执行</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Agent Runtime</span><strong>OpenAI</strong> · 官方页面 · <a href="https://openai.com/index/gpt-5-6/">GPT-5.6</a></div>
+  <div class="summary"><p>OpenAI 的 GPT-5.6 页面把 coding、knowledge work、computer use、Programmatic Tool Calling、multi-agent beta 和 Codex/ChatGPT Work 放在同一条产品线上。官方称 GPT-5.6 可在 ChatGPT、Codex 和 OpenAI API 中逐步开放，API 侧强调让模型在内存里写小程序来协调工具、过滤中间数据、保留关键结果。</p><p>这代表 agent 竞争点继续从“模型回答一次”转向“模型如何组织工具调用和中间状态”。Programmatic Tool Calling 的产品含义是：开发者不必把所有工具响应原样塞回模型上下文，而是让模型用程序处理、筛选和推进任务。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这正中 Codex/AI agent 主线。成本、延迟、上下文污染和工具回合数，是 agent 产品能否规模化的核心瓶颈；OpenAI 正在把这些问题做成 API 层能力。</div>
+  <div class="action">后续行动：为日报抓取任务设计一个小型“程序化工具调用”版本：RSS/XML 解析、去重、主题聚类在代码里完成，模型只处理高价值摘要和判断。</div>
+</div>
+
+<h3>三、Harness engineering：Codex 让软件团队从写代码转向设计环境和反馈回路</h3>
+<div class="card">
+  <div class="source"><span class="tag">Codex / Engineering Process</span><strong>OpenAI</strong> · 官方文章 · <a href="https://openai.com/index/harness-engineering/">Harness engineering</a></div>
+  <div class="summary"><p>OpenAI 的 harness engineering 文章讲述一个新产品如何从空仓库开始，由小团队驱动 Codex agent 生成、修改和合并大量代码。文章里最关键的表述是：工程师的主要工作不再只是写代码，而是设计环境、表达意图、构建反馈循环，让 Codex agent 能可靠工作。</p><p>文章提供的数字和叙事很激进：空仓库、由 Codex CLI/GPT-5 生成初始脚手架、数月内形成约百万行代码，早期约 1,500 个 PR。即便这些数字需要结合上下文看，它仍然清楚说明 OpenAI 内部正在把 agent 当作团队生产系统，而不是单人辅助工具。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条对 OpenClaw/WorkBuddy 有直接启发：未来“会用 agent”的团队，核心资产可能是任务分解、环境、权限、测试、review 和状态管理，而不是一堆孤立 prompt。</div>
+  <div class="action">后续行动：把当前日报发布流程整理成 harness：输入清单、抓取适配器、来源可信度、状态文件、Hugo 发布、Feishu 通知、失败回滚和人工复核点。</div>
+</div>
+
+<h3>四、GitHub Copilot：Opus 5 接入后，模型选择变成企业管理策略</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Copilot</span><strong>GitHub Changelog</strong> · 2026-07-24 · <a href="https://github.blog/changelog/label/copilot/">Copilot 标签页</a></div>
+  <div class="summary"><p>GitHub Copilot 标签页显示 7 月 24 日 “Claude Opus 5 is now available in GitHub Copilot”，而前一天还有 Copilot cloud agent for Linear GA、GitHub MCP Server 支持下一版 MCP spec、Issues agent automation controls preview 等更新。这些不是孤立功能，而是围绕 coding agent 入口、上下文、协作对象和企业治理的连续铺设。</p><p>Opus 5 接入 Copilot 后，团队要面对的问题从“是否有强模型”变成“哪些人能用、在哪些入口可用、默认模型是什么、AI credit 怎么控、哪些任务必须人工确认”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 中 GitHub/OpenAI/Anthropic 都是高优先级。Copilot 是开发者入口，谁能在入口里控制模型、上下文、权限和计费，谁就更接近真实工作流。</div>
+  <div class="action">后续行动：把 Copilot policy、AI credit pools、usage metrics、model picker 和 Linear/Issues automation 整理成企业启用清单。</div>
+</div>
+
+<h3>五、NVIDIA Cosmos 3 Edge：world model 从云端能力叙事进入边缘设备约束</h3>
+<div class="card">
+  <div class="source"><span class="tag">Physical AI / World Models</span><strong>Hugging Face / NVIDIA</strong> · 2026-07-21 · <a href="https://huggingface.co/blog/nvidia/cosmos3edge">文章</a></div>
+  <div class="summary"><p>NVIDIA 在 Hugging Face 发布 Cosmos 3 Edge，定位为 4B 参数的开放 world model / world action model，面向机器人和视觉 AI agent 在边缘设备上理解场景变化、推理下一步动作，并在 Jetson/RTX 等硬件上运行。</p><p>文章强调的不是单纯视觉识别，而是实时理解场景、预测动作影响、生成机器人动作。它把 Follow List 中 Jim Fan、Fei-Fei Li、World Labs 等长期讨论的 spatial intelligence / world model 主题，落到了边缘侧小模型、吞吐、内存和控制频率这些工程约束上。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>如果 agent 主线只盯软件，会漏掉 physical AI 的另一条曲线：模型需要在低延迟、低内存、高可靠环境里做闭环控制。Cosmos 3 Edge 是值得跟踪的开源入口。</div>
+  <div class="action">后续行动：下载/阅读 Cosmos3-Edge model card，关注许可、输入输出格式、Jetson Thor 运行条件、VANTAGE-Bench 指标和可复现实验。</div>
+</div>
+
+<h3>六、开放模型：Interconnects 暂无新 24 小时长文，但 Kimi/Qwen/GLM 背景仍重要</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models</span><strong>Interconnects AI</strong> · 最新 RSS 项 2026-07-22 · <a href="https://www.interconnects.ai/feed">RSS</a></div>
+  <div class="summary"><p>Interconnects RSS 在本窗口没有新的 24 小时内长文，最新项仍是 7 月 22 日关于 Kimi K3、Qwen、GLM、开闭源差距和蒸馏争议的 open-model recap。今天不重复展开旧内容，但它仍然是判断开放模型生态的主背景。</p><p>从昨天 Opus 5、今天 GPT-5.6/Codex agent 栈和 Cosmos 3 Edge 放在一起看，开放模型需要同时追赶三条线：通用智能/编码能力、agent 工具使用与评测、边缘/机器人等专用场景。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>开放模型的机会可能不只在追平闭源 flagship，而在可微调、可部署、可审计、可贴近硬件和行业场景。Nathan Lambert 线继续值得每周深读。</div>
+  <div class="action">后续行动：7 月 27 日后重点检查 Kimi K3 权重是否按承诺发布，以及社区是否出现高质量 post-training / coding-agent 微调报告。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Simon Willison / Anthropic：</strong>7 月 25 日记录 Opus 5 prompt-injection 抗性相关评论，并链接系统卡；这是 Claude agent 安全边界的高价值补充。</li>
+  <li><strong>OpenAI：</strong>GPT-5.6 页面把 Codex、ChatGPT Work、Programmatic Tool Calling、multi-agent、professional artifacts 放到统一叙事里，强调更低工具回合和更强长任务执行。</li>
+  <li><strong>OpenAI Codex：</strong>harness engineering 文章把 agent-first 软件工程描述为环境、意图和反馈回路的设计问题，而不是单纯 prompt 技巧。</li>
+  <li><strong>GitHub：</strong>Copilot 标签页确认 Opus 5 与 Linear cloud agent、MCP spec、Issues automation 等更新相邻，开发入口和企业治理继续加速。</li>
+  <li><strong>Hugging Face / NVIDIA：</strong>Cosmos 3 Edge 为 physical AI 提供新的开源/边缘部署线索，值得 Jim Fan、World Labs、机器人方向一起跟踪。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Simon Willison：</strong>继续扮演发布后实测和安全解释层角色，今天最值得看的个人来源是他对 Boris Cherny/Opus 5 系统卡的收录。</li>
+  <li><strong>Alex Albert / Anthropic 线：</strong>公开搜索 snippet 显示其继续放大 Opus 5 “thoughtful/proactive、接近 Fable 5、价格约一半”的定位；因 X 页面不可打开，本期只作线索，不作完整引用来源。</li>
+  <li><strong>OpenAI / Codex 线：</strong>GPT-5.6 与 harness engineering 把 Codex 从 coding agent 推向更广的知识工作和团队生产系统。</li>
+  <li><strong>GitHub Copilot：</strong>模型入口、Linear、MCP、Issues automation、AI credits/usage metrics 组成一条企业 adoption 路径。</li>
+  <li><strong>NVIDIA / Hugging Face：</strong>Cosmos 3 Edge 使 physical AI 线索更具体，从 world model 概念落到边缘设备推理和机器人动作生成。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>Prompt-injection eval：</strong>用 Anthropic system card 的维度，搭一组网页/邮件/文档/issue 注入样例，测 Claude/Codex/Gemini agent 的真实抗性。</li>
+  <li><strong>日报抓取 harness：</strong>把当前 cron 流程做成可复跑 pipeline，明确抓取、去重、主题聚类、Hugo 发布、状态文件和 Feishu 通知的失败处理。</li>
+  <li><strong>Programmatic Tool Calling 对照实验：</strong>选一个 RSS/网页汇总任务，对比“全交给模型读原文”和“代码先结构化、模型只做判断”的成本与质量。</li>
+  <li><strong>Copilot 企业清单：</strong>梳理模型 policy、AI credits、usage metrics、Linear/Issues automation、MCP server 的启用顺序。</li>
+  <li><strong>Cosmos 3 Edge 技术复核：</strong>阅读 model card，验证许可、硬件要求、benchmark、示例代码和是否适合做 robotics/world-model 研究卡片。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>Opus 5 的 prompt-injection 抗性需要回到 Anthropic system card 原始表格核验，并用自己的任务样例复测；本日报仅确认 Simon 页面和公开链接。</li>
+  <li>GPT-5.6 的可用性、价格、Programmatic Tool Calling 和 multi-agent beta 受账户、地区、API 权限和 rollout 影响；实际开发前需要查 OpenAI 控制台与官方 docs。</li>
+  <li>OpenAI harness engineering 的 PR/代码规模数字来自官方叙事，适合作为方法启发，不宜直接外推为普通团队生产率。</li>
+  <li>X/Twitter 页面仍然不可稳定读取；公开搜索 snippet 只能作为发现线索，不能替代可打开来源。</li>
+  <li>Cosmos 3 Edge 的 edge 实时能力需要看 model card 和硬件实测，不能只按发布文章判断可部署性。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Anthropic News 本窗口未发现比 7 月 24 日 Opus 5 更晚的官方发布；大量二手 Opus 5 转述未纳入重点。</li>
+  <li>LangChain 本窗口没有比 7 月 24 日 newsletter / Deep Agents benchmark 更晚的高信号更新，今天只在背景里保留。</li>
+  <li>Google AI RSS 本窗口没有与 Gemini/agent 主线强相关的新增官方更新，今日不展开。</li>
+  <li>OpenAI/Hugging Face cyber incident 的媒体报道仍在发酵，但本窗口没有新增一手技术材料；继续列入安全观察，不重复旧新闻。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://simonwillison.net/2026/Jul/25/">Simon Willison · Archive for 25th July 2026</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/25/boris-cherny/">Simon Willison · A quote from Boris Cherny</a></li>
+  <li><a href="https://openai.com/index/gpt-5-6/">OpenAI · GPT-5.6</a></li>
+  <li><a href="https://openai.com/index/harness-engineering/">OpenAI · Harness engineering</a></li>
+  <li><a href="https://github.blog/changelog/label/copilot/">GitHub Changelog · Copilot</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-24-claude-opus-5-is-now-available-in-github-copilot/">GitHub · Claude Opus 5 is now available in GitHub Copilot</a></li>
+  <li><a href="https://huggingface.co/blog/nvidia/cosmos3edge">Hugging Face / NVIDIA · Introducing Cosmos 3 Edge</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects AI RSS</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic Newsroom</a></li>
+  <li><a href="https://www.langchain.com/blog/july-2026-langchain-newsletter">LangChain · July 2026 Newsletter</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-25T00:00:00Z / 2026-07-26T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
