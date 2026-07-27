@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：GPT-5.6 落地、Opus 5 余波与 Agent 成本治理</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时没有新的大规模发布，但 GPT-5.6 的正式落地信息、Anthropic Opus 5 的发布后生态、GitHub Copilot 的模型入口，以及 LangChain 对 Deep Agents prompt caching / OpenEvals 的工程化说明，构成了今天最值得跟踪的 agent 主线。X 公开页面仍只能提供有限 snippet，本期不把不可打开贴文当作事实来源。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：GPT-5.6 落地、Opus 5 余波与 Agent 成本治理</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时没有新的大规模发布，但 GPT-5.6 的正式落地信息、Anthropic Opus 5 的发布后生态、GitHub Copilot 的模型入口，以及 LangChain 对 Deep Agents prompt caching / OpenEvals 的工程化说明，构成了今天最值得跟踪的 agent 主线。X 公开页面仍只能提供有限 snippet，本期不把不可打开贴文当作事实来源。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-07-27</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年7月27日（周一）</strong> · 覆盖窗口：2026-07-26 08:00 – 2026-07-27 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI 官方页面、Anthropic News、GitHub Changelog、LangChain Blog、Simon Willison/Interconnects/Hugging Face 公开页面与 RSS/搜索索引、公开 X 搜索 snippet 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天不是新发布日，而是落地核验日</h4><p>OpenAI GPT-5.6 页面已从 preview 进入可用性、定价、Codex/ChatGPT Work/API 能力说明阶段。对日报跟踪而言，重点从“有没有发布”转为“哪些入口可用、成本结构如何、agent runtime 怎样变”。</p></div>
+  <div class="overview-item"><h4>Agent 竞争继续收敛到三件事</h4><p>能力、可靠性、成本。GPT-5.6 强调 Programmatic Tool Calling 与 multi-agent；Claude Opus 5 强调长任务 agentic coding；LangChain 则从 prompt caching 和 evals 两侧解释如何把 agent 跑得更便宜、更可测。</p></div>
+  <div class="overview-item"><h4>GitHub Copilot 是模型入口争夺的温度计</h4><p>GitHub Changelog 最新 Copilot 区块里，Opus 5、Linear cloud agent、MCP spec、Issues automation、usage metrics、AI credits 连在一起。开发者入口正在把模型能力、企业治理和工单系统整合成一条产品线。</p></div>
+  <div class="overview-item"><h4>Prompt injection 仍是安全主线</h4><p>OpenAI GPT-Red、Anthropic Opus 5 系统卡线索，以及 GitHub CodeQL 的 prompt injection detection 方向共同说明：长任务 agent 能力越强，越需要把红队、权限、上下文隔离和评测做进工程流程。</p></div>
+  <div class="overview-item"><h4>开放模型与 physical AI 没有新 24 小时大事件</h4><p>Interconnects 最新强相关项仍是 Kimi K3/open-model recap；Hugging Face 强相关项仍是 NVIDIA Cosmos 3 Edge。今天保留为背景和待跟进，不重复包装旧新闻。</p></div>
+  <div class="overview-item"><h4>X 抓取仍是覆盖缺口</h4><p>公开 X 页面和镜像源可用性不稳定。Sam Altman、Harrison Chase 等账号的公开搜索 snippet 可作发现线索，但不适合作为完整事实来源；本期重点内容均落到可打开链接。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、GPT-5.6 落地：模型分层、Programmatic Tool Calling 与 multi-agent 进入产品说明</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Agent Runtime</span><strong>OpenAI</strong> · 官方页面 · <a href="https://openai.com/index/gpt-5-6/">GPT-5.6</a></div>
+  <div class="summary"><p>OpenAI 的 GPT-5.6 页面给出了正式可用性：GPT-5.6 覆盖 ChatGPT、Codex 和 OpenAI API，并分为 Sol、Terra、Luna 三个能力/成本层级。Codex 和 ChatGPT Work 里，Free/Go 用户进入 Terra，Plus 及以上可选 Sol/Terra/Luna；API 侧同时强调 Programmatic Tool Calling 与 multi-agent beta。</p><p>最关键的不是单个 benchmark，而是运行时形态。Programmatic Tool Calling 允许模型在内存里写小程序来协调工具和处理中间结果；multi-agent 允许并发子代理并汇总结果。这两项如果稳定，会直接改变 agent 的成本、延迟、上下文污染和可控性。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 的 OpenAI/Codex 主线正在从“模型能力”进入“agent runtime 能力”。日报抓取、代码修复、研究助理、企业知识工作都受这类 API 原语影响。</div>
+  <div class="action">后续行动：把当前日报 pipeline 拆成结构化程序阶段：抓取、去重、日期过滤、链接归一化、主题聚类先由代码完成，再让模型只处理高价值判断和中文摘要。</div>
+</div>
+
+<h3>二、GPT-5.6 Preview 里的安全信号：强 cyber 能力必须和分层发布绑定</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Safety</span><strong>OpenAI</strong> · 官方页面 · <a href="https://openai.com/index/previewing-gpt-5-6-sol/">Previewing GPT-5.6 Sol</a></div>
+  <div class="summary"><p>GPT-5.6 Sol preview 页面把 coding、biology、cybersecurity 和 safeguards 放在一起讲：Sol 是旗舰模型，Terra 面向日常工作，Luna 面向速度和成本；preview 阶段先给小范围可信伙伴，同时说明将与政府框架和更广可用性衔接。</p><p>安全部分强调分层 safeguards、红队压力测试、账号级信号和持续监控。官方说法是，GPT-5.6 Sol 更擅长帮助防御者发现和修复漏洞，而不是可靠完成端到端攻击；这仍需要结合 system card 与实际策略测试核验。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这解释了为什么 agent release 以后不只是看性能榜单，还要看发布节奏、权限、审计和误用边界。越强的 coding/cyber agent，越依赖可验证的安全壳。</div>
+  <div class="action">后续行动：把 GPT-5.6 的安全说明与 Anthropic Opus 5 system card 放到同一张对照表：prompt injection、数据外泄、浏览器/文件系统工具、代码执行、账户级风控。</div>
+</div>
+
+<h3>三、Claude Opus 5 余波：长任务 agentic coding 是 Anthropic 的主定位</h3>
+<div class="card">
+  <div class="source"><span class="tag">Claude / Coding Agent</span><strong>Anthropic</strong> · 2026-07-24 · <a href="https://www.anthropic.com/news/claude-opus-5">Introducing Claude Opus 5</a></div>
+  <div class="summary"><p>Anthropic Newsroom 最新强相关官方项仍是 7 月 24 日 Opus 5。页面把 Opus 5 定位为面向长时间、多步骤工作的 agentic coding model，并强调它能更好理解代码库、保持复杂任务上下文、澄清需求、完成 feature development 和 bug fixing。</p><p>今天没有看到比 Opus 5 更新的官方 Claude 发布。值得注意的是，发布页里多个客户/伙伴案例把 Opus 5 放在 Kiro、监控 agent、自主内存管理、生产异常复核等场景里，说明 Anthropic 不是单押 chat，而是在持续强调“能在真实系统里跑很久”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Codex、Claude Code、Copilot 和 Kiro 正在同一个战场：谁能处理长任务、复杂代码库和真实权限边界，谁更容易成为团队默认入口。</div>
+  <div class="action">后续行动：选择一个真实仓库问题，用 Opus 5/Codex/Gemini 3.6 Flash 在相同权限和测试约束下跑一次，比较上下文保持、patch 质量、测试通过率和人工 review 成本。</div>
+</div>
+
+<h3>四、GitHub Copilot：Opus 5、Linear、MCP、Issues automation 连成企业 agent 路线</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Copilot</span><strong>GitHub Changelog</strong> · 2026-07-24/23 · <a href="https://github.blog/changelog/">Changelog</a></div>
+  <div class="summary"><p>GitHub Changelog 的最新 Copilot 更新集中在 7 月 24 日到 7 月 20 日：Claude Opus 5 进入 GitHub Copilot；Copilot cloud agent for Linear GA；GitHub MCP Server 支持下一版 MCP spec；GitHub Issues agent automation controls 进入 public preview；usage metrics impact dashboard 和 AI credit pools 也在同一组更新里。</p><p>这条组合比单个模型接入更重要。GitHub 正在把 coding agent 从 IDE 补全扩展为“模型选择 + issue/Linear 工单 + MCP 工具上下文 + 企业用量与预算管理”的工作系统。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 OpenAI、Anthropic、LangChain、AI engineering 人群都关心 agent 落地。GitHub 是开发入口，Changelog 能最快反映企业 adoption 的真实阻力：权限、预算、可观测性、自动化边界。</div>
+  <div class="action">后续行动：做一份 Copilot agent 企业启用 checklist：模型 policy、AI credit pool、usage dashboard、Linear/Issues workflow、MCP server、审批/回滚规则。</div>
+</div>
+
+<h3>五、LangChain Deep Agents：prompt caching 从模型特性变成 harness 能力</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Cost</span><strong>LangChain Blog</strong> · <a href="https://www.langchain.com/blog/deep-agents-prompt-caching">Prompt Caching with Deep Agents</a></div>
+  <div class="summary"><p>LangChain 的 Deep Agents prompt caching 文章把成本问题讲得很直接：长对话 agent 每一步都要重读 system prompt、工具描述、技能、历史消息和新输入，token 成本随轨迹增长很快。Deep Agents 的做法是根据不同模型供应商能力，尽量设置 cache breakpoint、利用 implicit caching，并组织 prompt 结构以提高 cache read。</p><p>文章给出的实测结论是，在 Deep Agents eval suite 上，prompt caching 对中端模型轨迹带来约 49% 到 80% 的 token cost 降幅。这个数字未必能直接迁移到所有业务，但方向很明确：长任务 agent 的成本治理必须进入 harness 层，而不是事后靠提示词节省。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这与 GPT-5.6 的 prompt caching/Programmatic Tool Calling 正好呼应。agent 成本不只是模型价格表问题，还取决于上下文结构、工具回合、缓存命中和轨迹观测。</div>
+  <div class="action">后续行动：在日报 cron 中记录每次抓取/摘要的输入来源数、模型调用数、缓存命中可能性和重复上下文比例，为之后改造做基线。</div>
+</div>
+
+<h3>六、OpenEvals / AgentEvals：评测正在从“输出对不对”走向“轨迹是否合理”</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Evals</span><strong>LangChain Blog</strong> · <a href="https://www.langchain.com/blog/evaluating-llms-with-openevals">Evaluating Large Language Models With OpenEvals</a></div>
+  <div class="summary"><p>LangChain 的 OpenEvals 文章把 eval 分成 LLM-as-judge、结构化数据评测和 agent trajectory 评测。对 agent 来说，最终答案只是结果；工具选择、工具调用顺序、LangGraph 节点轨迹、结构化输出格式，都会影响系统能否稳定上线。</p><p>这对 AI engineering / evals 主线很重要：Shreya、Hamel、LangChain 等长期讨论的问题，正在从“写几个测试”变成“为 agent 行为建立可维护、可解释、可观测的评测层”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>日报本身就是 agent workflow，如果只看最终文章是否像样，很容易漏掉抓取失败、重复来源、旧链接误判和 X snippet 过度引用。轨迹评测能把这些失败显性化。</div>
+  <div class="action">后续行动：给日报 pipeline 加 5 个基础 eval：日期窗口正确、旧路径禁止、每条重点内容必须有可打开链接、X snippet 不得当事实、发布后 HTTP 200。</div>
+</div>
+
+<h3>七、开放模型与 physical AI：Kimi K3 / Cosmos 3 Edge 保持观察位</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Physical AI</span><strong>Interconnects / Hugging Face</strong> · <a href="https://www.interconnects.ai/p/open-models-recap-more-on-kimi-k3">Kimi K3 recap</a> · <a href="https://huggingface.co/blog/nvidia/cosmos3edge">Cosmos 3 Edge</a></div>
+  <div class="summary"><p>Interconnects 最新强相关公开项仍是 7 月 22 日的 open-model recap，讨论 Kimi K3、Qwen、GLM、中美模型竞争和开闭源差距。Hugging Face 强相关项仍是 NVIDIA Cosmos 3 Edge，聚焦 physical AI/world model 在边缘侧的部署约束。</p><p>今天不把这些旧内容包装成 24 小时新闻，但它们仍是中长期跟踪主线：开放模型要追的不只是聊天或 coding benchmark，还包括 agent 工具使用、post-training、部署许可、推理成本和机器人/世界模型场景。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>闭源模型在 agent runtime 上推进很快，开放生态的机会可能来自可部署、可审计、可定制和贴近硬件/行业的路线。</div>
+  <div class="action">后续行动：继续检查 Kimi K3 权重/许可证/社区复现实验；对 Cosmos 3 Edge 则关注 Jetson/RTX 实测、model card、VANTAGE-Bench 和机器人动作生成示例。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>GPT-5.6 页面明确 ChatGPT、Codex、API 可用性，Sol/Terra/Luna 分层，API 侧加入 Programmatic Tool Calling 和 multi-agent beta。</li>
+  <li><strong>OpenAI Safety：</strong>GPT-5.6 Sol preview 强调 cyber 能力、分层 safeguards、红队压力测试和 phased release，适合与 Anthropic Opus 5 system card 对照。</li>
+  <li><strong>Anthropic：</strong>Opus 5 仍是 Newsroom 最新强相关发布，定位长任务 agentic coding 与生产系统里的自主 agent。</li>
+  <li><strong>GitHub：</strong>Copilot 最新更新把 Opus 5、Linear cloud agent、MCP spec、Issues automation、usage metrics 和 AI credits 串成企业治理路径。</li>
+  <li><strong>LangChain：</strong>Deep Agents prompt caching 把 agent 成本治理做进 harness；OpenEvals/AgentEvals 把评测从输出扩展到结构化数据和工具轨迹。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Sam Altman / OpenAI 线：</strong>公开 X snippet 显示其仍在回应 GPT-5.6 与文件删除/全权限模式等运行边界问题；因 X 页面不可稳定打开，本期只作为线索，事实部分以 OpenAI 官方页为准。</li>
+  <li><strong>Alex Albert / Anthropic 线：</strong>Opus 5 讨论仍在扩散，但本窗口未发现比 Anthropic 官方页更新的一手材料；继续关注 Claude Code、Kiro、Copilot 接入后的真实反馈。</li>
+  <li><strong>Harrison Chase / LangChain：</strong>Deep Agents 的 prompt caching 与 OpenEvals 文章说明 LangChain 正把 agent harness 的成本和评测做成开发者基础设施。</li>
+  <li><strong>Nathan Lambert / Open Models：</strong>Interconnects 最新 open-model recap 仍是判断 Kimi K3/Qwen/GLM 竞争态势的重要背景，今天无新增 24 小时强信号。</li>
+  <li><strong>NVIDIA / Hugging Face：</strong>Cosmos 3 Edge 继续作为 physical AI/world model 的开源观察点，短期重点应放在可复现实测而不是发布话术。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>日报 pipeline harness 化：</strong>把 Follow List 解析、来源抓取、日期过滤、去重、摘要、Hugo 发布、状态写入、Feishu 通知拆成可测试步骤。</li>
+  <li><strong>Agent 安全对照表：</strong>整理 GPT-5.6、GPT-Red、Claude Opus 5、CodeQL prompt injection detection 的共同测试维度。</li>
+  <li><strong>成本基线：</strong>记录日报和代码 agent 的上下文长度、重复静态 prompt、工具回合数、缓存可能命中位置，为 prompt caching/Programmatic Tool Calling 改造做依据。</li>
+  <li><strong>Copilot 企业启用清单：</strong>关注模型 policy、AI credit pool、usage metrics、Linear/Issues automation、MCP server 和审批规则。</li>
+  <li><strong>开放模型观察：</strong>继续追 Kimi K3 权重/许可证/社区复现，以及 Cosmos 3 Edge 在 Jetson/RTX 上的真实推理表现。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>GPT-5.6 的实际可用性、价格、Programmatic Tool Calling 和 multi-agent beta 可能受账户、地区、计划和 API 权限影响；开发前必须回到控制台和官方文档核验。</li>
+  <li>GPT-5.6 preview 的 cyber/safety 说法需要结合 system card、Preparedness Framework 和可复现实验，不能只按发布页外推。</li>
+  <li>Opus 5 在 Copilot/Kiro/Claude Code 里的真实表现，需要用同一任务集、同一权限边界和同一测试标准比较。</li>
+  <li>LangChain prompt caching 的 49% 到 80% 成本下降来自其 Deep Agents eval suite，迁移到其他 harness 前要做本地基线。</li>
+  <li>X/Twitter 搜索 snippet 只可作为发现线索，不可替代可打开原文；本期未使用私密登录态、cookie 或反爬规避。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>大量 Opus 5/GPT-5.6 二手转述没有新增一手信息，本期不收录。</li>
+  <li>Google AI RSS/公开搜索本窗口未发现与 Gemini agent 主线强相关的新增官方发布，今日不展开。</li>
+  <li>Hugging Face 社区榜单和泛 AI 趋势文很多，但与 Follow List 的 agent/evals/open models 主线相关度较低。</li>
+  <li>X 热门讨论里关于模型“聪明/翻车”的短贴缺少可核验上下文，不纳入重点事实。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/index/gpt-5-6/">OpenAI · GPT-5.6</a></li>
+  <li><a href="https://openai.com/index/previewing-gpt-5-6-sol/">OpenAI · Previewing GPT-5.6 Sol</a></li>
+  <li><a href="https://openai.com/index/unlocking-self-improvement-gpt-red/">OpenAI · GPT-Red</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic Newsroom</a></li>
+  <li><a href="https://www.anthropic.com/news/claude-opus-5">Anthropic · Introducing Claude Opus 5</a></li>
+  <li><a href="https://github.blog/changelog/">GitHub Changelog</a></li>
+  <li><a href="https://github.blog/changelog/label/copilot/">GitHub Changelog · Copilot</a></li>
+  <li><a href="https://www.langchain.com/blog/deep-agents-prompt-caching">LangChain · Prompt Caching with Deep Agents</a></li>
+  <li><a href="https://www.langchain.com/blog/evaluating-llms-with-openevals">LangChain · Evaluating Large Language Models With OpenEvals</a></li>
+  <li><a href="https://www.interconnects.ai/p/open-models-recap-more-on-kimi-k3">Interconnects · Open models recap</a></li>
+  <li><a href="https://huggingface.co/blog/nvidia/cosmos3edge">Hugging Face / NVIDIA · Introducing Cosmos 3 Edge</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-26T00:00:00Z / 2026-07-27T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
