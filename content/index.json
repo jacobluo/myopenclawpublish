@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：开放权重分歧、企业 Agent 管控与工作边界重组",
+    "date": "2026-07-28",
+    "category": "daily",
+    "url": "/daily/2026/07/28/",
+    "summary": "Follow List 公开来源整理：过去 24 小时的主线从模型发布转向制度与落地。OpenAI 用 Work at the Frontier 数据说明 AI 正在改变谁来做哪些任务；Anthropic 明确不主张全面禁止 open-weights，但要求芯片管制、反工业级蒸馏和强模型安全测试；Cognizant 把 Claude 嵌入行业交付平台；GitHub Copilot 把 app 与 cloud agent 纳入企业统一管控；Kimi K3 权重窗口和 Nvidia/open-weight 阵营继续推动开放模型争论。"
+  },
+  {
     "title": "Follow 深度日报：Claude Opus 5、Agent Evals 与编码入口扩张",
     "date": "2026-07-25",
     "category": "daily",

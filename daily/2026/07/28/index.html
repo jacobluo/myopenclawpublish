@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：开放权重分歧、企业 Agent 管控与工作边界重组</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时的主线从模型发布转向制度与落地。OpenAI 用 Work at the Frontier 数据说明 AI 正在改变谁来做哪些任务；Anthropic 明确不主张全面禁止 open-weights，但要求芯片管制、反工业级蒸馏和强模型安全测试；Cognizant 把 Claude 嵌入行业交付平台；GitHub Copilot 把 app 与 cloud agent 纳入企业统一管控；Kimi K3 权重窗口和 Nvidia/open-weight 阵营继续推动开放模型争论。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：开放权重分歧、企业 Agent 管控与工作边界重组</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时的主线从模型发布转向制度与落地。OpenAI 用 Work at the Frontier 数据说明 AI 正在改变谁来做哪些任务；Anthropic 明确不主张全面禁止 open-weights，但要求芯片管制、反工业级蒸馏和强模型安全测试；Cognizant 把 Claude 嵌入行业交付平台；GitHub Copilot 把 app 与 cloud agent 纳入企业统一管控；Kimi K3 权重窗口和 Nvidia/open-weight 阵营继续推动开放模型争论。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-07-28</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年7月28日（周二）</strong> · 覆盖窗口：2026-07-27 08:00 – 2026-07-28 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News、Anthropic Newsroom、GitHub Changelog、Kimi API docs、Axios/公开新闻索引、LangChain/Interconnects/Hugging Face 公开页面与搜索索引抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天的关键词是“管控”</h4><p>新信号不在更强模型本身，而在企业如何吸收 agent、政府如何看待 open-weights、平台如何统一插件和命令权限。模型能力继续上升后，组织边界、审批、审计和安全测试成为主战场。</p></div>
+  <div class="overview-item"><h4>OpenAI 把 AI 影响从“替代任务”改写成“任务跨界”</h4><p>OpenAI Economic Research 新报告显示，职业特定 AI 使用中有相当比例来自本职之外的任务。对 agent 产品来说，这说明价值点不是简单替代岗位，而是让业务人员跨过原本需要交接给工程、法务、财务或营销的任务边界。</p></div>
+  <div class="overview-item"><h4>Anthropic 公开回应 open-weights 争议</h4><p>Dario Amodei 明确说 Anthropic 没有主张把 open-weights 作为类别禁止；但他仍把重点放在中国 frontier 能力、工业级蒸馏、不可撤回权重和 cyber/bio 风险上。这个表态会继续影响开源模型政策和商业叙事。</p></div>
+  <div class="overview-item"><h4>Claude 落地从模型发布进入 SI/行业平台</h4><p>Anthropic 与 Cognizant 扩大合作，把 Claude Code、行业交付平台、认证 workforce 和生产用例放在一起。Claude 的企业路径不只是 API 销售，而是通过大型服务商进入制造、生命科学、保险和软件现代化流程。</p></div>
+  <div class="overview-item"><h4>Copilot cloud agent 被纳入企业统一设置</h4><p>GitHub 7 月 27 日连续发布 Copilot app 访问策略与 enterprise managed settings 更新。插件、市场、URL/文件/命令审批、auto model selection 等策略开始覆盖 app 和 cloud agent，说明 agent 客户端扩张后，企业治理正在补齐。</p></div>
+  <div class="overview-item"><h4>X 覆盖仍不完整</h4><p>本轮 Nitter RSS 对高优先级账号返回空内容；公开 X 页面只提供零散 snippet。本期人物/机构动态以可打开官方页面和新闻源为准，社媒线索只放入待验证，不作为事实来源。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI Work at the Frontier：AI 正在改变“谁来做任务”</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Work</span><strong>OpenAI Economic Research</strong> · 2026-07-27 · <a href="https://openai.com/index/how-ai-is-expanding-what-people-do-at-work/">How AI is expanding what people do at work</a></div>
+  <div class="summary"><p>OpenAI 发布 Work at the Frontier 系列新报告，研究 80 多万条美国 ChatGPT 用户工作相关消息，提出 task crossover：原本属于某个职业的任务，开始出现在另一个职业用户的 AI 使用中。页面给出的核心数字是：工作相关消息中 16.8% 涉及跨职业任务；若只看职业特定、非通用任务，这一比例达到 43.5%。</p><p>报告还指出，客户体验、设计、人力资源、法务、营销等群体里，跨界任务比例尤其明显；工程任务和营销任务是最容易被其他职业“借用”的任务来源。这把 AI adoption 的问题从“某个岗位会不会被替代”推进到“组织内部哪些交接、等待和专业瓶颈会被重排”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 OpenAI/Codex/agent 线索最近一直强调长任务和工作入口。这个报告给了企业 agent 的组织学证据：价值不只在帮工程师写代码，而在让非工程角色也能完成数据、技术排障、文档、财务或营销类相邻任务。</div>
+  <div class="action">后续行动：把 WorkBuddy/内部 agent demo 的案例从“部门功能”改成“任务跨界地图”：哪些任务原本需要交接，AI 后可以由一线角色直接完成，哪些仍需专家审批。</div>
+</div>
+
+<h3>二、Anthropic open-weights 立场：不禁类别，但要求芯片、蒸馏和安全测试三件事</h3>
+<div class="card">
+  <div class="source"><span class="tag">Policy / Open Models</span><strong>Anthropic / Dario Amodei</strong> · 2026-07-27 · <a href="https://www.anthropic.com/news/position-open-weights-models">Our position on open-weights models</a></div>
+  <div class="summary"><p>Dario Amodei 对近期 open-weights 模型争论做了公开回应。他明确表示 Anthropic 没有主张把 open-weights 模型作为一个类别禁止，也承认没有危险能力的开放权重模型是公共品；但他把主要风险分成两类：威权国家获得超过美国的 frontier AI 能力，以及足够强模型被用于 cyber、bio 或 alignment 风险场景。</p><p>Anthropic 支持的措施是：限制强芯片和芯片制造设备流向中国，打击工业级蒸馏操作，对所有足够强的模型实施强制安全测试，不论开放还是闭源。这个立场本质上不是“开源 vs 闭源”的简单二分，而是把训练算力、蒸馏供应链和发布前安全评估放在政策中心。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Kimi K3、Qwen、GLM 等中国开放模型正在改变开源模型竞争强度。Anthropic 的表态会影响监管语言、企业采购风险、开源模型部署信心，也会被 Hugging Face/Nvidia/open-source 阵营继续反驳。</div>
+  <div class="action">后续行动：做一页 open-weights 政策对照：Anthropic 三条措施、Nvidia/Open Secure AI Alliance 观点、OpenAI/Google 是否签署行业信、Kimi K3 权重发布状态、企业可用性和合规风险。</div>
+</div>
+
+<h3>三、Cognizant + Anthropic：Claude 从模型能力进入大型服务商交付体系</h3>
+<div class="card">
+  <div class="source"><span class="tag">Claude / Enterprise</span><strong>Anthropic</strong> · 2026-07-27 · <a href="https://www.anthropic.com/news/cognizant-anthropic">Cognizant and Anthropic expand their partnership</a></div>
+  <div class="summary"><p>Anthropic 宣布扩大与 Cognizant 的合作，Cognizant 成为 Claude Partner Network 的 Global Premier Partner，并把 Claude 嵌入 Flowsource、Neuro AI Engineering、Neuro IT Ops 等平台。官方披露已有 30,000 多名 Cognizant associates 完成 Claude training，Flowsource 的 Spec-Driven Development 模块把 Claude Code 放进规格、编码标准、架构蓝图和输出评估的闭环里。</p><p>案例层面，Cognizant 提到制造业客户体验门户、生命科学合同智能系统和保险 underwriting research。Anthropic 页面给出的量化信号包括合同审查时间最高减少 40%、抽取准确率超过 88%、部分承保研究从小时级压到分钟级。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这说明 Claude/agent 的企业落地路径正在走向“模型 + 行业平台 + 交付队伍 + 审核标准”。对于想卖 AI agent 服务的团队，系统集成商的包装方式比单纯模型 benchmark 更值得学习。</div>
+  <div class="action">后续行动：拆解 Cognizant 这套叙事模板：行业场景、平台入口、认证 workforce、可量化 ROI、评估与生产闸门；映射到 WorkBuddy/FDE 交付材料。</div>
+</div>
+
+<h3>四、GitHub Copilot：app 和 cloud agent 进入统一企业管控</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Copilot / Governance</span><strong>GitHub Changelog</strong> · 2026-07-27 · <a href="https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/">Enterprise managed settings in the GitHub Copilot app and Copilot cloud agent</a> · <a href="https://github.blog/changelog/2026-07-27-manage-github-copilot-app-access-with-a-dedicated-policy/">Dedicated Copilot app policy</a></div>
+  <div class="summary"><p>GitHub 7 月 27 日发布两项企业管控更新：一是 Copilot app 有了独立访问策略，企业和组织可以单独启用、禁用或下放到组织决定；二是 enterprise managed settings 现在覆盖 Copilot app 和 Copilot cloud agent。企业可通过 managed-settings.json 统一控制插件、插件市场、是否允许绕过命令/文件/URL 访问审批，以及新会话默认 auto model selection 等。</p><p>对 cloud agent 来说，GitHub 明确它会读取适用的 managed settings，只使用企业批准的插件和市场；本地开发者设置不能覆盖企业托管值。这意味着 Copilot 不再只是 IDE 体验，而是多客户端、多代理任务、多插件环境下的受管平台。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>前几天 GitHub 刚把 Opus 5、Linear、MCP、Issues automation、usage metrics、AI credit pool 串起来。今天的更新补上治理环：越多入口给 agent 运行权限，越需要统一政策和审计。</div>
+  <div class="action">后续行动：把“企业编码 agent 启用清单”新增一节：客户端访问策略、插件白名单、市场来源、URL/文件/命令审批、cloud agent 与本地 app 的策略差异、日志与 PR 审查链路。</div>
+</div>
+
+<h3>五、Kimi K3 与开放模型阵营：权重发布窗口把政策争论推到台前</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / China</span><strong>Kimi API Docs / Interconnects / Axios</strong> · 2026-07-27 · <a href="https://platform.kimi.ai/docs/guide/kimi-k3-quickstart">Kimi K3 docs</a> · <a href="https://www.interconnects.ai/p/kimi-k3-the-open-weights-escalation">Interconnects analysis</a> · <a href="https://www.axios.com/2026/07/27/nvidia-anthropic-openai-open-weight-debate">Axios open-weight debate</a></div>
+  <div class="summary"><p>Kimi 官方文档把 Kimi K3 定位为 2.8T 参数、1M context、原生视觉理解、面向长周期 coding/knowledge work/reasoning 的 3T 级开放模型，并写明 full model weights 将在 2026 年 7 月 27 日前发布。Interconnects 之前已经把 Kimi K3 放进 open-weights escalation 叙事里，认为它让中美开放模型竞争进入新阶段。</p><p>同一天，Axios 报道 Nvidia、Microsoft、Meta、Palantir 等公司支持 open-weight AI 阵营，Google 和 OpenAI 也加入支持，而 Anthropic未签；Nvidia 还推动 Open Secure AI Alliance，把 open models 描述为防御资产。这里需要注意：Kimi 官方文档仍说“将发布”，具体权重仓库、许可证、下载可用性和社区实测要继续核验，不能只按二手新闻定论。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>开放模型线从技术竞争进入政策、产业联盟和算力商业模式竞争。对投资和产品判断来说，这影响 GPU 需求、企业私有部署、模型安全评估、美国监管路径和中国模型出海风险。</div>
+  <div class="action">后续行动：今天白天继续核验 Kimi K3 权重是否已在 Hugging Face/GitHub/官方镜像完整上线，记录许可证、文件体积、推理需求、quantization、model card、可商用限制和首批复现实测。</div>
+</div>
+
+<h3>六、LangChain observability 旧文重回相关：agent 评测要从生产 trace 生长</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Evals</span><strong>LangChain / Harrison Chase</strong> · 公开页面 · <a href="https://www.langchain.com/blog/agent-observability-powers-agent-evaluation">Agent observability powers agent evaluation</a></div>
+  <div class="summary"><p>本窗口 LangChain 没有比 7 月 27 日更强的新发布，但其 agent observability 文章与今天 GitHub/企业治理主线高度相关：agent 的错误不一定对应某一行代码，而可能出现在 200 步轨迹中某个工具选择、上下文累积或记忆状态。文章把 observability 原语拆成 runs、traces、threads，并强调生产 trace 会变成未来 offline eval 的测试样本。</p><p>这与 Copilot managed settings、Claude 行业平台和日报 pipeline 都有关。企业不是只需要“能跑的 agent”，还需要知道它为什么跑错、在哪一步跑偏、哪些工具和权限参与了结果。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>agent 越进入真实工作，eval 就越不能停留在 final answer；必须覆盖工具轨迹、状态变化、审批点和长期上下文污染。</div>
+  <div class="action">后续行动：给日报 cron 保存轻量 trace 摘要：抓取源、失败源、去重依据、被纳入/剔除理由、发布校验结果。不要记录 cookie/token，只记录可公开调试的元数据。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>7 月 27 日发布 Work at the Frontier 新报告，提出 task crossover，并用 ChatGPT 工作消息数据说明 AI 正在重排职业之间的任务边界。</li>
+  <li><strong>Anthropic：</strong>Dario Amodei 公开回应 open-weights 争议，否认主张类别禁令，但支持强芯片管制、反工业级蒸馏和强模型安全测试。</li>
+  <li><strong>Anthropic / Cognizant：</strong>双方扩大合作，Claude 进入 Cognizant 行业平台与交付体系，披露合同审查、制造业门户、保险研究等生产案例。</li>
+  <li><strong>GitHub Copilot：</strong>Copilot app 获得独立访问策略；enterprise managed settings 覆盖 Copilot app 和 cloud agent，统一插件、市场和审批 guardrails。</li>
+  <li><strong>Open Models：</strong>Kimi K3 权重发布窗口与 Nvidia/open-weight 阵营报道叠加，开放模型从技术新闻升级为政策和产业联盟议题。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI：</strong>官方新闻页确认 7 月 27 日最新项为“AI 如何扩展人们在工作中做的事”。这延续了 Codex/Presence/Health 等从模型到工作入口的产品叙事。</li>
+  <li><strong>Dario Amodei / Anthropic：</strong>亲自下场解释 open-weights 立场，焦点从“是否反开源”转到“哪些能力、哪些国家、哪些训练/蒸馏路径需要管制”。</li>
+  <li><strong>Daniela Amodei / Anthropic：</strong>在 Cognizant 合作公告中强调 Claude 进入制造、生命科学等 demanding industries，说明 Anthropic 正把企业价值落在行业场景。</li>
+  <li><strong>GitHub：</strong>Copilot 近期连续更新说明产品路线正在从模型接入转向 enterprise agent platform：模型、cloud agent、MCP、工单、度量、成本和策略统一。</li>
+  <li><strong>Nvidia / open-weight 阵营：</strong>通过行业信和 Open Secure AI Alliance 把 open models 定义为安全防御资产，这与 Anthropic 风险框架形成公开分歧。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>任务跨界地图：</strong>把 OpenAI task crossover 框架应用到 WorkBuddy/FDE 场景库，标注每个 agent 案例节省的是哪一次部门交接。</li>
+  <li><strong>Open-weights 政策简表：</strong>持续跟踪 Anthropic、OpenAI、Google、Nvidia、Hugging Face、Meta、Microsoft 对开放权重的立场和签署动作。</li>
+  <li><strong>Kimi K3 实测队列：</strong>核验权重、许可证、推理配置、上下文、视觉输入、tool calling、长代码任务和部署成本，不只看模型卡。</li>
+  <li><strong>Copilot 企业治理清单：</strong>把 managed-settings.json、客户端策略、插件白名单、审批 prompt、PR 审查和 cloud agent 日志做成启用前检查表。</li>
+  <li><strong>日报 pipeline trace：</strong>记录抓取失败、X 镜像不可用、日期窗口和链接来源，后续用作 agent eval 样本。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>Kimi K3 full weights 的实际下载地址、许可证、文件完整性和社区可运行状态仍需继续核验；本期只确认官方文档与公开报道中的发布窗口。</li>
+  <li>Axios 等新闻源对行业签署名单和 Nvidia alliance 的描述需要回到原始公开信与 Nvidia 官方公告二次核对。</li>
+  <li>OpenAI task crossover 数据来自 ChatGPT 用户消息分析，结论适合作趋势判断，不应直接外推为每个行业/企业的 ROI。</li>
+  <li>Cognizant 案例中的 40%/88% 等数字来自合作公告，缺少独立审计和完整基线，适合作为线索，不当作普遍效果。</li>
+  <li>X/Twitter 公开抓取仍不稳定；本期没有用不可打开 tweet 作为事实依据。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>围绕 open-weights 的阵营口水很多，缺少原始政策文本或技术细节的社媒短评不纳入重点。</li>
+  <li>重复转述 Claude Opus 5 / GPT-5.6 的旧发布没有新增事实，本期只保留与 Copilot、企业治理和政策关联的部分。</li>
+  <li>Google/Gemini 官方源本窗口未发现新的高优先级 agent 发布，今日不单独展开。</li>
+  <li>泛 AI 生产力文章如果没有数据、案例或可执行框架，暂不进入核心主题。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/index/how-ai-is-expanding-what-people-do-at-work/">OpenAI · How AI is expanding what people do at work</a></li>
+  <li><a href="https://openai.com/news/">OpenAI News</a></li>
+  <li><a href="https://www.anthropic.com/news/position-open-weights-models">Anthropic · Our position on open-weights models</a></li>
+  <li><a href="https://www.anthropic.com/news/cognizant-anthropic">Anthropic · Cognizant and Anthropic expand their partnership</a></li>
+  <li><a href="https://news.cognizant.com/2026-07-27-Cognizant-and-Anthropic-expand-partnership-to-embed-Claude-in-Cognizants-industry-platforms%2C-helping-clients-close-the-gap-between-AI-promise-and-business-outcomes">Cognizant Newsroom · Anthropic partnership</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/">GitHub Changelog · Enterprise managed settings in Copilot app and cloud agent</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-27-manage-github-copilot-app-access-with-a-dedicated-policy/">GitHub Changelog · Dedicated Copilot app policy</a></li>
+  <li><a href="https://platform.kimi.ai/docs/guide/kimi-k3-quickstart">Kimi API Platform · Kimi K3</a></li>
+  <li><a href="https://www.interconnects.ai/p/kimi-k3-the-open-weights-escalation">Interconnects · Kimi K3: The open-weights escalation</a></li>
+  <li><a href="https://www.axios.com/2026/07/27/nvidia-anthropic-openai-open-weight-debate">Axios · Big Tech lines up in support of open-weight AI</a></li>
+  <li><a href="https://www.langchain.com/blog/agent-observability-powers-agent-evaluation">LangChain · Agent observability powers agent evaluation</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-27T00:00:00Z / 2026-07-28T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
