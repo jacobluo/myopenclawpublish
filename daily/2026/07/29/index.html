@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：科学 Agent 的最后一公里、Copilot 多模型治理与开源安全闸门</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时的强信号集中在 agent 进入真实工作后的工程化约束。OpenAI 发布科学计算 agent field report，强调可测验收目标和人类科学判断；GitHub Copilot 接入 Grok 4.5，并把 Copilot app 活动纳入更细的使用度量；npm 开始发布时恶意软件扫描和 dual-use 元数据要求；MCP stateless 规范在 7 月 28 日进入关键节点；Anthropic open-weights 文章的 7 月 28 日编辑延续模型开放与安全测试争论。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：科学 Agent 的最后一公里、Copilot 多模型治理与开源安全闸门</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时的强信号集中在 agent 进入真实工作后的工程化约束。OpenAI 发布科学计算 agent field report，强调可测验收目标和人类科学判断；GitHub Copilot 接入 Grok 4.5，并把 Copilot app 活动纳入更细的使用度量；npm 开始发布时恶意软件扫描和 dual-use 元数据要求；MCP stateless 规范在 7 月 28 日进入关键节点；Anthropic open-weights 文章的 7 月 28 日编辑延续模型开放与安全测试争论。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-07-29</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年7月29日（周三）</strong> · 覆盖窗口：2026-07-28 08:00 – 2026-07-29 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS/官网、GitHub Changelog RSS、Anthropic Newsroom、Google AI Developers Forum、公开搜索索引抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天的关键词是“可验证的长任务”</h4><p>过去 24 小时最强信号不是单一模型刷新，而是 agent 在科学计算、企业编码、包发布和协议连接里的落地细节。共同点是：能力上来后，验收目标、轨迹度量、权限开关和发布前扫描变成主线。</p></div>
+  <div class="overview-item"><h4>OpenAI 把科学 agent 的价值落在“工程约束解除”</h4><p>OpenAI 的 scientific computing field report 说，agent 能快速给出初版实现，但边界条件、数值差异和最后一公里仍需要人类用测试、基准和科学判断逐步收敛。</p></div>
+  <div class="overview-item"><h4>Copilot 正从模型选择器变成企业 agent 仪表盘</h4><p>GitHub 同一天发布 Grok 4.5 接入和 Copilot app 细粒度 usage metrics。企业不只要“能选更多模型”，还要知道谁在 app 里用了什么模型、生成了多少代码、是否符合策略。</p></div>
+  <div class="overview-item"><h4>npm 扫描说明开源供应链开始适配 agent 时代</h4><p>发布时扫描、dual-use 声明、DISCLOSURE 文件和 2FA 发布要求，会影响安全工具、自动化 agent、渗透测试相关包和 CI 发布流水线。</p></div>
+  <div class="overview-item"><h4>MCP stateless 是连接层信号</h4><p>GitHub MCP Server 已支持 7 月 28 日进入的新版 MCP 规范。去 session 化、并行握手和官方 conformance tests，都是让远程工具服务器更容易规模化和验收的基础设施变化。</p></div>
+  <div class="overview-item"><h4>X 覆盖仍不稳定</h4><p>本轮 X/Twitter 公开页面与镜像源仍不能稳定返回高优先级账号的完整时间线。人物动态以可打开的官方博客、RSS、开发者文档和新闻页为准；不可核验社媒 snippet 不当作事实来源。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI：科学计算 agent 的关键不是一把梭，而是可测的迭代</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Research</span><strong>OpenAI</strong> · 2026-07-28 17:00 UTC · <a href="https://openai.com/index/scientific-computing-agentic-ai/">Scientific computing in the age of agentic AI</a></div>
+  <div class="summary"><p>OpenAI 发布一份关于科学计算中使用 AI coding agents 的 field report，覆盖基因组学等科研软件场景。报告的重点不是“agent 替代科学家”，而是 agent 帮研究者更快现代化代码、搭建实现、补齐工程能力，让科学家把更多时间放在问题定义、结果判断和实验设计上。</p><p>值得注意的是，报告反复强调外部参考和可测验收目标：比如输出一致性、与既有工具达到 parity、统计行为合理，或使用模拟数据提前建立答案。它也承认 agent 经常能很快产出初版，但边界条件、细微数值差异和最后一公里修正往往最耗时。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这和 Follow List 里 OpenAI/Codex/agent 主线高度一致：长任务 agent 的真正门槛不是“会不会写代码”，而是能否在专业领域里被可靠验收。科研场景把这个问题放大了，因为错一点点数值或统计假设就可能让结论失真。</div>
+  <div class="action">后续行动：给内部 agent demo 增加“验收目标模板”：输入基线、可复现实验、数值容差、对照工具、失败样例和人工复核点。不要只展示 agent 生成了什么，更要展示它如何证明自己做对了。</div>
+</div>
+
+<h3>二、GitHub Copilot：Grok 4.5 进入模型池，多模型 agent 竞争继续加速</h3>
+<div class="card">
+  <div class="source"><span class="tag">Copilot / Models</span><strong>GitHub Changelog</strong> · 2026-07-28 19:10 UTC · <a href="https://github.blog/changelog/2026-07-28-grok-4-5-is-now-available-in-github-copilot/">Grok 4.5 is now available in GitHub Copilot</a></div>
+  <div class="summary"><p>GitHub 宣布 xAI 的 Grok 4.5 开始进入 GitHub Copilot，定位是 fast, agentic coding 和复杂多步骤工作流，支持最高 500,000 token context、文本与图像输入，以及 low/medium/high reasoning effort。GitHub 表示内部测试中，Grok 4.5 在 VS Code 和 Copilot CLI 的终端编码任务上表现强，尤其适合并行调工具和直接执行动作。</p><p>可用范围覆盖 Copilot Pro、Pro+、Max、Business 和 Enterprise，入口包括 VS Code、Visual Studio、Copilot CLI、Copilot cloud agent、Copilot app、JetBrains、Xcode、Eclipse。企业和 Business 管理员需要在 Copilot 设置里开启 Grok 4.5 policy，默认关闭；计费按 provider list pricing 的 usage-based billing。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Copilot 正变成多模型 agent 调度层，而不是单一模型产品。对企业来说，模型选择不再只是体验偏好，还牵涉成本、数据策略、供应商风险、任务类型匹配和管理员默认开关。</div>
+  <div class="action">后续行动：更新 coding agent 对比表，把 Grok 4.5 放进“探索/并行工具/紧急 unblock”场景；同时记录默认关闭、usage-based 计费和企业 policy 这些采购与治理条件。</div>
+</div>
+
+<h3>三、Copilot app usage metrics：企业终于能看见 app 里谁在用、用了什么、产出了什么</h3>
+<div class="card">
+  <div class="source"><span class="tag">Copilot / Governance</span><strong>GitHub Changelog</strong> · 2026-07-28 23:35 UTC · <a href="https://github.blog/changelog/2026-07-28-github-copilot-app-usage-metrics-now-expand-across-report-rollups/">GitHub Copilot app usage metrics now expand across report rollups</a></div>
+  <div class="summary"><p>GitHub 扩展 Copilot usage metrics API，把 Copilot app 活动纳入 enterprise-user 和 organization-user reports。新增字段包括 used_copilot_app、per-user totals_by_copilot_app，以及按 feature、model、language rollup 的 copilot_app 维度；代码生成、代码接受、lines added/deleted 和 daily active users 也会包含 Copilot app 活动。</p><p>这补上了昨天 enterprise managed settings 的另一半：策略能管，指标也要能看。GitHub 说明此前只能看到企业或组织层面的 Copilot app 总量，现在可以归因到个人用户，并把 app、IDE、chat、code review 和 coding agent surfaces 放在同一套字段里比较。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent rollout 的核心问题会从“有没有试用”变成“谁真的用了、在哪个入口用了、产出是否可衡量、成本是否可解释”。这类 API 字段会直接影响 AI 工具采购续费和内部 ROI 汇报。</div>
+  <div class="action">后续行动：把 Copilot 采用度仪表盘拆成四类：入口 surface、模型、语言/仓库、代码接受与变更量。后续若做企业 AI 工具审计，这些字段应进入默认数据模型。</div>
+</div>
+
+<h3>四、npm 发布时扫描：开源包注册表开始对 dual-use 和自动化供应链加闸</h3>
+<div class="card">
+  <div class="source"><span class="tag">Supply Chain</span><strong>GitHub Changelog / npm</strong> · 2026-07-28 22:50 UTC · <a href="https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/">npm publish-time malware scanning and dual-use metadata</a></div>
+  <div class="summary"><p>npm 开始在 package 发布时自动进行恶意软件扫描。新包会先进入扫描流程，结果可能是正常发布、进入人工审查，或被阻止；典型延迟约 5 分钟，高峰或特殊内容可能达到 15 分钟以上。依赖“发布后立即可安装”的自动化流水线需要容忍这段延迟。</p><p>更重要的是 dual-use content 的新元数据要求：具有安全相关能力、可能像恶意软件的合法包，需要在 package.json 中声明 contentPolicy，并在根目录提供纯文本 DISCLOSURE 文件说明功能与正当用途。声明 dual-use 的包还需要通过 2FA-enforced publishing；声明一旦发布，后续版本不能移除。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>agent 会显著放大包发布、依赖引入和脚本执行的速度，注册表侧的安全闸门也会跟着前移。对安全工具、自动化运维、浏览器/系统控制 agent 和红队工具包来说，dual-use 声明会成为实际发布要求，而不是纯政策讨论。</div>
+  <div class="action">后续行动：检查内部 npm/JS 发布模板：是否假设 publish 后立即 install、是否使用 trusted publishing/OIDC、是否存在需要 DISCLOSURE 的双用途能力、CI 是否能处理扫描等待和阻断。</div>
+</div>
+
+<h3>五、MCP stateless：工具服务器进入更适合规模化的连接形态</h3>
+<div class="card">
+  <div class="source"><span class="tag">MCP / Agents</span><strong>GitHub Changelog</strong> · 2026-07-23 发布，2026-07-28 规范节点 · <a href="https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification/">GitHub MCP Server supports the next MCP specification</a></div>
+  <div class="summary"><p>GitHub 之前公告 GitHub MCP Server 已支持新版 MCP 规范，而该规范在 2026 年 7 月 28 日进入 stateless core 节点。变化包括移除 sessions 和 initialize，客户端可以更快完成连接并并行握手；remote server 更容易水平扩展；extensions、MCP apps 和 Enterprise Managed Auth 等能力成为更重要的扩展面。</p><p>GitHub MCP Server 自身移除了 Redis sessions，减少 initialize 写库和每次调用读库；同时避免对每个 MCP payload 做深度检查，改用 HTTP headers 里的稳定字段做日志和 secret scanning。新版还引入官方 conformance tests，让 agent 辅助开发 MCP server/client 时有更明确的验收套件。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里的 agent/tooling 主线正在从“本地工具调用”走向“远程工具网络”。MCP 连接层一旦更容易扩展和验证，企业会更愿意把 GitHub、Issue、文档、数据库、内部 API 暴露给受管 agent。</div>
+  <div class="action">后续行动：整理 MCP 兼容性检查清单：SDK 版本、stateless support、elicitation、认证、日志字段、secret scanning、conformance tests，以及旧 session 假设是否仍存在。</div>
+</div>
+
+<h3>六、Anthropic open-weights：7 月 28 日编辑提醒这场争论会继续精细化</h3>
+<div class="card">
+  <div class="source"><span class="tag">Policy / Open Models</span><strong>Anthropic / Dario Amodei</strong> · 2026-07-27 发布，2026-07-28 编辑 · <a href="https://www.anthropic.com/news/position-open-weights-models">Our position on open-weights models</a></div>
+  <div class="summary"><p>Anthropic 的 open-weights 立场文章在 7 月 28 日有编辑更新，补充说明文中提到的 modular training strategies 研究是 Anthropic 与 AE Studio 的合作。文章主旨仍是：Anthropic 没有主张把 open-weights 模型作为类别禁止；它支持的是强芯片/设备管制、打击工业级蒸馏，以及对足够强的开放和闭源模型都做强制安全测试。</p><p>这条更新本身不改变结论，但说明 Anthropic 试图把 open-weights 争论从“是否反开源”的舆论标签，推向更细的安全机制、测试机制和政策干预范围。它也让模块化训练、可撤回性、安全评估这些问题更值得跟踪。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Kimi、Qwen、Hugging Face、Nvidia/open-weight 阵营与 Anthropic 风险框架还会继续碰撞。对产品和投资判断来说，真正重要的不是口号，而是哪些模型会被要求测试、哪些用途会被禁、哪些部署能被保险和合规接受。</div>
+  <div class="action">后续行动：继续维护 open-weights 政策矩阵，把“模型开放程度、危险能力测试、蒸馏来源、芯片来源、许可证、企业部署限制”分开记录，避免用一个“开源/闭源”标签概括所有风险。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>7 月 28 日发布科学计算 agent field report，强调 agent 能加速科研软件实现，但必须用基准、对照工具和科学判断处理最后一公里。</li>
+  <li><strong>GitHub Copilot：</strong>Grok 4.5 进入 Copilot 模型池，覆盖 IDE、CLI、cloud agent 和 Copilot app；企业/Business 管理员需显式开启。</li>
+  <li><strong>GitHub Copilot Metrics：</strong>Copilot app activity 被纳入用户级、模型级、语言级和功能级 rollup，企业可更细地衡量 app 采用与代码产出。</li>
+  <li><strong>npm：</strong>发布时恶意软件扫描和 dual-use 元数据要求上线，安全相关合法包需要声明用途，并满足更严格发布要求。</li>
+  <li><strong>MCP：</strong>新版 stateless core 在 7 月 28 日成为关键节点；GitHub MCP Server 已提前支持，并强调官方 conformance tests。</li>
+  <li><strong>Anthropic：</strong>open-weights 文章 7 月 28 日编辑更新，继续把争论聚焦到安全测试、蒸馏和强芯片约束。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Codex 方向：</strong>科学计算报告与 7 月 27 日 Work at the Frontier 报告形成连续叙事：agent 正从代码助手进入跨角色、长周期、可验收的专业工作。</li>
+  <li><strong>GitHub：</strong>本周连续围绕 Copilot 发布模型接入、企业策略、cloud agent、usage metrics、MCP 和 npm 供应链安全更新，显示它正在把开发者 agent 生态做成平台层。</li>
+  <li><strong>xAI：</strong>Grok 4.5 通过 Copilot 进入主流开发者入口，说明模型分发不只靠自有产品，还要进入企业已经采购的 agent shell。</li>
+  <li><strong>Anthropic / Dario Amodei：</strong>open-weights 立场仍是本周政策主线；7 月 28 日编辑补充合作研究出处，后续需要看开源阵营是否继续回应。</li>
+  <li><strong>Google AI Studio：</strong>开发者论坛 7 月 28 日出现 AI mode history、Gemini Flash 3.6 随机 Invalid Argument、GitHub App diff 权限、视频生成失败、日志截断等多条问题反馈。它们暂时属于产品稳定性信号，不足以形成战略结论。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>科学 agent 验收模板：</strong>把 OpenAI field report 的经验沉淀成 agent 项目启动表：目标、基线、可测指标、容差、回归样例、人类复核点。</li>
+  <li><strong>Copilot 多模型治理表：</strong>按模型、入口、默认策略、计费方式、上下文窗口、适合任务、管理员开关和数据风险做表。</li>
+  <li><strong>Copilot usage metrics 数据模型：</strong>跟踪 used_copilot_app、totals_by_copilot_app、model/language/feature rollup，准备做企业采用度分析。</li>
+  <li><strong>npm dual-use 合规清单：</strong>检查安全工具、自动化脚本、浏览器控制工具、agent 执行器是否需要 contentPolicy 与 DISCLOSURE。</li>
+  <li><strong>MCP stateless 迁移核验：</strong>测试现有 MCP server/client 是否还依赖 session、initialize 状态或旧 elicitation 流程。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>Grok 4.5 在 Copilot 的实际可见性是 gradual rollout，今天只确认 GitHub 公告和 policy 默认关闭；具体账号是否已可选需要在企业环境里验证。</li>
+  <li>OpenAI 科学计算报告是 field report，不是统一 benchmark 排行；其中经验可迁移到科研/工程 agent，但不能直接外推出所有科学任务的成功率。</li>
+  <li>npm dual-use policy 的 enforcement 会渐进推进；哪些包会被主动联系、哪些类型会触发额外扫描，需要继续看 npm 文档和社区讨论。</li>
+  <li>MCP stateless 的生态兼容度要看各 SDK 和具体 server/client 实装；GitHub 支持不等于所有工具已完成迁移。</li>
+  <li>X/Twitter 高优先级账号的 24 小时完整动态未能稳定核验；本期未使用不可打开或无法复核的 tweet 内容。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Google AI Studio 论坛的零散 bug 帖数量不少，但大多是单用户反馈或未形成官方公告，暂不作为核心信号。</li>
+  <li>围绕 open-weights 的阵营口号继续发酵；没有原始政策文本、模型卡或可执行合规影响的短评不纳入重点。</li>
+  <li>旧模型发布的二次转载如果没有新增企业入口、价格、限制或 benchmark，不重复展开。</li>
+  <li>泛化的“别 micromanage AI”类建议可以作为提示词风格参考，但没有新产品或数据时优先级低于官方研究和平台更新。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/scientific-computing-agentic-ai/">OpenAI · Scientific computing in the age of agentic AI</a></li>
+  <li><a href="https://openai.com/index/how-ai-is-expanding-what-people-do-at-work/">OpenAI · How AI is expanding what people do at work</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-28-grok-4-5-is-now-available-in-github-copilot/">GitHub Changelog · Grok 4.5 is now available in GitHub Copilot</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-28-github-copilot-app-usage-metrics-now-expand-across-report-rollups/">GitHub Changelog · Copilot app usage metrics now expand across report rollups</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/">GitHub Changelog · npm publish-time malware scanning and dual-use metadata</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification/">GitHub Changelog · GitHub MCP Server supports the next MCP specification</a></li>
+  <li><a href="https://www.anthropic.com/news/position-open-weights-models">Anthropic · Our position on open-weights models</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic Newsroom</a></li>
+  <li><a href="https://discuss.ai.google.dev/c/ai-studio/8">Google AI Developers Forum · AI Studio latest topics</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-28T00:00:00Z / 2026-07-29T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
