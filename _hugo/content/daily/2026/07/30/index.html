@@ -1,0 +1,135 @@
+---
+title: "Follow 深度日报：Agent 记忆与评测、科研入口、Copilot 审查工具化"
+date: "2026-07-30"
+category: "daily"
+url: "/daily/2026/07/30/"
+summary: "Follow List 公开来源整理：过去 24 小时的强信号集中在 agent 从模型能力走向运行系统。OpenAI 用 ARC-AGI-3 说明 retained reasoning 与 compaction 会显著改变评测结果，同时推出面向 10 万研究者的 ChatGPT Academic Researchers 项目和 GPT-5.6 效率文章；GitHub 将 Copilot code review 的 agent skills 与 MCP server 支持推到 GA，并开始调整企业模型默认启用策略；Simon Willison 连续关注 MCP 接入与 Word/Copilot 文档蠕虫式 prompt injection。"
+---
+<div class="meta">
+  <strong>2026年7月30日（周四）</strong> · 覆盖窗口：2026-07-29 08:00 – 2026-07-30 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS/官网、GitHub Changelog RSS、Simon Willison Weblog、Anthropic Newsroom、Gemini API release notes、公开 X 个人页 SEO/microdata 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天的关键词是“运行中的 agent”</h4><p>过去 24 小时最强信号不是某个单点功能，而是 agent 在真实运行时需要的记忆、压缩、工具接入、审查上下文和企业默认策略。能力本身仍重要，但决定体验和评测结果的越来越多是 harness、上下文管理和治理开关。</p></div>
+  <div class="overview-item"><h4>OpenAI 把评测问题指向“系统设置”</h4><p>ARC-AGI-3 文章显示，同一个 GPT-5.6 Sol 在通用 harness 与生产式 Responses API harness 下表现差异巨大。保留推理状态与 compaction 让模型不必每一步重新理解游戏，也避免旧动作被滚动截断直接丢失。</p></div>
+  <div class="overview-item"><h4>科研入口正在平台化</h4><p>OpenAI 同日推出 ChatGPT for Academic Researchers，计划到 2027 年给 10 万名研究者提供免费前沿模型、Codex、深度研究、生命科学 skills 和连接器。科学 agent 主题从昨天的 field report 延伸到今天的分发与生态入口。</p></div>
+  <div class="overview-item"><h4>GitHub Copilot code review 进入“可带工具审查”阶段</h4><p>Copilot code review 的 agent skills 与 MCP servers 已 GA。它把团队标准、内部工具、Issue/文档/服务目录等上下文直接放入代码审查，但 MCP 调用限定为只读，说明 GitHub 正在把 agent 能力嵌进企业开发流程的低风险入口。</p></div>
+  <div class="overview-item"><h4>Prompt injection 风险开始像文档供应链问题</h4><p>Simon Willison 记录的 Word/Copilot “AI worming”案例提醒：隐藏指令不只会影响一次生成，还可能被复制进后续文档，成为新的传播载体。办公文档、知识库和 RAG 素材需要被当作可污染输入处理。</p></div>
+  <div class="overview-item"><h4>X 高优先级账号未形成可核验主线</h4><p>本轮抽样高优先级 X 个人页没有稳定抓到覆盖窗口内的新原帖；公开镜像/RSSHub 路线不可用或未配置。人物动态以官网、博客和 RSS 中可打开链接为主，不把不可复核 snippet 当事实来源。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI：ARC-AGI-3 的关键变量是 agent 记忆与上下文压缩</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Evals</span><strong>OpenAI</strong> · 2026-07-29 15:00 UTC · <a href="https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores/">How enabling two settings tripled our scores on the ARC-AGI-3 benchmark</a></div>
+  <div class="summary"><p>OpenAI 复盘 GPT-5.6 Sol 在 ARC-AGI-3 上的低分，结论不是简单说模型不会玩 2D puzzle，而是官方 harness 丢弃了私有推理，并用滚动截断处理长上下文。换成更贴近 ChatGPT/Codex 的 Responses API harness 后，保留 reasoning 与启用 compaction 让 GPT-5.6 Sol 在公开任务集上从 13.3% 提升到 38.3%，输出 token 也显著下降。</p><p>这条最值得注意的地方是它重新定义了 eval 讨论的边界：评测不只测模型，也测工具协议、上下文策略、状态保存和提示方式。对长任务 agent 来说，忘掉前序观察和推理不是“小实现差异”，而是会直接改变能力曲线。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Codex、Claude Code、MCP、agent evals 都在同一条线上。未来比较模型时，如果 harness 没有说明是否保留推理、如何压缩上下文、如何处理工具轨迹，排名很容易失真。</div>
+  <div class="action">后续行动：把内部 agent eval 模板加上四个必填项：是否保留 reasoning、压缩策略、工具调用轨迹、上下文丢弃规则。所有模型对比都要把 harness 设置和分数放在同一页。</div>
+</div>
+
+<h3>二、OpenAI：10 万研究者计划把科学 agent 变成分发入口</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Research Adoption</span><strong>OpenAI</strong> · 2026-07-29 10:00 UTC · <a href="https://openai.com/index/chatgpt-for-academic-researchers/">Accelerating scientific discovery with ChatGPT for Academic Researchers</a></div>
+  <div class="summary"><p>OpenAI 宣布 ChatGPT for Academic Researchers 项目，先从今年夏天 1 万名研究者开始，到 2027 年扩展到 10 万名。参与者可免费获得前沿模型、ChatGPT Work、Codex、更高使用额度、更大上下文、深度研究，以及超过 75 个生命科学 skills 和多个科研连接器。</p><p>项目覆盖数学、工程、生命科学、文献综述、资助申请、代码执行与数据分析等工作流，并强调 business-grade 隐私与默认不用于训练。OpenAI 还给出使用数据：每周约 130 万人用 ChatGPT 做高级科学与数学任务，研究者已经在从假设生成到结果分析的多阶段流程中使用 ChatGPT 和 Codex。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>昨天 OpenAI 讲科学计算 agent 的 field report，今天直接做学术分发计划。科研场景会把 agent 的长上下文、可验证代码、工具连接、数据隐私和协作边界全部放大，是观察 Codex/ChatGPT Work 企业化的高质量样本。</div>
+  <div class="action">后续行动：跟踪首批参与机构和公开案例，重点看哪些科研 workflows 真正从“辅助写作/问答”迁移到“可复现实验、代码分析、数据处理、论文验证”。</div>
+</div>
+
+<h3>三、OpenAI：GPT-5.6 叙事从更强转向更高效的智能</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Model Economics</span><strong>OpenAI</strong> · 2026-07-29 00:00 UTC · <a href="https://openai.com/index/gpt-5-6-frontier-intelligence-efficiency/">How GPT-5.6 fuses frontier intelligence with frontier efficiency</a></div>
+  <div class="summary"><p>OpenAI 发布 GPT-5.6 效率文章，把模型进展表述为模型本体、推理、agentic workflow 三层共同优化，而不是只谈单次回答质量。结合 ARC-AGI-3 文章看，OpenAI 正在强调同一个模型在不同运行设置下的有效智能差异：保留 reasoning、compaction、合适的 API 与工具编排都会影响每美元可完成工作量。</p><p>这条和前几周 OpenAI CFO 的 AI scorecard 叙事互相呼应：企业买 AI 不只看 benchmark 峰值，而要看 cost per successful task、dependability、return on compute，以及失败后能否收敛。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI agent 采购会越来越像“单位成功任务成本”的工程账，而不是“模型榜单第一”的市场账。对内部方案设计，应该把 token、时间、重试次数、工具错误率、人工复核成本放进同一张表。</div>
+  <div class="action">后续行动：为 Codex/Claude/Gemini 的对比表增加“成功任务成本”列，记录 token、wall time、失败重试、人工干预次数和最终可合并产物。</div>
+</div>
+
+<h3>四、GitHub：Copilot code review 的 agent skills 与 MCP servers GA</h3>
+<div class="card">
+  <div class="source"><span class="tag">Copilot / Code Review</span><strong>GitHub Changelog</strong> · 2026-07-29 21:26 UTC · <a href="https://github.blog/changelog/2026-07-29-copilot-code-review-agent-skills-and-mcp-now-generally-available">Copilot code review: Agent skills and MCP now generally available</a></div>
+  <div class="summary"><p>GitHub 宣布 Copilot code review 对 agent skills 和 MCP servers 的支持正式 GA，覆盖 Copilot Pro、Pro+、Business 和 Enterprise。团队可以在仓库或组织里通过 <code>.github/skills/SKILL.md</code> 提供审查标准和工具说明，也可以把第三方平台、Issue tracker、文档系统、服务目录等上下文通过 MCP 接入代码审查。</p><p>GitHub 明确 Copilot code review 中的 MCP tool calls 会限定为只读，并且已有 Copilot cloud agent 的 MCP 配置会自动应用到 code review。评论里也会标注哪些建议使用了 skills 或 MCP 上下文，方便团队观察自定义上下文是否真的发挥作用。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 enterprise agent 落地的典型低风险入口：审查建议需要上下文，但不直接写生产代码；MCP 只读降低外部系统风险；skills 给组织规则一个可版本化载体。它也说明“技能文件”正在从本地 agent 约定变成主流开发平台功能。</div>
+  <div class="action">后续行动：给重点仓库设计一版 <code>.github/skills</code> 草案，包括代码风格、架构边界、安全禁区、测试要求和业务上下文；同时列出可安全只读接入的 MCP 数据源。</div>
+</div>
+
+<h3>五、GitHub：Copilot 企业模型默认启用策略开始倒计时</h3>
+<div class="card">
+  <div class="source"><span class="tag">Copilot / Governance</span><strong>GitHub Changelog</strong> · 2026-07-29 14:01 UTC · <a href="https://github.blog/changelog/2026-07-29-default-model-enablement-for-copilot-business-and-enterprise">Default model enablement for Copilot Business and Enterprise</a></div>
+  <div class="summary"><p>GitHub 为 Copilot Business 和 Enterprise 引入 GA 模型的全局默认启用策略。接下来 28 天该策略可配置但不影响现有可用性；到 2026 年 8 月 26 日，未显式配置的新模型会从 unconfigured 变成 inherits default，并根据组织/企业策略自动可用或保持关闭。</p><p>GitHub 也说明显式开启或关闭的模型不会被覆盖，open-weight 模型以及不在 GitHub 数据保留协议覆盖内的模型被排除在默认启用之外。这是昨天 Grok 4.5 进入 Copilot 之后很关键的治理补丁：模型接入速度变快，管理员需要一个默认策略，而不是每次人工追新。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>多模型 Copilot 的治理重点从“能不能选模型”变成“默认允许哪些模型进入工作流”。对企业而言，模型数据协议、open-weight 属性、供应商边界和计费策略都会影响默认开关。</div>
+  <div class="action">后续行动：在企业 AI 工具采购清单里新增“默认模型策略”检查：新 GA 模型默认开/关、哪些模型排除、显式覆盖规则、数据保留协议、管理员审计责任。</div>
+</div>
+
+<h3>六、Simon Willison：MCP 接入真实聊天界面仍然复杂，文档注入风险也在升级</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Security</span><strong>Simon Willison</strong> · 2026-07-29 00:13 UTC / 2026-07-29 · <a href="https://simonwillison.net/2026/Jul/29/mcp-in-claude-and-chatgpt/">TIL: Adding a custom MCP server to Claude and ChatGPT</a>；<a href="https://simonwillison.net/2026/Jul/29/ai-worming-through-word/">AI Worming through Word</a></div>
+  <div class="summary"><p>Simon 记录了把自定义 MCP server 接入 Claude 与 ChatGPT 标准聊天界面的实际步骤，结论是可行，但配置路径并不直观。这补上了 GitHub MCP GA 的另一面：协议正在主流化，但普通开发者和企业管理员仍需要清晰的接入、权限和调试流程。</p><p>同一天他也转述了 Word/Copilot 中的 “AI worming” 风险：攻击者把隐藏指令放进文档，Copilot 把它当成上下文执行，甚至可能把隐藏指令复制进生成文档，让新文档继续成为载体。这不是传统宏病毒，而是 LLM 工作流里的内容级污染。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>MCP 让 agent 更有用，也扩大了输入面。企业要同时解决“怎么接工具”和“接入后怎么防止不可信内容通过工具链污染输出”两个问题。</div>
+  <div class="action">后续行动：把 RAG/办公文档处理流程加上内容污染检查：隐藏文本、白字、注释、元数据、不可见区域、外部引用和自动复制路径。MCP server 侧也要标注数据来源信任级别。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>ARC-AGI-3 复盘强调 retained reasoning 与 compaction 会显著改变长任务 agent 表现，建议 API 开发者使用 Responses API、保留推理并启用 compaction。</li>
+  <li><strong>OpenAI Academic Researchers：</strong>计划到 2027 年向 10 万名研究者提供免费前沿模型、Codex、深度研究、skills 和科研连接器，首批今年夏天 1 万名。</li>
+  <li><strong>OpenAI GPT-5.6：</strong>效率文章把模型价值放到“每美元可完成工作量”和 agentic workflow 上，与近期 AI scorecard、科学计算 field report 形成连续叙事。</li>
+  <li><strong>GitHub Copilot：</strong>code review 的 agent skills 与 MCP servers 支持正式 GA，MCP 调用限定只读，适合把团队标准和外部上下文带入审查。</li>
+  <li><strong>GitHub Enterprise：</strong>Copilot Business/Enterprise 新增 GA 模型默认启用策略，2026 年 8 月 26 日生效，open-weight 和不符合数据保留协议的模型排除。</li>
+  <li><strong>Simon Willison：</strong>发布 MCP 接入 Claude/ChatGPT 的实操笔记，并关注 Word/Copilot 文档中的 prompt injection 传播风险。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Codex 方向：</strong>从科学计算 field report 到 ARC-AGI-3 harness 复盘，再到 Academic Researchers 项目，OpenAI 正把 Codex/ChatGPT 定位成科研和长任务 agent 的基础设施。</li>
+  <li><strong>GitHub：</strong>本周连续围绕 Copilot 发布模型接入、使用指标、默认模型策略、code review skills、MCP 和 CodeQL 更新，显示其在开发者 agent 平台层的节奏很密。</li>
+  <li><strong>Simon Willison：</strong>继续承担 AI engineering 早期风险雷达角色：一边追踪 MCP 实操，一边把 prompt injection 从聊天/RAG 扩展到办公文档传播链。</li>
+  <li><strong>Anthropic：</strong>官网本轮未见覆盖窗口内的新发布；7 月 24 日 Claude Opus 5 仍是近期核心背景，关注点在长任务验证、自动 fallbacks 和安全分类器。</li>
+  <li><strong>Google / Gemini：</strong>Gemini API release notes 最近主要更新仍停留在 7 月 21 日 Gemini 3.6 Flash/3.5 Flash-Lite GA；过去 24 小时未见可核验的新高优先级 API 公告。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>Agent eval harness 模板：</strong>沉淀 retained reasoning、compaction、工具轨迹、上下文窗口和失败重试的记录格式。</li>
+  <li><strong>科研 agent 工作流库：</strong>围绕 OpenAI Academic Researchers 项目，整理可复现实验、代码分析、文献综述、基因组/蛋白建模的案例。</li>
+  <li><strong>Copilot code review skills POC：</strong>为一个真实仓库创建 <code>.github/skills</code>，验证 Copilot 是否能按团队标准给出更有用的 review。</li>
+  <li><strong>MCP 只读数据源清单：</strong>先接 Issue、文档、服务目录、API catalog 这类低风险上下文，再评估写操作。</li>
+  <li><strong>文档 prompt injection 扫描：</strong>把隐藏文本、注释、白字、元数据和复制传播风险加入企业知识库/RAG ingestion 检查。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>OpenAI ARC-AGI-3 结果来自 OpenAI 自建 Responses API harness；若用于第三方模型对比，需要确认每个模型是否具备等价的 reasoning retention 与 compaction 能力。</li>
+  <li>ChatGPT for Academic Researchers 的首批机构、资格审核和实际使用边界需要等待更多公开案例；现在只能确认 OpenAI 官方说明。</li>
+  <li>GitHub Copilot 默认模型策略 8 月 26 日才正式影响模型可用性；不同企业实例的现有显式配置不会被覆盖，但实际迁移体验需届时核验。</li>
+  <li>Copilot code review 的 MCP 支持虽然 GA，但第三方 MCP server 的权限、日志、数据保留和审计能力仍需逐一检查。</li>
+  <li>Word/Copilot 的 “AI worming” 是高价值风险信号，但具体影响范围取决于 Microsoft 端的文档解析、隐藏内容暴露和复制策略。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>本轮 X/Twitter 高优先级账号没有稳定抓到窗口内新原帖；旧转推、旧模型争论和无法打开的 snippet 不纳入核心结论。</li>
+  <li>Google AI Studio 论坛零散问题仍可作为产品稳定性观察，但过去 24 小时没有形成足够强的公开发布信号。</li>
+  <li>Anthropic Opus 5 是近期重要背景，但发布日期为 7 月 24 日，不重复作为今日核心更新展开。</li>
+  <li>单纯转述 GPT-5.6/Claude/Fable 模型排名的社媒评论，如果没有原始 eval、价格或产品入口变化，优先级低于官方报告和可复核技术文章。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores/">OpenAI · How enabling two settings tripled our scores on the ARC-AGI-3 benchmark</a></li>
+  <li><a href="https://openai.com/index/chatgpt-for-academic-researchers/">OpenAI · Accelerating scientific discovery with ChatGPT for Academic Researchers</a></li>
+  <li><a href="https://openai.com/index/gpt-5-6-frontier-intelligence-efficiency/">OpenAI · How GPT-5.6 fuses frontier intelligence with frontier efficiency</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-29-copilot-code-review-agent-skills-and-mcp-now-generally-available">GitHub Changelog · Copilot code review: Agent skills and MCP now generally available</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-29-default-model-enablement-for-copilot-business-and-enterprise">GitHub Changelog · Default model enablement for Copilot Business and Enterprise</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-29-codeql-2-26-1-improves-analysis-accuracy-and-framework-coverage">GitHub Changelog · CodeQL 2.26.1 improves analysis accuracy and framework coverage</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/29/mcp-in-claude-and-chatgpt/">Simon Willison · TIL: Adding a custom MCP server to Claude and ChatGPT</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/29/ai-worming-through-word/">Simon Willison · AI Worming through Word</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic Newsroom</a></li>
+  <li><a href="https://www.anthropic.com/news/claude-opus-5">Anthropic · Introducing Claude Opus 5</a></li>
+  <li><a href="https://ai.google.dev/gemini-api/docs/changelog">Gemini API release notes</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-29T00:00:00Z / 2026-07-30T00:00:00Z.</footer>
