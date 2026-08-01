@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：Stateless MCP、模型策略治理与高性价比开源 Agent</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时的强信号集中在 agent 控制面继续成形。Simon Willison 重新押注 Stateless MCP，并发布 mcp-explorer、datasette-mcp、llm-mcp-client 三个实践项目；GitHub Copilot 推企业团队级模型策略并下线旧 Gemini 模型；OpenAI 同时发布欧洲责任治理、abundant intelligence、企业 AI workforce 与诈骗滥用打击信号；DeepSeek V4 Flash 0731 以低成本和强化 agentic benchmarks 冲击开放模型性价比叙事；Google Gemini Enterprise Agent Platform 的评测能力 GA，Genkit Go 引入 Agent Skills。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：Stateless MCP、模型策略治理与高性价比开源 Agent</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时的强信号集中在 agent 控制面继续成形。Simon Willison 重新押注 Stateless MCP，并发布 mcp-explorer、datasette-mcp、llm-mcp-client 三个实践项目；GitHub Copilot 推企业团队级模型策略并下线旧 Gemini 模型；OpenAI 同时发布欧洲责任治理、abundant intelligence、企业 AI workforce 与诈骗滥用打击信号；DeepSeek V4 Flash 0731 以低成本和强化 agentic benchmarks 冲击开放模型性价比叙事；Google Gemini Enterprise Agent Platform 的评测能力 GA，Genkit Go 引入 Agent Skills。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-08-01</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年8月1日（周六）</strong> · 覆盖窗口：2026-07-31 08:00 – 2026-08-01 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、GitHub Copilot Changelog RSS、Simon Willison Weblog、Hugging Face model card / Blog RSS、Google Developers AI 页面、LangChain Blog RSS、Interconnects RSS、Anthropic News 页面。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天的主线是“agent 能力要被产品化地收口”</h4><p>过去 24 小时没有单一爆点压过所有来源，但多条更新指向同一个方向：工具协议、模型选择、企业策略、评测、滥用处置和成本曲线都在变成 agent 产品的控制面。模型能力继续重要，但真正的落地竞争点正在迁移到“谁能让组织安全、便宜、可审计地使用这些能力”。</p></div>
+  <div class="overview-item"><h4>Simon 重新看好 Stateless MCP</h4><p>Simon Willison 把 2026-07-28 MCP 规范称为重新点燃兴趣的重要变化，并用 mcp-explorer、datasette-mcp、llm-mcp-client 三个项目验证：相比给 agent 一个联网 shell，MCP 工具更容易审计、限制和由小模型驱动。</p></div>
+  <div class="overview-item"><h4>GitHub Copilot 进入团队级模型治理</h4><p>GitHub Copilot Changelog 显示，企业客户可以预览基于 enterprise teams 的模型策略：先设企业基线，再给特定团队开放额外模型。同时 GitHub 在 Copilot 全体验中下线 Gemini 2.5 Pro 和 Gemini 3 Flash，提示企业需要把模型生命周期管理当成运维事项。</p></div>
+  <div class="overview-item"><h4>OpenAI 同日发出四类企业/治理信号</h4><p>OpenAI RSS 在窗口内出现欧洲责任 AI、abundant intelligence、Unive 企业案例和打击柬埔寨诈骗团伙滥用四篇文章。正文页本轮仍触发前端/挑战页，报告只采用 RSS 可见元数据与摘要，不把不可直接读取的细节当事实。</p></div>
+  <div class="overview-item"><h4>DeepSeek V4 Flash 0731 推高开源性价比压力</h4><p>DeepSeek 在 Hugging Face 发布 V4 Flash 0731，模型卡强调强化 agentic capabilities、MIT 许可、reasoning_effort 三档，以及在多个 agent/coding benchmarks 上接近强闭源模型。Simon 随后用 Artificial Analysis 成本曲线把它解读为当前性价比非常突出的模型。</p></div>
+  <div class="overview-item"><h4>Google 也在补 agent 评测与技能入口</h4><p>Google Developers AI 页面 7 月 31 日出现 Gemini Enterprise Agent Platform 评测 GA 与 Genkit Go Agent Skills 两条更新，分别对应生产评测和按需技能加载。它们与 LangChain、GitHub、Simon 的线索互相咬合。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Stateless MCP：从“工具协议热潮”回到可审计 agent 能力边界</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / MCP</span><strong>Simon Willison</strong> · 2026-07-31 23:13 UTC · <a href="https://simonwillison.net/2026/Jul/31/stateless-mcp/">Stateless MCP has recaptured my interest</a></div>
+  <div class="summary"><p>Simon 将 2026-07-28 MCP specification 视作一次关键简化：无状态调用减少客户端和服务端实现复杂度，也更适合可扩展 Web 服务。更重要的是，他把 MCP 与“给 agent 一个 shell + curl + 网络”的通用能力做对比，认为 MCP 的工具边界更清晰，风险更容易审计，小模型也能更可靠地调用。</p><p>他没有停在观点层面，而是用 Codex 辅助做了三个项目：<a href="https://github.com/simonw/mcp-explorer">mcp-explorer</a> 用于交互式探查 MCP server，<a href="https://github.com/datasette/datasette-mcp">datasette-mcp</a> 给 Datasette 暴露只读 SQL 工具，<a href="https://github.com/simonw/llm-mcp-client">llm-mcp-client</a> 把 MCP 接进自己的 LLM CLI。结合昨天 Anthropic cyber eval 事件，这条等于给 agent 安全提供了一个更工程化的替代路径。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 中 Simon、Hamel/Shreya、LangChain、OpenAI/Codex 线索都绕不开“工具权限怎么给”。Stateless MCP 把工具边界、审计和低复杂度重新拉回中心，比单纯追求更大 agent 权限更适合企业环境。</div>
+  <div class="action">后续行动：用一个内部只读数据源做 MCP POC：暴露 2-3 个窄工具，记录调用日志、参数 schema、权限边界和失败模式；同时与直接 shell/HTTP 抓取方案做风险对照。</div>
+</div>
+
+<h3>二、Copilot 模型策略：企业 AI 管控从组织级走向团队级</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Copilot / Enterprise</span><strong>GitHub Changelog</strong> · 2026-07-31 18:11 UTC · <a href="https://github.blog/changelog/2026-07-31-enterprise-teams-model-policy-targeting-in-public-preview">Enterprise teams model policy targeting in public preview</a></div>
+  <div class="summary"><p>GitHub 为 Copilot Business / Enterprise 推出 enterprise teams model policy targeting 公开预览。管理员可以设置企业级模型基线，再把额外模型作为 Optional 分配给特定 enterprise teams，适配不同岗位、训练程度或试验团队，而不是只靠组织级开关。</p><p>这条和 7 月 30 日的 remote control managed devices、organization-level custom instructions 是一组连续动作：Copilot 不只是加模型和 agent，而是在补组织治理颗粒度。值得注意的是，策略采用 least-restrictive 逻辑：用户只要从任一 enterprise team 获得某模型，就能在相关 Copilot license 下使用该模型。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业落地 agent 的真实问题往往不是“有没有模型”，而是“哪些人能用哪些模型处理哪些仓库和数据”。GitHub 的方向说明未来 AI 管理员会像管 IAM 一样管模型权限。</div>
+  <div class="action">后续行动：整理一份 Copilot/Codex/Claude Code 企业治理矩阵：模型 allowlist、team policy、组织指令、远控设备、审计日志、BYOK、数据保留和回滚策略。</div>
+</div>
+
+<h3>三、模型生命周期：Copilot 下线旧 Gemini，强提醒生产 workflow 需要模型运维</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Copilot / Model Ops</span><strong>GitHub Changelog</strong> · 2026-07-31 20:04 UTC · <a href="https://github.blog/changelog/2026-07-31-gemini-2-5-pro-and-gemini-3-flash-deprecated">Gemini 2.5 Pro and Gemini 3 Flash deprecated</a></div>
+  <div class="summary"><p>GitHub 宣布在 Copilot Chat、inline edits、ask/agent modes 和 code completions 等体验中下线 Gemini 2.5 Pro 与 Gemini 3 Flash，并建议迁移到 Gemini 3.1 Pro Preview 与 Gemini 3.6 Flash。企业管理员可能需要在 Copilot settings 的模型策略里启用替代模型。</p><p>这条很“运维”，但高价值。随着 IDE agent workflow 绑定具体模型，模型 deprecation 会直接影响自动化脚本、团队习惯、质量基线和成本预期。未来团队需要像处理 API 版本一样处理模型版本，而不是等模型选择器突然变化后再排查。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Agent 生产环境需要模型生命周期管理：替代模型测试、策略启用、质量回归、费用变化和用户迁移通知都要有流程。</div>
+  <div class="action">后续行动：为常用 agent workflow 建一个 model fallback 表：主模型、备选模型、适用任务、禁止任务、回归测试集、迁移检查项。</div>
+</div>
+
+<h3>四、OpenAI：责任治理、供给曲线、企业采用和滥用处置同日出现</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Strategy</span><strong>OpenAI News RSS</strong> · 2026-07-31 00:00–15:00 UTC · <a href="https://openai.com/index/advancing-responsible-ai-across-europe">Responsible AI across Europe</a>；<a href="https://openai.com/index/building-abundant-intelligence">Building abundant intelligence</a>；<a href="https://openai.com/index/unive">Unive workforce case</a>；<a href="https://openai.com/index/disrupting-malicious-uses-of-ai-criminal-scam-operation">Disrupting a Criminal Scam Operation</a></div>
+  <div class="summary"><p>OpenAI RSS 在窗口内出现四条不同但互相关联的更新：欧洲责任 AI 治理强调 safety、security、transparency、provenance 与 EU AI Act 进展；abundant intelligence 强调通过 full-stack approach 让先进 AI 更强、更便宜、更广泛可用；Unive 案例强调 ChatGPT Enterprise 与 AI-ready workforce；诈骗处置则披露打击一个使用 ChatGPT 支持投资、恋爱、赌博和冒充骗局的柬埔寨团伙。</p><p>由于本机直接打开 OpenAI 正文页未能稳定读取完整正文，本报告只采用 RSS 可见标题、摘要、时间和链接。即便只看 RSS，组合信号也很明确：OpenAI 正在同时对监管者、企业客户和安全团队讲同一件事，即“更便宜更普及的 AI 必须配套治理、溯源、企业培训和滥用打击”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这比单个产品发布更能代表 OpenAI 的商业化方向：模型降本、规模化采用、合规叙事和 abuse response 正在被打包成企业信任基础设施。</div>
+  <div class="action">后续行动：后续复核 OpenAI 正文与官方政策页，抽取可用于企业客户材料的 governance checklist：透明度、内容溯源、滥用监测、员工培训、数据边界和审批流程。</div>
+</div>
+
+<h3>五、DeepSeek V4 Flash 0731：开放模型继续挤压“单位智能成本”</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Agentic Coding</span><strong>DeepSeek / Hugging Face</strong> · 2026-07-31 · <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731">DeepSeek-V4-Flash-0731 model card</a>；<a href="https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/">Simon Willison note</a></div>
+  <div class="summary"><p>DeepSeek-V4-Flash-0731 是 V4 Flash 的正式版本，模型卡称相比 preview 版本显著强化 agentic capabilities，并在 Terminal Bench、NL2Repo、Cybergym、DeepSWE、Toolathlon、Agents' Last Exam 等任务上展示接近强闭源模型的成绩。模型采用 MIT 许可，提供 OpenAI-compatible 编码示例，并支持 low、high、max 三档 reasoning_effort。</p><p>Simon 的跟进重点是性价比：他引用 Artificial Analysis 的成本/智能曲线，认为它可能是当前非常突出的 value-per-intelligence 模型；实际图像生成小测也显示 reasoning_effort 从默认调到 high 后质量显著改善。这和 OpenAI 的 GPT-5.6 price-performance 叙事形成直接呼应：前沿竞争正在从“谁最强”扩展到“谁在可接受质量下最便宜”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 中 Nathan Lambert、Simon、Hugging Face 阵营都在关注开放模型追赶。DeepSeek 这类模型会压低 agent 子任务、批量评测、低风险自动化和本地/私有部署的成本预期。</div>
+  <div class="action">后续行动：把 DeepSeek V4 Flash 0731 加入 coding-agent 与工具调用评测候选；重点测试中文任务、长输出、工具参数稳定性、代码 review、低/高/max reasoning_effort 的成本质量曲线。</div>
+</div>
+
+<h3>六、Google：Gemini Enterprise Agent Platform 评测 GA，Genkit Go 接入 Agent Skills</h3>
+<div class="card">
+  <div class="source"><span class="tag">Google / Agent Platform</span><strong>Google Developers</strong> · 2026-07-31 · <a href="https://developers.googleblog.com/en/agent-and-model-evaluations-in-gemini-enterprise-agent-platform-are-now-ga/">Agent and Model Evaluations in Gemini Enterprise Agent Platform are now GA</a>；<a href="https://developers.googleblog.com/en/enable-on-demand-expertise-with-agent-skills-in-genkit-go/">Enable on-demand expertise with Agent Skills in Genkit Go</a></div>
+  <div class="summary"><p>Google Developers AI 页面显示，Gemini Enterprise Agent Platform 的 agent and model evaluations 已 GA，目标是在开发到生产阶段用一致指标衡量 agent 质量。另一条 Genkit Go 更新则介绍用 Agent Skills 做按需专长加载，通过 SKILL.md 和渐进式披露优化 token 使用。</p><p>这两条很贴近当前 OpenClaw/Codex 工作流：评测要求 agent 质量从“感觉还行”变成可比较指标；skills 则把领域工作流从提示词散文变成可复用、可加载、可版本化的能力包。Google 也在把 agent 从 demo 拉进平台工程。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>LangChain 做 Align Evals，GitHub 做组织级 instructions，Google 做 Agent Skills 和评测 GA，说明平台侧都在押“结构化能力 + 持续评测”。</div>
+  <div class="action">后续行动：把现有 OpenClaw skills 与 Genkit Go Agent Skills 的结构做一次对照，抽取共通设计：技能元数据、触发条件、渐进加载、测试样例、版本迁移。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Simon Willison：</strong>发布 Stateless MCP 长文，并展示 mcp-explorer、datasette-mcp、llm-mcp-client；核心观点是 MCP 比通用 shell agent 更容易审计和控制。</li>
+  <li><strong>Simon / Prime Radiant：</strong>介绍 <a href="https://github.com/prime-radiant-inc/smevals">smevals</a>，用 YAML eval、runs、graders、checks、static HTML 报告来组织小型模型/提示/工具链评测。</li>
+  <li><strong>DeepSeek：</strong>Hugging Face 模型卡发布 DeepSeek-V4-Flash-0731，MIT 许可，强调 agentic capabilities 与 reasoning_effort 三档。</li>
+  <li><strong>GitHub Copilot：</strong>企业团队级模型策略进入 public preview；模型访问从组织级进一步细化到企业团队。</li>
+  <li><strong>GitHub Copilot：</strong>Gemini 2.5 Pro 与 Gemini 3 Flash 在 Copilot 全体验下线，推荐迁移到 Gemini 3.1 Pro Preview 与 Gemini 3.6 Flash。</li>
+  <li><strong>OpenAI：</strong>RSS 同日发布欧洲责任 AI、abundant intelligence、Unive 企业 workforce 案例和诈骗滥用打击四条内容。</li>
+  <li><strong>Google：</strong>Gemini Enterprise Agent Platform 评测 GA；Genkit Go 发布 Agent Skills 按需加载实践。</li>
+  <li><strong>LangChain：</strong>窗口内新增 ReviewBench：用真实 PR feedback 评估 code review agents，延续昨天 eval/gateway/control plane 主线。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Simon Willison：</strong>今天是最高信号人物源。从安全边界、MCP 协议、Datasette 工具、LLM CLI 到小型 eval，他在把“agent 工程”拆成可运行项目，而不是停在评论。</li>
+  <li><strong>OpenAI：</strong>同时面向监管、企业客户、安全团队和成本敏感用户发声。可推断其近期对外叙事重点是：AI 普及要建立在供给充足、价格下降和治理可信上。</li>
+  <li><strong>GitHub / Microsoft：</strong>继续把 Copilot 做成企业 agent 工作台。团队级模型策略和旧模型下线说明模型管理会成为管理员日常工作。</li>
+  <li><strong>Google Gemini：</strong>在企业 agent 平台评测和 Genkit skills 两端补齐。与 Logan Kilpatrick / AI Studio 线索一致，Google 正在强化开发者侧 agent 构建入口。</li>
+  <li><strong>DeepSeek / 开放模型阵营：</strong>V4 Flash 0731 强化 agentic coding 与工具能力，继续给闭源模型价格和边缘部署策略施压。</li>
+  <li><strong>Nathan Lambert / Interconnects：</strong>RSS 窗口内没有 7 月 31 日新主文，上一轮 open models recap 仍是理解 Kimi/DeepSeek/Qwen/开放权重竞争的背景。</li>
+  <li><strong>Anthropic：</strong>News 页面窗口内无新增文章；7 月 30 日 cyber eval 事件仍是今天安全讨论的上游背景。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>Stateless MCP 内部样例：</strong>为一个只读知识库或 SQLite 数据集暴露 MCP endpoint，先做 list/search/read 三个窄工具，记录 schema、权限和日志。</li>
+  <li><strong>模型策略治理表：</strong>为 Copilot/Codex/Claude/Gemini 建立企业模型矩阵：enabled/disabled/optional、团队授权、替代模型、deprecation 日期和回归测试。</li>
+  <li><strong>小型 eval 资产化：</strong>试跑 smevals 或同类结构，把 5-10 个真实工作流转成可复测 tasks/checks，输出静态报告供团队 review。</li>
+  <li><strong>DeepSeek V4 Flash POC：</strong>测试低成本 agent 子任务：代码 review、批量摘要、工具参数生成、中文报告草拟；比较 low/high/max reasoning_effort。</li>
+  <li><strong>Agent Skills 对照：</strong>对比 Google Genkit Go Agent Skills、OpenClaw Skills、Claude Skills 的触发、加载、版本和测试方式，沉淀一套可复用 skill 规范。</li>
+  <li><strong>OpenAI 治理材料复核：</strong>待正文可访问后，提取欧洲责任 AI 和诈骗打击文章中的公开治理要点，转成客户可读 checklist。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>OpenAI 四篇 7 月 31 日文章正文页本轮未稳定读取，已采用 RSS 标题、摘要和时间；具体段落、政策细节和案例数字需要后续从可公开访问正文复核。</li>
+  <li>DeepSeek V4 Flash 0731 的 benchmark 包含部分内部集；模型卡成绩需用独立任务验证，尤其是中文 agent、长上下文、工具调用和代码修改质量。</li>
+  <li>Simon 引用的 Artificial Analysis 价格/智能曲线是第三方评估；适合作为线索，不应直接替代内部成本测试。</li>
+  <li>GitHub enterprise teams model policy 处于 public preview，并且 rollout 到多数企业客户的时间写作 August 3rd；实际可用性取决于租户、计划和管理员设置。</li>
+  <li>Google Gemini Enterprise Agent Platform 的评测 GA 细节需结合 Google Cloud / Gemini Enterprise 文档确认，包括指标、日志保留、权限与价格。</li>
+  <li>X/Twitter 公开页面和 Nitter/RSS 抽样本轮没有稳定可核验的新内容；报告未把不可打开的社媒片段纳入核心事实。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>OpenAI 7 月 30 日 GPT-5.6 price-performance 已在昨日覆盖，今天只作为“单位任务成本”背景，不重复展开。</li>
+  <li>GitHub Copilot 7 月 30 日 VS Code / Visual Studio / remote control 更新昨日已详细写过，今天只保留与企业策略连续性相关的部分。</li>
+  <li>Hugging Face Blog 窗口内没有 7 月 31 日新博客；DeepSeek 模型卡和 Simon 解读比 HF 7 月 30 日 GPU 管理文章更贴近今日主题。</li>
+  <li>Google Developers AI 搜索页列出多条旧文，今天只收录 7 月 31 日新增的 agent evaluations GA 和 Genkit Go Agent Skills。</li>
+  <li>Interconnects 7 月 22 日播客/长文依然重要，但不在今日窗口内，只作为开放模型背景。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://simonwillison.net/2026/Jul/31/stateless-mcp/">Simon Willison · Stateless MCP has recaptured my interest</a></li>
+  <li><a href="https://github.com/simonw/mcp-explorer">GitHub · simonw/mcp-explorer</a></li>
+  <li><a href="https://github.com/datasette/datasette-mcp">GitHub · datasette/datasette-mcp</a></li>
+  <li><a href="https://github.com/simonw/llm-mcp-client">GitHub · simonw/llm-mcp-client</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/31/smevals/">Simon Willison · smevals</a></li>
+  <li><a href="https://github.com/prime-radiant-inc/smevals">GitHub · prime-radiant-inc/smevals</a></li>
+  <li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731">Hugging Face · DeepSeek-V4-Flash-0731</a></li>
+  <li><a href="https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/">Simon Willison · deepseek-ai/DeepSeek-V4-Flash-0731</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-31-enterprise-teams-model-policy-targeting-in-public-preview">GitHub Changelog · Enterprise teams model policy targeting in public preview</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-31-gemini-2-5-pro-and-gemini-3-flash-deprecated">GitHub Changelog · Gemini 2.5 Pro and Gemini 3 Flash deprecated</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/advancing-responsible-ai-across-europe">OpenAI · Advancing responsible AI across Europe</a></li>
+  <li><a href="https://openai.com/index/building-abundant-intelligence">OpenAI · Building abundant intelligence</a></li>
+  <li><a href="https://openai.com/index/unive">OpenAI · Unive builds an AI-ready workforce</a></li>
+  <li><a href="https://openai.com/index/disrupting-malicious-uses-of-ai-criminal-scam-operation">OpenAI · Disrupting a Criminal Scam Operation</a></li>
+  <li><a href="https://developers.googleblog.com/en/agent-and-model-evaluations-in-gemini-enterprise-agent-platform-are-now-ga/">Google Developers · Agent and Model Evaluations in Gemini Enterprise Agent Platform are now GA</a></li>
+  <li><a href="https://developers.googleblog.com/en/enable-on-demand-expertise-with-agent-skills-in-genkit-go/">Google Developers · Enable on-demand expertise with Agent Skills in Genkit Go</a></li>
+  <li><a href="https://www.langchain.com/blog/evaluating-code-review-agents-with-reviewbench">LangChain · Evaluating code review agents with ReviewBench</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects AI RSS</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic News</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-07-31T00:00:00Z / 2026-08-01T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

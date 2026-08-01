@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：Stateless MCP、模型策略治理与高性价比开源 Agent",
+    "date": "2026-08-01",
+    "category": "daily",
+    "url": "/daily/2026/08/01/",
+    "summary": "Follow List 公开来源整理：过去 24 小时的强信号集中在 agent 控制面继续成形。Simon Willison 重新押注 Stateless MCP，并发布 mcp-explorer、datasette-mcp、llm-mcp-client 三个实践项目；GitHub Copilot 推企业团队级模型策略并下线旧 Gemini 模型；OpenAI 同时发布欧洲责任治理、abundant intelligence、企业 AI workforce 与诈骗滥用打击信号；DeepSeek V4 Flash 0731 以低成本和强化 agentic benchmarks 冲击开放模型性价比叙事；Google Gemini Enterprise Agent Platform 的评测能力 GA，Genkit Go 引入 Agent Skills。"
+  },
+  {
     "title": "Follow 深度日报：开放权重分歧、企业 Agent 管控与工作边界重组",
     "date": "2026-07-28",
     "category": "daily",
