@@ -1,0 +1,135 @@
+---
+title: "Follow 深度日报：AI 进入数学科研、Agent 自测与治理控制面"
+date: "2026-08-02"
+category: "daily"
+url: "/daily/2026/08/02/"
+summary: "Follow List 公开来源整理：过去 24 小时的高信号集中在 AI 从工具使用走向科研协作与可治理 agent 平台。OpenAI 发布数学与理论计算机科学十项进展；Simon Willison 把这件事接到“大数学”与科研透明度，同时发布 datasette-apps 的 agent 自测能力并转述 Greg Brockman 关于 ChatGPT 接入 Slack 的协作边界提醒；LangChain 继续推出 ReviewBench 与 LangSmith LLM Gateway；Google 的 agent 评测 GA 与 Genkit Go Agent Skills 延续平台化主线；GitHub npm token 变更提醒供应链自动化不能绕开交互式安全。"
+---
+<div class="meta">
+  <strong>2026年8月2日（周日）</strong> · 覆盖窗口：2026-08-01 08:00 – 2026-08-02 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、Simon Willison Weblog、LangChain Blog RSS、Google Developers AI 页面、GitHub Changelog RSS、Hugging Face Blog RSS、Interconnects RSS、Anthropic News 页面。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天主线：AI 从“能做事”转向“怎样参与复杂组织”</h4><p>窗口内最强信号不是单个 agent 新功能，而是三类复杂组织场景同时出现：OpenAI 把模型用于长期停滞的数学问题，Simon/Datasette 把 agent 自测做进应用构建流程，Greg Brockman 的 Slack 观察提醒 AI 介入协作会触碰人际关系边界。技术能力、工作流治理和社会接受度开始绑定在一起。</p></div>
+  <div class="overview-item"><h4>OpenAI 发布十项数学与理论计算进展</h4><p>OpenAI RSS 发布“Ten advances in mathematics and theoretical computer science”，称其在几何、密码学、复杂性等长期问题上取得进展，并提供 GitHub Lean 4 形式化仓库与论文。正文页本轮触发 Cloudflare challenge，报告采用 RSS、Simon 可公开摘录与 GitHub 仓库可见信息，不把未读取正文当作事实。</p></div>
+  <div class="overview-item"><h4>Simon 继续把 agent 工程落到可运行项目</h4><p>Simon 在 8 月 1 日发布 datasette-apps 0.2a0，新增 app_debug 与 app_list，让 Datasette Agent 可以枚举可编辑应用并用 sandbox iframe 执行 JavaScript 做 smoke test。它和前一天 Stateless MCP 的脉络一致：agent 能力要被限制在可检查、可审计、可复测的工具边界内。</p></div>
+  <div class="overview-item"><h4>协作边界成为 AI 产品问题</h4><p>Simon 转述 Greg Brockman 的观点：OpenAI 内部有人把 ChatGPT 接到 Slack，但同事通常不喜欢被别人的 ChatGPT 直接请求帮忙。这条不是技术发布，却很关键，说明 agent 代人沟通不只是权限问题，还会改变“谁在请求谁”的社会含义。</p></div>
+  <div class="overview-item"><h4>LangChain 和 Google 继续补 agent 控制面</h4><p>LangChain 窗口附近发布 ReviewBench 与 LangSmith LLM Gateway，分别处理 code review agent 评测和运行时治理；Google Developers 7 月 31 日的 agent/model evaluations GA 与 Genkit Go Agent Skills 虽已在昨日提到，但今天仍是理解平台趋势的重要背景。</p></div>
+  <div class="overview-item"><h4>供应链安全线索低调但重要</h4><p>GitHub Changelog 宣布限制 npm bypass-2FA granular access tokens：敏感账号、组织和包管理操作需要交互式 2FA，后续还会限制直接发布。对自动化发布和 agent 执行环境来说，这意味着“方便的 token”正在被收窄，OIDC/trusted publishing 会更重要。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、数学科研代理：OpenAI 把模型推向长期开放问题</h3>
+<div class="card">
+  <div class="source"><span class="tag">Research / Frontier Models</span><strong>OpenAI News RSS</strong> · 2026-08-01 00:00 UTC · <a href="https://openai.com/index/ten-advances-in-mathematics">Ten advances in mathematics and theoretical computer science</a></div>
+  <div class="summary"><p>OpenAI RSS 称其分享了数学和理论计算机科学长期开放问题的新结果，范围包括几何、密码学和复杂性。Simon Willison 的公开摘录补充了一个更具体的说法：OpenAI 使用内部下一代模型 Astra 处理十个至少十年没有主结果进展的问题，并提供 <a href="https://github.com/openai/ten-proofs">openai/ten-proofs</a> 的 Lean 4 形式化、论文和 reasoning walkthrough PDF。</p><p>这条新闻值得和近期 Anthropic 用 Claude/Mythos 做密码学弱点发现放在一起看。前沿实验室正在把模型从“帮研究者写代码/查文献”推进到“参与产生数学证明或安全发现”的层级；但同样重要的是验证材料是否足够透明，例如问题选择、失败样本、提示词、推理轨迹、形式化证明覆盖范围和人类审查流程。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这会影响 AI 研究工具的叙事上限：如果模型能在严肃数学上稳定贡献，科研工作流会从辅助生产力工具转向人机协作系统。对投资和产品判断来说，重点不是标题有多大，而是可验证性、成本、复现和人类专家审查能否制度化。</div>
+  <div class="action">后续行动：下载并审阅 openai/ten-proofs 仓库与论文，建立一份“AI 科研结果可信度检查表”：问题来源、模型预算、失败基线、Lean 覆盖、人类贡献边界、是否公开 prompts、是否有第三方复核。</div>
+</div>
+
+<h3>二、Agent 自测：Datasette 把“看不见的浏览器测试”做成工具</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Agent Tools</span><strong>Simon Willison</strong> · 2026-08-01 21:23 UTC · <a href="https://simonwillison.net/2026/Aug/1/datasette-apps/">datasette-apps 0.2a0</a></div>
+  <div class="summary"><p>Simon 发布 datasette-apps 0.2a0，重点是改善由 Datasette Agent 创建和编辑的应用。两个新增工具很有代表性：app_list 让 agent 能列出用户有权限编辑的 app，app_debug 则把应用放到不可见、不可交互的 sandbox iframe 里，并执行 agent 提供的 JavaScript 来做 smoke test。</p><p>这意味着 agent 不只是“生成文件”，还可以在受控浏览器上下文里验证页面是否真的工作，甚至测量元素尺寸等 UI 事实。它依赖前一天 datasette-agent 0.4a0 引入的 context.browser_task 机制，和 Stateless MCP 主线一样，都在把 agent 能力收束成小而明确的工具调用。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这正中 agent 工程痛点：生成代码容易，确认它能运行、能显示、能被编辑才难。把浏览器检查作为工具暴露给 agent，比让 agent 猜测页面状态更可靠，也更适合积累回归测试。</div>
+  <div class="action">后续行动：把 OpenClaw/Sites 类前端交付也加入“浏览器自测最小集”：打开页面、检查主容器非空、检查关键文本可见、检查移动端布局、记录截图和 DOM 度量。</div>
+</div>
+
+<h3>三、人机协作边界：ChatGPT 接 Slack 不等于可以替人打扰同事</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Product / Collaboration</span><strong>Greg Brockman via Simon Willison</strong> · 2026-08-01 22:29 UTC · <a href="https://simonwillison.net/2026/Aug/1/greg-brockman/">A quote from Greg Brockman</a></div>
+  <div class="summary"><p>Simon 收录 Greg Brockman 关于 OpenAI 内部 ChatGPT 接 Slack 的观察：即使同事愿意帮另一个真人完成同样的工作，他们通常也不喜欢被“某人的 ChatGPT”直接联系。Greg 的结论是，人们重视彼此帮助的关系，希望 AI 返还或增强人的时间，而不是变成隔在人与人之间的新层。</p><p>这条线索对 enterprise agent 很现实。很多产品会自然走向“让 agent 自动问人、催人、收集信息”，但一旦 agent 代表人发起协作请求，就从工具执行进入组织礼仪、责任归属和信任边界。AI 可以减少摩擦，也可能制造新的情绪成本。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>未来办公 agent 的失败点很可能不是模型不够强，而是越过人际边界。谁发起请求、谁负责承诺、谁可以拒绝、是否需要人工确认，会成为产品设计和企业规则的一部分。</div>
+  <div class="action">后续行动：为内部 agent 设计一条协作规则：默认先把待询问内容回填给主人确认；只有低风险、已授权、可撤回的场景才允许 agent 直接发消息；所有外发请求必须标明代表关系和责任人。</div>
+</div>
+
+<h3>四、Agent 评测与网关治理：从“模型调用”走向运行时控制面</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Google / Agent Ops</span><strong>LangChain Blog、Google Developers</strong> · 2026-07-31 · <a href="https://www.langchain.com/blog/evaluating-code-review-agents-with-reviewbench">ReviewBench</a>；<a href="https://www.langchain.com/blog/introducing-llm-gateway">LangSmith LLM Gateway</a>；<a href="https://developers.googleblog.com/en/agent-and-model-evaluations-in-gemini-enterprise-agent-platform-are-now-ga/">Gemini Enterprise Agent Platform evaluations GA</a></div>
+  <div class="summary"><p>LangChain 的 ReviewBench 用真实 PR feedback 来评估 code review agents，目标是判断 agent 是否能发现可信 reviewer 会指出的问题。LangSmith LLM Gateway 则把 spend limits、PII redaction、trace continuity 等运行时治理能力放进 agent 生命周期。Google 同期宣布 Gemini Enterprise Agent Platform 的 agent/model evaluations GA，支持预置指标、自适应 rubrics、自定义 code-based 和 LLM-as-a-judge metrics，并集成 SDK、agents-cli 和 ADK。</p><p>这些更新共同说明，agent 平台的核心竞争不再只是“能接多少模型”，而是能否持续评估、限制预算、保护敏感信息、复盘轨迹和进入 CI。真正能被企业采用的 agent，需要一个像 DevOps/LLMOps 一样的控制面。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Hamel、Shreya、Simon、LangChain、Google 线索都在指向同一件事：评测不是发布前的一次打分，而是 agent 生命周期里的常驻系统。</div>
+  <div class="action">后续行动：把当前日报抓取流程也纳入轻量 eval：来源覆盖率、重复链接率、不可验证项标注率、公开性检查、摘要事实可追溯率，每天输出一小段机器可读检查结果。</div>
+</div>
+
+<h3>五、供应链自动化收紧：npm bypass-2FA token 不能再做敏感管理</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Supply Chain Security</span><strong>GitHub Changelog</strong> · 2026-07-31 16:45 UTC · <a href="https://github.blog/changelog/2026-07-31-restricting-npm-bypass-2fa-granular-access-tokens">Restricting npm bypass-2FA granular access tokens</a></div>
+  <div class="summary"><p>GitHub 宣布，配置为绕过 2FA 的 npm granular access tokens 不能再执行敏感账号、组织和包管理操作，这些操作现在需要交互式 2FA challenge。受影响操作包括创建/删除 token、修改包访问权限和维护者、管理组织/团队成员与授权等；GitHub 还预告 2027 年 1 月将进一步限制这类 token 的直接发布能力。</p><p>这条不是 AI 专属新闻，但对 agent 自动化很关键。越来越多 coding agent 会参与 release、package publish、CI/CD 和依赖维护，如果流程依赖高权限静态 token，未来会越来越难通过安全审计。OIDC trusted publishing、staged publishing、最小权限和人工确认会成为默认路线。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Agent 能力越强，凭证边界越重要。企业不应该为了让 agent 少问一句，就给它长期可复用的敏感发布 token。</div>
+  <div class="action">后续行动：检查常用 npm/GitHub 发布流程：列出静态 token、权限范围、是否绕过 2FA、是否能迁移到 trusted publishing 或 staged publishing；把 agent 可触发的发布动作放入人工确认队列。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>RSS 发布数学与理论计算机科学十项进展，公开链接指向 OpenAI 正文、GitHub Lean 4 形式化仓库和论文材料；正文页本轮未直接读取。</li>
+  <li><strong>Simon Willison：</strong>评论 OpenAI 数学结果，把它放到 Anthropic 近期密码学发现与 Terence Tao “big mathematics”语境中，并明确希望看到 prompts 等更多透明材料。</li>
+  <li><strong>Simon / Datasette：</strong>datasette-apps 0.2a0 增加 app_debug 和 app_list，支持 agent 在 sandbox iframe 中执行 JavaScript 做应用自测。</li>
+  <li><strong>Greg Brockman：</strong>提出 ChatGPT 接 Slack 后的协作边界问题：AI 不应成为隔开人与人的一层。</li>
+  <li><strong>LangChain：</strong>ReviewBench 用真实 PR feedback 评估 code review agents；LangSmith LLM Gateway 强调预算、PII、trace continuity 等运行时治理。</li>
+  <li><strong>Google：</strong>Gemini Enterprise Agent Platform 评测能力 GA；Genkit Go Agent Skills 提供渐进式披露的技能加载路径。</li>
+  <li><strong>GitHub / npm：</strong>bypass-2FA granular access tokens 被限制执行敏感管理操作，供应链自动化需要转向更强的交互式和 OIDC 机制。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI：</strong>今天从治理/企业采用转到科研能力展示，Astra、GPT-5.6 成本口径、Lean 4 形式化共同构成“模型参与严肃科学”的叙事。</li>
+  <li><strong>Simon Willison：</strong>仍是最高信号工程源。他一边追踪前沿实验室发布，一边把 Datasette Agent、MCP、浏览器自测做成可运行工具。</li>
+  <li><strong>Greg Brockman：</strong>这次不是产品发布，而是组织使用 ChatGPT 的一条真实产品洞察，值得纳入 agent UX 设计原则。</li>
+  <li><strong>LangChain：</strong>继续押注 agent 控制面：评测、gateway、trace、预算和治理都在向平台级能力收敛。</li>
+  <li><strong>Google Gemini：</strong>Agent Platform evaluation GA 与 Genkit Go Agent Skills 显示 Google 也在把 agent 构建从 demo 迁移到工程化平台。</li>
+  <li><strong>Anthropic：</strong>News 页面本窗口内没有稳定新增高优先级条目；近期 Claude Opus 5 与 Claude Code 线索仍作为背景。</li>
+  <li><strong>Hugging Face / Interconnects：</strong>RSS 窗口内没有 8 月 1 日新主文；开放模型和安全事件继续作为昨日 DeepSeek/OpenAI 数学线索的背景。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>AI 科研可信度检查表：</strong>围绕 OpenAI ten-proofs 建一个审阅模板，记录形式化证明、论文、失败样本、专家复核和提示透明度。</li>
+  <li><strong>前端 agent 自测工具：</strong>参考 datasette-apps app_debug，为本地 HTML/Sites 工作流做“打开页面、执行 JS、截图、测量元素”的最小工具链。</li>
+  <li><strong>Agent 外发消息政策：</strong>制定 Slack/飞书/邮件场景下的默认人工确认规则，区分提醒、询问、承诺、审批四类动作。</li>
+  <li><strong>日报流程 eval：</strong>为这套 Follow Daily 增加机器可读指标，尤其是来源覆盖、重复过滤、公开链接、待验证标记和旧路径检查。</li>
+  <li><strong>发布凭证清单：</strong>盘点 npm/GitHub/Pages 发布相关 token，优先迁移静态高权限 token 到 OIDC/trusted publishing。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>OpenAI 数学进展正文页本轮触发 Cloudflare challenge；已采用 RSS、Simon 摘录、GitHub 仓库链接和公开论文链接作为依据，细节仍需后续从正文或论文复核。</li>
+  <li>OpenAI “Astra”模型、每题成本、问题选择和失败样本等细节来自 Simon 对公开材料的摘录与评论，正式判断应以 OpenAI 论文和第三方数学专家复核为准。</li>
+  <li>X/Twitter 公开页面和搜索结果本轮没有稳定可核验的新内容；报告未把不可打开的社媒片段纳入核心事实。</li>
+  <li>Google Developers 两条 7 月 31 日 agent 更新位于上一窗口边界附近，昨日已覆盖，今天作为平台趋势背景保留，不算 8 月 1 日新增。</li>
+  <li>LangChain 7 月 31 日条目也属于上一窗口边界附近，但与今天的 agent 自测/治理主线高度相关，因此作为延续背景引用。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Simon 8 月 1 日数学条目中的 Hacker News 与社交讨论热度没有纳入事实依据，只作为发现入口。</li>
+  <li>Hugging Face Blog 窗口内无 8 月 1 日新博客；7 月 30 日 GPU 管理文章与今日 agent 主线关联较弱，暂不展开。</li>
+  <li>Interconnects 最新 RSS 主文仍是 7 月 22 日开放模型 recap；对 DeepSeek/Kimi/Qwen 背景有用，但不构成今日新更新。</li>
+  <li>Anthropic News 页面本轮未发现 8 月 1 日新增公开条目；不重复展开 Claude Opus 5 与旧研究发布。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/ten-advances-in-mathematics">OpenAI · Ten advances in mathematics and theoretical computer science</a></li>
+  <li><a href="https://github.com/openai/ten-proofs">GitHub · openai/ten-proofs</a></li>
+  <li><a href="https://cdn.openai.com/pdf/ten-proofs-oai.pdf">OpenAI PDF · Ten proofs paper</a></li>
+  <li><a href="https://cdn.openai.com/pdf/reasoning-walkthroughs.pdf">OpenAI PDF · Reasoning walkthroughs</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/1/ten-advances-in-mathematics/">Simon Willison · Ten advances in mathematics and theoretical computer science</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/1/datasette-apps/">Simon Willison · datasette-apps 0.2a0</a></li>
+  <li><a href="https://github.com/datasette/datasette-apps/releases/tag/0.2a0">GitHub · datasette-apps 0.2a0 release</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/1/greg-brockman/">Simon Willison · A quote from Greg Brockman</a></li>
+  <li><a href="https://twitter.com/gdb/status/2083435180392673714">X/Twitter · Greg Brockman source post</a></li>
+  <li><a href="https://www.langchain.com/blog/evaluating-code-review-agents-with-reviewbench">LangChain · Evaluating code review agents with ReviewBench</a></li>
+  <li><a href="https://www.langchain.com/blog/introducing-llm-gateway">LangChain · LangSmith LLM Gateway</a></li>
+  <li><a href="https://developers.googleblog.com/en/agent-and-model-evaluations-in-gemini-enterprise-agent-platform-are-now-ga/">Google Developers · Agent and Model Evaluations in Gemini Enterprise Agent Platform are now GA</a></li>
+  <li><a href="https://developers.googleblog.com/en/enable-on-demand-expertise-with-agent-skills-in-genkit-go/">Google Developers · Enable on-demand expertise with Agent Skills in Genkit Go</a></li>
+  <li><a href="https://github.blog/changelog/2026-07-31-restricting-npm-bypass-2fa-granular-access-tokens">GitHub Changelog · Restricting npm bypass-2FA granular access tokens</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects AI RSS</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic News</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-01T00:00:00Z / 2026-08-02T00:00:00Z.</footer>
