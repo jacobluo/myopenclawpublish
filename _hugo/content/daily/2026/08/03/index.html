@@ -1,0 +1,131 @@
+---
+title: "Follow 深度日报：开放模型 Pareto 前沿、AI 治理公开信与 Agent 数据压缩"
+date: "2026-08-03"
+category: "daily"
+url: "/daily/2026/08/03/"
+summary: "Follow List 公开来源整理：过去 24 小时的高信号集中在开放模型继续逼近性价比前沿、AI 自动化研发治理进入公开争论、以及 agent 工程开始处理运行日志和上下文压缩。Interconnects 汇总 Laguna S2.1、Inkling、Kimi K3、DeepSeek V4 Flash 等开放模型；Simon Willison 梳理开放权重与 pacing frontier 两类公开信，并发布 condense-json 1.0；OpenAI、Anthropic、GitHub、LangChain、Google 等官方源本窗口缺少新的高优先级发布，主要作为背景核验。"
+---
+<div class="meta">
+  <strong>2026年8月3日（周一）</strong> · 覆盖窗口：2026-08-02 08:00 – 2026-08-03 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Simon Willison Weblog Atom、Interconnects RSS、OpenAI News RSS、GitHub Changelog RSS、Hugging Face Blog RSS、Anthropic News 页面、explainx.ai sitemap、AI 播客索引 JSON、公开网页搜索。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天主线：开放模型不再只是“追赶叙事”</h4><p>窗口内最强信号来自 Interconnects 的 open artifacts 汇总：Laguna S2.1、Inkling、Kimi K3、DeepSeek V4 Flash、Tencent Hy3、LongCat 2.0 等开放/开放权重模型正在用性价比、透明 eval、长上下文、MoE 和许可证策略形成不同路线。重点不是谁单榜第一，而是可部署、可微调、可本地化的模型供给正在变多。</p></div>
+  <div class="overview-item"><h4>治理争论分成两条线</h4><p>Simon Willison 梳理了最近几周关于 AI 发展的公开信：一条支持开放权重与美国 AI 领导力，强调开放模型有助于竞争和安全审查；另一条要求政府支持“pace the frontier”的技术与治理工具，担心自动化 AI 研发让能力进展过快。两条线索都与 Follow List 里的开放模型、AI 安全、agent 自改进主线高度相关。</p></div>
+  <div class="overview-item"><h4>Agent 工程开始关心日志体积和重复上下文</h4><p>Simon 发布 condense-json 1.0，用替换表压缩 JSON 中重复字符串或片段，自己用于 LLM 的 SQLite logs。它不是炫目的模型新闻，但对长期 agent、trace、eval 和日报 state 很实用：agent 越常驻，轨迹越多，日志结构与压缩就越重要。</p></div>
+  <div class="overview-item"><h4>官方源今天偏安静</h4><p>OpenAI RSS 本窗口内无 8 月 2 日新条目；GitHub Changelog lastBuildDate 停在 7 月 31 日；Hugging Face Blog 最新条目仍为 7 月 30 日；Anthropic News 页面本轮没有发现 8 月 2 日新增高优先级内容。报告因此把重点放在公开博客/RSS 与可核验长文，不硬凑社媒短帖。</p></div>
+  <div class="overview-item"><h4>X-only 覆盖仍不稳定</h4><p>公开 X/Twitter 搜索与页面本轮没有稳定返回可核验正文。报告采用 Simon 对 Greg Brockman、Jensen Huang 等公开帖的链接转引作为线索，但不把无法稳定打开的 X 片段作为核心事实来源。</p></div>
+  <div class="overview-item"><h4>Follow List 控制面正常</h4><p>本轮已先读取 Obsidian Follow List，active 条目、高优先级和 weekly/daily cadence 用于抓取排序。explainx.ai sitemap 与 AI 播客索引 JSON 本窗口无新鲜更新，仅作为发现源状态记录。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、开放模型 Pareto 前沿：能力、成本、许可证和部署形态一起竞争</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Strategy</span><strong>Interconnects AI</strong> · 2026-08-02 13:01 UTC · <a href="https://www.interconnects.ai/p/latest-open-artifacts-23-laguna-s21">Latest open artifacts (#23)</a></div>
+  <div class="summary"><p>Interconnects 发布 open artifacts 第 23 期，主题是 Laguna S2.1、Inkling、Kimi K3 等模型显示开放模型在 Pareto frontier 上的实用性。文章认为，训练强模型的能力正在扩散，过去认为训练成本会推动行业快速整合，但现实是更多组织仍在投入高额资金训练并开放模型，把 token 生产、微调服务、部署生态和许可证策略结合成商业路径。</p><p>这篇汇总把 Thinking Machines 的 Inkling、Poolside 的 Laguna-S-2.1、DeepSeek-V4-Flash-0731、Tencent Hy3、LongCat 2.0 等放在一起看。重点差异包括：Inkling 更像可微调底座，Laguna 强调透明 eval trajectories 与 OpenMDW 许可证，DeepSeek V4 Flash 打性价比，Hy3 从更限制的许可转向 Apache 2，LongCat 展示中国加速器训练大 MoE 的供应链意义。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Nathan Lambert、Hugging Face、Francois Chollet、OpenAI/Anthropic 都在围绕开放与闭源能力差距争论。今天的信号说明，开放模型竞争已经从“是否接近闭源模型”变成“在哪些任务、成本、许可证和部署场景里更可用”。</div>
+  <div class="action">后续行动：为开放模型跟踪表新增四列：license/commercial terms、agentic benchmark、deployment footprint、eval transparency。不要只看总分，重点记录能否被本地 agent、企业私有部署和垂直 fine-tuning 真正采用。</div>
+</div>
+
+<h3>二、开放权重 vs 放缓前沿：两封公开信暴露治理分裂</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Governance / Open Weights</span><strong>Simon Willison</strong> · 2026-08-02 04:16 UTC · <a href="https://simonwillison.net/2026/Aug/2/open-letters/">Open letters about AI development</a></div>
+  <div class="summary"><p>Simon 汇总近期两类公开信。一类是 Microsoft 牵头的“Open Weights and American AI Leadership”，有 NVIDIA、Amazon、Y Combinator、Linux Foundation、OpenAI 等签署，核心论点是开放权重能促进竞争、研究审查和安全改进，不应把合法 distillation 与不当挪用混为一谈。另一类是“Pacing the Frontier”，由大量前沿 AI 公司员工签名，要求美国政府支持国际化技术与治理工具，用来有意识地调节自动化 AI 研发前沿。</p><p>Simon 特别把这场争论和近期自动化研发、agent 安全事件、Claude Code 代码生成占比、OpenAI 推理成本下降、Kimi K3 以及开放模型扩散联系起来。这里的关键矛盾不是简单的“开放好/闭源好”，而是：当模型能帮助研发更强模型、写大量代码、设计芯片或发现漏洞时，开放生态、商业竞争和安全治理之间的张力会迅速变大。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这会影响开放模型投资和产品策略。若政策偏向限制，商业部署和跨境使用会有不确定性；若政策偏向开放，企业仍需要更强的安全评测、凭证隔离和事故响应能力。</div>
+  <div class="action">后续行动：把公开信签署方、反对方和政策诉求整理成一页治理地图；特别标注“distillation”“open weights threshold”“frontier pacing”“automated AI R&D”四个关键词，跟踪是否进入具体监管文本。</div>
+</div>
+
+<h3>三、Agent 日志压缩：condense-json 1.0 是小工具，但打中长程运行痛点</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Logs</span><strong>Simon Willison</strong> · 2026-08-02 22:19 UTC · <a href="https://simonwillison.net/2026/Aug/2/condense-json/">condense-json 1.0</a></div>
+  <div class="summary"><p>Simon 发布 condense-json 1.0，这是一个用于压缩 JSON 中重复字符串或片段的小库。它通过 replacements object 把重复内容替换成特殊结构，并提供反向还原；Simon 说明自己用它来节省 LLM 生成 SQLite logs 的空间。</p><p>这类工具和 agent trace/eval 很贴近。长期运行的 agent 会产生大量结构相似的日志：系统提示、工具 schema、页面片段、重复错误、候选链接、摘要版本、验证结果。如果这些日志不能被压缩、索引、回放和审计，后续的评测与记忆系统会被存储成本和阅读成本拖垮。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>它提醒我们 agent 工程的基础设施不是只有模型调用和 UI，还包括日志经济学。能把 trace 存下来、压缩好、再还原复盘，是做可靠 agent eval 的前提。</div>
+  <div class="action">后续行动：给 Follow 日报 state 增加候选链接 trace 的最小 schema，并评估是否需要类似 condense-json 的重复片段压缩；优先压缩长摘要、来源元数据和重复抓取错误。</div>
+</div>
+
+<h3>四、开放模型商业化路径：Thinking Machines、Poolside 与中国实验室分头下注</h3>
+<div class="card">
+  <div class="source"><span class="tag">Market / Model Supply</span><strong>Interconnects AI</strong> · 2026-08-02 13:01 UTC · <a href="https://www.interconnects.ai/p/latest-open-artifacts-23-laguna-s21">Open artifacts roundup</a></div>
+  <div class="summary"><p>Interconnects 对 Thinking Machines 的判断很有意思：这家公司在 2025 年公布时未必会被视为开放模型公司，但现在通过开放模型和 Tinker 微调服务建立收入路径。Poolside 的 Laguna-S-2.1 则把开放模型和代码场景绑定，强调小一些但可部署、可评估、许可证更清晰的模型。中国实验室这边，Moonshot、DeepSeek、Tencent、Meituan 等延续高密度 MoE、长上下文、低成本或本土加速器路线。</p><p>这意味着开放模型不是一个统一商品，而是不同商业和地缘策略的集合：有的靠 API/token 规模化，有的靠 fine-tuning 平台，有的靠开源生态影响力，有的靠本土算力和供应链叙事，有的靠低价推理占据重复自动化任务。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>对创业和投资判断来说，“开放模型会不会打败闭源模型”这个问题太粗。更好的问题是：哪类开放模型会在什么任务里替代闭源 API，谁掌握部署入口，谁能把许可证和商业化讲清楚。</div>
+  <div class="action">后续行动：跟踪三类落地指标：开发者下载/部署量、商业微调收入、第三方 agent 框架默认支持情况。优先关注 coding agent、批量后端自动化、私有数据检索和本地个人 agent。</div>
+</div>
+
+<h3>五、官方源静默本身也是信号：不要在低信号日硬凑新闻</h3>
+<div class="card">
+  <div class="source"><span class="tag">Source Quality</span><strong>OpenAI / GitHub / Hugging Face / Anthropic / explainx.ai</strong> · 2026-08-02 至 2026-08-03 · <a href="https://openai.com/news/rss.xml">OpenAI RSS</a>；<a href="https://github.blog/changelog/feed/">GitHub Changelog</a>；<a href="https://huggingface.co/blog/feed.xml">HF Blog RSS</a></div>
+  <div class="summary"><p>本窗口官方源更新较少：OpenAI RSS 最新内容仍为 8 月 1 日数学进展，GitHub Changelog 最新构建停在 7 月 31 日，Hugging Face Blog 最新是 7 月 30 日 GPU 管理文章，Anthropic News 页面未发现 8 月 2 日新增高优先级条目。explainx.ai sitemap 最新 lastmod 仍为 7 月 26 日，AI 播客索引 JSON metadata updatedAt 仍为 7 月 2 日。</p><p>这使得今天的日报更像一次“强公开博客 + 背景源状态”的整理，而不是多机构发布日。比起把窗口外内容重复包装，保持清楚的低信号标注更有价值。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>日报系统需要区分“没抓到”和“抓到了但没有新高信号”。今天属于后者居多，但 X-only 来源仍是不完整覆盖，不能宣称所有关注账号无更新。</div>
+  <div class="action">后续行动：把状态文件从 handle 级 lastChecked 扩展到 source feed 级 lastSeenUrl/lastSeenDate，减少对静默源的重复人工判断。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Interconnects：</strong>open artifacts 第 23 期把 Laguna S2.1、Inkling、Kimi K3、DeepSeek V4 Flash、Hy3、LongCat 2.0 等放在同一张开放模型版图中，重点是能力扩散、性价比和许可证分化。</li>
+  <li><strong>Simon Willison：</strong>发布“Open letters about AI development”，梳理开放权重支持阵营与 pacing frontier 治理阵营的分歧。</li>
+  <li><strong>Simon / LLM tooling：</strong>condense-json 1.0 发布，用于压缩重复 JSON 片段，适合 agent logs、LLM traces 和长期 state 存储场景。</li>
+  <li><strong>OpenAI：</strong>RSS 本窗口无 8 月 2 日新增；8 月 1 日数学进展继续作为科研 agent 背景线索。</li>
+  <li><strong>GitHub：</strong>Changelog 本窗口无 8 月 2 日新增；7 月 31 日模型策略和 npm token 安全变更仍是 enterprise agent 背景。</li>
+  <li><strong>Hugging Face：</strong>Blog RSS 本窗口无新主文；开放模型核心线索今天主要来自 Interconnects 对 HF 模型页和模型生态的二次整理。</li>
+  <li><strong>Anthropic：</strong>News 页面未见本窗口新增高优先级条目；近期 open-weights 与 automated AI R&D 争论仍通过 Simon 汇总进入主题。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Nathan Lambert / Interconnects：</strong>继续把开放模型从单点发布拉回产业结构：训练能力扩散、token 需求增长、开放模型商业化和政策风险。</li>
+  <li><strong>Simon Willison：</strong>今天兼具评论员和工具作者角色：一边梳理公开信与治理争论，一边发布面向 LLM 日志的具体小工具。</li>
+  <li><strong>Thinking Machines：</strong>Inkling 被放在“开放模型 + 商业微调服务”的路径中观察，Follow List 里的 Mira Murati 线值得继续跟踪。</li>
+  <li><strong>Poolside：</strong>Laguna-S-2.1 代表较小但实用、透明 eval、更明确许可证的开放 coding model 路线。</li>
+  <li><strong>Moonshot / DeepSeek / Tencent / Meituan：</strong>中国开放模型阵营继续在 MoE、长上下文、成本和本土硬件适配上制造压力。</li>
+  <li><strong>OpenAI / Anthropic：</strong>今天没有新官方发布进入窗口，但它们仍是公开信、开放权重、安全事件和自动化研发治理争论中的核心参照物。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>开放模型跟踪表 2.0：</strong>新增许可证、部署成本、agentic eval、商业微调入口、默认框架支持五个字段。</li>
+  <li><strong>AI 治理公开信地图：</strong>记录签署方、反对方、关键主张和可能政策路径，尤其关注 open weights 与 pacing frontier 是否进入监管文本。</li>
+  <li><strong>Agent trace 压缩实验：</strong>用日报候选链接、抓取错误和摘要版本做样本，测试 condense-json 或类似结构压缩是否能降低长期日志体积。</li>
+  <li><strong>静默源状态记录：</strong>对 OpenAI、GitHub、HF、Anthropic、Google、LangChain、explainx.ai 等 feed 记录 lastSeenUrl，减少重复写“无新增”。</li>
+  <li><strong>X-only 账号补强：</strong>继续寻找合规公开镜像、官方博客/RSS、newsletter 或 GitHub release 替代来源，不依赖不稳定的公开 X 页面。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>Interconnects 文中对各模型 benchmark、许可证和商业路径的判断属于作者分析，需要回到各模型官方 card、paper、license 文件和第三方 eval 复核。</li>
+  <li>公开信签署方名单和签名数量可能持续变化；本轮采用 Simon 8 月 2 日文章和公开网页搜索作为线索，后续应以公开信官网快照为准。</li>
+  <li>Thinking Machines 的 Tinker 收入、开放模型商业贡献等判断来自 Interconnects 分析口径，未在本轮找到公司官方财务披露。</li>
+  <li>X/Twitter 源本轮没有稳定抓取正文，未能完整覆盖 Follow List 里 high priority X-only 账号最近 24 小时动态。</li>
+  <li>Google Developers RSS URL 本轮返回 404 页面，Google 线索仅用已知公开页面和上一窗口背景，不新增 Google 今日事实。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>OpenAI 8 月 1 日数学进展已在 8 月 2 日日报展开，今天只作为治理和科研 agent 背景，不重复写主卡。</li>
+  <li>GitHub 7 月 31 日模型下线、企业团队模型策略、npm token 变更均为上一窗口或边界内容，今天不再扩写。</li>
+  <li>Hugging Face 7 月 30 日 GPU 管理文章与今天开放模型/治理主线关联弱，未纳入重点。</li>
+  <li>AI 新闻聚合站和社交平台转述较多，但缺乏一手链接或可验证细节，只作为发现入口，不作为事实锚点。</li>
+  <li>AI 播客索引 JSON 本轮 metadata 未变，未展开单个播客。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects AI RSS</a></li>
+  <li><a href="https://www.interconnects.ai/p/latest-open-artifacts-23-laguna-s21">Interconnects · Latest open artifacts (#23)</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/2/open-letters/">Simon Willison · Open letters about AI development</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/2/condense-json/">Simon Willison · condense-json 1.0</a></li>
+  <li><a href="https://github.com/simonw/condense-json/releases/tag/1.0">GitHub · condense-json 1.0 release</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/2/july-newsletter/">Simon Willison · July 2026 newsletter</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/ten-advances-in-mathematics">OpenAI · Ten advances in mathematics and theoretical computer science</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic News</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-02T00:00:00Z / 2026-08-03T00:00:00Z.</footer>

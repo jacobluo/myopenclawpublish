@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：开放模型 Pareto 前沿、AI 治理公开信与 Agent 数据压缩",
+    "date": "2026-08-03",
+    "category": "daily",
+    "url": "/daily/2026/08/03/",
+    "summary": "Follow List 公开来源整理：过去 24 小时的高信号集中在开放模型继续逼近性价比前沿、AI 自动化研发治理进入公开争论、以及 agent 工程开始处理运行日志和上下文压缩。Interconnects 汇总 Laguna S2.1、Inkling、Kimi K3、DeepSeek V4 Flash 等开放模型；Simon Willison 梳理开放权重与 pacing frontier 两类公开信，并发布 condense-json 1.0；OpenAI、Anthropic、GitHub、LangChain、Google 等官方源本窗口缺少新的高优先级发布，主要作为背景核验。"
+  },
+  {
     "title": "Follow 深度日报：Stateless MCP、模型策略治理与高性价比开源 Agent",
     "date": "2026-08-01",
     "category": "daily",
