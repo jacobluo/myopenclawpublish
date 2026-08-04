@@ -1,0 +1,137 @@
+---
+title: "Follow 深度日报：实时语音栈、开放模型采用度量与企业 Agent 治理"
+date: "2026-08-04"
+category: "daily"
+url: "/daily/2026/08/04/"
+summary: "Follow List 公开来源整理：过去 24 小时的高信号集中在实时语音 AI、开放模型采用度量、企业 agent 治理和公司级知识 agent 落地。OpenAI 发布 GPT-Live 低延迟实时语音系统工程文；Interconnects 推出 Artifacts Hub 与 Adoption Dashboard，把开放模型从发布清单推进到采用度量；GitHub Copilot managed settings 进入企业团队级配置；LangChain 披露 Stripe 用 Deep Agents 一周构建 Kai；Greg Brockman 和 Simon Willison 的公开动态共同提醒：agent 价值必须通过人类验证、组织边界和真实工作流体现。"
+---
+<div class="meta">
+  <strong>2026年8月4日（周二）</strong> · 覆盖窗口：2026-08-03 08:00 – 2026-08-04 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、Simon Willison Weblog Atom、Interconnects RSS、GitHub Changelog RSS、LangChain Blog 页面、Hugging Face Blog RSS、Anthropic News 页面、explainx.ai sitemap、AI 播客索引 JSON、公开 Nitter RSS 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天主线：Agent 从“能做”走向“在组织里可控地做”</h4><p>OpenAI、GitHub、LangChain 和 Greg Brockman 的公开动态都指向同一个问题：agent 不再只是模型能力演示，而是要进入语音入口、企业策略、团队权限、知识库和业务运营。真实门槛变成延迟、权限、可观测、协作礼仪和人类最终验证。</p></div>
+  <div class="overview-item"><h4>实时语音重新升温</h4><p>OpenAI 发布 GPT-Live 工程文，强调 turnless speech model 和低延迟系统架构。Follow List 里 OpenAI 产品与多模态方向权重较高，这条新闻说明实时语音正在从 demo 变成可运营的系统工程。</p></div>
+  <div class="overview-item"><h4>开放模型需要采用度量，不只需要排行榜</h4><p>Interconnects 发布 Artifacts Hub 和 Adoption Dashboard，把 Hugging Face、OpenRouter、Artificial Analysis 与自定义 adoption metrics 汇总起来。Nathan Lambert 同日在 X/Nitter 上补充 Qwen、Kimi、GLM、DeepSeek 等开放模型竞争边界，重点转向价格、许可证、稳定发布和实际采用。</p></div>
+  <div class="overview-item"><h4>企业 AI 治理继续下沉到团队</h4><p>GitHub Copilot managed settings 支持 enterprise team 级专业化配置，团队可以在企业基线之上配置模型、权限和插件市场扩展。它与 7 月底的 team model policy targeting 连成一条线：AI 管控正在从组织级粗粒度走向角色/团队级。</p></div>
+  <div class="overview-item"><h4>公司级知识 Agent 出现更强落地样本</h4><p>LangChain 发布 Stripe Kai 案例，称一个工程师用 Deep Agents 约一周构建公司级知识 AI agent，约 4 周达到 5,000 用户。Harrison Chase 也转发强调内部 AI 平台如何改变公司运作。</p></div>
+  <div class="overview-item"><h4>低信号源保持静默标注</h4><p>Hugging Face Blog 本窗口无新博客；Anthropic News 最新重点仍为 7 月 24 日 Opus 5；explainx.ai sitemap 最新 lastmod 仍为 7 月 26 日；AI 播客索引 JSON metadata 仍为 7 月 2 日。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、GPT-Live：实时语音 AI 的竞争点变成系统延迟与交互自然度</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Voice AI</span><strong>OpenAI</strong> · 2026-08-03 07:00 UTC · <a href="https://openai.com/index/continuous-voice-interaction-with-gpt-live">How we built a realtime system for responsive voice AI in six months</a></div>
+  <div class="summary"><p>OpenAI 发布 GPT-Live 工程文章，介绍其用于连续语音交互的实时系统。RSS 摘要明确提到 turnless speech model 和低延迟架构，目标是让语音 AI 更快、更自然，而不是靠传统“用户说完一句、系统再处理一句”的回合制体验。</p><p>这条更新和 Follow List 里的 OpenAI 产品、Josh Woodward 多模态方向、Greg Brockman 工程线索高度相关。实时语音一旦进入稳定低延迟形态，客服、教育、陪练、现场操作和车载/硬件入口都会重新评估 AI agent 的交互方式。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>语音 agent 的产品价值不只取决于模型“会不会回答”，还取决于打断、延迟、上下文保留、音频质量和失败恢复。GPT-Live 把竞争点推回系统工程。</div>
+  <div class="action">后续行动：跟踪 OpenAI Realtime/GPT-Live API 是否开放新的 turnless、barge-in、音频事件和延迟指标；为 WorkBuddy/客服场景补一页语音 agent 验收清单。</div>
+</div>
+
+<h3>二、开放模型采用度量：从“谁发布了模型”转向“谁真的被用起来”</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Adoption</span><strong>Nathan Lambert / Interconnects</strong> · 2026-08-03 14:03 UTC · <a href="https://www.interconnects.ai/p/introducing-our-artifacts-hub-and">Introducing our Artifacts Hub and Adoption Dashboard</a></div>
+  <div class="summary"><p>Interconnects 推出两个免费数据入口：Artifacts Hub 和 Adoption Dashboard。前者整理 Hugging Face 趋势模型，并结合 OpenRouter 推理 token、Artificial Analysis intelligence index 和基于 Hugging Face 数据的 adoption metrics；后者追踪按地域和组织划分的下载与衍生模型数据，重点观察美中开放模型生态差距。</p><p>文章称 Artifacts Hub 当前覆盖过去两年发布的 792 个模型，聚焦文本语言模型和多模态生成模型。Nathan 在公开 Nitter/X 动态中也把 Qwen、Kimi、GLM、DeepSeek 等放在同一竞争框架里，强调价格、许可证、稳定发布、反馈修补和 adoption 将成为边界。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里开放模型主线过去常围绕 Kimi、DeepSeek、GLM、HF 与政策争论。今天的新增价值是把“模型发布新闻”转成可持续监控的数据产品，适合做投资线索和技术选型底表。</div>
+  <div class="action">后续行动：把 Artifacts Hub、Adoption Dashboard、Artificial Analysis 和 OpenRouter 加入开放模型跟踪源；日报里对模型不再只写 benchmark，补下载、衍生模型、token 使用、许可和框架支持。</div>
+</div>
+
+<h3>三、GitHub Copilot：企业 Agent 管控从组织级走向团队级</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Enterprise AI Governance</span><strong>GitHub Changelog</strong> · 2026-08-03 22:55 UTC · <a href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings">Enterprise team specialization for managed settings</a></div>
+  <div class="summary"><p>GitHub 宣布企业管理员可以按 enterprise team 定制 managed settings。配置方式是先在企业级 managed-settings 中把某些键标记为可覆盖，再把团队配置文件映射到一个或多个 team slug；企业基线仍然保底，团队只能在被允许的键上做专业化。</p><p>这次覆盖范围包括 VS Code、Copilot CLI、Copilot App 和 Copilot cloud agent。GitHub 还强调插件和 marketplace 扩展是 additive：企业默认启用的能力保留，团队可以叠加自己角色需要的插件或 marketplace。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent 的核心矛盾是既要让团队实验，又不能让权限、模型和插件失控。GitHub 这条更新把“模型策略、权限绕过、插件生态、团队角色”放进同一个治理文件体系里。</div>
+  <div class="action">后续行动：为企业 Copilot/agent 选型记录三层策略：企业默认、团队覆盖、个人例外；重点看是否支持审计、回滚和按角色启用模型/插件。</div>
+</div>
+
+<h3>四、Stripe Kai：公司级知识 Agent 的落地叙事正在成形</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Deep Agents</span><strong>LangChain</strong> · 2026-08-03 · <a href="https://www.langchain.com/blog/how-stripe-built-their-knowledge-ai-platform-on-deep-agents">How Stripe Built Kai, its Company-Wide AI Agent, on Deep Agents</a></div>
+  <div class="summary"><p>LangChain 发布 Stripe Kai 案例，页面描述称 Kai 是基于 LangChain、LangGraph 和 Deep Agents 构建的公司级知识 AI agent，由一名工程师约一周搭建，并在约 4 周内达到 5,000 用户。Harrison Chase 当天转发称内部 AI 平台有潜力改变公司运作。</p><p>这个案例的关键不是“一周造出聊天机器人”，而是公司级知识 agent 需要把企业知识、工具调用、权限边界、评估和真实使用增长结合起来。它与 LangChain 最近的 Deep Agents、LangSmith Gateway、ReviewBench 和 eval engineering 主线连续。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业客户最关心的不是单次问答，而是能否把知识、流程和上下文变成可复用内部平台。Stripe 这样的样本会推动“AI 平台团队”而不是“零散 AI bot”的预算逻辑。</div>
+  <div class="action">后续行动：拆解 Kai 案例中的四个可复用模块：知识源接入、任务分解/Deep Agents、权限与审计、用户 adoption 指标。对照 WorkBuddy/FDE 交付 SOP 做一版内部知识 agent 蓝图。</div>
+</div>
+
+<h3>五、不要当 AI 输出传声筒：人类验证成为 Agent 协作礼仪</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Use / Human Review</span><strong>Simon Willison</strong> · 2026-08-03 23:45 UTC · <a href="https://simonwillison.net/2026/Aug/3/dont-be-a-meat-proxy/">Don't be a meat proxy</a></div>
+  <div class="summary"><p>Simon 转述 Niklas Gruhn 的文章，用“meat proxy”描述把 AI 输出未经阅读、理解和验证就转发给同事的人。核心提醒是：使用 AI 可以，但不要只是中继输出；要读懂、验证，再用自己的话写出回应。</p><p>这和 Greg Brockman 前一日关于“ChatGPT 代替同事去找另一个同事帮忙会让人反感”的公开帖相互呼应。Agent 可以节省时间，但如果它成为人与人之间的隔离层，组织反而会增加摩擦。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow 日报本身就是这个原则的实践：不能把 RSS/X 原文机械搬运给大哥，而要筛选、交叉核验、转述、给出行动建议。企业 agent 落地也一样，最后的信任来自人的判断链条。</div>
+  <div class="action">后续行动：给自动日报和客户交付文档加一条质量规则：所有 AI 生成摘要必须有来源链接、明确不确定性、人工可读的判断理由和下一步行动。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>发布 GPT-Live 实时语音系统工程文，重点是连续语音交互、turnless 模型和低延迟架构。</li>
+  <li><strong>Greg Brockman：</strong>Nitter 抓到 8 月 3 日多条与 GPT-Live、Codex 运营业务、客户反馈到 roadmap、ChatGPT Work recurring tasks 相关的公开动态，说明 OpenAI 仍在强化“AI 进入日常业务操作”的叙事。</li>
+  <li><strong>Interconnects / Nathan Lambert：</strong>发布 Artifacts Hub 与 Adoption Dashboard，并在 X/Nitter 补充 Qwen 3.8 Max、开放模型采用、许可证与定价竞争线索。</li>
+  <li><strong>GitHub：</strong>Copilot managed settings 支持 enterprise team 专业化配置，与 7 月底 team model policy targeting 构成企业 AI 治理闭环。</li>
+  <li><strong>LangChain / Harrison Chase：</strong>Stripe Kai 案例把 Deep Agents、公司级知识平台、快速 adoption 和企业 agent 架构连起来。</li>
+  <li><strong>Simon Willison：</strong>8 月 3 日关注 AI 输出验证、开源 devtools 与 AI 辅助理解代码；其中“不要当 AI 输出传声筒”是今天最强的人机协作提醒。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Greg Brockman：</strong>围绕 GPT-Live 和 ChatGPT Work 连续发布应用线索，强调 voice、business operations、customer feedback 和 recurring tasks。</li>
+  <li><strong>Nathan Lambert：</strong>把开放模型讨论推进到采用数据产品，公开动态中继续关注 Qwen、Kimi、GLM、DeepSeek 等开放/开放权重模型的竞争边界。</li>
+  <li><strong>Harrison Chase / LangChain：</strong>通过 Stripe Kai 案例强化 Deep Agents 与企业内部 AI 平台定位，补足“agent 在公司里怎么真的用起来”的故事。</li>
+  <li><strong>GitHub：</strong>继续把 Copilot 从开发助手推成企业受管 agent 平台，团队级策略和 managed settings 是落地关键。</li>
+  <li><strong>Simon Willison：</strong>今天重点不是新工具发布，而是围绕 AI 输出验证、开源软件可检查性和 agent 使用边界做判断。</li>
+  <li><strong>Anthropic / Hugging Face：</strong>本窗口无新增高优先级官方发布；仍作为 Claude、开放模型、安全事件和开源生态背景源。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>实时语音 Agent 验收清单：</strong>记录 latency、barge-in、turnless、打断恢复、上下文保持、静音检测、工具调用和转人工策略。</li>
+  <li><strong>开放模型采用看板：</strong>把 Artifacts Hub、Adoption Dashboard、OpenRouter、Artificial Analysis 和 Hugging Face 下载/衍生数据纳入同一张表。</li>
+  <li><strong>企业 Agent 治理模板：</strong>参考 GitHub managed settings，设计企业默认、团队覆盖、插件白名单、模型策略、权限绕过和审计字段。</li>
+  <li><strong>公司级知识 Agent 蓝图：</strong>从 Stripe Kai 案例拆出可复用架构，评估能否映射到 WorkBuddy 客户交付和内部知识库。</li>
+  <li><strong>AI 输出验证规则：</strong>把“读懂、验证、再转述”写进日报、报告和客户材料工作流，避免机械转发模型输出。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>GPT-Live 的具体 API 暴露范围、价格、延迟指标和可用区域需要继续查看 OpenAI 开发者文档或后续公告。</li>
+  <li>Artifacts Hub 的 adoption metrics 与 RAM 口径需要核对方法文档；下载量、OpenRouter token 和 Artificial Analysis 指标不能简单等同于真实企业部署。</li>
+  <li>Stripe Kai 的“1 周构建、约 4 周 5,000 用户”来自 LangChain 案例页面，仍需 Stripe 自有技术博客或演讲进一步交叉验证。</li>
+  <li>Nitter 可抓到多位 X 账号条目，但公开镜像可能延迟或漏抓；X-only 动态仍不视为完整覆盖。</li>
+  <li>LangChain 博客没有稳定 RSS，本轮通过公开博客页和文章页抓取，后续应寻找更可靠 feed 或 sitemap。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Sam Altman 本窗口可抓到的最新高层级帖停在 8 月 1 日，主要是“team humanity”和转发 OpenAI 数学结果，已在前两天日报覆盖，不重复展开。</li>
+  <li>GitHub 8 月 3 日的 GitLab 迁移 GA 和 triage role issue creation 更新有工程管理价值，但与 AI agent 主线弱，放入低优先级。</li>
+  <li>Hugging Face 7 月 30 日 GPU 管理文章仍是最新博客，但不属于本窗口新增。</li>
+  <li>Anthropic News 最新核心内容仍为 7 月 24 日 Claude Opus 5，今天不重复包装。</li>
+  <li>explainx.ai 与 AI 播客索引本轮无新鲜 metadata，继续作为发现源而非事实源。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/continuous-voice-interaction-with-gpt-live">OpenAI · How we built a realtime system for responsive voice AI in six months</a></li>
+  <li><a href="https://nitter.net/gdb/status/2084405421041963356#m">Nitter · Greg Brockman on GPT-Live</a></li>
+  <li><a href="https://nitter.net/gdb/status/2084104354911707518#m">Nitter · Greg Brockman on Codex for business operations</a></li>
+  <li><a href="https://nitter.net/gdb/status/2084074129930772953#m">Nitter · Greg Brockman on customer feedback to roadmap</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects AI RSS</a></li>
+  <li><a href="https://www.interconnects.ai/p/introducing-our-artifacts-hub-and">Interconnects · Introducing our Artifacts Hub and Adoption Dashboard</a></li>
+  <li><a href="https://artifactshub.ai/">Artifacts Hub</a></li>
+  <li><a href="https://dashboard.interconnects.ai/">Interconnects Adoption Dashboard</a></li>
+  <li><a href="https://nitter.net/natolambert/status/2084283667606544474#m">Nitter · Nathan Lambert on Artifacts Hub</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings">GitHub · Enterprise team specialization for managed settings</a></li>
+  <li><a href="https://www.langchain.com/blog/how-stripe-built-their-knowledge-ai-platform-on-deep-agents">LangChain · How Stripe Built Kai, its Company-Wide AI Agent, on Deep Agents</a></li>
+  <li><a href="https://nitter.net/hwchase17/status/2084360686055067797#m">Nitter · Harrison Chase on Stripe Kai</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/3/dont-be-a-meat-proxy/">Simon Willison · Don't be a meat proxy</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/3/devtools-must-be-open-source-exedev/">Simon Willison · Devtools must be open source</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic News</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-03T00:00:00Z / 2026-08-04T00:00:00Z.</footer>

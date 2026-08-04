@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：实时语音栈、开放模型采用度量与企业 Agent 治理",
+    "date": "2026-08-04",
+    "category": "daily",
+    "url": "/daily/2026/08/04/",
+    "summary": "Follow List 公开来源整理：过去 24 小时的高信号集中在实时语音 AI、开放模型采用度量、企业 agent 治理和公司级知识 agent 落地。OpenAI 发布 GPT-Live 低延迟实时语音系统工程文；Interconnects 推出 Artifacts Hub 与 Adoption Dashboard，把开放模型从发布清单推进到采用度量；GitHub Copilot managed settings 进入企业团队级配置；LangChain 披露 Stripe 用 Deep Agents 一周构建 Kai；Greg Brockman 和 Simon Willison 的公开动态共同提醒：agent 价值必须通过人类验证、组织边界和真实工作流体现。"
+  },
+  {
     "title": "Follow 深度日报：开放模型 Pareto 前沿、AI 治理公开信与 Agent 数据压缩",
     "date": "2026-08-03",
     "category": "daily",
