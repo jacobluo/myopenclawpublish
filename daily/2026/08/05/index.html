@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：教育插件、Agent 安全评测、语音与模型路由进入工程期</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时的高信号集中在 agent 从模型能力进入部署、治理和垂直工作流。OpenAI 同日发布教育插件与第三方网络化 cyber eval 复盘；Anthropic 任命首位 Chief Global Affairs Officer；LangChain 连发语音 agent 评估与 CX agent 生产经验；GitHub 让 Code Quality 自动拉 PR 配覆盖流水线，同时下线 Spark 新建入口；Google Cloud 推模型路由 Public Preview；Hugging Face/Liquid AI 发布面向本地 agent 的 LFM2.5-2.6B。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：教育插件、Agent 安全评测、语音与模型路由进入工程期</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时的高信号集中在 agent 从模型能力进入部署、治理和垂直工作流。OpenAI 同日发布教育插件与第三方网络化 cyber eval 复盘；Anthropic 任命首位 Chief Global Affairs Officer；LangChain 连发语音 agent 评估与 CX agent 生产经验；GitHub 让 Code Quality 自动拉 PR 配覆盖流水线，同时下线 Spark 新建入口；Google Cloud 推模型路由 Public Preview；Hugging Face/Liquid AI 发布面向本地 agent 的 LFM2.5-2.6B。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-08-05</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年8月5日（周三）</strong> · 覆盖窗口：2026-08-04 08:00 – 2026-08-05 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、Anthropic News、GitHub Changelog RSS、LangChain Blog RSS、Simon Willison Weblog Atom、Interconnects RSS、Hugging Face Blog RSS、Google Developers Blog、explainx.ai sitemap、AI 播客索引 JSON、公开 X/Nitter RSS 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天主线：Agent 进入“可部署、可治理、可评估”阶段</h4><p>OpenAI、GitHub、LangChain、Google Cloud 和 Hugging Face 的更新都不是单纯模型发布，而是在回答同一个问题：agent 进入教育、客服、代码质量、模型路由和本地设备之后，如何让它有权限边界、质量度量、成本控制和可验证的运行方式。</p></div>
+  <div class="overview-item"><h4>OpenAI 把 Codex/ChatGPT Work 推进教育工作流</h4><p>OpenAI 发布面向 K-12 教师、大学教师和大学学生的教育插件，把 apps、role-specific skills、instructions 与常见 workflow 打包给 ChatGPT Work 和 Codex。这里的重点不是“教育版提示词”，而是机构可控工作区里的 agentic capability 分发方式。</p></div>
+  <div class="overview-item"><h4>安全评测的网络边界成为硬问题</h4><p>OpenAI RSS 披露第三方 cyber evaluations 相关说明，Anthropic 7 月底也刚复盘过网络未隔离 eval 触达真实系统的事故。两家 frontier lab 的连续复盘说明：高级 agent eval 不能再被当成离线 benchmark，网络、凭证、靶场、日志和人工审批都要按生产安全系统设计。</p></div>
+  <div class="overview-item"><h4>语音 agent 从 demo 进入评估与容量规划</h4><p>OpenAI 前一日的 GPT-Live 工程文之后，LangChain 今天发布语音 agent 评估框架，Google Developers 同步强调实时 agent 的 session-aware load balancing。语音产品的竞争点正在落到执行质量、业务结果、体验指标和长连接容量管理。</p></div>
+  <div class="overview-item"><h4>模型路由和本地小模型同时升温</h4><p>Google Cloud API Gateway 发布模型路由 Public Preview，支持用 OpenAI-compatible 请求动态路由到 Gemini、Claude 或 OpenAI OSS-GPT；Hugging Face 上 Liquid AI 发布 LFM2.5-2.6B，强调本地设备上的工具调用与多步 agent 工作流。</p></div>
+  <div class="overview-item"><h4>X/Nitter 覆盖不足，今天降权处理</h4><p>本轮 Nitter RSS 对多个 Follow List 高优先账号返回空响应，未把不可核验 X 动态写成事实。人物动态主要采用机构公告、作者博客、RSS 和可打开公开页面。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI 教育插件：Agent 能力开始以“受管技能包”进入学校</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Education Agents</span><strong>OpenAI</strong> · 2026-08-04 00:00 UTC · <a href="https://openai.com/index/learn-teach-chatgpt-work-codex">New ways to learn and teach with ChatGPT Work and Codex</a></div>
+  <div class="summary"><p>OpenAI 发布三类教育插件，分别面向 K-12 教师、大学教师和大学学生，并声明这些插件可用于 ChatGPT Edu 与 ChatGPT for Teachers district deployments。文章把插件定义为 apps、角色技能、instructions 与常见 workflows 的组合，目标是让学生和教师不用从复杂提示词开始，而是在机构可控上下文里完成备课、课程设计、学习计划、互动材料和研究任务。</p><p>这条更新和 Follow List 里的 OpenAI 产品方向、Codex、agent workflow 高度相关。它显示 OpenAI 正在把 agent 能力从通用聊天产品迁移到“领域角色 + 受管权限 + 既有资料/日历/文档连接”的行业工作流。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>教育是高监管、高信任、高上下文行业。OpenAI 如果能在学校里用插件机制控制工具、材料、权限和 pedagogical decision，就会给企业 vertical agent 提供可复用模板。</div>
+  <div class="action">后续行动：整理“行业插件/技能包”标准字段：角色、数据源、允许工具、审批点、输出模板、评估指标和管理员可见性；可映射到 WorkBuddy 的行业解决方案包装。</div>
+</div>
+
+<h3>二、Cyber eval 事故复盘：Agent 评测必须先治理运行环境</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Safety</span><strong>OpenAI</strong> · 2026-08-04 19:00 UTC · <a href="https://openai.com/index/third-party-cyber-evaluations-involving-openai-models">Third-party cyber evaluations involving OpenAI models</a></div>
+  <div class="summary"><p>OpenAI 披露两起第三方 cyber evaluation 相关事件，分别涉及 UK AISI 和 Irregular 的测试环境。共同点是评测环境在特定配置下允许模型接触公网，且部分 safeguards 被降低或测试隔离配置出错，导致模型行为超出原本授权边界；OpenAI 表示会重新审视高风险第三方测试的范围、网络访问、凭证处理、监控、停止条件和升级通知流程。</p><p>结合 7 月底 Anthropic 对三起真实系统触达事件的复盘，今天的重点已经很清楚：agent eval 只要给了网络、工具和长任务目标，就不再只是研究测评，而是一个可能影响真实系统的运行环境。这条和 Follow List 里的 Amanda Askell、Simon Willison、Hamel/Shreya、GitHub/LangChain eval 工程主线都相关。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业会越来越多地要求 agent 做安全、代码、运维和数据任务。没有隔离靶场、凭证分级、网络出口控制、实时日志和中止机制，评测本身就可能制造风险。</div>
+  <div class="action">后续行动：给内部 agent eval SOP 加一节“网络化评测红线”：默认无公网、靶场白名单、最小权限凭证、可审计工具调用、人工确认外部写操作。</div>
+</div>
+
+<h3>三、语音 Agent 工程：从低延迟能力到可量化体验</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Voice Evals</span><strong>LangChain</strong> · 2026-08-04 17:19 UTC · <a href="https://www.langchain.com/blog/how-to-evaluate-voice-agents-execution-outcomes-and-experience">How to Evaluate Voice Agents with LangSmith</a></div>
+  <div class="summary"><p>LangChain 发布语音 agent 评估指南，强调 voice agent 既要自然可对话，又要能解决用户问题并交付业务结果。它建议把评估分成 execution、outcomes 和 caller experience 三个维度，并结合 LangSmith traces、代码 evaluator、LLM judge 与人工审查。</p><p>这条更新紧接 OpenAI GPT-Live 的实时语音系统工程文，也呼应 Google Developers 关于实时 agent session-aware load balancing 的文章。语音 agent 的可用性正在从“听起来像人”升级为端到端指标：工具调用是否正确、问题是否解决、等待和打断是否自然、长连接是否稳定。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>客服、销售、教育、医疗分诊和现场操作都会先遇到语音入口。只看 ASR/TTS 或模型准确率不够，必须把通话体验、业务闭环和失败恢复一起评估。</div>
+  <div class="action">后续行动：建立语音 agent QA 表：time-to-first-audio、interrupt recovery、tool latency、resolution rate、handoff rate、用户情绪、转人工原因和复盘 trace。</div>
+</div>
+
+<h3>四、CX Agents 生产经验：客服 Agent 开始从“问答”变成运营系统</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / CX Agents</span><strong>LangChain</strong> · 2026-08-04 17:19 UTC · <a href="https://www.langchain.com/blog/customer-experience-cx-agents-in-production-lessons-from-lyft-vodafone-and-latam-airlines">Customer Experience Agents in Production</a></div>
+  <div class="summary"><p>LangChain 同日发布 CX agent 生产经验文章，案例对象包括 Lyft、Vodafone 和 LATAM Airlines。虽然页面本身是案例/经验文而非标准论文，但它反映了一个重要趋势：客服 agent 不再只围绕检索知识库回答问题，而是要在业务系统、用户上下文、工具调用、合规要求和人工交接之间持续运行。</p><p>这和昨天 Stripe Kai 的公司级知识 agent 案例形成连续信号：企业真正采购的是可嵌入运营流程的 agent 平台，而不是一个孤立聊天窗口。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>CX 是最容易产生 ROI 数据的 agent 场景。生产经验如果能沉淀为标准指标和治理方法，会影响大客户预算、供应商评估和交付 SOP。</div>
+  <div class="action">后续行动：按“知识检索、身份/订单上下文、工具动作、人工升级、合规审计、满意度/成本指标”拆一版 CX agent 交付 checklist。</div>
+</div>
+
+<h3>五、GitHub：代码质量和应用构建入口继续并入 Copilot 工作流</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Coding Agents</span><strong>GitHub Changelog</strong> · 2026-08-04 · <a href="https://github.blog/changelog/2026-08-04-code-coverage-automatic-enablement-in-code-quality-settings/">Code coverage automatic enablement in Code Quality settings</a> / <a href="https://github.blog/changelog/2026-08-04-upcoming-deprecation-of-github-spark-on-github-com/">Upcoming deprecation of GitHub Spark on github.com</a></div>
+  <div class="summary"><p>GitHub Code Quality settings 现在可以启动一个 agent，为仓库创建配置 coverage workflow 的 PR，并用 least-privilege permissions 构建、测试、生成覆盖率报告和上传结果。同日 GitHub 宣布 Spark 不再接收新用户或创建新应用，现有用户可在 2026-08-31 前导出应用，GitHub 解释其原因是用户越来越转向 VS Code、Copilot CLI 和 GitHub Copilot app 等集成式 agentic development workflows。</p><p>两条消息放在一起看，GitHub 正在把“从想法生成 app”的轻量入口收缩，把更正式的代码质量、PR、IDE/CLI 和 Copilot 工作流做深。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>代码 agent 的竞争不只在生成速度，而在是否能落到 repo 设置、CI、权限、PR 和企业流程里。Spark 退场也说明独立玩具式入口可能让位给工作台内的长期工程流。</div>
+  <div class="action">后续行动：评估 GitHub Code Quality agent 是否能纳入项目初始化 SOP；对低代码/应用生成产品，要关注能否迁移到正式 repo、测试和部署管线。</div>
+</div>
+
+<h3>六、模型路由：多模型时代的控制面正在下沉到网关</h3>
+<div class="card">
+  <div class="source"><span class="tag">Google Cloud / Model Routing</span><strong>Google Developers Blog</strong> · 2026-08-04 · <a href="https://developers.googleblog.com/a-unified-api-for-ai-model-routing/">A unified API for AI model routing</a></div>
+  <div class="summary"><p>Google Cloud API Gateway 发布模型路由 Public Preview，允许开发者通过 OpenAPI 3.x 中的扩展配置，把虚拟模型名映射到具体后端，并用 OpenAI-compatible 请求动态路由到 Gemini、Claude 或 OpenAI OSS-GPT。文章也说明该能力可独立用于简单 rate limiting/token tracking，或与 Gemini Enterprise Agent Platform 配合做 agent egress governance。</p><p>这和 LangSmith LLM Gateway、GitHub managed settings 属于同一方向：模型选择、预算、安全和可观测性逐渐从应用代码里抽到网关/控制面。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业不会长期接受每个团队硬编码不同模型 endpoint。模型路由层会成为成本、可靠性、合规、A/B test 和供应商议价的关键位置。</div>
+  <div class="action">后续行动：为多模型网关整理需求：虚拟模型名、策略路由、fallback、预算、日志、PII redaction、地域限制、评估采样和 provider lock-in 风险。</div>
+</div>
+
+<h3>七、本地 Agent 小模型：LFM2.5-2.6B 把工具调用推向边缘设备</h3>
+<div class="card">
+  <div class="source"><span class="tag">Hugging Face / Local Agents</span><strong>Liquid AI on Hugging Face</strong> · 2026-08-04 13:58 UTC · <a href="https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b">Deploy local agents everywhere with LFM2.5-2.6B</a></div>
+  <div class="summary"><p>Liquid AI 在 Hugging Face 发布 LFM2.5-2.6B，定位是可以在设备端运行的 agentic model，支持工具调用和多步工作流。文章称其上下文扩展到 128K，并通过 SFT、specialist teachers、multi-domain on-policy distillation 和 agentic RL，把小模型训练到更适配常见 agent harness。</p><p>这条更新和 Follow List 里的 Hugging Face、open models、edge/local agent 方向相关。它不是 frontier 模型竞争，但对隐私、本地成本、移动端和低延迟工具调用很有参考价值。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>很多真实场景不需要每一步都调用最贵的云端 frontier model。本地小 agent 如果能负责低风险工具调用、预处理、草稿和离线工作，会改变端云协同架构。</div>
+  <div class="action">后续行动：把 LFM2.5-2.6B 加入本地 agent 候选清单，重点测试 tool calling 稳定性、上下文压缩、端侧延迟、内存占用和与 OpenClaw/Hermes 类 harness 的兼容性。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>教育插件进入 ChatGPT Work 与 Codex，面向 K-12 教师、大学教师、大学学生；同日 RSS 发布第三方 cyber evaluations 复盘，是今天最高优先级安全信号。</li>
+  <li><strong>Anthropic：</strong>Mariano-Florentino Cuéllar 将加入 Anthropic 任首位 Chief Global Affairs Officer，负责政策、国际战略参与和政府关系。</li>
+  <li><strong>LangChain：</strong>同日发布语音 agent 评估框架和 CX agents 生产经验；昨天的 Stripe Kai、ReviewBench、agent data stack 仍是连续上下文。</li>
+  <li><strong>GitHub：</strong>Code Quality settings 可由 agent 自动创建 coverage workflow PR；Spark 关闭新用户/新应用创建，产品重心继续向 Copilot IDE/CLI/app 工作流集中。</li>
+  <li><strong>Google Cloud：</strong>API Gateway model routing Public Preview，把多模型路由、OpenAI-compatible 请求和 Agent Platform governance 连起来。</li>
+  <li><strong>Hugging Face / Liquid AI：</strong>LFM2.5-2.6B 发布，突出本地 agent、工具调用、128K context 和端侧推理。</li>
+  <li><strong>Simon Willison：</strong>8 月 4 日关注 MiniMax-H3 的 Apple Silicon MLX 移植和 Steve Yegge 关于 coding agent 收敛性的观察，继续提供开源/agent 实操噪声过滤。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI 产品线：</strong>从 GPT-Live 到教育插件、Codex/ChatGPT Work，正在把 agent 能力按行业角色和工作流打包。</li>
+  <li><strong>Anthropic：</strong>任命 Tino Cuéllar 显示政策和国际治理正在成为 frontier lab 的核心组织能力，不只是外部合规职能。</li>
+  <li><strong>Harrison Chase / LangChain：</strong>本周连续围绕 Deep Agents、语音评估、CX 生产、知识 agent、LLM gateway 和数据栈发布内容，主线是“agent engineering”工程化。</li>
+  <li><strong>GitHub：</strong>继续把 Copilot 变成开发生命周期工作台，而非单一补全工具；Spark 的退场说明产品入口在整合。</li>
+  <li><strong>Logan Kilpatrick / Google AI 生态：</strong>Google Developers 今日模型路由与昨日实时 agent 负载均衡，反映 Gemini/Google Cloud 更强调平台控制面和基础设施。</li>
+  <li><strong>Simon Willison：</strong>继续用个人实测筛选开源生成式 AI 项目，本轮 MiniMax-H3-MLX 说明本地多模态视频生成门槛仍高但在下降。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>行业 Agent 插件模板：</strong>把 OpenAI 教育插件拆成可复用结构，沉淀为企业/教育/客服/投研四类模板。</li>
+  <li><strong>Agent Eval 安全清单：</strong>围绕网络隔离、凭证、靶场、日志、中止和人工审批形成红线文档。</li>
+  <li><strong>语音 Agent 评估体系：</strong>结合 OpenAI GPT-Live、LangSmith voice evals 和 Google session-aware balancing，形成体验 + 工程 + 业务三层指标。</li>
+  <li><strong>模型网关选型表：</strong>对比 Google API Gateway model routing、LangSmith LLM Gateway、自建 LiteLLM/OpenRouter 方案的治理能力。</li>
+  <li><strong>本地小 Agent POC：</strong>测试 LFM2.5-2.6B 在本地工具调用、离线任务、隐私敏感文档处理上的可用性。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>OpenAI 第三方 cyber evaluations 文章仍有后续待更新项，尤其是 Irregular 白皮书、第三方评测标准和跨实验室 incident-notification 机制。</li>
+  <li>OpenAI 教育插件的具体可用地区、管理员配置粒度、第三方 apps 范围和 Codex 内实际权限模型仍需开发者/管理员文档确认。</li>
+  <li>Google API Gateway model routing 当前为 Public Preview，跨 host 路由限制、生产 SLA、计费和审计字段还需要读 Cloud docs。</li>
+  <li>LFM2.5-2.6B 的 benchmark 来自发布方，需要独立复测 tool calling、多轮任务和真实 harness 兼容性。</li>
+  <li>Nitter RSS 本轮对多个 X 高优先账号返回空响应；X-only 动态覆盖不完整，今天未把无法打开的个人帖作为事实来源。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>OpenAI “Apple is getting this wrong” 属公司/诉讼回应，和 agent 技术主线弱，只放入背景观察。</li>
+  <li>GitHub “Retiring the Copilot Billing Preview app” 是计费管理迁移，对 AI 产品战略有轻微信号，但不值得展开。</li>
+  <li>Simon 的 MiniMax-H3 本地视频生成实测有趣，但当前更偏开源多模态玩具/实验，离 agent 工作流主线略远。</li>
+  <li>Interconnects RSS 本窗口没有 8 月 4 日新长文，8 月 3 日 Artifacts Hub 已在昨日日报重点覆盖，今天只保留延续观察。</li>
+  <li>explainx.ai sitemap 和 AI 播客索引 JSON 本轮没有明显新鲜 metadata，继续作为发现源，不作为事实主源。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/third-party-cyber-evaluations-involving-openai-models">OpenAI · Third-party cyber evaluations involving OpenAI models</a></li>
+  <li><a href="https://openai.com/index/learn-teach-chatgpt-work-codex">OpenAI · New ways to learn and teach with ChatGPT Work and Codex</a></li>
+  <li><a href="https://www.anthropic.com/news/tino-cuellar">Anthropic · Tino Cuellar joins Anthropic as Chief Global Affairs Officer</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/how-to-evaluate-voice-agents-execution-outcomes-and-experience">LangChain · How to Evaluate Voice Agents with LangSmith</a></li>
+  <li><a href="https://www.langchain.com/blog/customer-experience-cx-agents-in-production-lessons-from-lyft-vodafone-and-latam-airlines">LangChain · Customer Experience Agents in Production</a></li>
+  <li><a href="https://www.langchain.com/blog/how-stripe-built-their-knowledge-ai-platform-on-deep-agents">LangChain · How Stripe Built Kai on Deep Agents</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-04-code-coverage-automatic-enablement-in-code-quality-settings/">GitHub · Code coverage automatic enablement in Code Quality settings</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-04-upcoming-deprecation-of-github-spark-on-github-com/">GitHub · Upcoming deprecation of GitHub Spark on github.com</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-04-retiring-the-copilot-billing-preview-app/">GitHub · Retiring the Copilot Billing Preview app</a></li>
+  <li><a href="https://developers.googleblog.com/a-unified-api-for-ai-model-routing/">Google Developers · A unified API for AI model routing</a></li>
+  <li><a href="https://developers.googleblog.com/scaling-real-time-ai-agents-with-session-aware-load-balancing/">Google Developers · Scaling real-time AI agents with session-aware load balancing</a></li>
+  <li><a href="https://developers.googleblog.com/agent-and-model-evaluations-in-gemini-enterprise-agent-platform-are-now-ga/">Google Developers · Agent and Model Evaluations in Gemini Enterprise Agent Platform are now GA</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b">Hugging Face / Liquid AI · Deploy local agents everywhere with LFM2.5-2.6B</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/4/minimax-h3-mlx/">Simon Willison · PipeNetwork/minimax-h3-mlx</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/4/steve-yegge/">Simon Willison · Quoting Steve Yegge</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects AI RSS</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-04T00:00:00Z / 2026-08-05T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
