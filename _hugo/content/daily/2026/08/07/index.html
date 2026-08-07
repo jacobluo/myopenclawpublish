@@ -1,0 +1,142 @@
+---
+title: "Follow 深度日报：Agent 插件标准、ChatGPT 普及化与安全评测边界"
+date: "2026-08-07"
+category: "daily"
+url: "/daily/2026/08/07/"
+summary: "Follow List 公开来源整理：过去 24 小时的主线从单个模型能力转向 agent 生态封装、运行治理和大众化使用。Google 推 Agent Plugins 1.0.0，把 Skills 与 MCP server 打包成跨客户端插件；OpenAI 更新 GPT-5.6 Sol 并开放更多 Luna 免费使用，同时发布 Signals 使用数据；LangChain 继续厘清 Deep Agents/LangChain/LangGraph 三层架构；GitHub Copilot 引入 Kimi K3 但因 GitHub Actions incident 暂停 rollout；Simon Willison 追踪 Meta 评测误连公网事件并发布 Datasette SQL injection 修复。"
+---
+<div class="meta">
+  <strong>2026年8月7日（周五）</strong> · 覆盖窗口：2026-08-06 08:00 – 2026-08-07 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS/公开页面、Google Developers Blog RSS、LangChain Blog RSS、Simon Willison Weblog Atom、GitHub Changelog RSS、Hugging Face Blog RSS、Interconnects RSS、Anthropic Newsroom、公开 X profile HTML/Nitter RSS 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天主线：agent 生态从“能跑”转向“能移植、能治理”</h4><p>过去 24 小时最有价值的信号不是某个单点 demo，而是 agent 工程开始围绕可移植包、运行层边界、模型路由和安全评测形成基础设施语言。Google 的 Agent Plugins、MCP Stateless、Agent Skills 与 Gemini Enterprise evals 连成一条线：agent 需要被打包、发现、部署、评估和审计。</p></div>
+  <div class="overview-item"><h4>OpenAI 把 GPT-5.6 更新重点放在“日常可靠性”</h4><p>OpenAI 今天发布三条内容：ChatGPT 中 GPT-5.6 Sol 更聚焦、更少事实错误，并给 Plus/Pro 用户提供思考强度滑杆；免费用户默认转向 GPT-5.6 Luna 并将获得不限文本聊天；Signals 首次发布国家维度使用数据，强调 ChatGPT 正从问答走向任务执行。</p></div>
+  <div class="overview-item"><h4>插件标准是今天最值得跟进的生态事件</h4><p>Google 加入 Agent Plugins 1.0.0 Core Maintainers，和 Amazon、Cursor、Microsoft、OpenAI、Vercel 等共同维护一个 vendor-neutral 目录规范。它把 Agent Skills、MCP servers、client-specific 扩展放进固定目录结构，核心目标是减少不同 IDE/CLI/agent client 的包装格式漂移。</p></div>
+  <div class="overview-item"><h4>Coding agent 的模型菜单继续开放，但风险也更现实</h4><p>GitHub Changelog 显示 Kimi K3 进入 Copilot，面向 Pro/Business/Enterprise 等计划，并由 Fireworks AI 托管；但同一条公告注明 rollout 已因 GitHub Actions incident 暂停。这说明 open-weight coding model 正在进入主流开发工具，同时企业默认策略、供应商托管、事故响应会成为采购判断的一部分。</p></div>
+  <div class="overview-item"><h4>安全主线继续升级：评测环境误连公网不是孤例</h4><p>Simon Willison 继续追踪 cyber evaluation 中模型误触真实目标的问题，今天补充 Meta 模型测试也出现类似 misconfiguration。结合 OpenAI、Anthropic、UK AISI 的前几天复盘，联网 eval 已经不能被看作研究脚本，而要按可能影响外部世界的生产系统治理。</p></div>
+  <div class="overview-item"><h4>X 覆盖仍受限，报告以可核验页面为准</h4><p>公开 Nitter RSS 对多账号返回空或验证页；X profile HTML 可打开但本窗口内没有足够可核验的高优先账号新帖。人物动态因此主要采用作者博客、机构公告、RSS 和公开网页，不把不可复现 X-only 内容写成事实。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Agent Plugins 1.0.0：Skills + MCP 的可移植包装层</h3>
+<div class="card">
+  <div class="source"><span class="tag">Google Developers / Agent Plugins</span><strong>Google Developers</strong> · 2026-08-06 · <a href="https://developers.googleblog.com/agent-plugins-package-your-skills-tools-and-more/">Agent Plugins package your skills, tools, and more</a></div>
+  <div class="summary"><p>Google Developers 介绍 Agent Plugins 1.0.0：这是一个开放、vendor-neutral 的目录规范，用来把 Agent Skills、脚本、references 和 MCP servers 封装成一个可在多种 agent 客户端之间迁移的插件包。Google 表示该规范由 Amazon、Cursor、Microsoft、OpenAI、Vercel 等 Core Maintainers 组成的 TSC 发布，Google 也以 Core Maintainer 身份加入，并开始把支持接入 Agents CLI 和 Data Agent Kit。</p><p>这篇文章的关键不是又造一个插件市场，而是把“可移植核心”和“客户端扩展”分层：`plugin.json` 只做很薄的 manifest，skills 固定放在 `skills/`，MCP server 放在 `mcp.json`，客户端专属 hooks/commands 则放进反向域名目录。Google 明确说 v1 只定义 package format，不定义安装、分发、权限、沙箱、信任证明或 UX，这些留给客户端和企业平台处理。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里的 Codex、Claude、Gemini、LangChain、MCP 线索正在收敛到同一个问题：可复用 agent 能力如何在不同客户端之间流动。Agent Plugins 如果被主流 IDE/CLI 接住，会成为 Skills 与 MCP 的事实打包层。</div>
+  <div class="action">后续行动：检查 OpenClaw skill/plugin 结构能否映射到 Agent Plugins v1：`SKILL.md`、scripts、references、MCP 配置、客户端扩展目录、失败隔离和 manifest 最小字段。可以做一个内部插件样例，用日报抓取或 Obsidian 发布流做试点。</div>
+</div>
+
+<h3>二、OpenAI GPT-5.6 Sol / Luna：模型发布转向“默认体验与使用数据”</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / ChatGPT</span><strong>OpenAI</strong> · 2026-08-06 10:00 UTC · <a href="https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt/">Improving GPT-5.6 Sol in ChatGPT</a></div>
+  <div class="summary"><p>OpenAI 更新 ChatGPT 中的 GPT-5.6 Sol，重点放在更直接的回答、更可靠的事实和 Instant/Thinking 体验的一致性。Plus 和 Pro 用户获得新的思考强度滑杆，可在快速回答与更深入推理之间调节；OpenAI 同时强调这次优化只影响 ChatGPT Chat 体验，不改变 Work 和 Codex 中使用的 GPT-5.6 Sol 版本。</p><p>免费侧的变化更大：GPT-5.6 Luna 将成为 Free 和 Go 用户默认模型，并从下周起提供不限文本聊天和 Think 按钮，文件、图片和其他工具仍有限制。OpenAI 还在同日发布 APA 青少年心理健康合作，说明其正在把青少年场景的边界、年龄预测、家长资源和危机支持写入产品安全叙事。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这不是单纯“模型更强”，而是 ChatGPT 走向更大规模默认入口。免费无限文本聊天会扩大使用基数，思考滑杆会教育用户把模型能力视作可调资源，青少年安全则会影响消费 AI 产品的合规默认值。</div>
+  <div class="action">后续行动：观察 API/Work/Codex 是否随后同步体验层机制；跟踪 Luna 免费不限文本对用户留存、低价竞品和边缘用例的影响；把“思考强度”抽象成产品配置项，用于内部 agent UI。</div>
+</div>
+
+<h3>三、OpenAI Signals：从“问 AI”到“让 AI 做事”的宏观数据</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Economic Research</span><strong>OpenAI</strong> · 2026-08-06 00:00 UTC · <a href="https://openai.com/index/how-the-world-is-putting-chatgpt-to-work/">From asking to doing: How the world is putting ChatGPT to work</a></div>
+  <div class="summary"><p>OpenAI Signals 首次发布国家维度 ChatGPT 使用数据，样本来自 Free、Go、Plus、Pro 等个人账号，不包含通常由组织管理的企业账号。报告称，工作场景里用户更倾向于让 ChatGPT 完成任务或创建内容，例如写作、编码、分析；非工作场景仍以提问、查找信息和解释为主。</p><p>更值得注意的是 adoption 结构变化：拉美、非洲和大洋洲部分地区的人均使用排名提升更快；多媒体相关消息成为增长最快用例，全球占比达到 7.8%，巴西、哥伦比亚等国超过十分之一；35 岁以上用户消息占比在多数国家上升，法国和捷克同比增幅超过 10 个百分点。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是投资和产品判断的底层信号：AI 使用正在从早期技术人群、文本问答、英语世界，扩展到更广地区、更高年龄层和多媒体任务。对创业项目而言，“让用户做成事”的工具流会比“答得更像人”的聊天流更有价值。</div>
+  <div class="action">后续行动：下载 Signals CSV 做行业/地区二次分析，特别关注拉美、多媒体、35+ 用户和工作任务分类；把它纳入 AI adoption/应用层投资线索库。</div>
+</div>
+
+<h3>四、LangChain 三层架构：Deep Agents、LangChain、LangGraph 的边界更清楚了</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Agent Architecture</span><strong>LangChain</strong> · 2026-08-06 18:15 UTC · <a href="https://www.langchain.com/blog/deep-agents-vs-langchain-vs-langgraph">Deep Agents vs LangChain vs LangGraph</a></div>
+  <div class="summary"><p>LangChain 用一篇框架定位文把自己的开源 agent stack 拆成三层：LangGraph 是 runtime，给自定义图、durable execution、human-in-the-loop、fault tolerance 和 observability；LangChain 是 agent framework 和 integrations 层，提供简单 agent loop 与 middleware；Deep Agents 是更高层的 agent harness，预装 filesystem、subagents、skills、memory 等 context engineering 实践。</p><p>文章给出的判断很明确：大多数构建者先从 Deep Agents 开始；需要修改 loop 或集成能力时用 LangChain；需要把确定性步骤和 agentic 步骤混合成复杂工作流时用 LangGraph。它还披露 LangChain 自己的 GTM agent 使用 Deep Agents，每周接近 1 万次请求，150+ 活跃用户，且大量流量来自 scheduled/event-triggered ambient runs。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这篇实际上是在定义 agent 工程的抽象梯度：harness、framework、runtime。对 OpenClaw/WorkBuddy 这类系统，问题不是选一个库，而是明确哪些流程该用默认 harness，哪些流程需要图式控制和人工审批。</div>
+  <div class="action">后续行动：把现有 agent 工作流按三层分类：可直接技能化的放 harness，需要模型/工具 loop middleware 的放 framework，需要状态机、人审、重试、长任务的放 runtime。</div>
+</div>
+
+<h3>五、GitHub Copilot + Kimi K3：open-weight coding model 进入主流入口，但 rollout 暂停</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Changelog / Copilot</span><strong>GitHub</strong> · 2026-08-06 17:27 UTC · <a href="https://github.blog/changelog/2026-08-06-kimi-k3-is-now-available-in-github-copilot">Kimi K3 is now available in GitHub Copilot</a></div>
+  <div class="summary"><p>GitHub Changelog 宣布 open-weight 模型 Kimi K3 进入 GitHub Copilot，覆盖 VS Code、Visual Studio、Copilot CLI、Copilot cloud agent、github.com、GitHub Mobile、JetBrains、Xcode、Eclipse 等入口，并由 GitHub 托管在 Fireworks AI。公告称 Business 和 Enterprise 组织默认关闭，需要管理员在 Copilot settings 中显式启用 Kimi K3 policy。</p><p>同一公告顶部有重要编辑说明：2026 年 8 月 6 日，GitHub 暂停 Kimi K3 rollout，以缓解一个 GitHub Actions incident；后续会恢复 rollout 并更新文档中的定价信息。这让这条消息既是 open model 进入开发者主入口的信号，也是“模型接入不是纯软件开关”的风险提醒。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Copilot 的模型菜单正在成为多模型分发渠道，开源/开放权重模型借主流 IDE 获得企业入口。但默认关闭、usage-based billing、第三方托管和事故暂停都说明企业使用会看治理、成本和供应链，而不只是 benchmark。</div>
+  <div class="action">后续行动：等 rollout 恢复后测试 Kimi K3 在真实 repo 任务中的表现；记录价格、延迟、上下文、工具调用稳定性；在企业建议里把 open-weight 模型默认设为需要管理员审核。</div>
+</div>
+
+<h3>六、Simon Willison：Meta cyber eval 事故与 Datasette 安全修复</h3>
+<div class="card">
+  <div class="source"><span class="tag">Simon Willison / Security</span><strong>Simon Willison</strong> · 2026-08-06 00:25 / 18:24 UTC · <a href="https://simonwillison.net/2026/Aug/6/an-ai-model-from-meta/">Meta model testing incident note</a> / <a href="https://simonwillison.net/2026/Aug/6/datasette/">Datasette 1.0a38</a></div>
+  <div class="summary"><p>Simon 今天补充了 Meta 模型在 cybersecurity testing 中因 Irregular 测试环境配置错误接入公网、进而利用真实公司漏洞的报道。结合前两天 OpenAI、Anthropic 和 UK AISI 的复盘，至少三家 frontier/large AI 公司相关测试都出现过“评测环境以为是靶场，实际触达真实互联网”的问题。</p><p>另一条更偏工程安全：Simon 发布 Datasette 1.0a38 和 0.65.3，修复一个 SQL injection 安全问题，影响的是同一数据库实例中同时暴露 public/private tables 且使用 Datasette permissions 的配置。修复建议是升级，同时相关管理员应检查 raw SQL 执行权限与私有表隔离。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>第一条延续 agent 安全主线：联网 eval 必须有真实边界，而不是靠任务描述。第二条提醒 AI 工程工具链本身仍要按普通软件安全标准运维，尤其是把数据浏览器、内部分析面板接入 agent 后，权限边界会被放大。</div>
+  <div class="action">后续行动：把 cyber/browser/GitHub/email eval 默认改为无公网或白名单代理；同时检查内部 Datasette/数据浏览器实例是否存在 public/private 混库和 execute-sql 权限组合。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Google Developers：</strong>Agent Plugins 1.0.0 将 Agent Skills 与 MCP server 放入固定目录结构，Google 加入 Core Maintainers，并将支持接入 Agents CLI/Data Agent Kit。</li>
+  <li><strong>OpenAI：</strong>GPT-5.6 Sol 在 ChatGPT 中更新事实可靠性和回答聚焦度，Plus/Pro 获得思考强度滑杆；Free/Go 默认转向 GPT-5.6 Luna 并将获得不限文本聊天。</li>
+  <li><strong>OpenAI Signals：</strong>发布国家维度 ChatGPT 使用数据，显示工作场景“完成任务/创建内容”占比更高，多媒体用例增长最快，35 岁以上用户占比提升。</li>
+  <li><strong>LangChain：</strong>用 Deep Agents、LangChain、LangGraph 三层重新定义自己的 agent stack，并继续强调 skills、subagents、memory、filesystem 等 context engineering 组件。</li>
+  <li><strong>GitHub：</strong>Kimi K3 进入 Copilot 模型选择器，但 rollout 因 GitHub Actions incident 暂停；Business/Enterprise 默认需要管理员启用。</li>
+  <li><strong>Hugging Face：</strong>Baseten 成为 Inference Providers，支持 conversational/text-generation 任务，初始覆盖 Kimi K3、DeepSeek V4 Flash、GLM-5.2 等开放模型。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Sam Altman 线：</strong>公开公司更新集中在大众化 ChatGPT 体验、Signals 数据和青少年安全合作；Sam 个人 X 页面本窗口未抓到可核验新帖。</li>
+  <li><strong>Google / Gemini 生态：</strong>Google Developers 连续发布 Agent Plugins、MCP Stateless、Agent Skills、Gemini Enterprise evals、session-aware load balancing，明显在抢 agent infrastructure 话语权。</li>
+  <li><strong>Harrison Chase / LangChain 生态：</strong>LangChain 继续把产品叙事从框架转向完整 agent lifecycle：harness、runtime、部署、gateway、sandbox、eval、observability。</li>
+  <li><strong>Simon Willison：</strong>继续承担 AI 安全事故与工程工具更新的高信号过滤；今天同时覆盖 Meta eval 误连公网与 Datasette 安全修复。</li>
+  <li><strong>Hugging Face / 开源模型生态：</strong>HF 的 Baseten Provider 与 GitHub 的 Kimi K3 共同说明开放模型的主战场在分发和托管入口，而不仅是模型卡。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>Agent Plugins 适配验证：</strong>做一个 OpenClaw 插件样例，把一个 skill、一个 MCP server、一个 client-specific 扩展放进规范目录，验证跨客户端可读性。</li>
+  <li><strong>思考强度 UI：</strong>把 OpenAI ChatGPT 的 slider 思路抽象到 agent 产品中，区分 quick、balanced、deep、audited 等运行档位。</li>
+  <li><strong>Signals 数据分析：</strong>下载 OpenAI Signals CSV，按国家、年龄、工作/非工作、多媒体分类建立趋势表，寻找应用和投资线索。</li>
+  <li><strong>Copilot/Kimi K3 观察：</strong>等待 GitHub 恢复 rollout 后，测试复杂 repo 修复、PR 审查、单测生成和长上下文任务表现，记录与 Claude/Codex/Gemini 的差异。</li>
+  <li><strong>Agent eval 出站控制：</strong>制定默认无公网、靶场白名单、请求审计、中止按钮、假身份/假凭证、人工审批的 eval SOP。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>Google Developers RSS 没有在 feed item 中提供 pubDate；本轮以 RSS 排序和文章页面显示的 2026-08-06 日期作为新鲜度依据，后续应补抓页面结构化时间。</li>
+  <li>Agent Plugins v1 明确不覆盖安装、权限、沙箱、信任证明和分发协议；企业真实落地仍要看各客户端实现和 provenance 方案。</li>
+  <li>OpenAI 对 GPT-5.6 Sol/Luna 的 factual error 降幅来自内部评测，需要后续观察第三方测试和真实用户反馈。</li>
+  <li>GitHub Kimi K3 rollout 暂停与 GitHub Actions incident 的具体影响范围未在公告中完全展开，需要持续检查后续 changelog 和 status 更新。</li>
+  <li>公开 X/Nitter 覆盖不足：Nitter 样本返回空或验证页，X profile HTML 没有抓到本窗口内可核验高优先账号新帖。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Simon 的技术博客访谈对写作实践有价值，但和今天 agent infrastructure 主线关系较弱，未展开。</li>
+  <li>LangChain SRE agent 是 8 月 6 日窗口边缘内容，昨日已重点覆盖；今天只作为运行治理背景保留。</li>
+  <li>Hugging Face Baseten Provider 重要但偏分发渠道，技术深度不如 Agent Plugins/MCP，因此放在重要更新而非主线第一位。</li>
+  <li>Anthropic Newsroom 未发现 8 月 6 日可核验新条目；不把旧内容重复包装成今天新闻。</li>
+  <li>Interconnects 最新正文仍是 8 月 3 日 Artifacts Hub；开放模型生态只作为 GitHub/HF 新闻背景引用。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt/">OpenAI · Improving GPT-5.6 Sol in ChatGPT</a></li>
+  <li><a href="https://openai.com/index/how-the-world-is-putting-chatgpt-to-work/">OpenAI · From asking to doing: How the world is putting ChatGPT to work</a></li>
+  <li><a href="https://openai.com/index/openai-and-apa-partner-to-advance-responsible-ai/">OpenAI · Working with APA on youth mental health and AI</a></li>
+  <li><a href="https://developers.googleblog.com/feeds/posts/default/">Google Developers Blog RSS</a></li>
+  <li><a href="https://developers.googleblog.com/agent-plugins-package-your-skills-tools-and-more/">Google Developers · Agent Plugins package your skills, tools, and more</a></li>
+  <li><a href="https://developers.googleblog.com/scaling-ai-agent-infrastructure-with-the-mcp-stateless-updates/">Google Developers · Scaling AI Agent Infrastructure with the MCP Stateless updates</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/deep-agents-vs-langchain-vs-langgraph">LangChain · Deep Agents vs LangChain vs LangGraph</a></li>
+  <li><a href="https://www.langchain.com/blog/how-we-build-an-autonomous-sre-agent-for-kubernetes-deployments">LangChain · How we built an autonomous SRE Agent for Kubernetes</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/6/an-ai-model-from-meta/">Simon Willison · Meta model testing incident note</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/6/datasette/">Simon Willison · Datasette 1.0a38</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-06-kimi-k3-is-now-available-in-github-copilot">GitHub Changelog · Kimi K3 is now available in GitHub Copilot</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/baseten">Hugging Face · Baseten on Hugging Face Inference Providers</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects AI RSS</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic Newsroom</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-06T00:00:00Z / 2026-08-07T00:00:00Z.</footer>
