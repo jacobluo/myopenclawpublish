@@ -1,5 +1,12 @@
 [
   {
+    "title": "Your Moat Is Your Data Model：Gates Foundation 知识图谱演讲研究报告",
+    "date": "2026-08-09",
+    "category": "research",
+    "url": "/research/2026/08/09/gates-foundation-data-model-moat-workbuddy/",
+    "summary": "整理 AI Engineer World's Fair 2026 演讲 Your Moat Is Your Data Model：Gates Foundation 如何用 Neo4j、MCP、治理流程和检索评估把组织数据模型变成 Agent 时代的护城河，并推导 WorkBuddy 的实践路线。"
+  },
+  {
     "title": "Follow 深度日报：实时语音栈、开放模型采用度量与企业 Agent 治理",
     "date": "2026-08-04",
     "category": "daily",

@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Moat Is Your Data Model：Gates Foundation 知识图谱演讲研究报告</title>
+  <meta name="description" content="整理 AI Engineer World's Fair 2026 演讲 Your Moat Is Your Data Model，并推导 WorkBuddy 的企业实践方案。">
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --ink: #17202f;
+      --muted: #627084;
+      --line: #dbe2ec;
+      --panel: #ffffff;
+      --panel-2: #edf3f7;
+      --blue: #3157d5;
+      --teal: #0c7f86;
+      --green: #2f8a58;
+      --gold: #ad741d;
+      --red: #b34444;
+      --shadow: 0 18px 50px rgba(36, 50, 76, 0.10);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+      line-height: 1.65;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(49, 87, 213, 0.08), rgba(49, 87, 213, 0) 360px),
+        var(--bg);
+    }
+
+    a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 64px 0 36px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 830px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 6px 12px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 36px;
+      padding: 40px 0 72px;
+      align-items: start;
+    }
+
+    article {
+      display: grid;
+      gap: 22px;
+    }
+
+    section, aside {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 28px;
+    }
+
+    aside {
+      position: sticky;
+      top: 20px;
+      padding: 20px;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 26px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 24px 0 8px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    p { margin: 0 0 14px; }
+
+    ul, ol {
+      margin: 10px 0 0;
+      padding-left: 22px;
+    }
+
+    li { margin: 7px 0; }
+
+    .note {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--gold);
+      background: #fff8ea;
+      color: #5d4828;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .tile {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel-2);
+      padding: 16px;
+    }
+
+    .tile strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr);
+      gap: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfcfe;
+    }
+
+    .time {
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: var(--radius);
+      font-size: 15px;
+    }
+
+    .matrix th,
+    .matrix td {
+      border: 1px solid var(--line);
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .matrix th {
+      background: #e8eef8;
+      color: #263853;
+      font-weight: 800;
+    }
+
+    .quote-lite {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid #bfd3e0;
+      border-radius: var(--radius);
+      background: #eef7fa;
+      color: #234957;
+      font-weight: 600;
+    }
+
+    .toc-title {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .source-list {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-block;
+      margin-right: 6px;
+      color: #fff;
+      background: var(--teal);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 880px) {
+      header { padding-top: 44px; }
+      main { grid-template-columns: 1fr; }
+      aside { position: static; order: -1; }
+      .grid { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 1fr; }
+      section { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">Research Report · AI Engineer World's Fair 2026</p>
+      <h1>Your Moat Is Your Data Model</h1>
+      <p class="dek">Mike Phipps 在 Gates Foundation 的这场演讲，讲的是一个比“做聊天机器人”更底层的问题：当模型、前端、Agent 框架都越来越商品化，企业真正可防守的资产，是能把隐性业务知识结构化、可治理、可被 Agent 调用的数据模型。</p>
+      <div class="meta">
+        <span class="pill">演讲者：Mike Phipps，Lead AI Engineer，Gates Foundation</span>
+        <span class="pill">场次：2026-07-02 11:40-12:00，Graphs Track</span>
+        <span class="pill">报告日期：2026-08-09</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <main>
+      <article>
+        <section id="source">
+          <h2>来源与可获得性</h2>
+          <p>本报告基于 AI Engineer World's Fair 2026 官方日程页、AI Engineer 发布的视频页面，以及 daily.dev 对该视频的结构化摘要和时间轴。官方日程确认了题目、讲者、公司、场次和 Graphs 赛道；视频页确认了 YouTube 视频 ID；daily.dev 摘要提供了演讲主线、时间戳和主题标签。</p>
+          <p>我没有找到官方公开发布的完整逐字稿。YouTube 自动字幕在本次抓取中需要登录验证，无法稳定取得；因此本文不提供“完整逐字中文翻译”。下面的“中文详述”是基于公开摘要、时间轴和可核验信息做的分段转述，不是逐字稿。</p>
+          <div class="note">版权边界：如果未来拿到讲者或主办方授权的字幕/逐字稿，可以再补一版完整翻译。当前版本保留短标题和必要术语，不复刻整场演讲文本。</div>
+        </section>
+
+        <section id="one-line">
+          <h2>一句话结论</h2>
+          <div class="quote-lite">企业 AI 的长期护城河不是“用了哪个大模型”，而是组织把自己的业务对象、层级、规则、权限、历史文档和决策口径，沉淀成 Agent 能安全查询和持续修正的数据模型。</div>
+          <div class="grid">
+            <div class="tile">
+              <strong>对企业</strong>
+              AI 项目要从“界面和 prompt”下沉到“数据模型和治理”。否则 Agent 只是漂亮地访问一堆不一致的数据。
+            </div>
+            <div class="tile">
+              <strong>对 WorkBuddy</strong>
+              WorkBuddy 不应只定位为办公 Agent，而应成为企业知识建模、工具接入、权限治理和评估闭环的工作层。
+            </div>
+          </div>
+        </section>
+
+        <section id="chinese-detail">
+          <h2>中文详述</h2>
+          <p>演讲从一个护城河问题开始：在 AI 时代，模型会变强，模型调用会变便宜，聊天界面和 Agent 框架会迅速同质化。真正难复制的，是一家组织长期积累下来的隐性知识，以及这些知识如何被映射进可靠的数据结构。</p>
+
+          <div class="timeline">
+            <div class="step">
+              <div class="time">0:00</div>
+              <div><strong>护城河问题。</strong>Mike Phipps 把竞争优势从模型层拉回数据层：别人可以使用同样的 LLM、相似的 RAG、相近的 Agent UI，但无法轻易复制你组织内部对业务问题的理解方式。</div>
+            </div>
+            <div class="step">
+              <div class="time">2:32</div>
+              <div><strong>SIP 的定位。</strong>Gates Foundation 建设 Strategic Intelligence Platform，目标不是做一个部门级报表，而是把约 4,000 人组织中的关键运营知识接到统一图谱中，让 AI 可以围绕组织真实语义回答问题。</div>
+            </div>
+            <div class="step">
+              <div class="time">3:46</div>
+              <div><strong>数据规模。</strong>案例涉及 25 年 grantmaking 历史、每年约 70 亿美元投入、约 2,000 个 grants，以及人员、组织、投资管理、文档等多个系统的关联。</div>
+            </div>
+            <div class="step">
+              <div class="time">5:15</div>
+              <div><strong>面向 Agent 的结构化。</strong>核心工作不是把所有数据塞进向量库，而是把 grant、funding、initiative、organization、person、document 等实体和关系建出来，让 Agent 可以沿着明确路径检索。</div>
+            </div>
+            <div class="step">
+              <div class="time">6:18</div>
+              <div><strong>隐性知识显性化。</strong>数据拥有者知道“这个数该怎么算”“这个组织层级该怎么 roll up”“这个项目为什么属于某个战略方向”。这类知识如果不进入模型，Agent 会得到看似合理但业务上错误的答案。</div>
+            </div>
+            <div class="step">
+              <div class="time">7:09</div>
+              <div><strong>治理与摄取。</strong>数据管道要处理来源系统、字段清洗、实体对齐、权限、PII、质量检查和版本变化。治理不是上线前的合规清单，而是整个知识图谱生命周期的一部分。</div>
+            </div>
+            <div class="step">
+              <div class="time">8:30</div>
+              <div><strong>层级建模。</strong>资金和管理视角不是一棵简单树，而可能是可累加的 DAG：同一笔投入在不同管理口径下可以向上汇总，但必须避免重复计算和路径歧义。</div>
+            </div>
+            <div class="step">
+              <div class="time">12:32</div>
+              <div><strong>跨系统缝合。</strong>人、组织架构、grant、投资组合和文档通常在不同系统中。SIP 的价值在于把这些孤岛实体缝合起来，让问题可以跨系统移动。</div>
+            </div>
+            <div class="step">
+              <div class="time">13:49</div>
+              <div><strong>结构化数据 + 非结构化文档。</strong>文档不是独立的搜索对象，而是在摄取时被切块、标注、挂到图谱实体上。这样 Agent 检索文档时能知道它与哪个项目、团队、组织、时间和决策上下文有关。</div>
+            </div>
+            <div class="step">
+              <div class="time">15:34</div>
+              <div><strong>通过 MCP 提供给 Agent。</strong>图谱通过 MCP 暴露给 Claude、ChatGPT 等 Agent。Agent 不直接乱查数据库，而是在受控工具和语义模型中生成查询、读取结果、组织答案。</div>
+            </div>
+            <div class="step">
+              <div class="time">17:31</div>
+              <div><strong>评估反馈闭环。</strong>当 Agent 回答失败，问题不一定在模型，也可能在图谱缺字段、关系建错、口径未显式化、权限策略过宽或过窄。检索评估的结果会反过来推动数据模型迭代。</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="views">
+          <h2>总结观点</h2>
+          <ol>
+            <li><strong>数据模型是 Agent 的真实上下文窗口。</strong>长上下文可以装下更多文本，但数据模型决定 Agent 能否按业务语义找到正确路径。</li>
+            <li><strong>知识图谱的价值不在“图”本身，而在可解释的业务关系。</strong>图数据库只是载体；护城河来自实体、关系、层级、口径和治理经验。</li>
+            <li><strong>RAG 不够，GraphRAG 也不够，关键是 operational graph。</strong>企业需要把运营系统、文档和权限放在同一个可查询语义层，而不是只做知识库问答。</li>
+            <li><strong>MCP 的意义是把数据模型变成 Agent 工具。</strong>MCP server 是边界：它包装查询能力、权限、工具描述、返回结构和审计，而不是让 Agent 直接面对所有底层系统。</li>
+            <li><strong>评估应该反哺数据模型。</strong>每一次检索失败都要被归因：是问题理解错、图谱漏建、实体未对齐、权限限制、文档切分错误，还是业务口径本身未达成共识。</li>
+            <li><strong>小团队可以放大组织能力。</strong>真正可复用的成果不是一次 demo，而是让更多员工通过同一套语义层安全访问组织知识。</li>
+          </ol>
+        </section>
+
+        <section id="workbuddy">
+          <h2>WorkBuddy 如何实践</h2>
+          <p>WorkBuddy 可以把这场演讲转化成一套企业 Agent 落地方法：先定义工作对象和业务关系，再接工具，再做受控问答和工作流，最后用评估持续修正数据模型。</p>
+
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>实践层</th>
+                <th>WorkBuddy 应该做什么</th>
+                <th>可交付物</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>业务对象建模</td>
+                <td>为客户定义核心实体：客户、商机、合同、项目、SKU、门店、供应商、工单、人员、制度、会议、文档。</td>
+                <td>企业对象字典、关系图、字段口径表。</td>
+              </tr>
+              <tr>
+                <td>层级与口径</td>
+                <td>把组织层级、财务口径、销售区域、品类结构、项目阶段等变成可遍历结构，明确汇总和去重规则。</td>
+                <td>层级 DAG、rollup 规则、指标血缘。</td>
+              </tr>
+              <tr>
+                <td>文档挂接</td>
+                <td>把合同、SOP、会议纪要、方案、报价单、培训资料切块后挂到实体，而不是只进一个全文搜索库。</td>
+                <td>文档摄取规范、实体标签、证据引用模板。</td>
+              </tr>
+              <tr>
+                <td>MCP 工具边界</td>
+                <td>为 CRM、ERP、OA、知识库、BI、工单系统建立最小可用工具集，按角色暴露查询和动作。</td>
+                <td>MCP 工具清单、权限矩阵、审计日志。</td>
+              </tr>
+              <tr>
+                <td>Agent 工作流</td>
+                <td>把常见问题做成可约束流程：先识别实体，再查图谱，再取证据，再生成答案或动作建议。</td>
+                <td>工作流模板、系统提示、失败兜底规则。</td>
+              </tr>
+              <tr>
+                <td>检索评估</td>
+                <td>沉淀真实问题集，评估答案准确性、证据覆盖、权限正确性、查询路径和用户反馈。</td>
+                <td>Golden set、eval dashboard、问题归因表。</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>建议的 6 周试点</h3>
+          <ol>
+            <li><strong>第 1 周：选场景。</strong>选一个跨系统、重复高、答案需要证据的业务场景，例如“重点客户经营复盘”“项目风险周报”“合同与回款追踪”。</li>
+            <li><strong>第 2 周：建对象。</strong>拉业务负责人一起定义实体、关系、字段口径和权限边界，先做 20% 高价值对象。</li>
+            <li><strong>第 3 周：接数据。</strong>接入 2-3 个核心系统和一批关键文档，做实体对齐和文档挂接。</li>
+            <li><strong>第 4 周：做工具。</strong>通过 MCP 暴露查询工具，限定输入输出结构，记录每次查询路径。</li>
+            <li><strong>第 5 周：跑工作流。</strong>让 WorkBuddy 处理真实问题，要求每个结论带来源、口径和可追溯证据。</li>
+            <li><strong>第 6 周：评估修模。</strong>用失败样本反推数据模型缺口，形成下一轮对象、关系和权限迭代清单。</li>
+          </ol>
+        </section>
+
+        <section id="risks">
+          <h2>风险与判断</h2>
+          <ul>
+            <li><strong>不要把图谱当银弹。</strong>如果业务口径没有共识，图谱只会把分歧更快地暴露出来。</li>
+            <li><strong>不要先追求全量。</strong>先围绕高频工作流建窄而深的模型，比铺一个大而空的企业知识图谱更容易出价值。</li>
+            <li><strong>权限必须前置。</strong>Agent 能跨系统回答问题后，越权和 PII 风险会放大，MCP 工具层必须承担访问控制和审计。</li>
+            <li><strong>评估要能定位到模型缺陷。</strong>如果只给答案打分，无法知道该改 prompt、改工具、改数据，还是改业务口径。</li>
+          </ul>
+        </section>
+      </article>
+
+      <aside>
+        <p class="toc-title">目录</p>
+        <ul class="toc">
+          <li><a href="#source">来源与可获得性</a></li>
+          <li><a href="#one-line">一句话结论</a></li>
+          <li><a href="#chinese-detail">中文详述</a></li>
+          <li><a href="#views">总结观点</a></li>
+          <li><a href="#workbuddy">WorkBuddy 实践</a></li>
+          <li><a href="#risks">风险与判断</a></li>
+        </ul>
+        <hr style="border:0;border-top:1px solid var(--line);margin:18px 0;">
+        <p class="toc-title">引用来源</p>
+        <div class="source-list">
+          <p><span class="badge">1</span><a href="https://www.ai.engineer/schedule">AI Engineer World's Fair 2026 官方日程</a></p>
+          <p><span class="badge">2</span><a href="https://www.youtube.com/watch?v=jt1Pbr_n6oU">YouTube 视频：Your Moat Is Your Data Model</a></p>
+          <p><span class="badge">3</span><a href="https://daily.dev/posts/your-moat-is-your-data-model-mike-phipps-gates-foundation-krxakedqe">daily.dev 结构化摘要</a></p>
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
