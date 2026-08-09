@@ -1,0 +1,136 @@
+---
+title: "Follow 深度日报：Claude Code 自动模式、Agent 权限边界与可验证科学路线"
+date: "2026-08-09"
+category: "daily"
+url: "/daily/2026/08/09/"
+summary: "Follow List 公开来源整理：过去 24 小时新增信号不多，但方向清晰。Simon Willison 重点复盘 Claude Code auto mode 默认开启及其 prompt injection 边界；Harrison Chase 继续把 managed agents、memory、sandbox、权限与托管运行时放到 agent 栈中心；Demis Hassabis 借 AlphaGo Move 37 十周年强调可验证领域对数学和科学突破的意义；GitHub Copilot 与 LangChain 的企业治理更新仍是本轮背景主线。"
+---
+<div class="meta">
+  <strong>2026年8月9日（周日）</strong> · 覆盖窗口：2026-08-08 08:00 – 2026-08-09 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Simon Willison Atom、Claude/Anthropic 公开页面、Nitter 公开镜像对高优先 X 账号抽样、LangChain/GitHub/OpenAI/Hugging Face/Google/Interconnects RSS 复核。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天主线：agent 默认放权前，安全分类器必须先过关</h4><p>过去 24 小时新增内容没有昨天密集，但有一个值得单独盯住的变化：Claude Code 将在 2026-08-14 起对 Pro、Max、Team 新会话默认启用 auto mode。Anthropic 把它定位为比普通人工点确认更稳的权限层，Simon Willison 则提醒 prompt injection 风险并没有因为“自动模式”这个名字消失。</p></div>
+  <div class="overview-item"><h4>Simon Willison：auto mode 是进步，但仍不能当作彻底安全</h4><p>Simon 在博客和 X 上写了 Claude Code auto mode 的笔记：他愿意相信这是降低 coding agent prompt injection 风险的重要一步，但还没有被完全说服。核心问题不是分类器是否有用，而是默认放权之后，用户是否会误以为长期运行 agent 已经不需要隔离、审计和最小权限。</p></div>
+  <div class="overview-item"><h4>Harrison Chase：managed agents 继续围绕 memory、sandbox、权限和基础设施展开</h4><p>Harrison Chase 在 X 上延续昨天 Managed Deep Agents 的发布讨论，强调“标准化 agent 栈”正在形成，memory 会成为独立组件，托管基础设施是生产化关键。这个方向和 Anthropic 早前的 Managed Agents 工程文呼应：brain 与 hands 解耦，凭证不应暴露在 agent 生成代码可触达的环境里。</p></div>
+  <div class="overview-item"><h4>可验证领域：AlphaGo Move 37 十周年被重新放进数学与科学突破语境</h4><p>Demis Hassabis 转发关于 AlphaGo 著名第 37 手十周年的讨论，强调它对数学和科学这类可验证领域的意义。结合 OpenAI 近期数学/理论计算机科学成果与 test-time compute 讨论，前沿模型的下一个叙事仍会围绕“能被验证的复杂任务”展开。</p></div>
+  <div class="overview-item"><h4>低新增日也有价值：治理主线在沉淀为默认产品配置</h4><p>OpenAI、LangChain、GitHub、Hugging Face、Google、Interconnects RSS 在本窗口没有新的高信号条目；但昨天的 LangSmith Gateway、GitHub MCP allowlist、OpenAI Astra cyber gating 与今天 Claude Code auto mode 合起来看，agent 平台正在把安全、成本、权限和审计变成默认产品形态。</p></div>
+  <div class="overview-item"><h4>报告处理原则：不把旧闻伪装成新增</h4><p>本轮没有使用 Folo CLI；X/Nitter 只作为公开线索，长文与产品事实优先回到源站核验。对 2026-08-07 发布、但 2026-08-08 被重点讨论的内容，报告会明确标注“窗口内讨论/复盘”，避免重复发布成当天新公告。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Claude Code auto mode：默认自动执行背后的权限模型升级</h3>
+<div class="card">
+  <div class="source"><span class="tag">Anthropic / Claude Code</span><strong>Claude by Anthropic</strong> · 2026-08-07 发布，2026-08-08 窗口内由 Simon Willison 复盘 · <a href="https://claude.com/blog/auto-mode-default-in-claude-code">Auto mode is now the default in Claude Code for Pro, Max, and Team plans</a></div>
+  <div class="summary"><p>Anthropic 宣布 Claude Code 将从 2026-08-14 起，在 Pro、Max、Team 新会话中默认使用 auto mode。auto mode 会把工具调用交给分类器判断，目标是允许常规开发命令自动运行，同时阻断不可逆、破坏性或明显越界的操作；Anthropic 称其经过内部红队、第三方红队、prompt injection 评估、1,053 名付费测试者的受控实验和真实生产会话分析。</p><p>这不是一个小 UI 默认值变化，而是 coding agent 从“每一步都问人”走向“默认连续执行”的关键门槛。只要 agent 可以连续读文件、跑命令、改代码、提交 PR，权限分类器、硬阻断规则、环境上下文、仓库可见性、git 状态和数据处理规则就变成运行时安全的一部分。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Claude Code 是高频 coding agent 入口。auto mode 默认开启会改变用户预期：更少打断、更长任务、更高产出，但也更需要工程团队把 sandbox、凭证隔离和日志审计做成默认。</div>
+  <div class="action">后续行动：内部 coding agent 默认策略应拆成三层：可自动执行的读/测试/格式化命令，需 soft deny 或确认的外部网络/部署/force 操作，以及永远 hard deny 的凭证读取、数据外传、生产写入。</div>
+</div>
+
+<h3>二、Simon Willison：prompt injection 风险下降，不等于风险消失</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Security</span><strong>Simon Willison</strong> · 2026-08-08 22:36 UTC · <a href="https://simonwillison.net/2026/Aug/8/auto-mode/">Auto mode is now the default in Claude Code for Pro, Max, and Team plans</a> / <a href="https://nitter.net/simonw/status/2086220154468442496#m">X mirror</a></div>
+  <div class="summary"><p>Simon 在博客与 X 上写到，他很想相信 Claude Code auto mode 修复了 coding agent 的 prompt injection 风险，但目前仍未完全放心。他引用 Anthropic 的说法：auto mode 在独立评估中阻止了对 Claude 模型的相关攻击，并对工具结果中的恶意指令做扫描；但 Simon 关注的仍是默认权限扩大后，用户是否会忽略环境隔离和敏感数据边界。</p><p>同一窗口内，他还继续追踪 OpenAI 模型误攻击 Hugging Face 的时间线，并指出一个细节：OpenAI 似乎是在联系 HF 撤销凭证时才发现该凭证已经因攻击行为被 HF 撤销。这让“agent 出站控制、凭证最小权限、训练/评测环境是否隔离真实服务”再次成为共同主题。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Simon 的价值在于把产品公告转成工程风险清单。auto mode、评测出站事故、凭证误用，其实都指向同一件事：AI agent 的安全不是靠单个模型更聪明，而是靠运行环境把最坏路径堵住。</div>
+  <div class="action">后续行动：为所有联网 agent 增加“工具结果可信度”检查：外部网页、issue、README、日志、PDF、邮件正文都视为不可信输入；任何由这些输入诱发的写入、外传、授权、安装和部署都要额外确认。</div>
+</div>
+
+<h3>三、Managed agents 栈：memory 正在从功能点变成基础设施组件</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Agent Runtime</span><strong>Harrison Chase</strong> · 2026-08-08 15:25–22:00 UTC · <a href="https://nitter.net/hwchase17/status/2086111507826561438#m">standard-ish agent stack</a> / <a href="https://nitter.net/hwchase17/status/2086194208101273683#m">memory component</a> / <a href="https://www.anthropic.com/engineering/managed-agents">Anthropic managed agents engineering note</a></div>
+  <div class="summary"><p>Harrison Chase 在 X 上继续围绕 Managed Deep Agents 讨论 agent 栈，提到“standard-ish agent stack”正在出现，托管方案会把不同组件打包起来；他还明确说 memory 很有意思且仍未被充分探索，Managed Deep Agents 可以对 memory 的形态更有主张。转发讨论中反复出现 durable execution、auth、streaming、sandboxes、memory、evals、observability 等关键词。</p><p>这和 Anthropic 早前的 Managed Agents 工程文形成互证：真正稳的 long-horizon agent 不是把所有东西塞进一个容器，而是把会话日志、harness、sandbox、凭证和外部工具边界拆开。尤其是“brain”和“hands”解耦后，模型生成代码即使被 prompt injection 诱导，也不应该直接触达高权限 token。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OpenClaw 这类个人/工作 agent 系统，最容易在 memory、技能、工具、状态、凭证之间混层。现在产业正在把这些拆成可治理组件，说明自建系统也需要从“能跑”升级到“能复盘、能恢复、能限权”。</div>
+  <div class="action">后续行动：把本地 agent 记忆拆为四类：长期偏好、项目知识、任务运行态、外部资料缓存；每类设不同保留期、可见范围和写入权限，避免把日志当事实、把私密上下文带入公开输出。</div>
+</div>
+
+<h3>四、可验证科学路线：Move 37、数学成果与 test-time compute 的同一条线</h3>
+<div class="card">
+  <div class="source"><span class="tag">Research / Strategy</span><strong>Demis Hassabis</strong> · 2026-08-08 02:23 UTC · <a href="https://nitter.net/demishassabis/status/2085914742414061886#m">AlphaGo Move 37 and verifiable domains</a></div>
+  <div class="summary"><p>Demis Hassabis 转发 WSJ 关于 AlphaGo 第 37 手十周年的内容，并表示很享受讨论这一著名时刻及其对数学、科学突破这类可验证领域的意义。这个动态本身不是新产品公告，但它把 DeepMind 的长期叙事再次拉回“可验证复杂领域”：围棋、数学、科学问题都有一个共同点，结果可以被检查，模型可以从明确反馈中迭代。</p><p>结合 OpenAI 最近强调数学和理论计算机科学成果、Noam Brown 对 test-time compute 的判断，以及 François Chollet 对 TTC 和符号学习的讨论，前沿模型竞争并不只在聊天体验或代码补全。更深的路线是：找到高价值、可验证、能形成反馈闭环的任务域，把推理预算和后训练技术用在真正可累积的地方。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这对研究方向和投资线索都有用。能验证的领域更适合 RL、搜索、self-play、test-time compute 和自动评测，也更容易产生可量化突破。</div>
+  <div class="action">后续行动：把“可验证领域”作为项目筛选条件之一：数学、代码、EDA、药物设计、仿真、财务审计、合规检查等方向优先观察是否具备自动评分、闭环训练和真实工作流入口。</div>
+</div>
+
+<h3>五、企业治理延续：GitHub、LangChain、OpenAI 的共同方向没有变</h3>
+<div class="card">
+  <div class="source"><span class="tag">Platform Governance</span><strong>GitHub / LangChain / OpenAI</strong> · 2026-08-07 发布，本窗口复核无新增 · <a href="https://github.blog/changelog/2026-08-07-github-copilot-weekly-releases-august-3">GitHub Copilot weekly releases</a> / <a href="https://www.langchain.com/blog/introducing-llm-gateway">LangSmith LLM Gateway</a> / <a href="https://openai.com/index/responding-next-frontier-critical-cyber-capabilities">OpenAI Astra cyber safeguards</a></div>
+  <div class="summary"><p>官方 RSS 本窗口没有新的 OpenAI、LangChain、GitHub 高信号新增，但昨天的更新仍构成今天判断 Claude Code auto mode 的背景：OpenAI 因 Astra 网络安全能力提高发布门槛，LangChain 把模型调用治理放进 LangSmith Gateway，GitHub Copilot 把 MCP allowlist、agent app activity、ROI dashboard 纳入企业设置与指标。</p><p>这些变化共同说明，agent 产品的竞争正在从“谁的模型更强”转向“谁能默认安全地让模型做更多事”。默认自动执行、企业 MCP 白名单、token 成本看板、PII redaction、trace continuity、出站控制和网络安全发布闸门，本质上都是同一套生产化约束。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>客户以后不会只问 agent 能不能写代码、搜资料、调工具，还会问：能不能限制工具、记录成本、解释行为、隔离凭证、证明 ROI、出事后复盘。</div>
+  <div class="action">后续行动：把“agent 治理能力”做成独立材料，覆盖权限、身份、凭证、日志、成本、审计、MCP 白名单、风险路由和人工审批；不要把它藏在功能列表后面。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Claude Code：</strong>auto mode 将于 2026-08-14 起成为 Pro、Max、Team 新会话默认模式；分类器会判断工具调用风险，并可通过配置声明可信 repo、bucket、domain 等环境边界。</li>
+  <li><strong>Simon Willison：</strong>窗口内新增 auto mode 风险笔记，重点不是否定自动模式，而是提醒 prompt injection 与数据外传仍需 sandbox、最小权限和审计配合。</li>
+  <li><strong>Harrison Chase：</strong>继续推动 managed agents 栈叙事，强调 memory、托管运行时和基础设施默认值；这补充了昨天 LangChain Managed Deep Agents 发布后的产品定位。</li>
+  <li><strong>Demis Hassabis：</strong>借 AlphaGo Move 37 十周年强调可验证领域对数学和科学突破的意义；这是 DeepMind 长期研究路线的高层信号。</li>
+  <li><strong>GitHub Copilot：</strong>weekly releases 整理了 Copilot app、CLI、VS Code 的多项更新；更重要的仍是前一日企业治理侧的 MCP allowlist、agent activity metrics 和 ROI dashboard。</li>
+  <li><strong>官方 RSS 复核：</strong>OpenAI、LangChain、Hugging Face、Google AI、Google Research、Interconnects 在本窗口没有新的高价值条目；不重复当作新增展开。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Simon Willison：</strong>继续担任 coding agent 安全的现实主义观察者。他认可 auto mode 的安全评估价值，但明确保留对 prompt injection 风险的警惕。</li>
+  <li><strong>Harrison Chase / LangChain：</strong>围绕 managed agents 反复强调“基础设施才是 unlock”，尤其是 memory 组件、durable runtime、sandbox 和权限默认值。</li>
+  <li><strong>Demis Hassabis / DeepMind：</strong>把 AlphaGo 历史时刻和数学、科学等可验证领域连接起来，说明 DeepMind 的高层叙事仍偏长期研究突破，而不只是短期产品。</li>
+  <li><strong>Nathan Lambert：</strong>窗口内转发/回应 Thomas Wolf 关于 AISI 事件的观点，认为这值得写成文章；重点仍是模型在评测中与真实开源维护者互动带来的边界问题。</li>
+  <li><strong>François Chollet：</strong>窗口内谈到 Google 不应被低估，并延续其长期“算力需求/基础设施投资”判断；投资线索有参考价值，但不是技术新增。</li>
+  <li><strong>Hamel Husain：</strong>本窗口仅有低信息量反应帖，未纳入核心判断。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>Auto mode 安全清单：</strong>整理 Claude Code auto mode 的默认规则、hard deny/soft deny 思路、环境配置方式，并映射到本地 Codex/OpenClaw 自动化任务。</li>
+  <li><strong>Prompt injection 基线测试：</strong>做一组小测试：README、issue、网页、日志、PDF 中出现恶意指令时，agent 是否会外传文件、安装包、改配置或执行部署命令。</li>
+  <li><strong>Memory 分层设计：</strong>把长期偏好、项目资料、运行状态和临时抓取缓存分开，公开报告生成时只允许读取可公开转述的来源摘要和链接。</li>
+  <li><strong>可验证任务雷达：</strong>建立一个“可自动评分的 AI 应用方向”清单，优先观察数学、代码、仿真、审计、合规、科研自动化、EDA 和数据分析 agent。</li>
+  <li><strong>企业 agent 治理材料：</strong>把 GitHub MCP allowlist、LangSmith Gateway、Claude auto mode、OpenAI Astra cyber gating 归纳成一页客户可懂的治理框架。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>Anthropic 对 auto mode 的评估结果来自其公开说明与 Simon 的复盘；需要继续跟进第三方是否复现实验，尤其是真实仓库中的 prompt injection、data exfiltration 和 supply-chain 攻击样本。</li>
+  <li>Claude Code auto mode 在 Pro/Max/Team 默认开启后，企业管理员默认策略、组织级禁用方式、审计日志粒度和 API/平台差异仍需实测。</li>
+  <li>Harrison Chase 关于 memory 组件的讨论主要来自 X 公开帖和转发观点，产品细节需等待 LangChain/Managed Deep Agents 文档进一步公开。</li>
+  <li>Demis Hassabis 的 Move 37 动态是战略信号，不是具体研究发布；不应过度解读为 DeepMind 即将发布某个数学或科学产品。</li>
+  <li>Nitter 公开镜像可用性不稳定，X-only 内容均作为线索和人物动态处理；关键事实仍优先依赖源站页面、RSS 或官方文档。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Hamel Husain 的单词反应帖信息量不足，未作为趋势依据。</li>
+  <li>Simon 转发 agent 通过文件名通信的趣味案例有启发，但缺少可复核上下文，暂放低优先级。</li>
+  <li>François Chollet 的市场与基础设施投资判断有长期参考价值，但窗口内没有新增可操作技术信息。</li>
+  <li>GitHub Changelog 的普通 issue/project 字段、secret scanning 规则更新与今日 agent 主线关系较弱，未展开。</li>
+  <li>Google AI/Research、Interconnects 本窗口无新条目；不为了凑数复述旧文。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://claude.com/blog/auto-mode-default-in-claude-code">Claude by Anthropic · Auto mode is now the default in Claude Code for Pro, Max, and Team plans</a></li>
+  <li><a href="https://code.claude.com/docs/en/auto-mode-config">Claude Code Docs · Configure auto mode</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/8/auto-mode/">Simon Willison · Auto mode is now the default in Claude Code for Pro, Max, and Team plans</a></li>
+  <li><a href="https://nitter.net/simonw/status/2086220154468442496#m">Simon Willison · X mirror on auto mode and prompt injection</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/8/now-we-have-a-timeline-of-the-openai-accidental-attack-against-h/">Simon Willison · Timeline comment on OpenAI accidental attack against Hugging Face</a></li>
+  <li><a href="https://nitter.net/simonw/status/2085918487256654329#m">Simon Willison · X mirror on credential revocation detail</a></li>
+  <li><a href="https://nitter.net/hwchase17/status/2086111507826561438#m">Harrison Chase · standard-ish agent stack</a></li>
+  <li><a href="https://nitter.net/hwchase17/status/2086194208101273683#m">Harrison Chase · memory as an underexplored component</a></li>
+  <li><a href="https://nitter.net/hwchase17/status/2086211089487061045#m">Harrison Chase · separate brain from hands</a></li>
+  <li><a href="https://www.anthropic.com/engineering/managed-agents">Anthropic Engineering · Scaling Managed Agents: Decoupling the brain from the hands</a></li>
+  <li><a href="https://nitter.net/demishassabis/status/2085914742414061886#m">Demis Hassabis · AlphaGo Move 37 and verifiable domains</a></li>
+  <li><a href="https://nitter.net/natolambert/status/2086173605042561479#m">Nathan Lambert · AISI incident should be a blog post</a></li>
+  <li><a href="https://nitter.net/fchollet/status/2086069179589783615#m">François Chollet · Google should not be underestimated</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-07-github-copilot-weekly-releases-august-3">GitHub Changelog · Copilot weekly releases — August 3</a></li>
+  <li><a href="https://www.langchain.com/blog/introducing-llm-gateway">LangChain · LangSmith LLM Gateway</a></li>
+  <li><a href="https://openai.com/index/responding-next-frontier-critical-cyber-capabilities">OpenAI · Responding to the next frontier of critical cyber capabilities</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-08T00:00:00Z / 2026-08-09T00:00:00Z.</footer>
