@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ontology：企业 AI 落地的业务骨架</title>
+  <meta name="description" content="面向管理层解释 ontology 在企业 AI、FDE 和业务系统落地中的位置。">
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --paper: #ffffff;
+      --ink: #172033;
+      --muted: #5d6b80;
+      --line: #dce4ee;
+      --blue: #2356c4;
+      --teal: #087e8b;
+      --green: #2f855a;
+      --amber: #a86610;
+      --soft-blue: #eaf0ff;
+      --soft-teal: #e8f6f7;
+      --soft-amber: #fff5df;
+      --shadow: 0 18px 50px rgba(30, 43, 67, 0.10);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
+      line-height: 1.72;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(35, 86, 196, 0.10), rgba(35, 86, 196, 0) 380px),
+        var(--bg);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 64px 0 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 960px;
+      margin: 0;
+      font-size: clamp(34px, 5.6vw, 60px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 840px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.74);
+      padding: 6px 12px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 34px;
+      padding: 40px 0 72px;
+      align-items: start;
+    }
+
+    article {
+      display: grid;
+      gap: 22px;
+    }
+
+    section, aside, figure {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 28px;
+    }
+
+    figure {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+    }
+
+    figcaption {
+      padding: 12px 16px 14px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 25px;
+      line-height: 1.24;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    ul, ol {
+      margin: 10px 0 0;
+      padding-left: 1.2em;
+    }
+
+    li {
+      margin: 7px 0;
+    }
+
+    .lead {
+      font-size: 19px;
+      color: #27344a;
+    }
+
+    .callout {
+      border-left: 4px solid var(--teal);
+      background: var(--soft-teal);
+      padding: 16px 18px;
+      border-radius: 6px;
+      margin-top: 16px;
+      color: #173d45;
+      font-weight: 650;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .mini {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 15px;
+      background: #fbfdff;
+    }
+
+    .mini strong {
+      display: block;
+      color: var(--blue);
+      margin-bottom: 5px;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .step {
+      position: relative;
+      padding: 14px 14px 14px 48px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdff;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 14px;
+      top: 15px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+
+    .quote {
+      background: var(--soft-amber);
+      border-color: #f0d59f;
+      color: #53340d;
+      font-size: 20px;
+      font-weight: 750;
+      line-height: 1.5;
+    }
+
+    aside {
+      position: sticky;
+      top: 20px;
+      padding: 20px;
+    }
+
+    aside h2 {
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    aside a {
+      display: block;
+      padding: 8px 0;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    aside a:hover {
+      color: var(--blue);
+    }
+
+    .source-list {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+        order: -1;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        width: min(100% - 24px, 1120px);
+      }
+
+      header {
+        padding-top: 42px;
+      }
+
+      section {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">Enterprise AI · Ontology · FDE</p>
+      <h1>Ontology：企业 AI 落地的业务骨架</h1>
+      <p class="dek">为什么真正可用的企业 AI，不只是大模型，而是一套能理解业务、连接数据、驱动行动的系统。</p>
+      <div class="meta">
+        <span class="pill">老板版简报</span>
+        <span class="pill">2026-08-10</span>
+        <span class="pill">面向 FDE 与企业 AI 落地</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article>
+      <figure>
+        <img src="/assets/research/ontology-fde/ontology-fde-infographic.png" alt="Ontology 连接数据、对象、动作、AI Agent 与 FDE 的结构图">
+        <figcaption>Ontology 是业务对象、数据、动作、AI Agent 与 FDE 交付之间的结构化连接层。</figcaption>
+      </figure>
+
+      <section id="conclusion">
+        <h2>先说结论</h2>
+        <p class="lead">Ontology 可以理解成企业 AI 的“业务骨架”。</p>
+        <p>大模型负责理解语言，RAG 负责查找资料，知识图谱负责连接实体，而 ontology 负责定义企业业务世界里的对象、关系、规则、权限和动作。</p>
+        <p>如果没有 ontology，AI 很容易停留在“会聊天、会总结、会写报告”的层面；有了 ontology，AI 才可能进入真实业务流程，理解订单、客户、供应商、产品、风险、合同、设备之间的关系，并进一步支持决策和执行。</p>
+        <div class="callout">Ontology 是企业 AI 从“问答工具”走向“业务操作系统”的关键中间层。</div>
+      </section>
+
+      <section id="why">
+        <h2>为什么老板需要关心 Ontology？</h2>
+        <p>企业引入 AI 时，最容易被关注的是模型能力：哪个模型更强、回答更准、成本更低、速度更快。</p>
+        <p>但真正进入企业场景后，问题很快会变成：AI 知不知道我们公司里的“客户”是什么意思？知不知道订单和合同、库存、供应商之间的关系？能不能区分普通风险和关键客户风险？建议能不能追溯到证据？能不能在权限范围内触发动作？</p>
+        <p>这些问题，单靠大模型本身无法稳定解决。因为模型知道的是通用语言知识，而企业需要的是“本企业的业务结构”。Ontology 正是把这套业务结构沉淀下来，让 AI 能够围绕真实业务对象工作。</p>
+      </section>
+
+      <section id="definition">
+        <h2>Ontology 到底是什么？</h2>
+        <p>通俗地说，ontology 是一套“给机器看的业务世界说明书”。它主要定义五类东西：</p>
+        <div class="grid">
+          <div class="mini"><strong>业务对象</strong>客户、订单、产品、供应商、工厂、设备、合同、风险事件、财务指标。</div>
+          <div class="mini"><strong>对象属性</strong>客户有行业、地区、信用等级；订单有金额、交付日期、状态。</div>
+          <div class="mini"><strong>对象关系</strong>客户下订单，订单包含产品，产品依赖零部件，风险事件影响供应商。</div>
+          <div class="mini"><strong>业务规则与动作</strong>高价值订单优先处理；创建预警、触发审批、加急订单、生成报告。</div>
+        </div>
+        <p class="callout">Ontology 不只是“知识分类”，它更像是企业业务的可执行地图。</p>
+      </section>
+
+      <section id="example">
+        <h2>一个简单例子</h2>
+        <p>以 AI 产业链研究为例，我们可以定义公司、产品、供应链关系、事件和指标。</p>
+        <p>当出现一条新闻：“HBM 供应紧张可能影响高端 GPU 交付”，普通 AI 可能只能做新闻摘要。但如果有 ontology，系统可以进一步追踪：HBM 影响哪些 GPU？这些 GPU 由哪些公司生产？哪些云厂商依赖这些 GPU？哪些上市公司可能受到收入或成本影响？是否需要生成投资研究提醒？</p>
+        <p>这就是 ontology 的价值：它让 AI 不只是读懂一句话，而是能把这句话放进业务网络里。</p>
+      </section>
+
+      <section id="difference">
+        <h2>它和 RAG、知识图谱有什么区别？</h2>
+        <p>RAG 解决的是资料检索问题：用户问问题时，系统去文档库里找相关内容，再交给模型回答。</p>
+        <p>知识图谱解决的是关系连接问题：把公司、产品、人物、事件等实体用关系连起来，方便查询路径和影响链。</p>
+        <p>Ontology 解决的是业务语义问题：定义哪些对象存在、它们之间能有什么关系、哪些属性必须有、哪些动作可以执行、哪些规则必须遵守。</p>
+        <div class="grid">
+          <div class="mini"><strong>RAG</strong>像资料柜，帮助 AI 找资料。</div>
+          <div class="mini"><strong>知识图谱</strong>像关系网，告诉 AI 谁和谁有关。</div>
+          <div class="mini"><strong>Ontology</strong>像组织架构、业务流程和操作规则的合体。</div>
+          <div class="mini"><strong>企业 AI</strong>要从查资料升级到参与业务，就需要 ontology。</div>
+        </div>
+      </section>
+
+      <section id="fde">
+        <h2>在 FDE 工作中的位置</h2>
+        <p>如果把 FDE 理解成 Forward Deployed Engineer，也就是深入客户现场、把 AI 和软件系统交付到真实业务中的工程角色，那么 ontology 是 FDE 的核心工作之一。</p>
+        <p>FDE 面对的不是干净的教科书问题，而是混乱的真实系统：数据散在不同部门，字段口径不一致，业务流程依赖人，很多关键知识只存在于员工经验里。</p>
+        <p>FDE 要做的，是把这些现实问题翻译成可运行的软件系统。Ontology 正好位于 FDE 工作的中心：它连接业务理解、数据工程、软件工程和 AI 工程。</p>
+        <p class="callout">更准确地说，FDE 是把客户业务现实转化为 ontology，并基于 ontology 交付 AI 应用的人。</p>
+      </section>
+
+      <section id="moat">
+        <h2>为什么它能形成壁垒？</h2>
+        <p>模型可以换，前端可以重做，数据库也可以迁移，但高质量 ontology 不容易被复制。</p>
+        <p>原因是 ontology 沉淀的是客户真实业务的结构：哪些对象最重要，哪些关系决定风险，哪些流程影响收入，哪些规则来自管理经验，哪些动作真正能推动业务结果。</p>
+        <p>这些不是买一个模型就能得到的，也不是看几份文档就能自动生成的。它需要 FDE 和业务团队反复磨合，在真实使用中不断修正。一旦 ontology 成熟，它会变成企业 AI 系统的核心资产。</p>
+      </section>
+
+      <section id="system">
+        <h2>需要什么系统支撑？</h2>
+        <p>Ontology 不是一张图，也不是一份文档。要真正落地，需要一套系统支持。</p>
+        <div class="steps">
+          <div class="step"><strong>数据源层：</strong>连接 ERP、CRM、财务系统、Excel、数据库、文档、网页、API 和日志。</div>
+          <div class="step"><strong>数据处理层：</strong>负责清洗、去重、实体对齐、关系抽取、质量校验。</div>
+          <div class="step"><strong>Ontology 层：</strong>定义对象、属性、关系、规则、权限和动作。</div>
+          <div class="step"><strong>存储与查询层：</strong>存储对象和关系，支持图查询、语义查询、向量检索和证据追溯。</div>
+          <div class="step"><strong>应用与 AI 层：</strong>面向业务用户提供看板、搜索、问答、报告、预警、工作流和 Agent。</div>
+        </div>
+        <p style="margin-top:16px;">MVP 阶段可以先轻量实现：Postgres 存对象和关系，pgvector 存文档片段和向量，Python / FastAPI 提供对象查询和动作接口，LLM 负责信息抽取、解释和问答，前端提供对象视图、关系链路和风险看板。</p>
+      </section>
+
+      <section id="roadmap">
+        <h2>落地路线</h2>
+        <div class="steps">
+          <div class="step"><strong>选场景：</strong>不要先做大而全的企业知识库，而是选择一个高价值问题，比如供应链风险、客户流失、设备故障、销售预测、投研知识库。</div>
+          <div class="step"><strong>建对象：</strong>先定义 5 到 10 个核心对象。对象越少，越容易跑通。</div>
+          <div class="step"><strong>连关系：</strong>把对象之间最关键的关系连起来。关系链路决定 AI 是否能做推理。</div>
+          <div class="step"><strong>接数据：</strong>把真实系统中的数据映射到对象和关系上，解决字段口径、ID 对齐和数据质量问题。</div>
+          <div class="step"><strong>加 AI：</strong>让 AI 基于 ontology 做检索、问答、抽取、解释和建议，而不是直接对数据库和文档乱查。</div>
+          <div class="step"><strong>接动作：</strong>把预警、审批、分配、更新状态、生成报告等动作接进去，让 AI 进入工作流。</div>
+          <div class="step"><strong>持续迭代：</strong>根据业务使用反馈，不断修正对象、关系、规则和权限。</div>
+        </div>
+      </section>
+
+      <section id="management">
+        <h2>管理层应该关注什么？</h2>
+        <div class="grid">
+          <div class="mini"><strong>有没有覆盖关键业务对象？</strong>如果核心业务对象没定义清楚，AI 就无法稳定理解业务。</div>
+          <div class="mini"><strong>有没有打通关键关系？</strong>对象之间的关系，决定系统能不能做影响分析和推理。</div>
+          <div class="mini"><strong>有没有连接真实动作？</strong>如果只能查询和总结，价值有限；如果能进入预警、审批、派单、报告和决策流程，价值才会放大。</div>
+          <div class="mini"><strong>能不能持续演进？</strong>企业业务会变化，ontology 也必须能版本管理、权限控制、审计追踪和持续维护。</div>
+        </div>
+      </section>
+
+      <section class="quote" id="summary">
+        <h2>一句话给老板</h2>
+        <p>Ontology 是企业 AI 的业务操作地图。它让 AI 不只是会说话，而是知道业务对象是谁、关系是什么、风险在哪里、下一步该做什么。</p>
+      </section>
+
+      <section id="sources">
+        <h2>参考</h2>
+        <div class="source-list">
+          <p><a href="https://palantir.com/docs/foundry/ontology/overview/">Palantir Foundry Ontology 官方文档</a></p>
+          <p><a href="https://palantir.com/docs/foundry/action-types/overview/">Palantir Action Types 官方文档</a></p>
+          <p><a href="https://enterprise-knowledge.com/ontology-and-knowledge-graph-in-the-age-of-ai-and-agents/">Enterprise Knowledge: Ontology and Knowledge Graph in the Age of AI and Agents</a></p>
+        </div>
+      </section>
+    </article>
+
+    <aside>
+      <h2>目录</h2>
+      <a href="#conclusion">先说结论</a>
+      <a href="#why">为什么老板要关心</a>
+      <a href="#definition">Ontology 是什么</a>
+      <a href="#example">简单例子</a>
+      <a href="#difference">和 RAG、知识图谱的区别</a>
+      <a href="#fde">在 FDE 中的位置</a>
+      <a href="#system">系统支撑</a>
+      <a href="#roadmap">落地路线</a>
+      <a href="#management">管理层关注点</a>
+      <a href="#summary">一句话总结</a>
+    </aside>
+  </main>
+</body>
+</html>
