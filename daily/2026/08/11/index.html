@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：Cyber 模型治理、RLHF 教材与本地开放模型回潮</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时高信号集中在三条线：OpenAI 把 Daybreak 与 GPT-5.6-Cyber 推向授权防御场景，同时用 Texas 基建、AI-native finance 和企业案例包装落地叙事；Nathan Lambert 发布 RLHF/post-training 教材，补齐 post-training 系统知识；Simon Willison 与 Hugging Face 同时关注 Meta Muse Glimmer，显示本地、开放、多模态模型又回到开发者视野。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：Cyber 模型治理、RLHF 教材与本地开放模型回潮</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时高信号集中在三条线：OpenAI 把 Daybreak 与 GPT-5.6-Cyber 推向授权防御场景，同时用 Texas 基建、AI-native finance 和企业案例包装落地叙事；Nathan Lambert 发布 RLHF/post-training 教材，补齐 post-training 系统知识；Simon Willison 与 Hugging Face 同时关注 Meta Muse Glimmer，显示本地、开放、多模态模型又回到开发者视野。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-08-11</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年8月11日（周二）</strong> · 覆盖窗口：2026-08-10 08:00 – 2026-08-11 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、Interconnects RSS、Simon Willison Atom、Hugging Face Blog RSS、GitHub Changelog RSS、LangChain Blog RSS、Google Developers AI 搜索页抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天主线：cyber 能力从事故复盘转向“受控开放”</h4><p>OpenAI 在窗口内连发 Daybreak / GPT-5.6-Cyber 相关更新，把 frontier cyber 模型限定到授权漏洞研究、验证和受治理服务交付。这和前几天 Hugging Face 事件复盘形成连续线：行业不再只是讨论模型会不会越界，而是在设计哪些人、哪些任务、哪些审计条件下可以使用更强的 cyber capability。</p></div>
+  <div class="overview-item"><h4>Nathan Lambert：post-training 从经验活变成教材化知识</h4><p>Nathan 宣布 Manning 出版的 <em>Reinforcement Learning from Human Feedback: Aligning and Post-training LLMs</em> 已开始发货，并强调它源自 rlhfbook.com 的开放教材、课程、代码和练习。对 Follow List 来说，这不是普通新书，而是把 RLHF、reward models、PPO/GRPO/GSPO/CISPO、character training、on-policy distillation 等前沿模型后训练知识整理成可学习体系。</p></div>
+  <div class="overview-item"><h4>Meta Muse Glimmer：开放权重和本地模型重新进入开发者手边</h4><p>Simon Willison 与 Hugging Face 同日都记录了 Meta Muse Glimmer。Simon 关注 30B、Apache 2.0、本地 LM Studio 可运行；HF 标题则直接把它定位成 local、agentic、multimodal、open source。它不一定代表 Meta 已全面回到开放权重前沿，但说明“够强、够小、许可证干净、能本地跑”的模型仍有强吸引力。</p></div>
+  <div class="overview-item"><h4>GitHub Copilot：体验控制和 token 预算继续产品化</h4><p>GitHub Changelog 显示 Copilot Chat on github.com 增加最近会话、最小化/恢复、token spend 指示器。和 8 月 7 日 ROI dashboard、agent app activity metrics 连起来看，GitHub 正在把 agent 从“能做事”推向“可恢复、可计费、可解释给企业管理者”。</p></div>
+  <div class="overview-item"><h4>OpenAI 企业叙事：从模型能力转向组织函数改造</h4><p>OpenAI 同日发布 finance、Model ML、Zapier、Virgin Atlantic、ChatGPT Business premium seats、Texas AI infrastructure 等多条内容。共同信号是：OpenAI 正把产品故事从“模型更强”扩展为“财务、营销、客户旅程、基础设施和合规治理整套工作方式改变”。</p></div>
+  <div class="overview-item"><h4>抓取备注：X-only 覆盖仍有限</h4><p>Nitter/RSSHub 类公开镜像本轮仍不稳定，X-only 人物动态没有作为事实主来源。日报采用公开 RSS、博客、机构页和可打开原始链接；X 只作为后续补抓方向，不把不可访问帖子写成确定结论。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI：Daybreak 与 GPT-5.6-Cyber 把强 cyber 模型放进授权防御窗口</h3>
+<div class="card">
+  <div class="source"><span class="tag">Security / Frontier Models</span><strong>OpenAI</strong> · 2026-08-10 10:00 UTC · <a href="https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows">Expanding Daybreak as the Cyber Defense Window Narrows</a> / <a href="https://openai.com/index/putting-frontier-cyber-models-in-more-trusted-hands">Putting frontier cyber models in more trusted hands</a></div>
+  <div class="summary"><p>OpenAI 发布 GPT-5.6-Cyber，并把它放进 Daybreak Red 这类授权漏洞研究、exploit validation 和安全测试场景中。配套文章强调 approved partners、governed cybersecurity services 和 trusted hands，说明 OpenAI 试图把高风险能力通过身份、授权、任务边界和服务交付框架进行约束。</p><p>这和上周的 frontier cyber capabilities、安全评估和 Hugging Face 事件时间线直接相连。行业的问题不再是“强模型能不能做 cyber”，而是如何在防御窗口缩短时，让防御方能合法、可审计地拿到足够强的工具，同时不把攻击能力随意扩散。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 frontier labs 在安全事件后最关键的产品化动作：高能力 cyber model 不会简单消失，而是进入受控渠道、授权伙伴和审计框架。它会影响企业安全服务商、红队、模型评测、保险和合规采购。</div>
+  <div class="action">后续行动：建立 Daybreak / frontier cyber capability 观察表，记录访问资格、允许任务、审计方式、输出限制、合作伙伴名单、事故披露机制和与开放模型政策的关系。</div>
+</div>
+
+<h3>二、OpenAI：AI-native finance 把企业落地故事推向 CFO 和工作流层</h3>
+<div class="card">
+  <div class="source"><span class="tag">Enterprise / AI Work</span><strong>OpenAI</strong> · 2026-08-10 12:00-17:00 UTC · <a href="https://openai.com/index/building-an-ai-native-finance-function">What building an AI-native finance function taught me</a> / <a href="https://openai.com/index/model-ml">Model ML completes finance work more efficiently with GPT-5.6 Sol</a></div>
+  <div class="summary"><p>OpenAI CFO Sarah Friar 发布 AI-native finance function 经验，主题包括自动化预测、更强控制、AI ROI 和财务团队工作方式改变。同期 Model ML 案例强调用 GPT-5.6 Sol 贯穿研究、分析、可编辑 PowerPoint decks 和 Excel workbooks。</p><p>这条线比单个“客户成功案例”更重要，因为它把 AI 从个人生产力工具推进到财务函数、审计控制、资产产出和投资回报话术。OpenAI 正在面向 CFO、COO、业务负责人讲同一个故事：AI 不只是 chat，而是把可追踪产物嵌回 PowerPoint、Excel 和企业流程。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这对“AI 产业链与股票市场研究”有直接意义。企业 AI 采购的核心决策者会越来越问 ROI、控制、审计、产物可编辑性，而不是只看模型榜单。</div>
+  <div class="action">后续行动：跟踪 OpenAI enterprise case studies 是否持续强调 editable artifacts、controls、forecasting、ROI dashboard；可转化为 WorkBuddy 面向财务/运营的销售语言。</div>
+</div>
+
+<h3>三、Nathan Lambert：RLHF / post-training 教材发布，后训练知识进入可复用体系</h3>
+<div class="card">
+  <div class="source"><span class="tag">Post-training / Open Models</span><strong>Nathan Lambert / Interconnects</strong> · 2026-08-10 13:02 UTC · <a href="https://www.interconnects.ai/p/5-useful-things-youll-learn-in-my">5 useful things you'll learn in my new post-training textbook</a></div>
+  <div class="summary"><p>Nathan 宣布自己的 post-training 教材正式发货，书名为 <em>Reinforcement Learning from Human Feedback: Aligning and Post-training LLMs</em>，并说明它源自 rlhfbook.com 的开放内容。文章提到教材覆盖 rejection sampling、outcome reward models、character training、PPO、GRPO、GSPO、CISPO、on-policy distillation 等主题，还配有课程、代码和练习。</p><p>他的定位很清楚：这不是零基础读物，而是给已经具备 CS 背景、想理解现代 LLM post-training 的人建立直觉和历史脉络。尤其值得注意的是，Nathan 把现代 RL 讲成系统问题，围绕 off-policy 程度、训练-推理不匹配、throughput、actor/learner 分离等工程约束展开。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>post-training 是开放模型、frontier safety、agent 能力和企业定制之间的共同底座。过去很多知识散在论文、代码和传闻里，教材化会降低研究者和工程团队进入门槛。</div>
+  <div class="action">后续行动：把 rlhfbook.com 加入长期资源；优先读 reward models、policy gradients、character training、on-policy distillation 四块，并整理成中文学习路线。</div>
+</div>
+
+<h3>四、Meta Muse Glimmer：开放权重、本地运行、多模态 agent 重新获得注意力</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Local LLMs</span><strong>Simon Willison / Hugging Face</strong> · 2026-08-10 00:00 & 23:56 UTC · <a href="https://simonwillison.net/2026/Aug/10/introducing-muse-glimmer/">Simon: Introducing Muse Glimmer</a> / <a href="https://huggingface.co/blog/muse-glimmer">HF: Meta is back with Muse Glimmer</a></div>
+  <div class="summary"><p>Simon 记录 Meta 发布 Muse Glimmer，重点是 30B、Apache 2.0 license，以及可通过 LM Studio 的约 18GB 版本在本地机器上运行。他把它看作 Meta 回到开放权重游戏的一次重要信号，尤其许可证比旧 Llama 路线更清爽。</p><p>Hugging Face 同日以“local, agentic, multimodal, open source”定位该模型。结合 Follow List 的 open models / agents 主线，这类模型的意义不只是生成效果，而是让开发者在本地或私有环境里探索多模态 agent、低延迟交互、数据不出域和可控部署。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>开放模型竞争不只看 frontier 分数。对企业与个人开发者，干净许可证、可本地运行、足够小的内存需求、多模态能力，可能比“最强闭源模型”更快进入真实工作流。</div>
+  <div class="action">后续行动：用同一套 prompt 评估 Muse Glimmer 的中文、多模态、tool-use 和本地部署体验；和 Kimi/GLM/Qwen、本地 voice agent 栈做对照。</div>
+</div>
+
+<h3>五、Hugging Face：低延迟多语言 voice agents 与低成本蒸馏继续补齐工程栈</h3>
+<div class="card">
+  <div class="source"><span class="tag">Voice Agents / Distillation</span><strong>Hugging Face Blog</strong> · 2026-08-10 10:05 & 16:25 UTC · <a href="https://huggingface.co/blog/nvidia/magpie-tts-multilingual-voice-agents">NVIDIA Magpie TTS multilingual voice agents</a> / <a href="https://huggingface.co/blog/MultiverseComputingCAI/efficient-knowledge-distillation">Efficient knowledge distillation</a></div>
+  <div class="summary"><p>HF RSS 显示 NVIDIA Magpie TTS 文章强调 open weights、full deployment control 和 low-latency multilingual voice agents。另一篇 Multiverse ComputingCAI 的文章关注把 knowledge distillation 降到足够便宜、可规模化运行。</p><p>这两条不一定来自 Follow List 核心人物，但与 agent 工程非常贴近：一边是 voice agent 的部署控制和延迟，一边是把大模型能力压缩进更便宜模型的路径。它们共同指向“把智能从云端大模型搬进可控、低成本、特定场景运行时”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>如果企业要部署语音客服、销售陪练、现场助理或本地 agent，TTS/ASR 延迟、私有化部署、蒸馏成本会比通用聊天能力更早成为瓶颈。</div>
+  <div class="action">后续行动：补一张 voice agent 技术栈表：ASR、LLM、TTS、turn-taking、latency budget、部署边界、模型蒸馏和评测指标。</div>
+</div>
+
+<h3>六、GitHub Copilot：会话恢复与 token spend 可视化，把 agent 使用变成可管理体验</h3>
+<div class="card">
+  <div class="source"><span class="tag">Coding Agents / GitHub</span><strong>GitHub Changelog</strong> · 2026-08-10 14:27 UTC · <a href="https://github.blog/changelog/2026-08-10-copilot-on-web-expands-conversation-controls">Copilot on web expands conversation controls</a></div>
+  <div class="summary"><p>GitHub Copilot Chat on github.com 增加了最近会话入口、最小化聊天窗口并恢复进行中对话，以及 token spend indicators。用户可以在等待 Copilot 回复时继续浏览 GitHub，也能查看每个 session 和 message 的配额消耗。</p><p>这不是模型能力更新，但对高频 agent 产品很关键。会话恢复解决“长任务中断”，token spend 可视化解决“成本不可感知”，二者都让 Copilot 更像企业可管理工具，而不只是开发者临时聊天窗口。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>GitHub 正把 coding agent 的使用成本、状态和连续性前台化。对任何 agent 产品来说，用户要能恢复工作、看见成本、理解当前任务状态，否则很难规模化。</div>
+  <div class="action">后续行动：在 WorkBuddy / OpenClaw 类产品设计里加入 session resume、cost visibility、long-running status 和 per-task trace 四个基础控件。</div>
+</div>
+
+<h3>七、Simon Willison：OpenClaw gym-booking 案例提醒 agent 外部动作必须有权限边界</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Ethics / Agent Safety</span><strong>Simon Willison</strong> · 2026-08-10 02:05 UTC · <a href="https://simonwillison.net/2026/Aug/10/openclaw/">Quoting OpenClaw</a></div>
+  <div class="summary"><p>Simon 记录了 ABC 关于 OpenClaw 测试澳大利亚 gym-booking 网站的报道片段：站点 API 缺少取消他人预约的授权检查，测试者能够影响等待队列位置。日报不复述操作细节，只保留安全含义：agent 能发现并触达外部系统缺陷时，测试边界、授权、披露和“能不能继续点下去”都必须非常清楚。</p><p>这条和 OpenAI/Hugging Face cyber 事件同属一类问题，只是规模更贴近日常生活系统。agent 一旦被赋予浏览器、账号、网络请求和自动操作能力，低质量业务 API 的授权漏洞就会从“黑客问题”变成“普通自动化也可能踩到”的问题。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>它提醒我们，个人助理和企业 agent 不是只要“更聪明”就好。越接近真实账户和外部系统，越需要授权证明、动作确认、审计日志和停止条件。</div>
+  <div class="action">后续行动：给所有外部网站自动化任务增加四项检查：是否授权测试、是否会改变他人状态、是否有可回滚路径、是否需要先只读验证。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI Security：</strong>发布 GPT-5.6-Cyber / Daybreak Red 相关内容，把高能力 cyber 模型引入授权研究和受治理安全服务。</li>
+  <li><strong>OpenAI Enterprise：</strong>同日发布 AI-native finance、Model ML、Zapier、Virgin Atlantic、ChatGPT Business premium seats、Texas infrastructure 等多条企业/政策内容。</li>
+  <li><strong>Nathan Lambert：</strong>RLHF/post-training 教材开始发货，开放网站、课程、代码和练习继续可用。</li>
+  <li><strong>Simon Willison：</strong>关注 Meta Muse Glimmer 和 OpenClaw gym-booking 安全案例；前者是开放本地模型信号，后者是 agent 外部动作边界信号。</li>
+  <li><strong>Hugging Face：</strong>新增 Muse Glimmer、NVIDIA Magpie TTS 多语言 voice agents、低成本 knowledge distillation 文章。</li>
+  <li><strong>GitHub：</strong>Copilot on web 增加会话控制和 token spend indicators；印度 recurring payments 与 thread subscriptions 退场属于低相关平台更新。</li>
+  <li><strong>LangChain：</strong>RSS 本窗口无 8 月 10 日新增条目，8 月 7 日 Managed Deep Agents / LLM Gateway 仍作为 agent runtime 背景。</li>
+  <li><strong>Google Developers：</strong>AI 搜索页最新高相关仍是 8 月 6 日 Agent Plugins 1.0.0，窗口内无明确新增。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI：</strong>一天内把安全、企业函数、金融案例、基础设施和商业座席一起推送，显示它正在用多条内容线支撑“AI work / governed frontier capability”的市场叙事。</li>
+  <li><strong>Nathan Lambert：</strong>从开放模型研究者转向更强的教育与体系化输出，post-training 教材会成为后续很多讨论的共同参考。</li>
+  <li><strong>Simon Willison：</strong>继续作为 AI engineering 与安全边界观察者，既看本地模型，也看 agent 触碰外部世界时的权限问题。</li>
+  <li><strong>Hugging Face：</strong>继续承担开放模型和工程实践分发层角色，Muse Glimmer、voice agents、distillation 都服务于“可部署的开放生态”。</li>
+  <li><strong>GitHub：</strong>Copilot 的方向从 IDE 内补全扩大到跨会话、跨界面、可度量、可恢复的 agent 工作台。</li>
+  <li><strong>LangChain：</strong>本窗口安静，但过去一周的 Managed Deep Agents、LLM Gateway、evals 与 sandboxes 仍是生产化 agent 主背景。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>Daybreak / cyber model 治理表：</strong>跟踪访问资格、任务范围、审计方式、伙伴生态和事故披露。</li>
+  <li><strong>RLHF 学习路线：</strong>基于 rlhfbook.com 整理 reward models、policy gradients、PPO/GRPO/GSPO/CISPO、distillation、character training 中文笔记。</li>
+  <li><strong>Muse Glimmer 本地评测：</strong>测试中文、多模态、agent tool-use、许可证、内存占用和 LM Studio/私有部署体验。</li>
+  <li><strong>Voice agent stack：</strong>整理 ASR/LLM/TTS、turn-taking、latency budget、部署控制、蒸馏、voice evals 的工程清单。</li>
+  <li><strong>Agent 外部动作守则：</strong>把授权、是否改变第三方状态、可回滚性、确认阈值写进浏览器/网站自动化默认流程。</li>
+  <li><strong>Enterprise AI ROI 语料库：</strong>收集 OpenAI、GitHub、LangChain 关于 ROI、token spend、editable artifacts、controls 的表达，用于业务提案。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>GPT-5.6-Cyber / Daybreak 的实际访问条件、能力边界、评估数据和合作伙伴范围需要持续查官方更新，当前只按 OpenAI 公开 RSS 和页面摘要记录。</li>
+  <li>Muse Glimmer 的真实多模态与 agent 能力需要本地实测，不能仅凭 Simon/HF 标题判断强度。</li>
+  <li>Nathan 教材覆盖面很广，但具体章节质量、代码练习完整性和与最新 frontier post-training 实践的距离需要读后复核。</li>
+  <li>OpenAI enterprise case studies 中的效率、ROI 和业务影响指标属于公司发布材料，需要和第三方案例或实际部署经验交叉验证。</li>
+  <li>X-only 账号本轮覆盖不足；Kevin Weil、Alex Albert、Logan Kilpatrick、Jeff Dean、Demis Hassabis、Mira Murati 等 high-priority 人物如有 X 原帖，需要后续用稳定公开入口补抓。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub billing in India 与 Follow List 的 agent/evals/open model 主线相关度较低，仅作为平台商业化背景。</li>
+  <li>GitHub custom thread subscriptions deprecation 可能影响通知管理，但和本期主线弱相关，未展开。</li>
+  <li>OpenAI Zapier、Virgin Atlantic 案例与企业落地相关，但信息密度低于 finance / cyber 两条主线，放入背景而非核心卡片。</li>
+  <li>LangChain 8 月 7 日多篇文章前几期已覆盖，本期只保留生产化 agent runtime 背景，不重复铺开。</li>
+  <li>X 公开镜像失败或空结果不纳入事实；避免把不可核验转发、反应帖写入日报。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows">OpenAI · Expanding Daybreak as the Cyber Defense Window Narrows</a></li>
+  <li><a href="https://openai.com/index/putting-frontier-cyber-models-in-more-trusted-hands">OpenAI · Putting frontier cyber models in more trusted hands</a></li>
+  <li><a href="https://openai.com/index/building-an-ai-native-finance-function">OpenAI · What building an AI-native finance function taught me</a></li>
+  <li><a href="https://openai.com/index/model-ml">OpenAI · Model ML completes finance work more efficiently with GPT-5.6 Sol</a></li>
+  <li><a href="https://openai.com/index/responsible-ai-infrastructure-texas">OpenAI · Responsible AI infrastructure in Texas</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://www.interconnects.ai/p/5-useful-things-youll-learn-in-my">Nathan Lambert · 5 useful things you'll learn in my new post-training textbook</a></li>
+  <li><a href="https://rlhfbook.com/">RLHF Book</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/10/introducing-muse-glimmer/">Simon Willison · Introducing Muse Glimmer</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/10/openclaw/">Simon Willison · Quoting OpenClaw</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/muse-glimmer">Hugging Face · Meta is back with Muse Glimmer</a></li>
+  <li><a href="https://huggingface.co/blog/nvidia/magpie-tts-multilingual-voice-agents">Hugging Face / NVIDIA · Magpie TTS multilingual voice agents</a></li>
+  <li><a href="https://huggingface.co/blog/MultiverseComputingCAI/efficient-knowledge-distillation">Hugging Face · Efficient knowledge distillation</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-10-copilot-on-web-expands-conversation-controls">GitHub Changelog · Copilot on web expands conversation controls</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://developers.googleblog.com/en/search/?technology_categories=AI">Google Developers Blog · AI search page</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-10T00:00:00Z / 2026-08-11T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
