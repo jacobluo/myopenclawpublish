@@ -1,0 +1,166 @@
+---
+title: "Follow 深度日报：托管 agent、插件标准与企业数据边界"
+date: "2026-08-13"
+category: "daily"
+url: "/daily/2026/08/13/"
+summary: "Follow List 公开来源整理：过去 24 小时高信号集中在 agent 生产化的控制层。LangChain 把 Managed Deep Agents、BYOC 和生产观测推到企业运行时中心，GitHub 发布 Agent Plugins 1.0 的跨客户端落地，Claude 把本地 Cowork/Claude Code 会话纳入 Compliance API，OpenAI 用企业执行和 RingCentral 案例包装 ChatGPT Work/Codex 的组织落地，Hugging Face 侧则出现边缘视觉模型和 OlmoEarth embedding 两条垂直化信号。"
+---
+<div class="meta">
+  <strong>2026年8月13日（周四）</strong> · 覆盖窗口：2026-08-12 08:00 – 2026-08-13 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、LangChain Blog RSS、GitHub Changelog RSS、Claude Platform Release Notes RSS、Simon Willison Atom、Hugging Face Blog RSS、Interconnects RSS、ExplainX blog sitemap、AI 播客索引 JSON、公开 Nitter/X 镜像抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天主线：agent 进入“托管控制层”竞争</h4><p>本窗口里最密集的更新来自 LangChain、GitHub、Claude 和 OpenAI，方向高度一致：agent 不再只是模型循环加工具，而是运行时、权限、插件、记忆、审计、VPC 数据边界和组织策略的组合。上游模型能力还在进步，但企业真正采购的会越来越像“可治理的 agent 操作系统”。</p></div>
+  <div class="overview-item"><h4>插件标准开始跨客户端落地</h4><p>GitHub 宣布 Agent Plugins 1.0 已在 VS Code、Copilot CLI、Copilot SDK 和 Copilot app 中支持，并强调同一插件可同时携带 skill 与 MCP server。这个信号比单个插件市场更重要：agent 能力的包装格式正在从厂商私有配置走向可迁移资产。</p></div>
+  <div class="overview-item"><h4>企业数据边界成为 agent 平台卖点</h4><p>LangSmith BYOC on AWS GA，把 traces、datasets、prompts、agent deployments 和 sandbox data 留在客户 AWS/VPC 内；Claude Compliance API 则开始返回本地机器上 Cowork 与 Claude Code 会话的 transcript。一个强调数据不出边界，一个强调组织可以追溯本地 agent 行为，都是企业 adoption 的硬门槛。</p></div>
+  <div class="overview-item"><h4>OpenAI 正把“协助”改写成“执行”叙事</h4><p>OpenAI RSS 同日发布企业 agentic AI 研究与 RingCentral 案例，摘要都围绕 ChatGPT Work、Codex、工程到运营的执行和组织 intelligence。页面正文直接抓取被 JavaScript/cookie challenge 阻挡，因此本期只依据官方 RSS 摘要记录，并把细节列入待验证。</p></div>
+  <div class="overview-item"><h4>垂直模型信号：边缘视觉与地球观测 embedding</h4><p>Hugging Face 新增 Liquid AI 的 LFM2.5-VL-3B 和 Ai2 的 OlmoEarth embeddings。前者强调本地硬件上的文档、屏幕、grounding、多图和工具调用；后者把遥感 foundation model 的 embedding 导出给下游分析。这两条说明开放模型生态正在从“通用聊天”转向可部署、可行业化的专用能力。</p></div>
+  <div class="overview-item"><h4>抓取限制：X-only 本轮不进重点事实</h4><p>本轮按 Follow List 抽样 high-priority X 账号，但公开镜像不可用：nitter.net RSS 返回空，nitter.poast.org 与 xcancel 返回 403，nitter.privacydev.net 连接失败。为避免不可核验内容进入公开日报，本期人物动态主要来自作者博客、机构 RSS 和公开页面。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、LangChain：Managed Deep Agents 把 agent 运行时、记忆、沙箱和评测打包成平台</h3>
+<div class="card">
+  <div class="source"><span class="tag">Managed Agents / Runtime</span><strong>LangChain / Harrison Chase</strong> · 2026-08-13 00:00 UTC · <a href="https://www.langchain.com/blog/why-managed-agents-are-the-next-big-thing-in-agent-building">Why managed agents are the next big thing in agent building</a></div>
+  <div class="summary"><p>LangChain 在 Managed Deep Agents 发布后的长文里，把 agent 构建史拆成早期框架、LLM loop、agent harness 和 managed agent 几个阶段。文章的核心观点是：当模型已经能在循环里调用工具后，下一层价值来自 durable execution、sandbox、streaming、evals、memory、auth 和部署管理。</p><p>这和昨天的 Switchyard routing benchmark 组成连续叙事。LangChain 正在把自己从“开发框架”升级为 agent 生产平台：先定义 agent harness，再把运行、评测、成本、数据和安全边界托管起来。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>对企业 agent 来说，模型本身只是一部分。谁掌握运行时和观测数据，谁就能做质量改进、成本路由、权限控制和持续评测。</div>
+  <div class="action">后续行动：把 OpenClaw/WorkBuddy 的 agent runtime 拆成 durable execution、sandbox、memory、auth、eval、trace、budget 七层，逐项找缺口。</div>
+</div>
+
+<h3>二、GitHub：Agent Plugins 1.0 在 Copilot 客户端落地，skill + MCP 成为可迁移包</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Plugins / MCP / Skills</span><strong>GitHub Changelog</strong> · 2026-08-12 18:39 UTC · <a href="https://github.blog/changelog/2026-08-12-agent-plugins-1-0-in-vs-code-copilot-cli-and-the-copilot-app">Agent Plugins 1.0 in VS Code, Copilot CLI, and the Copilot app</a></div>
+  <div class="summary"><p>GitHub 宣布 Agent Plugins 1.0 已支持 VS Code、Copilot CLI、GitHub Copilot SDK 和 Copilot app，且覆盖所有 Copilot plans。官方描述的关键变化是：同一个插件包可以被多个兼容 agent client 发现和使用，并可同时封装 skill 与 MCP server。</p><p>迁移方式也很有信号：插件保留通用的 <code>plugin.json</code>、<code>skills/</code> 和 <code>mcp.json</code>，再把 Copilot 特有能力放到 namespaced 目录。也就是说，厂商差异被隔离在扩展命名空间里，基础能力则尽量标准化。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Agent 能力会越来越像软件包分发，而不是每个客户端重写一套工具描述。对团队来说，runbook、权限、MCP server 和技能说明可以变成可审计、可复用资产。</div>
+  <div class="action">后续行动：评估现有 OpenClaw skills 是否能映射到 Agent Plugins 1.0：哪些是纯 skill，哪些需要 MCP/server，哪些包含敏感配置不能公开分发。</div>
+</div>
+
+<h3>三、LangSmith BYOC：企业想要观测和评测，但不想把 traces 放出自己的云边界</h3>
+<div class="card">
+  <div class="source"><span class="tag">Enterprise Data Boundary / Observability</span><strong>LangChain</strong> · 2026-08-12 18:50 UTC · <a href="https://www.langchain.com/blog/langsmith-byoc-is-now-generally-available-on-aws">LangSmith BYOC on AWS is generally available</a></div>
+  <div class="summary"><p>LangSmith Bring Your Own Cloud 在 AWS 上 GA，面向 Enterprise 客户提供运行在客户 AWS 账号和 VPC 内的托管 LangSmith。文章明确列出 traces、datasets、experiments、prompts、agent deployments 和 sandbox data 等敏感数据留在客户环境内，同时 LangChain 负责监控、升级、扩缩容和集群生命周期。</p><p>这解决的是 agent 生产化的典型矛盾：没有 trace/eval/observability 很难改进 agent，但 trace 里常常有 PII、PHI、客户记录、内部 API 响应和工具输出，企业又不能随便把它们交给 SaaS。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>BYOC 是 agent 平台进入受监管行业的关键形态。未来很多 AI 工程工具的高阶版本都会变成“供应商运维、客户持有数据边界”。</div>
+  <div class="action">后续行动：给 WorkBuddy 的企业版准备一页数据边界方案：哪些日志在客户侧、哪些指标可汇总回传、如何做脱敏、删除和审计。</div>
+</div>
+
+<h3>四、Claude：Compliance API 覆盖本地 Cowork / Claude Code 会话，agent 治理深入终端</h3>
+<div class="card">
+  <div class="source"><span class="tag">Compliance / Local Agents</span><strong>Claude Platform Release Notes</strong> · 2026-08-11 00:00 UTC · <a href="https://platform.claude.com/docs/en/release-notes/overview#august-11-2026">Claude Platform release notes — August 11, 2026</a></div>
+  <div class="summary"><p>Claude Platform release notes 显示，Compliance API 现在 beta 支持返回用户本机上运行的 Cowork 和 Claude Code 会话 transcript，Enterprise 组织可以列出本地 session、读取 metadata 和 messages。它还新增 <code>anthropic-workspace-id</code> 响应头，帮助确认请求实际解析到的 workspace。</p><p>这是一个很强的治理信号。过去 agent 风险常集中在云端对话和 API 调用；现在 coding agent、终端 agent、本地会话也进入组织 compliance 视野，意味着“我在自己电脑上跑的 agent”不再天然是不可见区域。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业不会只问 agent 能做什么，还会问谁批准、谁看过、执行过哪些命令、泄露过什么上下文、出事后能不能追溯。</div>
+  <div class="action">后续行动：梳理本地 agent 的审计最小集：session metadata、tool calls、filesystem diff、network calls、prompt/memory 边界、用户确认记录。</div>
+</div>
+
+<h3>五、OpenAI：企业案例从“助手”转向“执行”，但页面细节需后续核验</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Enterprise Execution</span><strong>OpenAI News RSS</strong> · 2026-08-12 06:00 UTC / 00:00 UTC · <a href="https://openai.com/index/how-enterprises-put-ai-to-work">From assistance to execution</a> / <a href="https://openai.com/index/ringcentral">RingCentral case</a></div>
+  <div class="summary"><p>OpenAI 官方 RSS 在窗口内发布两条企业相关内容：一条是关于企业如何采用 agentic AI、使用 ChatGPT 和 Codex、以及 frontier firms 如何在 AI adoption 中拉开差距；另一条是 RingCentral 如何用 ChatGPT Work 和 Codex 加速 AI 产品开发，并把工程到运营的 operational intelligence 集中起来。</p><p>这延续了 OpenAI 最近几天的商业化节奏：ChatGPT 广告测试、Daybreak 上 AWS、AI-native finance 案例、企业执行案例同时出现。它们共同把 OpenAI 的产品叙事从“生成答案”推向“在组织里完成工作”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OpenAI 正在争夺企业工作流入口，而 Codex 是把知识工作和工程执行连接起来的关键产品线。</div>
+  <div class="action">后续行动：等页面可访问后核验具体客户指标、组织部署方式、Codex 使用场景、权限模型和 ROI 口径，避免只引用营销摘要。</div>
+</div>
+
+<h3>六、Hugging Face / Liquid AI：3B 级视觉语言模型瞄准本地硬件和屏幕理解</h3>
+<div class="card">
+  <div class="source"><span class="tag">Edge VLM / Tool Calling</span><strong>Liquid AI on Hugging Face</strong> · 2026-08-12 14:00 UTC · <a href="https://huggingface.co/blog/LiquidAI/lfm2-5-vl-3b">LFM2.5-VL-3B for Better and Faster Vision Capabilities for the Edge</a></div>
+  <div class="summary"><p>Liquid AI 发布 LFM2.5-VL-3B，定位是能在自有硬件上运行的视觉语言模型，强调文档、屏幕/UI 理解、grounding、多图输入和工具调用。文章称它用 SigLIP2 400M NaFlex vision encoder 搭配 LFM2.5-2.6B 文本 backbone，并通过更多视觉数据、扩展 tokenizer、SFT 和多奖励 RL 训练。</p><p>它的重要性不只在参数量，而在应用面：屏幕理解、对象定位和工具调用正是桌面 agent、移动端 agent、RPA 和边缘设备最需要的视觉能力。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>如果小型 VLM 足够理解 UI 和文档，本地 agent 就能减少截图上云、降低延迟，并更容易进入隐私敏感场景。</div>
+  <div class="action">后续行动：用几组真实 UI 截图、表格截图和多图任务测试 LFM2.5-VL-3B，同 Qwen/InternVL/Gemma 小模型比较速度、OCR 和 grounding。</div>
+</div>
+
+<h3>七、Ai2 OlmoEarth：遥感 embedding 让 foundation model 进入地理分析工作流</h3>
+<div class="card">
+  <div class="source"><span class="tag">Earth Observation / Embeddings</span><strong>Ai2 on Hugging Face</strong> · 2026-08-12 16:14 UTC · <a href="https://huggingface.co/blog/allenai/olmoearth-embeddings">Introducing OlmoEarth embeddings</a></div>
+  <div class="summary"><p>Ai2 在 Hugging Face 发布 OlmoEarth Studio 的 embedding export：用户可以为指定区域、时间范围、encoder、分辨率和影像来源计算地球观测 embedding，并以 Cloud-Optimized GeoTIFF 导出。官方示例覆盖相似区域搜索、few-shot segmentation、变化检测和无监督探索。</p><p>这是一条典型的垂直 foundation model 路径：不要求每个用户训练完整遥感模型，而是把 embedding 作为低成本入口，让行业分析者在自己的 GIS/数据流里复用模型表征。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>embedding export 可能成为很多行业 foundation model 的默认产品形态：模型厂商提供通用表征，客户围绕下游检索、分割、监测和告警构建业务系统。</div>
+  <div class="action">后续行动：把 OlmoEarth 放入“行业模型产品化”案例库，重点记录 embedding、fine-tuning、API/UI、COG 输出和开源权重之间的组合。</div>
+</div>
+
+<h3>八、Nathan Lambert：长文写作仍是 AI 科学能力的观测窗</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Scientific Writing</span><strong>Nathan Lambert / Interconnects</strong> · 2026-08-12 13:01 UTC · <a href="https://www.interconnects.ai/p/i-wrote-an-ai-textbook-how-long-until">I wrote an AI textbook — how long until AI can do it better?</a></div>
+  <div class="summary"><p>Nathan Lambert 在发布 post-training 教材后反思 AI 写作能力，观点比“AI 文风不好”更深：如果模型连成熟科学知识的长篇组织、压缩和表达都做不好，就很难相信它们马上能自主解决开放科学问题。文章把知识组织看成一种 compression，而 insight 需要这种 compression。</p><p>这对评估 research agent 很有启发。模型能检索、改写、补全，不等于能形成有层次、有取舍、有问题意识的教材级结构；而长期研究任务恰恰需要这种压缩和结构化能力。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Nathan 是开放模型/post-training 方向的重要观察者，这篇文章给出了一个实用评测角度：不要只看 benchmark，也看模型能否组织复杂知识并产生可读、可教、可复用的解释。</div>
+  <div class="action">后续行动：设计一个“长篇知识压缩”评测：给模型一组论文/博客/代码，让它生成教学章节，再由人类评价结构、取舍、事实密度和洞察质量。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>LangChain：</strong>Managed Deep Agents 叙事升级为下一阶段 agent building；LangSmith BYOC on AWS GA；同日还发布 AI agent 定义、生产监控、debug/evaluation 相关内容。</li>
+  <li><strong>GitHub：</strong>Agent Plugins 1.0 在 VS Code、Copilot CLI、Copilot SDK 和 Copilot app 中落地；组织级 rule insights 进入 public preview；前一天 Copilot JetBrains memory/Ollama 仍是背景主线。</li>
+  <li><strong>Claude：</strong>Compliance API beta 覆盖本地 Cowork / Claude Code session transcripts，并新增 workspace ID 响应头；这延续了此前 inference hooks、managed agent budgets、advisor 和 compliance transcript 的治理路线。</li>
+  <li><strong>OpenAI：</strong>官方 RSS 新增 enterprise execution 研究与 RingCentral 案例；页面正文抓取受阻，本期只记录 RSS 摘要和链接。</li>
+  <li><strong>Hugging Face：</strong>Liquid AI 发布 LFM2.5-VL-3B；Ai2 发布 OlmoEarth embeddings；IBM Research 的低 token ACE 文章仍与 agent cost/harness 效率相关。</li>
+  <li><strong>Nathan Lambert：</strong>Interconnects 发布 post-training 教材后的写作能力反思，把长文知识组织作为 AI 科学能力的侧面指标。</li>
+  <li><strong>ExplainX / AI 播客索引：</strong>ExplainX sitemap 仍停留在 8 月 8 日更新；AI 播客索引 JSON metadata 仍为 2026-07-02，未见本窗口新增。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Harrison Chase / LangChain：</strong>连续用 Managed Deep Agents、Switchyard、BYOC、monitor/debug/eval 内容占据 agent 生产化叙事中心。</li>
+  <li><strong>GitHub / Copilot：</strong>从 IDE 功能更新进一步推进到跨客户端插件标准和组织治理，正在把 agent 能力包装成开发者生态资产。</li>
+  <li><strong>Anthropic / Claude：</strong>路线明显偏企业治理：本地会话 transcript、workspace 标识、inference hooks、budget 和 advisor 都围绕可控 agent 运作。</li>
+  <li><strong>OpenAI：</strong>把 ChatGPT Work、Codex、Daybreak、企业案例和广告测试放在同一周密集推进，商业化与企业执行两线并行。</li>
+  <li><strong>Nathan Lambert：</strong>从 post-training 教材转向“AI 能否写出教材级解释”的能力反思，为 research agent 评估提供高质量问题。</li>
+  <li><strong>Hugging Face 生态：</strong>开放模型发布更偏行业和部署场景：边缘 VLM、遥感 embedding、voice agent、低 token harness、知识蒸馏成本。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>Agent Plugins 1.0 兼容性表：</strong>把 OpenClaw skills、MCP server、runbook、权限需求逐项映射到 GitHub 规范。</li>
+  <li><strong>企业 agent 审计最小集：</strong>定义本地/云端 session 都应该记录哪些 metadata、tool calls、diff、network calls 和用户确认。</li>
+  <li><strong>BYOC / self-host / SaaS 对照：</strong>做一页给客户看的 agent observability 部署选型，覆盖数据边界、运维责任、升级、成本和审计。</li>
+  <li><strong>小型 VLM UI 测试集：</strong>收集真实桌面、移动端、表格、PDF 和多图任务，测试边缘模型是否足够驱动本地 agent。</li>
+  <li><strong>行业 embedding 产品形态：</strong>从 OlmoEarth 提炼模式：基础模型、embedding export、fine-tuning、标准地理/行业格式、下游检索与变化检测。</li>
+  <li><strong>长篇知识压缩评测：</strong>用 Nathan 的问题设计 research agent 评测，看模型能否把复杂资料组织成教材级结构。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>OpenAI 两篇企业页面直接抓取返回 “Enable JavaScript and cookies to continue”，本期依据官方 RSS 摘要记录；客户指标、部署细节、ROI 和权限模型需后续核验。</li>
+  <li>GitHub Agent Plugins 1.0 的跨厂商兼容范围需要进一步读 spec 与 OpenAI/Vercel/Google/Anysphere 支持细节，尤其是安全权限和插件签名。</li>
+  <li>Claude Compliance API 返回本地 transcript 的默认保留期、用户告知方式、管理员可见边界和隐私设置需要查文档细节。</li>
+  <li>LangSmith BYOC 的 15 个 AWS region、具体网络拓扑、升级窗口、日志流向和备份责任边界需要从 enterprise docs 或销售资料确认。</li>
+  <li>LFM2.5-VL-3B 的 benchmark 需要实测验证，尤其是中文/非拉丁 UI、复杂表格、低分辨率截图和 tool calling 准确性。</li>
+  <li>公开 X/Nitter 镜像本轮不可用，因此 Kevin Weil、Alex Albert、Logan Kilpatrick、Jeff Dean、Jim Fan、Francois Chollet 等 X-only 更新未作为事实写入。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub rule insights、branch protection migration、release candidate 的通用治理更新有参考价值，但低于 Agent Plugins 和 Copilot memory/Ollama 主线。</li>
+  <li>LangChain 的“What is an AI agent?”更像基础教育内容，对新读者有用，但本期只保留其和 managed agent 叙事的背景作用。</li>
+  <li>Hugging Face 的 voice agent、知识蒸馏、Muse Glimmer 等仍值得跟踪，但不是本窗口新增最高信号。</li>
+  <li>OpenAI 广告测试舆论会继续发酵，本期不收录二手评论，只保留官方 RSS 已确认内容作为前情。</li>
+  <li>不可打开的 X 帖子、镜像 403 页面和搜索摘要不进入重点内容，避免把抓取噪音公开发布。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/why-managed-agents-are-the-next-big-thing-in-agent-building">LangChain · Why managed agents are the next big thing in agent building</a></li>
+  <li><a href="https://www.langchain.com/blog/langsmith-byoc-is-now-generally-available-on-aws">LangChain · LangSmith BYOC on AWS is generally available</a></li>
+  <li><a href="https://www.langchain.com/blog/what-is-an-agent">LangChain · What is an AI agent?</a></li>
+  <li><a href="https://www.langchain.com/blog/production-monitoring">LangChain · How to Monitor AI Agents in Production</a></li>
+  <li><a href="https://www.langchain.com/blog/agent-observability-powers-agent-evaluation">LangChain · How to Debug AI Agents</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-12-agent-plugins-1-0-in-vs-code-copilot-cli-and-the-copilot-app">GitHub · Agent Plugins 1.0 in VS Code, Copilot CLI, and the Copilot app</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-12-rule-insights-for-organizations-in-public-preview">GitHub · Rule insights for organizations in public preview</a></li>
+  <li><a href="https://platform.claude.com/docs/en/release-notes/feed.xml">Claude Platform Release Notes RSS</a></li>
+  <li><a href="https://platform.claude.com/docs/en/release-notes/overview#august-11-2026">Claude Platform · August 11, 2026 release notes</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/how-enterprises-put-ai-to-work">OpenAI · From assistance to execution</a></li>
+  <li><a href="https://openai.com/index/ringcentral">OpenAI · RingCentral case</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/LiquidAI/lfm2-5-vl-3b">Liquid AI / Hugging Face · LFM2.5-VL-3B</a></li>
+  <li><a href="https://huggingface.co/blog/allenai/olmoearth-embeddings">Ai2 / Hugging Face · OlmoEarth embeddings</a></li>
+  <li><a href="https://huggingface.co/blog/ibm-research/altk-evolve-sldd">IBM Research / Hugging Face · Thinking of ACE? We Can Do It with Fewer Tokens</a></li>
+  <li><a href="https://www.interconnects.ai/feed.xml">Interconnects RSS</a></li>
+  <li><a href="https://www.interconnects.ai/p/i-wrote-an-ai-textbook-how-long-until">Nathan Lambert · I wrote an AI textbook — how long until AI can do it better?</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-12T00:00:00Z / 2026-08-13T00:00:00Z.</footer>
