@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：Gemini 3.7 Flash、数据 agent 评测与 AI 可观测性并购</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时高信号集中在三条线。Google 推出 Gemini 3.7 Flash 并快速进入 Copilot，模型竞争开始转向 coding、web dev、企业自动化和价格节奏；Hamel Husain 与 Shreya Shankar 推出 Data Agent Benchmark，进一步把企业数据 agent 的失败模式具体化；Arize 被 Dynatrace 收购，说明 AI observability 和传统软件可观测性正在合流。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：Gemini 3.7 Flash、数据 agent 评测与 AI 可观测性并购</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时高信号集中在三条线。Google 推出 Gemini 3.7 Flash 并快速进入 Copilot，模型竞争开始转向 coding、web dev、企业自动化和价格节奏；Hamel Husain 与 Shreya Shankar 推出 Data Agent Benchmark，进一步把企业数据 agent 的失败模式具体化；Arize 被 Dynatrace 收购，说明 AI observability 和传统软件可观测性正在合流。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-08-14</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年8月14日（周五）</strong> · 覆盖窗口：2026-08-13 08:00 – 2026-08-14 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；公开 Nitter/X RSS 镜像抽样、OpenAI News RSS、GitHub Changelog RSS、LangChain Blog RSS、Hugging Face Blog RSS、Simon Willison Atom、Interconnects RSS、公开官网/新闻稿。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天主线：模型进步继续服务 agent 生产化</h4><p>Gemini 3.7 Flash 的发布不是单纯模型榜单新闻。Google、DeepMind、Logan Kilpatrick、Josh Woodward 和 GitHub Copilot 同时放大它在 coding、web development、knowledge work 和 enterprise automation 上的改进，说明“快、便宜、足够强的 workhorse 模型”正在成为 agent 平台的基础燃料。</p></div>
+  <div class="overview-item"><h4>数据 agent 的评测开始进入真实企业数据复杂度</h4><p>Hamel Husain 与 Shreya Shankar 推出/讲解 Data Agent Benchmark，重点不是让模型回答干净表格问题，而是复现真实数据仓库里的多系统、脏 join key、自由文本键值、模糊 schema 和业务问题歧义。这比传统 text-to-SQL 更接近企业落地难点。</p></div>
+  <div class="overview-item"><h4>AI observability 被传统可观测性平台吸收</h4><p>Arize 宣布将被 Dynatrace 收购。Hamel 转发的创始人长文把核心逻辑讲得很清楚：agent 系统与软件系统深度交织，prompt、skills、tools、代码、日志和 traces 正在合并成同一套可观测性问题。</p></div>
+  <div class="overview-item"><h4>“Kill My SaaS”像一场垂直软件压力测试</h4><p>swyx 的 1 万美元替代企业 SaaS 挑战持续发酵，多位开发者在几天内做出会议 CFP/议程系统替代品。它的启发不是“所有 SaaS 已死”，而是窄域 B2B 软件的护城河正在从 CRUD 功能转向数据、流程、信任、集成、维护责任和分发。</p></div>
+  <div class="overview-item"><h4>研究方向：test-time training 再次被拿出来讨论</h4><p>Francois Chollet 围绕 ARC Prize 和 test-time training 发帖，强调测试时适应可能是除搜索/符号工具外另一条利用 test-time compute 的路径。Nathan Lambert 也把 Gemini 3.7 Flash 的公开反馈视为模型迭代必须经历的过程。</p></div>
+  <div class="overview-item"><h4>抓取质量：X 镜像可读，但以交叉验证为准</h4><p>本轮 nitter.net RSS 可访问，覆盖 Follow List 中 30 个 active X 账号；日报仅收录有明确链接、时间戳和可解释价值的内容。对转推内容尽量追溯到原始官网、博客或新闻稿，避免把社交平台噪音当事实。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Gemini 3.7 Flash：Google 把 workhorse 模型拉回 coding/agent 战场</h3>
+<div class="card">
+  <div class="source"><span class="tag">Frontier Labs / Coding Model</span><strong>Logan Kilpatrick、Demis Hassabis、Josh Woodward / Google</strong> · 2026-08-13 17:04–21:36 UTC · <a href="https://nitter.net/OfficialLoganK/status/2087948481721962669#m">X 镜像</a> / <a href="https://github.blog/changelog/2026-08-13-gemini-3-7-flash-is-now-available-in-github-copilot">GitHub Changelog</a></div>
+  <div class="summary"><p>Logan Kilpatrick 宣布 Gemini 3.7 Flash 上线，强调速度快、价格比 3.6 Flash 低 50%（截至 2026 年底）、约三周内通过算法改进带来明显智能提升，并已进入 API、AI Studio、Antigravity 等入口。Demis Hassabis 进一步强调它在软件工程、web dev 和 knowledge work 上的升级；Josh Woodward 则转发放大了“快、便宜、三周迭代”的产品节奏。</p><p>同日 GitHub Changelog 确认 Gemini 3.7 Flash 已可在 GitHub Copilot 使用。这意味着 Google 的模型发布不只是自家 Gemini App/API 的动作，而是迅速进入开发者日常 IDE/agent 工具链，直接参与 coding agent 的模型路由竞争。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent 很多任务不需要最贵的 frontier 模型，而需要低延迟、低成本、足够稳定的工作模型。Gemini 3.7 Flash 如果能在 coding 和企业自动化上逼近高端模型，会影响 Copilot、LangChain、OpenClaw/WorkBuddy 这类平台的默认路由策略。</div>
+  <div class="action">后续行动：把 Gemini 3.7 Flash 加入 coding/web automation 基准：小 bug 修复、UI 生成、浏览器操作规划、长上下文业务问答、工具调用失败恢复；同时记录 2026 年底价格回调风险。</div>
+</div>
+
+<h3>二、Data Agent Benchmark：数据 agent 的难点不是 SQL，而是企业数据混乱</h3>
+<div class="card">
+  <div class="source"><span class="tag">Evals / Data Agents</span><strong>Hamel Husain、Shreya Shankar</strong> · 2026-08-13 20:07 UTC · <a href="https://nitter.net/HamelHusain/status/2087994596899028998#m">X 镜像</a> / <a href="https://hamel.dev/notes/llm/ai-product-engineering/evals-data-agents.html">Hamel notes</a></div>
+  <div class="summary"><p>Hamel 发布与 Shreya Shankar 的新 session，主题是 Data Agent Benchmark（DAB）。DAB 关注数据 agent 如何回答真实业务问题，例如哪个 cohort churn 最高；它刻意复现企业数据仓库中的麻烦：任务跨至少两个数据库系统、join key 不一致、键值藏在自由文本里、schema 模糊或定义不良。</p><p>Hamel 的时间戳显示讨论覆盖 data agent 是什么、大公司为什么自建、企业数据的四类破坏性挑战、frontier models 得分、五种失败模式、规划为何是最大失败点、semantic layer 策略和让 agent 清洗脏数据等。这是把“AI 数据分析师”从 demo 推向可评测工程问题的一步。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>WorkBuddy/FDE 类企业场景经常死在数据语义层：字段名、口径、权限、跨系统关系和业务定义。DAB 的价值在于把这些失败模式显性化，能反向指导产品架构，而不是只追求更强 text-to-SQL。</div>
+  <div class="action">后续行动：抽取 DAB 的任务结构，设计一套中文企业数据 mini-benchmark：ERP + CRM + Excel + 自由文本备注，测试 agent 是否会先澄清口径、构建 semantic layer，再执行查询。</div>
+</div>
+
+<h3>三、Arize + Dynatrace：AI observability 和软件 observability 合流</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Observability / M&A</span><strong>Arize AI、Dynatrace / Hamel 转发</strong> · 2026-08-13 10:11 UTC · <a href="https://nitter.net/aparnadhinak/status/2087844420922364148#m">X 镜像</a> / <a href="https://arize.com/blog/a-new-chapter-with-dynatrace/">Arize blog</a></div>
+  <div class="summary"><p>Arize 联合创始人 Aparna Dhinakaran 宣布 Arize 已与 Dynatrace 达成被收购的最终协议。她的长文把原因归结为 AI 系统和软件系统的边界正在消失：最好的通用 agent 往往是 coding agent，agent 的 skills 和 tools 是 prompt 与代码的混合体，控制 agent 的 prompt 存在代码库里，软件日志和 traces 也会被用来调试 AI 系统。</p><p>这不是单一公司的退出新闻，而是类别迁移信号。AI observability 从独立工具变成应用性能监控、日志、trace、代码和 agent 行为治理的一部分；Phoenix、OpenInference 等开源标准也可能被更大的企业可观测性平台吸收。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业不会长期为“LLM trace 工具”和“软件 observability 工具”维护两套孤岛。agent 真正上线后，模型输出、工具调用、代码变更、业务指标和告警需要在同一条因果链里被解释。</div>
+  <div class="action">后续行动：为 OpenClaw/WorkBuddy 做一张 observability schema：session、tool call、prompt version、code diff、业务对象、human approval、cost、latency、error taxonomy 如何关联。</div>
+</div>
+
+<h3>四、Kill My SaaS：AI 让窄域 B2B 软件进入可复制性压力测试</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Coding / Vertical SaaS</span><strong>swyx、Gene Kim、社区参赛者</strong> · 2026-08-13 00:01–07:12 UTC · <a href="https://nitter.net/swyx/status/2087799423774646316#m">swyx 更新</a></div>
+  <div class="summary"><p>swyx 的“Kill My SaaS”挑战继续产生大量提交：开发者尝试在一个周末内替代年费约 4 万美元的会议 CFP/议程管理软件。Gene Kim 描述自己用不到 24 小时构建了 CurtainCall CFP；其他提交包括 ProgramLoom、Unsession、open-speaker-operations 等，部分还强调 full sandbox、MCP/API docs、Cloudflare 部署和开源。</p><p>值得注意的是，社区讨论没有停在“vibe coding 很快”这一层。更深的问题是：如果一个窄域软件的功能可在几天内被克隆，客户真正购买的可能是稳定维护、流程知识、迁移成本、权限/审计、已有数据和组织信任。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这对 AI 产品创业和企业采购都有启发。AI 会压低垂直软件 MVP 的制作成本，但不自动解决长期运营责任；未来护城河可能更偏“业务流程 + 数据闭环 + 分发 + 信任”。</div>
+  <div class="action">后续行动：把“Kill My SaaS”作为 WorkBuddy 商业分析案例，拆解哪些 SaaS 模块适合 agent 迅速替代，哪些模块需要人、合规和系统集成兜底。</div>
+</div>
+
+<h3>五、test-time training：ARC 路线重新提醒模型适应能力的重要性</h3>
+<div class="card">
+  <div class="source"><span class="tag">Research Direction / ARC</span><strong>Francois Chollet</strong> · 2026-08-13 08:41–08:46 UTC · <a href="https://nitter.net/fchollet/status/2087821894581973426#m">X 镜像</a></div>
+  <div class="summary"><p>Francois Chollet 回顾 test-time training 在 ARC Prize 2024 中被推广，并指出 ARC 1/2 可能仍是 TTT 显著胜出的少数数据集。他进一步区分了两类 test-time compute：一种是自然语言推理/搜索，常配合 verifier 或 grader；另一种是 test-time training，用梯度在测试时做连续潜空间适应。</p><p>他的判断是，TTT 虽然工程上困难、昂贵，但潜力很大，因为它不是在离散符号空间里搜索，而是在模型内部表征上适应新任务。这与 ARC 对“高效泛化”的关注一致。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>当前 agent 热潮容易把 test-time compute 等同于多想几步、多调用工具。Chollet 的提醒是：真正的适应也可能发生在参数/表征层，而不是只发生在 prompt 和外部工具层。</div>
+  <div class="action">后续行动：跟踪 TTT 与 program synthesis/search/verifier 的组合路线，尤其关注它是否能在小模型、个人化 memory 或长期任务适应中变得工程可行。</div>
+</div>
+
+<h3>六、OpenAI：GPT-5.6 builder guide 与 Ultrafast mode 继续强化速度/执行叙事</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Developer Platform</span><strong>OpenAI News RSS</strong> · 2026-08-13 09:00–11:00 UTC · <a href="https://openai.com/index/builders-guide-to-gpt-5-6">Builder guide</a> / <a href="https://openai.com/index/previewing-ultrafast">Ultrafast mode</a></div>
+  <div class="summary"><p>OpenAI 官方 RSS 在窗口内发布 GPT-5.6 builder guide、GPT-5.6 Sol Ultrafast mode 预览，以及任命 Dali Rajic 为 Chief Revenue Officer。页面正文抓取仍可能受 JavaScript/cookie challenge 影响，因此本期只将官方 RSS 元数据作为确认来源，不展开未核验细节。</p><p>从最近几天的 OpenAI RSS 看，叙事连续性很强：企业执行、ChatGPT Work/Codex、AWS 上的 Daybreak、广告测试、GPT-5.6 Sol 速度模式和 CRO 任命，都是商业化与开发者平台并行推进。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>与 Gemini 3.7 Flash 类似，OpenAI 也在强调速度和可执行性。未来 agent 平台的模型选择不会只看“最聪明”，还会看吞吐、延迟、价格、工具调用可靠性和组织级产品入口。</div>
+  <div class="action">后续行动：等页面可访问后核验 GPT-5.6 builder guide 的具体迁移建议、Ultrafast mode 的限制、速度/质量 trade-off 和适合场景。</div>
+</div>
+
+<h3>七、Hugging Face：机器人数据闭环与大规模论文复现</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Source / Robotics / Reproducibility</span><strong>Hugging Face Blog</strong> · 2026-08-13 00:00–17:16 UTC · <a href="https://huggingface.co/blog/amazon/strands-lerobot-streaming-data-loop">Strands + LeRobot</a> / <a href="https://huggingface.co/blog/icml-2026-open-reproductions">ICML open reproductions</a></div>
+  <div class="summary"><p>Hugging Face RSS 本窗口新增两条值得留意的内容：Amazon 的 Strands Agents、LeRobot 和 Hugging Face Storage Buckets 打通机器人数据采集、训练和部署闭环；另一篇总结复现 2,200 篇 ICML 论文的经验，强调开放复现与研究工程化。</p><p>这两条都不是纯模型发布，而是把 AI 能力落到“数据流和工程流”上：机器人需要持续采集与训练闭环，科研需要可复现流水线和共享工件。它们与 agent 生产化主线一致：系统能力越来越依赖流程、数据和工具链。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>开源 AI 的竞争点正在从单个 checkpoint 扩展到完整工件链：数据、训练脚本、bucket、eval、复现报告和部署接口。</div>
+  <div class="action">后续行动：跟踪 LeRobot 数据闭环是否能复用到低成本机器人/具身 agent demo；把 ICML 复现经验纳入研究自动化工作流设计。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Google / Gemini：</strong>Gemini 3.7 Flash 发布，官方人物强调速度、价格和 coding/web/enterprise automation 改进；GitHub Copilot 同日接入。</li>
+  <li><strong>Hamel / Shreya：</strong>Data Agent Benchmark 把评测目标推向真实企业数据仓库复杂度，重点关注多系统、脏键、模糊 schema 和 agent 规划失败。</li>
+  <li><strong>Arize / Dynatrace：</strong>AI observability 平台 Arize 宣布被 Dynatrace 收购，agent trace 与软件 observability 合流成为明确趋势。</li>
+  <li><strong>swyx 社区：</strong>Kill My SaaS 挑战继续产生多款开源/可部署替代品，垂直 SaaS 的复制成本与真实护城河被公开压力测试。</li>
+  <li><strong>Francois Chollet：</strong>围绕 ARC Prize 重申 test-time training 的潜力，把 test-time compute 讨论从语言推理/搜索扩展到梯度适应。</li>
+  <li><strong>OpenAI：</strong>RSS 新增 GPT-5.6 builder guide、Ultrafast mode 和 CRO 任命；正文细节待页面可访问后核验。</li>
+  <li><strong>Hugging Face：</strong>新增机器人数据闭环与 ICML 论文复现内容，延续开源模型生态从 checkpoint 走向工程工件链的趋势。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Logan Kilpatrick / Josh Woodward / Demis Hassabis：</strong>共同放大 Gemini 3.7 Flash 的速度、价格、coding 和应用集成信号，Google AI 的节奏明显加快。</li>
+  <li><strong>Simon Willison：</strong>对 Gemini 3.7 Flash 的“introductory pricing”提出观察：价格计划 2026 年底翻倍，但模型迭代速度可能让五个月后的使用预期变得不确定。</li>
+  <li><strong>Hamel Husain：</strong>一边推进 DAB/data agent eval，一边转发 Arize 并购和开源模型部署讨论，焦点集中在 AI 工程质量与生产化。</li>
+  <li><strong>Shreya Shankar：</strong>通过 DAB 把 AI data analyst 的评测问题拉回企业数据系统真实复杂度；也转发 CMUDB 新 seminar series，值得纳入数据库/数据系统关注池。</li>
+  <li><strong>swyx：</strong>通过 Kill My SaaS 把 AI coding、eval harness、窄域 SaaS、开源替代和商业可行性放到同一个公开实验场。</li>
+  <li><strong>Nathan Lambert：</strong>评价 Google 公开发布并接受反馈是正确路径；这延续他对开放模型/公开迭代生态的关注。</li>
+  <li><strong>Francois Chollet：</strong>继续推动 ARC、efficient generalization 和 test-time adaptation 讨论，提供不同于 scaling-only 的研究视角。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>模型路由基准：</strong>把 Gemini 3.7 Flash、GPT-5.6 Sol、Claude、开源模型放入同一组 coding/agent/workflow 测试，按质量、延迟、价格和失败恢复评分。</li>
+  <li><strong>中文企业 DAB：</strong>构建一个小型中文数据 agent benchmark，覆盖 ERP/CRM/Excel/自由文本备注/模糊业务口径。</li>
+  <li><strong>Agent observability schema：</strong>把 Arize/Dynatrace 信号转化为 OpenClaw/WorkBuddy 的 trace、tool call、prompt version、代码 diff、审批与业务结果数据模型。</li>
+  <li><strong>垂直 SaaS 替代清单：</strong>用 Kill My SaaS 的案例框架，评估哪些客户内部工具适合 agent 快速重建，哪些必须保留成熟 SaaS。</li>
+  <li><strong>TTT 研究跟踪：</strong>跟进 ARC、test-time training、test-time search、verifier、program synthesis 的组合路线，关注工程可行性。</li>
+  <li><strong>机器人数据闭环：</strong>测试 LeRobot + storage bucket + agent workflow 是否能做成低成本具身智能采集/训练 demo。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>Gemini 3.7 Flash 的具体 benchmark、价格表和“年底后价格翻倍”细节需要从 Google AI/Vertex/GitHub 文档逐项核验；本期主要依据官方人物 X、GitHub Changelog 和公开发布链接。</li>
+  <li>DAB 的完整数据集、leaderboard、任务许可和评测脚本需要进一步读取 Hamel notes、视频和论文/仓库，以确认可复用范围。</li>
+  <li>Arize/Dynatrace 交易金额、交割条件、Phoenix/OpenInference 后续治理和产品整合路线需以后续公告为准。</li>
+  <li>OpenAI GPT-5.6 builder guide 与 Ultrafast mode 页面正文抓取可能受 JS/cookie challenge 影响，本期仅记录 RSS 确认的标题、时间和链接。</li>
+  <li>Kill My SaaS 参赛项目质量、长期可维护性、安全性和真实客户迁移成本尚未验证；公开演示不能直接等同生产替代。</li>
+  <li>TTT 在 ARC 外的泛化效果仍不明确，Chollet 的发帖应视为研究判断和方向提示，不是产业落地结论。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub 的 license data、评论屏蔽、组织规则等治理更新有日常价值，但本期低于 Gemini 3.7 Flash 接入 Copilot。</li>
+  <li>Gemini 发布后的转发、祝贺、表情和 meme 类内容不收录，只保留能指向产品能力、价格、入口或生态影响的内容。</li>
+  <li>Kill My SaaS 的大量单项目宣传容易过载，本期只提炼为“窄域 SaaS 可复制性压力测试”主题，不逐一评测每个项目。</li>
+  <li>Hamel 转发的写作建议、CMUDB seminar 等有参考价值，但不属于今天 AI agent/模型/工程主线。</li>
+  <li>无法交叉验证的 X-only 断言不进入重点事实；转推内容尽量追溯到原文、官网或仓库。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://nitter.net/OfficialLoganK/status/2087948481721962669#m">Logan Kilpatrick · Gemini 3.7 Flash announcement (Nitter mirror)</a></li>
+  <li><a href="https://nitter.net/demishassabis/status/2087950102455271765#m">Demis Hassabis · Gemini 3.7 Flash comment (Nitter mirror)</a></li>
+  <li><a href="https://nitter.net/joshwoodward/status/2088016871710957587#m">Josh Woodward · Gemini 3.7 Flash repost/comment (Nitter mirror)</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-13-gemini-3-7-flash-is-now-available-in-github-copilot">GitHub Changelog · Gemini 3.7 Flash is now available in GitHub Copilot</a></li>
+  <li><a href="https://nitter.net/simonw/status/2087964264275587565#m">Simon Willison · Gemini 3.7 Flash pricing observation (Nitter mirror)</a></li>
+  <li><a href="https://nitter.net/HamelHusain/status/2087994596899028998#m">Hamel Husain · Data Agent Benchmark session (Nitter mirror)</a></li>
+  <li><a href="https://hamel.dev/notes/llm/ai-product-engineering/evals-data-agents.html">Hamel notes · Evals for data agents</a></li>
+  <li><a href="https://nitter.net/sh_reya/status/2088001415478468999#m">Shreya Shankar · DAB presentation note (Nitter mirror)</a></li>
+  <li><a href="https://nitter.net/aparnadhinak/status/2087844420922364148#m">Aparna Dhinakaran · Arize/Dynatrace announcement (Nitter mirror)</a></li>
+  <li><a href="https://arize.com/blog/a-new-chapter-with-dynatrace/">Arize · A new chapter with Dynatrace</a></li>
+  <li><a href="https://nitter.net/swyx/status/2087799423774646316#m">swyx · Kill My SaaS update (Nitter mirror)</a></li>
+  <li><a href="https://nitter.net/RealGeneKim/status/2087774049145626928#m">Gene Kim · CurtainCall CFP / Kill My SaaS post (Nitter mirror)</a></li>
+  <li><a href="https://nitter.net/maddiedreese/status/2087780053170163849#m">ProgramLoom submission (Nitter mirror)</a></li>
+  <li><a href="https://nitter.net/cvolzer/status/2087751774572601483#m">Unsession submission (Nitter mirror)</a></li>
+  <li><a href="https://nitter.net/fchollet/status/2087821894581973426#m">Francois Chollet · test-time training note (Nitter mirror)</a></li>
+  <li><a href="https://nitter.net/fchollet/status/2087822673204113680#m">Francois Chollet · test-time compute/search/training note (Nitter mirror)</a></li>
+  <li><a href="https://nitter.net/natolambert/status/2087966826110353796#m">Nathan Lambert · Google shipping/public feedback note (Nitter mirror)</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/builders-guide-to-gpt-5-6">OpenAI · The builder's guide to GPT-5.6</a></li>
+  <li><a href="https://openai.com/index/previewing-ultrafast">OpenAI · Previewing Ultrafast mode</a></li>
+  <li><a href="https://openai.com/index/dali-rajic-chief-revenue-officer">OpenAI · Dali Rajic Chief Revenue Officer</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/why-managed-agents-are-the-next-big-thing-in-agent-building">LangChain · Why managed agents are the next big thing in agent building</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/amazon/strands-lerobot-streaming-data-loop">Hugging Face · Strands Agents, LeRobot, and Storage Buckets</a></li>
+  <li><a href="https://huggingface.co/blog/icml-2026-open-reproductions">Hugging Face · Reproducing 2,200 papers from ICML</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://www.interconnects.ai/feed.xml">Interconnects RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-13T00:00:00Z / 2026-08-14T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
