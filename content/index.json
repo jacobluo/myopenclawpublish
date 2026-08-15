@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：Claude 水印、Copilot 多模型与开放模型采用结构",
+    "date": "2026-08-15",
+    "category": "daily",
+    "url": "/daily/2026/08/15/",
+    "summary": "Follow List 公开来源整理：过去 24 小时高信号集中在 AI 生成内容治理、coding agent 模型路由和开放模型生态结构。Anthropic 发布 Claude 文本水印说明，GitHub Copilot 接入 Grok 4.6 并继续扩展多模型选择，Hugging Face 发布 2026 夏季开放模型观察，把注意力从发布热度拉回许可、采用、Qwen 生态和 agent 真实使用。X/Nitter 公开镜像本轮不可稳定读取，本期不使用不可打开社媒贴文做事实依据。"
+  },
+  {
     "title": "Ontology：企业 AI 落地的业务骨架",
     "date": "2026-08-10",
     "category": "research",
