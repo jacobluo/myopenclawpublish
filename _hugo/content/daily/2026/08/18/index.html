@@ -1,0 +1,135 @@
+---
+title: "Follow 深度日报：Agent 支付、GPU 调度与 AI 训练数据供应链"
+date: "2026-08-18"
+category: "daily"
+url: "/daily/2026/08/18/"
+summary: "Follow List 公开来源整理：过去 24 小时高信号集中在 LangChain/AWS AgentCore Payments 把 agent 从调用工具推进到可控交易，Hugging Face 上的 GPU 调度实验提醒算力瓶颈很大一部分是编排问题，Simon Willison 转述 404 Media 对稀缺图书进入 Amazon AI 训练设施的调查，显示训练数据供应链和版权伦理继续升温。"
+---
+<div class="meta">
+  <strong>2026年8月18日（周二）</strong> · 覆盖窗口：2026-08-17 08:00 – 2026-08-18 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Simon Willison Weblog Atom；LangChain Blog RSS；Hugging Face Blog RSS；GitHub Changelog RSS；Lilian Weng RSS；explainx.ai blog sitemap；AI 播客索引结构化 JSON；公开 X/Nitter 镜像健康检查。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。OpenAI News、Interconnects、Chip Huyen、Eugene Yan RSS 本轮返回 403 或不可用；Nitter RSS 本轮 200 但正文为空，未作为事实主来源。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Agent 正在获得“受控支付”能力</h4><p>LangChain 8 月 17 日发布 AgentCore Payments middleware，把 agent 遇到 HTTP 402 付费资源时的授权、签名、预算限制和重试封装进运行时。这个变化比单纯工具调用更进一步：agent 不只是读写 API，还开始进入带预算、身份和审计的交易链路。</p></div>
+  <div class="overview-item"><h4>算力问题不只靠买卡，也靠调度</h4><p>Hugging Face 8 月 17 日刊登 Dharma-AI 的 GPU 管理实验，同一集群、同一硬件，仅改变分配顺序，最高提升 33 个百分点 GPU 利用率，优先级加权产出最高提升 105%。这对 AI infra 很现实：利用率、队列策略和任务形状匹配，是成本曲线的一部分。</p></div>
+  <div class="overview-item"><h4>训练数据供应链继续成为公众议题</h4><p>Simon Willison 转述 404 Media 对稀缺图书流向 Amazon AI 训练设施的调查。重点不只是“书被扫描”，而是二手书、稀缺书、物流追踪、平台采购和训练数据之间形成了不透明供应链，版权和文化保存问题会继续发酵。</p></div>
+  <div class="overview-item"><h4>开放模型热度延续，但本窗口少新一手发布</h4><p>Hugging Face 的 open models 夏季观察仍是本周背景，Qwen/GLM 等开放模型继续牵引讨论；但今天窗口内新增重点更偏 infra 和 agent runtime，不宜重复昨天的 Qwen 主线。</p></div>
+  <div class="overview-item"><h4>X 抓取仍不可靠，报告主链路应转向可审计源</h4><p>Nitter 主站对多位 high priority handle 的 RSS 返回 200 但空正文，其他镜像多为 403。今天继续用公开网页、RSS、博客和源站作为主依据；X 页面只保留为低置信辅助线索。</p></div>
+  <div class="overview-item"><h4>今天的关键词：交易、调度、来源治理</h4><p>agent 支付解决“怎么让 agent 花钱”，GPU 调度解决“怎么让任务不浪费卡”，训练数据调查解决“模型背后的材料从哪里来”。三条线共同指向一个事实：AI 产品竞争越来越多发生在模型之外的运行系统和供应系统。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、AgentCore Payments：agent 开始进入可控交易层</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Runtime / Commerce</span><strong>LangChain / AWS AgentCore</strong> · 2026-08-17 14:52 UTC · <a href="https://www.langchain.com/blog/langchain-agentcore-payments">LangChain Blog</a> · <a href="https://docs.langchain.com/oss/python/integrations/middleware/aws">LangChain docs</a></div>
+  <div class="summary"><p>LangChain 发布 AgentCore Payments middleware，用于让 LangGraph/LangChain agent 在访问付费 API、MCP server、网页内容或其他 agent 时处理付款要求。文档显示，当工具返回 HTTP 402 时，中间件会识别支付需求，通过 Amazon Bedrock AgentCore Payments 签名，并受 session budget 限制后重试请求。</p><p>这把 agent 的边界从“会调用工具”推进到“能在预算和策略约束下完成交易”。真正有价值的部分不是自动付款本身，而是把付款凭据、限额、重试、可观测性和治理从业务代码中抽出来，变成运行时能力。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>agentic commerce 会迫使平台回答几个硬问题：谁授权、花多少钱、买了什么、失败怎么回滚、审计怎么做。对于企业 agent，支付能力和权限治理会一起出现，不能只做“工具调用成功”的 demo。</div>
+  <div class="action">后续行动：为 WorkBuddy/OpenClaw 设计“外部付费动作”策略草案：默认禁止，白名单资源可预算内执行，高金额或新商户必须人工确认，所有付款动作记录 trace 和业务原因。</div>
+</div>
+
+<h3>二、GPU 管理：同样的硬件，调度顺序能改变产出</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Infrastructure / GPU Scheduling</span><strong>Dharma-AI Team on Hugging Face</strong> · 2026-08-17 19:46 UTC · <a href="https://huggingface.co/blog/Dharma-AI/gpu-management-pt2">Hugging Face Blog</a></div>
+  <div class="summary"><p>Dharma-AI 在 Hugging Face 发布 GPU management 系列第二篇，比较 FIFO 调度与 constraint-aware GPU allocator。文章称在相同硬件和工作负载下，改变分配决策顺序后，GPU 利用率最高提升 33 个百分点，优先级加权产出在全部 benchmark 场景中提升，最高达 105%。</p><p>它强调的核心问题是异构任务形状：实时推理、短训练、长训练、单卡、多卡任务会争夺同一批 GPU；同一模型的训练 job 也可能从几小时到几天、从一张卡到几十张卡。简单 FIFO 在高竞争下会让资源碎片化和高优任务排队变严重。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>算力成本不是只看 GPU 单价。agent 平台、模型训练平台和企业私有 AI 集群都需要调度策略，把优先级、任务形状、SLA、预约资源和空闲填充一起考虑。</div>
+  <div class="action">后续行动：把“利用率提升来自调度”加入 AI infra 研究框架；后续跟踪 Run:ai、Kubernetes GPU operator、SkyPilot、Ray、Modal、Baseten、HF Inference 等调度和队列策略。</div>
+</div>
+
+<h3>三、训练数据供应链：稀缺图书进入 AI 训练设施的调查值得警惕</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Data / Copyright</span><strong>Simon Willison 转述 404 Media</strong> · 2026-08-17 15:21 UTC · <a href="https://simonwillison.net/2026/Aug/17/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-tra/">Simon Willison Weblog</a></div>
+  <div class="summary"><p>Simon Willison 转述 404 Media 的调查：记者追踪一批稀缺图书，最终发现它们流向 Amazon 的 AI training facility。Simon 把这件事放在近一年关于图书扫描、AI 训练数据和 Anthropic 图书相关诉讼的脉络里看。</p><p>这类报道的信号价值在于“训练数据采购”开始被当作供应链调查对象，而不是抽象版权争论。二手书商、匿名大额订单、物流追踪、扫描设施和模型训练之间的关系，会影响公众对模型公司数据来源的信任。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI 数据治理不只是法律条款，也包括来源透明度、稀缺材料保护、创作者补偿和品牌风险。企业采购模型时，未来可能会更关心训练数据 provenance，而不仅是模型性能。</div>
+  <div class="action">后续行动：为 AI 产业链研究增加“训练数据供应链”维度：数据来源、授权方式、扫描/清洗设施、版权风险、公开诉讼、供应商和平台角色。</div>
+</div>
+
+<h3>四、Markdown SVG upgrades：AI 工具链里的小改动也会改变交付体验</h3>
+<div class="card">
+  <div class="source"><span class="tag">Developer Tools / Documentation</span><strong>Simon Willison</strong> · 2026-08-16 23:59 UTC，接近本窗口边界 · <a href="https://simonwillison.net/2026/Aug/16/markdown-svg-upgrades/">Simon Willison Weblog</a></div>
+  <div class="summary"><p>Simon 在窗口边界附近发布 Markdown SVG upgrades，虽严格按 UTC 早于本次窗口几十秒，但适合作为低权重延续线索。它关注 Markdown 与 SVG 展示/升级这类文档工具细节，属于 AI coding 和技术写作工作流中的“交付体验”层。</p><p>这类小工具不一定构成日报主线，却常常决定 agent 产出的可读性：研究图、架构图、评测图表、交互式说明页如果能更稳地嵌入文档，就能减少报告和工程交付之间的摩擦。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI agent 写代码之外，还要生成解释、图表和可审阅材料。Markdown/SVG/HTML 这类基础表达层的改进，会直接影响人类审核和客户交付效率。</div>
+  <div class="action">后续行动：在发布站点和研究模板里继续保留“图表即内容”的路径：SVG/HTML 图要能离线保存、能被 Hugo 渲染、能在移动端正常阅读。</div>
+</div>
+
+<h3>五、开放模型与 agent runtime 的焦点短暂分离</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Ecosystem</span><strong>Hugging Face / explainx.ai / Follow List</strong> · 2026-08-14 至 2026-08-17 · <a href="https://huggingface.co/blog/state-of-open-models-summer-2026">HF State of Open Models</a> · <a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai sitemap</a></div>
+  <div class="summary"><p>Hugging Face 的开放模型夏季观察仍然是本周背景，explainx.ai sitemap 也显示上周围绕 Qwen 3.8 27B、GLM-5.3、Claude/GPT/Grok/Gemini 比较的聚合页密集出现。但今天窗口内新增一手高信号不是新模型，而是 agent 支付和 GPU 调度。</p><p>这说明开放模型热度并没有消失，只是产业议题暂时切到“模型如何被运行、被调度、被收费、被治理”。模型本身越多，平台层越需要自动路由、成本控制、集群调度和安全策略。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 不能只追模型名。真正影响产品和投资线索的，经常是模型周边的部署、调度、评测、商业化和治理层。</div>
+  <div class="action">后续行动：日报分类上把“新模型发布”和“模型运行系统”分开；后者包括路由、GPU 调度、推理服务、agent runtime、支付、权限和日志。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>LangChain：</strong>发布 AgentCore Payments middleware，让 agent 在遇到付费资源时通过受控预算和签名流程处理 HTTP 402，推动 agentic commerce 进入 runtime 层。</li>
+  <li><strong>Hugging Face：</strong>Dharma-AI 发布 GPU 调度实验，展示 constraint-aware allocator 对利用率和优先级产出的显著提升。</li>
+  <li><strong>Simon Willison：</strong>转述 404 Media 稀缺图书流向 Amazon AI training facility 的调查，训练数据供应链透明度继续成为公共议题。</li>
+  <li><strong>GitHub Changelog：</strong>本窗口没有新的 AI/Copilot 高信号条目，最新相关内容仍是 8 月 14 日 Grok 4.6 接入 Copilot 和多模型 IDE 趋势。</li>
+  <li><strong>Lilian Weng：</strong>RSS 本窗口无新增，7 月的 harness engineering 仍是 agent self-improvement 背景资料。</li>
+  <li><strong>explainx.ai：</strong>sitemap 本窗口无 8 月 17 日新增；8 月 15 日多篇聚合页可作为发现线索，不作为一手事实主链路。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Harrison Chase / LangChain：</strong>LangChain 的叙事继续从 agent 框架走向 managed runtime、生产监控、支付和企业治理，值得持续跟踪其与 AWS AgentCore 的耦合程度。</li>
+  <li><strong>Simon Willison：</strong>今天高价值不在模型实测，而在把 AI 训练数据争议连接到可追踪供应链调查，继续体现其“技术细节 + 公共影响”的筛选价值。</li>
+  <li><strong>Hugging Face 生态：</strong>HF Blog 新增内容偏 infra 和社区研究，说明开放模型平台的价值正在从托管模型扩展到训练、推理、资源管理和社区数据。</li>
+  <li><strong>OpenAI / Anthropic / Google 高优先账号：</strong>本轮公开 RSS/X 镜像未抓到窗口内可审计的一手新增；不强行编入人物动态。</li>
+  <li><strong>Chip Huyen / Eugene Yan：</strong>RSS 本轮 403，无法确认新增；后续需改用其公开网页 sitemap 或备用 RSS 入口。</li>
+  <li><strong>Andrew Ng / Jeff Dean / Demis Hassabis 等：</strong>公开 X 抓取质量不足，本期只记录为已检查，不做内容判断。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>Agent 支付治理模板：</strong>整理可自动支付、需确认支付、禁止支付三类动作，配套预算、白名单、商户风险、审计日志和回滚策略。</li>
+  <li><strong>GPU 调度研究表：</strong>跟踪 FIFO、优先级队列、backfilling、gang scheduling、MIG、spot/预留混合、训练/推理共池等策略对利用率的影响。</li>
+  <li><strong>训练数据供应链地图：</strong>把图书、网页、代码、视频、语音、合成数据、授权数据集分层，标注来源透明度、版权风险和供应商角色。</li>
+  <li><strong>Follow pipeline 稳定性修复：</strong>为 X/Nitter 增加“空正文即失败”的健康判断，并自动降级到官方 RSS、个人博客、GitHub release、新闻页和 web search。</li>
+  <li><strong>公开来源权重规则：</strong>一手官方文档和博客权重最高，个人转述次之，聚合站只做发现线索，动态 X 摘要必须有可审计链接才进入重点内容。</li>
+  <li><strong>WorkBuddy 产品说明：</strong>把 agent runtime 能力分成工具调用、交易授权、长任务状态、人工确认、trace/eval 五块，形成客户可理解的架构页。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>AgentCore Payments 的实际区域可用性、支持的付款网络、企业合规边界和失败回滚语义，需要以 AWS/LangChain 正式产品文档和试用为准。</li>
+  <li>Dharma-AI GPU 调度实验的 benchmark 场景、工作负载分布和 allocator 约束是否能迁移到企业私有集群，需要复核代码或更完整实验设置。</li>
+  <li>404 Media 关于稀缺图书流向 Amazon AI training facility 的调查细节在 Simon 页面为转述，本期未大段转载；后续应阅读原文并核对 Amazon 回应。</li>
+  <li>Nitter RSS 主站返回 200 但空正文，可能是镜像服务、源站变化或限流导致；本轮未使用其作为内容事实源。</li>
+  <li>OpenAI News RSS、Interconnects RSS、Chip Huyen、Eugene Yan 本轮 403 或不可用，无法排除窗口内有未抓取内容。</li>
+  <li>explainx.ai 多篇 8 月 15 日聚合文章标题高密度覆盖 AI 话题，但不是本窗口新增，也不是一手来源，需要逐条溯源后再采用。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>“agent 自动付款”容易被包装成科幻式消费代理，本期只关注预算、授权、审计和 HTTP 402 处理这类可验证机制。</li>
+  <li>GPU 利用率提升数字容易被单独传播，缺少工作负载背景时不应直接外推到所有集群。</li>
+  <li>AI 训练数据争议的社媒道德化争吵很多，本期只保留供应链、版权、来源透明度和采购治理维度。</li>
+  <li>模型横评标题继续很多，但没有模型卡、可复现实验和真实工作流时，不进入今天主线。</li>
+  <li>公开 X 页面摘要和搜索结果只能做发现线索，不替代原始链接和可审计发布时间。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.langchain.com/blog/langchain-agentcore-payments">LangChain · AgentCore Payments middleware for LangChain agents</a></li>
+  <li><a href="https://docs.langchain.com/oss/python/integrations/middleware/aws">LangChain Docs · AWS middleware integration / AgentCore Payments</a></li>
+  <li><a href="https://aws.amazon.com/about-aws/whats-new/2026/04/amazon-bedrock-agentcore-payments-preview/">AWS · Amazon Bedrock AgentCore Payments preview</a></li>
+  <li><a href="https://huggingface.co/blog/Dharma-AI/gpu-management-pt2">Hugging Face · Same Cluster, 33 Points More Utilization: What Changed Was the Order</a></li>
+  <li><a href="https://huggingface.co/blog">Hugging Face Blog index</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/17/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-tra/">Simon Willison · We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/16/markdown-svg-upgrades/">Simon Willison · Markdown SVG upgrades</a></li>
+  <li><a href="https://huggingface.co/blog/state-of-open-models-summer-2026">Hugging Face · State of Open Models: Summer 2026 Observations</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://lilianweng.github.io/index.xml">Lilian Weng RSS</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+  <li><a href="https://nitter.net/simonw/rss">Nitter simonw RSS health check</a></li>
+  <li><a href="https://nitter.net/hwchase17/rss">Nitter hwchase17 RSS health check</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-17T00:00:00Z / 2026-08-18T00:00:00Z.</footer>
