@@ -1,0 +1,163 @@
+---
+title: "Follow 深度日报：Frontier 隐私、Agent 反馈闭环与工程治理"
+date: "2026-08-20"
+category: "daily"
+url: "/daily/2026/08/20/"
+summary: "Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI 面向 frontier models 推出 Zero Data Retention 与 Private Safety Processing、Replit 用 GPT-5.6 Luna 扩大软件创建入口、LangSmith 把生产 trace 反馈训练成 tuned evaluators、GitHub Copilot/CodeQL/Code Quality 继续补企业治理，Simon Willison 的 sandbox/extensible software 观察与 Google AI Studio GitHub sync 指向 agent 安全边界和开发入口竞争。"
+---
+<div class="meta">
+  <strong>2026年8月20日（周四）</strong> · 覆盖窗口：2026-08-19 08:00 – 2026-08-20 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS；LangChain Blog RSS；GitHub Changelog RSS；Hugging Face Blog RSS；Simon Willison Atom；Google AI Blog RSS；公开 Nitter RSS；explainx.ai sitemap；AI 播客索引 JSON。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。OpenAI 正文页本轮直连仍返回 403，因此 OpenAI 条目以官方 RSS 的标题、发布时间、链接和摘要为事实依据，并用公开 X/Nitter 帖作辅助确认。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Frontier model 商业化进入“隐私与安全同时要”阶段</h4><p>OpenAI 官方 RSS 发布 Zero Data Retention for frontier models，并预告 Private Safety Processing。Sam Altman 和 Greg Brockman 同日公开转发强调 business privacy，说明企业客户的数据边界正在成为 frontier API 可采用性的核心变量。</p></div>
+  <div class="overview-item"><h4>软件创建入口继续下沉</h4><p>OpenAI/Replit 文章称 Replit Free Mode 由 GPT-5.6 Luna 驱动，让用户不再先被 token 成本拦住。这个信号和近期 Codex、Copilot、AI Studio、Claude Code 形成同一方向：开发入口正在从 IDE 扩散到更轻量的“想法到软件”工作台。</p></div>
+  <div class="overview-item"><h4>Agent 反馈闭环从口号变成产品</h4><p>LangChain 发布 LangSmith Tuned Evaluators，以 Perceived Error 起步，把生产 traces 中的质量反馈连接到可调 evaluator。Harrison Chase 也在公开帖中把 eval/environment engineering 放进 agent improvement loop，说明 agent 平台竞争开始围绕“持续改进系统”。</p></div>
+  <div class="overview-item"><h4>企业 coding agent 的治理面继续变厚</h4><p>GitHub Copilot for JetBrains 新增企业托管设置，覆盖插件治理、MCP server allowlist、OpenTelemetry 和 permission modes；GitHub 同时发布 Code Quality Trends 与 CodeQL 2.26.3。coding agent 不是只靠模型，权限、审计、质量趋势和安全查询也在产品化。</p></div>
+  <div class="overview-item"><h4>Sandbox 与 extensible software 是同一条线</h4><p>Simon Willison 8 月 19 日连续写到 smolvm 运行不可信 Python/JavaScript、LLM 降低网页扩展生成成本，以及 AI 编程下的 conceptual integrity。把 LLM 生成的扩展真正交给用户之前，硬隔离、权限边界和核心系统完整性会非常关键。</p></div>
+  <div class="overview-item"><h4>开放模型采用度量继续成熟</h4><p>Nathan Lambert 讨论 ATOM/RAM score，用相对采用指标衡量开放模型在发布后 30 天内的真实使用。相比单看 benchmark，采用度量更接近“生态是否真的在用”。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI ZDR + Private Safety Processing：frontier API 的企业隐私底座</h3>
+<div class="card">
+  <div class="source"><span class="tag">Frontier Labs / Enterprise Privacy</span><strong>OpenAI 官方 RSS；Sam Altman；Greg Brockman</strong> · 2026-08-19 19:00 / 19:48 / 20:03 UTC · <a href="https://openai.com/index/offering-zero-data-retention-for-frontier-models">OpenAI</a> · <a href="https://nitter.net/sama/status/2090163991234453611#m">Sam Altman</a> · <a href="https://nitter.net/gdb/status/2090167683035853120#m">Greg Brockman</a></div>
+  <div class="summary"><p>OpenAI 官方 RSS 发布“Offering Zero Data Retention for frontier models”，摘要说明 OpenAI 为符合条件的 API 客户重申 Zero Data Retention，并预告 Private Safety Processing，目标是在不牺牲数据隐私的情况下支持更高级的 AI safety。Sam Altman 公开帖强调支持 business privacy，Greg Brockman 的公开帖则把 technical and policy approaches 与 customer benefit、safety enhancement 放在一起。</p><p>这说明 OpenAI 正在试图解决一个难题：frontier model 越强，安全监测需求越高；企业客户越大，对数据不保留、不进入训练和不外泄的要求越硬。Private Safety Processing 的关键看点，会是它如何在安全筛查、日志最小化、合规审计和客户数据边界之间取得平衡。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这会影响金融、医疗、法律、制造等敏感行业是否敢用最强模型。企业 AI 平台的护城河不只是模型能力，也包括 ZDR、私有化安全处理、审计证明和异常处理机制。</div>
+  <div class="action">后续行动：等 OpenAI 正文可读后复核 eligibility、保留范围、Private Safety Processing 的技术边界；把 ZDR/安全处理作为 WorkBuddy 企业安全页的对标项。</div>
+</div>
+
+<h3>二、Replit x GPT-5.6 Luna：把“成本恐惧”从软件创建入口移走</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Coding / Creation Platform</span><strong>OpenAI 官方 RSS</strong> · 2026-08-19 07:00 UTC · <a href="https://openai.com/index/replit">OpenAI · Replit expands access to software creation with GPT-5.6 Luna</a></div>
+  <div class="summary"><p>OpenAI 官方 RSS 显示，Replit 推出由 GPT-5.6 Luna 驱动的 Free Mode，让任何人能把想法变成可运行软件，同时不必先担心 token 成本。这个发布不是单纯模型接入，而是在重新包装 coding agent 的入口：用户先描述目标，平台负责把模型、运行环境、部署和成本体验尽量藏到后面。</p><p>结合 Codex、GitHub Copilot、Google AI Studio 和 Claude Code 的近期动作，AI coding 竞争正在从“谁补全得好”转向“谁能让更多非传统开发者完成闭环”。Replit 的优势是云端运行和项目工作台，GPT-5.6 Luna 的角色是把首轮尝试成本和心理门槛继续压低。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>软件创建入口越低，越多企业内部工具、原型、自动化脚本会由业务人员直接启动。真正的差异会出现在权限、部署、数据连接、质量验收和维护责任，而不是首屏生成速度。</div>
+  <div class="action">后续行动：试用 Replit Free Mode，记录它在需求澄清、文件结构、运行错误、部署和成本提示上的默认流程；对比 WorkBuddy 的“业务想法到可运行工具”路径。</div>
+</div>
+
+<h3>三、LangSmith Tuned Evaluators：agent 质量反馈开始闭环</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Evals / Feedback Loop</span><strong>LangChain Blog；Harrison Chase</strong> · 2026-08-19 12:59 / 17:50 UTC · <a href="https://www.langchain.com/blog/introducing-langsmith-tuned-evaluators-starting-with-perceived-error">LangSmith Tuned Evaluators</a> · <a href="https://nitter.net/hwchase17/status/2090134426118394077#m">Harrison Chase</a></div>
+  <div class="summary"><p>LangChain 发布 LangSmith Tuned Evaluators，第一项是 Perceived Error：把生产 traces 中的质量反馈连接到 evaluator，用来帮助团队定位和修复 agent 错误。Harrison Chase 同日在公开帖中预告一个关于 agent improvement loop 的讨论，主题包括 eval 和 environment engineering，另一个公开回复提到 agents.md 和 skills 这类 markdown/目录标准对 coding agent 生态的作用。</p><p>这条线很重要，因为 agent 质量不可能只靠离线 benchmark。真实用户感知到的错误、任务环境、工具调用轨迹、回放数据和专家判断，才是持续改进的燃料。LangSmith 如果能把这些变成可调 evaluator，就会从 observability 往 improvement platform 走。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent 的瓶颈往往不是“没有 trace”，而是 trace 之后没人知道怎么把反馈变成下一版系统。Tuned evaluator 把评测从静态规则推进到带组织经验的质量模型。</div>
+  <div class="action">后续行动：把 WorkBuddy 的失败案例按 perceived error、tool error、permission error、context miss、human handoff 五类打标；评估是否能用 LangSmith 或自建 trace store 训练内部 evaluator。</div>
+</div>
+
+<h3>四、GitHub Copilot / CodeQL / Code Quality：治理正在覆盖 IDE、MCP 与质量趋势</h3>
+<div class="card">
+  <div class="source"><span class="tag">Developer Platform / Governance</span><strong>GitHub Changelog</strong> · 2026-08-18 23:33 / 2026-08-19 12:56 / 21:09 UTC · <a href="https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains">Copilot JetBrains managed settings</a> · <a href="https://github.blog/changelog/2026-08-19-track-organization-code-quality-trends">Code Quality Trends</a> · <a href="https://github.blog/changelog/2026-08-19-codeql-2-26-3-improves-github-actions-queries-and-javascript-modeling">CodeQL 2.26.3</a></div>
+  <div class="summary"><p>GitHub Copilot for JetBrains now supports enterprise managed settings，覆盖插件治理、MCP server allowlist、OpenTelemetry 和组织控制的 permission modes。GitHub 同日还给组织级 Code Quality dashboard 增加 Trends tab，并发布 CodeQL 2.26.3，提升 GitHub Actions 查询和 JavaScript/TypeScript/Vue source modeling。</p><p>这些更新放在一起看，GitHub 正在把 coding agent 的企业控制面做细：哪些插件能用、哪些 MCP server 能连、权限模式如何统一、trace 如何收集、代码质量趋势如何看、安全查询如何更准。模型只是执行层，治理和度量层决定它能不能进大企业。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>未来企业采购 coding agent 时，会问的不只是“能写多少代码”，还会问“能否统一策略、可观测、可审计、可证明质量没有变差”。GitHub 的优势正在从 IDE 插件扩展到治理平台。</div>
+  <div class="action">后续行动：整理一个 coding agent enterprise checklist：MCP allowlist、permission mode、OpenTelemetry、code scanning、quality trend、secret/token revocation、模型策略和用户级指标。</div>
+</div>
+
+<h3>五、Simon Willison：不可信代码 sandbox、可扩展软件与 AI 编程的 conceptual integrity</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Security</span><strong>Simon Willison Weblog Atom</strong> · 2026-08-19 22:46 / 22:56 / 23:16 UTC · <a href="https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox/">smolmachines / smolvm sandbox</a> · <a href="https://simonwillison.net/2026/Aug/19/jeremy-morrell/">Extensible Software quote</a> · <a href="https://simonwillison.net/2026/Aug/19/conceptual-integrity-and-counting-lines-of-code/">Conceptual integrity</a></div>
+  <div class="summary"><p>Simon Willison 记录了用 Claude Code for web 测试 smolmachines/smolvm 的研究任务，结论摘要指向用硬件隔离 VM 而不是共享内核容器来运行不可信 Python/JavaScript 数据转换，并强调 no-network、CPU/RAM 限制等边界。同一天他还引用 Jeremy Morrell 对“LLM 时代可扩展软件”的判断：LLM 降低扩展创作成本，现代 sandbox 原语降低部署成本。</p><p>第三篇关于 conceptual integrity 和代码行数的文章，则把 AI 编程拉回软件设计本身：代码变多不等于系统变好，核心概念的一致性仍然要有人维护。这三条合起来，正好构成 agentic software 的三角：让用户扩展、把扩展关进安全边界、同时保护核心系统设计。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>让 LLM 生成插件、脚本和网页扩展会成为自然需求，但没有 sandbox 和架构约束，就会把产品变成不可审计的权限集合。Simon 这组观察很适合转化为 agent runtime 的安全设计原则。</div>
+  <div class="action">后续行动：评估 OpenClaw/Codex 工作流中哪些用户生成代码需要 no-network、资源限制、只读文件系统或一次性 VM；把 conceptual integrity 加入代码 review 标准。</div>
+</div>
+
+<h3>六、Google AI Studio / Gemini 学生计划：Google 把开发者和学习者入口一起扩张</h3>
+<div class="card">
+  <div class="source"><span class="tag">Google AI / Developer Entry</span><strong>Josh Woodward；Logan Kilpatrick；Google AI Blog RSS</strong> · 2026-08-19 19:00 / 19:18 / 19:59 UTC · <a href="https://blog.google/products-and-platforms/products/search/back-to-school-study-tools/">Google Search study tools</a> · <a href="https://nitter.net/OfficialLoganK/status/2090156520843657488#m">Logan Kilpatrick</a> · <a href="https://nitter.net/joshwoodward/status/2090166806401228912#m">Josh Woodward</a></div>
+  <div class="summary"><p>Google AI Blog RSS 发布 back-to-school 学习工具文章，围绕 Search、Lens 和 AI Mode 支持课程与标准化考试学习。Josh Woodward 公开称大学生计划重新上线并扩展到 140 多个国家，提供更高 limits、更多存储、student hub，以及 Notebook、Flow 等能力。Logan Kilpatrick 则公开说明 Google AI Studio 新增 GitHub repo import、双向 GitHub sync，以及 force push、merge 等 UI 支持。</p><p>Google 这边的动作是双入口：一边把 AI 学习工具嵌入 Search/Gemini/学生计划，一边把 AI Studio 往开发者项目工作台推进。GitHub 双向同步尤其值得看，因为它让 AI Studio 不只是 playground，而更像轻量 IDE/agent workspace。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>学生入口会塑造下一代默认工作流，开发者入口会决定 Gemini API 的试用和留存。Google 如果能把 Search、Notebook、Flow、AI Studio 和 GitHub 工作流打通，就会形成很强的分发优势。</div>
+  <div class="action">后续行动：测试 AI Studio GitHub sync 的权限模型、冲突处理和可回滚性；记录 student hub 是否会把 Notebook/Flow 变成学习 agent 套件。</div>
+</div>
+
+<h3>七、Hugging Face / Liquid AI QAD：小模型边缘部署继续走向实用化</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Edge Inference</span><strong>Hugging Face Blog</strong> · 2026-08-19 13:48 UTC · <a href="https://huggingface.co/blog/LiquidAI/qad">LFM2.5 Q4_0 Checkpoints from Quantization-Aware Distillation</a></div>
+  <div class="summary"><p>Liquid AI 在 Hugging Face 发布 LFM2.5 Q4_0 checkpoints from Quantization-Aware Distillation，面向 LFM2.5-230M、350M、1.2B-Instruct 和 2.6B 等模型提供更新的 4-bit GGUF。文章重点在用 QAD 让开发者在真实边缘硬件上以更小体积和更快速度运行 LFM2.5。</p><p>这不是最大的模型新闻，但对端侧 agent 很实用。小模型如果能以稳定质量跑在本地设备或边缘盒子上，就可以承担分类、路由、轻量抽取、隐私敏感预处理和低延迟交互，把昂贵 frontier model 留给高价值步骤。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent 架构会越来越分层：本地小模型做便宜、快速、隐私友好的前处理；云端强模型处理复杂推理。QAD/GGUF 这类工作是端云协同的基础材料。</div>
+  <div class="action">后续行动：挑一个中文抽取/分类任务，用 LFM2.5 Q4_0、本地 Qwen 小模型和云端模型对比延迟、准确率和部署复杂度。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>官方 RSS 新增 Zero Data Retention for frontier models 与 Replit x GPT-5.6 Luna；OpenAI 正文页本轮 curl 仍 403，事实依据限于 RSS 字段和公开社媒辅助确认。</li>
+  <li><strong>LangChain：</strong>新 RSS 地址 <code>https://www.langchain.com/blog/rss.xml</code> 可读；本窗口高信号为 LangSmith Tuned Evaluators。</li>
+  <li><strong>GitHub：</strong>Copilot for JetBrains 企业托管设置覆盖 MCP allowlist、OpenTelemetry 和 permission modes；Code Quality Trends 与 CodeQL 2.26.3 强化质量/安全控制面。</li>
+  <li><strong>Simon Willison：</strong>连续发布 sandbox、LLM 时代可扩展软件、AI 编程 conceptual integrity 三条工程反思。</li>
+  <li><strong>Google / Gemini：</strong>Josh Woodward 公开学生计划全球扩展；Logan Kilpatrick 公开 AI Studio GitHub import/sync 更新；Google AI Blog 同日推学习工具。</li>
+  <li><strong>Hugging Face：</strong>Liquid AI 发布 LFM2.5 Q4_0 QAD GGUF，偏端侧/本地部署信号。</li>
+  <li><strong>Nathan Lambert：</strong>继续推动 ATOM/RAM score，把开放模型比较从 benchmark 拉向发布后采用度量。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Sam Altman：</strong>围绕 OpenAI ZDR 文章强调 business privacy，是企业 frontier API 采用的正面信号。</li>
+  <li><strong>Greg Brockman：</strong>把 business privacy、Private Safety Processing 和 safety enhancement 放在同一条公开表述里，呼应昨日 frontier safety pacing。</li>
+  <li><strong>Harrison Chase：</strong>公开强调 agent improvement loop，主题指向 eval 与 environment engineering；另提到 agents.md 和 skills 这类 markdown/目录标准。</li>
+  <li><strong>Josh Woodward：</strong>宣布大学生计划扩展到 140 多个国家，并把 Notebook、Flow、student hub 打包进学生体验。</li>
+  <li><strong>Logan Kilpatrick：</strong>公开 Google AI Studio GitHub import 与双向 sync，说明 AI Studio 正向可持续项目工作台演进。</li>
+  <li><strong>Nathan Lambert：</strong>讨论 RAM score 和 artifacts curation，用相对采用指标衡量开放模型真实扩散。</li>
+  <li><strong>Francois Chollet：</strong>继续批评把“Singularity”概念过度稀释，属于低优先级但可记录的 AGI 叙事纠偏。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>企业隐私对标表：</strong>整理 OpenAI ZDR、Private Safety Processing、Anthropic/Google/GitHub 的数据保留和安全审计口径。</li>
+  <li><strong>Agent improvement loop 模板：</strong>把 trace、用户反馈、perceived error、environment replay、evaluator tuning 和修复 PR 串成可复用流程。</li>
+  <li><strong>Coding agent 治理 checklist：</strong>覆盖 MCP allowlist、permission modes、OpenTelemetry、quality trend、CodeQL、credential revocation 和模型策略。</li>
+  <li><strong>Sandbox 试验：</strong>复现 smolvm/no-network/CPU-RAM 限制，用于不可信脚本、用户生成扩展和数据转换任务。</li>
+  <li><strong>AI Studio GitHub sync 评测：</strong>检查 repo import、双向 push/pull、merge、force push、权限提示和冲突处理。</li>
+  <li><strong>开放模型采用指标：</strong>跟踪 ATOM/RAM score，把 Artifacts Hub 指标纳入开放模型观察框架。</li>
+  <li><strong>端侧小模型分层：</strong>测试 QAD/GGUF 小模型在分类、路由、抽取、隐私预处理中的性价比。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>OpenAI ZDR 和 Replit 正文页本轮直连返回 403，报告未引用正文细节；需要后续通过可公开浏览方式复核完整条款和产品边界。</li>
+  <li>Private Safety Processing 的具体架构、是否会保留安全信号、如何满足合规审计，尚需官方技术说明。</li>
+  <li>Replit Free Mode 的实际限制、GPT-5.6 Luna 的默认能力、部署和持久化成本，需要实测确认。</li>
+  <li>LangSmith Tuned Evaluators 的训练数据、人工反馈要求、误报/漏报表现，需要结合实际 traces 验证。</li>
+  <li>Google AI Studio 双向 GitHub sync 的权限边界、冲突处理和企业管控能力，需要实测，不应只按公开帖乐观外推。</li>
+  <li>Nitter RSS 本轮可读，但仍是第三方镜像；X 内容只作为公开辅助线索，关键事实优先回到官方博客、RSS、文档或项目页。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>ChatGPT Ads 欧洲扩展是商业化信号，但不在 Follow List 的 AI agent/工程主线里，本期只作为背景不展开。</li>
+  <li>Google Search 学习工具偏消费者产品，和 agent 工程关系较弱；高价值部分是它与 student plan、Notebook、Flow 的组合可能。</li>
+  <li>Francois Chollet 对 Singularity 表述的批评值得保留为叙事校准，但不是本期核心技术更新。</li>
+  <li>GitHub credential revocation by token type 是安全治理重要更新，但与 AI/Copilot 主线间接，本期放低权重。</li>
+  <li>Hamel Husain 本窗口多为转发和人才动态，信息有价值但缺少新的 eval 方法论主文。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/offering-zero-data-retention-for-frontier-models">OpenAI · Offering Zero Data Retention for frontier models</a></li>
+  <li><a href="https://openai.com/index/replit">OpenAI · Replit expands access to software creation with GPT-5.6 Luna</a></li>
+  <li><a href="https://nitter.net/sama/status/2090163991234453611#m">Sam Altman · business privacy</a></li>
+  <li><a href="https://nitter.net/gdb/status/2090167683035853120#m">Greg Brockman · Private Safety Processing</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/introducing-langsmith-tuned-evaluators-starting-with-perceived-error">LangChain · Introducing LangSmith Tuned Evaluators</a></li>
+  <li><a href="https://nitter.net/hwchase17/status/2090134426118394077#m">Harrison Chase · agent improvement loop webinar</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains">GitHub · Enterprise managed settings in GitHub Copilot for JetBrains</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-19-track-organization-code-quality-trends">GitHub · Track organization code quality trends</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-19-codeql-2-26-3-improves-github-actions-queries-and-javascript-modeling">GitHub · CodeQL 2.26.3</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox/">Simon Willison · smolmachines / smolvm sandbox</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/19/jeremy-morrell/">Simon Willison · Extensible Software quote</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/19/conceptual-integrity-and-counting-lines-of-code/">Simon Willison · Conceptual integrity and counting lines of code</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI Blog RSS</a></li>
+  <li><a href="https://blog.google/products-and-platforms/products/search/back-to-school-study-tools/">Google · Search study tools</a></li>
+  <li><a href="https://nitter.net/OfficialLoganK/status/2090156520843657488#m">Logan Kilpatrick · AI Studio GitHub sync</a></li>
+  <li><a href="https://nitter.net/joshwoodward/status/2090166806401228912#m">Josh Woodward · global student plans</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/LiquidAI/qad">Hugging Face / Liquid AI · LFM2.5 Q4_0 Checkpoints from QAD</a></li>
+  <li><a href="https://nitter.net/natolambert/status/2090145176832389595#m">Nathan Lambert · RAM score / ATOM adoption metric</a></li>
+  <li><a href="https://artifactshub.ai/">Artifacts Hub</a></li>
+  <li><a href="https://atomproject.ai/relative-adoption-metric">ATOM · Relative Adoption Metric</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-19T00:00:00Z / 2026-08-20T00:00:00Z.</footer>
