@@ -1,0 +1,136 @@
+---
+title: "Follow 深度日报：协作入口里的 Agent、低成本 Trace Judge 与语音 Benchmark 失真"
+date: "2026-08-22"
+category: "daily"
+url: "/daily/2026/08/22/"
+summary: "Follow List 公开来源整理：过去 24 小时高信号集中在 GitHub Copilot 进入 Slack/Teams，把 agent 工作从个人 IDE 推到团队对话；LangChain/Fireworks 用微调 Qwen 做 perceived error trace judge，声称达到 frontier judge 水平且成本低 10-100x；Hugging Face/HumeAI 量化 ASR benchmark optimization，提醒语音模型 leaderboard 可能被测试集模式污染；Simon Willison 更新 LLM/OpenRouter 工具链并转述 GUI-first 个人工具观点。"
+---
+<div class="meta">
+  <strong>2026年8月22日（周六）</strong> · 覆盖窗口：2026-08-21 08:00 – 2026-08-22 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；LangChain Blog RSS/正文；GitHub Changelog RSS/正文；Simon Willison Atom/正文；Hugging Face Blog RSS/正文；OpenAI/Google/Interconnects/Chip Huyen/Eugene Yan RSS；explainx.ai sitemap；AI 播客索引 JSON；公开 Nitter/X 镜像尝试。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。Nitter 主实例本轮对高优先级 handle 返回 403，X-only 内容未纳入事实依据。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Copilot 从 IDE 继续外溢到团队对话</h4><p>GitHub 同日发布 Copilot 在 Slack 和 Microsoft Teams 的 public preview：在频道、线程或私聊里 @GitHub，就能把讨论转成共享 agent session、代码频道、云沙箱和 PR。这是 coding agent 从“个人副驾”转向“团队协作对象”的强信号。</p></div>
+  <div class="overview-item"><h4>Agent trace 的自动评估开始走向专用小模型</h4><p>LangChain Labs 与 Fireworks 发布 perceived error trace judge：用内部 trace 数据微调 Qwen-3.5-35B，目标是在生产 trace 上低成本识别用户是否感到 agent 出错。文章给出的结论是可接近或超过 frontier judge，并在规模化时低 10-100x 成本。</p></div>
+  <div class="overview-item"><h4>语音模型 leaderboard 需要警惕 benchmark optimization</h4><p>Hugging Face 上的 HumeAI 研究指出，多款 ASR 模型会在公共 benchmark 上复现错误参考转写，甚至在相关音频被静音后补出 reference 里的数字。它提醒我们：公开榜单分数可能混入测试集记忆、声学提示和格式模式。</p></div>
+  <div class="overview-item"><h4>LLM 工具链维护进入“模型路由 + 工具调用”阶段</h4><p>Simon Willison 发布 llm 0.32.1 修复依赖问题，并更新 llm-openrouter 0.7，使其兼容 LLM 0.32、接入 OpenRouter Responses API，并支持 Shell、WebFetch、WebSearch 三个服务端工具。</p></div>
+  <div class="overview-item"><h4>个人软件可能从 TUI 回到轻量 GUI</h4><p>Simon 转述 Thomas Ptacek 的观点：coding agents 让做一个“够用的原生 GUI”成本大幅下降，小型个人工具不必默认停留在终端 UI。对 OpenClaw 这类个人 agent 来说，这意味着很多内部工具可以有更可控的可视化界面。</p></div>
+  <div class="overview-item"><h4>官方 RSS 之外新增有限</h4><p>OpenAI、Google AI、Interconnects、Chip Huyen、Eugene Yan 在本窗口没有新增高信号 RSS 条目；explainx.ai sitemap 最新主要停在 8 月 19 日，AI 播客索引 JSON 仍是 7 月 2 日元数据。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、GitHub Copilot in Slack/Teams：agent 工作从私聊变成可围观、可接力、可审计的团队流</h3>
+<div class="card">
+  <div class="source"><span class="tag">Coding Agent / Collaboration</span><strong>GitHub Changelog</strong> · 2026-08-21 16:03 / 16:07 UTC · <a href="https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack">Copilot in Slack</a> · <a href="https://github.blog/changelog/2026-08-21-shared-agentic-work-with-github-copilot-in-microsoft-teams">Copilot in Microsoft Teams</a></div>
+  <div class="summary"><p>GitHub 把 Copilot cloud agent 接进 Slack 和 Microsoft Teams。团队可以在频道、线程或私聊里提到 @GitHub，让 Copilot triage bug、创建或更新 issue、调查失败、实现变更、在云沙箱里验证，并最终开 PR。Slack 侧还配合 Slack Code 的 dedicated code channel；Teams 侧强调把会议讨论里的 action item 直接转成 agent session。</p><p>这次更新的关键不是“聊天软件里能叫 Copilot”，而是工作流形态变化：agent session 是共享的，团队成员可以看计划、看 diff、看 HTML preview、补上下文、改方向或停止任务。GitHub 同时强调权限、预算、cloud sandbox policy、AI credits、以及 Copilot app / Teams integration identity 生成 PR 时可要求额外人工审批。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>coding agent 的主战场正在从 IDE 和 CLI 外扩到“团队已经协作的地方”。这会改变需求捕捉、上下文补充、评审学习、预算归因和合规审批的设计方式。</div>
+  <div class="action">后续行动：为 WorkBuddy/OpenClaw 梳理“对话到 PR”的标准链路：触发词、默认仓库选择、上下文边界、云沙箱策略、人工审批、生成物归档、频道噪音控制和费用预算。</div>
+</div>
+
+<h3>二、LangChain + Fireworks Trace Judge：用专用 Qwen judge 挖生产 trace，成本比 frontier judge 低一个数量级以上</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Evals / Trace Mining</span><strong>LangChain Blog</strong> · 2026-08-21 23:08 UTC · <a href="https://www.langchain.com/blog/building-a-100x-cheaper-trace-judge-with-fireworks">Building a 100x Cheaper Trace Judge with Fireworks</a></div>
+  <div class="summary"><p>LangChain Labs 与 Fireworks 合作，微调 Qwen-3.5-35B 来识别 production traces 里的 “perceived error”：也就是用户是否认为 assistant 出错、需要纠正、拒绝 agent action、重复请求或触发 assistant 承认错误。训练数据来自 chat-langchain 和 Fleet 两个内部 trace 数据集，标签通过模型辅助与人工 review 组合生成。</p><p>文章给出的核心结果是：base Qwen 已经是不错的分类器；LoRA SFT 后，chat-langchain SFT 在 chat-langchain holdout 上 96.1%，在 Fleet 上 90.8%；Fleet SFT 在 Fleet 上 91.3%。对照项里 Claude Opus 是 91.6% / 90.2%，GPT-5.5 是 98.9% / 89.1%。LangChain 的结论是，微调 open model 可以在 perceived error 上接近或超过 frontier judge，并在 trace 量上来后低 10-100x 成本。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>生产 agent 的稀缺资源不是 trace 本身，而是从大量 trace 里持续挖出“哪里让用户觉得坏了”。如果通用 perceived-error judge 能成立，agent 改进会从抽样看日志变成近实时质量雷达。</div>
+  <div class="action">后续行动：在自己的 agent traces 中先定义 perceived-error schema：用户纠正、重复请求、拒绝动作、人工接管、工具失败后重试、语气/格式不满；小规模人工标注后再评估是否值得训练专用 judge。</div>
+</div>
+
+<h3>三、Hugging Face / HumeAI：ASR 榜单分数可能混有测试集记忆与声学提示</h3>
+<div class="card">
+  <div class="source"><span class="tag">Research / Benchmark Integrity</span><strong>Hugging Face Blog</strong> · 2026-08-21 00:00 UTC · <a href="https://huggingface.co/blog/asr-benchmark-optimization">Measuring benchmark optimization in speech recognition</a></div>
+  <div class="summary"><p>HumeAI 团队在 Hugging Face 发布研究，讨论 speech recognition 里的 benchmark optimization。文章测试了 11 个常用开源 ASR 模型，发现一些 leaderboard 高分模型会复现 VoxPopuli English 和 LibriSpeech 等公开 benchmark 的错误参考转写，即使音频本身与参考文本矛盾、相关词被静音，或音频支持另一种写法。</p><p>研究使用三类 probe：共识分歧、静音数字、最小对比对。一个关键发现是 VoxPopuli 样本中，方法标记出的潜在 reference errors 涉及相当比例的测试片段；部分模型在错误 reference 与真实音频冲突时，仍会输出 benchmark 的“标准答案”。在公共 benchmark 上恢复被静音数字的比例也更高，而新采集/held-out 音频上这种现象减弱。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这不是语音领域的小问题，而是所有模型评测的通用警报：公开 benchmark 一旦成为训练和优化目标，分数会越来越像“对测试集的熟悉度”，不一定代表真实任务能力。</div>
+  <div class="action">后续行动：把该方法论迁移到 LLM/agent eval：公开题、内部 held-out、对抗改写、关键字段遮蔽、同义任务重采样分开报告，避免只看单一 leaderboard。</div>
+</div>
+
+<h3>四、Simon Willison LLM / OpenRouter 更新：模型路由、Responses API 与服务端工具开始进入个人 CLI</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Local Tools</span><strong>Simon Willison Weblog</strong> · 2026-08-21 16:58 / 17:16 UTC · <a href="https://simonwillison.net/2026/Aug/21/llm/">llm 0.32.1</a> · <a href="https://simonwillison.net/2026/Aug/21/llm-openrouter/">llm-openrouter 0.7</a></div>
+  <div class="summary"><p>Simon 发布 llm 0.32.1，主要是修复 fresh install 因 OpenAI Python library 不再间接带上 httpx 而失败的问题，短期通过 pinning 处理，后续 0.33 会切换到 httpx2。这个更新很小，但提醒我们 CLI 工具链常常依赖上游 SDK 的传递依赖，agent 自动化脚本尤其容易被这种小变动打断。</p><p>llm-openrouter 0.7 则更有方向性：兼容 LLM 0.32，模型使用 OpenRouter 的 Responses API 实现，并新增 Shell、WebFetch、WebSearch 三个 server-side tools，可通过类似 <code>-T WebSearch</code> 的方式启用。个人 LLM CLI 正在从“给模型发 prompt”变成“统一路由模型和工具执行”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OpenRouter 这类多模型入口与 LLM CLI 结合后，可以快速比较 reasoning 模型、工具调用行为和成本；但工具权限、审计和依赖锁定会变得更重要。</div>
+  <div class="action">后续行动：为本地 LLM/agent CLI 维护一张兼容矩阵：上游 SDK 版本、Responses/API 差异、工具权限、默认模型、失败回退、依赖 pinning 和 smoke test。</div>
+</div>
+
+<h3>五、Stop Making TUIs：coding agents 改变了“小工具默认形态”的成本结构</h3>
+<div class="card">
+  <div class="source"><span class="tag">Product / Developer Tools</span><strong>Simon Willison Link Blog</strong> · 2026-08-21 16:07 UTC · <a href="https://simonwillison.net/2026/Aug/21/stop-making-tuis/">Stop Making TUIs</a></div>
+  <div class="summary"><p>Simon 转述 Thomas Ptacek 的观点：即使是很小的个人工具，也应该重新考虑原生 GUI，而不是默认做成 TUI，因为 coding agents 已经把做一个足够好用的 GUI 的成本降到很低。Simon 也提到自己用 agent 做过 macOS 菜单栏的带宽和 GPU 监控小工具，并且仍在日常使用。</p><p>这条不属于模型能力新闻，但对个人 agent/内部工具很重要。以前很多“给自己用”的工具停在命令行，是因为 UI 太贵；现在更合理的问题是：哪些状态需要可视化、哪些动作需要人确认、哪些日志需要可回放，而不是一律用终端承载。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>agent 不只会写代码，也会改变软件可用性的默认下限。小 GUI 让确认、纠错、观察和权限边界更清楚，尤其适合半自动工作流。</div>
+  <div class="action">后续行动：挑一个 OpenClaw 内部高频任务做 GUI-first 试验，例如日报发布状态板、Feishu 发送确认器、RSS 抓取健康面板或 agent trace review 小窗。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>GitHub：</strong>Copilot in Slack 和 Copilot in Microsoft Teams 同日进入 public preview，强调共享 agent session、dedicated code channel、云沙箱、PR 和额外人工审批。</li>
+  <li><strong>LangChain / Fireworks：</strong>发布 perceived-error trace judge 方案，用微调 Qwen-3.5-35B 挖 production trace，目标是在更低成本下达到 frontier judge 级质量。</li>
+  <li><strong>Hugging Face / HumeAI：</strong>发布 ASR benchmark optimization 研究，指出部分高分语音模型会复现公共 benchmark 的错误 reference 或被静音字段。</li>
+  <li><strong>Simon Willison：</strong>llm 0.32.1 修复 OpenAI SDK 依赖变化导致的安装问题；llm-openrouter 0.7 适配 Responses API 并加入 server-side tools。</li>
+  <li><strong>Simon / Thomas Ptacek：</strong>“Stop Making TUIs” 提醒 coding agents 让小型原生 GUI 成本下降，值得重新设计个人工具默认形态。</li>
+  <li><strong>X 镜像：</strong>Nitter 主实例本轮对高优先级 Follow List handle 返回 403；未使用登录态绕过，也未将未复核社媒内容写入重点事实。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>GitHub Copilot：</strong>继续把 coding agent 的入口从 GitHub/IDE/CLI 推到 Slack 和 Teams，明显指向团队协作与企业流程。</li>
+  <li><strong>LangChain Labs：</strong>从 agent observability、preview builds 继续延伸到 trace mining 和自动质量判断，LangSmith 的定位更接近 agent lifecycle 平台。</li>
+  <li><strong>Fireworks：</strong>作为微调和推理基础设施出现在 trace judge 案例中，角色是让 open model judge 具备低成本规模化条件。</li>
+  <li><strong>HumeAI：</strong>用语音 benchmark integrity 研究建立评测可信度话语权，方法论可迁移到其它模型评测。</li>
+  <li><strong>Simon Willison：</strong>继续维护个人 LLM 工具链，并捕捉 agent 时代开发者工具形态变化。</li>
+  <li><strong>OpenAI / Google / Interconnects：</strong>本窗口官方 RSS 无新增高信号条目，但前几日 AI Futures、ZDR、AI Studio/GitHub sync、open models 话题仍是后续观察主线。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>Conversation-to-PR 设计：</strong>把 Slack/Teams Copilot 拆成可复用的企业 agent 流程，包括触发、上下文、权限、预算、沙箱、PR 审批和审计。</li>
+  <li><strong>Trace judge 原型：</strong>从 OpenClaw/WorkBuddy 真实 trace 中抽样，定义 perceived-error 标签，并测试通用 judge 与任务专用 judge 的差异。</li>
+  <li><strong>Eval anti-benchmarking checklist：</strong>为 LLM、语音和 agent eval 增加 held-out、字段遮蔽、重采样、同义改写和公开题隔离。</li>
+  <li><strong>LLM CLI smoke tests：</strong>给本地 LLM 工具链加最小自动测试，覆盖 fresh install、OpenAI SDK 依赖、OpenRouter Responses API 和工具调用。</li>
+  <li><strong>GUI-first 内部工具试点：</strong>选择一个原来用命令行跑的自动化任务，做一个有确认、日志、回放和状态提示的小 GUI。</li>
+  <li><strong>X 抓取备选源：</strong>继续寻找不绕过 CAPTCHA 的公开镜像、RSSHub 源或官方博客/RSS 替代，减少 Nitter 单点不可用对日报覆盖的影响。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>LangChain 的 perceived-error judge 数据来自内部 trace，指标需要在外部业务、中文任务和工具调用丰富的 agent trace 上复测；文章本轮训练输入还忽略了 tool calls，这是后续变量。</li>
+  <li>GitHub Copilot Slack/Teams 的权限、默认仓库选择、频道噪音、AI credits 与 cloud sandbox 计费，必须在真实组织配置中验证，尤其是多人同时 steering 的边界。</li>
+  <li>Teams/Slack 生成 PR 的额外审批机制是重要合规点，但不同仓库已有 branch protection 规则叠加后会如何影响开发速度，需要实测。</li>
+  <li>HumeAI 的 ASR benchmark optimization 结论需要区分“测试集记忆”“声学提示”“文本 autocomplete”三类机制；对 LLM/agent eval 的迁移目前是方法论推断。</li>
+  <li>llm-openrouter 的 Shell/WebFetch/WebSearch server-side tools 需要明确执行环境、权限边界、日志和成本；不能简单等同于本地工具调用。</li>
+  <li>Nitter 403 导致 X 高优先级账号无法复核，今天的人物动态主要来自官方博客/RSS，不代表这些账号过去 24 小时没有新观点。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub “Better tools for managing blocked users” 是协作治理更新，但与 AI/agent 主线关系较弱，本期仅记录不展开。</li>
+  <li>OpenAI RSS 本窗口无新增；8 月 20 日 AI Futures 和 Stampli 已在昨日日报详细覆盖，今天不重复展开。</li>
+  <li>Google AI Blog 本窗口无新条目，8 月 19 日学习工具更新仍偏消费/教育场景，非今日新增事实。</li>
+  <li>explainx.ai sitemap 最新高密度更新停在 8 月 19 日，本窗口没有新的 sitemap lastmod 信号。</li>
+  <li>AI 播客索引 JSON 元数据仍是 2026-07-02，适合作为长期资源目录，不适合作为今日新闻来源。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/building-a-100x-cheaper-trace-judge-with-fireworks">LangChain · Building a 100x Cheaper Trace Judge with Fireworks</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack">GitHub · The new GitHub Copilot experience in Slack</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-21-shared-agentic-work-with-github-copilot-in-microsoft-teams">GitHub · Shared agentic work with GitHub Copilot in Microsoft Teams</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/21/llm/">Simon Willison · llm 0.32.1</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/21/llm-openrouter/">Simon Willison · llm-openrouter 0.7</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/21/stop-making-tuis/">Simon Willison · Stop Making TUIs</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/asr-benchmark-optimization">Hugging Face / HumeAI · Measuring benchmark optimization in speech recognition</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI Blog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://huyenchip.com/feed.xml">Chip Huyen RSS</a></li>
+  <li><a href="https://eugeneyan.com/rss/">Eugene Yan RSS</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-21T00:00:00Z / 2026-08-22T00:00:00Z.</footer>
