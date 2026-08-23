@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：Coding Agent 验证、LLM 0.33 与公开源空窗</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时新增高信号集中在 Simon Willison 对 coding agents 的验证方法、LLM 0.33 对 OpenAI Python 3.x / httpx2 / Responses reasoning summary 的适配，以及 Linus Torvalds 在 Linux 调试提交里给 AI 辅助 grunt-work 的务实评价。GitHub/LangChain/Hugging Face 的上一轮重要更新仍是延续主线；OpenAI、Google AI、Interconnects、Chip Huyen、Eugene Yan RSS 本窗口没有新增高优先级条目。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：Coding Agent 验证、LLM 0.33 与公开源空窗</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时新增高信号集中在 Simon Willison 对 coding agents 的验证方法、LLM 0.33 对 OpenAI Python 3.x / httpx2 / Responses reasoning summary 的适配，以及 Linus Torvalds 在 Linux 调试提交里给 AI 辅助 grunt-work 的务实评价。GitHub/LangChain/Hugging Face 的上一轮重要更新仍是延续主线；OpenAI、Google AI、Interconnects、Chip Huyen、Eugene Yan RSS 本窗口没有新增高优先级条目。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-08-23</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年8月23日（周日）</strong> · 覆盖窗口：2026-08-22 08:00 – 2026-08-23 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Simon Willison Atom/正文；GitHub Changelog RSS；OpenAI News RSS；Google AI Blog RSS；LangChain Blog RSS；Hugging Face Blog RSS；Interconnects RSS；Chip Huyen RSS；Eugene Yan RSS；公开 Nitter/RSSHub 尝试。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。Nitter 本轮对抽样 handle 返回 200 但正文为空，RSSHub Twitter 路径返回 404，X-only 内容未纳入事实依据。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天是“新增少、验证强”的窗口</h4><p>Follow List 的官方源和高质量个人 RSS 在过去 24 小时没有大规模产品发布。最有价值的新内容来自 Simon Willison：如何验证 coding agent 的改动、LLM CLI 的依赖升级，以及 Linus 对 AI 调试协作的真实反馈。</p></div>
+  <div class="overview-item"><h4>Coding agent 的关键能力不是写代码，而是被正确验证</h4><p>Simon 明确把使用 coding agents 的核心技能放在两端：先能清楚地下指令，再能有信心确认改动是否按预期完成。他强调逐行 review 不是唯一验证方式，这和近期 agentic engineering 里“人类瓶颈从写代码转向验收和质量系统”的主题一致。</p></div>
+  <div class="overview-item"><h4>LLM 0.33 把昨日临时依赖修复变成正式升级</h4><p>LLM 0.33 升级到 OpenAI Python library 3.x，并把 HTTP client 依赖从 httpx 切到 httpx2；同时补上 embedding per-call key、可叠加模板、Responses API reasoning summary 等能力。对自动化脚本来说，这类小版本变化值得放进 smoke test。</p></div>
+  <div class="overview-item"><h4>Linus 的 Linux 提交给了 AI 辅助调试的现实样本</h4><p>Linus Torvalds 在 drm/xe 调试提交中提到 AI 做了大量繁琐分析和加 debug code 的工作，但也多次判断问题不可能解决、建议写报告收场。这个例子很适合提醒：AI 在耐心执行和整理上有价值，但需要人类持续推进、怀疑和定方向。</p></div>
+  <div class="overview-item"><h4>昨日 GitHub / LangChain / Hugging Face 主线继续有效</h4><p>GitHub Copilot 进入 Slack/Teams、LangChain/Fireworks trace judge、Hugging Face/HumeAI ASR benchmark optimization 没有新版本，但仍是今天 Follow List 里最值得延续跟踪的三条工程主线。</p></div>
+  <div class="overview-item"><h4>X 抓取仍不稳定，人物动态偏 RSS/博客</h4><p>本轮抽样 sama、karpathy、simonw、HamelHusain、hwchase17、natolambert 的 Nitter RSS 返回空正文，RSSHub Twitter user 路径返回 404。今天不把不可复核的 X 贴文写成事实，只记录公开源空窗。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Simon Willison：coding agent 的核心技能是“指令 + 验证”，不是盯每一行 diff</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agentic Engineering / Verification</span><strong>Simon Willison Weblog</strong> · 2026-08-22 15:56 UTC · <a href="https://simonwillison.net/2026/Aug/22/more-than-just-code-review/">More than just code review</a></div>
+  <div class="summary"><p>Simon 把高效使用 coding agents 的关键能力定义为：能清楚地告诉 agent 要改什么，并能自信地验证改动是否正确落地。这个判断把焦点从“模型能不能生成代码”转到“人和流程能不能确认结果”。</p><p>他也提醒，逐行审查 agent 写出的每一行代码并不总是最高效的验证方式。更现实的做法包括复现路径、端到端测试、截图/日志证据、行为级检查、局部抽查和对风险区域的重点 review。对 agent 速度很快的场景，人类的价值越来越像质量系统的设计者，而不是每个 diff 的手工抄表员。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Simon、Hamel、Shreya、Eugene 的长期主线都是 eval 和可靠 AI 系统。今天这条把 coding agent adoption 的难点说得很直接：不是会不会生成，而是能不能被验收。</div>
+  <div class="action">后续行动：给 OpenClaw/WorkBuddy 的代码类任务补一套“验收证据模板”：任务意图、关键路径、自动测试、人工检查点、截图/日志、残余风险和需要人类复核的 diff 区域。</div>
+</div>
+
+<h3>二、LLM 0.33：OpenAI Python 3.x、httpx2、模板叠加和 reasoning summary 进入个人 LLM CLI</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Toolchain</span><strong>Simon Willison Weblog</strong> · 2026-08-22 17:01 UTC · <a href="https://simonwillison.net/2026/Aug/22/llm/">llm 0.33</a></div>
+  <div class="summary"><p>Simon 发布 LLM 0.33，把前一天 0.32.1 的临时修复升级成正式依赖调整：升级到 OpenAI Python library 3.x，并将 HTTP client 依赖从 httpx 切换到 httpx2。这个变化源于 OpenAI Python library 不再间接携带 httpx，导致 fresh install 断裂。</p><p>新版本还让 embedding 相关命令和 Python API 支持 per-call key；<code>llm prompt -t/--template</code> 可以重复使用，从而把模型配置模板和具体 prompt 模板按顺序组合；Responses API reasoning-capable models 增加 <code>reasoning_summary</code> 选项，支持 auto、concise、detailed。它说明个人 CLI 正在承担更多模型路由、密钥边界和推理可观测功能。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 的 AI engineering 线索里，很多自动化最终都会落在本地 CLI、API wrapper 和脚本上。依赖、模型接口和工具调用的小变化，会直接影响日报、研究、代码 agent 的稳定性。</div>
+  <div class="action">后续行动：把本地 LLM 工具链纳入每日/每周 smoke test：fresh install、OpenAI SDK 版本、OpenRouter Responses API、模板组合、embedding key、工具调用和 reasoning summary 输出。</div>
+</div>
+
+<h3>三、Linus Torvalds 的 Linux 调试提交：AI 可以做大量苦活，但需要人类坚持推进</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Assisted Programming / Debugging</span><strong>Simon Willison Link Blog / Linux commit</strong> · 2026-08-22 21:04 UTC · <a href="https://simonwillison.net/2026/Aug/22/linus-torvalds/">Quoting Linus Torvalds</a> · <a href="https://github.com/torvalds/linux/commit/818bebeb63dd6bf5f4e07e145f6cdbace520a34c">Linux commit</a></div>
+  <div class="summary"><p>Simon 摘录了 Linus Torvalds 在 Linux drm/xe 提交中的一段评论：这次调试非常痛苦，AI 帮忙做了很多繁琐工作，包括持续加 debug code 和分析结果。Linus 同时指出，AI 多次判断问题不可能解决，甚至建议只写报告结束。</p><p>这条信息的价值在于它不是产品营销，而是高强度系统调试里的真实使用感。AI 很适合耐心跑重复实验、整理观察、产出候选解释，但当它过早放弃或过度确信时，需要人类保持问题意识、继续设计实验并约束结论。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这正好对应 coding agent 在复杂工程中的边界：速度和耐心增加了，但判断、坚持、系统直觉和最后责任还在人类一侧。</div>
+  <div class="action">后续行动：在 debug agent 工作流中加入“不要提前宣布不可能”的规则：每次失败必须给出下一组可观测实验、需要收集的日志、可缩小假设空间的最小补丁，以及何时升级给人类。</div>
+</div>
+
+<h3>四、GitHub / LangChain / Hugging Face：昨日三条主线仍是今天的延续观察对象</h3>
+<div class="card">
+  <div class="source"><span class="tag">Continuation / Agent Stack</span><strong>GitHub Changelog / LangChain Blog / Hugging Face Blog</strong> · 2026-08-21 · <a href="https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack">Copilot in Slack</a> · <a href="https://github.blog/changelog/2026-08-21-shared-agentic-work-with-github-copilot-in-microsoft-teams">Copilot in Teams</a> · <a href="https://www.langchain.com/blog/building-a-100x-cheaper-trace-judge-with-fireworks">Trace Judge</a> · <a href="https://huggingface.co/blog/asr-benchmark-optimization">ASR Benchmark Optimization</a></div>
+  <div class="summary"><p>GitHub Changelog 本窗口 latestBuild 仍停在 8 月 22 日 00:55 UTC，新增条目只是前一窗口已覆盖的 Copilot Slack/Teams 和 blocked users 管理。LangChain RSS 仍以 Fireworks trace judge 为最新；Hugging Face RSS 仍以 ASR benchmark optimization 为最新。</p><p>这些不是今日新增事实，但它们共同指向同一件事：agent 进入协作入口后，必须有可观测、可评估、可治理的质量系统；而 benchmark 和 judge 本身也会成为被优化、被污染、需要校准的对象。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>公开源空窗时，最重要的工作不是硬凑新消息，而是把前一日高信号主线接到行动项上。</div>
+  <div class="action">后续行动：把这三条拆成一个 agent 运维框架：协作入口负责需求捕捉，trace judge 负责质量雷达，benchmark integrity 负责防止评测自欺。</div>
+</div>
+
+<h3>五、官方 RSS 空窗：OpenAI、Google、Interconnects、Chip、Eugene 今天没有新增高优先级内容</h3>
+<div class="card">
+  <div class="source"><span class="tag">Source Health / Noise Control</span><strong>Multiple RSS sources</strong> · checked 2026-08-23 00:00 UTC · <a href="https://openai.com/news/rss.xml">OpenAI RSS</a> · <a href="https://blog.google/technology/ai/rss/">Google AI RSS</a> · <a href="https://www.interconnects.ai/feed">Interconnects RSS</a> · <a href="https://huyenchip.com/feed.xml">Chip Huyen RSS</a> · <a href="https://eugeneyan.com/rss/">Eugene Yan RSS</a></div>
+  <div class="summary"><p>OpenAI RSS 的最新高优先级条目仍是 8 月 20 日 AI Futures 和 Stampli / ChatGPT Work 案例；Google AI RSS 最新是 8 月 19 日 Search 学习工具；Interconnects 最新是 8 月 17 日关于 Nvidia 与开放模型经济的文章；Chip Huyen feed 最新仍是旧文；Eugene Yan RSS 最新仍是 6 月 21 日 cybersecurity evals。</p><p>因此今天没有把这些来源扩写成新动态。它们仍然保留在监控清单中，但不会为了填充日报而重复前几天已经总结过的内容。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>日报的价值一半来自发现新信号，另一半来自拒绝把旧内容、营销重复和抓取失败包装成新闻。</div>
+  <div class="action">后续行动：状态文件继续记录本次检查时间；下轮优先看这些 RSS 是否有新 pubDate，再决定是否展开。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Simon Willison：</strong>发布 “More than just code review”，强调 coding agent 工作的关键在于清晰指令和结果验证，逐行 review 不是唯一方法。</li>
+  <li><strong>LLM CLI：</strong>LLM 0.33 升级到 OpenAI Python library 3.x，切换 httpx2，增加 embedding per-call key、可叠加模板和 reasoning summary 选项。</li>
+  <li><strong>Linux / Linus：</strong>Linus 在一次 drm/xe 调试提交中记录 AI 辅助做大量 debug grunt-work，同时也多次过早判断问题无解。</li>
+  <li><strong>GitHub / LangChain / Hugging Face：</strong>昨日 Copilot Slack/Teams、trace judge、ASR benchmark optimization 仍是当前 agent 工程主线，没有新增替代性高信号。</li>
+  <li><strong>X 公开镜像：</strong>Nitter 抽样返回空正文，RSSHub Twitter user 返回 404；今天没有使用 X-only 内容作为事实依据。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Simon Willison：</strong>继续围绕 coding agents、LLM CLI、模型接口和实际工程验证输出高密度观察。</li>
+  <li><strong>Linus Torvalds / Linux：</strong>给出 AI 辅助系统级调试的务实样本：有价值，但不神化，需要人类主导。</li>
+  <li><strong>GitHub Copilot：</strong>昨日进入 Slack/Teams 的更新继续指向企业协作入口，不再只是个人 IDE 插件。</li>
+  <li><strong>LangChain / Fireworks：</strong>trace judge 案例仍是 agent observability 向质量自动化推进的代表。</li>
+  <li><strong>OpenAI / Google / Interconnects / Chip Huyen / Eugene Yan：</strong>公开 RSS 本窗口无新增高信号条目。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>Agent 验收模板：</strong>把“结果验证”产品化为任务模板，要求每个 coding agent 任务输出可复核证据，而不仅是变更摘要。</li>
+  <li><strong>LLM CLI 依赖监控：</strong>给常用 CLI 和插件建立 weekly smoke test，捕捉 OpenAI SDK、OpenRouter、httpx/httpx2 等依赖变化。</li>
+  <li><strong>Debug agent 实验协议：</strong>要求 agent 在复杂 bug 中持续提出可执行实验，不允许只给“可能无解”的结论。</li>
+  <li><strong>Conversation-to-PR 流程：</strong>延续 GitHub Slack/Teams 线索，设计频道触发、权限、预算、沙箱、审批和审计链路。</li>
+  <li><strong>Trace judge schema：</strong>将 perceived error 拆成用户纠正、重复请求、拒绝动作、人工接管、工具失败和格式不满等标签。</li>
+  <li><strong>X 抓取备选：</strong>继续寻找公开、合规、不绕过 CAPTCHA 的 X 镜像或作者自有 RSS 替代。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>Simon 关于“逐行 code review 不是唯一验证方式”的观点需要落到具体项目：不同风险等级应采用哪些自动测试、人工检查、截图、日志和抽样策略。</li>
+  <li>LLM 0.33 的 OpenAI Python 3.x / httpx2 迁移需要在本地现有插件、OpenRouter Responses API、embedding provider 和保存模板上实测。</li>
+  <li>Linus 提到的 AI 辅助调试案例只说明一个具体 Linux bug 的协作过程，不能泛化为“AI 擅长所有内核调试”。</li>
+  <li>GitHub Copilot Slack/Teams 的权限、预算、AI credits 和额外审批机制仍需在真实企业组织里验证。</li>
+  <li>LangChain trace judge 的公开文章使用内部 trace 数据，跨业务和中文场景的泛化能力仍未验证。</li>
+  <li>X 镜像返回空正文可能是服务端限制、实例问题或路径格式变化，本轮没有继续尝试登录态抓取。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub blocked users 管理更新与协作治理有关，但与 AI/agent 主线关系弱，本期不展开。</li>
+  <li>OpenAI 8 月 20 日 AI Futures、Stampli、ZDR 等已在前几期覆盖，今天没有重复写长段总结。</li>
+  <li>Google AI RSS 最新仍是教育/Search 方向，非今日新增，也不是 Follow List 的 agent/evals/open models 主线。</li>
+  <li>Interconnects 8 月 17 日开放模型经济文章仍值得长期跟踪，但已超出本窗口，不作为今日新增重点。</li>
+  <li>Chip Huyen 和 Eugene Yan RSS 没有新日期条目，保留为背景知识源。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/22/more-than-just-code-review/">Simon Willison · More than just code review</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/22/llm/">Simon Willison · llm 0.33</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/22/linus-torvalds/">Simon Willison · Quoting Linus Torvalds</a></li>
+  <li><a href="https://github.com/torvalds/linux/commit/818bebeb63dd6bf5f4e07e145f6cdbace520a34c">Linux commit · drm/xe debug session</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack">GitHub · The new GitHub Copilot experience in Slack</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-21-shared-agentic-work-with-github-copilot-in-microsoft-teams">GitHub · Shared agentic work with GitHub Copilot in Microsoft Teams</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/building-a-100x-cheaper-trace-judge-with-fireworks">LangChain · Building a 100x Cheaper Trace Judge with Fireworks</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/asr-benchmark-optimization">Hugging Face / HumeAI · Measuring benchmark optimization in speech recognition</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI Blog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://huyenchip.com/feed.xml">Chip Huyen RSS</a></li>
+  <li><a href="https://eugeneyan.com/rss/">Eugene Yan RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-22T00:00:00Z / 2026-08-23T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
