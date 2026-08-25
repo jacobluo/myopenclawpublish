@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：企业 Agent 上生产线，评测成本开始被压缩</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时新增高信号集中在企业 agent 工程化、trace judge 成本压缩、GPT-5.6 进入 Kiro，以及 Anthropic SDK 1.0 迁移对工具生态的影响。X 公开镜像可访问但抽样 high-priority handle 本窗口无新增条目。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：企业 Agent 上生产线，评测成本开始被压缩</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时新增高信号集中在企业 agent 工程化、trace judge 成本压缩、GPT-5.6 进入 Kiro，以及 Anthropic SDK 1.0 迁移对工具生态的影响。X 公开镜像可访问但抽样 high-priority handle 本窗口无新增条目。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-08-25</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年8月25日（周二）</strong> · 覆盖窗口：2026-08-24 08:00 – 2026-08-25 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Simon Willison Atom/正文；OpenAI News RSS；LangChain Blog RSS/正文；GitHub Changelog RSS；Hugging Face Blog RSS；Google AI Blog RSS；Interconnects RSS；Chip Huyen RSS；Eugene Yan RSS；explainx sitemap；AI 播客索引 JSON；公开 Nitter/xcancel 镜像抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。nitter.net 与 nitter.poast.org 返回 403，nitter.privacydev.net 连接失败，nitter.tiekoetter.com 返回反机器人页；xcancel RSS 可读取，但抽样 high-priority handles 在本窗口内未发现新条目。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天的主线是 agent 从演示走向生产运营</h4><p>LangChain 发布 Toyota 案例：内部 ToyotaGPT 已有 50 多个生产 agent，新 agent 的交付从 6 个月、6 名工程师压到 4 天、1 名工程师。这不是单个模型能力新闻，而是企业 agent 平台、权限、技能库和交付流程的组合信号。</p></div>
+  <div class="overview-item"><h4>评测成本成为 agent 扩张的硬约束</h4><p>LangChain 与 Fireworks 的 trace judge 文章把问题说得很清楚：如果要从每条 trace 中挖信号，frontier judge 太贵，必须训练更便宜的专用 judge。这个方向和昨天的模型路由、成本分层完全接上。</p></div>
+  <div class="overview-item"><h4>OpenAI 继续把 GPT-5.6 放进开发者工作流</h4><p>OpenAI RSS 新增 GPT-5.6 in Kiro，重点是 plan、build、review、test 的软件工程工作流，以及更好的 price-performance。它和 LangChain 的企业 agent 案例共同说明：模型发布后的关键战场在 IDE、agent harness、评测与部署链路。</p></div>
+  <div class="overview-item"><h4>Anthropic SDK 1.0 迁移开始影响下游工具</h4><p>Simon Willison 发布 llm-anthropic 0.27，主要是兼容 anthropic Python library 1.0.0。OpenAI SDK 两周前也发生过类似 http 客户端栈迁移，说明模型厂商 SDK 的底层变更会直接传导到开发者工具生态。</p></div>
+  <div class="overview-item"><h4>有趣但低优先级：可执行 SQLite 数据库</h4><p>Simon 记录了 SELF 模式：把 SQLite 数据库组织成可执行文件，由解释器读取并执行。这对 AI 主线不是核心新闻，但对工具分发、可审计 artifact 和“数据即程序”有启发。</p></div>
+  <div class="overview-item"><h4>公开 X 仍不是稳定事实源</h4><p>本轮按 Follow List 抽样 kevinweil、joshwoodward、AmandaAskell、sama、karpathy、lilianweng、polynoamial、alexalbert__、OfficialLoganK、JeffDean、demishassabis、miramurati、simonw、HamelHusain、sh_reya、eugeneyan、chipro、hwchase17、natolambert、DrJimFan、fchollet、drfeifei。没有把 X-only 内容写成事实。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、企业 agent 的落地重心：平台、权限、技能库和 ROI</h3>
+<div class="card">
+  <div class="source"><span class="tag">Enterprise Agents</span><strong>LangChain / Toyota Motor North America</strong> · 2026-08-24 18:59 UTC · <a href="https://www.langchain.com/blog/how-toyota-north-america-put-enterprise-ai-on-the-balance-sheet-with-deep-agents-and-langsmith">Toyota Scales Enterprise AI with Deep Agents and LangSmith</a></div>
+  <div class="summary"><p>Toyota 北美的企业 AI 团队覆盖制造、供应链、金融服务、经销商、车载研发和 R&amp;D 等场景，内部平台 ToyotaGPT 已经有 50 多个生产 agent。文章称，在 Deep Agents 和 LangGraph 基础设施之前，新 agent 交付需要约 6 个月和 6 名工程师，现在缩短到 4 天和 1 名工程师。</p><p>更关键的是它没有把企业知识硬编码进单个 agent，而是建设可复用 skills，运行时注入到 Deep Agents 中；同时对底层数据做权限门控，例如员工没有 SharePoint 数据权限时，agent 不返回对应数据。这说明企业 agent 产品真正难的部分在组织知识、权限边界、复用组件、可观测性和 ROI 证明。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条直接对应 WorkBuddy / OpenClaw 的企业交付方向：客户不会为“会聊天的 agent”买单，会为能压缩交付周期、守住权限边界、并证明 6-7 位数年度 ROI 的 agent 平台买单。</div>
+  <div class="action">后续行动：把 Toyota 案例拆成企业 agent 交付模板：场景 intake、数据权限、可复用 skill、trace/eval、ROI 口径、上线门槛、维护责任人。</div>
+</div>
+
+<h3>二、Trace judge 成本压缩：从抽样评估走向每条 trace 都可被理解</h3>
+<div class="card">
+  <div class="source"><span class="tag">Evals / Observability</span><strong>LangChain / Fireworks</strong> · 2026-08-24 14:11 UTC · <a href="https://www.langchain.com/blog/building-a-100x-cheaper-trace-judge-with-fireworks">Building a 100x Cheaper Trace Judge with Fireworks</a></div>
+  <div class="summary"><p>LangChain 的问题设定是：怎样以可承受成本从每一条 agent trace 中挖出重要信号，同时接近 frontier judge 的表现。他们与 Fireworks 合作，微调 Qwen judge，用来检测用户交互中的 perceived error，例如用户纠正、拒绝 agent 动作、重复请求或 assistant 承认错误。</p><p>这类 judge 的价值不只是省钱，而是把线上 agent 的反馈从“人工看少量样本”推进到“系统性理解所有 trace”。如果 general-purpose perceived error 能成立，它会成为 agent observability 的底层指标之一；如果不能，也会逼迫团队建设更贴近业务场景的专用 evaluator。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里的 Hamel、Shreya、Eugene、Simon 主线都在讲 evals 和可靠性。今天这条给出一个明确产品化方向：低成本 judge 是 agent 大规模上线的前置条件。</div>
+  <div class="action">后续行动：为 OpenClaw 设计 trace judge backlog：先定义 perceived error、task success、tool misuse、permission risk 四类标签，再用历史会话/任务 trace 做小样本标注。</div>
+</div>
+
+<h3>三、GPT-5.6 in Kiro：模型能力继续嵌入软件工程闭环</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Coding / Developer Tools</span><strong>OpenAI</strong> · 2026-08-24 12:00 UTC · <a href="https://openai.com/index/gpt-5-6-in-kiro">Advancing price-performance for developers with GPT-5.6 in Kiro</a></div>
+  <div class="summary"><p>OpenAI News RSS 新增 GPT-5.6 in Kiro，摘要强调 GPT-5.6 现在可用于 Kiro，帮助开发者计划、构建、审查和测试软件，并改善 price-performance。正文页面本轮直接抓取返回 403，因此这里只依据 OpenAI RSS 元数据，不补充未验证细节。</p><p>这条与昨天的模型成本分层、今天的 Toyota agent 案例相互印证：AI coding 的竞争正在从“聊天窗口写代码”转向完整软件工程链路。能否把 plan、build、review、test 变成可追踪、可评估、可回滚的闭环，比单次生成质量更重要。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Kiro、Codex、Claude Code、LangGraph/Deep Agents 都在争夺开发者工作流默认入口。入口一旦形成，模型路由、评测、上下文和权限会变成平台层优势。</div>
+  <div class="action">后续行动：跟踪 Kiro 对 GPT-5.6 的默认任务分配和价格策略；同时对比 Codex/Claude Code 在 review/test 环节给出的可验证证据。</div>
+</div>
+
+<h3>四、SDK 迁移是生态稳定性的早期预警</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / SDK</span><strong>Simon Willison</strong> · 2026-08-24 16:27 UTC · <a href="https://simonwillison.net/2026/Aug/24/llm-anthropic/">Release: llm-anthropic 0.27</a></div>
+  <div class="summary"><p>Simon 发布 llm-anthropic 0.27，主要适配 Anthropic Python library 1.0.0。文章提到这次 Anthropic SDK 从 httpx 切到 httpx2，OpenAI Python SDK v3.0.0 两周前也做过类似变化。</p><p>这类更新看起来很小，但对生产 agent 很现实：模型 SDK 的底层依赖、超时语义、streaming、错误类型和重试行为一变，下游工具就可能出现兼容性问题。Simon 还记录了让 Fable 5 在 Claude Code 中读取迁移文档并跑通测试的做法，适合转化为依赖升级 workflow。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent 平台要稳定运行，不能只关注模型发布，还要跟踪 SDK breaking changes。依赖升级需要自动化迁移、测试和回滚证据。</div>
+  <div class="action">后续行动：给 OpenClaw/WorkBuddy 增加“模型 SDK 升级检查清单”：锁版本、读 migration guide、运行 contract tests、验证 streaming/tool call/error handling、记录回滚方案。</div>
+</div>
+
+<h3>五、可执行 SQLite 数据库：工具分发和可审计 artifact 的旁支启发</h3>
+<div class="card">
+  <div class="source"><span class="tag">Developer Tools / Artifact Design</span><strong>Simon Willison linking Farid Zakaria</strong> · 2026-08-24 11:38 UTC · <a href="https://simonwillison.net/2026/Aug/24/your-executable-is-a-sqlite-database/">Your executable is a SQLite database</a></div>
+  <div class="summary"><p>Simon 记录 Farid Zakaria 的 SELF 模式：把 SQLite 文件的 application ID 设置为 SELF，并把 ELF executable 的组件安排进多个 SQLite 表；配合 self-exec 解释器或 Linux binfmt_misc，就能让数据库文件表现得像可执行二进制。</p><p>这不是 AI 主线新闻，但对 agent 产物形态有启发。未来 agent 生成的工具、报告、数据快照、trace 和 provenance 也许可以被打包成一个既可执行又可查询的 artifact，便于审计、复现和分发。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI 工具链越来越强调 provenance 和可复现。把数据、元数据和可执行入口放进同一 artifact，可能适合离线评测包、交付包或客户验收包。</div>
+  <div class="action">后续行动：低优先级 spike：评估 SQLite/duckdb 作为 agent 交付 artifact 容器，重点看安全边界、签名、可审计性和跨平台执行。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>LangChain / Toyota：</strong>ToyotaGPT 已有 50 多个生产 agent；新 agent 交付从 6 个月、6 名工程师缩短到 4 天、1 名工程师，重点是 Deep Agents、LangGraph、可复用 skills、权限门控和 ROI。</li>
+  <li><strong>LangChain / Fireworks：</strong>用 Qwen judge 检测 perceived error，目标是在接近 frontier judge 效果的同时，把 trace 级评估成本压低两个数量级。</li>
+  <li><strong>OpenAI：</strong>GPT-5.6 进入 Kiro，RSS 摘要强调 plan/build/review/test 软件工程闭环和 price-performance；正文抓取 403，未展开未验证细节。</li>
+  <li><strong>Simon Willison：</strong>llm-anthropic 0.27 适配 Anthropic Python SDK 1.0.0，提示模型 SDK 升级会影响下游工具稳定性。</li>
+  <li><strong>Source health：</strong>GitHub Changelog、Hugging Face、Google AI、Interconnects、Chip Huyen、Eugene Yan、explainx、AI 播客索引本窗口无新增高优先级 AI agent 条目。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>LangChain：</strong>连续两条新内容都指向企业 agent 运营层：一条讲 Toyota 生产案例，一条讲低成本 trace judge。产品叙事正在从框架转向 agent improvement engine。</li>
+  <li><strong>OpenAI：</strong>继续围绕 GPT-5.6 扩大开发者工具分发，Kiro 是今天的新增入口；需要后续验证实际体验和价格策略。</li>
+  <li><strong>Simon Willison：</strong>继续高密度记录 LLM 工具链维护细节和有趣系统模式，是本轮 Follow List 中新增最多的稳定公开源。</li>
+  <li><strong>Anthropic：</strong>没有官方 RSS 新增，但 SDK 1.0.0 迁移已经通过 Simon 的插件发布影响下游工具生态。</li>
+  <li><strong>Follow List X 账号：</strong>公开镜像抽样未发现本窗口新增可用条目，本期不做 X-only 人物动态推断。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>企业 agent 交付模板：</strong>把 Toyota 案例转成 WorkBuddy 售前/交付检查表，包含场景、权限、数据源、skill 复用、ROI 和上线评估。</li>
+  <li><strong>低成本 trace judge：</strong>用 OpenClaw 历史任务 trace 建一个小型 perceived error 标注集，测试便宜模型 judge 是否能稳定发现用户纠正、重复请求和工具误用。</li>
+  <li><strong>模型 SDK 升级 workflow：</strong>为 OpenAI/Anthropic/Gemini SDK 升级建立 contract tests，重点覆盖 streaming、tool call、重试、错误分类和超时。</li>
+  <li><strong>Kiro / Codex / Claude Code 对比：</strong>按 plan、build、review、test 四个环节比较默认体验、可验证证据、成本和失败恢复。</li>
+  <li><strong>Artifact 容器 spike：</strong>研究 SQLite/duckdb 打包 agent 交付证据的可行性，包括 trace、输入输出、评测结果、签名和查询界面。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>Toyota 案例来自 LangChain 官方客户故事，数字和 ROI 口径需要结合 Toyota 公开材料或后续访谈交叉验证。</li>
+  <li>Fireworks/Qwen judge 的泛化能力仍需在不同业务应用中验证；perceived error 是否能成为通用指标，不应只看单一实验。</li>
+  <li>OpenAI GPT-5.6 in Kiro 正文页面本轮返回 403，本期只引用 RSS 元数据，不对未抓到的页面细节做扩写。</li>
+  <li>Anthropic SDK 1.0.0 的 httpx2 迁移对实际生产系统影响，需看具体调用方式、依赖锁定和测试覆盖。</li>
+  <li>xcancel RSS 本轮可读取但可能不稳定；X 内容应继续以作者博客、官方公告或可验证链接优先。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Simon 的可执行 SQLite 数据库很有趣，但不是今天 AI/agent 主线，只作为工具 artifact 设计启发。</li>
+  <li>GitHub Changelog 最新仍停留在 8 月 21 日 Copilot Slack/Teams 与 blocked users 更新，本窗口没有新增。</li>
+  <li>Hugging Face 最新仍是 8 月 21 日 ASR benchmark optimization；与 agent/evals 主线距离较远，本期不展开。</li>
+  <li>Google AI RSS 最新仍是 8 月 19 日 Search 学习工具；非今日新增。</li>
+  <li>explainx sitemap 最新仍停在 8 月 19 日，AI 播客索引 JSON updatedAt 仍为 2026-07-02，均无本窗口新增。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.langchain.com/blog/how-toyota-north-america-put-enterprise-ai-on-the-balance-sheet-with-deep-agents-and-langsmith">LangChain · Toyota Scales Enterprise AI with Deep Agents and LangSmith</a></li>
+  <li><a href="https://www.langchain.com/blog/building-a-100x-cheaper-trace-judge-with-fireworks">LangChain · Building a 100x Cheaper Trace Judge with Fireworks</a></li>
+  <li><a href="https://openai.com/index/gpt-5-6-in-kiro">OpenAI · Advancing price-performance for developers with GPT-5.6 in Kiro</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/24/llm-anthropic/">Simon Willison · Release: llm-anthropic 0.27</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/24/your-executable-is-a-sqlite-database/">Simon Willison · Your executable is a SQLite database</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI Blog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://huyenchip.com/feed.xml">Chip Huyen RSS</a></li>
+  <li><a href="https://eugeneyan.com/rss/">Eugene Yan RSS</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-24T00:00:00Z / 2026-08-25T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
