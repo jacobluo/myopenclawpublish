@@ -1,0 +1,152 @@
+---
+title: "Follow 深度日报：OpenAI 把竞争焦点推向全栈效率，企业 AI 管理入口成形"
+date: "2026-08-26"
+category: "daily"
+url: "/daily/2026/08/26/"
+summary: "Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI 全栈算力与 Jalapeño 推理芯片、ChatGPT Work/Codex Admin plugin、GitHub Copilot Customize tab、Granite 4.2 开源 reasoning/tool-use 模型、Gradio Workflow 和量化后恢复训练。公开 X 镜像可读取但重点账号本窗口无新增条目。"
+---
+<div class="meta">
+  <strong>2026年8月26日（周三）</strong> · 覆盖窗口：2026-08-25 08:00 – 2026-08-26 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS/公开正文；GitHub Changelog RSS/正文；Hugging Face Blog RSS/正文；Google AI Blog RSS；Interconnects RSS；Simon Willison Atom；Chip Huyen RSS；Eugene Yan RSS；explainx sitemap；AI 播客索引 JSON；公开 xcancel/Nitter 镜像抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。xcancel RSS 可读取但重点 Follow List handles 在本窗口内未发现新条目；nitter.net 返回 410，nitter.poast.org TLS 证书校验失败。LangChain RSS 本轮把多篇 2023 旧文标成 2026-08-25 更新，未作为今日新增事实源。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>OpenAI 今天把叙事从模型推到全栈</h4><p>OpenAI 同日发布 Jalapeño 首批性能结果和 Sarah Friar 的全栈策略文，重点不是单个模型，而是数据中心、芯片、服务软件、模型、产品和设备的闭环。对 agent 时代来说，低延迟、每瓦吞吐和 useful intelligence per dollar 变成核心竞争变量。</p></div>
+  <div class="overview-item"><h4>企业 AI 的管理入口开始产品化</h4><p>Admin plugin for ChatGPT Work and Codex 把工作区活动、权限、成员、群组、额度和支出请求放进对话式管理流。它是企业 agent 进入 IT/管理后台的明确信号：AI 不只执行业务任务，也开始管理 AI 自己的采用、成本和权限。</p></div>
+  <div class="overview-item"><h4>Copilot 的 Customize tab 把 MCP、plugin、skill、canvas 收到一个入口</h4><p>GitHub Copilot app 的新 Customize tab GA，强调团队可以集中浏览和配置 MCP servers、plugins、skills、canvases。这说明“可扩展 agent 工作台”正在成为开发工具的默认形态，和 OpenClaw/Skill Workshop 的方向高度同频。</p></div>
+  <div class="overview-item"><h4>开放模型继续追 agentic reasoning</h4><p>IBM Granite 4.2 在 Hugging Face 发布，主打 3B/8B/30B dense reasoning、512K context、tool calling、thinking/non-thinking 模式，以及 8B/30B 在沙箱环境中的 agentic RL。开源模型竞争已经从聊天能力转向可控推理、工具调用和可部署性。</p></div>
+  <div class="overview-item"><h4>工作流 UI 和模型压缩都是落地层信号</h4><p>Gradio Workflow 把多步 AI pipeline 做成可运行、可调试、可部署的节点画布；Quantization-Aware Healing 则把压缩模型的恢复训练做成系统问题。一个解决“怎么编排和看见流程”，一个解决“怎么便宜地部署能力”。</p></div>
+  <div class="overview-item"><h4>公开 X 仍不是稳定事实锚点</h4><p>本轮抽样 kevinweil、joshwoodward、AmandaAskell、sama、gdb、karpathy、lilianweng、polynoamial、alexalbert__、OfficialLoganK、JeffDean、demishassabis、miramurati、simonw、HamelHusain、sh_reya、eugeneyan、chipro、hwchase17、natolambert、DrJimFan、fchollet、drfeifei 等，没有把 X-only 内容写成事实。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、全栈 AI 竞争：从“更强模型”转向“更便宜、更快、更可控地完成工作”</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Infrastructure</span><strong>OpenAI / Sarah Friar</strong> · 2026-08-25 07:05 UTC · <a href="https://openai.com/index/the-full-stack-behind-abundant-intelligence/">The full stack behind abundant intelligence</a></div>
+  <div class="summary"><p>OpenAI 把算力策略描述成一个覆盖数据中心、芯片、frontier models、developer platform、消费/企业产品和 AI-native devices 的一体化系统。文章强调不同工作负载需要不同的芯片、软件、网络、电力和延迟组合，OpenAI 会同时使用 Microsoft、NVIDIA、AWS、AMD、Broadcom、Cerebras、CoreWeave、Oracle、SB Energy、SoftBank 等伙伴，同时保留自研路径。</p><p>最值得注意的是指标口径：文章反复强调 useful intelligence per dollar，而不是单纯看峰值算力或模型榜单。它还把 GPT-5.6 Sol 在 coding agent index 上用更少输出 token 达到新高的例子放进经济性叙事里，说明模型、路由、上下文管理和硬件效率会共同决定 agent 能否进入更多真实任务。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 OpenAI、Codex、agent workflow 是主线。今天这条把“模型能力”接到“单位成本完成有效工作”的商业指标上，对 WorkBuddy、OpenClaw 和 AI 产业链研究都更可操作。</div>
+  <div class="action">后续行动：把 AI 基础设施跟踪指标从 capex/芯片型号扩展到 latency、tokens per successful task、routing efficiency、agent retry rate 和 gross margin pressure。</div>
+</div>
+
+<h3>二、Jalapeño：OpenAI 首个自研推理芯片给出实测结果</h3>
+<div class="card">
+  <div class="source"><span class="tag">Inference / Silicon</span><strong>OpenAI</strong> · 2026-08-25 07:00 UTC · <a href="https://openai.com/index/jalapeno-first-results/">Jalapeño’s first results show industry-leading speed and efficiency in AI inference</a></div>
+  <div class="summary"><p>OpenAI 公布 Jalapeño 的首批测试结果，称其在 InferenceX 公共 benchmark 上覆盖 GPT-OSS 120B、DeepSeek R1 670B、Kimi K2.5 1T 等模型，展现更高每瓦吞吐和更低端到端延迟。文章给出的总体区间是：在三类模型上，峰值吞吐下每瓦 AI work 提升约 1.5 到 1.9 倍，端到端延迟降低约 1.7 到 3.6 倍；高交互工作负载下性能提升约 2.1 到 4.1 倍。</p><p>它特别把目标对准 interactive agents：agent 多步串行执行时，单步延迟会累积成任务级失败和成本。OpenAI 还称用 Codex 和 GPT-Astra 在两个月内把三个原本不在生产计划里的开放权重模型优化到高性能，并且部分 GPT-OSS attention/MoE block 的 AI 生成实现比原有人写版本快 1.5 到 1.8 倍。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条直接影响 AI 产业链与推理成本判断。若自研推理芯片真正进入规模部署，OpenAI 的议价、模型服务成本、agent 产品响应速度和供应链组合都会改变。</div>
+  <div class="action">后续行动：跟踪 Jalapeño 年底部署进展、与 NVIDIA/AMD/Cerebras 的互补关系、InferenceX 复测结果，以及 OpenAI 是否把低延迟能力转化为新的 agent SKU。</div>
+</div>
+
+<h3>三、Admin plugin：企业 AI 进入权限、用量和预算治理层</h3>
+<div class="card">
+  <div class="source"><span class="tag">Enterprise AI / Governance</span><strong>OpenAI</strong> · 2026-08-25 00:00 UTC · <a href="https://openai.com/index/introducing-admin-plugin/">Introducing the Admin plugin for ChatGPT Work and Codex</a></div>
+  <div class="summary"><p>OpenAI 发布 Admin plugin for ChatGPT Work and Codex，管理员可以在一个对话里查看 adoption、usage、credit usage、成员/群组、权限、模型或功能访问、额度和支出请求，并执行受支持的管理动作。文章强调插件遵守现有角色与权限，不会扩大访问权；更大范围的变更会让管理员在应用前审查。</p><p>这里的高信号不在“又一个插件”，而在企业 AI 平台的控制面板开始对话化。OpenAI 还披露内部 IT 使用 ChatGPT Work/Codex 处理工单、检索政策、执行受支持任务和升级例外；报告时已部署流程解决约 45% 工单量，同时用支持数据生成运营健康仪表盘。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>WorkBuddy/企业 agent 交付不能只做业务前台，必须进入 admin、权限、预算、审计和例外升级。客户真正关心的是“谁能让 agent 做什么、花多少钱、出错怎么追责”。</div>
+  <div class="action">后续行动：把企业 AI 控制台需求列成模块：成员/角色、模型权限、工具权限、额度预算、审批流、任务日志、异常升级、月度采用报告。</div>
+</div>
+
+<h3>四、Copilot Customize tab：开发者 agent 的扩展市场正在收拢</h3>
+<div class="card">
+  <div class="source"><span class="tag">Developer Tools</span><strong>GitHub</strong> · 2026-08-25 20:05 UTC · <a href="https://github.blog/changelog/2026-08-25-github-copilot-app-customize-tab-is-generally-available/">GitHub Copilot app Customize tab is generally available</a></div>
+  <div class="summary"><p>GitHub Copilot app 的 Customize tab GA，把 MCP servers、plugins、skills、canvases 放在一个可浏览和配置的入口里。GitHub 的定位是让 Copilot 连接团队已有工具、知识和工作流，并让用户按类型探索不同定制能力。</p><p>这与过去两个月 Follow List 里反复出现的“agent workspace / skill / MCP / tool ecosystem”连在一起。未来开发者工具的竞争点不只是模型和 IDE 补全，而是谁能成为团队默认的扩展目录、权限边界和工作流装配层。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OpenClaw 的 skill、plugin、canvas 和 agent 会话形态正被主流平台验证。要注意差异化不能只靠“也有技能”，而要靠可审核、可迁移、可组合和适合个人/小团队的工作流。</div>
+  <div class="action">后续行动：拆解 Copilot Customize tab 的信息架构，反推 OpenClaw 技能市场/插件安装页该展示哪些元数据：权限、示例、适用场景、维护状态、回滚方式。</div>
+</div>
+
+<h3>五、Granite 4.2：开源 reasoning 模型把 tool calling 和 agentic RL 放进主叙事</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Agents</span><strong>IBM Granite / Hugging Face</strong> · 2026-08-25 15:14 UTC · <a href="https://huggingface.co/blog/ibm-granite/granite-4-2">Granite 4.2 LLMs: How They're Built</a></div>
+  <div class="summary"><p>IBM Granite 团队发布 Granite 4.2 技术 walkthrough：3B、8B、30B dense decoder-only reasoning 模型，从头预训练约 15T tokens，context 扩到 512K，SFT 数据包含 chain-of-thought、reasoning 和 agentic trajectory，再通过多阶段 RL 后训练。8B 和 30B 还加入 agentic RL，在真实沙箱环境中学习使用工具。</p><p>产品能力上，它强调 thinking/non-thinking switch、low-effort thinking mode、native tool calling，并给出 Transformers、tool calling、多轮工具响应、agentic coding harnesses 等使用方式。开放模型已经把“能不能接工具、能不能进 coding harness、能不能控制推理预算”放到了发布核心。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 的 Nathan Lambert、Hugging Face、Jim Fan、Francois Chollet 等线索都关注开放模型是否能进入真实工作流。Granite 4.2 是企业友好开源模型向 agentic deployment 靠拢的清晰样本。</div>
+  <div class="action">后续行动：记录 Granite 4.2 的 license、tool calling 格式、long-context 成本和本地推理门槛；后续可用一个固定 agent/coding/eval harness 与 GPT-OSS、Qwen、Kimi 开源模型横向比较。</div>
+</div>
+
+<h3>六、Gradio Workflow 与 Quantization-Aware Healing：落地工程的两块拼图</h3>
+<div class="card">
+  <div class="source"><span class="tag">Workflow UI / Deployment</span><strong>Hugging Face / Gradio</strong> · 2026-08-25 00:00 UTC · <a href="https://huggingface.co/blog/gradio-workflow-guide">Wire It, Run It, Deploy It: AI Workflows in Gradio</a></div>
+  <div class="summary"><p>Gradio 发布 gr.Workflow，核心是把多步 AI pipeline 描述成 typed nodes graph，并直接生成可运行的拖拽画布、可见中间结果、REST API 和一键部署到 Hugging Face Spaces。示例包括图片编辑、并行图像生成、背景移除、voiceover、dataset profiling 和 GPU 模型节点。</p><p>这类工具降低了 AI 应用从 notebook/脚本走向可分享界面的门槛，尤其适合演示、内部工具和小团队快速验证。它和 LangGraph、OpenClaw canvas、Copilot canvases 的共同方向是：AI workflow 需要可视化、可运行、可调试，而不是藏在一段脚本里。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>对 WorkBuddy 来说，很多客户场景先需要“能看懂流程、能改节点、能复现结果”的交付物。Gradio Workflow 是一个可借鉴的轻量形态。</div>
+  <div class="action">后续行动：评估 Gradio Workflow 是否适合做客户 PoC 的 pipeline 展示层，尤其是多模型、多媒体、数据处理和人工审阅节点。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Model Efficiency</span><strong>Multiverse Computing / Hugging Face</strong> · 2026-08-25 11:39 UTC · <a href="https://huggingface.co/blog/MultiverseComputingCAI/quantization-aware-healing">Quantization-Aware Healing</a></div>
+  <div class="summary"><p>Multiverse Computing 介绍 Quantization-Aware Healing，目标是在模型已经结构压缩并量化到 4-bit 之后恢复能力。文章称，他们把 GPT-OSS 120B 压缩到 60B 并量化到 MXFP4 后，通过 QAH 让 4-bit 模型在 9 个 benchmark 中 7 个超过其 full-precision 版本。</p><p>这条需要谨慎看待：它是团队博客和论文口径，仍需独立复现。但方向重要，因为实际部署里模型经常先被压缩再量化，传统 healing 或 QAT 不一定适配这种“压缩 + 量化”组合。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>推理成本是 agent 扩张的硬约束。若压缩模型能在特定任务上恢复甚至超过原 checkpoint，就会影响本地部署、边缘部署和企业私有化方案。</div>
+  <div class="action">后续行动：把 QAH 放入开放模型部署观察清单，重点看复现实验、模型卡、训练成本、真实任务表现和是否只对特定 benchmark 有效。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI 全栈策略：</strong>将数据中心、芯片、模型、开发者平台、企业/消费产品和设备统一到 useful intelligence per dollar 的经济性指标下。</li>
+  <li><strong>OpenAI Jalapeño：</strong>首个自研推理芯片公开测试，面向 interactive agents 的低延迟和每瓦吞吐成为核心卖点，计划年底开始部署进 OpenAI 基础设施。</li>
+  <li><strong>OpenAI Admin plugin：</strong>ChatGPT Work/Codex 管理员可在对话中分析使用、管理权限和处理额度/支出请求，企业 AI 治理入口进一步产品化。</li>
+  <li><strong>GitHub Copilot：</strong>Customize tab GA，把 MCP servers、plugins、skills、canvases 聚合成 Copilot 扩展入口。</li>
+  <li><strong>Hugging Face / IBM Granite：</strong>Granite 4.2 发布，开源 reasoning 模型强调 512K context、native tool calling、thinking 模式和 agentic RL。</li>
+  <li><strong>Hugging Face / Gradio：</strong>gr.Workflow 把 AI pipeline 做成节点画布、REST API 和 Spaces 部署物，适合快速 PoC 和可视化调试。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI：</strong>今天几乎占据高信号核心：基础设施、推理芯片、企业管理插件、影响行动治理四条线同时更新，说明它在补模型之外的全栈控制面。</li>
+  <li><strong>GitHub：</strong>Copilot app 正从代码助手变成团队 AI 工作台，Customize tab 是“扩展生态入口”的关键产品化动作。</li>
+  <li><strong>Hugging Face：</strong>继续是开放模型、部署工作流和模型效率的发现源；今天的 Granite 4.2 与 Gradio Workflow 都贴近 agent 工程落地。</li>
+  <li><strong>Simon Willison：</strong>本窗口新增 EVE Online Python 3 迁移记录，工程文化价值高，但与本 Follow List 的 AI/agent 主线关联较弱，本期不展开。</li>
+  <li><strong>Follow List X 账号：</strong>公开镜像未发现窗口内新增可用条目，不对个人账号做“无更新”以外的事实推断。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ol>
+  <li><strong>AI 成本指标升级：</strong>为 AI 产业链研究增加 agent 任务级经济性指标，而不只看训练芯片和模型 benchmark。</li>
+  <li><strong>企业 AI 管理控制台：</strong>参考 Admin plugin 与 Copilot Customize tab，设计 WorkBuddy 的权限、额度、插件、技能、审批和审计模块。</li>
+  <li><strong>Jalapeño 跟踪表：</strong>记录 OpenAI 自研芯片的部署时间、合作伙伴变化、benchmark 复现和对推理价格的潜在影响。</li>
+  <li><strong>开放模型 agent harness：</strong>用 Granite 4.2、GPT-OSS、Qwen、Kimi 等跑同一组 tool-use / coding / eval 任务，比较可靠性和部署成本。</li>
+  <li><strong>Workflow UI PoC：</strong>用 Gradio Workflow 或 OpenClaw canvas 做一个可视化客户交付 demo，把节点执行、中间产物、审批和最终报告串起来。</li>
+</ol>
+
+<h2>待验证信息</h2>
+<ul>
+  <li>Jalapeño 的性能结果来自 OpenAI 官方发布，需等待第三方复测、更多 workload 细节和实际部署数据。</li>
+  <li>OpenAI 对 GPT-5.6 Sol coding agent index 的成本/输出 token 表述需要结合 Artificial Analysis 原始榜单和任务定义交叉验证。</li>
+  <li>Admin plugin 的实际可用范围、企业版权限模型、审批粒度和审计日志，需要等产品文档或实测确认。</li>
+  <li>GitHub Copilot Customize tab 的 MCP/plugin/skill/canvas 权限边界和组织级分发机制，需要后续实测。</li>
+  <li>Granite 4.2 的 agentic RL、512K context 和 tool calling 表现，需要通过独立 benchmark 与真实任务验证。</li>
+  <li>Quantization-Aware Healing 的“4-bit 超过 full-precision”结果来自团队博客，需看论文、代码、训练配置和独立复现。</li>
+  <li>LangChain RSS 本轮出现旧文被标成 2026-08-25 的异常；除非源站更正或有新公告，不作为今日新增。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>OpenAI 影响行动报告很重要，但与本日报的 agent/product/infra 主线相比偏安全治理背景；已保留原始链接，后续可单独做 AI 信息战专题。</li>
+  <li>GitHub rule insights、push rules path exceptions 和 security advisory block users 对仓库治理有用，但不是 AI agent 主线，作为工程治理背景观察。</li>
+  <li>Google AI Blog 今天的家居装饰搜索技巧偏消费搜索场景，和 Follow List 关注的 agent/工程/研究线关联较弱。</li>
+  <li>Simon 的 EVE Online Python 3 迁移是长期软件维护案例，适合作为工程文化阅读，不进入今天高价值要点。</li>
+  <li>explainx sitemap 最新仍停在 2026-08-19，AI 播客索引 JSON updatedAt 仍为 2026-07-02，均无本窗口新增。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/index/the-full-stack-behind-abundant-intelligence/">OpenAI · The full stack behind abundant intelligence</a></li>
+  <li><a href="https://openai.com/index/jalapeno-first-results/">OpenAI · Jalapeño’s first results show industry-leading speed and efficiency in AI inference</a></li>
+  <li><a href="https://openai.com/index/introducing-admin-plugin/">OpenAI · Introducing the Admin plugin for ChatGPT Work and Codex</a></li>
+  <li><a href="https://openai.com/index/disrupting-malicious-uses-of-ai-influence-campaign-russia/">OpenAI · Disrupting a new covert influence campaign from Russia</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-25-github-copilot-app-customize-tab-is-generally-available/">GitHub · Copilot app Customize tab is generally available</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-25-rule-insights-dashboard-generally-available/">GitHub · Rule insights dashboard generally available</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-25-push-rules-in-rulesets-now-support-path-exceptions/">GitHub · Push rules in rulesets now support path exceptions</a></li>
+  <li><a href="https://huggingface.co/blog/ibm-granite/granite-4-2">Hugging Face · Granite 4.2 LLMs: How They're Built</a></li>
+  <li><a href="https://huggingface.co/blog/gradio-workflow-guide">Hugging Face · Wire It, Run It, Deploy It: AI Workflows in Gradio</a></li>
+  <li><a href="https://huggingface.co/blog/MultiverseComputingCAI/quantization-aware-healing">Hugging Face · Quantization-Aware Healing</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI Blog RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Weblog Atom</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://huyenchip.com/feed.xml">Chip Huyen RSS</a></li>
+  <li><a href="https://eugeneyan.com/rss/">Eugene Yan RSS</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-08-25T00:00:00Z / 2026-08-26T00:00:00Z.</footer>
