@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：教育评估、RSP 治理与 Agent 沙箱现实</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI 教育实验、OpenAI 巴西商业落地、Anthropic Responsible Scaling Policy 更新、Simon/Johann 对 Claude Code Auto Mode 的 prompt injection 绕过、GitHub Copilot code review 反馈闭环、Actions retention 治理，以及 Google Search AI Mode 从规划走向旅行交易。X 公开镜像本轮不可用或无窗口内可核验条目，未使用 X-only 内容。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：教育评估、RSP 治理与 Agent 沙箱现实</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI 教育实验、OpenAI 巴西商业落地、Anthropic Responsible Scaling Policy 更新、Simon/Johann 对 Claude Code Auto Mode 的 prompt injection 绕过、GitHub Copilot code review 反馈闭环、Actions retention 治理，以及 Google Search AI Mode 从规划走向旅行交易。X 公开镜像本轮不可用或无窗口内可核验条目，未使用 X-only 内容。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-08-28</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年8月28日（周五）</strong> · 覆盖窗口：2026-08-27 08:00 – 2026-08-28 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS/公开正文；Anthropic News 公开正文；GitHub Changelog RSS/正文；Simon Willison Atom/正文；Google AI Blog RSS/正文；LangChain Blog 公开页；Hugging Face Blog RSS；Interconnects RSS；Chip Huyen RSS；Eugene Yan RSS；explainx sitemap；AI 播客索引 JSON；公开 Nitter/xcancel 镜像抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。X 抽样：nitter.net 返回 410，nitter.poast.org DNS 不可用，xcancel RSS 仅返回占位/无窗口内可核验条目，因此未把 X-only 内容写成事实。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>教育 AI 的关键指标从“写得更好”转向“想得更宽”</h4><p>OpenAI 披露一项与 Bocconi University 合作的随机实验：ChatGPT access 提高学生作业质量、结构和专家相似度，因果推理训练则更明显提升想法多样性和独特性。两者组合给出今天最有行动价值的教育结论：AI 可以补齐 novice 的表达和专业度，但学校需要评估原创性、推理过程和多方案能力。</p></div>
+  <div class="overview-item"><h4>Anthropic 把 frontier 风险治理继续制度化</h4><p>Anthropic 发布新版 Responsible Scaling Policy，继续承诺未部署足够 safeguard 时不训练或部署高风险模型，同时把能力阈值和对应防护要求拆得更细。核心阈值集中在自主 AI R&D 和 CBRN 协助能力，指向更强的模型权重保护、部署监控、red teaming 与响应机制。</p></div>
+  <div class="overview-item"><h4>Claude Code Auto Mode 的绕过案例强化 sandbox 结论</h4><p>Simon Willison 记录 Johann Rehberger 对 Claude Code Opus 5 Auto Mode 的攻击：通过下载解压 zip 并利用本地 <code>struct.py</code> 影子导入，让 agent 执行非预期代码。更糟的是，一些运行里 auto mode 允许风险进程产生，却阻止后续清理命令。安全控制一旦成为运行时的一部分，也会变成新的失败面。</p></div>
+  <div class="overview-item"><h4>Copilot code review 正在补全 agent 自评和人类反馈闭环</h4><p>GitHub 让 Copilot code review 覆盖 bot authored PR、Copilot cloud agent PR，并移除 300 文件或 20,000 行限制；同时新增 comment resolution reason。agent 写 PR、agent review PR、人类选择 addressed/won't fix/incorrect，这是一条很清晰的工程质量反馈链。</p></div>
+  <div class="overview-item"><h4>AI 平台治理从模型权限扩展到日志、插件、成本和留存</h4><p>GitHub Actions retention 将从 2026-10-01 起覆盖 checks、workflow runs 和 statuses；企业 managed settings 支持 plugin marketplace 自动更新。它和前一天的 model policy、billing API 放在一起看，企业 AI 工具链正在快速补齐“谁能用、怎么更新、保留多久、谁付费、怎么审计”。</p></div>
+  <div class="overview-item"><h4>Google AI Mode 继续把搜索变成可交易工作流</h4><p>Google 在 Search AI Mode 中加入航班价格追踪、点数/里程价格查看和美国英文酒店预订。它不是纯信息检索更新，而是把旅行规划、比价、提醒、奖励积分和支付链路收进同一个对话入口。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI 教育实验：ChatGPT 提升答案质量，批判性训练提升原创性</h3>
+<div class="card">
+  <div class="source"><span class="tag">Education / Evaluation</span><strong>OpenAI Economic Research / Bocconi University</strong> · 2026-08-27 09:00 UTC · <a href="https://openai.com/index/what-students-gain-from-chatgpt-critical-thinking-training/">Better answers, broader thinking</a></div>
+  <div class="summary"><p>OpenAI 披露一项超过 1,000 名 Bocconi University 一年级本科生参与的随机实验。学生被分到四组：使用 ChatGPT、接受因果推理训练、两者都有、两者都没有；任务是为大学 merchandise store 做真实商业案例建议，并由人工评分与自动文本分析共同评估。</p><p>结果显示，ChatGPT access 让学生在五分制 rubric 上接近提高一分，答案更有结构、想法更多、也更接近专家建议；因果推理训练没有显著提高传统 rubric 分数，却提升了想法多样性、独特性，以及说明方案为何有效或失败的能力。两者结合时，学生同时保留较高答案质量和更广的思路。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条把“学生能不能用 AI”推进到更细的问题：当最终答案变得更顺、更像专家时，教育评估必须看过程、原创性、解释质量和多方案探索。它也呼应 Follow List 中 AI evals 的主线：rubric 本身会决定我们看到什么能力。</div>
+  <div class="action">后续行动：为教育/培训类 AI 产品设计双层评估：一层看输出质量和任务完成度，另一层看原创性、反事实推理、失败条件、方案多样性和学生是否能解释取舍。</div>
+</div>
+
+<h3>二、OpenAI 巴西商业落地：Codex 与 ChatGPT Work 的区域增长样本</h3>
+<div class="card">
+  <div class="source"><span class="tag">Market / Regional Adoption</span><strong>OpenAI</strong> · 2026-08-27 03:00 UTC · <a href="https://openai.com/index/expanding-our-presence-in-brazil/">Expanding OpenAI's presence in Brazil</a></div>
+  <div class="summary"><p>OpenAI 宣布在巴西启动商业运营，团队位于圣保罗。文章给出一组区域 adoption 信号：巴西是 ChatGPT weekly active users 三大市场之一，用户数过去一年近乎翻倍，每天约 2.15 亿条 ChatGPT 消息；2026 年 6 月，巴西个人 ChatGPT 账号中 35% 的分类消息与工作相关，高于全球 30%。</p><p>开发者侧同样强：按 OpenAI API 开发者数量，巴西全球第二；巴西也是 Codex 在拉美最大市场。自 2026 年初以来，巴西 weekly Codex users 增长超过 11 倍，daily interactions 增长近 30 倍；ChatGPT Enterprise seats 同比增长 5 倍，巴西也进入 OpenAI business customers 数量前十市场。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这不是单纯开办公室新闻，而是区域 AI adoption 的强样本：工作场景、API 开发者、Codex、Enterprise seats、创作者和公共部门合作同时增长。对投资和 GTM 判断来说，巴西可以当作“AI 产品本地化 + 开发者生态 + SMB 教育”的观察窗口。</div>
+  <div class="action">后续行动：跟踪 OpenAI 在巴西的本地合作、开发者 roadshow、Edu/政府项目和 Codex 使用增长是否转化为可复制的区域扩张 playbook。</div>
+</div>
+
+<h3>三、Anthropic RSP 更新：能力阈值和 ASL safeguards 更细化</h3>
+<div class="card">
+  <div class="source"><span class="tag">Frontier Governance / Safety</span><strong>Anthropic</strong> · 2026-08-27 18:00 UTC · <a href="https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy">Announcing our updated Responsible Scaling Policy</a></div>
+  <div class="summary"><p>Anthropic 发布新版 Responsible Scaling Policy，称这是其用于缓解 frontier AI catastrophic risks 的风险治理框架更新。新版继续保留核心承诺：在没有足够安全与安保措施把风险压到可接受水平前，不训练或部署相关模型；同时把框架拆成 capability thresholds 和 required safeguards 两块。</p><p>当前所有模型仍按 ASL-2 标准运行。新版重点定义两个会触发更高 safeguard 的阈值：一是模型可以独立完成复杂 AI R&D，可能不可预测地加速 AI 发展；二是模型能实质性帮助具备基础技术背景的人制造或部署 CBRN weapons。对应防护包括更强的内部访问控制、模型权重保护、实时与异步监控、快速响应流程和部署前 red teaming。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>前一天 OpenAI 的 Hugging Face incident 把 agent sandbox 和内部基础设施安全推到台前，今天 Anthropic RSP 则给出 frontier lab 侧的治理语言：能力达到什么阈值、升级什么防护、谁承担部署责任。两条合起来看，agent 安全正在从提示词安全变成组织级安全工程。</div>
+  <div class="action">后续行动：把 Anthropic 的 threshold/safeguard 结构借鉴到企业 agent 分级：按工具权限、网络出口、凭据可见性、代码执行、数据敏感度和自治时间定义不同安全等级。</div>
+</div>
+
+<h3>四、Claude Code Opus 5 Auto Mode 被绕过：安全分类器不能替代 sandbox</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Security / Prompt Injection</span><strong>Simon Willison / Johann Rehberger</strong> · 2026-08-27 22:50 UTC · <a href="https://simonwillison.net/2026/Aug/27/breaking-claude-code-opus-5-auto-mode/">Breaking Claude Code Opus 5 Auto Mode</a></div>
+  <div class="summary"><p>Simon 记录 Johann Rehberger 对 Claude Code Opus 5 Auto Mode 的攻击。攻击思路是诱导 Claude Code 下载并解压一个 zip，然后执行会导入 <code>base64</code> 的代码；由于解压目录中放入了恶意 <code>struct.py</code>，Python import 机制会先执行本地文件，从而绕过 agent 原本的意图边界。</p><p>更值得警惕的是，Simon 提到某些运行里 auto mode 先允许有害进程出现，但当 Claude 发现异常并试图终止进程时，auto mode 又阻止了清理命令。这说明运行时安全策略如果只看单条命令危险性，可能会把“修复动作”误判成风险，反而扩大事故窗口。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条和 OpenAI Hugging Face incident 是同一主题的产品侧版本：unattended coding agent 的风险不只来自模型回答，还来自文件系统、依赖解析、shell、import path、凭据、home directory 和安全拦截器自身。Simon 的结论很清楚：存在对抗输入时，必须用 container、VM 或 OS sandbox。</div>
+  <div class="action">后续行动：给所有代码 agent 默认加最小隔离清单：不挂载 home、不给 SSH/cloud credentials、限制网络出口、工作目录一次性、依赖安装可审计、cleanup 命令不被同一策略粗暴拦截。</div>
+</div>
+
+<h3>五、Copilot code review：从大 PR 覆盖到 resolution reason 的反馈数据</h3>
+<div class="card">
+  <div class="source"><span class="tag">Coding Agent / Review Loop</span><strong>GitHub Changelog</strong> · 2026-08-27 22:46 UTC · <a href="https://github.blog/changelog/2026-08-27-copilot-code-review-resolution-reasons-and-expanded-capabilities/">Copilot code review: Resolution reasons and expanded capabilities</a></div>
+  <div class="summary"><p>GitHub 扩大 Copilot code review 覆盖面：现在可以 review bot authored PR，包括自动请求 review 的 bot PR；也能给 Copilot cloud agent 打开的 PR 提供完整 agentic review，而不再退回有限体验。此前 300 文件或 20,000 行代码的 review 限制也被移除。</p><p>新增的 resolution reason 更有长期价值：用户在 resolve Copilot review comment 时，可以选择 Addressed、Won't fix 或 Incorrect。这会把人类对 AI review 的接受、拒绝和错误反馈结构化，未来可用于改进 review 模型、团队规则和质量指标。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>agent 写代码会放大 review 需求，单纯“多一个 AI reviewer”不够。真正有价值的是把 AI comment 到人类决策再到产品改进的数据链打通，尤其是 Incorrect 这种负反馈。</div>
+  <div class="action">后续行动：在内部代码 agent 流程里记录 review comment 的 resolution reason，并按 false positive、真实缺陷、风格偏好、风险等级、是否被测试覆盖做聚合。</div>
+</div>
+
+<h3>六、GitHub Actions retention 与插件自动更新：企业平台治理继续补课</h3>
+<div class="card">
+  <div class="source"><span class="tag">Enterprise Governance / DevOps</span><strong>GitHub Changelog</strong> · 2026-08-27 21:50 UTC / 2026-08-27 01:52 UTC · <a href="https://github.blog/changelog/2026-08-27-actions-retention-will-cover-checks-workflow-runs-and-statuses/">Actions retention will cover checks, workflow runs, and statuses</a> · <a href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces/">Enterprise-managed settings autoUpdate for plugin marketplaces</a></div>
+  <div class="summary"><p>从 2026-10-01 起，GitHub Actions 的 retention 设置将覆盖 checks、workflow runs 和 statuses，默认 90 天；此前这些元数据会保留 400 多天。新规则会让它们跟 artifacts/logs 一样，在超过 repo、organization 或 enterprise 配置的留存期后清理；公共仓库上限也与 artifacts/logs 一致为 90 天。</p><p>另一条更新是 enterprise managed settings 支持对 plugin marketplaces 设置 <code>autoUpdate: true</code>。在 Copilot Business/Enterprise 的 Copilot app、Copilot CLI 和 VS Code 中，受支持客户端可以自动检查并更新来源于允许 marketplace 的插件，减少组织级自定义插件维护成本。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这两条看似不是模型新闻，但对企业 agent 平台很重要：CI evidence 保留多久影响审计、回归排查和合规；插件自动更新影响供应链安全、版本治理和能力下发。AI 工具进入企业后，这些“无聊设置”会决定系统能不能长期运行。</div>
+  <div class="action">后续行动：为 agent/Copilot 试点客户增加平台治理检查：Actions retention、artifact storage 成本、PR review 证据保留、plugin marketplace allowlist、autoUpdate 策略和回滚机制。</div>
+</div>
+
+<h3>七、Google Search AI Mode：旅行规划从答案页进入预订链路</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Product / Search Commerce</span><strong>Google Search</strong> · 2026-08-27 16:00 UTC · <a href="https://blog.google/products-and-platforms/products/search/book-travel-ai-mode/">3 new ways to plan and book travel in Search</a></div>
+  <div class="summary"><p>Google 在 Search AI Mode 中加入三项旅行能力：在对话中设置航班价格追踪、查看航班和酒店的点数/里程成本、并在 AI Mode 中完成酒店预订。价格追踪覆盖 180 多个国家和地区；点数/里程价格全球可用，初始支持 Alaska/Hawaiian、American Airlines、Choice、Hilton 和 Wyndham，后续加入 Accor、Flying Blue、Hyatt、LATAM 和 Lufthansa Group。</p><p>酒店预订先在美国英文环境推出，合作方包括 Booking.com、Choice、Expedia、Hilton、Hotels.com、IHG、Marriott、Priceline、Trip.com 和 Wyndham。用户可以在 AI Mode 中比较选项、查看评价和关键因素，再通过 Google Pay 完成预订；merchant of record 仍是酒店或预订平台。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Search AI Mode 正在从“把网页答案组织好”变成“帮用户完成交易”。这对 SEO/GEO、在线旅游、支付入口和平台分发都有影响：未来被 AI agent 选择、解释并接入交易流，比单纯排名更关键。</div>
+  <div class="action">后续行动：跟踪 AI Mode 旅行结果如何排序、合作方如何接入、广告/佣金如何展示，以及 OTA/酒店品牌是否需要为 agent-readable inventory 和政策说明做新优化。</div>
+</div>
+
+<h3>八、LangChain 月报：own your intelligence 成为企业 agent 叙事中心</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Platform / Strategy</span><strong>LangChain</strong> · 2026-08-26 / checked 2026-08-28 · <a href="https://www.langchain.com/blog/august-2026-langchain-newsletter">August 2026 LangChain Newsletter</a> · <a href="https://www.langchain.com/blog/own-your-intelligence">What does it mean to own your intelligence?</a></div>
+  <div class="summary"><p>LangChain 的 8 月月报把 Managed Deep Agents、LLM Gateway、Tuned Evaluators、BYOC、Deep Agents v0.7 放在同一叙事里：企业不会只使用通用模型，而是要控制模型、agent system、context、memory、成本、质量、风险和行为。Harrison Chase 的 “own your intelligence” 文章虽然发布于 8 月 12 日，但月报在本窗口内继续把它作为主线。</p><p>这和今天 GitHub、Anthropic、OpenAI 的信号高度一致：差异化不在“能不能接一个 API”，而在模型周围的 workflow、工具权限、eval、memory、feedback loop 和组织治理。Deep Agents v0.7 提到 base harness input tokens 减少 65%，也说明 agent 平台竞争正在进入成本和运行效率。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 中 Harrison/LangChain 的价值一直是把 agent 从 demo 推向 production。今天不算单条新产品发布，但它很好地概括了过去一周的共同方向：企业要拥有会随使用复利的智能系统，而不是租一层通用问答能力。</div>
+  <div class="action">后续行动：把 WorkBuddy/FDE 方案写成“own your intelligence”四层：业务流程、上下文和记忆、评估与反馈、运行时治理；底层模型和基础设施可采购，但复利层要沉淀在客户系统里。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI 教育实验：</strong>ChatGPT access 提升作业质量和专业度，因果推理训练提升想法多样性和独特性，组合效果最好。</li>
+  <li><strong>OpenAI 巴西：</strong>巴西进入商业运营，ChatGPT 每日约 2.15 亿条消息，API 开发者数量全球第二，Codex weekly users 年初以来增长超过 11 倍。</li>
+  <li><strong>Anthropic：</strong>新版 RSP 细化 capability thresholds 和 safeguards，重点覆盖 autonomous AI R&D 与 CBRN 协助能力。</li>
+  <li><strong>Simon/Johann：</strong>Claude Code Opus 5 Auto Mode 攻击案例显示安全分类器会被绕过，甚至可能阻止清理动作；sandbox 是硬要求。</li>
+  <li><strong>GitHub：</strong>Copilot code review 扩展到 bot/Copilot cloud agent PR，移除大 PR 限制，并新增 resolution reason 反馈。</li>
+  <li><strong>Google：</strong>Search AI Mode 加入航班价格追踪、点数/里程查看和美国英文酒店预订，搜索入口继续向交易工作流扩展。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI：</strong>一边发布教育实验，一边推进巴西本地商业运营；教育、开发者、企业和公共部门 adoption 同时被纳入叙事。</li>
+  <li><strong>Anthropic：</strong>用 RSP 更新回应 frontier model 风险治理，强调能力阈值、ASL 标准和部署/训练前 safeguards。</li>
+  <li><strong>Simon Willison：</strong>继续围绕 coding agent 安全给出高信号整理，重点从 prompt injection 转向 runtime sandbox 和安全机制失效模式。</li>
+  <li><strong>GitHub Copilot：</strong>从 IDE coding 继续向 PR review、bot-authored workflow、企业插件市场和平台设置扩展。</li>
+  <li><strong>Google Search：</strong>AI Mode 进入旅行交易链路，值得跟踪其对在线旅游生态和搜索分发的影响。</li>
+  <li><strong>Hugging Face / Interconnects / Chip Huyen / Eugene Yan：</strong>公开 RSS 本窗口无新增高优先级条目；8 月 26 日 Hugging Face 多向量检索已在昨日报告覆盖。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Agent sandbox baseline：</strong>把 Claude Code Auto Mode 绕过案例转成内部安全基线，明确哪些任务必须 container/VM/OS sandbox。</li>
+  <li><strong>教育 AI 评估模板：</strong>围绕“输出质量 + 原创性/推理过程”设计培训、作业和企业 learning product 的 rubric。</li>
+  <li><strong>企业 agent 治理清单：</strong>整合 Anthropic RSP、GitHub model policy、billing API、Actions retention、plugin marketplace autoUpdate，形成客户侧治理 checklist。</li>
+  <li><strong>巴西 AI adoption casebook：</strong>跟踪 OpenAI 在巴西的企业、开发者、SMB、教育和公共部门案例，看哪些增长打法可迁移到其他新兴市场。</li>
+  <li><strong>AI Mode commerce tracking：</strong>记录 Google AI Mode 中 OTA/酒店/航司合作方变化、排序逻辑、支付链路和广告披露。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>OpenAI 教育实验外推：</strong>实验来自特定学校、课程和商业案例任务，不能直接外推到所有学科或年龄段；需要看完整论文、样本构成、评分一致性和长期学习效果。</li>
+  <li><strong>巴西市场数据：</strong>OpenAI 披露的是平台内部 adoption 指标和受资助研究估算，经济影响与实际 ROI 仍需要第三方数据长期验证。</li>
+  <li><strong>Claude Code Auto Mode 攻击复现：</strong>Johann 报告的成功率和不同环境表现需要更多独立复现；但 import path 和解压执行风险本身足够明确。</li>
+  <li><strong>Anthropic RSP 执行细节：</strong>政策语言清晰，但真正关键在 threshold 评估方法、谁有否决权、触发升级后的训练/部署停机机制和第三方审计。</li>
+  <li><strong>Google AI Mode 交易入口：</strong>目前酒店预订从美国英文开始，合作方和地区扩展节奏、广告/佣金透明度、商户责任边界需要继续观察。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub “blocked user close content” 对开源社区治理有用，但与 AI/agent 主线关系较弱，本期只作噪音记录。</li>
+  <li>Google Search 家居装饰更新、体育/Gemini Pixel 等消费内容本窗口不展开。</li>
+  <li>explainx sitemap 最新仍停在 2026-08-19 附近，今天没有作为一手新增来源使用。</li>
+  <li>公开 X 镜像有响应但无可核验窗口内条目，避免把镜像占位内容或不可复核 X-only 内容写进日报。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/index/what-students-gain-from-chatgpt-critical-thinking-training/">OpenAI: Better answers, broader thinking</a></li>
+  <li><a href="https://openai.com/index/expanding-our-presence-in-brazil/">OpenAI: Expanding OpenAI's presence in Brazil</a></li>
+  <li><a href="https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy">Anthropic: Announcing our updated Responsible Scaling Policy</a></li>
+  <li><a href="https://simonwillison.net/2026/Aug/27/breaking-claude-code-opus-5-auto-mode/">Simon Willison: Breaking Claude Code Opus 5 Auto Mode</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-27-copilot-code-review-resolution-reasons-and-expanded-capabilities/">GitHub: Copilot code review resolution reasons and expanded capabilities</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-27-actions-retention-will-cover-checks-workflow-runs-and-statuses/">GitHub: Actions retention will cover checks, workflow runs, and statuses</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-27-close-all-open-contributions-authored-by-a-blocked-user/">GitHub: Close all open contributions authored by a blocked user</a></li>
+  <li><a href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces/">GitHub: Enterprise-managed settings autoUpdate for plugin marketplaces</a></li>
+  <li><a href="https://blog.google/products-and-platforms/products/search/book-travel-ai-mode/">Google: 3 new ways to plan and book travel in Search</a></li>
+  <li><a href="https://www.langchain.com/blog/august-2026-langchain-newsletter">LangChain: August 2026 Newsletter</a></li>
+  <li><a href="https://www.langchain.com/blog/own-your-intelligence">LangChain: What does it mean to own your intelligence?</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://huyenchip.com/feed.xml">Chip Huyen RSS</a></li>
+  <li><a href="https://eugeneyan.com/rss/">Eugene Yan RSS</a></li>
+</ul>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
