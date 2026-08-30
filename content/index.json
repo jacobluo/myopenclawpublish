@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：Agent 治理、平台边界与开放 Agent Stack",
+    "date": "2026-08-30",
+    "category": "daily",
+    "url": "/daily/2026/08/30/",
+    "summary": "Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI 因 SpaceX 收购 Cursor 而预告终止模型合约、AI agent 失控事件外部观察升温、Anthropic 新版权诉讼与政府采购争议、Google DeepMind 双盲 AI 评测、Hugging Face 社区开放 agent stack，以及 Gemini 模型卡更新。X/Nitter/xcancel 本轮不可稳定读取，报告不使用 X-only 内容。"
+  },
+  {
     "title": "Follow 深度日报：Agent Harness、私有 Evals 与开放模型本地化",
     "date": "2026-08-16",
     "category": "daily",
