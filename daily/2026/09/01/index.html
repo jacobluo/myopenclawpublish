@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：广告商业化、Agent 供应链与运行时分层</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI 广告收入与 DSA 监管压力、ChatGPT/Work 可用性、Anthropic 版权与算力采购、LangChain 对 agent runtime/framework/harness 的分层、Hugging Face 社区对 agent 供应链事故和技术写作的讨论。公开 X/Nitter/xcancel 本轮仍不可稳定读取，报告不使用 X-only 内容。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：广告商业化、Agent 供应链与运行时分层</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI 广告收入与 DSA 监管压力、ChatGPT/Work 可用性、Anthropic 版权与算力采购、LangChain 对 agent runtime/framework/harness 的分层、Hugging Face 社区对 agent 供应链事故和技术写作的讨论。公开 X/Nitter/xcancel 本轮仍不可稳定读取，报告不使用 X-only 内容。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-09-01</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年9月1日（周二）</strong> · 覆盖窗口：2026-08-31 08:00 – 2026-09-01 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI/Anthropic/Google/Hugging Face/LangChain/Simon/Hamel 等公开网页、新闻报道与博客聚合页面。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。X 抽样：xcancel RSS 对 Follow List 重点账号返回 403，nitter.net 返回 410，nitter.tiekoetter.com 返回 429，因此本期不把 X-only 贴文写成事实。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>OpenAI 的增长叙事从订阅/API 扩展到广告</h4><p>Axios 与 Business Insider 报道称 ChatGPT Ads 年化收入 run rate 已达 10 亿美元，免费层商业化开始成为 OpenAI 资金闭环的一部分。对 Follow List 的 OpenAI 主线来说，这意味着产品方向不只看模型和 agent，也要看搜索、推荐、广告和企业信任之间的张力。</p></div>
+  <div class="overview-item"><h4>ChatGPT 被纳入更重的欧洲平台监管</h4><p>Financial Times 报道欧盟把 ChatGPT、Reddit、Roblox 等纳入 DSA 更严格规则范围。若监管口径稳定，ChatGPT 不再只是 AI 工具，还会按超大平台承担内容安全、未成年人保护和透明度义务。</p></div>
+  <div class="overview-item"><h4>Agent 产品的可靠性问题开始进入普通新闻周期</h4><p>8 月 31 日多家媒体报道 Microsoft 365、Outlook 与 ChatGPT 出现服务异常，OpenAI 状态更新称部分订阅用户无法启动或继续任务。对 Work/Codex 类长任务产品来说，可用性和恢复能力会直接影响“交给 agent 做事”的信任。</p></div>
+  <div class="overview-item"><h4>Anthropic 同时面对版权诉讼与算力采购压力</h4><p>Guardian 报道音乐出版方就 Claude 训练数据提起诉讼；WSJ 报道 Anthropic 签下大型云计算协议。一个是数据权利边界，一个是算力供给边界，都指向 frontier lab 商业化的真实约束。</p></div>
+  <div class="overview-item"><h4>LangChain 把 agent stack 讲清楚：runtime、framework、harness</h4><p>LangChain 近期文章将 LangGraph 定位为 runtime，LangChain 定位为 framework，Deep Agents 定位为 harness。这个分层对评估 Codex、Claude Code、OpenClaw、LangGraph 和自研 agent runtime 很有用。</p></div>
+  <div class="overview-item"><h4>低噪声结论：Agent 从能力竞争进入制度竞争</h4><p>今天没有新的单一模型发布压倒全场。更值得跟踪的是商业模式、监管分类、服务可用性、版权/数据权利、算力金融结构、运行时分层和供应链安全，这些会决定 agent 能不能被企业长期采用。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI 广告收入破 10 亿美元 run rate：ChatGPT 免费层开始变成媒体/搜索生意</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Business Model</span><strong>Axios / Business Insider / MarketWatch</strong> · 2026-08-31 · <a href="https://www.axios.com/2026/08/31/openai-chatgpt-ads-1b-revenue-run-rate">Axios</a> · <a href="https://www.businessinsider.com/openai-chatgpt-ad-revenue-ipo-2026-8">Business Insider</a> · <a href="https://www.marketwatch.com/story/sam-altman-once-called-ads-a-last-resort-now-openai-is-on-track-for-1-billion-in-revenue-from-them-14c61945">MarketWatch</a></div>
+  <div class="summary"><p>多家媒体今天报道，OpenAI 称 ChatGPT Ads 在推出不到 200 天后达到约 10 亿美元年化收入 run rate，广告主覆盖 40 多个国家。报道还提到 OpenAI 正向投资人描绘更长期的广告收入目标，并把自助广告平台扩展到印度、欧洲、中东和北非等区域。</p><p>这条消息对 AI agent 不是外围商业新闻。ChatGPT 如果越来越像搜索/推荐入口，Work、Codex、购物、研究、文件生成等任务流都可能与广告、赞助结果、排序透明度和用户信任发生关系；“帮我完成任务”和“向我推荐供应商/工具/商品”的边界会变敏感。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 中 Sam Altman、Kevin Weil、OpenAI 产品线的核心问题之一，是 ChatGPT 如何从订阅和 API 扩展成超级入口；广告是入口商业化的最直接信号。</div>
+  <div class="action">后续行动：在 OpenAI/ChatGPT 产品观察表新增“广告暴露面、免费层能力、任务型推荐、赞助标识、企业版隔离”五个字段；尤其跟踪 Work/Codex 是否保持无广告或强隔离。</div>
+</div>
+
+<h3>二、DSA 将 ChatGPT 推向平台监管：AI 工具也可能被按超大平台治理</h3>
+<div class="card">
+  <div class="source"><span class="tag">Regulation / Platform Governance</span><strong>Financial Times</strong> · 2026-08-31 · <a href="https://www.ft.com/content/6af706a3-6e63-46c2-926b-85461a355e9b">ChatGPT faces tougher rules under EU online safety regime</a></div>
+  <div class="summary"><p>FT 报道称，欧盟委员会将 ChatGPT、Reddit 和 Roblox 纳入《数字服务法案》下的更严格平台/搜索规则范围，原因是相关服务超过欧盟月活门槛。报道提到，这类指定会带来更重的非法内容处置、未成年人保护、风险评估和透明度义务。</p><p>对 OpenAI 来说，ChatGPT 的法律身份正在从“模型界面”变成“信息分发和任务执行平台”。一旦监管把生成式 AI 与平台责任绑定，agent 的浏览、搜索、文件处理、推荐和自动执行都可能被要求提供更强的审计与申诉机制。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业采购 agent 时，合规问题会从模型安全扩展到平台治理：用户生成内容、推荐结果、未成年人、违法内容、数据访问和组织管理员责任都会进入评估。</div>
+  <div class="action">后续行动：把 EU DSA/AI Act 监管状态加入 frontier lab 跟踪表；为 ChatGPT Work、Claude、Gemini、Grok 等入口建立“平台义务”观察列。</div>
+</div>
+
+<h3>三、ChatGPT/Work 与 Microsoft 365 同日异常：长任务 agent 的 SLA 会被放大检验</h3>
+<div class="card">
+  <div class="source"><span class="tag">Reliability / Productivity Stack</span><strong>Houston Chronicle / Folha / OpenAI Status via media reports</strong> · 2026-08-31 · <a href="https://www.houstonchronicle.com/news/houston-texas/trending/article/outlook-microsoft-365-chatgpt-outages-22411318.php">Houston Chronicle</a> · <a href="https://www1.folha.uol.com.br/tec/2026/08/chatgpt-apresenta-instabilidade-na-tarde-desta-segunda-31.shtml">Folha</a></div>
+  <div class="summary"><p>8 月 31 日，多地媒体报道 Microsoft 365、Outlook 和 ChatGPT 出现服务异常。报道引述 Downdetector 数据和服务状态更新称，Microsoft 365/Exchange Online 有降级情况，ChatGPT 也出现用户无法启动或继续任务的问题，后续被标记为恢复。</p><p>如果 ChatGPT Work/Codex 被定位为“替你持续完成任务”的工作层，短时故障的影响会大于普通聊天中断：任务上下文、长运行作业、文件产物、审批节点和团队协作都需要可恢复性。agent 产品的竞争会越来越像云服务竞争，而不是只比较模型 benchmark。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这直接关联 OpenAI Work、Codex、Microsoft 365 Copilot、Google Workspace/Gemini 和企业 agent 的采购决策：SLA、任务恢复、状态可见性、失败通知和手动接管都是硬指标。</div>
+  <div class="action">后续行动：给 WorkBuddy/agent 平台方案增加“任务恢复设计”检查项：checkpoint、幂等重试、用户可见任务状态、失败摘要、人工恢复入口。</div>
+</div>
+
+<h3>四、Anthropic 音乐版权诉讼：Claude 的安全品牌继续被数据权利问题牵引</h3>
+<div class="card">
+  <div class="source"><span class="tag">Anthropic / Copyright</span><strong>The Guardian / Music Business Worldwide</strong> · 2026-08-31 · <a href="https://www.theguardian.com/business/2026/aug/31/aanthropic-sued-alleged-theft-songs-ai-train-claude">Guardian</a> · <a href="https://www.musicbusinessworldwide.com/">Music Business Worldwide</a></div>
+  <div class="summary"><p>Guardian 报道，Sony Music Publishing 和 Warner Chappell 等音乐出版方就 Anthropic 训练 Claude 涉嫌使用大量受版权保护歌曲提起诉讼，并寻求高额赔偿。报道同时给出 Anthropic 的回应：公司不同意原告主张，并准备在法庭上抗辩。</p><p>本期只把这件事作为“原告主张 + 媒体报道 + Anthropic 否认”的合规风险，不把诉讼指控当成已被法院认定的事实。对 Claude 企业客户来说，问题不止是输出是否安全，还包括训练数据来源、版权赔偿风险、供应商声明和客户免责边界。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 中 Anthropic/Amanda/Alex 主线长期强调安全与可信，版权诉讼会影响 Claude 在教育、媒体、营销、音乐和企业知识场景中的采用门槛。</div>
+  <div class="action">后续行动：公开报告和客户材料坚持短转述与链接，不生成可替代原作的长篇歌词/音乐文本；采购评估中新增“版权诉讼与训练数据声明”字段。</div>
+</div>
+
+<h3>五、Anthropic 大型云计算交易：算力供应链金融化继续加速</h3>
+<div class="card">
+  <div class="source"><span class="tag">Compute / Frontier Lab Strategy</span><strong>Wall Street Journal</strong> · 2026-08-31 · <a href="https://www.wsj.com/tech/ai/anthropic-signs-35-billion-cloud-deal-backed-by-nvidia-f12622f1">Anthropic signs cloud deal backed by Nvidia</a></div>
+  <div class="summary"><p>WSJ 报道称，Anthropic 与 Lambda 签署了价值约 350 亿美元的云计算协议，背后涉及 Nvidia 支持的数据中心和云服务供应链。报道还提到 Anthropic 此前也有其他大型算力协议，反映前沿模型需求与数据中心融资之间的强绑定。</p><p>这类交易的信号是：frontier lab 的竞争越来越像模型能力、渠道、监管、资本市场和算力金融工程的组合。对投资线索来说，neocloud、数据中心开发商、GPU 供给、能源合同和模型公司信用状况会互相影响。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里的 Demis/Jeff Dean/OpenAI/Anthropic/Google 主线都离不开算力；模型路线图能否兑现，越来越受物理基础设施和融资结构制约。</div>
+  <div class="action">后续行动：在 AI 产业链跟踪里把 Lambda、Nscale、Hut 8、SB Energy、Nvidia-backed neocloud 这类主体放进“算力融资/长期租约”观察池，区分真实投产容量和合同 backlog。</div>
+</div>
+
+<h3>六、LangChain 的三层 agent stack：runtime、framework、harness 成为选型语言</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Architecture</span><strong>LangChain</strong> · 2026-08-06，今日仍在公开博客首页可见 · <a href="https://www.langchain.com/blog/deep-agents-vs-langchain-vs-langgraph">Deep Agents vs LangChain vs LangGraph</a></div>
+  <div class="summary"><p>LangChain 将 LangGraph 定位为 agent runtime，强调持久执行、human-in-the-loop、容错和可观测性；LangChain 定位为集成与抽象框架；Deep Agents 定位为更开箱即用的 agent harness，内置文件系统、subagents、skills、memory 等上下文工程能力。</p><p>这套分层值得反复引用，因为它帮助把“agent 工具”从营销词拆成可比较的工程层：谁负责执行状态，谁负责工具集成，谁负责上下文组织和长任务策略。它也解释了为什么 Claude Code、Codex、OpenClaw、LangGraph 和企业自研 agent 不应只在一个维度比较。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Harrison Chase/LangChain 主线正在把 agent architecture 的术语标准化；这对内部方案、竞品矩阵和客户沟通都很实用。</div>
+  <div class="action">后续行动：把现有 agent 产品矩阵改成四列：model、runtime、framework/integrations、harness/context；每个产品标注是否支持权限、审计、恢复、skills、memory、subagents。</div>
+</div>
+
+<h3>七、Hugging Face 社区新信号：agent 事故复盘、技术写作和机器人代码库</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Source / Community Signals</span><strong>Hugging Face Blog</strong> · 2026-08-31 抓取 · <a href="https://huggingface.co/blog">Hugging Face Blog</a> · <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline">Agent intrusion technical timeline</a></div>
+  <div class="summary"><p>Hugging Face 博客首页今天显示 several 个窗口内或近窗口条目：VLANeXt 机器人研究代码库、agentic era 技术写作、three.ws 开放 agent stack 以及 frontier lab agent intrusion 技术时间线等。主页时间标注显示部分文章在 11-17 小时内更新或发布，适合作为开源生态热度信号。</p><p>其中 agent intrusion 技术时间线继续把注意力拉回 sandbox、短生命周期环境、命令控制、第三方平台暴露和审计记录可信度；技术写作主题则说明 agent 时代文档本身正在变成机器可读输入，因此写作质量与安全边界不再只是“内容体验”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Hugging Face 是 Follow List 中开源模型、agent runtime、数据集和社区实验的关键窗口；它常常比官方 lab 博客更早暴露开发者真实关注点。</div>
+  <div class="action">后续行动：把 Hugging Face Blog 主页变成日报固定源；对“agent 安全、机器人/world models、语音/ASR、模型压缩、workflow tooling”五类条目做周度汇总。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI / Ads：</strong>媒体报道称 ChatGPT Ads 达到约 10 亿美元年化收入 run rate，广告开始成为 OpenAI 商业模型的重要支柱。</li>
+  <li><strong>OpenAI / Regulation：</strong>FT 报道 ChatGPT 被纳入欧盟 DSA 更严格监管范围，生成式 AI 入口开始被按平台治理。</li>
+  <li><strong>OpenAI / Reliability：</strong>8 月 31 日 ChatGPT/Work 与 Microsoft 365/Outlook 同日出现服务异常报道，长任务 agent 的恢复能力值得持续跟踪。</li>
+  <li><strong>Anthropic / Copyright：</strong>音乐出版方就 Claude 训练数据提起诉讼；Anthropic 表示不同意相关主张并将抗辩。</li>
+  <li><strong>Anthropic / Compute：</strong>WSJ 报道 Anthropic 签下 Nvidia 支持的大型云计算协议，前沿模型算力供应链继续金融化。</li>
+  <li><strong>LangChain / Architecture：</strong>LangChain 的 runtime/framework/harness 分层提供了评估 agent 工程栈的清晰语言。</li>
+  <li><strong>Hugging Face / Community：</strong>博客首页继续出现 agent 安全、技术写作、机器人研究和开放 agent stack 信号。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Sam Altman / Kevin Weil：</strong>今天主线不是新模型，而是广告、平台监管、服务可靠性和 Work/Codex 长任务信任边界。</li>
+  <li><strong>Anthropic / Amanda Askell / Alex Albert：</strong>Claude 品牌同时被版权诉讼、企业安全和算力采购拉扯；安全叙事需要数据权利叙事配合。</li>
+  <li><strong>LangChain / Harrison Chase：</strong>Deep Agents、LangChain、LangGraph 的三层定位适合纳入 agent 架构词典，帮助客户理解何时需要开箱 harness，何时需要可控 runtime。</li>
+  <li><strong>Hugging Face / Clem Delangue / Thomas Wolf：</strong>HF 社区仍是开源 agent 和开放模型信号中心；今天更偏工程实践、事故复盘和机器人/world-model 周边。</li>
+  <li><strong>Simon Willison / Hamel / Shreya / Eugene Yan / Chip Huyen：</strong>本窗口未发现新的高优先级公开文章；但 LangChain 分层、agent 供应链和服务恢复问题都与他们长期关注的 eval、可靠性和上下文工程直接相关。</li>
+  <li><strong>Google / Jeff Dean / Demis Hassabis / Logan Kilpatrick：</strong>本窗口未发现 Google/DeepMind/Gemini 官方重大新发布；继续把 EnvHarness、Gemini Enterprise 和 AI Studio 作为周度跟踪线。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>ChatGPT 广告与 Work 隔离：</strong>观察广告是否只留在免费消费入口，还是会影响搜索、购物、研究和任务代理的推荐链路。</li>
+  <li><strong>DSA/AI Act 合规表：</strong>建立 ChatGPT、Claude、Gemini、Grok、Roblox/Reddit 等平台状态表，跟踪指定日期、义务和整改期限。</li>
+  <li><strong>Agent SLA 模板：</strong>为长任务 agent 增加 checkpoint、失败通知、恢复摘要、幂等重试和人工接管设计。</li>
+  <li><strong>版权风险清单：</strong>对音乐、歌词、影视、图书和新闻内容场景明确“只转述、不替代原作”的输出边界。</li>
+  <li><strong>算力供应链观察池：</strong>跟踪 neocloud、数据中心、能源、GPU 和长期租约，区分合同金额、融资安排和实际可用容量。</li>
+  <li><strong>Agent 栈矩阵：</strong>按 model/runtime/framework/harness/context/safety 六列重排 Codex、Claude Code、OpenClaw、LangGraph、Deep Agents、Cursor。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>X 个人账号更新：</strong>公开镜像失败，不能据此判断 Follow List 账号没有更新；需要可用登录态、官方 API 或后续公开索引回补。</li>
+  <li><strong>OpenAI Ads 细节：</strong>本期依据媒体报道；仍需核 OpenAI 原始公告、广告展示位置、地域、产品层级和企业版隔离条款。</li>
+  <li><strong>DSA 指定范围：</strong>FT 报道给出监管方向，但具体义务、执行时间表和 OpenAI 合规承诺需以后续欧盟文件为准。</li>
+  <li><strong>ChatGPT/Work 故障：</strong>媒体报道可确认异常发生，但任务丢失、恢复策略和具体影响范围需以 OpenAI status postmortem 为准。</li>
+  <li><strong>Anthropic 版权案：</strong>诉讼指控尚未经法院认定；需跟踪起诉书、Anthropic 答辩、管辖和可能和解。</li>
+  <li><strong>Anthropic 算力交易：</strong>WSJ 报道披露交易结构，但真实投产容量、价格、交付节点和 Nvidia 风险暴露仍需后续文件核验。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>部分聚合站把 8 月下旬的 agent 事故、Claude Code 安全、ChatGPT Work 旧信息重新包装为“今天新闻”，本期只保留能追溯到公开来源的线索。</li>
+  <li>社媒搜索片段可见少量账号动态，但缺少完整上下文、时间线和原始链接核验，不纳入重点内容。</li>
+  <li>关于 frontier lab 估值、IPO 时间和长期广告目标的数字差异较大，本期只把它们作为商业化方向信号，不做投资结论。</li>
+  <li>Hugging Face 社区文章质量分布较宽，项目推广色彩强的条目只作为“生态热度”，不直接视为成熟产品。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.axios.com/2026/08/31/openai-chatgpt-ads-1b-revenue-run-rate">Axios: OpenAI says ads biz reached $1B revenue run rate in less than a year</a></li>
+  <li><a href="https://www.businessinsider.com/openai-chatgpt-ad-revenue-ipo-2026-8">Business Insider: Sam Altman's 'last resort' is now minting money for OpenAI</a></li>
+  <li><a href="https://www.marketwatch.com/story/sam-altman-once-called-ads-a-last-resort-now-openai-is-on-track-for-1-billion-in-revenue-from-them-14c61945">MarketWatch: OpenAI ad revenue coverage</a></li>
+  <li><a href="https://www.ft.com/content/6af706a3-6e63-46c2-926b-85461a355e9b">Financial Times: ChatGPT faces tougher rules under EU online safety regime</a></li>
+  <li><a href="https://www.houstonchronicle.com/news/houston-texas/trending/article/outlook-microsoft-365-chatgpt-outages-22411318.php">Houston Chronicle: Microsoft 365, Outlook and ChatGPT users report outages Monday</a></li>
+  <li><a href="https://www1.folha.uol.com.br/tec/2026/08/chatgpt-apresenta-instabilidade-na-tarde-desta-segunda-31.shtml">Folha: ChatGPT apresenta instabilidade</a></li>
+  <li><a href="https://www.theguardian.com/business/2026/aug/31/aanthropic-sued-alleged-theft-songs-ai-train-claude">Guardian: Anthropic sued over alleged theft of songs</a></li>
+  <li><a href="https://www.wsj.com/tech/ai/anthropic-signs-35-billion-cloud-deal-backed-by-nvidia-f12622f1">Wall Street Journal: Anthropic signs cloud deal backed by Nvidia</a></li>
+  <li><a href="https://www.langchain.com/blog/deep-agents-vs-langchain-vs-langgraph">LangChain: Deep Agents vs LangChain vs LangGraph</a></li>
+  <li><a href="https://huggingface.co/blog">Hugging Face Blog</a></li>
+  <li><a href="https://huggingface.co/blog/agent-intrusion-technical-timeline">Hugging Face: Anatomy of a Frontier Lab Agent Intrusion</a></li>
+  <li><a href="https://simonwillison.net/">Simon Willison's Weblog</a></li>
+  <li><a href="https://hamelhusain.substack.com/">Hamel Husain's Substack</a></li>
+</ul>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
