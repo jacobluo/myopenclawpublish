@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：Fable 5.1、医疗工作区与多模态 Agent 成本战</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时高信号集中在 Anthropic Claude Fable/Mythos 5.1 与企业安全架构、OpenAI ChatGPT for Healthcare 连接 Epic 和官方医疗数据、Google Gemini agentic video 降低长视频理解成本、Hugging Face 推出 WebGPU kernels 与 benchmark 审计、生产 agent 换模型评估方法。公开 X/Nitter/xcancel 本轮仍不可稳定读取，X-only 内容只作为辅助线索。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：Fable 5.1、医疗工作区与多模态 Agent 成本战</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时高信号集中在 Anthropic Claude Fable/Mythos 5.1 与企业安全架构、OpenAI ChatGPT for Healthcare 连接 Epic 和官方医疗数据、Google Gemini agentic video 降低长视频理解成本、Hugging Face 推出 WebGPU kernels 与 benchmark 审计、生产 agent 换模型评估方法。公开 X/Nitter/xcancel 本轮仍不可稳定读取，X-only 内容只作为辅助线索。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-09-02</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年9月2日（周三）</strong> · 覆盖窗口：2026-09-01 08:00 – 2026-09-02 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI、Anthropic、Google、Hugging Face、Simon Willison 等公开网页、博客、RSS/聚合页面和可公开搜索到的 X URL 片段。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。X 抽样：nitter.net RSS 返回 410，xcancel RSS 跳转后返回 403，nitter.tiekoetter.com 返回 429；因此本期不把无法打开的 X-only 贴文写成完整事实。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Anthropic 把模型发布和企业安全架构绑在一起</h4><p>Claude Fable 5.1 / Mythos 5.1 是本窗口最高信号。Anthropic 同时强调 coding、knowledge work、科学研究、成本下降、EFS 企业边界和更精细的 cyber/bio safeguards，说明 frontier model 发布正在从“能力榜单”变成“能力 + 数据治理 + 风险分层”的组合。</p></div>
+  <div class="overview-item"><h4>OpenAI 继续把 ChatGPT Work 做成垂直行业工作区</h4><p>ChatGPT for Healthcare 新增 Epic EHR 连接和 Healthcare Public Data plugin，可接入授权病历上下文与 PubMed、DailyMed、CMS Coverage 等官方源。信号不只是医疗，而是 ChatGPT Work/Codex/plugins/apps 进入 regulated workspace 的模板。</p></div>
+  <div class="overview-item"><h4>Google 把“agentic”推进到长视频理解成本结构</h4><p>Gemini API 的 agentic video understanding 让模型动态检索帧、音轨和转录，而不是固定 FPS 全量吞视频。Google 称长视频 token 消耗最多降 88%、成本最多降 66%、质量最多升 7%，这对会议、课程、监控、播客和知识库视频都很关键。</p></div>
+  <div class="overview-item"><h4>Hugging Face 当天同时出现 eval 和本地推理基础设施信号</h4><p>AllenAI 的 BenchMIRT 试图拆解 benchmark 背后的安全/推理等潜在能力维度；Hugging Face WebAI 团队发布 207 个 WebGPU kernels 和浏览器端 Fleet 测试套件。一个关心“分数到底测了什么”，一个关心“本地 AI 的底层算子怎么跑”。</p></div>
+  <div class="overview-item"><h4>生产 agent 的换模型评估开始有更具体的方法论</h4><p>Hugging Face 社区文章提出用生产等价 replay pipeline 评估 conversational agent 的模型替换，并把幻觉率作为独立淘汰门槛，而不是混进平均分。这和 Hamel/Eugene/Shreya 长期关注的 task-specific evals 很贴近。</p></div>
+  <div class="overview-item"><h4>低噪声结论：Agent 竞争焦点转向“可被企业放心交付”</h4><p>今天的新消息共同指向同一个方向：更强模型只是入口，真正影响采用的是数据留存、合规工作区、长上下文成本、可审计评估、本地运行效率和安全边界。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Claude Fable 5.1 / Mythos 5.1：Anthropic 的新主线是长任务、科学能力和风险分层</h3>
+<div class="card">
+  <div class="source"><span class="tag">Anthropic / Frontier Models</span><strong>Anthropic</strong> · 2026-09-01 · <a href="https://www.anthropic.com/claude-fable-and-mythos-5-1">Claude Fable 5.1 and Mythos 5.1</a></div>
+  <div class="summary"><p>Anthropic 发布 Claude Fable 5.1 和 Claude Mythos 5.1，称两者底层模型相同，但 safeguards 层级不同：Fable 5.1 面向一般可用，Mythos 5.1 通过 trusted access programs 面向更敏感的网络安全和生命科学专业工作。发布页强调 coding、knowledge work、long-running problem-solving 和 scientific research，并给出 Terminal-Bench、CursorBench、AutomationBench、OSWorld、HLE 等多组内部/公开评测口径。</p><p>更值得看的是成本与安全组合：Anthropic 称 Fable 5.1 典型 token 计费工作负载预计比 Fable 5 低约 25%，高度 agentic 工作最高可省约 45%；同时 cyber safeguards 对 benign defensive security 工作的误拦截减少，Claude Code 用户每 session 平均可看到约 60% 更少的 cyber safeguard interventions。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里的 Anthropic/Alex/Amanda 主线今天不只是“新模型更强”。Anthropic 正在把前沿能力包装成企业可采购的分层产品：普通工作用 Fable，敏感专业能力走 Mythos + 验证计划 + EFS。</div>
+  <div class="action">后续行动：把模型观察表改成“能力、价格、默认 effort、数据留存、企业审计、cyber/bio 权限、agent 长任务表现”七列；Claude Fable 5.1 应单独加入 Codex/Claude Code/CursorBench 对比。</div>
+</div>
+
+<h3>二、Enterprise Frontier Safeguards：ZDR 和滥用监测不再被设计成二选一</h3>
+<div class="card">
+  <div class="source"><span class="tag">Enterprise AI / Security Architecture</span><strong>Anthropic</strong> · 2026-09-01 · <a href="https://www.anthropic.com/news/enterprise-frontier-safeguards">Developing Enterprise Frontier Safeguards with our customers</a></div>
+  <div class="summary"><p>Anthropic 同日发布 Enterprise Frontier Safeguards（EFS），目标是在客户控制的云环境里保存活动数据，让 Anthropic 能做自动化 misuse detection，又保持类似 zero data retention 的隐私边界。EFS 将分阶段推出，支持 Claude Code、Claude Enterprise、Claude Platform、Amazon Bedrock、Claude Platform on AWS、Google Agent Platform 和 Microsoft Foundry。</p><p>文章的核心矛盾讲得很清楚：复杂滥用可能跨 session、跨账号、跨时间发生，完全即时丢弃数据会削弱检测能力；但金融、医疗、法律、公共部门等客户又很难接受供应商持有敏感日志。EFS 的设计把“日志存在哪里、谁有 key、谁做人审、谁跑检测”拆开。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条直接影响 enterprise agent 采购。未来客户问的不会只是“是不是 ZDR”，而是“能不能在我自己的云账户里保留可审计日志，同时让模型供应商的安全检测生效”。</div>
+  <div class="action">后续行动：在 WorkBuddy/OpenClaw 企业方案里增加“客户自管日志 + 供应商检测 + 本方审批 + 审计导出”的架构选项，避免把隐私和安全做成简单对立。</div>
+</div>
+
+<h3>三、OpenAI 医疗工作区：ChatGPT 接入 Epic 与官方医疗数据源</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Regulated Workspace</span><strong>OpenAI</strong> · 2026-09-01 · <a href="https://openai.com/index/chatgpt-connects-health-records-and-healthcare-sources/">Healthcare organizations can now connect EHR and additional industry data to ChatGPT</a></div>
+  <div class="summary"><p>OpenAI 宣布 ChatGPT for Healthcare 可连接 Epic 环境，把授权 patient context 带入 ChatGPT，并推出 Healthcare Public Data plugin，面向 PubMed、DailyMed、CMS Coverage 等官方医疗数据集做结构化访问。文章把适用范围限定在 healthcare organizations 的 governed workspace 中，个人 clinician 账号可用 public data plugin，但 EHR integration 不面向个人账号。</p><p>值得注意的是 OpenAI 把 ChatGPT Work、Codex、apps 和 plugins 放在同一个 healthcare workspace 叙事里，并强调 role-based access、SSO、audit logs 和 Business Associate Agreement 下的 HIPAA-compliant workflows。这说明 Codex/agent 不再只是开发工具，也会被带入医疗运营、研究、行政和临床上下文。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Kevin Weil/Sam/OpenAI 产品方向的关键点是：ChatGPT 正在按行业工作区打包工具、数据连接、合规和 agent 执行能力。医疗是最重监管场景之一，成功后可复制到金融、法律、教育和政府。</div>
+  <div class="action">后续行动：为行业 agent 方案补一张“数据源连接矩阵”：EHR/CRM/ERP/数据仓库/公开权威源/代码仓库/文档库，逐项标注授权、审计、BAA/DPA、禁用训练和输出责任边界。</div>
+</div>
+
+<h3>四、Gemini agentic video understanding：长视频理解从固定采样变成目标驱动检索</h3>
+<div class="card">
+  <div class="source"><span class="tag">Google / Multimodal Agents</span><strong>Google / Google AI for Developers / Logan Kilpatrick</strong> · 2026-09-01 · <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/">Google Blog</a> · <a href="https://ai.google.dev/gemini-api/docs/changelog">Gemini API changelog</a> · <a href="https://x.com/OfficialLoganK/status/2094843143623680264">X</a></div>
+  <div class="summary"><p>Google 发布 Gemini agentic video understanding，支持 Gemini 3.7 Flash、3.6 Flash 和 3.5 Flash-Lite，在 Gemini API、Google AI Studio 和 Gemini Enterprise Agent Platform 中可用。相比固定 FPS 静态处理，模型可以动态搜索、扫描并检查目标视频片段，在视觉帧、音频和转录之间按需取证。</p><p>Google 称该方式在长视频分析中 token 消耗最多降低 88%、成本最多降低 66%、准确率最多提升 7%，适合 10 分钟教程、90 分钟课程、多小时会议、异常检测、精确计数和“找某个瞬间”这类任务。Logan Kilpatrick 的 X 片段也把它描述成 Gemini API 中可按视频开启的 agentic processing 选项。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Logan/Jeff/Demis/Gemini 主线今天给出一个很清晰的成本信号：多模态 agent 的突破不一定是更大的 context window，而是让模型决定何时看、看哪里、用什么 modality 看。</div>
+  <div class="action">后续行动：视频知识库和会议纪要方案不要默认“全量转录 + 全量抽帧”。先设计 query-driven scan、片段证据、时间戳引用和二次复核流程，再决定是否接 Gemini agentic video。</div>
+</div>
+
+<h3>五、BenchMIRT：benchmark 分数需要拆成潜在能力，而不是只看总榜</h3>
+<div class="card">
+  <div class="source"><span class="tag">Evals / Benchmark Auditing</span><strong>AllenAI / Hugging Face</strong> · 2026-09-01 · <a href="https://huggingface.co/blog/allenai/benchmirt">BenchMIRT: What are LLM benchmarks actually measuring?</a></div>
+  <div class="summary"><p>AllenAI 在 Hugging Face 发布 BenchMIRT，用 multidimensional item response theory 分析 benchmark 中每道题到底测了什么能力。文章以 BBQ、WildJailbreak 等例子说明，同一个 benchmark 可能混合安全、一般推理、拒答精度等不同信号，直接平均会掩盖模型真实强弱。</p><p>BenchMIRT 在 100 个 LLM、16 个 benchmarks、超过 34K 个问题的结果上训练，并在未预先告知 benchmark 目标的情况下恢复出 safety 和 general reasoning 两个主维度。它不是又一个“总分榜”，而是提醒我们：采购、产品和研究评估要问“这个分数由哪些题、哪些能力驱动”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Hamel/Shreya/Eugene/AI evals 主线长期强调 task-specific evaluation。BenchMIRT 给了一个更系统的语言，帮助解释为什么单一 benchmark 不能直接映射到业务表现。</div>
+  <div class="action">后续行动：内部模型评测报告中增加“score decomposition”小节，至少把安全、推理、工具调用、领域知识、拒答过度和格式遵循分开看。</div>
+</div>
+
+<h3>六、Hugging Face WebGPU kernels：本地 AI 的底层算子开始平台化</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Source / Browser AI Infrastructure</span><strong>Hugging Face</strong> · 2026-09-01 · <a href="https://huggingface.co/blog/webgpu-kernels">Introducing @huggingface/kernels</a></div>
+  <div class="summary"><p>Hugging Face WebAI 团队发布 @huggingface/kernels 和首批 207 个 WebGPU kernels。每个 kernel 作为完整、版本化的 Hub package 发布，包含接口、shader template、correctness cases、benchmark cases 和使用说明；同时发布 Fleet 浏览器端 GPU benchmarking/testing suite，收集真实设备上的性能与正确性证据。</p><p>这件事的重要性在于把浏览器端 AI 推理的“底层算子”变成可共享、可测试、可版本化的基础设施。随着 WebAI、本地 agent、隐私端侧推理和离线小模型越来越常见，性能瓶颈会从“有没有模型”转向“运行时、kernel、设备差异和证据质量”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Hugging Face/Clem/Thomas/open models 主线不只在模型权重，还在推理栈。浏览器 AI 如果跑得稳，个人知识库、隐私助手、轻量 agent 和边缘场景会多一个部署面。</div>
+  <div class="action">后续行动：把 @huggingface/kernels 加入“本地/端侧 AI 技术观察池”，重点关注 transformers.js、WebGPU、WASM、ONNX Runtime Web 和浏览器权限模型的组合。</div>
+</div>
+
+<h3>七、生产等价 replay：换模型不是跑公开榜，而是重放自己的业务行为</h3>
+<div class="card">
+  <div class="source"><span class="tag">Production Evals / Agents</span><strong>TechforHumans / Hugging Face Community</strong> · 2026-09-01 · <a href="https://huggingface.co/blog/TechforHumans/evaluating-llms-under-production-parity">Evaluating LLMs Under Production Parity</a></div>
+  <div class="summary"><p>这篇社区文章提出用 replay engine 重放经过批准的 synthetic interactions，在“生产等价”的工具、流程、语气和事务上下文中测试模型替换。作者评估了 GPT-4.1/5、Gemini 2.5、Kimi-K2.5、GPT-OSS-120B 等候选模型，核心发现不是某个模型胜出，而是 verdict 设计会改变结论。</p><p>文章特别强调 hallucination rate 应该作为独立淘汰门槛，而不是混入加权平均分；否则严重失败可能被其他维度的高分抵消。对真实客户决策型 agent 来说，这个观点比“平均表现更好”更重要。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这正好对应企业 agent 选型：模型升级、供应商切换、降本替换和 fallback 都需要在自己的 workflow 上验证，而不是照搬公开 benchmark。</div>
+  <div class="action">后续行动：给 OpenClaw/WorkBuddy 建一个小型 replay eval 样板：固定工具响应、固定审批节点、固定期望行为，把幻觉、越权、格式错、遗漏动作作为独立 gates。</div>
+</div>
+
+<h3>八、Simon Willison 观察到 agent-driven testing/tracing 新工具：wrapture</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI-assisted Engineering / Observability</span><strong>Simon Willison</strong> · 2026-09-01 公开首页可见 · <a href="https://simonwillison.net/">Simon Willison's Weblog</a></div>
+  <div class="summary"><p>Simon 记录了 Graham Dumpleton 的新项目 wrapture：它把 wrapt/monkeypatching 思路扩展到 testing 和 tracing，可包装函数或方法，追踪访问，也可在测试中替换或变换返回值，并支持 OpenTelemetry。Simon 特别指出这是 Graham 首次尝试大规模 agent-driven 项目，作者强调设计由人把关，AI 是生产手段。</p><p>这条不如 Anthropic/OpenAI/Google 发布重，但对 agentic engineering 很实用：随着 AI 写代码变多，测试、观测和可控替身会成为“如何验证 AI 产物”的关键工具层。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Simon 主线一贯高信号：他关注的是 AI coding 之后的验证、工具链和现实工程细节，而不是只看模型宣传。</div>
+  <div class="action">后续行动：把 wrapture 放入 Python 测试/观测工具候选清单；适合用一个小项目验证“agent 生成变更 + wrapture 追踪关键调用 + pytest gate”的模式。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Anthropic / Model：</strong>Claude Fable 5.1 和 Mythos 5.1 发布，强调 coding、knowledge work、scientific research、长任务和更低 agentic 成本。</li>
+  <li><strong>Anthropic / Security：</strong>EFS 试图把客户自管日志、ZDR 隐私诉求和跨 session 滥用检测组合起来，支持 Claude Code 和多家云平台入口。</li>
+  <li><strong>OpenAI / Healthcare：</strong>ChatGPT for Healthcare 接入 Epic 和官方医疗数据插件，ChatGPT Work/Codex/apps/plugins 进入医疗 regulated workspace 叙事。</li>
+  <li><strong>Google / Video Agent：</strong>Gemini agentic video understanding 在 API/AI Studio/Enterprise Agent Platform 可用，主打长视频 token 和成本下降。</li>
+  <li><strong>Hugging Face / Evals：</strong>BenchMIRT 用 MIRT 拆解 benchmark 潜在能力，提醒不要用单一平均分替代业务评估。</li>
+  <li><strong>Hugging Face / Local AI：</strong>@huggingface/kernels 发布 207 个 WebGPU kernels 和 Fleet 测试套件，本地/浏览器 AI 基础设施继续补齐。</li>
+  <li><strong>Production Agents：</strong>生产等价 replay pipeline 的思路值得用于模型替换、降本和 fallback 评估。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Anthropic / Alex Albert / Amanda Askell：</strong>Fable 5.1、Mythos 5.1、EFS、watermark API 更新共同构成今天最强 Claude 主线：能力增强必须同时解释隐私、安全、滥用检测和合规。</li>
+  <li><strong>OpenAI / Sam Altman / Kevin Weil：</strong>OpenAI 今天重点是医疗行业工作区，而不是通用模型；ChatGPT Work 与 Codex 被放入受监管行业流程，说明产品重心在 enterprise integration。</li>
+  <li><strong>Google / Logan Kilpatrick / Jeff Dean / Demis Hassabis：</strong>Logan 的公开 X 片段与 Google 官方博客一致，Gemini API 新增 agentic video；这是 Google 多模态 agent 的高信号更新。</li>
+  <li><strong>Hugging Face / Clem Delangue / Thomas Wolf：</strong>HF 今天同时承载评测方法、浏览器推理底层和社区 production eval 实践，开放生态信号强于单一模型发布。</li>
+  <li><strong>Simon Willison：</strong>本窗口记录 wrapture 这样的 AI-assisted engineering 工具，继续围绕“AI 写代码后如何验证、观测和维护”。</li>
+  <li><strong>Hamel / Shreya / Eugene Yan / Chip Huyen：</strong>未发现他们在本窗口的新长文，但 BenchMIRT 与 production replay eval 与他们长期关注的 task-specific evals、生产可靠性高度相关。</li>
+  <li><strong>Lilian Weng / Nathan Lambert / Karpathy / Mira Murati：</strong>本轮未发现新的高优先级公开长文或官方发布；继续作为周度复核对象。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Claude Fable 5.1 实测：</strong>在 coding、长任务、文档生成、research 和工具调用上做小样本评测，重点看成本、速度、恢复能力和误拒。</li>
+  <li><strong>企业日志架构：</strong>把 EFS 拆成参考架构，比较 Anthropic、OpenAI Regulated Workspace、Google Enterprise Agent Platform 的数据留存与审计设计。</li>
+  <li><strong>医疗/金融行业 agent 模板：</strong>以 OpenAI Healthcare 为样板，建立行业数据源、合规协议、角色权限、audit logs、输出责任的复用 checklist。</li>
+  <li><strong>视频知识库 POC：</strong>用 Gemini agentic video 思路设计会议/课程/播客视频检索，要求输出时间戳证据和二次复核链接。</li>
+  <li><strong>模型换代 replay eval：</strong>为常用 agent workflow 建 20-50 条 synthetic replay cases，幻觉、越权、遗漏动作做独立 gate。</li>
+  <li><strong>浏览器端 AI：</strong>跟踪 @huggingface/kernels、Fleet、WebGPU kernels 与 transformers.js，判断是否适合隐私知识库或轻量本地助手。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>X 个人账号更新：</strong>公开镜像本轮失败，搜索片段只能做发现线索，不能替代完整时间线；需要可用登录态、官方 API 或稳定公开索引回补。</li>
+  <li><strong>Claude benchmark 可比性：</strong>Fable 5.1 发布页含大量 Anthropic 自测和合作伙伴 quote，需等待第三方复测，尤其是 Terminal-Bench、CursorBench、OSWorld、AutomationBench 的 harness 细节。</li>
+  <li><strong>Mythos trusted access：</strong>网络安全与生命科学 access program 的准入、审计、可用地区和客户责任仍需后续文档确认。</li>
+  <li><strong>OpenAI Healthcare 合规边界：</strong>Epic 集成、BAA、Regulated Workspace、EHR 数据最小权限和输出责任需看客户配置文件与实际合同。</li>
+  <li><strong>Gemini agentic video 成本：</strong>Google 给出最高 88% token / 66% cost 降幅，真实效果要按视频长度、问题类型、转录质量和检索命中率实测。</li>
+  <li><strong>BenchMIRT 泛化：</strong>它在选定 16 个 benchmarks 上恢复出两个主维度，但更多领域 eval 是否也能稳定拆解，需要更多数据。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>部分聚合站把 Claude Fable 5.1 的合作伙伴 quote 直接转成“绝对领先”结论，本期只保留 Anthropic 原文中可核的指标和产品结构。</li>
+  <li>Gemini agentic video 被不少新闻站复写，原始信息主要来自 Google Blog 和 Gemini API changelog，二级报道不重复纳入重点。</li>
+  <li>Hugging Face 社区文章数量多、质量差异大，带推广性质的条目只作为生态温度，不直接视为成熟产品。</li>
+  <li>X 搜索片段能看到 Alex Albert、Logan Kilpatrick 等同步发布，但因原帖完整上下文不可稳定抓取，本期不摘录长文本。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.anthropic.com/claude-fable-and-mythos-5-1">Anthropic: Claude Fable 5.1 and Mythos 5.1</a></li>
+  <li><a href="https://www.anthropic.com/news/enterprise-frontier-safeguards">Anthropic: Developing Enterprise Frontier Safeguards with our customers</a></li>
+  <li><a href="https://www.anthropic.com/news/claude-text-watermark">Anthropic: How Claude's text watermark works</a></li>
+  <li><a href="https://openai.com/index/chatgpt-connects-health-records-and-healthcare-sources/">OpenAI: Healthcare organizations can now connect EHR and additional industry data to ChatGPT</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/">Google Blog: Introducing agentic video understanding with Gemini</a></li>
+  <li><a href="https://ai.google.dev/gemini-api/docs/changelog">Gemini API Release Notes</a></li>
+  <li><a href="https://x.com/OfficialLoganK/status/2094843143623680264">Logan Kilpatrick: Agentic Video in the Gemini API</a></li>
+  <li><a href="https://x.com/alexalbert__/status/2094849958025306330">Alex Albert: Claude Fable 5.1 / Mythos 5.1 launch post</a></li>
+  <li><a href="https://huggingface.co/blog/allenai/benchmirt">Hugging Face / AllenAI: BenchMIRT</a></li>
+  <li><a href="https://huggingface.co/blog/webgpu-kernels">Hugging Face: Introducing @huggingface/kernels</a></li>
+  <li><a href="https://huggingface.co/blog/TechforHumans/evaluating-llms-under-production-parity">Hugging Face Community: Evaluating LLMs Under Production Parity</a></li>
+  <li><a href="https://huggingface.co/blog">Hugging Face Blog</a></li>
+  <li><a href="https://simonwillison.net/">Simon Willison's Weblog</a></li>
+</ul>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
