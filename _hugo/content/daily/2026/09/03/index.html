@@ -1,0 +1,158 @@
+---
+title: "Follow 深度日报：Cyber-Critical 模型、Gemini 3.8 与商业 Agent 蓝图"
+date: "2026-09-03"
+category: "daily"
+url: "/daily/2026/09/03/"
+summary: "Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI/Google/Anthropic 同时把强 agent 模型推向网络安全和商业执行场景，Gemini 3.8 Flash/Flash Cyber 发布，Claude commerce agents 蓝图开源，Hugging Face 出现生产 replay eval、实时流式时间序列模型和 Simon Willison 对 Claude 系统提示词的追踪。公开 X/Nitter/RSSHub 本轮仍不可稳定读取，X-only 内容只作为发现线索。"
+---
+<div class="meta">
+  <strong>2026年9月3日（周四）</strong> · 覆盖窗口：2026-09-02 08:00 – 2026-09-03 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI、Anthropic/Claude、Google、Hugging Face、Simon Willison、Hamel/Shreya 等公开网页、博客、RSS/聚合页与可公开搜索到的 X 片段。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。X 抽样：nitter.net RSS 返回 410，xcancel RSS 返回 403，nitter.tiekoetter.com 返回 429；因此本期不把无法打开的 X-only 贴文写成完整事实。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Cyber-capable agent 进入“能力分层 + 可信访问”阶段</h4><p>OpenAI 把 Astra 标为首个达到 Preparedness Framework Critical cyber capability threshold 的模型；Google 同日推出 Gemini 3.8 Flash Cyber，只给 trusted defenders；Anthropic 前一天发布 Mythos/Fable 与 EFS。三家路线不同，但共同承认：长程 agent 的网络安全能力已经不能靠普通 API 发布策略处理。</p></div>
+  <div class="overview-item"><h4>Gemini 3.8 Flash 把 Flash 系列节奏推到六周三更</h4><p>Google 宣布 Gemini 3.8 Flash GA，面向长程软件工程、自主 agent 与复杂企业工作流，API release notes 也同步标记 `gemini-3.8-flash` 可用。它延续 3.7 的速度/价格叙事，但更强调“模型会更努力”：更多推理步骤、更多工具调用、更强复杂任务完成度。</p></div>
+  <div class="overview-item"><h4>Anthropic 把 Claude 从模型卖点推进到可复制的商业 Agent 模板</h4><p>Claude commerce agents 蓝图包含购物 agent、商家 agent、行业 demo、guardrails、Claude Code plugin，并可部署到 Claude API、Bedrock、Microsoft Foundry 或 Vertex AI。购物 agent 不再只是聊天导购，而是搜索、比较、库存、政策、支付信任和商家控制权的工程问题。</p></div>
+  <div class="overview-item"><h4>生产 Agent 评估继续从榜单转向 replay 与硬门槛</h4><p>Hugging Face 社区文章延续昨天的高价值：模型替换需要在生产等价上下文里重放业务流程，并把 hallucination rate 作为独立淘汰 gate。Hamel/Shreya 的 eval FAQ 同步更新“多少样本才够”的实践回答，强调先用样本发现错误，再按失败模式补标注。</p></div>
+  <div class="overview-item"><h4>实时数据与时间序列模型成为 Agent 的新上下文层</h4><p>IBM/Confluent 在 Hugging Face 发布实时智能方案，把 Granite Time Series 模型放进 Confluent/Flink 流里做预测、异常检测、相似模式检索和优化。对企业 agent 来说，这比静态 RAG 更接近“看到正在发生的业务状态”。</p></div>
+  <div class="overview-item"><h4>低噪声结论：模型发布正在被治理、行业模板和可验证工作流包住</h4><p>今天的共识很清楚：AI agent 的下一段竞争不是单纯更聪明，而是谁能把强能力放进可审计、可控、可复用、可验证、可收费的系统里。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI Astra：首个被公开标记为 Critical cyber capability 的 OpenAI 模型</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Cyber Safety</span><strong>OpenAI / Sam Altman 公开 X 片段</strong> · 2026-09-01，窗口内延续复核 · <a href="https://openai.com/index/path-to-astra/">Path to Astra: critical capabilities and frontier safeguards</a> · <a href="https://x.com/sama/status/2094934592062959832">X 片段</a></div>
+  <div class="summary"><p>OpenAI 称 Astra 已达到 Preparedness Framework 的 Critical cybersecurity capability threshold：在合适工具和访问下，可以无人持续指导地发现未知安全缺陷，并为受保护系统开发利用方式。OpenAI 同时表示模型即将开放，但最高级网络安全能力会先限制给测试者，并通过 Daybreak Blue 扩展防御用途。</p><p>文章给出的评估信号很重：Astra 在 ExploitBench 获得 100%，在内部 V8 漏洞 benchmark 上比 GPT-5.6 Sol 更高效，甚至在评估过程中发现并使用了两个零日漏洞链；专家评估中还完成了浏览器沙箱逃逸和本地提权链。Sam Altman 的公开 X 片段把这件事放进“安全优先事项 sprint”和“下一模型 soon”的叙事中。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OpenAI/Sam 主线今天的关键不在普通产品发布，而是承认 frontier agent 的双用能力到达临界点。对企业和开源社区来说，模型能力、运行权限、日志监测、auto-review、硬件密钥、可信访问会被打包讨论。</div>
+  <div class="action">后续行动：把 Daybreak/Astra/Claude Mythos/Gemini Flash Cyber 放进同一张“cyber-capable model access matrix”，列出准入、默认拒答、可信防御权限、日志留存、工具权限和人为审批。</div>
+</div>
+
+<h3>二、Gemini 3.8 Flash / Flash Cyber：Google 用低价 Flash 打长程 agent 与防御安全</h3>
+<div class="card">
+  <div class="source"><span class="tag">Google / Gemini</span><strong>Google / Google DeepMind / Logan Kilpatrick 公开 X 片段</strong> · 2026-09-02 · <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/">Introducing Gemini 3.8 Flash and 3.8 Flash Cyber</a> · <a href="https://ai.google.dev/gemini-api/docs/changelog">Gemini API release notes</a> · <a href="https://x.com/OfficialLoganK/status/2095175881690173885">X 片段</a></div>
+  <div class="summary"><p>Google 发布 Gemini 3.8 Flash 和 Gemini 3.8 Flash Cyber。普通 3.8 Flash 已在 Gemini API GA，面向 long-horizon software engineering、autonomous agents 和 complex enterprise workflows；Google 给出的价格延续 3.7 Flash 的 introductory level：每百万 input tokens 0.75 美元、output tokens 3.75 美元。</p><p>3.8 Flash Cyber 则通过 Fairwind Program 面向 trusted defenders。Google 称它在 CyberGym、内部多语言漏洞发现 benchmark 和 CWE-Bench 相关 patching 评估上进入 frontier 区间，并强调 Chrome Security、Wiz、Google Cloud Vulnerability Research 的实际防御使用。公开 X 片段显示 Logan 把它概括为 Gemini agentic + coding 能力的又一次跳升。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Jeff/Logan/Demis/Gemini 主线今天与 OpenAI Astra 构成正面比较：同样承认高阶 cyber 能力，但 Google 选择把普通 agent/coding 能力和 cyber trusted-access 能力拆成两个 Flash 变体。</div>
+  <div class="action">后续行动：更新 Gemini API 观察表，把 3.8 Flash、3.8 Flash Cyber、3.7 Flash、agentic video understanding 的价格、模型 ID、可用面和安全限制分开记录；后续做一个低成本 coding-agent 回归测试。</div>
+</div>
+
+<h3>三、Google AI Agents Challenge 总结：强 Agent 还是靠工程架构，不只靠模型</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Architecture</span><strong>Google Developers Blog</strong> · 2026-09-02 · <a href="https://developers.googleblog.com/4-engineering-patterns-behind-the-strongest-ai-agents-challenge-submissions/">4 engineering patterns behind the strongest AI Agents Challenge submissions</a></div>
+  <div class="summary"><p>Google Developers Blog 总结 Google for Startups AI Agents Challenge 的优胜架构，核心观察是最好的多 agent 系统更多依赖基础工程模式，而不是只依赖模型变强。文章点出 bidirectional MCP、异步事件总线、统一验证层和分层模型路由等模式。</p><p>一个很实用的例子是：agent 不只消费自己的 MCP 工具，也把自身推理能力暴露成 MCP server，让其他 agent 直接调用；这把 MCP 从“工具连接协议”推进到“agent 间能力暴露协议”。异步事件总线则帮助多个 agent 并行处理任务，同时避免长流程堵住主路径。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条对 OpenClaw/WorkBuddy 很贴近。未来多 agent 产品的护城河不只是 prompt，而是清晰的工具边界、事件流、验证层、模型路由和观测。</div>
+  <div class="action">后续行动：把 OpenClaw 多 agent 设计文档补上四个 checklist：MCP 能力发布、事件总线、fallback 统一验证、昂贵模型路由条件。</div>
+</div>
+
+<h3>四、Claude commerce agents：购物 Agent 的标准件开始出现</h3>
+<div class="card">
+  <div class="source"><span class="tag">Anthropic / Commerce Agents</span><strong>Anthropic / Claude</strong> · 2026-09-02 · <a href="https://claude.com/blog/claude-for-commerce-agents">Building commerce agents with Claude</a> · <a href="https://claude.com/blog/the-anatomy-of-effective-commerce-agents">A guide to the anatomy of effective commerce agents</a> · <a href="https://github.com/anthropics/commerce-agents">GitHub repository</a></div>
+  <div class="summary"><p>Anthropic 发布 commerce agents blueprint，包含购物 agent 和商家 agent 的参考实现、harness、patterns、guardrails、垂直行业 demo 和 Claude Code plugin，目标是让工程团队数天内启动 retail、travel、telecom、ticketing 等场景的商业 agent。文章称 Shopify、Priceline 等客户已经在用 Claude 构建自然语言搜索、比较和购买体验。</p><p>这份蓝图可部署到 Claude API、Amazon Bedrock、Microsoft Foundry、Google Cloud Vertex AI 等入口，并与 Accenture、Mastercard、Visa 等生态伙伴一起推动落地。Anthropic 还强调商家需要掌控 agent 如何接触客户，支付和信任体系必须进入架构本身。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Alex Albert/Anthropic 产品主线正在把“agent 能做什么”变成“某个行业怎样安全上线”。商业 agent 是最容易从 demo 变成收入的方向之一，也会快速暴露推荐偏置、库存真实、退改政策、支付责任和商家数据权属问题。</div>
+  <div class="action">后续行动：拆解 GitHub 仓库，提炼一个“行业 agent 蓝图模板”：意图识别、目录/库存工具、政策工具、支付边界、商家控制台、评价指标、失败回退。</div>
+</div>
+
+<h3>五、Hugging Face / IBM / Confluent：流式时间序列模型把 Agent 上下文推进到实时业务状态</h3>
+<div class="card">
+  <div class="source"><span class="tag">Enterprise AI / Real-Time Data</span><strong>IBM Research / Hugging Face / Confluent</strong> · 2026-09-02 · <a href="https://huggingface.co/blog/ibm-research/real-time-intelligence">Real-Time Intelligence with IBM Time Series Models on Confluent</a> · <a href="https://www.ibm.com/new/announcements/ibm-granite-time-series-models-bring-real-time-forecasting-and-anomaly-detection-to-confluent-cloud">IBM announcement</a></div>
+  <div class="summary"><p>IBM 和 Confluent 把 Granite Time Series 模型带到 Confluent Cloud Early Access，让团队通过 Flink SQL 在流式数据上直接调用预测和异常检测。组合包括 PatchTST-FM、FlowState、TTM、TSPulse 等模型，覆盖 forecasting、anomaly detection、classification、gap-filling、similarity search 和 optimization。</p><p>这条和普通 LLM 新闻不同：它处理的是 agent 执行前最容易失真的“业务状态新鲜度”。如果订单、设备、支付、库存、日志仍是几个小时以前的快照，agent 决策再聪明也会错；把模型推到 Kafka/Flink 流中，输出可以直接成为告警、仪表盘、下游 agent 或人工审批的触发器。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI engineering 主线需要从静态 RAG 扩展到实时上下文。企业 agent 的可靠性很大一部分来自数据新鲜、schema、lineage、replay 和权限，而不是模型本体。</div>
+  <div class="action">后续行动：为 WorkBuddy 企业方案新增“实时上下文层”架构选项：Kafka/Flink/CDC/warehouse/RAG 的职责边界，以及何时应该让 agent 读取实时状态而非文档索引。</div>
+</div>
+
+<h3>六、Production parity replay eval：模型替换要重放业务，不要只跑排行榜</h3>
+<div class="card">
+  <div class="source"><span class="tag">Production Evals</span><strong>TechforHumans / Hugging Face Community</strong> · 2026-09-01，窗口内延续复核 · <a href="https://huggingface.co/blog/TechforHumans/evaluating-llms-under-production-parity">Evaluating LLMs Under Production Parity</a></div>
+  <div class="summary"><p>这篇文章提出用 replay engine 在生产等价上下文里评估模型替换：保持相同 Skill、Actions、memory manager、prompt、工具表面和历史响应，只替换 LLM 决策。它把真实工具执行换成历史响应或模拟失败，避免测试时取消保单这类不可逆动作，同时保持流程可复现。</p><p>它评估了 Gemini 2.5 Flash、GPT-4.1 nano、GPT-5 系列、GPT-OSS-120B、Kimi-K2.5 等模型，结论不只是哪些模型 approved，而是 hallucination rate 必须作为独立淘汰门槛。否则严重失败会被加权平均里的其他好分数冲淡。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Hamel/Shreya/Eugene 等 eval 主线反复提醒：业务 agent 的评价必须接近真实任务。现在模型发布节奏越来越快，LLM-swap 会变成常态，replay eval 是采购和降本时最应该先补的一层。</div>
+  <div class="action">后续行动：为 OpenClaw 建 20 条 replay case：工具调用、消息发送、审批等待、报告发布、失败恢复各覆盖 3-5 条；把 hallucination、越权、遗漏外部动作作为硬 gate。</div>
+</div>
+
+<h3>七、Hamel / Shreya 更新 eval FAQ：先用样本发现错误，再为失败模式补数据</h3>
+<div class="card">
+  <div class="source"><span class="tag">Evals / Practice</span><strong>Hamel Husain / Shreya Shankar</strong> · 2026-09-01 修改 · <a href="https://hamel.dev/blog/posts/evals-faq/">AI Evals: Everything You Need to Know</a></div>
+  <div class="summary"><p>Hamel 的 eval FAQ 在 9 月 1 日有更新，首页也显示新增问题“多少样本才够”。核心建议是不要一开始迷信大规模测试集：先用约 100 条 traces 发现错误类型；code-based evals 要覆盖逻辑路径；LLM judges 通常需要每个失败模式 100-200 条已标注样本。</p><p>这和 production replay 文章能互相补强：先通过 trace review 找到失败模式，再决定哪些维度需要 deterministic check、人工标注、judge panel 或线上监控。评估不是一次性榜单，而是产品设计和观测体系的一部分。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>对 AI 产品团队最有用的是“从哪里开始”。这条建议能防止团队因为没有完美 eval 集而迟迟不做验证，也防止只拿十几条 demo case 误判上线风险。</div>
+  <div class="action">后续行动：把内部 eval SOP 改成三段：100 traces 错误发现、按失败模式补标注、上线后按风险抽样复核；每个 agent feature 都必须先定义可验证产物。</div>
+</div>
+
+<h3>八、Simon Willison：Claude 系统提示词追踪与 Gemini 3.8 Flash 插件实测</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Prompt Transparency</span><strong>Simon Willison</strong> · 2026-09-02 · <a href="https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/">Claude's new system prompt really doesn't want to reproduce song lyrics</a> · <a href="https://simonwillison.net/2026/Sep/2/llm-gemini/">Release: llm-gemini 0.34</a></div>
+  <div class="summary"><p>Simon 记录了 Anthropic 发布的 Claude consumer app 系统提示词变化，并指出 Fable 5.1 增加了更强的版权/歌词拒答规则、对外部 substance support 站点的引用，以及可靠知识截止日期提示。他还把 Claude 系统提示词整理成 Git timeline，便于 diff 历史变化。</p><p>同日他发布 `llm-gemini` 0.34，加入 `gemini-3.8-flash`，支持 low/medium/high thinking levels，并做了快速 HTML/JavaScript、SVG/iframe sandbox 实测。这是对 Google 官方 benchmark 的小型现实感补充：便宜、快、能做前端 demo，但仍需要用具体任务验证。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Simon 主线价值在于把供应商公告落到工具、prompt、代码和可复查工件上。系统提示词 diff 是观察模型产品行为变化的低成本方法，也能帮助理解合规压力如何进入模型默认行为。</div>
+  <div class="action">后续行动：建立一个“系统提示词/模型文档 diff”观察清单，跟踪 OpenAI、Anthropic、Google 在版权、安全、工具调用、知识截止、浏览器/文件权限上的变化。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI / Safety：</strong>Astra 被公开标记为 Critical cyber capability，OpenAI 同时强调更强 safeguards、监测和 Daybreak Blue 可信防御访问。</li>
+  <li><strong>Google / Model：</strong>Gemini 3.8 Flash GA，`gemini-3.8-flash` 出现在 Gemini API release notes，定位长程软件工程、自主 agent 和企业复杂工作流。</li>
+  <li><strong>Google / Cyber：</strong>Gemini 3.8 Flash Cyber 面向 trusted defenders，Google 把漏洞发现、自动修复和 prompt injection robustness 放在同一发布叙事里。</li>
+  <li><strong>Anthropic / Commerce：</strong>Claude commerce agents blueprint 和工程深潜发布，购物/商家 agent 进入参考实现阶段。</li>
+  <li><strong>Google / Agent Architecture：</strong>AI Agents Challenge 总结显示 bidirectional MCP、异步事件总线、统一验证、分层模型路由是获胜架构共性。</li>
+  <li><strong>Hugging Face / Real-Time AI：</strong>IBM Granite Time Series 模型接入 Confluent/Flink，实时业务状态和 agent context 开始汇合。</li>
+  <li><strong>AI Evals：</strong>production parity replay 与 Hamel/Shreya FAQ 共同强调：评估要围绕真实流程、失败模式和硬门槛。</li>
+  <li><strong>Simon Willison：</strong>系统提示词 diff 和 `llm-gemini` 更新提供了供应商公告之外的可复查工程信号。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Sam Altman / OpenAI：</strong>公开 X 片段围绕安全 sprint 与 Astra 即将发布；官方文章把 Astra 放入 Preparedness Framework 最高风险层级，是 OpenAI 近期最重要安全信号。</li>
+  <li><strong>Logan Kilpatrick / Google：</strong>公开 X 片段同步 Gemini 3.8 Flash 发布，并强调 agentic + coding 能力连续跳升；官方 release notes 已给出模型 ID。</li>
+  <li><strong>Jeff Dean / Demis Hassabis / Google DeepMind：</strong>本轮没有单独长文，但 Gemini 3.8、3.8 Cyber、agentic video 属于 Google DeepMind/Gemini 主线的连续模型节奏。</li>
+  <li><strong>Alex Albert / Anthropic：</strong>Claude 生态今天高信号来自 commerce agents、前一天 Fable/Mythos/EFS；个人 X 完整上下文不可稳定读取，只记录官方页面可核信息。</li>
+  <li><strong>Hamel Husain / Shreya Shankar：</strong>eval FAQ 修改与 HF replay eval 同向，继续强化“trace-first、failure-mode-first”的产品评估方法。</li>
+  <li><strong>Simon Willison：</strong>连续两篇 9 月 2 日文章提供模型实测、插件更新、系统提示词追踪，仍是 AI engineering 低噪声观察源。</li>
+  <li><strong>Harrison Chase / LangChain：</strong>公开 X 片段显示 LangSmith Messages View beta rollout，但未找到可稳定打开的官方长文；本期列为待验证产品信号。</li>
+  <li><strong>Nathan Lambert / Karpathy / Lilian Weng / Mira Murati / Fei-Fei Li / Jim Fan：</strong>本窗口未发现新的高优先级公开长文或官方发布；继续周度复核。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Cyber-capable model matrix：</strong>横向比较 Astra、Gemini 3.8 Flash Cyber、Claude Mythos 5.1、OpenAI Daybreak、Google Fairwind、Anthropic trusted access。</li>
+  <li><strong>Gemini 3.8 coding-agent 小测：</strong>用固定 repo migration、前端 bugfix、长上下文阅读、工具调用四类任务测试 3.8 Flash 与 3.7 Flash。</li>
+  <li><strong>Claude commerce blueprint 拆解：</strong>读取 GitHub 仓库，提炼 shopping agent 和 merchant agent 的工具边界、guardrails、evals、支付/商家控制模式。</li>
+  <li><strong>OpenClaw replay eval：</strong>建立 20 条可重复 case，覆盖报告发布、消息发送、浏览器抓取、失败恢复和审批等待；硬 gate 包括越权、伪造成功、遗漏链接。</li>
+  <li><strong>实时上下文架构：</strong>把 Confluent/IBM 的流式时间序列思路整理成企业 agent 方案，说明何时使用 CDC/Kafka/Flink，何时使用普通 RAG。</li>
+  <li><strong>系统提示词 diff 观察：</strong>跟随 Simon 的方法，把供应商公开 prompt/model docs 变更纳入日报低频跟踪。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>X 个人账号完整时间线：</strong>公开镜像本轮失败，搜索片段只能用于发现，不足以复述完整帖文；需要稳定登录态、官方 API 或可用公开索引回补。</li>
+  <li><strong>Astra 实际可用范围：</strong>OpenAI 表示 soon，但默认用户、Daybreak Blue、测试者、API/ChatGPT 可用性和系统卡细节仍待发布时确认。</li>
+  <li><strong>Gemini 3.8 独立评测：</strong>Google 公布的 DeepSWE、CyberGym、CWE-Bench 等数据需要第三方复测；“更努力”可能意味着高 effort 下 token 增加。</li>
+  <li><strong>Claude commerce blueprint 生产成熟度：</strong>需要实际跑仓库 demo，看 merchant controls、policy tools、payment trust、eval harness 是否足够完整。</li>
+  <li><strong>Hamel FAQ 更新范围：</strong>搜索与页面显示 9 月 1 日修改，但具体 diff 未直接给出；本期只摘取页面可见实践建议。</li>
+  <li><strong>LangSmith Messages View：</strong>Harrison Chase X 片段可见，但未找到官方 changelog；暂不写成正式发布。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Gemini 3.8 和 Astra 的二级报道大量使用“最强”“危险”等标题，本期只保留官方框架、可核 benchmark 名称、准入方式和工程含义。</li>
+  <li>Claude commerce agents 有明显假日购物季营销节奏，但 GitHub blueprint、工程深潜和多云部署信息是真正值得拆解的部分。</li>
+  <li>Hugging Face 社区页更新很多，未贴近 Follow List 主题或缺少可验证工程细节的条目未纳入重点。</li>
+  <li>公开 X 搜索能看到同步转发和简短评论，但镜像和页面不可稳定抓取，本期不摘录长文本，也不把 X-only 片段当最终事实。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/index/path-to-astra/">OpenAI: Path to Astra: critical capabilities and frontier safeguards</a></li>
+  <li><a href="https://x.com/sama/status/2094934592062959832">Sam Altman: Astra/safety priorities X snippet</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/">Google: Introducing Gemini 3.8 Flash and 3.8 Flash Cyber</a></li>
+  <li><a href="https://ai.google.dev/gemini-api/docs/changelog">Gemini API Release Notes</a></li>
+  <li><a href="https://x.com/OfficialLoganK/status/2095175881690173885">Logan Kilpatrick: Gemini 3.8 Flash X snippet</a></li>
+  <li><a href="https://developers.googleblog.com/4-engineering-patterns-behind-the-strongest-ai-agents-challenge-submissions/">Google Developers Blog: 4 engineering patterns behind the strongest AI Agents Challenge submissions</a></li>
+  <li><a href="https://claude.com/blog/claude-for-commerce-agents">Claude: Building commerce agents with Claude</a></li>
+  <li><a href="https://claude.com/blog/the-anatomy-of-effective-commerce-agents">Claude: A guide to the anatomy of effective commerce agents</a></li>
+  <li><a href="https://github.com/anthropics/commerce-agents">GitHub: anthropics/commerce-agents</a></li>
+  <li><a href="https://huggingface.co/blog/ibm-research/real-time-intelligence">Hugging Face / IBM Research: Real-Time Intelligence with IBM Time Series Models on Confluent</a></li>
+  <li><a href="https://www.ibm.com/new/announcements/ibm-granite-time-series-models-bring-real-time-forecasting-and-anomaly-detection-to-confluent-cloud">IBM: Granite Time Series models on Confluent Cloud</a></li>
+  <li><a href="https://huggingface.co/blog/TechforHumans/evaluating-llms-under-production-parity">Hugging Face Community: Evaluating LLMs Under Production Parity</a></li>
+  <li><a href="https://hamel.dev/blog/posts/evals-faq/">Hamel Husain / Shreya Shankar: AI Evals: Everything You Need to Know</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/">Simon Willison: Claude's new system prompt really doesn't want to reproduce song lyrics</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/2/llm-gemini/">Simon Willison: Release llm-gemini 0.34</a></li>
+</ul>
