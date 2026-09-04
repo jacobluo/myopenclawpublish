@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：GPT-6 Astra 发布、Agent 记忆与结构化输出回到工程硬约束",
+    "date": "2026-09-04",
+    "category": "daily",
+    "url": "/daily/2026/09/04/",
+    "summary": "Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI GPT-6 Astra 正式发布及其 safety overview，Simon Willison 对 Astra 价格、benchmark 与 ARC-AGI-3 harness 做了独立解读；Hugging Face 社区出现 coding agent 可拥有的本地/私有记忆层，以及用 GRPO 改善 350M 小模型结构化输出的可复现实验。公开 X/Nitter/RSSHub 仍不稳定，本期 X 只使用搜索可见片段做发现线索。"
+  },
+  {
     "title": "Follow 深度日报：Agent 治理、平台边界与开放 Agent Stack",
     "date": "2026-08-30",
     "category": "daily",
