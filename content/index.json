@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：OpenAI 转向防御叙事，Agent 工程进入治理期",
+    "date": "2026-09-08",
+    "category": "daily",
+    "url": "/daily/2026/09/08/",
+    "summary": "Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI 9 月 7 日乌克兰新闻业 AI 项目、Jakub Pachocki 安全文章的继续扩散、Simon Willison 对 AI 爬虫/agent 工程/地图可视化工具的更新，以及 X 搜索索引可见的 Astra 与 LangSmith 传播线索。公开 X/RSSHub/Nitter 本轮不可稳定抓取，不使用 X-only 内容做事实依据。"
+  },
+  {
     "title": "Follow 深度日报：Astra 进入 Copilot，Agent 安全转向治理闭环",
     "date": "2026-09-05",
     "category": "daily",
