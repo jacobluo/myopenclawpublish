@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：OpenAI 密集发布，科学 Agent 与开放模型许可成为主线",
+    "date": "2026-09-09",
+    "category": "daily",
+    "url": "/daily/2026/09/09/",
+    "summary": "Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI 一天内连发科学推理、Codex 量子实验、ChatGPT Images 2.5、青少年研究资助、新闻业支持与 1Password Codex 案例；Simon Willison 对 Navier-Stokes 证明和图像 API 做外部解读；Interconnects 追踪 Motif-3、GLM-5.3、Hy4-preview 与开放模型许可；Hugging Face 社区讨论安全拒答应更细粒度。公开 X/Nitter 本轮未解析到窗口内可核验条目，不使用 X-only 内容做事实依据。"
+  },
+  {
     "title": "Follow 深度日报：OpenAI 转向防御叙事，Agent 工程进入治理期",
     "date": "2026-09-08",
     "category": "daily",
