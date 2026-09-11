@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：OpenAI 把 agent 平台推向工作台，GitHub 收紧 AI 安全控制面</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI Agents API、ChatGPT Work Data agent、金融服务与政府采购折扣，GitHub AI Scan API 与 Actions cache-mode 强化安全治理，Nathan Lambert 讨论 AI 恐惧叙事外溢，Simon Willison 记录 WeChat 零点击漏洞与浏览器内 Nix，Hugging Face 和 Google 更新偏工具与消费场景。公开 X 镜像本轮无法提供有效时间线，未使用 Folo CLI。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：OpenAI 把 agent 平台推向工作台，GitHub 收紧 AI 安全控制面</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI Agents API、ChatGPT Work Data agent、金融服务与政府采购折扣，GitHub AI Scan API 与 Actions cache-mode 强化安全治理，Nathan Lambert 讨论 AI 恐惧叙事外溢，Simon Willison 记录 WeChat 零点击漏洞与浏览器内 Nix，Hugging Face 和 Google 更新偏工具与消费场景。公开 X 镜像本轮无法提供有效时间线，未使用 Folo CLI。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-09-11</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年9月11日（周五）</strong> · 覆盖窗口：2026-09-10 08:00 – 2026-09-11 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、GitHub Changelog RSS、Interconnects RSS、Simon Willison Atom、Hugging Face Blog RSS、Google AI RSS、公开 X/Nitter/xcancel 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：xcancel RSS 返回“RSS reader not yet whitelisted”，nitter.net 返回 410，其它公开 Nitter 镜像超时；因此本期不使用 X-only 内容做事实依据。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>OpenAI 把 agent 从产品功能推成平台层</h4><p>OpenAI 在 9 月 10 日连续发布 Agents API、GPT-Live-1、ChatGPT Work Data agent、金融服务版本和政府采购支持。组合起来看，Astra 后的重点不是单一模型炫技，而是把 agent、数据分析、语音和垂直行业工作台打包成可购买、可部署、可治理的生产系统。</p></div>
+  <div class="overview-item"><h4>企业 AI 的主战场转向权限和安全</h4><p>GitHub 同日发布 AI Scan for pull request API、Actions cache-mode、PR 页面刷新和 Copilot 模型弃用。最值得看的是 AI 安全检测可通过组织/仓库 API 批量开启，以及 cache-mode 用最小权限减少 cache poisoning 风险。</p></div>
+  <div class="overview-item"><h4>AI 安全叙事从圈内扩散到公共舆论</h4><p>Nathan Lambert 的新文围绕一次 AI 研究员辞职事件如何点燃风险叙事。他的重点不是否认风险，而是区分现实的网络/生物/治理风险与极端灭绝叙事，并提醒 frontier lab 的透明度和基础设施硬化会影响整个生态。</p></div>
+  <div class="overview-item"><h4>开发者工具仍在向“可复制环境”推进</h4><p>Simon Willison 记录 trynix.dev：在浏览器中用 qemu-wasm 跑 x86_64 Linux VM 并加载任意 Nix 包。它不是 AI 发布，但对 agent 工具链重要：可复现环境、浏览器沙箱和依赖固定，会成为未来自动化 coding agent 的基础件。</p></div>
+  <div class="overview-item"><h4>低门槛工具更新多，核心信号少</h4><p>Hugging Face 发布 Gradio Workflow 复刻 AUTOMATIC1111 的文章，Google Search 给跑步比赛准备增加信息功能。这些更像应用层触点和工具生态维护，价值在观察用户入口，不应和 OpenAI/GitHub 的平台治理信号等量齐观。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>今天的关键词是“可控部署”。OpenAI 在铺 agent 与行业工作台，GitHub 在补安全与权限 API，Interconnects 把舆论风险拉回可操作治理，Simon 的工具观察则提醒：agent 落地需要稳定环境，不只是更聪明的模型。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI Agents API：Codex harness 变成云端 agent 平台入口</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Agents</span><strong>OpenAI</strong> · 2026-09-10 00:00 UTC · <a href="https://openai.com/index/introducing-the-agents-api">Introducing the Agents API</a></div>
+  <div class="summary"><p>OpenAI RSS 将 Agents API 描述为由 Codex harness 驱动的托管云 agent 服务，面向编排、长时间运行会话和工具使用。这个定位很关键：Codex 不只是一个 coding 产品名，而被抽象成可复用的 agent 执行层。</p><p>和 9 月 9 日的 Astra for work 连起来看，OpenAI 正在把“模型能力”翻译为“可接入企业流程的执行单元”。API 层的价值在于让开发者构建自己的 agent，而不是只在 ChatGPT UI 里使用官方工作流。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里的 OpenAI 产品线、AI agent、Codex 和开发者平台信号都汇聚到这里。未来竞争会从模型 benchmark 转向 session、工具、权限、记忆、审计、成本和失败恢复。</div>
+  <div class="action">后续行动：建立 Agents API 观察清单：最大会话时长、工具沙箱、文件/网络权限、人工审批、日志留存、计费方式、与 ChatGPT Work / Codex 的边界。</div>
+</div>
+
+<h3>二、ChatGPT Work Data agent 与金融服务：OpenAI 开始把行业工作台产品化</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Enterprise</span><strong>OpenAI</strong> · 2026-09-10 15:00 UTC / 07:00 UTC · <a href="https://openai.com/index/put-data-to-work">Now everyone can put data to work</a> · <a href="https://openai.com/index/introducing-chatgpt-financial-services">Introducing ChatGPT for Financial Services</a></div>
+  <div class="summary"><p>OpenAI 发布 ChatGPT Work 的 Data agent，强调连接公司数据、用自然语言发现洞察并构建交互式 dashboard。同日的金融服务版本把内置金融数据和 GPT-6 Astra 结合，用于研究、建模和客户材料。</p><p>这两条说明 OpenAI 正在从“通用助手”向“行业工作台”推进：数据接入、分析输出、可展示的 dashboard、研究和建模材料，都是企业愿意付费的高频白领工作。金融服务尤其重要，因为它对数据质量、引用、审计、合规和输出格式要求高。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 AI agent 商业化的更明确路径。比起泛泛地说“提高效率”，行业工作台可以直接绑定部门预算、岗位任务和可衡量交付物。</div>
+  <div class="action">后续行动：跟踪金融服务版本是否披露数据源、引用机制、权限隔离、模型可选项、审计日志和监管合规边界；与 Perplexity Finance、Bloomberg、AlphaSense 类工具比较。</div>
+</div>
+
+<h3>三、OpenAI 面向政府与语音 API：采购入口和实时交互同时推进</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Public Sector / Voice</span><strong>OpenAI</strong> · 2026-09-10 07:00 UTC / 00:00 UTC · <a href="https://openai.com/index/expanding-ai-access-us-government">Expanding AI access and cyber defense for governments</a> · <a href="https://openai.com/index/introducing-gpt-live-1-in-the-api">Build more natural voice experiences with GPT-Live-1 in the API</a></div>
+  <div class="summary"><p>OpenAI 与 GSA 的政府访问更新提到 eligible federal、state、local、tribal governments 的许可费减免、用量折扣和网络防御支持。GPT-Live-1 则把全双工自然语音、指令跟随、自定义声音和电话支持放进 API。</p><p>政府采购和实时语音看似两条线，其实都服务于“把 AI 放进真实组织流程”。公共部门需要采购通道、折扣、安全和防御叙事；语音 API 则让客服、呼叫中心、现场操作和无屏交互更容易 agent 化。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>政府和语音都是扩散通道。前者影响政策背书和大规模组织采用，后者影响普通用户与 AI 的自然交互入口。</div>
+  <div class="action">后续行动：关注 GPT-Live-1 的延迟、打断处理、电话集成成本、合规录音、语音克隆防护；政府侧关注采购资格、实际部署案例和 cyber defense 工具边界。</div>
+</div>
+
+<h3>四、GitHub AI Scan API 与 cache-mode：企业 AI 安全进入“可批量配置”阶段</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Security</span><strong>GitHub Changelog</strong> · 2026-09-10 20:20 UTC / 17:26 UTC · <a href="https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview">AI Scan for pull request APIs in public preview</a> · <a href="https://github.blog/changelog/2026-09-10-control-github-actions-cache-access-with-cache-mode">Control GitHub Actions cache access with cache-mode</a></div>
+  <div class="summary"><p>GitHub 让组织和仓库级 REST API 管理 code scanning 的 AI Scan for pull requests，便于 GitHub Advanced Security 客户批量开启 AI 安全检测。cache-mode 则允许 workflow 或 job 级别控制 Actions cache 的 read、write、write-only、none 权限，用最小权限降低 cache poisoning 风险。</p><p>这两条比普通 UI 更新更重要，因为它们把 AI 安全和供应链安全变成平台级策略。企业不可能靠每个仓库手工配置；必须能通过 API、规则和默认策略批量铺开。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>GitHub 正在围绕 AI coding 和安全治理形成闭环：扫描、权限、缓存、PR 门禁、agentic autofix 和企业策略。对所有 coding agent 厂商都是基准线。</div>
+  <div class="action">后续行动：整理一份 GitHub 安全控制面矩阵，把 AI Scan API、secret blocking、agentic autofix、cache-mode、CodeQL、rulesets 放在同一张图里，标出可自动化和需人工审批的环节。</div>
+</div>
+
+<h3>五、Nathan Lambert：AI 恐惧叙事外溢，真正问题是透明度和基础设施硬化</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Safety / Discourse</span><strong>Nathan Lambert / Interconnects</strong> · 2026-09-10 15:28 UTC · <a href="https://www.interconnects.ai/p/one-resignation-turned-the-embers">One resignation turned the embers of AI fear into a wildfire</a></div>
+  <div class="summary"><p>Nathan Lambert 分析一位 AI 研究员辞职如何把 AI 风险讨论推向大众舆论。他认为风险讨论有现实基础，尤其是网络攻击、生物风险、模型行为监控和实验室基础设施，但极端灭绝概率叙事很容易吸走注意力。</p><p>文章对 frontier labs 的批评集中在透明度、内部文化和安全响应速度。它还把开放模型放进治理语境：如果强开源模型被用于恶意网络行动，开放生态可能面对严重限制；但开放生态也可能是社会进行独立防御和研究的必要条件。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这篇是政策和投研的重要情绪指标。AI 行业的外部约束不只来自技术事故，也来自公众叙事、媒体放大和政策窗口。</div>
+  <div class="action">后续行动：把 AI 风险分成三类跟踪：已发生/可验证的安全事件、合理近中期风险、极端长期风险；每类分别记录证据、利益相关方和政策响应。</div>
+</div>
+
+<h3>六、Simon Willison：WeChat 零点击漏洞与浏览器内 Nix，分别指向安全与可复现环境</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Security</span><strong>Simon Willison</strong> · 2026-09-10 00:56 UTC / 23:44 UTC · <a href="https://simonwillison.net/2026/Sep/10/calif-research/">Quoting Calif Research</a> · <a href="https://simonwillison.net/2026/Sep/10/trynix/">Any Nix package, live in your browser</a></div>
+  <div class="summary"><p>Simon 记录 Calif Research 关于 WeWorm 的摘要：一个可通过 WeChat calls 在 iOS 和 Android 间传播的零点击漏洞，受害者不需要接听或互动。该条需要继续看原始研究细节，但它提醒移动通信软件仍可能成为高价值攻击面。</p><p>同日他还介绍 trynix.dev：在浏览器中通过 qemu-wasm 运行 x86_64 Linux VM，并加载任意 Nix package。对 agent 工程而言，这类浏览器内可复现环境能降低“我的机器能跑”的摩擦，也可能成为轻量沙箱、教学和调试界面。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Simon 的价值常在发现基础设施信号。安全事件提醒 agent/移动自动化要谨慎处理消息平台；trynix 则提示未来 coding agent 的环境交付可能更接近浏览器内一次性沙箱。</div>
+  <div class="action">后续行动：对 WeWorm 只做待验证记录，后续读取原始报告再判断严重性；把 trynix 加入“agent 可复现执行环境”候选清单，与 Dev Containers、Nix flakes、WASM sandbox 对比。</div>
+</div>
+
+<h3>七、Hugging Face / Google：应用层触点继续扩散，但本期不是主线</h3>
+<div class="card">
+  <div class="source"><span class="tag">Tools / Consumer AI</span><strong>Hugging Face / Google AI</strong> · 2026-09-10 00:00 UTC / 16:00 UTC · <a href="https://huggingface.co/blog/gradio-workflow-1111">Rebuilding AUTOMATIC1111 with Gradio Workflow</a> · <a href="https://blog.google/products-and-platforms/products/search/running-race-training-tips/">3 ways to prep for your next big race with Search</a></div>
+  <div class="summary"><p>Hugging Face 的 Gradio Workflow 文章围绕用 Gradio Workflow 重建 AUTOMATIC1111，属于低代码/可视化工作流和生成式工具界面方向。Google Search 则发布面向跑步比赛准备的搜索功能，用注册提醒、训练计划等方式进入消费生活场景。</p><p>这两条都不是前沿模型或重大平台更新，但它们显示 AI 应用正在沿两个方向扩散：开发者工具降低构建门槛，消费搜索把 AI 融入具体任务而非抽象聊天。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>它们适合作为用户入口观察，而不是本期核心投资/技术主线。真正的价值要看是否带来留存、工作流闭环或生态开发者迁移。</div>
+  <div class="action">后续行动：对 Gradio Workflow 关注可复用节点、部署方式和与 Spaces 的结合；对 Google 关注 Search AI Mode 是否能从一次性查询进入持续计划管理。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>Agents API、GPT-Live-1、Data agent、金融服务和政府访问同日出现，说明 OpenAI 正在用平台/API、行业包和采购通道推进 Astra 后的企业落地。</li>
+  <li><strong>GitHub：</strong>AI Scan API 与 Actions cache-mode 是本期最重要安全信号，企业可批量配置 AI 安全检测和供应链最小权限。</li>
+  <li><strong>Interconnects：</strong>Nathan Lambert 将 AI 安全舆论从“灭绝概率”拉回透明度、基础设施硬化、开放生态与政策后果。</li>
+  <li><strong>Simon Willison：</strong>WeChat 零点击漏洞条目需继续核验，trynix.dev 则是 agent/开发者环境可复现化的有趣基础设施样本。</li>
+  <li><strong>Hugging Face / Google：</strong>本期更新偏工具与消费场景，保留为应用扩散信号。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Sam Altman / Kevin Weil / Josh Woodward 相关产品线：</strong>官方 RSS 显示重点从 Astra 模型发布延展到 Agents API、Data agent、金融服务和政府采购；未使用 X-only 内容补充。</li>
+  <li><strong>Nathan Lambert：</strong>继续提供开放模型、AI 风险叙事和政策后果的高价值判断，本期文章值得纳入“AI safety public discourse”素材库。</li>
+  <li><strong>GitHub / Copilot / GHAS：</strong>机构动态从 coding agent 能力转向安全控制面、API 化配置和供应链权限。</li>
+  <li><strong>Simon Willison：</strong>继续发现开发者工具和安全研究入口，本期两条分别指向移动安全与可复现运行环境。</li>
+  <li><strong>X-only 高优先级账号：</strong>公开 RSS/Nitter 路线本轮无法访问有效时间线，不能据此判断个人账号无动态。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Agents API 技术拆解：</strong>记录 session、tool use、权限、状态管理、回放、审计、成本和失败恢复；与 Codex、Claude Code、LangGraph Platform 比较。</li>
+  <li><strong>企业数据 agent 清单：</strong>按数据源连接、权限继承、dashboard 输出、引用和人工审核点拆解 ChatGPT Work Data agent。</li>
+  <li><strong>AI 金融工作台竞品表：</strong>比较 OpenAI、Bloomberg、AlphaSense、Perplexity、Hebbia 等在数据、合规、交付物和客户材料上的边界。</li>
+  <li><strong>GitHub 安全控制面矩阵：</strong>把 AI Scan、cache-mode、secret blocking、agentic autofix、CodeQL 与 rulesets 组成一张企业采用图。</li>
+  <li><strong>AI 安全舆论事件库：</strong>记录研究员辞职、媒体放大、政策人物回应、lab 透明度和开源模型影响。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>OpenAI Agents API 细节：</strong>RSS 只能确认定位和链接；需后续读取官方文档确认 API 形态、限额、权限和日志机制。</li>
+  <li><strong>ChatGPT for Financial Services：</strong>需验证内置金融数据来源、是否有引用/审计、是否支持客户私有数据隔离。</li>
+  <li><strong>GPT-Live-1：</strong>需实测延迟、打断、电话音质、自定义声音限制和费用。</li>
+  <li><strong>WeWorm：</strong>目前只按 Simon 引述记录，应读取 Calif Research 原文、CVE/厂商响应和修复状态后再做安全判断。</li>
+  <li><strong>X 时间线：</strong>xcancel RSS 要求白名单，nitter.net 返回 410，其它镜像超时；本期未使用私密登录态或 CAPTCHA 绕过。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub repository pull requests 页面刷新改善协作体验，但与 AI agent / 安全主线弱于 AI Scan API 和 cache-mode。</li>
+  <li>MAI-Code-1-Flash 弃用是 Copilot 模型运营信号，记录即可，短期不构成产品主线。</li>
+  <li>Xcode 27 runner image 更新偏移动构建基础设施，本期只作为平台维护项。</li>
+  <li>Google 跑步比赛搜索功能偏消费产品细节，价值在大众触点，不作为本期核心技术信号。</li>
+  <li>Gradio Workflow 复刻 AUTOMATIC1111 有工具生态意义，但需看真实采用和迁移成本。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/introducing-the-agents-api">OpenAI: Introducing the Agents API</a></li>
+  <li><a href="https://openai.com/index/introducing-gpt-live-1-in-the-api">OpenAI: Build more natural voice experiences with GPT-Live-1 in the API</a></li>
+  <li><a href="https://openai.com/index/put-data-to-work">OpenAI: Now everyone can put data to work</a></li>
+  <li><a href="https://openai.com/index/introducing-chatgpt-financial-services">OpenAI: Introducing ChatGPT for Financial Services</a></li>
+  <li><a href="https://openai.com/index/expanding-ai-access-us-government">OpenAI: Expanding AI access and cyber defense for governments</a></li>
+  <li><a href="https://openai.com/index/using-codex-chatgpt-to-search-for-new-antimicrobials">OpenAI: Using Codex and ChatGPT to search for new antimicrobial molecules</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview">GitHub: AI Scan for pull request APIs in public preview</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-10-control-github-actions-cache-access-with-cache-mode">GitHub: Control GitHub Actions cache access with cache-mode</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-10-refreshed-repository-pull-requests-page-in-public-preview">GitHub: Refreshed repository pull requests page in public preview</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-10-mai-code-1-flash-deprecated">GitHub: MAI-Code-1-Flash deprecated</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://www.interconnects.ai/p/one-resignation-turned-the-embers">Interconnects: One resignation turned the embers of AI fear into a wildfire</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom feed</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/10/calif-research/">Simon Willison: Quoting Calif Research</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/10/trynix/">Simon Willison: Any Nix package, live in your browser</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/10/shopify-react-native/">Simon Willison: Native is now the future of mobile at Shopify</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/gradio-workflow-1111">Hugging Face: Rebuilding AUTOMATIC1111 with Gradio Workflow</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://blog.google/products-and-platforms/products/search/running-race-training-tips/">Google: 3 ways to prep for your next big race with Search</a></li>
+  <li><a href="https://xcancel.com/sama/rss">xcancel sample RSS: sama</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-09-10T00:00:00Z / 2026-09-11T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
