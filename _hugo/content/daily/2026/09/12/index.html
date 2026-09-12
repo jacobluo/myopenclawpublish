@@ -1,0 +1,149 @@
+---
+title: "Follow 深度日报：agent 进入可度量阶段，OpenAI 暴露基础设施底座"
+date: "2026-09-12"
+category: "daily"
+url: "/daily/2026/09/12/"
+summary: "Follow List 公开来源整理：过去 24 小时高信号集中在 OpenAI 披露支撑 10 亿 ChatGPT 用户的在线存储平台 Habitat，GitHub 把 VS Code Agents 纳入 Copilot 使用指标并升级 Copilot code review，Nathan Lambert 更新 open models 阅读清单，Simon Willison 连续记录 OpenRouter 路由风险、Claude 生产代码护栏、Datasette AI 安全审计和可观测性工具。公开 X 镜像本轮 403/不可达，未使用 Folo CLI。"
+---
+<div class="meta">
+  <strong>2026年9月12日（周六）</strong> · 覆盖窗口：2026-09-11 08:00 – 2026-09-12 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、GitHub Changelog RSS、Interconnects RSS、Simon Willison Atom、Hugging Face Blog RSS、Google AI RSS、Latent Space RSS、公开 X/Nitter/xcancel 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：xcancel RSS 对抽样账号返回 403，nitter.net 本轮不可达；因此本期不使用 X-only 时间线做事实依据。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>agent 产品开始进入“可度量”阶段</h4><p>GitHub 将 dedicated VS Code Agents window 纳入 Copilot usage metrics，给企业和组织提供 daily active users、session_count、total_user_messages 和用户级 used_vscode_agent 等字段。这个变化看似运营报表，实则说明 agent 从实验工具进入企业管理台：采用率、参与度、团队分布和成本都要被量化。</p></div>
+  <div class="overview-item"><h4>代码审查 agent 正在从评论者变成验证者</h4><p>GitHub Copilot code review 新增已处理评论自动关闭、autofix 智能提交信息、更广泛的 shell 工具验证，以及 Lite effort 下的 agent ensemble。重点不是“会写评论”，而是 code review agent 获得运行测试、执行脚本、查工具和复核自身输出的能力。</p></div>
+  <div class="overview-item"><h4>OpenAI 把 ChatGPT 规模问题摊到工程层</h4><p>OpenAI 发布 Habitat 在线存储平台文章，披露它从 Python library 演进为支撑 10 亿 ChatGPT 用户、2200 万 requests per second 的全球分布式存储平台。今天的 OpenAI 信号不是新模型，而是高规模产品背后的状态、存储和可靠性能力。</p></div>
+  <div class="overview-item"><h4>开放模型讨论开始需要系统教材</h4><p>Nathan Lambert 更新 Open-Source AI & Open Models Reading List，把开放模型的商业策略、安全、US-China 竞争、开放/闭源差距、distillation、cyber 风险放进一张阅读地图。它适合做投研和政策理解的底稿，而不是单篇新闻。</p></div>
+  <div class="overview-item"><h4>AI 工程的主线是“护栏 + 可复现 + 可观测”</h4><p>Simon Willison 今天的条目横跨 OpenRouter 多后端路由差异、Anthropic 对 Claude 生产代码的护栏、Datasette 用 frontier models 做安全审计、wrapture 的测试/观测工具。共同主题是：模型越强，周边工程控制越重要。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>今天关键词是“运营化”。昨天是 agent 平台发布，本期则看到指标、审查、存储、路由、安全审计和开源模型阅读体系。AI agent 正在从 demo 进入管理、治理、审计和成本控制的日常系统。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、GitHub 把 VS Code Agents 纳入 Copilot 指标：agent 采用率要可审计</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Copilot Metrics</span><strong>GitHub Changelog</strong> · 2026-09-11 21:30 UTC · <a href="https://github.blog/changelog/2026-09-11-add-vs-code-agents-to-copilot-usage-metrics">Add VS Code Agents to Copilot usage metrics</a></div>
+  <div class="summary"><p>GitHub Copilot usage metrics 现在包括 dedicated VS Code Agents window 的 GA 指标。企业和组织级报告新增 daily_active_vscode_agent_users，以及按 VS Code agent 聚合的 session_count 和 total_user_messages；用户级报告新增 used_vscode_agent 和 per-user agent session/message 指标。</p><p>这说明 GitHub 正在把 agent 从“功能入口”转成“可管理资产”。企业客户会问：谁在用、用在哪些团队、互动多少、是否真的进入开发流程、是否值得继续扩大许可和培训。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 关注的 AI agent、Codex/Copilot、企业采用和开发者平台都汇聚在这里。agent 能力之外，采用率指标会影响预算、续约、内部推广和治理。</div>
+  <div class="action">后续行动：把 VS Code Agents 指标纳入“企业 agent 采用漏斗”：席位开通、DAU、session 数、消息数、PR/issue 关联、代码审查通过率、人工返工率。</div>
+</div>
+
+<h3>二、Copilot code review 升级：从静态建议走向带工具验证的 review loop</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Code Review Agent</span><strong>GitHub Changelog</strong> · 2026-09-11 20:00 UTC · <a href="https://github.blog/changelog/2026-09-11-auto-resolution-and-analysis-updates-in-copilot-code-review">Auto-resolution and analysis updates in Copilot code review</a></div>
+  <div class="summary"><p>Copilot code review 现在会在后续 commit 已处理评论时自动 resolve 对应线程，并为 Copilot autofix suggestion 生成更贴近修改内容的 commit message。更重要的是，Copilot review 后台开始使用 Copilot SDK 的更完整 shell 工具集，用于运行 build、test、脚本和可用工具/API。</p><p>GitHub 还把 Lite effort review 改成 agent ensemble，多代理共同产出一份 review。官方实验称高严重度被处理评论增加，中低严重度也提高，同时 review 成本下降。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 coding agent 产品成熟的典型路径：从“生成建议”转向“验证建议”，再转向“自动整理状态”。它直接影响代码审查的人机分工。</div>
+  <div class="action">后续行动：跟踪 Copilot review 的工具权限边界、日志可见性、失败重试、误 resolve 风险和企业策略控制；与 Claude Code / Codex 的 review 工作流做横向比较。</div>
+</div>
+
+<h3>三、OpenAI Habitat：支撑 10 亿用户的 agent/ChatGPT 底座不是模型，是状态系统</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Engineering</span><strong>OpenAI</strong> · 2026-09-11 10:00 UTC · <a href="https://openai.com/index/scaling-storage-one-billion-users-part-one">Rapidly scaling online storage to serve over 1 billion ChatGPT users</a></div>
+  <div class="summary"><p>OpenAI 披露 Habitat 从 Python library 演进为全球分布式在线存储平台，用来服务超过 10 亿 ChatGPT 用户和 2200 万 requests per second。文章定位在工程扩容：从产品快速迭代需要的便利层，变成承载全球用户状态和请求的关键基础设施。</p><p>这条值得和 Agents API、ChatGPT Work Data agent 连起来看。长期运行 session、记忆、文件、工具调用、企业数据连接和审计都不是“模型回答”问题，而是状态存储和一致性问题。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OpenAI 正在公开更多底层工程能力。未来 agent 平台竞争不只看模型强弱，还看状态管理、延迟、吞吐、数据隔离、灾备和跨区域合规。</div>
+  <div class="action">后续行动：拆读 Habitat 系列后续部分，记录它如何处理多区域复制、schema 演进、租户隔离、热 key、成本和故障恢复；映射到 agent session / memory 产品需求。</div>
+</div>
+
+<h3>四、Nathan Lambert 开放模型阅读清单：从情绪争论转向结构化知识图谱</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Policy</span><strong>Nathan Lambert / Interconnects</strong> · 2026-09-11 12:36 UTC · <a href="https://www.interconnects.ai/p/open-source-ai-reading-list">Open-Source AI & Open Models Reading List</a></div>
+  <div class="summary"><p>Nathan Lambert 发布/更新开放模型阅读清单，覆盖开放模型定义、商业策略、安全、美国与中国竞争、开闭源差距、distillation、cyber 风险和 adoption dashboard 等材料。它不是单一观点文章，更像一套面向研究者、投资人和政策观察者的课程大纲。</p><p>清单里反复出现的主线是：开放模型不是二元标签，而是权重、数据、许可证、可运行成本、生态采用和治理风险的梯度。它也把中国开放模型的速度、distillation 争议和美国政策反应放在同一个框架下。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Nathan Lambert 的价值在于把 open models 从口号变成可分析系统。对投研来说，这份清单可以直接变成“开放模型产业链/政策风险”资料库。</div>
+  <div class="action">后续行动：把清单拆成三张表：基础概念、竞争格局、风险治理；标记每篇文章的立场、证据类型和可复用数据源，后续用于 AI 产业链报告。</div>
+</div>
+
+<h3>五、Simon Willison：OpenRouter 路由、Claude 代码护栏与 Datasette 安全审计</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Safety</span><strong>Simon Willison</strong> · 2026-09-11 03:27–22:49 UTC · <a href="https://simonwillison.net/2026/Sep/11/so-you-want-to-use-openrouter/">So you want to use OpenRouter?</a> · <a href="https://simonwillison.net/2026/Sep/11/boris-cherny/">Quoting Boris Cherny</a> · <a href="https://simonwillison.net/2026/Sep/11/datasette-security/">Datasette 1.0a39 and 0.65.4 security releases</a></div>
+  <div class="summary"><p>Simon 转述 OpenRouter 使用风险：单一模型 endpoint 背后可能路由到不同 provider，而 provider 的 serving 软件、优化、视觉能力和 reasoning effort 处理方式会不同。它提醒团队不要把“模型名相同”误认为“行为一致”。</p><p>他还记录 Boris Cherny 关于 Claude 生产代码的观点：Anthropic 对 Claude 写出的生产代码设更高门槛，靠 lint、测试、Claude-driven E2E、fuzzers、自动 code/security review 等护栏兜底。Simon 自己也发布 Datasette 安全版本，说明他和 Alex Garcia 用 Claude Fable 5.1、GPT-5.6、GPT-6 Astra 做了一轮安全审计并协作修复。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这几条合在一起给出 AI 工程的现实主义答案：模型输出不能裸奔，路由不能黑箱，安全审计不能只靠一次 prompt，生产代码必须有测试、审查、fuzz 和人类复核。</div>
+  <div class="action">后续行动：建立“AI coding production checklist”：provider pinning、模型能力探针、lint/test/fuzz、E2E、security review、human pair split、release note 和回滚路径。</div>
+</div>
+
+<h3>六、可观测性与可复现环境：wrapture、Datasette releases 和小工具仍有长尾价值</h3>
+<div class="card">
+  <div class="source"><span class="tag">Developer Tools</span><strong>Simon Willison</strong> · 2026-09-11 00:05–14:47 UTC · <a href="https://simonwillison.net/2026/Sep/11/wrapture/">Don't sleep on wrapture</a> · <a href="https://simonwillison.net/2026/Sep/11/datasette/">datasette 0.65.4</a> · <a href="https://simonwillison.net/2026/Sep/11/github-to-sqlite/">github-to-sqlite 2.9.1</a></div>
+  <div class="summary"><p>Simon 强调 Graham Dumpleton 的 wrapture：一个仍处 alpha 但已可用的 monkey patching 包，可同时服务测试和可观测性，支持 recording calls、live tracing、zero-code tracing、Flask tracing 和 OpenTelemetry export 等教程。Datasette 与相关工具也有安全和兼容性 release。</p><p>这些不是“大模型发布”，但很适合 AI agent 工程：当 agent 能改代码、跑服务、审查系统，调用轨迹、性能热点、HTTP/DB/框架级 tracing 会变得更重要。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>agent 需要观察环境才能可靠行动。测试/观测工具的小进步会直接影响自动化 debugging、审计和回归定位。</div>
+  <div class="action">后续行动：把 wrapture 加入 Python agent 工具箱候选，找一个小 Flask/FastAPI 项目试验 zero-code tracing 和 OpenTelemetry export。</div>
+</div>
+
+<h3>七、Hugging Face / Google / Latent Space：本窗口无强新信号，但提供背景参照</h3>
+<div class="card">
+  <div class="source"><span class="tag">Ecosystem / Lower Priority</span><strong>Hugging Face / Google / Latent Space</strong> · 2026-09-10 或更早 · <a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a> · <a href="https://blog.google/technology/ai/rss/">Google AI RSS</a> · <a href="https://www.latent.space/feed">Latent Space RSS</a></div>
+  <div class="summary"><p>Hugging Face Blog 和 Google AI RSS 在本次 UTC 窗口内没有新的高优先级条目；最近条目仍是 9 月 10 日 Gradio Workflow 和 Google Search 跑步比赛功能，已经在昨日覆盖。Latent Space 的 AINews 9 月 10 日早间条目在窗口外，但它提供了 X 公开聚合背景，包含 Anthropic cyber incidents、OpenAI governance/security、agent benchmarks 和 harness engineering 等线索。</p><p>由于 X 公开镜像本轮不可用，本期不把 Latent Space 聚合里的 X 内容当成今天窗口内事实依据，只把它作为后续人工复核候选池。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>低优先级源没有强更新时，最重要的是避免硬凑新闻。背景聚合可以指路，但公开日报需要可验证、可链接、不过度转载的事实基础。</div>
+  <div class="action">后续行动：明天继续检查 Hugging Face / Google 是否有新 developer/research 条目；对 Latent Space 提到的 AutoResearchExam、HydraFusion、Q2D-Web 和 Photon 2.2 单独做来源复核。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>Habitat 在线存储平台披露 10 亿用户与 2200 万 RPS 规模，说明 ChatGPT/agent 平台背后正在补公开工程叙事。</li>
+  <li><strong>GitHub：</strong>VS Code Agents 进入 Copilot usage metrics，企业终于能按 agent 窗口追踪采用率和使用深度。</li>
+  <li><strong>GitHub：</strong>Copilot code review 获得自动 resolve、smart commit message、shell 工具验证和 Lite agent ensemble，review loop 更像可执行 agent。</li>
+  <li><strong>Nathan Lambert：</strong>开放模型阅读清单值得长期收藏，可作为 open models / China / policy / distillation 研究入口。</li>
+  <li><strong>Simon Willison：</strong>OpenRouter 路由差异、Claude 代码护栏和 Datasette AI 安全审计共同指向 production AI engineering 的底线。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Kevin Weil / Sam Altman 相关产品线：</strong>官方 RSS 今日主信号转向基础设施工程，而不是新模型或新产品；这对判断平台护城河很重要。</li>
+  <li><strong>GitHub / Copilot：</strong>机构动态明显偏企业管理与自动化审查，说明 Copilot 正在围绕 agent 使用、review 质量和组织治理继续产品化。</li>
+  <li><strong>Nathan Lambert：</strong>继续把开放模型议题结构化，本期更像资料库维护，而不是立场短文。</li>
+  <li><strong>Simon Willison：</strong>继续作为 AI 工程雷达：供应商路由、生产代码标准、安全审计、Python 可观测性都被他纳入同一天记录。</li>
+  <li><strong>X-only 高优先级账号：</strong>公开镜像不可用，不能据此判断 Sam Altman、Karpathy、Lilian Weng、Noam Brown、Alex Albert 等账号无动态。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Agent metrics dashboard：</strong>参考 GitHub Copilot usage metrics，设计自己的 coding/work agent 采用率指标：DAU、session、消息数、任务完成率、人工打断率、返工率。</li>
+  <li><strong>Code review agent 对照表：</strong>比较 Copilot、Claude Code、Codex、CodeRabbit 等在工具调用、自动 resolve、commit message、审查深度和企业权限上的差异。</li>
+  <li><strong>OpenAI Habitat 技术拆解：</strong>跟踪该系列后续文章，抽取状态存储、数据隔离、可靠性、成本和全球部署经验。</li>
+  <li><strong>Open models reading map：</strong>把 Nathan 的阅读清单转为中文索引，按投资、政策、技术、安全四类归档。</li>
+  <li><strong>AI coding production checklist：</strong>沉淀 provider pinning、模型能力探针、测试/fuzz、安全 review、observability 和 release rollback 模板。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>GitHub Copilot metrics：</strong>需读取 REST API 文档确认字段、权限、历史回填、数据延迟和企业/组织层级差异。</li>
+  <li><strong>Copilot code review shell tools：</strong>需确认工具运行环境、网络/文件权限、日志可见性，以及是否可被组织策略禁用。</li>
+  <li><strong>OpenAI Habitat：</strong>RSS 和文章摘要确认规模和定位；细节需继续读完整系列，尤其是一致性、schema、故障恢复和隐私隔离。</li>
+  <li><strong>OpenRouter 路由风险：</strong>Simon 记录的是二手指引，后续应直接核对 OpenRouter provider routing 文档和具体模型 endpoint 行为。</li>
+  <li><strong>X 时间线：</strong>xcancel 返回 403，nitter.net 不可达；本期未使用受限登录态，不判断个人账号实际发帖情况。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Simon 的 Python `re.match()` soft deprecation 条目对 Python 开发有用，但与 AI agent / 投研主线关系较弱。</li>
+  <li>`github-to-sqlite`、`datasette-publish-fly` 等小版本发布记录为工具维护信号，不单独上升为行业趋势。</li>
+  <li>Hugging Face 的 Gradio Workflow 和 Google Search 跑步功能属于昨日窗口内容，本期只保留背景，不重复展开。</li>
+  <li>Latent Space 的 9/10 AINews 信息密度高，但不在本次 UTC 窗口，且包含大量 X 链接，需后续逐条复核。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/scaling-storage-one-billion-users-part-one">OpenAI: Rapidly scaling online storage to serve over 1 billion ChatGPT users</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-11-add-vs-code-agents-to-copilot-usage-metrics">GitHub: Add VS Code Agents to Copilot usage metrics</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-11-auto-resolution-and-analysis-updates-in-copilot-code-review">GitHub: Auto-resolution and analysis updates in Copilot code review</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-10-github-copilot-weekly-releases-september-7">GitHub: Copilot weekly releases - September 7</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://www.interconnects.ai/p/open-source-ai-reading-list">Interconnects: Open-Source AI & Open Models Reading List</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom feed</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/11/so-you-want-to-use-openrouter/">Simon Willison: So you want to use OpenRouter?</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/11/boris-cherny/">Simon Willison: Quoting Boris Cherny</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/11/feeling-sad-about-ai/">Simon Willison: Feeling sad about AI</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/11/hugging-face-security/">Simon Willison: Quoting huggingface.co/security.txt</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/11/datasette-security/">Simon Willison: Datasette 1.0a39 and 0.65.4 security releases</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/11/wrapture/">Simon Willison: Don't sleep on wrapture</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://xcancel.com/sama/rss">xcancel sample RSS: sama</a></li>
+  <li><a href="https://nitter.net/sama/rss">nitter sample RSS: sama</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-09-11T00:00:00Z / 2026-09-12T00:00:00Z.</footer>
