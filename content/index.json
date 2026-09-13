@@ -1,5 +1,12 @@
 [
   {
+    "title": "WorldClaw 与 GPT-6 Astra 对比分析报告",
+    "date": "2026-09-14",
+    "category": "research",
+    "url": "/research/2026/09/14/worldclaw-gpt-astra-comparison/",
+    "summary": "分析腾讯混元 WorldClaw 的技术路线、产业影响与成熟度，并与 OpenAI GPT-6 Astra 在定位、能力、商业化路径和行业冲击上做横向比较。"
+  },
+  {
     "title": "Follow 深度日报：OpenAI 密集发布，科学 Agent 与开放模型许可成为主线",
     "date": "2026-09-09",
     "category": "daily",
