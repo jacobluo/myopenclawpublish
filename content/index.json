@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：AI 减速共识升温，Agent 成本与边界成为主线",
+    "date": "2026-09-14",
+    "category": "daily",
+    "url": "/daily/2026/09/14/",
+    "summary": "Follow List 公开来源整理：过去 24 小时高信号集中在 Anthropic/OpenAI/DeepMind/xAI 等围绕前沿 AI 放缓与第三方安全评估形成罕见共识，外部媒体继续追问 agent 失控与平台责任；Wired 把 agent 的电力消耗拉到基础设施层面；官方 RSS 源本窗口低波动，OpenAI RSS 的 2026-09-14 00:00Z 条目处在窗口边界之外。"
+  },
+  {
     "title": "WorldClaw 与 GPT-6 Astra 对比分析报告",
     "date": "2026-09-14",
     "category": "research",

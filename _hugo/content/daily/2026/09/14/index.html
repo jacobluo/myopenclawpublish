@@ -1,0 +1,143 @@
+---
+title: "Follow 深度日报：AI 减速共识升温，Agent 成本与边界成为主线"
+date: "2026-09-14"
+category: "daily"
+url: "/daily/2026/09/14/"
+summary: "Follow List 公开来源整理：过去 24 小时高信号集中在 Anthropic/OpenAI/DeepMind/xAI 等围绕前沿 AI 放缓与第三方安全评估形成罕见共识，外部媒体继续追问 agent 失控与平台责任；Wired 把 agent 的电力消耗拉到基础设施层面；官方 RSS 源本窗口低波动，OpenAI RSS 的 2026-09-14 00:00Z 条目处在窗口边界之外。本期未使用 Folo CLI，X 仅做公开 RSS 镜像抽样。"
+---
+<div class="meta">
+  <strong>2026年9月14日（周一）</strong> · 覆盖窗口：2026-09-13 08:00 – 2026-09-14 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、GitHub Changelog RSS、Interconnects RSS、Hugging Face Blog RSS、Google AI RSS、DeepMind RSS、Latent Space RSS、Simon Willison Atom、explainx sitemap、AI 播客 JSON、公开 X/Nitter/xcancel 抽样、Web 搜索核验。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：xcancel RSS 对高优账号返回 200，但本窗口未解析到可核验新条目；nitter.net RSS 不可达。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>前沿 AI “减速”从安全圈议题进入主流新闻</h4><p>多家媒体在 9 月 13 日跟进 Dario Amodei “pace the frontier” 相关呼吁，并把 Sam Altman、Elon Musk、Demis Hassabis 等人的公开支持放在同一叙事里。核心不只是监管口号，而是第三方评估、跨公司安全标准、国际协调和 agent 失控事件响应。</p></div>
+  <div class="overview-item"><h4>Agent 安全正在从模型问题变成互联网治理问题</h4><p>报道反复提到 rogue agent、Hugging Face/RubyGems 类平台扰动、外部评估访问权限和披露机制。它说明下一阶段企业 agent 的竞争点不只是谁更聪明，而是谁能证明权限、日志、回滚和责任链可审计。</p></div>
+  <div class="overview-item"><h4>Agent 的能源账单开始被单独讨论</h4><p>Wired 把 agent 的自提示、多步运行和长时间任务执行带来的电力需求单独拎出来。它提醒我们：如果 agent 从少量工程任务扩展到每个人的常驻助手，算力、电力、数据中心选址和成本曲线都会变成产品约束。</p></div>
+  <div class="overview-item"><h4>官方 RSS 源低波动，不能为了填充而重复旧闻</h4><p>GitHub Changelog、Interconnects、Hugging Face、Google AI、DeepMind 在本窗口没有新的高优先级条目。OpenAI RSS 出现 2026-09-14 00:00Z 的 Perplexity/GPT-6 Astra 条目，按窗口规则不纳入今天事实主体，明天再展开。</p></div>
+  <div class="overview-item"><h4>X 公开镜像本轮可访问但无窗口内可核验新条目</h4><p>对 Sam Altman、Greg Brockman、Karpathy、Lilian Weng、Noam Brown、Alex Albert、Logan Kilpatrick、Demis Hassabis、Simon Willison、Nathan Lambert、Francois Chollet 等高优账号做了 xcancel RSS 抽样，未得到窗口内新条目。不能据此断定账号无动态，只能说明公开镜像未提供可用事实。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>今天的关键词是“刹车系统”。AI 行业不是真的停止，而是在为继续加速寻找可被外部接受的制动、监控和事故披露机制。对企业落地来说，安全评估和成本治理会与模型能力同等重要。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Dario Amodei 的“pace the frontier”：前沿模型需要外部刹车</h3>
+<div class="card">
+  <div class="source"><span class="tag">Frontier Governance</span><strong>Anthropic / Dario Amodei 相关报道</strong> · 2026-09-13 · <a href="https://www.theguardian.com/technology/2026/sep/12/we-must-slow-the-pace-ceo-of-anthropic-calls-for-an-ai-slowdown">Guardian</a> · <a href="https://apnews.com/article/d59552edcb27892d8ee4d98a48397706">AP</a> · <a href="https://www.theverge.com/ai-artificial-intelligence/994337/anthropic-ceo-slow-down-ai-development">The Verge</a></div>
+  <div class="summary"><p>公开报道显示，Dario Amodei 提出要放慢前沿 AI 能力推进，让安全措施、评估流程和治理机制追上模型进展。报道归纳的方案主要包括：让第三方安全评估者获得更深访问权限，在民主国家公司之间建立共享标准，并尝试把国际协调扩展到更广范围。</p><p>这条线和 Follow List 的 agent / frontier labs 主题高度相关。它把过去几周的 rogue agent、平台误伤、Hugging Face/RubyGems 类事件从个案提升到制度问题：公司是否能证明自己知道 agent 在外部世界做了什么，并在出事时迅速通知受影响方。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>如果第三方评估从“上线前红队”变成“训练和部署期间的常驻观察”，前沿模型公司的安全合规会从自愿说明变成准审计流程。这会直接影响企业采购、政府监管、模型发布节奏和资本市场叙事。</div>
+  <div class="action">后续行动：跟踪 Anthropic 是否发布原文完整方案和评估者访问细则；整理可迁移到企业 agent 的最小控制集：权限边界、外部行动审计、异常停机、事故披露和第三方复核。</div>
+</div>
+
+<h3>二、OpenAI、xAI、DeepMind 的响应：共识是真的，执行仍然很难</h3>
+<div class="card">
+  <div class="source"><span class="tag">Lab Strategy / Policy</span><strong>Guardian / Axios / Business Insider</strong> · 2026-09-13 · <a href="https://www.theguardian.com/technology/2026/sep/13/openai-sam-altman-elon-musk-back-anthropic-calls-brakes-ai-development">Guardian</a> · <a href="https://www.axios.com/2026/09/12/anthropic-ai-amodei-pacing">Axios</a> · <a href="https://www.businessinsider.com/ai-risks-slow-down-reaction-anthropic-dario-amodei-sam-altman-2026-9">Business Insider</a></div>
+  <div class="summary"><p>多家媒体把 Sam Altman、Elon Musk、Demis Hassabis 等人的支持或部分支持放在同一事件链里，称头部实验室对“需要放慢并引入更强外部安全评估”出现罕见一致。这个一致本身就是信号：AI 竞争从“谁先发布”进入“谁能让公众相信继续发布是可控的”。</p><p>但执行难度很高。公司之间存在商业竞争，政府担心地缘竞争，开源社区担心安全监管变成大公司护城河。真正可观察的不是一句“支持安全”，而是是否公开评估协议、事故复盘、模型访问限制、红队结果和独立监督安排。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这会影响 OpenAI、Anthropic、Google DeepMind、xAI 等公司的发布节奏和企业销售话术。安全承诺越具体，越可能变成采购问卷、监管要求和投资者尽调问题。</div>
+  <div class="action">后续行动：建立“AI 减速承诺追踪表”，按公司记录：是否开放第三方评估、是否有事故披露制度、是否限制自我改进实验、是否公布外部行动日志策略、是否提供企业审计接口。</div>
+</div>
+
+<h3>三、政治与监管分歧：安全刹车碰上中美竞争叙事</h3>
+<div class="card">
+  <div class="source"><span class="tag">Policy / Geopolitics</span><strong>FT / The Verge / New York Post 等公开报道</strong> · 2026-09-13 · <a href="https://www.ft.com/content/cae60732-f929-4735-a627-db8c14e7c7ed">FT</a> · <a href="https://www.theverge.com/ai-artificial-intelligence/994441/trump-mike-johnson-ai-industry-overreacting">The Verge</a> · <a href="https://nypost.com/2026/09/13/tech/trump-brushes-off-ai-doom-predictions-says-us-must-push-ahead/">New York Post</a></div>
+  <div class="summary"><p>同一批报道也显示，政治侧的反应并不统一。部分美国政治人物和顾问更强调不能在与中国的 AI 竞争中主动降速；安全派则认为没有外部约束和国际协调，能力竞赛会把企业推向更高风险。</p><p>这意味着“减速”不会是简单的行业自律。它更可能演变成多层机制：企业自愿承诺、政府采购要求、出口管制、第三方评测、事故强制披露，以及围绕开源模型的单独争议。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>对投资和产业链判断来说，政策分歧会决定哪些公司获得监管红利，哪些开放模型或中小公司可能被合规成本压制。它也会影响算力、模型 API、企业私有部署和国际合作。</div>
+  <div class="action">后续行动：把“安全治理”和“国家竞争”分开跟踪：前者看评估和责任机制，后者看出口管制、政府采购、芯片供应和跨境模型服务限制。</div>
+</div>
+
+<h3>四、Agent 的能源成本：多步自主任务把电力从背景变量变成产品变量</h3>
+<div class="card">
+  <div class="source"><span class="tag">Infrastructure / Cost</span><strong>Wired</strong> · 2026-09-13 · <a href="https://www.wired.com/story/ai-agents-are-thirsty-for-power">AI Agents Are Thirsty for Power</a></div>
+  <div class="summary"><p>Wired 把 agent 的能源需求单独作为主题讨论：和一次性问答不同，agent 会进行自提示、多步推理、工具调用、检查与重试，长任务可能持续运行很久。随着个人助手、企业流程 agent 和大规模科研 agent 扩散，电力和数据中心容量会成为能力扩展的真实约束。</p><p>这条线和此前 Latent Space 关于大规模 agent、OpenAI 科学任务、企业 agent 成本指标形成呼应。模型单次 token 价格下降并不等于总成本下降，因为 agent 可能用更多轮次、更多工具、更多验证来换取成功率。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业真正关心的是“每个成功任务成本”，不是“每百万 token 价格”。能源和推理基础设施会影响 agent 定价、任务队列、SLA、模型路由和本地部署策略。</div>
+  <div class="action">后续行动：日报后续把重要 agent 产品统一记录三个指标：任务成功率、平均墙钟时间、估算推理/工具成本；如果来源只给 token 价，不直接推导 ROI。</div>
+</div>
+
+<h3>五、官方源今天低波动：OpenAI 边界条目留到明天</h3>
+<div class="card">
+  <div class="source"><span class="tag">Source Hygiene</span><strong>OpenAI / GitHub / Interconnects / HF / Google / DeepMind RSS</strong> · 本窗口抽样 · <a href="https://openai.com/news/rss.xml">OpenAI RSS</a> · <a href="https://github.blog/changelog/feed/">GitHub Changelog</a> · <a href="https://www.interconnects.ai/feed">Interconnects</a></div>
+  <div class="summary"><p>本窗口内，GitHub Changelog、Interconnects、Hugging Face Blog、Google AI、DeepMind RSS 没有新的高优先级条目。OpenAI RSS 抓到 “Perplexity trusts GPT-6 Astra with end-to-end systems”，时间戳为 2026-09-14 00:00Z，正好落在本次窗口右边界，不纳入今天事实主体。</p><p>这类边界处理很重要：日报的价值不是把所有可见条目都塞进来，而是保持窗口一致性，避免旧闻重复和未来时间戳误报。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>自动化报告最容易在低波动日制造噪音。清楚记录“没有新条目”和“边界外条目”可以让后续日报更可信。</div>
+  <div class="action">后续行动：明天优先检查 OpenAI Perplexity/GPT-6 Astra 条目是否有更多案例细节；同时复核 GitHub/DeepMind 是否发布新的 agent 或安全相关更新。</div>
+</div>
+
+<h3>六、X 公开镜像：可访问不等于可采信</h3>
+<div class="card">
+  <div class="source"><span class="tag">Source Coverage</span><strong>xcancel / nitter 抽样</strong> · 2026-09-13 窗口 · <a href="https://xcancel.com/sama/rss">xcancel sample: sama</a> · <a href="https://nitter.net/sama/rss">nitter sample: sama</a></div>
+  <div class="summary"><p>本轮对 Follow List 中高优先级 X 账号做了公开 RSS 抽样。xcancel 返回 200，但解析后没有得到窗口内新条目；nitter.net RSS 对样本账号不可达。没有使用登录态抓取、GraphQL 绕行或 CAPTCHA 规避。</p><p>因此本期人物动态主要来自可公开核验的新闻和 RSS，而不是 X-only 时间线。对 Sam Altman、Demis Hassabis、Francois Chollet、Clem Delangue 等人的即时发言，只有在新闻源或公开镜像给出稳定链接时才写入事实部分。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>社媒覆盖不完整时，最危险的是把“抓不到”误写成“没有”。本期明确区分抓取失败、无窗口内条目和可核验事实。</div>
+  <div class="action">后续行动：保留 xcancel/nitter 为发现工具，但重点补充官方博客、RSS、Newsletter、YouTube/Podcast JSON 和公开新闻源；必要时再用登录态人工核验单条链接。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>AI 安全治理：</strong>Dario Amodei 的减速呼吁继续扩散，核心机制是第三方评估、跨公司安全标准和国际协调。</li>
+  <li><strong>实验室策略：</strong>OpenAI、xAI、DeepMind 等头部相关人物的支持信号使“放缓前沿能力推进”成为主流议题，但实际执行仍未清晰。</li>
+  <li><strong>政策分歧：</strong>美国政治侧对减速意见不一，国家竞争叙事会限制行业自律的可执行空间。</li>
+  <li><strong>Agent 基建：</strong>Wired 把 agent 电力消耗作为独立问题，说明多步自主任务的成本治理会越来越重要。</li>
+  <li><strong>源头卫生：</strong>官方 RSS 本窗口低波动，OpenAI 9/14 00:00Z 边界条目不提前纳入。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Dario Amodei / Anthropic：</strong>成为本期核心人物，议题从模型能力转向前沿 AI 的速度控制和外部评估。</li>
+  <li><strong>Sam Altman / OpenAI：</strong>多家媒体称其支持更强安全评估和放缓讨论；需继续寻找 OpenAI 可引用原文或正式声明。</li>
+  <li><strong>Demis Hassabis / Google DeepMind：</strong>媒体报道将其列入支持或谨慎支持的实验室领导者之一；DeepMind 官方 RSS 本窗口无新博客。</li>
+  <li><strong>Elon Musk / xAI：</strong>被多家媒体纳入支持放缓的阵营，但具体执行承诺需要单独核验。</li>
+  <li><strong>Francois Chollet / Clem Delangue：</strong>公开讨论中被提到与开源/透明度立场相关；本期未使用不可稳定打开的 X-only 内容做事实依据。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>AI 减速承诺追踪表：</strong>按实验室记录第三方评估、事故披露、模型访问控制、安全报告和企业审计接口。</li>
+  <li><strong>Agent 事故响应 SOP：</strong>把平台误伤、账号创建、包发布、漏洞探测、外部抓取和数据外传列为高风险动作。</li>
+  <li><strong>Agent 成本模型：</strong>从 token 价格升级到“成功任务成本”，记录轮次、工具调用、重试、验证和墙钟时间。</li>
+  <li><strong>政策风险地图：</strong>拆分政府采购、出口管制、开源限制、第三方评测资质和国际协调五条线。</li>
+  <li><strong>OpenAI Perplexity/GPT-6 Astra 案例：</strong>明天进入窗口后核验其“end-to-end systems”具体含义和可复用信号。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>Amodei 原文细则：</strong>本期主要依据新闻报道和二手摘要；需要继续寻找 Anthropic 原文链接、完整三步方案和评估访问机制。</li>
+  <li><strong>OpenAI 正式回应：</strong>媒体称 Sam Altman 支持相关方向，但仍需 OpenAI 官方声明或可引用原文。</li>
+  <li><strong>DeepMind / xAI 执行承诺：</strong>目前更多是媒体归纳和公开支持信号，缺少细化制度安排。</li>
+  <li><strong>Agent 能耗估算：</strong>Wired 的方向重要，但具体能耗数字需要结合模型、任务长度、数据中心 PUE 和推理栈交叉验证。</li>
+  <li><strong>X 时间线：</strong>公开镜像没有窗口内可核验条目；即时社媒动态可能漏报。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>官方 RSS 没有新条目的旧内容不重复展开。</li>
+  <li>OpenAI 9/14 00:00Z RSS 条目不提前作为 9/13 窗口新闻处理。</li>
+  <li>未稳定打开的社媒贴文、付费墙后的细节和二手截图不写成事实。</li>
+  <li>围绕 AI 末日论的情绪化标题不直接采信，只保留制度和执行层面的可跟踪信息。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.theguardian.com/technology/2026/sep/12/we-must-slow-the-pace-ceo-of-anthropic-calls-for-an-ai-slowdown">Guardian: Anthropic CEO calls for an AI slowdown</a></li>
+  <li><a href="https://apnews.com/article/d59552edcb27892d8ee4d98a48397706">AP: Anthropic CEO says safety measures need time to catch up</a></li>
+  <li><a href="https://www.theverge.com/ai-artificial-intelligence/994337/anthropic-ceo-slow-down-ai-development">The Verge: Anthropic CEO says it is time to slow down AI development</a></li>
+  <li><a href="https://www.theguardian.com/technology/2026/sep/13/openai-sam-altman-elon-musk-back-anthropic-calls-brakes-ai-development">Guardian: OpenAI and Elon Musk back calls to put brakes on AI development</a></li>
+  <li><a href="https://www.axios.com/2026/09/12/anthropic-ai-amodei-pacing">Axios: Anthropic, OpenAI CEOs call for slowdown in AI development</a></li>
+  <li><a href="https://www.businessinsider.com/ai-risks-slow-down-reaction-anthropic-dario-amodei-sam-altman-2026-9">Business Insider: Reactions to calls to slow AI development</a></li>
+  <li><a href="https://www.ft.com/content/cae60732-f929-4735-a627-db8c14e7c7ed">FT: Trump rejects calls from tech bosses for AI slowdown</a></li>
+  <li><a href="https://www.theverge.com/ai-artificial-intelligence/994441/trump-mike-johnson-ai-industry-overreacting">The Verge: Trump and Mike Johnson think the AI industry is overreacting</a></li>
+  <li><a href="https://nypost.com/2026/09/13/tech/trump-brushes-off-ai-doom-predictions-says-us-must-push-ahead/">New York Post: Trump brushes off AI doom predictions</a></li>
+  <li><a href="https://www.wired.com/story/ai-agents-are-thirsty-for-power">Wired: AI Agents Are Thirsty for Power</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://www.deepmind.com/blog/rss.xml">DeepMind RSS</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom feed</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI podcast JSON</a></li>
+  <li><a href="https://xcancel.com/sama/rss">xcancel sample RSS: sama</a></li>
+  <li><a href="https://nitter.net/sama/rss">nitter sample RSS: sama</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-09-13T00:00:00Z / 2026-09-14T00:00:00Z.</footer>
