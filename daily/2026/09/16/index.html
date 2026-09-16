@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：agent 可靠性进入评测前沿——平均分掩盖的 24 点一致性缺口，Gemini 3.8 Live 语音模型发布</title>
+    <meta name="description" content="Follow List 公开来源整理：过去 24 小时高信号集中在 agent 评测范式升级——IBM Research 在 Hugging Face 指出「平均成功率」掩盖了 agent 的不可复现性（GPT-4.1 ReAct 在 AppWorld 平均 77.4% 成功，但五次全对仅 53%，一致性缺口 24.4 点），并给出 Consistency Analyzer &#43; consistency guidelines 的解法；Google 发布 Gemini 3.8 Live / 3.8 Live Extended Thinking 语音模型并开放 AI 经济 ATLAS 交互数据；GitHub Copilot 补上自定义属性治理建议与 Advanced Security 强制执行。未使用 Folo CLI，X 仅公开镜像抽样，未绕过 CAPTCHA，未发布私密信息。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：agent 可靠性进入评测前沿——平均分掩盖的 24 点一致性缺口，Gemini 3.8 Live 语音模型发布</h1>
+      <p class="portal-lead">Follow List 公开来源整理：过去 24 小时高信号集中在 agent 评测范式升级——IBM Research 在 Hugging Face 指出「平均成功率」掩盖了 agent 的不可复现性（GPT-4.1 ReAct 在 AppWorld 平均 77.4% 成功，但五次全对仅 53%，一致性缺口 24.4 点），并给出 Consistency Analyzer &#43; consistency guidelines 的解法；Google 发布 Gemini 3.8 Live / 3.8 Live Extended Thinking 语音模型并开放 AI 经济 ATLAS 交互数据；GitHub Copilot 补上自定义属性治理建议与 Advanced Security 强制执行。未使用 Folo CLI，X 仅公开镜像抽样，未绕过 CAPTCHA，未发布私密信息。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-09-16</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年9月16日（周三）</strong> · 覆盖窗口：2026-09-15 08:00 – 2026-09-16 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Hugging Face Blog RSS、OpenAI News RSS、GitHub Changelog RSS、Google AI RSS、Simon Willison Atom、Interconnects RSS、LangChain Blog RSS、Chip Huyen / Eugene Yan RSS、explainx sitemap、AI 播客 JSON、公开 X/Nitter/xcancel 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：OpenAI News RSS 本窗口无新条目（最新停在 9/14）；Interconnects 最新停在 9/11《Open-Source AI & Open Models Reading List》；X 公开镜像仍不可稳定采信，本期不用 X-only 内容作事实依据。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Agent 的评测从「平均分」转向「一致性/可复现性」</h4><p>本窗口最高信号来自 IBM Research 发在 Hugging Face 的文章：一个 ReAct agent（GPT-4.1，AppWorld test_normal）平均成功率 77.4%，但同一任务重复 5 次「全部成功」的比例只有 53.0%——两者之间是 24.4 个点的一致性缺口，难题上甚至到 30 点。这是对「agent 不可复现」第一次给出清晰量化。</p></div>
+  <div class="overview-item"><h4>连续性主线：昨天讲「少人工干预」，今天讲「少一次成功不算数」</h4><p>昨天 Astra 企业案例把「人工 check-in 频次下降」当验收口径；今天这篇直接指出：单次跑通不构成可靠性，只有多次重复稳定成功才值得交付。两条信号合并，意味着企业 agent 选型正在从「能力演示」走向「可靠性验收」。</p></div>
+  <div class="overview-item"><h4>Google 发布 Gemini 3.8 Live / 3.8 Live Extended Thinking</h4><p>两个新的 speech-to-speech 语音模型，形态对齐 OpenAI 的 GPT-Live 家族。Simon Willison 用 GPT-6 Astra 生成文档并做了一个零依赖 Web 前端来试玩（WebSocket + Web Audio API），可打断、可选音色、可加 system prompt。语音实时交互的竞争继续升温。</p></div>
+  <div class="overview-item"><h4>Google 把 AI 经济 ATLAS 做成交互开放数据</h4><p>将 ATLAS 数百万全球数据点转化为可交互、开放访问的体验，属于 AI 经济影响研究的公开数据资产，对「投资线索 / 研究方向」主题是可直接引用的源。</p></div>
+  <div class="overview-item"><h4>GitHub Copilot 治理继续补细节</h4><p>Copilot 新增「自定义属性定义建议」（帮管理员生成 governance 元数据以定位 rulesets），以及 Advanced Security 配置可在企业层强制执行。都是编码 agent 商业化的治理补位，与昨天「成本/质量配置」同属一条主线。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>今天的信号不是新模型发布潮，而是「评测与治理」的双向收口：评测侧开始量化和修复 agent 的不可复现性，治理侧继续把模型路由、元数据、安全策略做成企业可强制的开关。前沿竞争的差异化正从榜单分数转向「可审计、可复现、可强制」。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、一致性缺口：Agent 评测范式的一次实质升级</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Evals</span><strong>IBM Research × Hugging Face</strong> · 2026-09-15 · <a href="https://huggingface.co/blog/ibm-research/altk-evolve-consistency">Your Agent Aced the Task. Will It Do It Again?</a></div>
+  <div class="summary"><p>文章的核心是一个被大多数 benchmark 隐藏的事实：在 AppWorld 上，ReAct agent（GPT-4.1）平均成功率 77.4%，但同一任务重复 5 次「全部成功」的比例只有 53.0%，一致性缺口高达 24.4 点，难题上甚至达到 30 点。作者指出，大多数评测只报告第一个数（平均分），而真正决定 agent 能否交付的是第二个数（可复现性）。</p><p>他们给出的解法延续了此前的 ALTK-Evolve 框架：新增「consistency guidelines」这一指南类型，配上一个名为 Consistency Analyzer 的诊断工具，直接针对这个缺口做定位和修复——不是 patch 单条轨迹，而是把 agent 自身的历史轨迹蒸馏成可复用、可泛化的指南，在推理时注入。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 Follow List 里「evals / 可靠性」主题的一次关键推进。它把一个长期模糊的问题（agent 忽好忽坏）变成了可测量、可诊断、可改进的工程对象，并且给出了「诊断—修复—验证」的闭环。对做 agent 产品、评测平台、监控工具的人来说，这是方法论层面的直接输入。</div>
+  <div class="action">后续行动：把「任务级重复成功率（如 5 次全对率）+ 一致性缺口」纳入自己的 agent 评估框架；追踪 ALTK-Evolve 的 Consistency Analyzer 是否开源、能否复用到其他 agent 框架；对照昨天 Astra 案例的「人工 check-in 频次」，梳理一套统一的可靠性验收口径。</div>
+</div>
+
+<h3>二、Gemini 3.8 Live：语音实时交互竞赛升温</h3>
+<div class="card">
+  <div class="source"><span class="tag">Frontier Labs / Product</span><strong>Google × Simon Willison</strong> · 2026-09-15 · <a href="https://simonwillison.net/2026/Sep/15/gemini-live/">Gemini Live audio</a></div>
+  <div class="summary"><p>Google 发布了 Gemini 3.8 Live 和 3.8 Live Extended Thinking，两个新的 speech-to-speech（语音到语音）模型，形态与 OpenAI 的 GPT-Live 家族对齐。Simon 用 GPT-6 Astra Extra High 指向文档，生成了一个零依赖的 Web UI 来试玩：可选模型和音色、可加可选 system prompt、可语音对话并在对方说话时打断。</p><p>实现上值得一提：不用任何库，直接连 WebSocket（generativelanguage.googleapis.com 的 BidiGenerateContent 端点）+ Web Audio API 的 AudioContext 做采集和播放。这既是新模型信号，也是一份「如何快速给语音模型搭前端」的现成参考。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>语音实时交互（Live / speech-to-speech）是继文本 agent 之后的下一个竞争焦点，OpenAI 的 GPT-Live 已有先手，Google 用 3.8 Live + Extended Thinking 跟进。Extended Thinking 出现在语音链路里，意味着「边说边想」的实时推理开始产品化。</div>
+  <div class="action">后续行动：对比 Gemini 3.8 Live 与 GPT-Live 的延迟、打断体验、多音色与 Extended Thinking 的行为差异；关注是否进入 Gemini API / AI Studio 正式可用，以及成本口径；把「语音 agent 的前端最小实现」归档为可复用参考。</div>
+</div>
+
+<h3>三、GitHub 的治理补位：元数据建议 + 安全配置强制</h3>
+<div class="card">
+  <div class="source"><span class="tag">Dev Tools / Governance</span><strong>GitHub Changelog</strong> · 2026-09-15 · <a href="https://github.blog/changelog/2026-09-15-github-copilot-suggests-custom-properties-definitions">Copilot suggests custom properties definitions</a> · <a href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations">Enforce GitHub Advanced Security configurations</a></div>
+  <div class="summary"><p>两个更新同属「企业治理」主线。其一，Copilot 现在能在你为组织仓库创建「自定义属性（custom properties）」时，自动建议相关属性及其允许值——自定义属性是给仓库挂治理元数据、再用 rulesets 定位仓库的常用手段，但管理员往往不知道该定义哪些属性，元数据不一致又会让治理难落地。其二，Advanced Security 配置可在企业层强制执行，阻止组织/仓库管理员覆盖企业级设置，帮助安全与合规团队统一策略。</p><p>这延续了昨天「Copilot auto model selection 成本/质量配置」的节奏：GitHub 正在把 Copilot 和代码安全从「能用」推向「企业可强制、可审计」。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>编码 agent 与 DevSecOps 的商业化，最终都会落到「治理开关是否够细、能否强制」上。Copilot 主动帮管理员补元数据，是把 AI 用在治理本身的早期信号；安全配置的企业级强制，则是安全左移的标配能力。</div>
+  <div class="action">后续行动：关注 custom properties 建议是否也能用于 rulesets 的自动化生成（不止建议值，而是建议整套治理策略）；记录 Advanced Security 强制执行的三档粒度，对标自己项目里配置漂移的治理需求。</div>
+</div>
+
+<h3>四、Google AI 经济 ATLAS：一份可引用的开放数据</h3>
+<div class="card">
+  <div class="source"><span class="tag">Research / 投资线索</span><strong>Google</strong> · 2026-09-15 · <a href="https://blog.google/innovation-and-ai/technology/ai/ai-economy-atlas-september-2026/">New insights from Google's AI &amp; Economy ATLAS</a></div>
+  <div class="summary"><p>Google 把 AI &amp; Economy ATLAS 的数百万全球数据点转化为交互式、开放访问的体验。ATLAS 是 Google 首席经济学家办公室主导的 AI 经济影响研究项目，这次更新让它从报告/图表变成可探索的数据入口。</p><p>对「投资线索 / 研究方向」主题来说，这是一份可长期引用、可按地区/行业拆解的公开数据资产，比零散新闻更适合做宏观判断的底料。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI 经济影响的讨论长期缺公开、可交互、可复核的数据。ATLAS 的开放化降低了引用门槛，适合作为「AI 采用率 / 生产率影响」类研究的数据锚点。</div>
+  <div class="action">后续行动：打开 ATLAS 交互页，抽取与关注赛道（AI 产业链、企业采用）相关的地区/行业切片，作为后续研究的数据来源之一。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>IBM Research × HF：</strong>量化 agent 一致性缺口（平均 77.4% vs 五次全对 53.0%，缺口 24.4 点），推出 Consistency Analyzer + consistency guidelines。</li>
+  <li><strong>Google：</strong>发布 Gemini 3.8 Live / 3.8 Live Extended Thinking 语音模型；Simon Willison 给出零依赖前端实现。</li>
+  <li><strong>Google：</strong>AI &amp; Economy ATLAS 转化为交互式开放数据。</li>
+  <li><strong>GitHub Copilot：</strong>新增自定义属性定义建议（public preview，Business/Enterprise）。</li>
+  <li><strong>GitHub：</strong>Advanced Security 配置支持企业级强制执行。</li>
+  <li><strong>GitHub：</strong>HTTPS 的 SHA-1 开始退役（infra，AI 信号弱，归入低优先级）。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>IBM Research：</strong>在 Hugging Face 连续推进 ALTK-Evolve，本窗口把「一致性」纳入 agent 评测体系，是 evals 方法论的重要贡献者之一。</li>
+  <li><strong>Google：</strong>语音（Gemini 3.8 Live）+ 经济数据（ATLAS）双线发布，显示其在「实时交互」与「影响叙事」两条线上的持续投入。</li>
+  <li><strong>Simon Willison：</strong>保持「亲自动手验证」的风格，用生成式工具搭建语音模型前端，是 Follow List 里实用工具链的高频信号源。</li>
+  <li><strong>GitHub：</strong>Copilot 商业化治理继续补位（元数据建议、安全配置强制），与昨天成本/质量配置构成连续动作。</li>
+  <li><strong>OpenAI：</strong>本窗口官方 RSS 无新条目，Astra 企业案例（Fyxer/Perplexity/Cognition）仍是近期叙事主线。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Agent 可靠性评测体系：</strong>把「任务级重复成功率 + 一致性缺口 + 人工干预频次」整合成一套统一验收口径，用于企业 agent 选型。</li>
+  <li><strong>ALTK-Evolve / Consistency Analyzer：</strong>跟踪其开源进展与可迁移性，评估能否接入自己的 agent 评测与监控。</li>
+  <li><strong>语音实时交互竞赛：</strong>持续对比 Gemini 3.8 Live vs GPT-Live 的延迟、打断、Extended Thinking 行为与成本。</li>
+  <li><strong>GitHub Copilot 治理能力集：</strong>把「成本/质量配置、自定义属性建议、安全配置强制」归档为编码 agent 平台治理的标杆清单。</li>
+  <li><strong>AI 经济 ATLAS：</strong>作为宏观研究的数据锚点，抽取关注赛道相关切片。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>一致性缺口的基准模型：</strong>文章用 GPT-4.1 + AppWorld 的 ReAct agent 作示例，需确认该缺口是否随模型/框架变化，以及修复后「五次全对率」的具体提升幅度。</li>
+  <li><strong>Gemini 3.8 Live 可用性：</strong>是否已进入 Gemini API / AI Studio 正式可用、成本与速率限制，官方博客暂未在 AI RSS 中给出独立发布条目，需单独核验。</li>
+  <li><strong>Copilot 自定义属性建议：</strong>是否支持「整条 ruleset 的自动生成」，changelog 未展开，需看文档。</li>
+  <li><strong>ATLAS 数据口径：</strong>交互页的指标定义（采用率、生产率影响）与更新频率，需在引用前核对。</li>
+  <li><strong>X 时间线：</strong>公开镜像不可稳定采信，Follow List 高优账号（Sam Altman、Karpathy、Jim Fan 等）的即时动态可能漏报。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Google AI 的「AI for Societal Impact」「AI for everyone in every language」「Building AI to accelerate science」等合集/通稿类内容，AI 产业链信号弱，不展开。</li>
+  <li>GitHub 的 SHA-1 in HTTPS 退役属基础设施安全，与 AI 主线弱相关，仅记录。</li>
+  <li>OpenAI 9/14 及更早的旧条目（Fyxer、Perplexity、存储扩容、Devin 等）已在近期日报覆盖，不重复。</li>
+  <li>Chip Huyen RSS 仍停在 2025 年初，Eugene Yan 停在 2026-06，Interconnects 最新在 9/11，均无窗口内更新。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://huggingface.co/blog/ibm-research/altk-evolve-consistency">Hugging Face / IBM Research: Your Agent Aced the Task. Will It Do It Again?</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/15/gemini-live/">Simon Willison: Gemini Live audio</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/ai/ai-economy-atlas-september-2026/">Google: New insights from Google's AI &amp; Economy ATLAS</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-15-github-copilot-suggests-custom-properties-definitions">GitHub Changelog: GitHub Copilot suggests custom properties definitions</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations">GitHub Changelog: Enforce GitHub Advanced Security configurations</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-15-sha-1-in-https-on-github-sunset">GitHub Changelog: SHA-1 in HTTPS on GitHub sunset</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/ai/ai-for-every-language/">Google: AI for everyone in every language</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/ai/ai-applications-science-people/">Google: Building AI to accelerate science and improve lives</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom feed</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-09-15T00:00:00Z / 2026-09-16T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
