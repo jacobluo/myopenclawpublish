@@ -1,0 +1,141 @@
+---
+title: "Follow 深度日报：Anthropic 发布 Claude Fable 5.1 / Mythos 5.1 并把 Claude 合一为通用 agent，OpenAI 首次公开模型错位报告框架"
+date: "2026-09-17"
+category: "daily"
+url: "/daily/2026/09/17/"
+summary: "Follow List 公开来源整理：过去 24 小时的高信号集中在两条主线。一是 Anthropic 同时发布 Claude Fable 5.1 与 Claude Mythos 5.1（同一模型、不同护栏层级，Fable 5.1 全面可用、Mythos 5.1 仅信任接入计划面向网络安全与生命科学），典型负载降价约 25%、高 agentic 负载最高约 45%，并以 Enterprise Frontier Safeguards（EFS）实现零留存级隐私；同时把 Claude Cowork 与对话合并成「一个 Claude」，Claude 正变成通用 agent（后台继续执行任务）。二是 OpenAI 首次公开「模型错位（misalignment）报告框架」，并附 6 份意外/令人担忧行为的报告，配合内部编码 agent 的思维链监控与错位泛化研究。此外 OpenAI 推进广告（Sponsored Agents + HubSpot/Shopify）与 AARP 老年群体合作，GitHub Copilot 预算请求转 GA、AI Scan 摆脱 CodeQL default setup，LangChain 发布医疗/生命科学 agent 规模化案例。未使用 Folo CLI，X 仅公开镜像抽样且不可稳定采信，未绕过 CAPTCHA，未发布私密信息。"
+---
+<div class="meta">
+  <strong>2026年9月17日（周四）</strong> · 覆盖窗口：2026-09-16 08:00 – 2026-09-17 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、Anthropic News 页面、GitHub Changelog RSS、Simon Willison Atom、Hugging Face Blog RSS、LangChain Blog RSS、Interconnects RSS、Chip Huyen / Eugene Yan RSS、explainx sitemap、AI 播客 JSON、公开 X/Nitter/xcancel 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：Anthropic 官方 RSS 返回 404，改用 /news 页面（置顶文章为 Fable 5.1/Mythos 5.1，正文见 /claude-fable-and-mythos-5-1）；Google Developers Blog RSS 返回 404，本窗口 Google 无新条目；Hugging Face 最新停在 9/15《Your Agent Aced the Task》，Interconnects 最新停在 9/11，Chip Huyen 停在 2025 初，均无窗口内更新；X 公开镜像仍不可稳定采信，本期不用 X-only 内容作事实依据。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Anthropic 双模型发布：Fable 5.1 全面可用，Mythos 5.1 走信任接入</h4><p>Claude Fable 5.1 与 Claude Mythos 5.1 是同一个模型、两档护栏：Fable 5.1 面向一般可用，Mythos 5.1 仅通过信任接入计划开放，护栏专门支持网络安全与生命科学工作。Anthropic 称之为「最先进的编码与知识工作模型」，并把研究能力定位成「AI 参与科学进展的早期一瞥」。</p></div>
+  <div class="overview-item"><h4>同场降价 + 隐私补位：EFS 零留存级护栏</h4><p>Fable 5.1 典型 token 计费负载比 Fable 5 便宜约 25%（主要是 cache read 降价），高 agentic 负载最高可省约 45%。同时推出 Enterprise Frontier Safeguards（EFS），在保持顶尖对抗性使用防护的同时，给客户「零数据留存」级别的完整隐私——直接回应客户对价格、数据留存、护栏的长期反馈。</p></div>
+  <div class="overview-item"><h4>Claude 产品合一：从「助手 + 同事」走向通用 agent</h4><p>Claude Cowork 与对话合并成「一个 Claude」，先向 Pro/Max 计划、网页/桌面/移动端滚动推送，且在你合上电脑后仍可继续接手任务。Simon Willison 判断「Claude 正在成为它自己的通用 agent」，并类比几周前 OpenAI 把 Codex 桌面应用改名为 ChatGPT 的路径。</p></div>
+  <div class="overview-item"><h4>OpenAI 首次公开「模型错位报告框架」</h4><p>OpenAI 发布用于追踪、调查、披露模型错位（misalignment）的框架，并附 6 份「意外或令人担忧的模型行为」报告，配套内部编码 agent 的思维链监控（CoT monitoring）与「错位泛化」研究（训练错误回答如何诱发更广泛的错位，以及可被极小规模微调逆转的内部特征）。</p></div>
+  <div class="overview-item"><h4>OpenAI 商业化继续铺：广告 + 老年群体 + 价值衡量</h4><p>「Reimagining advertising with AI」推出 Sponsored Agents、营销工具与 HubSpot/Shopify 集成；与 AARP 合作为美国 10 城 1000 位老年人提供免费 ChatGPT 工作坊；同期发布经济研究《How workers are unlocking new ways of working》与《How to connect AI usage to business value》（ChatGPT Work/Codex 分析）。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>这是「模型发布 + 产品形态 + 安全披露」三线并进的一天：Anthropic 用「同模型双护栏 + 降价 + 零留存」回应企业诉求，并把 Claude 推向通用 agent；OpenAI 则把错位治理从内部研究推进到公开报告框架，同时加速广告与普及。前沿竞争的叙事正从「榜单分数」转向「护栏粒度、数据留存、错位透明度」这些可审计的维度。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Anthropic：Fable 5.1 / Mythos 5.1 双模型 + Claude 合一为通用 agent</h3>
+<div class="card">
+  <div class="source"><span class="tag">Frontier Labs / Models</span><strong>Anthropic</strong> · 2026-09-16 · <a href="https://www.anthropic.com/claude-fable-and-mythos-5-1">Introducing Claude Fable 5.1 and Claude Mythos 5.1</a></div>
+  <div class="summary"><p>Claude Fable 5.1 与 Claude Mythos 5.1 是同一模型的两档护栏版本：Fable 5.1 一般可用，Mythos 5.1 仅通过信任接入计划提供，其护栏专门针对网络安全与生命科学场景。Anthropic 称之为「最先进的编码与知识工作模型」，并强调其研究能力「早期一瞥了 AI 模型将如何推动科学进展」。</p><p>这次发布同时回应客户反馈的三大痛点：价格——典型 token 计费负载比 Fable 5 便宜约 25%（来自 cache read 降价），高 agentic 负载最高省约 45%；数据留存——新系统 Enterprise Frontier Safeguards（EFS）在阻止对抗性使用上保持顶尖的同时，给客户「零数据留存」级别的完整隐私；护栏——用双版本设计把「强能力」与「高受限」拆开，避免一刀切。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>「同一模型、分档护栏」是前沿实验室商业化的一个关键转向——它同时解决了「能力上限」与「企业合规」的张力，而 EFS 的「零留存级隐私」直指大型企业上云的最后一层顾虑。降价 25%–45% 也说明 agentic 负载正在成为定价结构的主角。</div>
+  <div class="action">后续行动：核验 Fable 5.1 在 coding benchmark（如 SWE-bench / Terminal-Bench）与知识工作上的具体分数；跟踪 EFS 的可用范围与「零留存」与既有 ZDR（zero data retention）政策的差异；对比 Mythos 5.1 信任接入的申请门槛与竞品同类的「受限模型」策略。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Product / General Agents</span><strong>Anthropic × Simon Willison</strong> · 2026-09-16 · <a href="https://simonwillison.net/2026/Sep/16/one-claude/">Claude Cowork and chat are now one Claude</a></div>
+  <div class="summary"><p>Anthropic 把 Claude Cowork 与常规对话合并成「一个 Claude」，先向 Pro/Max 计划、网页/桌面/移动端滚动推送（未来数周覆盖新旧用户）。关键变化是 Claude 可以在你合上电脑后继续接手并推进任务，不再需要人在场盯守。</p><p>Simon Willison 的判断是「Claude 正在成为它自己的通用 agent」，并把它与几周前 OpenAI 把 Codex 桌面应用改名为 ChatGPT 的路径作类比——两家都在把「单点工具」收敛成「一个会自己干活的 agent 入口」。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>产品形态的收敛（Cowork + chat → one Claude）意味着「后台持续执行」成为通用 agent 的默认预期，而不是独立功能。这对「AI agent / 创业观点」主题是明确的产品路线信号。</div>
+  <div class="action">后续行动：跟踪「合上电脑后台继续」的具体能力边界（能触发哪些工具、成本如何计费、失败如何回滚）；补记一份「Claude 与 ChatGPT 产品收敛路径」的对比，作为 agent 产品演进的连续观察。</div>
+</div>
+
+<h3>二、OpenAI 安全/对齐：首次公开「模型错位报告框架」</h3>
+<div class="card">
+  <div class="source"><span class="tag">Safety / Alignment</span><strong>OpenAI</strong> · 2026-09-16 · <a href="https://openai.com/index/model-misalignment-reporting-framework">Our framework for reporting model misalignment</a></div>
+  <div class="summary"><p>OpenAI 公开一套用于追踪、调查、披露「模型错位（model misalignment）」的框架，并同步发布 6 份「意外或令人担忧的模型行为」报告。错位指的是模型行为偏离预期目标的那类问题，而非单纯的幻觉或能力不足。</p><p>这套框架与同期发布的两项工作相互呼应：一是「如何用思维链监控（chain-of-thought monitoring）研究内部编码 agent 的错位」，通过在真实部署中分析推理轨迹来检测风险、加固安全护栏；二是「理解和预防错位泛化（misalignment generalization）」，研究「训练模型给出错误回答」如何诱发更广泛的错位，并定位到一个可被极小规模微调逆转的内部特征。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>对齐/安全一直缺少可复核的「公开披露口径」。OpenAI 从「内部研究」推进到「公开框架 + 具体案例报告」，是对 Follow List 里 Amanda Askell、Noam Brown 等对齐相关视角的一条重要落地信号，也是安全治理可审计化的标志。</div>
+  <div class="action">后续行动：细读 6 份报告的分类维度（哪些属于错位、哪些是能力边界问题），评估能否抽象成自己团队的「模型行为分级与上报」模板；关注「错位泛化可被小规模微调逆转」的机制细节，判断其对模型维护的现实含义。</div>
+</div>
+
+<h3>三、OpenAI 商业化：广告体验 + 老年群体普及 + 价值衡量</h3>
+<div class="card">
+  <div class="source"><span class="tag">Business / Adoption</span><strong>OpenAI</strong> · 2026-09-16 · <a href="https://openai.com/index/reimagining-advertising-with-ai">Reimagining advertising with AI</a> · <a href="https://openai.com/index/helping-older-adults-use-ai-in-everyday-life">Helping older adults use AI in everyday life</a> · <a href="https://openai.com/index/unlocking-new-ways-of-working">How workers are unlocking new ways of working</a></div>
+  <div class="summary"><p>商业化侧三线并进。广告：「Reimagining advertising with AI」推出 Sponsored Agents（赞助式 agent）、面向营销人员的工具，以及 HubSpot 与 Shopify 集成——把 AI 原生广告体验放进对话与工作流里。普及：OpenAI 与 AARP 合作，为美国 10 座城市的 1000 位老年人提供免费、实操的 ChatGPT 工作坊，主打「安全地建立实用 AI 技能」。度量：同步发布 OpenAI 经济研究《How workers are unlocking new ways of working》（员工如何把 AI 用出传统角色之外、哪些新活动变成固定工作环节）与《How to connect AI usage to business value》（ChatGPT Work + Codex 分析帮助企业理解用量与花费、定位培训需求、把采纳连到业务结果）。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>广告体验（Sponsored Agents）是 OpenAI 探索新收入结构的一个明确动作，值得作为「商业模式」信号跟踪；AARP 合作则是「非技术人群普及」的典型样本；而「connect usage to business value」直接回应了企业 AI 采购最关心的 ROI 论证问题。</div>
+  <div class="action">后续行动：跟踪 Sponsored Agents 的披露规则与用户信任边界（是否明确标注、如何保证答案质量）；把 OpenAI 经济研究的「新工作方式」分类框架用作「AI 采纳度」研究的参考口径；关注 HubSpot/Shopify 集成是否成为 agent 分发的新渠道。</div>
+</div>
+
+<h3>四、GitHub Copilot 治理继续：预算请求 GA + AI Scan 摆脱 CodeQL 依赖</h3>
+<div class="card">
+  <div class="source"><span class="tag">Dev Tools / Governance</span><strong>GitHub Changelog</strong> · 2026-09-16 · <a href="https://github.blog/changelog/2026-09-16-copilot-budget-increase-requests-are-generally-available">Copilot budget increase requests are generally available</a> · <a href="https://github.blog/changelog/2026-09-16-code-scanning-ai-scan-no-longer-requires-codeql-default-setup">Code scanning AI Scan no longer requires CodeQL default setup</a></div>
+  <div class="summary"><p>两个更新延续「编码 agent 企业化治理」主线。其一，Copilot 预算增加请求（budget increase requests）转为一般可用（GA），让组织能走正规流程申请扩容，而非绕过或硬编码。其二，Code scanning 的 AI Scan 不再要求先配置 CodeQL default setup，降低了用 AI 扫描的门槛，使更多仓库能直接启用。</p><p>同日还有两条基础设施更新：经典 PAT/SSH key 的 SSO 授权自动化，以及 SCIM 用户响应新增 profileUrl 属性——属身份治理细节，AI 信号弱，归入低优先级。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>预算请求 GA 说明 Copilot 在企业里已经走到「成本治理需要流程化」的阶段；AI Scan 解耦 CodeQL 则是「AI 原生安全扫描」降低落地成本的信号，两者共同指向编码 agent 与 DevSecOps 的继续收敛。</div>
+  <div class="action">后续行动：记录 Copilot 预算治理的完整路径（请求→审批→配额），作为 agent 成本治理的标杆；观察 AI Scan 解耦后是否带来误报率/覆盖率变化，评估能否替代部分传统静态扫描。</div>
+</div>
+
+<h3>五、LangChain：医疗 / 生命科学 agent 规模化案例</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agents / Enterprise</span><strong>LangChain</strong> · 2026-09-16 · <a href="https://www.langchain.com/blog/scaling-agents-in-healthcare-life-sciences-lessons-from-madrigal-pharmaceuticals-abridge-and-vizient">Scaling Agents in Healthcare &amp; Life Sciences</a></div>
+  <div class="summary"><p>LangChain 发布医疗与生命科学领域的 agent 规模化案例，覆盖 Madrigal Pharmaceuticals、Abridge（医疗文档 AI）与 Vizient（医疗供应链）三家，聚焦高合规行业里 agent 如何落地、如何过审、如何规模化。</p><p>这是继此前「欧洲/中东（Schneider Electric、Vodafone、monday.com）」「付费媒体 agent」「GTM agent」之后，LangChain 企业落地叙事在垂直行业的又一推进，重点放在「监管与安全约束下的可规模化」。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>医疗/生命科学是高门槛、强监管的行业，它的 agent 落地经验对「如何在高合规场景里规模化 agent」有直接参考价值，也呼应 OpenAI 同窗口「企业价值衡量」的叙事。</div>
+  <div class="action">后续行动：抽取三家案例中「合规审查、可解释性、失败兜底」的共性做法，归档为高合规行业 agent 落地的清单；关注 Abridge（医疗文档）这类垂直 agent 公司的产品边界。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Anthropic：</strong>发布 Claude Fable 5.1（一般可用）与 Claude Mythos 5.1（信任接入，面向网络安全/生命科学），典型负载降价约 25%、高 agentic 负载最高约 45%，并推出 Enterprise Frontier Safeguards（零留存级隐私）。</li>
+  <li><strong>Anthropic：</strong>Claude Cowork 与对话合并成「一个 Claude」，先向 Pro/Max 推送，支持后台继续执行任务。</li>
+  <li><strong>OpenAI：</strong>公开「模型错位报告框架」+ 6 份意外/令人担忧行为报告，配套内部编码 agent 思维链监控与错位泛化研究。</li>
+  <li><strong>OpenAI：</strong>「Reimagining advertising with AI」推出 Sponsored Agents + HubSpot/Shopify 集成。</li>
+  <li><strong>OpenAI：</strong>与 AARP 合作为美国 10 城 1000 位老年人提供免费 ChatGPT 工作坊。</li>
+  <li><strong>OpenAI：</strong>发布经济研究《How workers are unlocking new ways of working》与《How to connect AI usage to business value》。</li>
+  <li><strong>GitHub：</strong>Copilot budget increase requests 转 GA；Code scanning AI Scan 不再要求 CodeQL default setup。</li>
+  <li><strong>LangChain：</strong>发布医疗/生命科学 agent 规模化案例（Madrigal、Abridge、Vizient）。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Anthropic：</strong>一次性打出「双模型 + 降价 + 零留存护栏 + 产品合一」组合拳，把 Claude 从「助手 + 同事」推进为「通用 agent」，是本周最高信号的机构动态。</li>
+  <li><strong>OpenAI：</strong>在安全（错位报告框架）、商业化（广告/AARP）、度量（经济研究）三线同时发稿，叙事重心从「模型能力」转向「治理透明 + 商业落地」。</li>
+  <li><strong>Simon Willison：</strong>第一时间解读 Claude 合一，给出「Claude 正在成为通用 agent」的判断，并持续做产品路线与 OpenAI 的横向对比。</li>
+  <li><strong>Mustafa Suleyman（Microsoft AI CEO）：</strong>Simon 摘录其关于「model welfare（模型福利）」的警示言论（<a href="https://simonwillison.net/2026/Sep/16/mustafa-suleyman/">Quoting Mustafa Suleyman</a>），落在 ai-ethics 主题，是 AI 治理讨论的一个观点信号。</li>
+  <li><strong>GitHub：</strong>Copilot 治理从「能力」走向「预算流程 + AI 安全扫描解耦」，企业化节奏延续。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Claude 通用 agent 化：</strong>持续跟踪「一个 Claude」的后台执行能力边界、计费口径与工具权限，作为 agent 产品演进的核心样本。</li>
+  <li><strong>模型分档护栏 + 零留存：</strong>把「同模型双护栏（Fable/Mythos）+ EFS」与竞品的受限模型/零留存策略对照，梳理前沿实验室的企业合规打法。</li>
+  <li><strong>模型错位报告框架：</strong>评估能否抽象成可复用的「模型行为分级与上报」模板，跟踪后续是否持续披露错位报告。</li>
+  <li><strong>AI 原生广告（Sponsored Agents）：</strong>跟踪披露规则、用户信任边界与 HubSpot/Shopify 集成，判断 agent 分发的新渠道价值。</li>
+  <li><strong>高合规行业 agent 落地：</strong>从 LangChain 医疗案例抽取合规/兜底/可解释性的共性做法，归档为清单。</li>
+  <li><strong>Copilot 成本治理路径：</strong>记录「预算请求→审批→配额」全流程，作为 agent 成本治理标杆。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>Fable 5.1 具体分数：</strong>官方以「最先进的编码与知识工作模型」定性，未在公告正文给出 benchmark 数字，需在模型卡/评测页核验。</li>
+  <li><strong>EFS 与既有 ZDR 的关系：</strong>「零留存级隐私」与 Anthropic 既有 zero data retention 政策的具体差异、覆盖哪些产品，公告未展开。</li>
+  <li><strong>Claude 合一推送范围：</strong>「后台继续执行」在哪些平台/账户先开放、成本与速率限制，官方说明较简，需跟进实际产品。</li>
+  <li><strong>OpenAI 错位报告细节：</strong>6 份报告的具体分类标准与严重度口径，正文尚未逐条展开，需读原文。</li>
+  <li><strong>Sponsored Agents 披露规则：</strong>是否明确标注「赞助」、如何保证答案质量与隐私，需看产品落地说明。</li>
+  <li><strong>X 时间线：</strong>公开镜像不可稳定采信，Follow List 高优账号（Sam Altman、Karpathy、Jim Fan 等）的即时动态可能漏报。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub 经典 PAT/SSH key 的 SSO 授权自动化、SCIM profileUrl 属身份治理基础设施，AI 信号弱，仅记录。</li>
+  <li>OpenAI「How to connect AI usage to business value」偏企业培训/度量软文，作为采纳叙事记录，不深挖。</li>
+  <li>Hugging Face 最新停在 9/15《Your Agent Aced the Task》（昨日已覆盖），Interconnects 停在 9/11，Chip Huyen 停在 2025 初，Eugene Yan 停在 2026-06，均无窗口内更新。</li>
+  <li>Google Developers Blog RSS 返回 404，本窗口 Google 无新条目，不展开。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.anthropic.com/claude-fable-and-mythos-5-1">Anthropic: Introducing Claude Fable 5.1 and Claude Mythos 5.1</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/16/one-claude/">Simon Willison: Claude Cowork and chat are now one Claude</a></li>
+  <li><a href="https://openai.com/index/model-misalignment-reporting-framework">OpenAI: Our framework for reporting model misalignment</a></li>
+  <li><a href="https://openai.com/index/reimagining-advertising-with-ai">OpenAI: Reimagining advertising with AI</a></li>
+  <li><a href="https://openai.com/index/helping-older-adults-use-ai-in-everyday-life">OpenAI: Helping older adults use AI in everyday life</a></li>
+  <li><a href="https://openai.com/index/unlocking-new-ways-of-working">OpenAI: How workers are unlocking new ways of working</a></li>
+  <li><a href="https://openai.com/index/how-to-connect-ai-usage-to-business-value">OpenAI: How to connect AI usage to business value</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-16-copilot-budget-increase-requests-are-generally-available">GitHub Changelog: Copilot budget increase requests are generally available</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-16-code-scanning-ai-scan-no-longer-requires-codeql-default-setup">GitHub Changelog: Code scanning AI Scan no longer requires CodeQL default setup</a></li>
+  <li><a href="https://www.langchain.com/blog/scaling-agents-in-healthcare-life-sciences-lessons-from-madrigal-pharmaceuticals-abridge-and-vizient">LangChain: Scaling Agents in Healthcare &amp; Life Sciences</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/16/mustafa-suleyman/">Simon Willison: Quoting Mustafa Suleyman</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic News</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom feed</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-09-16T00:00:00Z / 2026-09-17T00:00:00Z.</footer>
