@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>朱啸虎北大演讲：AI 创业的商业化与护城河框架</title>
+  <meta name="description" content="从朱啸虎北大演讲纪要出发，分析 AI 创业从技术领先回到商业本质的判断框架。">
+  <style>
+    :root {
+      --bg: #f4f7f4;
+      --paper: #ffffff;
+      --ink: #17211c;
+      --muted: #5d6b62;
+      --line: #dbe5dd;
+      --green: #16784f;
+      --blue: #2459a8;
+      --red: #b04435;
+      --gold: #a96914;
+      --soft-green: #e8f5ee;
+      --soft-blue: #eaf1fb;
+      --soft-red: #fff0ed;
+      --soft-gold: #fff6e6;
+      --shadow: 0 18px 52px rgba(28, 43, 34, 0.10);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
+      line-height: 1.72;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(22, 120, 79, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(36, 89, 168, 0.09), rgba(36, 89, 168, 0) 420px),
+        var(--bg);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 64px 0 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(34px, 5.4vw, 58px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 880px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      padding: 6px 12px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 34px;
+      padding: 40px 0 72px;
+      align-items: start;
+    }
+
+    article {
+      display: grid;
+      gap: 22px;
+    }
+
+    section, aside {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 28px;
+    }
+
+    aside {
+      position: sticky;
+      top: 22px;
+      padding: 20px;
+    }
+
+    h2, h3, p {
+      margin-top: 0;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 26px;
+      line-height: 1.24;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    p { margin-bottom: 14px; }
+    p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0 0 14px;
+      padding-left: 1.35em;
+    }
+
+    li + li { margin-top: 8px; }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lead-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #fbfdfb;
+    }
+
+    .lead-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 15px;
+    }
+
+    .axis {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .axis:first-of-type { border-top: 0; padding-top: 0; }
+    .axis:last-child { padding-bottom: 0; }
+
+    .axis-title {
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .framework {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .framework-item {
+      border-radius: var(--radius);
+      padding: 18px;
+      border: 1px solid var(--line);
+    }
+
+    .framework-item:nth-child(1) { background: var(--soft-green); }
+    .framework-item:nth-child(2) { background: var(--soft-blue); }
+    .framework-item:nth-child(3) { background: var(--soft-gold); }
+
+    .framework-item b {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 20px;
+    }
+
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .score-table th, .score-table td {
+      border: 1px solid var(--line);
+      padding: 11px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .score-table th {
+      background: #eef5f0;
+      color: #213328;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .tag.good { background: var(--soft-green); color: var(--green); }
+    .tag.watch { background: var(--soft-gold); color: var(--gold); }
+    .tag.risk { background: var(--soft-red); color: var(--red); }
+
+    .quote {
+      border-left: 4px solid var(--green);
+      background: #f7fbf8;
+      padding: 18px 20px;
+      color: #28372e;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .nav-title {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li + li { margin-top: 8px; }
+
+    .toc a {
+      color: var(--ink);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .side-note {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 28px 0 46px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+      }
+
+      .lead-grid, .framework {
+        grid-template-columns: 1fr;
+      }
+
+      .axis {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(100% - 24px, 1120px);
+      }
+
+      header {
+        padding-top: 42px;
+      }
+
+      section {
+        padding: 22px;
+      }
+
+      .score-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">AI Startup Strategy</p>
+      <h1>朱啸虎北大演讲：AI 创业的商业化与护城河框架</h1>
+      <p class="dek">这不是一篇“AI 还能不能创业”的情绪判断，而是一套更冷静的项目筛选框架：技术先进只是入场券，长期价值仍要回到市场规模、可规模化复制、留存、入口、商业模式和防御能力。</p>
+      <div class="meta">
+        <span class="pill">发布时间：2026-09-24</span>
+        <span class="pill">资料来源：用户提供的北大演讲纪要</span>
+        <span class="pill">主题：AI 创业 / 商业模式 / 护城河</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article>
+      <section id="summary">
+        <h2>结论先行</h2>
+        <div class="lead-grid">
+          <div class="lead-card">
+            <strong>核心判断</strong>
+            <p>AI 技术红利会快速扩散，创业公司的长期价值不会只由模型能力决定，而由能否形成入口、数据、网络效应、运营效率和可持续商业闭环决定。</p>
+          </div>
+          <div class="lead-card">
+            <strong>关键筛选器</strong>
+            <p>朱啸虎强调的 3S 框架可以作为第一层过滤器：Size 足够大，Scalable 能快速复制，Sustainable 能长期防御。</p>
+          </div>
+          <div class="lead-card">
+            <strong>AI 创业红线</strong>
+            <p>最危险的是做成“大厂可以免费集成的功能”。如果没有入口、数据、场景深度、工作流绑定或网络效应，容易变成替平台验证需求。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="logic">
+        <h2>一、技术领先为什么会变成阶段性优势</h2>
+        <p>在技术快速变化的早期，领先模型、领先算法、领先交互确实能创造窗口期。但当技术扩散速度也很快时，窗口期会被压缩。模型能力趋同、开源模型成熟、推理成本下降、云厂商和大厂产品线快速集成，都会让单点技术优势变短。</p>
+        <p>这意味着创业公司不能只问“我是不是用了最强模型”，而要问“我是否掌握了一个别人不容易拿走的商业位置”。这个位置可能是高频用户入口，可能是专有数据闭环，可能是复杂供应链和服务网络，也可能是社区、品牌、渠道、成本结构和运营效率。</p>
+        <div class="quote">技术领先决定能否进场，商业结构决定能否留下。</div>
+      </section>
+
+      <section id="three-s">
+        <h2>二、3S：判断项目的第一层过滤器</h2>
+        <p>3S 框架的价值在于它足够朴素，也足够残酷。很多项目看起来“AI 味很浓”，但一放进 3S，就会暴露出市场太窄、交付太重、壁垒太薄的问题。</p>
+        <div class="framework">
+          <div class="framework-item">
+            <b>Size</b>
+            <p>市场是否足够大，需求是否真实存在，用户是否已经在为类似问题付出时间、预算或注意力。</p>
+          </div>
+          <div class="framework-item">
+            <b>Scalable</b>
+            <p>产品是否能低边际成本复制，还是每个客户都要重新开发、部署、培训和服务。</p>
+          </div>
+          <div class="framework-item">
+            <b>Sustainable</b>
+            <p>一旦需求被验证，是否具备数据、入口、网络效应、品牌、供应链或组织能力，让大厂和同类公司难以轻易吞掉。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="scale">
+        <h2>三、为什么高度定制化业务很难成为产品公司</h2>
+        <p>企业 AI 项目最容易掉进“看似高客单价，实则服务公司”的陷阱。一个客户一个流程、一个客户一套权限、一个客户一轮私有部署、一个客户一批定制开发，收入可以增长，但交付能力很难非线性增长。</p>
+        <p>这不是说定制化没有价值。早期定制可以帮助团队理解真实需求，沉淀行业 know-how。但真正的产品化拐点，是把重复出现的需求抽象成通用模块，把客户差异留在配置层、数据层和插件层，而不是永远靠项目经理与工程师手工兜底。</p>
+        <table class="score-table">
+          <thead>
+            <tr>
+              <th>业务形态</th>
+              <th>增长表象</th>
+              <th>真实风险</th>
+              <th>改进方向</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>重交付定制</td>
+              <td><span class="tag watch">短期收入好看</span></td>
+              <td>毛利被人力吞掉，复制速度慢，销售越多交付越痛</td>
+              <td>沉淀标准对象、标准流程、标准集成和模板库</td>
+            </tr>
+            <tr>
+              <td>标准化产品</td>
+              <td><span class="tag good">规模化更强</span></td>
+              <td>早期可能不够贴合大客户复杂流程</td>
+              <td>用配置和生态扩展覆盖差异，不把差异写死进主干</td>
+            </tr>
+            <tr>
+              <td>平台型网络</td>
+              <td><span class="tag good">壁垒更厚</span></td>
+              <td>冷启动难，需要同时组织供给和需求</td>
+              <td>先选高频、标准化、强痛点的楔子场景</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="growth">
+        <h2>四、最好的增长不是买量，而是用户带来用户</h2>
+        <p>社交网络、社区、双边平台和多对多市场的强处，不只是获客便宜，而是产品价值会随着参与者增加而提高。用户不是单纯消费产品，也在贡献内容、关系、供给、评价、数据和分发。</p>
+        <p>这也是为什么高频业务比低频业务更容易形成独立入口。若用户至少每周使用一次，产品还有机会占据心智、沉淀习惯、形成自然传播；若一年只用几次，除非客单价极高或场景极痛，否则很容易被超级入口、搜索、平台插件或线下服务商截流。</p>
+      </section>
+
+      <section id="ai-risk">
+        <h2>五、AI 创业最危险的形态：大厂功能试验田</h2>
+        <p>AI Feature 很容易让人兴奋：一个 prompt、一个工作流、一个小插件，就能做出过去做不到的体验。但如果它不能独立占据入口，不能沉淀用户数据，不能绑定复杂工作流，也不能形成网络效应，大厂只要把同类能力免费集成进现有产品，创业公司的差异就会迅速消失。</p>
+        <p>因此，AI 创业更适合寻找“旧需求 × 10 倍体验”的机会：需求已经被验证，用户已有预算或习惯，只是旧方案慢、贵、复杂、体验差。AI 的作用不是制造概念，而是把原来的体验提升一个数量级。</p>
+        <div class="axis">
+          <div class="axis-title">更危险</div>
+          <div>独立小功能、低频工具、无数据闭环、无工作流绑定、无分发入口、用户可轻易迁移。</div>
+        </div>
+        <div class="axis">
+          <div class="axis-title">更健康</div>
+          <div>高频入口、明确付费、留存稳定、深度嵌入业务流程、越用数据越好、多人协同或双边网络增强。</div>
+        </div>
+      </section>
+
+      <section id="metrics">
+        <h2>六、用户数不是商业价值，留存和付费才是</h2>
+        <p>用户数量本身不等于商业价值。AI 产品尤其容易出现“尝鲜用户很多，真实留存很薄”的情况。朱啸虎在纪要中提到，看 AI 产品时希望看到大致次月留存 50%+、六个月留存 20%+。这个口径的含义不是机械设门槛，而是提醒创业者关注用户是否真的把产品纳入日常工作或生活。</p>
+        <table class="score-table">
+          <thead>
+            <tr>
+              <th>指标</th>
+              <th>健康信号</th>
+              <th>危险信号</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>留存</td>
+              <td>用户每周自然回来，任务变成习惯</td>
+              <td>发布期冲高，随后快速衰减</td>
+            </tr>
+            <tr>
+              <td>付费</td>
+              <td>用户愿意为结果、省时或收入提升付费</td>
+              <td>只愿意免费试用，付费转化弱</td>
+            </tr>
+            <tr>
+              <td>升级</td>
+              <td>从个人版自然升级到团队、企业或高阶服务</td>
+              <td>客单价被模型成本和客服成本压住</td>
+            </tr>
+            <tr>
+              <td>传播</td>
+              <td>产物、协作或社区机制自带分享</td>
+              <td>完全依赖投放和渠道补贴</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="model-economics">
+        <h2>七、从 Token Maxing 到 Value Maxing</h2>
+        <p>“所有任务都用最强模型”不是成熟产品的终局。成熟 AI 产品应该把模型和 prompt 隐藏起来，让用户只关心任务是否完成、成本是否合理、体验是否稳定。系统内部再根据任务难度、延迟要求、隐私要求和成本目标，自动选择模型、工具和执行路径。</p>
+        <p>这也是开源模型可能成为基础设施的重要原因。随着能力趋同和成本下降，很多场景不需要最强闭源模型，而需要可控、便宜、可私有化、可微调、可嵌入工作流的模型组合。类比 Linux 的意义在这里：开源不一定赢在最炫能力，而是赢在生态、成本、可控性和长期基础设施属性。</p>
+      </section>
+
+      <section id="directions">
+        <h2>八、三个值得关注的 AI 应用方向</h2>
+        <p>纪要中提到角色扮演、Coding 和视频，是因为它们同时具备高频、强需求和 AI 体验提升明显三个特征。</p>
+        <div class="axis">
+          <div class="axis-title">角色扮演</div>
+          <div>核心是陪伴、互动、内容生成和情绪价值。机会在高频和个性化，风险在内容安全、付费深度和平台政策。</div>
+        </div>
+        <div class="axis">
+          <div class="axis-title">Coding</div>
+          <div>需求强、频率高、结果可验证，AI 能直接缩短开发周期。真正壁垒会转向工程上下文、企业权限、代码库记忆、评测和交付闭环。</div>
+        </div>
+        <div class="axis">
+          <div class="axis-title">视频</div>
+          <div>体验提升直观，供给端效率变化大。短期机会在广告、短剧、素材生成、分镜和后期流程，长期要看版权、质量稳定性和分发入口。</div>
+        </div>
+      </section>
+
+      <section id="robotics">
+        <h2>九、机器人创业：别先追求通用，先解决高价值具体任务</h2>
+        <p>机器人创业的难点不只是模型智能，而是硬件、场景、维护、安全、成本、供应链和责任边界。相比追逐同质化人形机器人，更务实的路径是优先选择高价值、任务明确、环境可控、泛化要求低的场景，例如水下清洗、工业装配、巡检、危险环境作业等。</p>
+        <p>这和 AI 软件创业的逻辑一致：先找到真实付费需求，再用技术把效率提升到足够明显。不要用“通用”掩盖商业闭环不足。</p>
+      </section>
+
+      <section id="checklist">
+        <h2>十、给 AI 创业项目的一页检查表</h2>
+        <table class="score-table">
+          <thead>
+            <tr>
+              <th>问题</th>
+              <th>通过标准</th>
+              <th>警惕信号</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>需求是否已存在</td>
+              <td>用户今天已经在花钱、花时间或忍受低效方案</td>
+              <td>需要长期教育市场才知道为什么要用</td>
+            </tr>
+            <tr>
+              <td>使用频率是否足够</td>
+              <td>至少周频，最好日频或嵌入核心工作流</td>
+              <td>低频、可替代、难形成心智</td>
+            </tr>
+            <tr>
+              <td>交付是否可复制</td>
+              <td>配置化、模板化、模块化，边际成本下降</td>
+              <td>每单都像新项目，每个客户都要重做</td>
+            </tr>
+            <tr>
+              <td>是否有长期壁垒</td>
+              <td>入口、数据、网络效应、品牌、供应链或运营效率之一成立</td>
+              <td>只是 prompt、插件或单点模型调用</td>
+            </tr>
+            <tr>
+              <td>经济账是否成立</td>
+              <td>模型成本、获客成本和服务成本低于可持续毛利</td>
+              <td>收入增长靠补贴、人工和算力硬撑</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="closing">
+        <h2>最终判断</h2>
+        <p>这次演讲纪要最有价值的地方，是把 AI 创业从“模型能力崇拜”拉回到商业基本功。AI 会降低很多能力的门槛，也会让很多单点功能更快商品化。真正能留下来的公司，需要在旧需求中创造 10 倍体验，并把这种体验沉淀成高频入口、稳定留存、可扩展交付和长期防御。</p>
+        <p>换句话说，技术先进不是答案本身，而是拿到答题资格。后面的题，仍然是商业。</p>
+      </section>
+    </article>
+
+    <aside>
+      <p class="nav-title">目录</p>
+      <ol class="toc">
+        <li><a href="#summary">结论先行</a></li>
+        <li><a href="#logic">技术领先的窗口期</a></li>
+        <li><a href="#three-s">3S 框架</a></li>
+        <li><a href="#scale">定制化与规模化</a></li>
+        <li><a href="#growth">增长与入口</a></li>
+        <li><a href="#ai-risk">AI Feature 风险</a></li>
+        <li><a href="#metrics">留存与付费</a></li>
+        <li><a href="#model-economics">Value Maxing</a></li>
+        <li><a href="#directions">应用方向</a></li>
+        <li><a href="#robotics">机器人创业</a></li>
+        <li><a href="#checklist">项目检查表</a></li>
+      </ol>
+      <div class="side-note">
+        <p>说明：本文基于 2026-09-24 收到的演讲纪要扩展分析，未对现场原始录音或视频做独立核验。</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="wrap">Generated by OpenClaw. Based on notes provided on 2026-09-24.</div>
+  </footer>
+</body>
+</html>
