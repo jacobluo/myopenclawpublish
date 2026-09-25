@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：LangSmith 发布生产级 agent 控制面，GitHub 强化高风险操作验证，Claude 进入生命科学发现场景</title>
+    <meta name="description" content="Follow List 公开来源整理：本窗口高信号集中在三条主线。一是 LangChain 在 9 月 24 日密集发布 LangSmith Engine v2、Fine-Tuning、Managed Deep Agents 0.8、Trajectories 与 Custom Apps，把 agent 生产化从 trace/eval 推向红队、自动测试、用户凭据、用户记忆、会话可读性和工作台定制。二是 GitHub Enterprise Cloud 推出 proof of presence，高影响操作需要重新认证或 MFA，和前一天 Copilot 沙箱/OTel 共同指向企业 agent 与凭据安全。三是 Anthropic 公开生命科学研究组与实验室，称 Claude 可在公共 DNA 数据中提出候选酶系统并由人类科学家实验验证；Hugging Face 则出现视觉语言加速、实时多人说话人识别、FLUX 3 Action、Jev 生态等开源信号。OpenAI RSS 本窗口无 9 月 24 日新发布；X 公开索引仍不稳定，本期不使用 X-only 内容作事实依据。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：LangSmith 发布生产级 agent 控制面，GitHub 强化高风险操作验证，Claude 进入生命科学发现场景</h1>
+      <p class="portal-lead">Follow List 公开来源整理：本窗口高信号集中在三条主线。一是 LangChain 在 9 月 24 日密集发布 LangSmith Engine v2、Fine-Tuning、Managed Deep Agents 0.8、Trajectories 与 Custom Apps，把 agent 生产化从 trace/eval 推向红队、自动测试、用户凭据、用户记忆、会话可读性和工作台定制。二是 GitHub Enterprise Cloud 推出 proof of presence，高影响操作需要重新认证或 MFA，和前一天 Copilot 沙箱/OTel 共同指向企业 agent 与凭据安全。三是 Anthropic 公开生命科学研究组与实验室，称 Claude 可在公共 DNA 数据中提出候选酶系统并由人类科学家实验验证；Hugging Face 则出现视觉语言加速、实时多人说话人识别、FLUX 3 Action、Jev 生态等开源信号。OpenAI RSS 本窗口无 9 月 24 日新发布；X 公开索引仍不稳定，本期不使用 X-only 内容作事实依据。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-09-25</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年9月25日（周五）</strong> · 覆盖窗口：2026-09-24 08:51 – 2026-09-25 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；LangChain Blog RSS、GitHub Changelog RSS、Anthropic News 页面、Hugging Face Blog 页面、OpenAI News RSS、Simon Willison Weblog/Atom、Interconnects RSS。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：公开 X 搜索与镜像未稳定返回窗口内可核验内容，本期重点依赖官方博客/RSS 与可复查网页。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>LangSmith 从观测工具升级为 agent 控制面</h4><p>LangChain 在 9 月 24 日集中发布 LangSmith Engine v2、Fine-Tuning、Managed Deep Agents 0.8、Trajectories 与 Custom Apps。组合起来看，它们不是单点功能，而是把生产 agent 的红队、自动化测试、模型专门化、用户凭据、用户记忆、会话调试和内部工作台都收进一个控制面。</p></div>
+  <div class="overview-item"><h4>企业安全从“登录态有效”转向“高风险动作当场确认”</h4><p>GitHub Enterprise Cloud 的 proof of presence 要求高影响操作前重新认证或 MFA，目标是防止被盗 session cookie、长效 token 或越权 agent 直接执行敏感动作。它与 Copilot app 的沙箱、OpenTelemetry 更新一起，把 agent 执行环境的安全边界讲得更具体。</p></div>
+  <div class="overview-item"><h4>Claude 的科学发现叙事落到湿实验闭环</h4><p>Anthropic 介绍新的生命科学研究组和实验室，称 Claude 在公共 DNA 数据中提出带 CRISPR-like repeats 的候选酶系统，并由人类科学家完成后续实验。这个信号比一般“AI for science”口号更强，因为它把模型、假设生成、实验验证和生物安全边界放到同一篇说明里。</p></div>
+  <div class="overview-item"><h4>开源生态继续补齐多模态、音频和世界模型工具链</h4><p>Hugging Face 本窗口出现 LFM2.5-VL-DSpark 视觉语言模型加速、NVIDIA Nemotron 3 实时多人 diarization、FLUX 3 Action 世界动作模型、Basis Conversations 1500 数据集，以及 Jev 决策模型生态内容。信号分散，但都指向“agent 所需的感知、音频、动作、评估和数据层”。</p></div>
+  <div class="overview-item"><h4>OpenAI 本窗口没有新主发布</h4><p>OpenAI News RSS lastBuildDate 更新到 9 月 24 日晚，但最新条目仍是 9 月 23 日发布的 Academy、Daybreak、UN、Harvey/Ringg/MentalHealthBench 等，昨天日报已覆盖主线。本期只把 OpenAI 作为背景，不重复包装为新消息。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>今天的主线不是新模型，而是生产化：agent 要能被测试、红队、调优、追踪、绑定真实用户身份、管理凭据，并在高风险动作前触发人类确认。换句话说，市场正在从“模型能力发布日”进入“可靠运行与治理能力发布日”。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、LangSmith 生产化套件：红队、自动测试、fine-tuning、运行时体验</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Evals / Red Teaming</span><strong>LangChain</strong> · 2026-09-24 17:22 UTC · <a href="https://www.langchain.com/blog/langsmith-engine-v2-redteam">New in LangSmith Engine: red teaming and automated testing</a></div>
+  <div class="summary"><p>LangSmith Engine v2 新增 Red Teaming 与 automated agent testing，定位是主动发现 agent 问题，而不是等生产用户撞到之后再看 trace。这个方向把 eval 从离线 benchmark 推向生产发布流程：先构造攻击/失败场景，再把检查变成持续测试。</p><p>这对 agent 产品特别重要，因为传统单轮问答测试覆盖不了工具调用、权限、状态迁移、长任务和用户上下文变化。红队和自动测试如果能常态化，会成为 agent 发布门禁的一部分。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Hamel、Shreya、Harrison、Simon 都长期强调 evals 和可靠性。LangSmith Engine v2 的重点正好是把“发现问题”从人工抽样变成平台能力。</div>
+  <div class="action">后续行动：跟踪 LangSmith Engine v2 是否支持自定义风险类别、中文/行业数据集、回归基线和 CI/CD gate；对照 OpenClaw/Codex 工作流整理一份 agent 发布前测试清单。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Post-training / Agent Data</span><strong>LangChain</strong> · 2026-09-24 15:51 UTC · <a href="https://www.langchain.com/blog/langsmith-fine-tuning">Introducing LangSmith Fine-Tuning</a></div>
+  <div class="summary"><p>LangChain 发布 LangSmith Fine-Tuning 与 SmithTune CLI，强调不用手工搭数据管道，也能从 LangSmith 数据中训练专门化模型。它把生产 trace、反馈和评估数据进一步变成 post-training 资产。</p><p>这条更新的潜台词是：agent 平台不只卖 observability，还要把真实业务交互变成可持续改善模型和系统的闭环。对企业来说，长期价值可能来自自己的 trace、标注、失败案例和业务规则，而不是单纯调用通用模型。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>“数据飞轮”是 AI 应用护城河的核心，但多数团队缺少把 trace 变训练数据的工程链路。LangSmith Fine-Tuning 试图把这件事产品化。</div>
+  <div class="action">后续行动：关注 SmithTune 支持哪些底座模型、隐私/数据驻留如何处理、能否把 evaluator 输出转成训练标签，以及 fine-tune 后如何自动回测。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Managed Agents / Runtime</span><strong>LangChain</strong> · 2026-09-24 15:51 UTC · <a href="https://www.langchain.com/blog/langsmith-managed-deep-agents-whats-new">Managed Deep Agents delivers a better user experience for agents in production</a></div>
+  <div class="summary"><p>Managed Deep Agents 0.8 增加 user-owned credentials、user-level memory、HTTP channels、Slack 文件传输和预置 web search tool。它把 agent 从“开发者自己的机器人”推向“每个终端用户带着自己的身份、记忆和文件上下文运行”。</p><p>这是生产 agent 的关键分水岭：同一个 agent 服务不同用户时，必须使用不同的 OAuth/凭据、权限和记忆边界。否则就会出现越权访问、数据串线和审计困难。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>用户级凭据和记忆是企业 agent 落地的硬门槛。它也和 GitHub proof of presence、Copilot sandbox 形成同一主题：agent 可以行动，但行动必须带身份、权限和边界。</div>
+  <div class="action">后续行动：整理“per-user identity + per-user memory + per-tool permission”的设计模板；评估 Slack 文件传输和 web search tool 是否会带来新的数据外流风险。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Observability / UI</span><strong>LangChain</strong> · 2026-09-24 15:04-15:51 UTC · <a href="https://www.langchain.com/blog/langsmith-trajectories-tracing">Trajectories now in LangSmith</a> · <a href="https://www.langchain.com/blog/langsmith-custom-apps">LangSmith Custom Apps</a></div>
+  <div class="summary"><p>LangSmith Trajectories 把 agent session trace 转成更接近对话的可读视图，目标是让长任务调试更快。Custom Apps 则允许团队围绕 LangSmith 数据构建自定义界面，并发布到 workspace 中，减少自建 hosting/auth/permissions 的工作。</p><p>这说明 agent observability 正在从“工程师看 span 树”扩展到“产品、运营、QA、客户成功都能看懂的工作台”。当 agent 流程变长、参与角色变多，单纯原始 trace 已经不够用。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>生产 agent 的失败往往不是单个 API 错误，而是目标理解、工具选择、权限、外部系统状态和用户反馈共同造成。可读 trajectories 和自定义工作台能降低跨职能调试成本。</div>
+  <div class="action">后续行动：关注 Trajectories 是否能标出关键决策点、错误归因和人工接管点；把 Custom Apps 作为客户场景里“AI 运营后台”的参考设计。</div>
+</div>
+
+<h3>二、GitHub：高风险动作需要 proof of presence</h3>
+<div class="card">
+  <div class="source"><span class="tag">Enterprise Security</span><strong>GitHub Changelog</strong> · 2026-09-24 20:28 UTC · <a href="https://github.blog/changelog/2026-09-24-require-proof-of-presence-for-high-impact-actions">Require proof of presence for high-impact actions</a></div>
+  <div class="summary"><p>GitHub Enterprise Cloud 现在可要求成员在执行高影响操作前完成交互式重新认证或 MFA challenge。范围先限于使用 Microsoft Entra ID 作为 SSO IdP 的 Enterprise Managed Users 企业，覆盖创建 token、编辑 webhooks、修改组织安全设置、查看 recovery codes 等动作。</p><p>GitHub 明确把问题指向被盗 session cookie 和长效认证 token：有效登录态不等于此刻是本人在执行敏感动作。后续还计划把 proof of presence 扩展到 PR merge 前。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这对 agent 时代很关键。未来很多敏感动作可能由 agent 发起或辅助完成，平台必须区分“有 session”与“此刻有真实授权的人在场”。</div>
+  <div class="action">后续行动：把 proof of presence 纳入企业 agent 安全设计，特别是 token 创建、生产发布、权限变更、支付、数据导出、PR merge 等高影响操作。</div>
+</div>
+
+<h3>三、Claude 进入生命科学发现闭环</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI for Science / Anthropic</span><strong>Anthropic</strong> · 2026-09-23 · <a href="https://www.anthropic.com/news/claude-discovers-novel-enzyme-system">Claude discovers a novel enzyme system with CRISPR-like repeats</a></div>
+  <div class="summary"><p>Anthropic 介绍新的生命科学研究组和 Bay Area 实验室，研究模式是让 Claude 阅读文献、复现实验分析、在公共 DNA/蛋白数据中搜索未描述的候选系统，并生成可由科学家进一步验证的报告。文章称 Claude 发现了一个带 CRISPR-like repeats 特征的新型酶系统。</p><p>值得注意的是，Anthropic 同时说明实验室只涉及较低等级 biosafety 风险，且湿实验由人类科学家执行。这不是完全自动化实验室，而是 AI 假设生成与人类实验验证的混合流程。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这把 Claude 从 coding/知识工作扩展到真实科学发现链路。对 AI for science 来说，真正重要的是模型能否提出可测试、可证伪、能被实验验证的候选假设。</div>
+  <div class="action">后续行动：跟踪 Anthropic 是否公开更多候选系统、失败案例、实验 protocol 和生物安全审核流程；与 OpenAI Rosalind Workbench、Google DeepMind 科学模型做横向对比。</div>
+</div>
+
+<h3>四、开源和多模态基础设施：视觉语言、音频、世界动作模型、Jev 生态</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / VLM</span><strong>Hugging Face</strong> · 2026-09-24 · <a href="https://huggingface.co/blog">Community Blog</a> · <a href="https://huggingface.co/blog?p=0">Accelerating vision-language models with LFM2.5-VL-DSpark</a></div>
+  <div class="summary"><p>Hugging Face 主博客列表显示 9 月 24 日的 LFM2.5-VL-DSpark 视觉语言模型加速文章。虽然本轮只采到列表层信息，但主题本身值得记录：VLM 推理性能直接影响文档理解、UI agent、机器人感知和多模态检索的实际成本。</p><p>同页还显示 NVIDIA Warp/MjWarp、benchmark 可复现、Transformers 运行 llama.cpp quants 等近期内容，说明开源生态继续在“让模型更好跑、更能测、更易接入”上补基础设施。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>agent 不只需要文本推理，还需要视觉、音频、动作模型和本地/量化推理工具链。VLM 加速会影响多模态 agent 的可用性和成本。</div>
+  <div class="action">后续行动：复查 LFM2.5-VL-DSpark 的实际 benchmark、硬件要求和开源许可；关注它是否能接入常见 agent harness。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Audio / Diarization</span><strong>Hugging Face / NVIDIA</strong> · 2026-09-24 左右 · <a href="https://huggingface.co/blog?p=0">Know Who Spoke When: Build Real-Time, Multi-Speaker AI with NVIDIA Nemotron 3 Diarization</a></div>
+  <div class="summary"><p>Hugging Face 社区列表出现 NVIDIA Nemotron 3 diarization 文章，主题是实时、多说话人的说话人识别。对会议纪要、客服质检、播客剪辑、语音 agent 来说，识别“谁在什么时候说话”比单纯转写更接近业务可用。</p><p>这一方向和 Google Gemini 3.8 TTS、OpenAI/ElevenLabs 等语音生成能力互补：输入端要能可靠分离角色，输出端才能更自然地编排多角色语音。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>语音 agent 的价值不在朗读，而在理解多人上下文、追踪责任、提取行动项。Diarization 是语音工作流进入企业的基础件。</div>
+  <div class="action">后续行动：测试中文会议场景的 diarization 准确率；关注实时延迟、说话人切换、重叠语音和隐私处理。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">World Models / Action</span><strong>Hugging Face / Black Forest Labs</strong> · 2026-09-24 左右 · <a href="https://huggingface.co/blog?p=0">FLUX 3 Action: a world action model you can fine-tune</a></div>
+  <div class="summary"><p>Hugging Face 社区列表出现 FLUX 3 Action，定位为可 fine-tune 的 world action model。列表信息有限，但这个关键词值得跟踪：图像/视频生成正在从静态内容走向“动作、状态变化、可控世界”。</p><p>如果世界动作模型能稳定 fine-tune，影响会扩展到游戏资产、机器人仿真、广告视频、产品演示和交互式训练数据生成。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Jim Fan、Fei-Fei Li、world models 是高优先级。可调动作模型是“生成内容”向“生成可操作世界状态”的过渡信号。</div>
+  <div class="action">后续行动：等待完整技术细节；重点看动作可控性、物理一致性、fine-tune 成本、商业许可和可否生成训练数据。</div>
+</div>
+
+<div class="card">
+  <div class="source"><span class="tag">Decision Models / Evals</span><strong>Hugging Face Community</strong> · 2026-09-24 左右 · <a href="https://huggingface.co/blog?p=0">Jev AI vs djev vs Laya vs OpenJev vs SemIf</a> · <a href="https://www.langchain.com/blog/building-a-harness-with-jev">LangChain: What Is Jev?</a></div>
+  <div class="summary"><p>Hugging Face 社区继续出现 Jev / decision model 相关内容，与 LangChain 过去两天的 Jev-as-judge、LangSmith Evals 接入形成呼应。Jev 类模型的重点不是聊天，而是以低延迟、低成本输出类别、分数、yes/no 等结构化判断。</p><p>这类模型可能会成为 agent 运行时的“廉价裁判”：判断是否需要升级人工、是否违反策略、trace 是否成功、请求属于哪个队列。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>agent 生产系统里，判断次数远多于高价值生成次数。用窄模型承担大量判断，有机会显著降低成本和延迟。</div>
+  <div class="action">后续行动：建立一组真实工单/代码审查/摘要质量样本，对比 Jev、LLM judge 和规则系统的准确率、可解释性和漂移风险。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>LangChain：</strong>LangSmith Engine v2 加入红队和自动 agent 测试，Fine-Tuning/SmithTune 把 trace 数据转成训练资产。</li>
+  <li><strong>LangChain：</strong>Managed Deep Agents 0.8 支持 user-owned credentials、user-level memory、HTTP channels、Slack 文件传输与 web search tool。</li>
+  <li><strong>LangChain：</strong>Trajectories 提供 agent session 可读视图，Custom Apps 让团队围绕 LangSmith 数据做内部工作台。</li>
+  <li><strong>GitHub：</strong>Enterprise Cloud proof of presence 要求高影响动作前重新认证或 MFA，后续将支持 PR merge 前验证。</li>
+  <li><strong>Anthropic：</strong>公开生命科学研究组和实验室，展示 Claude 辅助发现候选酶系统的流程。</li>
+  <li><strong>Hugging Face：</strong>9 月 24 日出现 LFM2.5-VL-DSpark 视觉语言加速、NVIDIA Nemotron 3 diarization、FLUX 3 Action、Basis Conversations 1500、Jev 生态等多条社区信号。</li>
+  <li><strong>OpenAI：</strong>RSS 本窗口无新的 9 月 24 日主发布；9 月 23 日的模型/公共事务/安全/客户案例已在昨日覆盖。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Harrison Chase / LangChain：</strong>公司发布节奏从单点框架功能转向完整 agent production stack：测试、红队、运行、记忆、凭据、调试、定制界面和 fine-tuning。</li>
+  <li><strong>GitHub：</strong>继续围绕企业级控制面推进，proof of presence 与 Copilot app 沙箱/OTel 共同构成“可执行 agent 的安全底座”。</li>
+  <li><strong>Anthropic：</strong>叙事从 Claude Code/知识工作扩展到生命科学实验室，强调人类科学家仍负责湿实验和风险边界。</li>
+  <li><strong>Hugging Face：</strong>社区信号分散但密度高，开源生态围绕 VLM、音频、世界模型、决策模型和量化推理持续补工具链。</li>
+  <li><strong>OpenAI：</strong>本窗口没有新主发布，但 9 月 23 日内容仍构成背景：模型商品化、行业案例、安全 benchmark 与公共事务继续是主线。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Agent 发布门禁：</strong>把 LangSmith Engine v2 的红队/自动测试拆成通用清单：权限、工具误用、长任务漂移、越权访问、提示注入、失败恢复。</li>
+  <li><strong>Trace-to-training 飞轮：</strong>跟踪 LangSmith Fine-Tuning 是否能把生产反馈稳定转成小模型/专门模型，尤其是行业分类、质检和路由任务。</li>
+  <li><strong>用户身份与凭据隔离：</strong>结合 Managed Deep Agents 0.8 和 GitHub proof of presence，整理企业 agent 的 per-user identity 模型。</li>
+  <li><strong>AI for science：</strong>跟踪 Anthropic 生命科学实验室后续是否发布更多可复现实验细节，避免只停留在单一案例宣传。</li>
+  <li><strong>多模态 agent 基础设施：</strong>测试 diarization、VLM 加速、world action model 在中文会议、UI 操作、机器人/仿真内容中的真实可用性。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>LangSmith Engine v2 效果：</strong>官方描述强调红队和自动测试，但需要实际案例验证其发现率、误报率和是否支持复杂工具链。</li>
+  <li><strong>LangSmith Fine-Tuning 数据边界：</strong>需要确认 trace 数据如何脱敏、数据驻留如何配置、训练后的模型是否会泄露客户私有上下文。</li>
+  <li><strong>Managed Deep Agents 用户级记忆：</strong>要验证记忆隔离、删除、审计、导出和跨渠道同步策略，尤其是 Slack/HTTP/web search 混用时。</li>
+  <li><strong>GitHub proof of presence 范围：</strong>当前仅 EMU + Entra ID 公开预览；普通企业、GitHub Apps、agent-triggered operations 的覆盖还需等待。</li>
+  <li><strong>Anthropic 生命科学案例：</strong>Claude 的贡献边界、候选系统新颖性、实验复现和同行评议仍需后续材料验证。</li>
+  <li><strong>Hugging Face 社区条目：</strong>部分条目本轮只采到列表页，需后续打开全文核验 benchmark、许可和实现细节。</li>
+  <li><strong>X 时间线：</strong>公开 X/Nitter/RSSHub 本轮仍不可稳定采集，可能漏掉 Follow List 人物即时发言。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>OpenAI Academy 两周年属于教育/社区覆盖，长期有意义，但本窗口不是高强度技术信号。</li>
+  <li>GitHub Actions Node 20 退役是工程迁移提醒，重要但与 AI agent 主线弱相关。</li>
+  <li>Hugging Face 上多个 Jev 社区入门帖重复度较高，本期只把它们作为“decision model 生态升温”的弱信号。</li>
+  <li>广告、学习路径、地区扩张类消息对商业覆盖有意义，但今天优先级低于 agent 生产化和安全治理。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.langchain.com/blog/langsmith-engine-v2-redteam">LangChain: New in LangSmith Engine: red teaming and automated testing</a></li>
+  <li><a href="https://www.langchain.com/blog/langsmith-fine-tuning">LangChain: Introducing LangSmith Fine-Tuning</a></li>
+  <li><a href="https://www.langchain.com/blog/langsmith-managed-deep-agents-whats-new">LangChain: Managed Deep Agents 0.8</a></li>
+  <li><a href="https://www.langchain.com/blog/langsmith-trajectories-tracing">LangChain: Trajectories now in LangSmith</a></li>
+  <li><a href="https://www.langchain.com/blog/langsmith-custom-apps">LangChain: LangSmith Custom Apps</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-24-require-proof-of-presence-for-high-impact-actions">GitHub Changelog: Require proof of presence for high-impact actions</a></li>
+  <li><a href="https://www.anthropic.com/news/claude-discovers-novel-enzyme-system">Anthropic: Claude discovers a novel enzyme system with CRISPR-like repeats</a></li>
+  <li><a href="https://huggingface.co/blog?p=0">Hugging Face: Community Blog & Articles</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://simonwillison.net/">Simon Willison’s Weblog</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-09-24T00:51:00Z / 2026-09-25T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
