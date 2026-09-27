@@ -1,0 +1,108 @@
+---
+title: "Follow 深度日报：公开源低波动，Simon 用 Claude + Playwright 串起创意编码到演示交付"
+date: "2026-09-27"
+category: "daily"
+url: "/daily/2026/09/27/"
+summary: "Follow List 公开来源整理：本窗口真正可核验的新内容很少，重点来自 Simon Willison 9 月 26 日发布的 Kākāpō Party 案例。他把 Claude Opus 5.5 用于生成 HTML5 canvas 像素动画，再让本地 Claude Code 调用 Playwright 把交互网页录成 15 秒视频，用作 Keynote 演示素材。这个案例不属于模型大发布，却很好地展示了 agentic creative coding 的一条实用链路：参考图片 -> 生成交互网页 -> 浏览器自动化 -> 可嵌入媒体资产。GitHub、LangChain、OpenAI、Hugging Face、Google DeepMind 等官方 RSS 在 2026-09-26 UTC 窗口内没有新的高优先级主条目；公开 X/Nitter/RSSHub 抓取仍不稳定，本期不使用 X-only 内容作事实依据。"
+---
+<div class="meta">
+  <strong>2026年9月27日（周日）</strong> · 覆盖窗口：2026-09-26 08:00 – 2026-09-27 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Simon Willison Atom / 原文页、GitHub Changelog RSS、LangChain Blog RSS、Hugging Face Blog RSS、Google DeepMind Blog RSS、explainx.ai sitemap。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：OpenAI 与 Interconnects RSS 本轮返回 403；公开 X/Nitter 镜像分别出现连接拒绝、451 或 DNS 失败，因此本期仅发布可复查网页/RSS 内容。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>窗口内新增高信号偏少</h4><p>从 2026-09-26T00:00:00Z 到 2026-09-27T00:00:00Z，官方 RSS 中几乎没有新的 frontier lab 或 agent 平台主发布。GitHub Changelog 最新仍停在 9 月 25 日晚的 Copilot 企业管理与度量更新，LangChain 最新仍是 9 月 25 日 Jev / LangSmith 组合，Hugging Face 最新仍是 9 月 24 日 VLM 加速条目，Google DeepMind RSS 最新主条目停在 9 月上旬。</p></div>
+  <div class="overview-item"><h4>Simon 的案例展示创意编码工作流</h4><p>Simon Willison 在 9 月 26 日发布 Kākāpō Party：先用 Claude Opus 5.5 根据参考图片生成 HTML5 canvas 像素动画网页，再让本地 Claude Code 通过 Playwright 打开本地 HTML、按时间点点击触发效果，并录制成可嵌入 Keynote 的视频。这是一个轻量但完整的“生成资产 -> 自动操作 -> 交付媒体”链路。</p></div>
+  <div class="overview-item"><h4>AI agent 的价值不只在写代码</h4><p>这个案例的信号不在于动画本身多复杂，而在于 agent 可以把一个模糊的表达目标拆成可执行步骤：生成前端、模拟用户交互、控制浏览器、产出视频文件。它更接近创作者和讲者的临时生产力工具，而不是传统意义上的软件工程项目。</p></div>
+  <div class="overview-item"><h4>昨天的生产 agent 主线仍是背景</h4><p>9 月 25 日的 GitHub Copilot Memory、local sandboxing、OpenTelemetry、Slack/Teams 长任务恢复、LangChain Jev 与 LangSmith Custom Apps，仍然是本周 agent 生产化的核心背景。但这些内容已经在 9 月 26 日日报发布，本期不重复当作新增。</p></div>
+  <div class="overview-item"><h4>X 抓取缺口需要继续补</h4><p>Follow List 高优先级人物很多仍以 X 为第一发布渠道，但本轮公开 X URL 与 Nitter 类镜像不可稳定抓取。为了避免把不可核验转述写成事实，本期不采纳 X-only 内容；这会漏掉即时评论，但更适合公开报告的可信度。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>今天的主线是“低波动日也要看工作流信号”。大厂发布少时，Simon 这类实操案例反而能提醒我们：agent 产品的实际价值，常常藏在临时需求、演示材料、浏览器自动化和媒体生成这些非正式但高频的工作里。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Claude + Claude Code + Playwright：从创意素材到演示视频的一次 agentic 串联</h3>
+<div class="card">
+  <div class="source"><span class="tag">Creative Coding / Browser Automation</span><strong>Simon Willison</strong> · 2026-09-26 23:39 UTC · <a href="https://simonwillison.net/2026/Sep/26/kakapo-party/">Kākāpō Party</a></div>
+  <div class="summary"><p>Simon 为 WeAreDevelopers World Congress North America 的闭幕 keynote 准备一个演示素材：他先把几张参考图片交给 Claude Opus 5.5，让模型生成一个 HTML5 canvas 像素动画页面。生成结果是一个可交互网页，点击后会触发动画效果，适合作为演示中的“记忆点”。</p><p>随后他把生成的 HTML 下载到本地，再让 Claude Code 用 Playwright 打开本地文件、按指定时间点在画布不同位置点击，并录制约 15 秒视频。这个过程把“AI 写网页”和“浏览器自动化录屏”合并成了一个端到端的创意交付流程。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Simon 长期关注 AI 工程的真实可用性。这个案例小而完整，显示 coding agent 已经能服务非工程场景：演讲、教学、销售材料、内部 demo、产品原型和短视频素材都可以受益。</div>
+  <div class="action">后续行动：整理一份“演示资产 agent workflow”模板：输入参考图和风格要求，生成单文件 HTML，自动打开交互，录制视频/GIF，输出可嵌入 Keynote/网页的资产；同时记录版权和素材来源边界。</div>
+</div>
+
+<h3>二、工作流启示：浏览器自动化正在变成 agent 的媒体生产工具</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Workflow</span><strong>推断自 Simon 案例</strong> · 2026-09-26 · <a href="https://gisthost.github.io/?368b481fba654c4fb84d90188da77581/page-001.html">Claude Code / Playwright transcript</a></div>
+  <div class="summary"><p>Playwright 在这里不是测试工具，而是媒体生产工具：它负责稳定打开页面、等待、点击、录制，把交互式网页转成可交付视频。这说明 agent 工具链里的“浏览器控制”价值不止于 QA，也适合把动态网页、dashboard、canvas、Three.js demo 变成可传播素材。</p><p>这个模式对内部汇报尤其有用。很多团队临时需要一个效果视频、交互 demo 或客户演示片段，过去要靠手动录屏和剪辑；现在可以把点击轨迹、视口尺寸、等待时间、录制长度写成脚本，由 agent 一次生成并复现。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>可复现的录制脚本比手工录屏更适合团队协作，也更容易迭代。对于 AI agent 产品，这类“最后一公里交付”能力会直接影响用户是否愿意把它放进真实工作流。</div>
+  <div class="action">后续行动：在自己的前端/报告工作流里保留 Playwright 录制模版，支持固定视口、延迟点击、滚动、截图、视频导出；必要时加入 canvas 非空像素检查，防止录到空白画面。</div>
+</div>
+
+<h3>三、低波动日的信号：少发布不等于没趋势</h3>
+<div class="card">
+  <div class="source"><span class="tag">Source Check</span><strong>公开 RSS / Sitemap</strong> · 2026-09-26 窗口 · <a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></div>
+  <div class="summary"><p>本窗口 GitHub Changelog、LangChain Blog、Hugging Face Blog、Google DeepMind Blog 和 explainx.ai sitemap 都没有新的高优先级 AI agent / coding agent 主条目。OpenAI News RSS 与 Interconnects RSS 当前无法直接抓取，需后续用可复查网页或备用官方路径补充。</p><p>因此今天的报告刻意不扩写旧新闻。9 月 25 日的 Copilot 记忆、沙箱、可观测性、审批和 LangChain Jev 决策模型仍是本周大主题，但它们已经进入昨日归档；今天只把它们作为背景，不再重复占据重点内容。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>日报的可信度来自区分“新事实”和“背景判断”。在抓取低波动时明确说低波动，比用旧内容堆满版面更有价值。</div>
+  <div class="action">后续行动：继续监控 GitHub Copilot 企业 controls、LangSmith Engine v2、Jev in LangGraph、OpenAI Agents API / Codex 客户案例和 HF agent memory 方向；等出现新版本、实测、定价或安全边界变化再深挖。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Simon Willison：</strong>发布 Kākāpō Party 案例，展示 Claude Opus 5.5 生成交互式 HTML5 canvas 动画，再由 Claude Code + Playwright 录制视频的完整链路。</li>
+  <li><strong>Claude Code / Playwright：</strong>案例显示 coding agent 可以把浏览器自动化用于演示资产生产，而不只是测试、爬取或调试。</li>
+  <li><strong>GitHub：</strong>窗口内没有新的 9 月 26 日 RSS 条目；最新仍是 9 月 25 日企业 managed settings validator、Copilot usage metrics 和 Copilot Memory 等内容。</li>
+  <li><strong>LangChain：</strong>窗口内没有新的 9 月 26 日 RSS 条目；最新仍是 9 月 25 日 Jev + LangGraph、LangSmith Custom Apps、Engine v2 / Managed Deep Agents / Fine-Tuning 总结。</li>
+  <li><strong>Hugging Face：</strong>窗口内没有新的官方 RSS 条目；最新仍是 9 月 24 日 LFM2.5-VL-DSpark。</li>
+  <li><strong>Google DeepMind：</strong>RSS 最新主条目仍停在 9 月上旬，本窗口无新增高优先级 AI agent / model 更新。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Simon Willison：</strong>继续提供“真实工作流里的 AI”信号。这次不是安全警示或模型测评，而是把 Claude、Claude Code、Playwright 和演示软件之间的缝隙打通。</li>
+  <li><strong>Anthropic / Claude 生态：</strong>间接信号是 Claude Opus 5.5 在小型创意前端生成上表现可用，Claude Code 能把本地网页操作和录屏自动化串起来；这属于用户案例，不等同于官方能力声明。</li>
+  <li><strong>GitHub / Copilot：</strong>本窗口没有新发布，但昨日的 Copilot 企业治理、记忆和运行环境能力仍是本周主线。后续应观察这些 preview 能力的实测边界。</li>
+  <li><strong>LangChain：</strong>本窗口无新条目，但 9 月 25 日围绕 Jev、LangSmith Custom Apps 和 Engine v2 的组合，仍显示其叙事重心在生产 agent 的控制面与评估层。</li>
+  <li><strong>OpenAI / Interconnects：</strong>RSS 抓取失败，未纳入新增事实；后续需通过官方网页、搜索结果或可用 feed 复查。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>演示资产 agent 模板：</strong>把“生成 HTML/canvas -> Playwright 点击/滚动 -> 录制视频/GIF -> 嵌入报告或幻灯片”做成可复用流程。</li>
+  <li><strong>Agentic creative coding 评测：</strong>建立小样本任务集，测试模型生成动态网页、像素动画、交互效果、可访问性和可录制性的稳定性。</li>
+  <li><strong>Playwright 作为交付工具：</strong>不要只把它放在测试目录；可为报告、demo、客户培训材料建立 `record-demo` 脚本。</li>
+  <li><strong>版权与素材边界：</strong>参考图片、生成图像、衍生视频进入公开材料时，需要记录来源、授权状态和可替换方案。</li>
+  <li><strong>X 抓取备用路径：</strong>继续寻找合规、可复查、无需绕过 CAPTCHA 的公开路径；在不可用时保持“未核验不发布”的原则。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>Claude Opus 5.5 生成质量：</strong>Simon 案例说明单次任务可用，但还需要更多样本验证复杂动画、响应式布局、浏览器兼容性和可维护性。</li>
+  <li><strong>Claude Code 录制稳定性：</strong>案例中的 Playwright 脚本很短，但不同页面加载时间、字体、GPU/canvas 渲染和视频编码环境可能导致输出不稳定，需要本地模板化测试。</li>
+  <li><strong>OpenAI News RSS：</strong>本轮返回 403，不能确认窗口内是否存在未被 RSS 抓到的新条目；后续应以官方网页或搜索结果补查。</li>
+  <li><strong>Interconnects RSS：</strong>本轮返回 403，不能确认 Nathan Lambert 是否有窗口内新文章或短评。</li>
+  <li><strong>X 时间线：</strong>公开 X/Nitter/RSSHub 本轮不可稳定采集，可能漏掉 Follow List 人物即时发言。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub 9 月 25 日的企业 managed settings validator 对 Copilot 管理有用，但已经落在昨日窗口，今天只作为背景。</li>
+  <li>Simon 条目中的趣味素材本身不是 AI 行业重大新闻；真正值得记录的是背后的创意编码和浏览器自动化流程。</li>
+  <li>Hugging Face 9 月 24 日、LangChain 9 月 25 日、GitHub 9 月 25 日内容不再重复展开，避免制造“假新增”。</li>
+  <li>无法稳定抓取的 X-only 传闻不纳入公开日报。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://simonwillison.net/2026/Sep/26/kakapo-party/">Simon Willison: Kākāpō Party</a></li>
+  <li><a href="https://tools.simonwillison.net/kakapo-party">Kākāpō Party result page</a></li>
+  <li><a href="https://claude.ai/share/43bec0be-a0a3-4737-bfac-34894af34ddc">Claude transcript shared by Simon</a></li>
+  <li><a href="https://gisthost.github.io/?368b481fba654c4fb84d90188da77581/page-001.html">Claude Code / Playwright transcript shared by Simon</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/rss/">Google DeepMind RSS</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai Blog Sitemap</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-09-26T00:00:00Z / 2026-09-27T00:00:00Z.</footer>
