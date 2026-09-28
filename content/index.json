@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：公开源进入低波动窗口，重点转向抓取可靠性与本周待复查队列",
+    "date": "2026-09-28",
+    "category": "daily",
+    "url": "/daily/2026/09/28/",
+    "summary": "Follow List 公开来源整理：本窗口从 2026-09-27T00:00Z 到 2026-09-28T00:00Z，主流可核验公开源没有新的高优先级 AI agent、Codex、Claude、开源模型或 frontier lab 主发布。OpenAI RSS 可访问但最新主条目仍是 9 月 25 日 Proaction / Codex 客户案例；Simon Willison Atom 最新仍是 9 月 26 日 Kākāpō Party；GitHub Changelog、LangChain、Hugging Face、Google DeepMind 与 Interconnects 也没有窗口内新增高信号条目。今天的价值不在复述旧闻，而在确认低波动、列出抓取缺口，并把本周应继续复查的 agent 生产化、AI 研究加速和开放模型线索放进待办队列。"
+  },
+  {
     "title": "朱啸虎北大演讲：AI 创业的商业化与护城河框架",
     "date": "2026-09-24",
     "category": "research",
