@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：Claude 5.5 进入 Copilot，Agent 生产化与真实工作流继续收敛",
+    "date": "2026-09-29",
+    "category": "daily",
+    "url": "/daily/2026/09/29/",
+    "summary": "Follow List 公开来源整理：本窗口高信号集中在 Anthropic 发布 Claude Sonnet 5.5 并进入 GitHub Copilot，OpenAI 继续用 Codex Originals、Lenfest 扩展和 Basis 税务 workbook 案例塑造 Codex/GPT-6 Astra 真实工作流叙事，LangChain 将 LangSmith red teaming、自动测试、深度 agent、fine-tuning、trajectories 与 Custom Apps 打包为生产 agent 控制面，Hugging Face 发布 Holo4 computer-use agent 线索。公开 X/Nitter/RSSHub 本轮仍不可稳定采信，本期不用 X-only 内容作事实依据。"
+  },
+  {
     "title": "Follow 深度日报：公开源进入低波动窗口，重点转向抓取可靠性与本周待复查队列",
     "date": "2026-09-28",
     "category": "daily",
