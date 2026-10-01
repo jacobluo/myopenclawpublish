@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：模型安全、Copilot 多模型编排与可追溯 Agent</title>
+    <meta name="description" content="Follow List 公开来源整理：本窗口从 2026-09-30T00:00Z 到 2026-10-01T00:00Z。高信号集中在五条线索：OpenAI 披露并处置 coordinated model-distillation campaign，把前沿模型竞争从发布与分发拉回模型窃取、推理链保护和滥用检测；GitHub Copilot 将 HydraFusion 从 CLI 扩展到 VS Code 和 Copilot app，说明 IDE 里的下一步不只是换模型，而是用 cascade/critique 等多模型工作流优化质量与成本；Google DeepMind 发布 SynthID Bio，把水印从图像/文本/音频/视频延伸到 AI 设计蛋白，代表 AI for science 的溯源治理开始具体化；Hugging Face 推出 Open TTS Leaderboard，继续把开放评测扩展到语音与 voice cloning；Simon Willison 的窗口内更新低 AI 相关，Interconnects feed 有构建更新时间但无窗口内新文章。公开 X profile 可打开但不稳定暴露时间线，RSSHub Twitter 路径返回 404，因此本期不使用 X-only 内容作事实依据。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：模型安全、Copilot 多模型编排与可追溯 Agent</h1>
+      <p class="portal-lead">Follow List 公开来源整理：本窗口从 2026-09-30T00:00Z 到 2026-10-01T00:00Z。高信号集中在五条线索：OpenAI 披露并处置 coordinated model-distillation campaign，把前沿模型竞争从发布与分发拉回模型窃取、推理链保护和滥用检测；GitHub Copilot 将 HydraFusion 从 CLI 扩展到 VS Code 和 Copilot app，说明 IDE 里的下一步不只是换模型，而是用 cascade/critique 等多模型工作流优化质量与成本；Google DeepMind 发布 SynthID Bio，把水印从图像/文本/音频/视频延伸到 AI 设计蛋白，代表 AI for science 的溯源治理开始具体化；Hugging Face 推出 Open TTS Leaderboard，继续把开放评测扩展到语音与 voice cloning；Simon Willison 的窗口内更新低 AI 相关，Interconnects feed 有构建更新时间但无窗口内新文章。公开 X profile 可打开但不稳定暴露时间线，RSSHub Twitter 路径返回 404，因此本期不使用 X-only 内容作事实依据。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-10-01</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年10月1日（周四）</strong> · 覆盖窗口：2026-09-30 08:00 – 2026-10-01 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、GitHub Changelog RSS、Hugging Face Blog RSS、Google DeepMind RSS、Google AI RSS、Simon Willison Atom、Interconnects RSS、explainx.ai sitemap、公开 X profile URL 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：公开 X profile 页面可返回 200，但 HTML 不稳定提供可核验时间线；RSSHub Twitter user 路径对抽样账号返回 404；Anthropic RSS 常见路径返回 404；本期不使用 X-only 内容作事实依据。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>OpenAI 把“模型蒸馏攻击”推到台前</h4><p>OpenAI 在 9 月 30 日披露 coordinated model-distillation campaign，称其已处置一次试图提取受保护模型推理能力的行动，并会加强对 adversarial distillation 的防御。这个信号比一般安全公告更贴近前沿模型商业化：如果模型能力本身成为资产，推理链、能力迁移和异常调用检测就是平台护城河的一部分。</p></div>
+  <div class="overview-item"><h4>HydraFusion 进入 VS Code，Copilot 从模型选择走向工作流选择</h4><p>GitHub Changelog 显示 HydraFusion research preview 已从 Copilot CLI 扩展到 VS Code 与 GitHub Copilot app。它不是单一模型，而是根据任务在 Single、Cascade、Critique 三种工作流之间选择，意味着 Copilot 正在把“哪个模型最好”升级成“怎样组合模型完成任务最划算”。</p></div>
+  <div class="overview-item"><h4>Google DeepMind 将 SynthID 扩展到 synthetic biology</h4><p>Google DeepMind 发布 SynthID Bio，用于给 AI 设计蛋白加水印，同时强调维持生物功能。AI for science 的产物越来越接近现实世界实验与产业链，溯源机制从媒体内容治理进入合成生物这类高影响领域。</p></div>
+  <div class="overview-item"><h4>Hugging Face 继续把开放评测扩到语音</h4><p>HF 发布 Open TTS Leaderboard，关注多语言 text-to-speech 与 voice cloning 的可规模化评测。随着语音 agent、实时助理和多模态产品变成主流，语音质量、克隆能力和安全边界会从演示问题变成生产评测问题。</p></div>
+  <div class="overview-item"><h4>安全、编排、溯源成为同一条线</h4><p>今天的几条重点并不分散：OpenAI 关注模型能力被提取，GitHub 关注多模型编排透明度，DeepMind 关注生成物溯源，HF 关注开放评测。共同指向一个现实：agent 和模型基础设施要进入生产，必须同时解决能力、成本、可追溯和治理。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>昨日主题是模型分发与主动助理；今天主题变成“控制面”。前沿模型竞争正在从发布会速度转向四个控制点：模型能力保护、IDE 内执行策略、AI 生成科学产物的标记，以及多模态评测的公开基准。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI 披露模型蒸馏行动：安全边界进入“能力资产保护”阶段</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Security</span><strong>OpenAI News RSS</strong> · 2026-09-30 10:30 UTC · <a href="https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign">Disrupting a coordinated model-distillation campaign</a></div>
+  <div class="summary"><p>OpenAI 发布安全公告，称其打断了一次 coordinated model-distillation campaign，目标是抽取受保护模型推理能力，并表示会继续强化对 adversarial distillation 的防御。公告没有把问题描述成普通滥用，而是直接聚焦模型推理能力、受保护能力和对抗性蒸馏。</p><p>这与 Follow List 中 OpenAI 产品、frontier lab strategy、AI safety 和 agent security 的关注点高度相关。进入 2026 年下半年后，前沿模型的风险不只来自终端用户滥用，也来自竞争方或攻击者用大量调用、提示策略和输出分析来复制能力。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>如果 coding、computer use 和专业推理能力成为高价值资产，平台必须识别异常调用模式、保护 reasoning traces、限制可迁移能力泄露，并在不破坏开发者体验的前提下做风控。这会影响 API 速率限制、企业审计、模型输出策略和 research preview 的开放程度。</div>
+  <div class="action">后续行动：跟踪 OpenAI 是否公布更多技术细节、检测指标和开发者侧影响；对比 Anthropic、Google、xAI、开源推理模型生态对 distillation/teacher extraction 的治理方式；把“模型能力保护”列入 agent 平台风险清单。</div>
+</div>
+
+<h3>二、HydraFusion 进入 VS Code：Copilot 试图让多模型编排成为默认体验</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Copilot</span><strong>GitHub Changelog</strong> · 2026-09-30 14:31 UTC · <a href="https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app">HydraFusion in VS Code and the GitHub Copilot app</a></div>
+  <div class="summary"><p>GitHub 宣布 HydraFusion research preview 已可在 VS Code 和 GitHub Copilot app 中使用，范围从此前的 Copilot CLI 扩展到更主流的开发入口。HydraFusion 出现在模型选择器中，但它不是单一模型，而是会根据任务选择 Single、Cascade 或 Critique 工作流。</p><p>Single 是一个模型直接完成任务；Cascade 是先让更便宜或更快的模型尝试，质量门不过再升级；Critique 则让一个模型起草、另一个只读 critic 审查，再由起草模型修订。GitHub 还强调本次改进了透明度、实时进度和长任务状态提示。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这说明 IDE agent 的竞争正在从“接入 GPT/Claude/Gemini 哪个模型”转向“如何组合模型、质量门和审查者”。如果有效，企业将更关心任务级成本、失败恢复、critic 可靠性和策略透明度，而不是只看单模型 benchmark。</div>
+  <div class="action">后续行动：在 VS Code 中验证 HydraFusion 对重构、调试、测试生成、跨文件修改的 step count 与失败率；比较 Cascade 是否真能省 token；观察 Business/Enterprise 管理员能否限制 preview feature 和模型家族组合。</div>
+</div>
+
+<h3>三、Google DeepMind 的 SynthID Bio：AI for science 也需要水印与来源治理</h3>
+<div class="card">
+  <div class="source"><span class="tag">Google DeepMind</span><strong>Google DeepMind RSS</strong> · 2026-09-30 15:00 UTC · <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synthid-bio/">SynthID Bio</a></div>
+  <div class="summary"><p>Google DeepMind 发布 SynthID Bio，将 SynthID 水印技术带到 synthetic biology，目标是在不破坏生物功能的前提下标记 AI 设计蛋白。RSS 摘要明确提到 AI-designed proteins 和 watermarking technology。</p><p>这条不是普通产品更新，而是 AI for science 的治理信号。随着模型能够设计蛋白、材料和实验方案，生成物的来源、版本、责任边界和可追溯性会比图片水印更复杂，因为它们可能进入实验室、药物研发、供应链和监管流程。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 中 DeepMind、Jeff Dean、Demis Hassabis、Fei-Fei Li、Jim Fan 等方向都与科学 AI、世界模型和现实世界能力相关。SynthID Bio 说明大厂开始把 provenance 机制提前放进科学生成物，而不是等事故后再补。</div>
+  <div class="action">后续行动：阅读完整 research report，核验水印鲁棒性、对蛋白功能的影响、检测误报/漏报和是否适配第三方模型；关注监管机构是否把这类标记作为 AI-designed biological artifacts 的推荐实践。</div>
+</div>
+
+<h3>四、HF Open TTS Leaderboard：语音与 voice cloning 进入开放评测</h3>
+<div class="card">
+  <div class="source"><span class="tag">Hugging Face / Voice</span><strong>Hugging Face Blog</strong> · 2026-09-30 00:00 UTC · <a href="https://huggingface.co/blog/open-tts-leaderboard">Open TTS Leaderboard</a></div>
+  <div class="summary"><p>Hugging Face 发布 Open TTS Leaderboard，主题是多语言 text-to-speech 与 voice cloning 的可规模化评测。虽然 RSS 没有提供长摘要，但标题本身已给出方向：语音模型也需要公开、可比较、可复现的评价体系。</p><p>语音能力正进入客服、教育、移动助理、会议纪要、视频生成和个人代理。越接近真实交互，越需要评估自然度、语言覆盖、延迟、身份克隆能力、误用风险和不同口音/语言的公平性。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>多模态 agent 不是只有文字和代码。TTS 与 voice cloning 一旦成熟，会影响 AI companion、企业客服、播客生成、实时翻译和无障碍工具，同时也放大冒充、欺诈和同意管理问题。</div>
+  <div class="action">后续行动：检查 leaderboard 的指标、数据集、人工评估与安全维度；关注是否纳入 watermarking、speaker consent、clone detection 和 multilingual robustness；把语音模型纳入个人/企业 agent 选型表。</div>
+</div>
+
+<h3>五、OpenAI 小企业 AI 培训：模型能力继续向 SMB 工作流下沉</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Adoption</span><strong>OpenAI News RSS</strong> · 2026-09-30 10:00 UTC · <a href="https://openai.com/index/helping-small-businesses-put-ai-to-work">Helping small businesses put AI to work</a></div>
+  <div class="summary"><p>OpenAI 宣布与 America’s SBDC 合作，为小企业扩展 hands-on AI training 和本地支持，并同步发布小团队如何使用 AI 的报告。与 GPT-6.1 Sol、Codex 和 dots 放在一起看，OpenAI 正在把 AI 从 developer platform 推向更宽的 SMB 操作层。</p><p>这类项目未必产生当天最大的技术信号，但能说明 OpenAI 正在系统化建设“AI adoption channel”：通过培训、地方组织和案例报告进入小企业经营、销售、运营、财务和客服工作流。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI agent 的商业化不只靠大企业采购。小企业如果被训练出稳定需求，会推动低成本模型、模板化 agent、行业工作流和本地服务生态，反过来影响 OpenAI/Google/Microsoft 的产品包装。</div>
+  <div class="action">后续行动：读 OpenAI 的小团队使用报告，提取可复用 workflow；观察是否出现面向 SMB 的 dots/Codex/API 模板；关注美国地方 SBDC 网络是否带来真实部署案例。</div>
+</div>
+
+<h3>六、npm trusted publishing 扩展 dist-tag 权限：供应链安全继续去 token 化</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Supply Chain</span><strong>GitHub Changelog</strong> · 2026-09-30 21:03 UTC · <a href="https://github.blog/changelog/2026-09-30-opt-in-dist-tag-permissions-for-npm-trusted-publishing">Opt-in dist-tag permissions for npm trusted publishing</a></div>
+  <div class="summary"><p>GitHub/npm 宣布 trusted publishing configurations 现在可以选择性获得 dist-tag 管理权限，例如把版本提升到 latest 或维护 next/beta 标签。此前很多项目即使发布环节已经转向 OIDC 短期凭证，dist-tag 操作仍需要保留长期 token。</p><p>新权限默认关闭，并且与直接发布权限独立。它的意义在于让维护者更完整地移除长期 npm access token，降低 CI/CD、release automation 和包管理流程里的凭据风险。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI coding agent 越多参与依赖升级、发布和自动化修复，软件供应链凭据面就越重要。去 token 化和最小权限是让 agent 可安全参与 release workflow 的底层条件。</div>
+  <div class="action">后续行动：检查自有 npm 包是否还依赖长期 token 做 dist-tag；把 OIDC trusted publishing、环境保护规则和 agent release 权限分开审计。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>本窗口新增 model-distillation campaign 安全公告和小企业 AI 培训合作；前一日 GPT-6.1 Sol、DevDay recap、dots 仍是连续背景。</li>
+  <li><strong>GitHub Copilot：</strong>HydraFusion 扩展到 VS Code 和 Copilot app，是本窗口最重要的开发者平台信号；同日还有 Advanced Security trials、npm trusted publishing、GHE.com TLS 变更等治理更新。</li>
+  <li><strong>Google DeepMind：</strong>SynthID Bio 是高信号科学 AI 治理更新，把生成物溯源从内容媒体扩展到 AI-designed proteins。</li>
+  <li><strong>Hugging Face：</strong>Open TTS Leaderboard 将开放评测推进到多语言 TTS 与 voice cloning；前一日 MCP source-aware verification 与 Kumo Tabular 仍值得跟踪。</li>
+  <li><strong>Simon Willison：</strong>窗口内最新条目是 Museum of the City of New York 参观笔记，非 AI 主线；9 月 29 日 DevDay 和 Anthropic cyber note 仍作为背景延续。</li>
+  <li><strong>Interconnects：</strong>RSS lastBuildDate 在窗口内更新，但可见最新条目仍是 9 月 22 日播客，本期不计为新增重点。</li>
+  <li><strong>explainx.ai：</strong>blog sitemap 最新 lastmod 仍为 2026-08-19，无本窗口新增。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Sam Altman / Kevin Weil 产品线：</strong>从 DevDay、Sol、dots 到蒸馏安全公告，OpenAI 正在同时推进能力分发、主动助理和能力保护。</li>
+  <li><strong>GitHub / Copilot：</strong>HydraFusion 表明 Copilot 不满足于做多模型入口，而是开始把模型组合、质量门和 critic 模式包装成用户可选工作流。</li>
+  <li><strong>Google DeepMind / Demis Hassabis / Jeff Dean 方向：</strong>SynthID Bio 延续 DeepMind 把 AI for science 与治理机制打包的路线，值得放在 AlphaGenome、WeatherNext 和生物设计线索旁边看。</li>
+  <li><strong>Hugging Face / open evaluation：</strong>HF 继续扮演开放模型、评测和生态基础设施节点；TTS leaderboard 与 MCP verification 都服务于“让能力可比较、可审计”。</li>
+  <li><strong>Simon Willison：</strong>本窗口无新增 AI 技术条目，但他前一天对 DevDay 与 cyber capability 的整理仍是后续安全主题的观察锚点。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Adversarial distillation 防御：</strong>建立一页跟踪表，记录各家对模型提取、reasoning trace 保护、异常调用检测和输出限制的做法。</li>
+  <li><strong>HydraFusion：</strong>实测 Single/Cascade/Critique 在真实代码仓库里的成本、延迟、失败恢复和可解释性，特别关注 critic 是否能减少隐性错误。</li>
+  <li><strong>SynthID Bio：</strong>阅读完整 research report，判断水印是否能抵抗常见生物序列编辑、优化和模型再生成。</li>
+  <li><strong>Open TTS Leaderboard：</strong>拆解指标，特别是 voice cloning 安全、语言覆盖、说话人相似度、自然度与延迟之间的权衡。</li>
+  <li><strong>npm trusted publishing：</strong>把自有包发布流程从长期 token 切到 OIDC，尤其是 dist-tag、rollback 和 prerelease channel。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>X 时间线：</strong>公开 X profile URL 对抽样账号返回 200，但 HTML 不稳定提供可核验时间线；RSSHub Twitter user 路径返回 404，不能据此判断这些账号窗口内是否无更新。</li>
+  <li><strong>OpenAI 蒸馏事件细节：</strong>RSS 摘要给出主题和方向，但未包含完整攻击方法、规模、归因、误报率和开发者影响，需要阅读全文并等待后续技术说明。</li>
+  <li><strong>HydraFusion 实际收益：</strong>GitHub 描述了工作流机制和透明度改进，但真实质量/成本收益依赖任务类型、模型组合和管理员策略。</li>
+  <li><strong>SynthID Bio 鲁棒性：</strong>需要验证水印在蛋白序列变异、功能优化、实验噪声和下游工具处理后的保留程度。</li>
+  <li><strong>Open TTS Leaderboard 安全维度：</strong>需要确认是否覆盖冒充、同意、检测、水印和跨语言偏差，而不只是语音质量排名。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Simon Willison 的 Museum of the City of New York 参观笔记很有趣，但与本清单 AI agent、Codex、Claude、开源工具主线无直接关系。</li>
+  <li>Google AI 主 RSS 最新 Future Vision XPRIZE trailer 仍偏媒体/创意内容，本期只保留为低优先级背景。</li>
+  <li>GitHub Advanced Security trials 和 GHE.com TLS 变更对平台治理有用，但与今日 AI 主线相比优先级较低。</li>
+  <li>Interconnects 9 月 22 日播客已超出窗口，不重复计为今日新增。</li>
+  <li>explainx.ai sitemap 无窗口内新增，不强行填充。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign">OpenAI: Disrupting a coordinated model-distillation campaign</a></li>
+  <li><a href="https://openai.com/index/helping-small-businesses-put-ai-to-work">OpenAI: Helping small businesses put AI to work</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app">GitHub Changelog: HydraFusion in VS Code and the GitHub Copilot app</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-30-opt-in-dist-tag-permissions-for-npm-trusted-publishing">GitHub Changelog: npm trusted publishing dist-tag permissions</a></li>
+  <li><a href="https://github.blog/changelog/2026-09-30-github-advanced-security-trials-for-github-team">GitHub Changelog: GitHub Advanced Security trials for GitHub Team</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/rss/">Google DeepMind RSS</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synthid-bio/">Google DeepMind: SynthID Bio</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/open-tts-leaderboard">Hugging Face: Open TTS Leaderboard</a></li>
+  <li><a href="https://huggingface.co/blog/MultiverseComputingCAI/getting-the-source-right-not-just-the-fact-source">Hugging Face: Source-Aware Verification for MCP Agents</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Sep/30/he-built-this-city/">Simon Willison: He Built This City</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-09-30T00:00:00Z / 2026-10-01T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
