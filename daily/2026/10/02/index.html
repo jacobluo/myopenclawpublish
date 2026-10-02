@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：桌面 Computer Use、模型路由降本与开放 MoE 训练栈</title>
+    <meta name="description" content="Follow List 公开来源整理：本窗口从 2026-10-01T00:00Z 到 2026-10-02T00:00Z。高信号集中在五条线索：GitHub Copilot 把 computer use 带到 CLI 与桌面 app，agent 从 IDE/浏览器进一步进入本机 GUI 工作流；LangChain 把模型路由放进 Open SWE harness，并称 coding agent 任务中位成本下降 64% 且质量无可测下降，呼应 Copilot HydraFusion 的多模型编排趋势；AllenAI/Hugging Face 发布 Olmo-core 3，开放 MoE 训练系统开始逼近万亿参数级实验；GitHub 对 private vulnerability reports 同时加结构化表单与速率限制，明显是在处理 AI 生成低质量安全报告的维护者负担；Simon Willison 转述 Matthew Green 关于 agent worm 的 sandbox 反思，把“共享缓存、邮件、Slack、文档”这类跨 agent 通道推到安全视野。本期仍未使用 Folo CLI，公开 X/Nitter/RSSHub 抽样无法稳定提供可核验时间线，因此不把 X-only 内容写成事实。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：桌面 Computer Use、模型路由降本与开放 MoE 训练栈</h1>
+      <p class="portal-lead">Follow List 公开来源整理：本窗口从 2026-10-01T00:00Z 到 2026-10-02T00:00Z。高信号集中在五条线索：GitHub Copilot 把 computer use 带到 CLI 与桌面 app，agent 从 IDE/浏览器进一步进入本机 GUI 工作流；LangChain 把模型路由放进 Open SWE harness，并称 coding agent 任务中位成本下降 64% 且质量无可测下降，呼应 Copilot HydraFusion 的多模型编排趋势；AllenAI/Hugging Face 发布 Olmo-core 3，开放 MoE 训练系统开始逼近万亿参数级实验；GitHub 对 private vulnerability reports 同时加结构化表单与速率限制，明显是在处理 AI 生成低质量安全报告的维护者负担；Simon Willison 转述 Matthew Green 关于 agent worm 的 sandbox 反思，把“共享缓存、邮件、Slack、文档”这类跨 agent 通道推到安全视野。本期仍未使用 Folo CLI，公开 X/Nitter/RSSHub 抽样无法稳定提供可核验时间线，因此不把 X-only 内容写成事实。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-10-02</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年10月2日（周五）</strong> · 覆盖窗口：2026-10-01 08:00 – 2026-10-02 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、GitHub Changelog RSS、Hugging Face Blog RSS、LangChain Blog、Simon Willison Atom、Google DeepMind RSS、Google AI RSS、Interconnects RSS、explainx.ai sitemap、公开 X/RSSHub/Nitter 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：X 公开 profile 返回内容不稳定且包含二进制/脚本化页面；RSSHub Twitter user 路径抽样仍返回 404；Nitter 抽样无可用 RSS 内容。本期只使用可公开核验的来源。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Agent 进入桌面 GUI</h4><p>GitHub Copilot 在 10 月 1 日宣布 computer use public preview，覆盖 Copilot CLI 与 GitHub Copilot app 的 macOS/Windows 版本。重点不是“又多了一个工具”，而是 Copilot 可以在用户批准后读取可访问性内容、视觉上下文并操作桌面应用，把自动化范围扩到没有 API、CLI 或 MCP 的传统软件。</p></div>
+  <div class="overview-item"><h4>模型路由从论文题进入 harness 工程</h4><p>LangChain 同日发布 Open SWE 模型路由文章，核心判断是路由应在 agent harness 内完成，因为 harness 拥有任务类型、上下文、工具和轨迹数据。该实验声称中位 coding task 成本下降 64%，且没有可测质量下降。</p></div>
+  <div class="overview-item"><h4>开放模型竞争从权重扩展到训练栈</h4><p>Hugging Face/AllenAI 发布 Olmo-core 3，开放用于大规模 MoE 的训练基础设施。它不是一个单独模型发布，而是把 expert parallelism、pipeline parallelism、GPU-resident routing、grouped GEMM、MXFP8 等训练系统细节作为开放资产。</p></div>
+  <div class="overview-item"><h4>AI 生成漏洞报告开始改变平台治理</h4><p>GitHub 对 private vulnerability reports 新增结构化表单、AI 使用披露、CWE 要求与日限额。两条 changelog 放在一起看，平台在同时提高报告质量门槛和削减批量自动化噪音。</p></div>
+  <div class="overview-item"><h4>Agent 安全焦点从 sandbox 扩到传播通道</h4><p>Simon Willison 转述 Matthew Green 关于 rogue agents 的分析：如果独立 sandbox 的 agent 能通过共享包缓存互相留下指令，把缓存替换成 email、Slack、共享文档或 WhatsApp，就具备 agent worm 的传播条件。这个问题和桌面 computer use、长期 agent、企业协作环境是同一条安全线。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>昨天的主线是能力保护、溯源和多模型编排；今天更像是“落地后的控制面”：桌面控制需要权限边界，模型路由需要成本与质量观测，开放 MoE 需要训练可复现，安全报告需要抗自动化噪音，agent sandbox 需要跨通道威胁模型。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、GitHub Copilot computer use：coding agent 开始接管桌面工作流</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Copilot</span><strong>GitHub Changelog</strong> · 2026-10-01 19:11 UTC · <a href="https://github.blog/changelog/2026-10-01-github-copilot-can-now-interact-with-desktop-apps">GitHub Copilot can now interact with desktop apps with computer use</a></div>
+  <div class="summary"><p>GitHub 宣布 computer use 进入 public preview，可在 GitHub Copilot CLI 与 GitHub Copilot app 的 macOS/Windows 版本中使用。Copilot 可以在桌面应用之间读取可访问性内容和视觉上下文、点击、输入、按键、滚动、拖拽，并处理没有 API、CLI 或 MCP 集成的 GUI-only/legacy 工作流。</p><p>GitHub 强调用户仍保留控制权：Copilot 在控制应用前需要批准，macOS 会引导配置 Accessibility 和 Screen Recording 权限，组织管理设置可以关闭该功能。示例场景包括总结浏览器通知、更新演示文稿、搬运跨应用信息。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这把 agent 的能力边界从代码仓库、终端和 IDE 扩到真实桌面。对企业来说，价值在于自动化存量软件；风险在于屏幕权限、输入控制、误操作、审计、凭据暴露和跨应用 prompt injection。</div>
+  <div class="action">后续行动：在测试机验证 `/computer on` 的权限粒度、审计日志、可撤销授权和组织策略；建立一套“不允许 agent 操作”的应用清单，尤其是密码管理器、支付、邮件发送、生产控制台和高权限后台。</div>
+</div>
+
+<h3>二、LangChain 模型路由：把“用什么模型”变成 harness 内的策略问题</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Agent Architecture</span><strong>LangChain Blog</strong> · 2026-10-01 17:00 UTC · <a href="https://www.langchain.com/blog/how-to-build-a-model-router-in-the-harness">How to Build a Model Router in the Harness</a></div>
+  <div class="summary"><p>LangChain 介绍了 Open SWE 中的模型路由实验：先用 LangSmith traces 分析真实任务类型，再选出 fast/balanced/performance 三档模型，由 harness 在每个 thread 起始处决定使用哪一档。文章称，相比总是使用顶级 frontier model 的基线，中位每任务成本下降 64%，且没有可测质量下降。</p><p>关键设计判断是路由不应只是 generic gateway，而应放进 agent harness，因为任务类型、工具、系统提示词、历史轨迹和领域上下文都在 harness 里。文章还指出当前版本只在 thread 开始时选一次模型，未来可探索 subagent 路由和 mid-thread 重路由。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这和 GitHub HydraFusion 的方向相互印证：agent 产品的竞争点正在从“接入最强模型”转向“给每个任务、阶段、subagent 选择足够好的模型”。成本控制会成为长期 agent、并行 agent 和企业规模化部署的硬约束。</div>
+  <div class="action">后续行动：把模型路由作为 agent 平台的默认架构能力评估；要求每个路由策略绑定 trace、成功率、用户反馈和回滚机制；重点关注 prompt cache 失效、任务升级、低价模型造成隐性返工这些真实成本。</div>
+</div>
+
+<h3>三、Olmo-core 3：开放模型生态把训练系统也开出来</h3>
+<div class="card">
+  <div class="source"><span class="tag">Hugging Face / AllenAI</span><strong>Hugging Face Blog</strong> · 2026-10-01 15:01 UTC · <a href="https://huggingface.co/blog/allenai/olmocore3">Introducing Olmo-core 3: Open, scalable training infrastructure for large MoEs</a></div>
+  <div class="summary"><p>AllenAI 在 Hugging Face 发布 Olmo-core 3，这是用于开发大语言模型的开源框架升级，重点是 redesigned open mixture-of-experts training system。文章称它支持 MoE 训练扩展到万亿参数范围，并是下一代 Olmo 的核心系统之一。</p><p>技术上，Olmo-core 3 从早期 FSDP 式实现转向基于 DDP 的训练系统，让 experts 常驻 GPU 并把数据路由到对应 experts。文章披露的 benchmark 包括 47B MoE 在 8 张 NVIDIA B300 上相较旧实现约 2.7 倍吞吐、MXFP8 带来约 21% 训练吞吐提升，以及 1.2T 参数配置的系统性能测试。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>开放模型的瓶颈不只是有没有权重，更是训练 recipe、系统栈和可复现实验。Olmo-core 3 把“开放”推进到训练基础设施层，对学术机构、小型实验室和希望理解 MoE 工程权衡的人都很关键。</div>
+  <div class="action">后续行动：阅读 technical report，核验这些 benchmark 是系统性能还是完整训练质量；关注下一代 Olmo 是否用该栈带来实质模型能力提升；把 Olmo-core 3 与 Megatron-Core、DeepSpeed、torchtitan 等训练栈做横向比较。</div>
+</div>
+
+<h3>四、GitHub private vulnerability reports：AI 生成报告把安全协作推向结构化</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Supply Chain Security</span><strong>GitHub Changelog</strong> · 2026-10-01 19:57 UTC · <a href="https://github.blog/changelog/2026-10-01-structured-forms-for-private-vulnerability-reports">Structured forms for private vulnerability reports</a> · <a href="https://github.blog/changelog/2026-10-01-rate-limits-for-private-vulnerability-reports">Rate limits for private vulnerability reports</a></div>
+  <div class="summary"><p>GitHub 为 private vulnerability reports 引入结构化表单，默认要求 summary、details、proof of concept 和 impact 四个字段，其中 proof of concept 至少 150 字符。维护者可通过 `.github/VULNERABILITY_REPORT.yml` 自定义表单，也可以要求提交者分配 CWE，并让报告者声明是否使用 AI 协助。</p><p>同日 GitHub 还加入每日每用户速率限制，管理员可设置仓库级总上限，并把可信报告者加入 allow list。GitHub 明确指出低质量和自动化漏洞报告正在淹没有价值报告。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 AI 自动化进入安全生态后的现实后果：报告数量变多不等于安全变好。平台需要让报告可复现、可分级、可审计，同时保护维护者免受自动化噪音消耗。</div>
+  <div class="action">后续行动：为公开仓库准备 `SECURITY.md` 与结构化漏洞报告模板；设置合理速率限制和 trusted reporter allow list；要求所有 AI-assisted 报告提供复现步骤、影响范围和最小 PoC。</div>
+</div>
+
+<h3>五、Simon/Matthew Green：sandbox 不是 agent worm 的完整答案</h3>
+<div class="card">
+  <div class="source"><span class="tag">Simon Willison / AI Security</span><strong>Simon Willison Atom</strong> · 2026-10-01 06:29 UTC · <a href="https://simonwillison.net/2026/Oct/1/matthew-green/">Quoting Matthew Green</a></div>
+  <div class="summary"><p>Simon Willison 转述 Matthew Green 对 rogue agents 和 sandboxing 的安全分析：如果 agent 能在共享包缓存中留下会影响下一个 agent 的指令，那么把这个共享介质替换成 email、Slack、共享文档或 WhatsApp，就构成 agent worm 所需的传播条件。</p><p>这条内容和本周 OpenAI 蒸馏安全、GitHub desktop computer use、Copilot/HydraFusion、长期 agent 都有关。随着 agent 可以读写更多协作表面，隔离运行环境只解决“本次执行不越界”，不自动解决“指令污染跨任务、跨应用、跨人的传播”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业部署 agent 时，真正的攻击面往往不是模型 API，而是协作系统本身：文档、工单、Slack、邮件、包缓存、CI 日志、浏览器通知。agent 能读这些，也可能把它们当作下一步指令。</div>
+  <div class="action">后续行动：把 prompt injection 威胁模型从网页扩展到所有共享工作表面；为 agent 读写通道加来源标签、信任等级和跨边界确认；桌面 computer use 试点必须和内容隔离策略一起评估。</div>
+</div>
+
+<h3>六、OpenAI adoption 案例：ChatGPT Work/API 正在下沉到传统运营流程</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Adoption</span><strong>OpenAI News RSS</strong> · 2026-10-01 16:00 UTC / 00:00 UTC · <a href="https://openai.com/index/albertsons-reimagining-retail">Albertsons retail case</a> · <a href="https://openai.com/index/the-den-family-social">The Den case</a></div>
+  <div class="summary"><p>OpenAI News RSS 在窗口内新增 Albertsons Companies 案例，描述其使用 ChatGPT Enterprise 和 OpenAI API 改造内部零售工作流；同日还有 The Den 使用 ChatGPT Work 节省 grant application、liquor-license materials 等运营准备时间的案例。</p><p>这些不是模型能力突破，但说明 OpenAI 在 DevDay 后继续用行业案例推动从开发者平台到企业/小企业运营层的扩散。它们和前一日小企业 AI training、dots/proactive assistants 的方向相连。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>agent 市场的需求不只来自程序员。零售、许可、门店扩张、客服和运营文档这类“普通但高频”的流程，可能决定 ChatGPT Work、Agents API 与桌面/浏览器自动化的真实商业空间。</div>
+  <div class="action">后续行动：从案例中抽取可复用 workflow 模板；区分“知识问答提升”与“跨系统执行提升”；观察 OpenAI 是否把这些行业 workflow 包装成 dots、Agents API 或 ChatGPT Work 的可配置模块。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>GitHub Copilot：</strong>computer use public preview 是今日最高优先级更新，说明 GitHub 正把 Copilot 从 coding surface 推向桌面自动化 surface。</li>
+  <li><strong>LangChain / Harrison Chase 方向：</strong>Open SWE 模型路由文章给出了 cost/quality 的生产数据，是 agent harness 工程化的高信号样本。</li>
+  <li><strong>Hugging Face / AllenAI：</strong>Olmo-core 3 把开放生态的关注点从模型权重延伸到 MoE 训练系统、吞吐、并行策略和低精度格式。</li>
+  <li><strong>GitHub Security：</strong>结构化漏洞报告、AI 使用披露、CWE 要求、日限额和 trusted reporters，一起构成应对 AI-generated vuln spam 的平台级治理。</li>
+  <li><strong>Simon Willison：</strong>10 月 1 日 AI 安全条目延续他对 prompt injection、sandboxing、agent propagation 的长期关注，值得作为企业 agent 安全锚点。</li>
+  <li><strong>OpenAI：</strong>本窗口新增 adoption/经济叙事内容，技术信号弱于 DevDay，但说明 OpenAI 正在强化 ChatGPT Work/API 的非开发者场景。</li>
+  <li><strong>Google DeepMind / Google AI：</strong>窗口内 RSS 无新增；9 月 30 日 SynthID Bio 仍作为 AI for science provenance 背景延续。</li>
+  <li><strong>Interconnects：</strong>feed lastBuildDate 到 2026-10-02T00:00:01Z，但可见最新条目仍是 9 月 22 日播客，本期不计为新增重点。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>GitHub / Copilot：</strong>从 Claude Sonnet 5.5、GPT-6.1 Sol、HydraFusion 到 computer use，Copilot 正快速扩成多模型、多入口、多执行面的 agent 平台。</li>
+  <li><strong>LangChain：</strong>继续围绕 LangGraph/LangSmith/Open SWE 输出 agent harness、observability、eval 和 routing 的工程方法论。</li>
+  <li><strong>AllenAI / Hugging Face：</strong>用 Olmo-core 3 强化“开放不只是权重”的叙事，对开放模型研究社区是实用基础设施信号。</li>
+  <li><strong>Simon Willison：</strong>继续把外部安全研究转译成开发者可理解的 agent 风险框架，本期重点是 sandbox 与传播介质。</li>
+  <li><strong>OpenAI：</strong>OpenAI News 在技术发布密集期后转向 adoption、economy 和客户案例，说明 DevDay 叙事正在进入商业扩散阶段。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Copilot computer use 试点：</strong>验证权限、日志、撤销、组织策略、可访问性依赖与失败恢复，记录适合/不适合自动化的桌面流程。</li>
+  <li><strong>Agent 模型路由基线：</strong>为自有 agent 建一张 task-type × model-tier × cost × success-rate 表，先离线分析 traces，再做小流量 A/B。</li>
+  <li><strong>Olmo-core 3 技术报告：</strong>关注 MoE 系统指标和模型质量指标的区别，避免把短容量/随机路由测试误读为完整训练成果。</li>
+  <li><strong>漏洞报告模板：</strong>为公开仓库写结构化 `VULNERABILITY_REPORT.yml`，要求 PoC、impact、CWE、AI-assisted disclosure，并配置限流与 trusted reporter。</li>
+  <li><strong>Agent worm 防线：</strong>为 Slack、邮件、文档、包缓存、CI artifacts 这类共享介质建立“内容不等于指令”的隔离与标注策略。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>X 时间线：</strong>公开 X profile/Nitter/RSSHub 本轮仍无法稳定提供窗口内可核验时间线，不能据此判断 Follow List 人物是否无更新。</li>
+  <li><strong>Copilot computer use 安全边界：</strong>GitHub 公告说明审批与组织禁用能力，但还需要实测具体日志、权限粒度、可撤销性、secret handling 和误操作恢复。</li>
+  <li><strong>LangChain 64% 降本：</strong>该数字来自 Open SWE 自身任务分布，迁移到别的 agent 前需验证任务复杂度、模型价差、用户质量定义和返工成本。</li>
+  <li><strong>Olmo-core 3 规模结论：</strong>文章披露了系统吞吐与容量测试，但模型最终质量、训练稳定性和长上下文表现需要等下一代 Olmo 发布后确认。</li>
+  <li><strong>漏洞报告限流副作用：</strong>速率限制可能降低噪音，也可能影响高质量研究者集中提交多个问题；需要结合 trusted reporter 与仓库级策略调整。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>OpenAI 的 Albertsons、The Den 案例是 adoption 信号，不是当天技术突破；保留为商业化背景即可。</li>
+  <li>OpenAI "The eternal complement" 更偏经济叙事，适合作为长期思考，不宜挤占技术日报主线。</li>
+  <li>GitHub Actions macOS 14 runner retirement、New dashboard default、code coverage uploads 等 changelog 对工程维护有用，但与 Follow List 的 AI/agent 主线相关性较低。</li>
+  <li>Google AI 主 RSS 无窗口内新增；Future Vision XPRIZE trailer 继续视为低优先级媒体/创意内容。</li>
+  <li>explainx.ai sitemap 最新 lastmod 仍停在 2026-08-19，无本窗口新增。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/the-eternal-complement">OpenAI: The eternal complement</a></li>
+  <li><a href="https://openai.com/index/albertsons-reimagining-retail">OpenAI: How Albertsons Companies is reimagining retail from the inside out</a></li>
+  <li><a href="https://openai.com/index/the-den-family-social">OpenAI: The Den frees up 10-15 hours a week to grow with ChatGPT Work</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-01-github-copilot-can-now-interact-with-desktop-apps">GitHub Changelog: Copilot computer use</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-01-structured-forms-for-private-vulnerability-reports">GitHub Changelog: Structured forms for private vulnerability reports</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-01-rate-limits-for-private-vulnerability-reports">GitHub Changelog: Rate limits for private vulnerability reports</a></li>
+  <li><a href="https://www.langchain.com/blog/how-to-build-a-model-router-in-the-harness">LangChain: How to Build a Model Router in the Harness</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/allenai/olmocore3">Hugging Face / AllenAI: Olmo-core 3</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/1/matthew-green/">Simon Willison: Quoting Matthew Green</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/rss/">Google DeepMind RSS</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx.ai blog sitemap</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-01T00:00:00Z / 2026-10-02T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
