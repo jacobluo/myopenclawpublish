@@ -1,0 +1,143 @@
+---
+title: "Follow 深度日报：GPT-6 生产指南、代码审查 API 与科学/企业 Agent 数据飞轮"
+date: "2026-10-03"
+category: "daily"
+url: "/daily/2026/10/03/"
+summary: "Follow List 公开来源整理：本窗口从 2026-10-02T00:00Z 到 2026-10-03T00:00Z。高信号集中在五条线索：OpenAI 发布 GPT-6 family 生产指南，把模型选择、reasoning effort、prompts/skills、tools 和生产 workflow 放到同一套 startup 落地框架；GitHub Copilot code review 开放 REST/GraphQL API，并把 Balanced 设为默认 effort，代码审查 agent 开始进入企业自有脚本、CI 和内部平台；Hugging Face/Ai2 开源 AstaBrief 8B，把科学报告生成从闭源长推理模式推向可本地运行、可复现、带引用的专用模型；ServiceNow AutoSynthData 把企业 agent 的失败样本转成可验证合成训练任务，强化“真实环境 + verifier + curriculum”的数据飞轮；GitHub 安全与平台更新继续显示 agent 化后的工程控制面需求，包括模型弃用迁移、security advisory GraphQL 字段、confidential comments 和 stateless app tokens。本期未使用 Folo CLI；公开 X/RSSHub/Nitter 抽样仍无法稳定提供窗口内可核验时间线，因此不把 X-only 内容写成事实。"
+---
+<div class="meta">
+  <strong>2026年10月3日（周六）</strong> · 覆盖窗口：2026-10-02 08:00 – 2026-10-03 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、GitHub Changelog RSS、Hugging Face Blog RSS、LangChain Blog RSS、Simon Willison Atom、Google DeepMind RSS、Google AI RSS、Interconnects RSS、公开 X/RSSHub/Nitter 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：OpenAI 文章页对当前抓取环境返回 403，本期只使用 RSS 标题与摘要；X 公开 profile 可返回脚本化 HTML，但不稳定暴露可核验时间线；RSSHub Twitter user 路径返回 404；Nitter 连接失败。本期重点只采用公开可复查来源。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>OpenAI 从发布模型转向指导生产落地</h4><p>OpenAI News RSS 在 10 月 2 日新增 “A model guide for the GPT-6 family”，摘要指向 startup 如何选择 GPT-6 模型、调节 reasoning effort、改进 prompts 与 skills、协调工具，并把 workflow 推到生产环境。这不是单点能力发布，而是把 GPT-6 family 包装成可运营的产品工程方法。</p></div>
+  <div class="overview-item"><h4>代码审查 Agent 进入 API 化阶段</h4><p>GitHub Copilot code review 现在可通过 REST 和 GraphQL API 请求，并可为每次 review 设置 effort level；Balanced 也成为默认审查强度。Copilot review 从 UI 功能变成可嵌入企业 CI、内部工具和审查流程的自动化能力。</p></div>
+  <div class="overview-item"><h4>科学 Agent 开始追求本地、开源、带引用</h4><p>Ai2 在 Hugging Face 开源 AstaBrief 8B，用于把研究问题和检索到的文献片段生成带引用报告。重点是科学工作对 evidence grounding、结论边界和可验证输出的要求，不能只靠通用聊天模型临场发挥。</p></div>
+  <div class="overview-item"><h4>企业 Agent 训练数据走向失败驱动</h4><p>ServiceNow AutoSynthData 用目标模型失败与教师模型成功来生成新的企业任务，并用 verifier 检查可行性、真实性和完成情况。这把 agent 训练从“泛化数据越多越好”推进到“围绕目标环境的短板持续造题”。</p></div>
+  <div class="overview-item"><h4>GitHub 平台控制面继续补齐</h4><p>同一窗口内，GitHub 发布模型弃用、SecurityAdvisory GraphQL 字段、repository advisory comments API、confidential comments，以及 stateless GitHub App installation tokens。它们共同指向一个趋势：agent 化开发越深入，权限、审计、迁移、集成和安全元数据越要结构化。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>昨天的主线是桌面 computer use 与模型路由；今天更偏“可生产化的控制面”。模型指南告诉团队怎么选型，code review API 让 agent 进流程，AstaBrief/AutoSynthData 把专用模型和训练数据闭环做实，GitHub 安全 API 则让治理层能跟上自动化速度。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI GPT-6 family 指南：模型选型成为产品工程动作</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Model Ops</span><strong>OpenAI News RSS</strong> · 2026-10-02 16:15 UTC · <a href="https://openai.com/index/practical-guide-building-gpt-6">A model guide for the GPT-6 family</a></div>
+  <div class="summary"><p>OpenAI RSS 摘要显示，这篇指南面向 startups，主题是如何在 GPT-6 family 中选择模型、调整 reasoning effort、改进 prompts 与 skills、协调工具，并把工作流准备到生产环境。相比单纯宣布新模型，这类 guide 更接近开发者平台的产品手册：告诉团队如何在成本、延迟、能力和可靠性之间做组合。</p><p>由于文章页对当前抓取环境返回 403，本期不扩写页面正文，只使用 RSS 可见信息。结合过去几天的 GPT-6.1 Sol、DevDay recap、dots 和 Codex 案例，OpenAI 正在把模型发布转换成“模型家族 + 工具编排 + workflow 生产化”的叙事。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里的 OpenAI 产品方向、Codex、AI agent 和创业观点都绕不开这个问题：团队不再只是问“最强模型是谁”，而是要知道什么任务用什么模型、何时加 reasoning、何时转工具、何时把 skill 固化。</div>
+  <div class="action">后续行动：等页面可访问后复核完整建议；把 GPT-6 family guide 拆成一张 model-tier × reasoning-effort × workflow-stage 的实践表，并和 LangChain/GitHub 的模型路由线索对照。</div>
+</div>
+
+<h3>二、GitHub Copilot code review API：审查 Agent 从界面功能变成流程组件</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Copilot</span><strong>GitHub Changelog</strong> · 2026-10-02 19:13 UTC · <a href="https://github.blog/changelog/2026-10-02-copilot-code-review-api-support-and-new-default-effort-level">Copilot code review: API support and new default effort level</a></div>
+  <div class="summary"><p>GitHub 宣布 Copilot code review 支持 REST 和 GraphQL API 请求，并允许调用方为每次 review 设置 effort level。官方说明强调，这让团队可以把 Copilot code review 接入自有脚本、workflow 和内部工具，而不必只在 GitHub UI 或 IDE 中手动触发。</p><p>同一更新还把 Balanced 设为新旧仓库和组织的默认 review effort；如果此前明确选择 Lite，则保留该选择。这个变化说明 GitHub 正把 review agent 的默认质量门槛往中档能力移动，同时保留组织级配置入口。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>代码审查是 agent 最容易进入企业软件工程流程的位置之一。API 化后，团队可以把它放进 CI、release gate、内部开发门户和风险分级系统，真正形成“每次变更都有机器审查轨迹”。</div>
+  <div class="action">后续行动：评估在关键仓库中用 API 触发 Copilot review；设计规则区分哪些 PR 只需 Lite/Balanced，哪些需要人工专家或更高 effort；记录误报、漏报、返工时间和开发者接受率。</div>
+</div>
+
+<h3>三、AstaBrief 8B：科学报告生成需要专用模型和可验证引用</h3>
+<div class="card">
+  <div class="source"><span class="tag">Hugging Face / Ai2</span><strong>Hugging Face Blog</strong> · 2026-10-02 15:19 UTC · <a href="https://huggingface.co/blog/allenai/astabrief">Open-sourcing AstaBrief, the fast report-generation model in Asta</a></div>
+  <div class="summary"><p>Ai2 开源 AstaBrief 8B，用于把研究问题和检索到的文献片段生成带引用报告。文章强调科学报告的关键不是写得像报告，而是必须保持 evidence grounding、保留证据实际支持的边界，并让研究者能验证最终输出。</p><p>AstaBrief 从 Qwen3-8B 出发，围绕真实研究查询、引用过滤、偏好数据和重新设计的一次性报告生成 pipeline 做后训练。Ai2 称在 Asta 的 Fast mode 中，完整 pipeline 平均每份报告约 51.1 秒，而 Claude-powered Thinking mode 约 178.5 秒；开源权重也让机构能在本地基础设施上处理敏感或未发表研究问题。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这和 Follow List 里的科学 AI、开源模型、eval 和 agent workflow 主线高度相关。科学 agent 的护城河不会只在“会总结论文”，而在检索、引用、证据边界、可复现训练数据和本地部署。</div>
+  <div class="action">后续行动：查看 AstaBrief 模型与数据许可证；用一组已有研究问题测试 citation grounding 和结论越界；把它与通用 frontier model 的长报告输出做成本、速度、引用准确性对比。</div>
+</div>
+
+<h3>四、AutoSynthData：企业 Agent 的训练数据从失败样本里长出来</h3>
+<div class="card">
+  <div class="source"><span class="tag">Hugging Face / ServiceNow</span><strong>Hugging Face Blog</strong> · 2026-10-02 04:01 UTC · <a href="https://huggingface.co/blog/ServiceNow-AI/autosynthdata">AutoSynthData: Generating Training Data for Enterprise Agents</a></div>
+  <div class="summary"><p>ServiceNow CoreAI 介绍 AutoSynthData，用目标模型的失败和更强教师模型的成功来决定下一批训练任务。系统会生成并验证新的企业任务，让 curriculum 随模型能力变化而转向仍然困难的部分。</p><p>文章把企业 agent 环境拆成 state、tools/APIs、可执行动作与状态转移，并要求生成任务满足可行性、真实性和难度：任务必须能在环境中完成，像真实用户需求，而不是随意制造的困难；verifier 则需要和 user prompt、system spec、初始化状态保持一致。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent 的瓶颈常常不是模型“聪不聪明”，而是能否在本组织系统、权限、流程和数据状态下稳定完成任务。AutoSynthData 给出的是一套数据飞轮：失败归因、合成新题、验证可完成、再训练。</div>
+  <div class="action">后续行动：把自有 agent 的失败日志按工具误用、约束违反、状态理解错误、任务不可行等类型归档；优先建设 verifier，而不是只堆 prompt；评估是否能为内部流程生成可执行训练/评测任务。</div>
+</div>
+
+<h3>五、GitHub 安全与平台更新：Agent 化开发需要更强元数据和迁移纪律</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Platform / Security</span><strong>GitHub Changelog</strong> · 2026-10-02 13:15-22:18 UTC · <a href="https://github.blog/changelog/2026-10-02-new-fields-for-securityadvisory-graphql-api">SecurityAdvisory GraphQL fields</a> · <a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview">Repository security advisory comments API</a> · <a href="https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories">Confidential comments</a> · <a href="https://github.blog/changelog/2026-10-02-stateless-github-app-installation-tokens-rolled-out">Stateless GitHub App installation tokens</a></div>
+  <div class="summary"><p>GitHub SecurityAdvisory GraphQL API 新增 sourceCodeLocation、githubReviewedAt、nvdPublishedAt、repositoryAdvisoryUrl 等字段，并加入 severities、isWithdrawn 过滤器，方便集成方用一个 GraphQL 路径构建分级 triage、撤回审计和 NVD/GitHub 审核时延追踪。</p><p>同日，repository security advisory comments API 进入 public preview，并支持 confidential comments。GitHub App installation tokens 的 stateless 格式也完成 rollout，新 token 仍以 ghs_ 开头但长度约 520 字符，官方提醒所有系统必须把 token 当不透明字符串处理，避免固定长度校验、字段截断、代理拒绝长 Authorization header 或日志脱敏漏掉新格式。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>昨天 GitHub 刚为 private vulnerability reports 加结构化表单和限流；今天又补 advisory API 与 token 格式迁移。安全协作、自动审查和 app 自动化越多，平台就越依赖结构化元数据、权限边界和 token 处理纪律。</div>
+  <div class="action">后续行动：审计所有 GitHub App token 存储、日志脱敏、proxy/header 长度限制和 token 正则；把 SecurityAdvisory GraphQL 新字段纳入安全看板；试用 confidential comments 管理敏感修复讨论。</div>
+</div>
+
+<h3>六、GitHub Copilot 模型弃用：多模型产品必须把迁移当成常态</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub Copilot / Model Lifecycle</span><strong>GitHub Changelog</strong> · 2026-10-02 18:24 UTC · <a href="https://github.blog/changelog/2026-10-02-selected-models-in-github-copilot-deprecated">Selected models in GitHub Copilot deprecated</a></div>
+  <div class="summary"><p>GitHub 宣布部分模型在所有 Copilot 体验中弃用，覆盖 Copilot Chat、inline edits、ask/agent modes 和 code completions。公告要求用户更新 workflow 与 integrations，企业管理员可能需要在 Copilot settings 的 model policies 中启用替代模型。</p><p>这条更新本身不如 code review API 或 computer use 亮眼，但它提醒多模型 agent 平台的运维现实：模型不是永久基础设施，企业 workflow、prompt、评测和权限策略都需要可迁移。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>模型路由、多模型编排和企业策略越复杂，模型生命周期管理越重要。今天可用的模型明天可能因成本、质量、安全或商业关系被替换，真正稳健的是抽象层、评测集和回滚机制。</div>
+  <div class="action">后续行动：梳理所有依赖固定模型名的 Copilot/agent workflow；增加“模型弃用演练”；把模型选择放进配置和评测门禁，而不是硬编码在脚本里。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>GPT-6 family guide 是今日最高优先级 OpenAI 信号，说明模型家族的使用方法、reasoning effort、skills 与工具编排正在成为官方开发者教育重点。</li>
+  <li><strong>OpenAI Adoption：</strong>Chatham Financial 案例显示 Codex 和 GPT-5.6 被用于资本市场技术与 workflow 重设计，RSS 摘要称 trade validation 从 30 分钟降到 4 分钟以内；该条偏商业落地，但金融场景信号较强。</li>
+  <li><strong>GitHub Copilot：</strong>code review API 与默认 Balanced effort 让审查 agent 更容易接入企业自有流程。</li>
+  <li><strong>GitHub Platform：</strong>模型弃用提醒多模型 agent 产品必须建设迁移策略，尤其是企业 policy、workflow 与集成测试。</li>
+  <li><strong>Hugging Face / Ai2：</strong>AstaBrief 8B 把科学报告生成推向开源、本地部署和 citation-grounded 专用模型。</li>
+  <li><strong>Hugging Face / ServiceNow：</strong>AutoSynthData 给企业 agent 提供从失败到合成训练数据再到 verifier 的闭环框架。</li>
+  <li><strong>Google AI：</strong>9 月 AI 更新合集回顾 Gemini 4 Argon、Connected Apps、WeatherNext 3、Gemini app for Windows 等；它是月度汇总，不作为当天新发布主线。</li>
+  <li><strong>Simon / Interconnects：</strong>窗口内无新增高信号条目；Simon 最新仍是 10 月 1 日 Matthew Green agent worm/sandbox 条目，Interconnects 最新可见文章仍停在 9 月 22 日。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI：</strong>从 GPT-6.1 Sol 发布、DevDay、dots 到 GPT-6 family guide，叙事重点正在从“模型能力”转向“模型如何进入生产 workflow”。</li>
+  <li><strong>GitHub / Copilot：</strong>连续两天发布 computer use、code review API、模型弃用和安全协作更新，显示 Copilot 正同时扩展执行面和治理面。</li>
+  <li><strong>Ai2 / Hugging Face：</strong>AstaBrief 与前一日 Olmo-core 3 形成呼应：开放生态不只发布模型，还在开训练系统、专用数据和可复现实验流程。</li>
+  <li><strong>ServiceNow CoreAI：</strong>AutoSynthData 代表企业 agent 研究从 demo 转向环境建模、任务生成和 verifier 工程。</li>
+  <li><strong>Google / DeepMind：</strong>本窗口只有月度 AI roundup，技术增量弱于 SynthID Bio 和 WeatherNext 3 等前序发布，但仍体现 Google 把 Gemini、Workspace、Windows app 与科学项目打包传播。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>GPT-6 family 使用手册：</strong>页面可访问后提炼成内部模型选型指南，特别关注 reasoning effort、skills、tools、成本与生产准备。</li>
+  <li><strong>Copilot review API 试点：</strong>把 API 接到一个低风险仓库的 PR 流程，记录 review 覆盖率、开发者采纳率、误报和漏报。</li>
+  <li><strong>科学报告 Agent 评测：</strong>用 AstaBrief 跑本地论文报告测试，重点看 citation 是否支持结论、是否扩大研究范围、是否遗漏反证。</li>
+  <li><strong>企业 Agent 数据飞轮：</strong>从失败日志里抽任务类型，先建设 verifier，再决定是否生成合成训练数据。</li>
+  <li><strong>GitHub token 迁移审计：</strong>检查所有假设 token 长度为 40 字符的代码、数据库字段、secret scanner、日志脱敏规则和代理限制。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>OpenAI GPT-6 guide 正文：</strong>当前文章页返回 403，本期只使用 RSS 可见标题和摘要；需要稍后用可访问浏览器或官方页面复核完整内容。</li>
+  <li><strong>X 时间线：</strong>公开 X profile/RSSHub/Nitter 本轮仍无法稳定提供窗口内可核验时间线，不能据此判断 Follow List 人物是否无更新。</li>
+  <li><strong>AstaBrief 速度与质量：</strong>51.1 秒与 178.5 秒对比来自 Ai2 自身 Asta pipeline，需确认任务分布、硬件、引用准确率和与当前 frontier model 的差距。</li>
+  <li><strong>AutoSynthData 泛化：</strong>EnterpriseOps Gym 的结论迁移到其他企业环境前，需要验证工具集、状态复杂度、policy 约束和 verifier 编写成本。</li>
+  <li><strong>Copilot review API 成本：</strong>API 化会提升触发频率，需要结合 effort level、PR 风险分级和人工复核成本评估总 ROI。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Google AI 9 月 roundup 是有用背景，但多数内容已在 9 月逐条出现，不宜当作 10 月 2 日的新技术突破。</li>
+  <li>OpenAI Chatham 案例是金融行业采用信号，技术细节有限；适合作为 adoption 素材，不应挤占 agent 架构主线。</li>
+  <li>GitHub stateless token rollout 对平台工程很重要，但和 Follow List 的 AI/agent 主题间接相关，放在治理与安全控制面下跟踪即可。</li>
+  <li>LangChain model router RSS 在本窗口仍显示 10 月 2 日更新时间，但该主题已在 10 月 2 日日报重点覆盖，本期不重复展开。</li>
+  <li>Interconnects、Simon Willison、Google DeepMind 没有新的窗口内高信号条目，保留为低波动状态。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/practical-guide-building-gpt-6">OpenAI: A model guide for the GPT-6 family</a></li>
+  <li><a href="https://openai.com/index/chatham-financial">OpenAI: Chatham scales its capital markets expertise with OpenAI</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-02-copilot-code-review-api-support-and-new-default-effort-level">GitHub Changelog: Copilot code review API support</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-02-selected-models-in-github-copilot-deprecated">GitHub Changelog: Selected models in GitHub Copilot deprecated</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-02-stateless-github-app-installation-tokens-rolled-out">GitHub Changelog: Stateless GitHub App installation tokens</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-02-new-fields-for-securityadvisory-graphql-api">GitHub Changelog: SecurityAdvisory GraphQL fields</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview">GitHub Changelog: Repository security advisory comments API</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories">GitHub Changelog: Confidential comments on repository security advisories</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/allenai/astabrief">Hugging Face / Ai2: AstaBrief</a></li>
+  <li><a href="https://huggingface.co/blog/ServiceNow-AI/autosynthdata">Hugging Face / ServiceNow: AutoSynthData</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/">Google AI: September 2026 updates</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/rss/">Google DeepMind RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-02T00:00:00Z / 2026-10-03T00:00:00Z.</footer>
