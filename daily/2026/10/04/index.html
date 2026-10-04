@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：Stateful Agent 评测与硬预算护栏</title>
+    <meta name="description" content="Follow List 公开来源整理：本窗口从 2026-10-03T00:00Z 到 2026-10-04T00:00Z。高信号集中在两条线索：Microsoft 与 Hugging Face 发布 ThinkingBox，把企业 agent 评测从“工具调用是否成功”推进到“后端状态和副作用是否真的正确”；Simon Willison 提醒 coding/personal agents 会显著降低调用付费 API、部署服务和消耗云资源的摩擦，因此 pay-by-usage 服务需要默认硬预算上限。今天官方博客/RSS 新增较少，OpenAI、GitHub、Google、LangChain、Interconnects 等本窗口没有新的高优先级条目；公开 X/RSSHub/Nitter 抽样仍无法稳定提供窗口内可核验时间线。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：Stateful Agent 评测与硬预算护栏</h1>
+      <p class="portal-lead">Follow List 公开来源整理：本窗口从 2026-10-03T00:00Z 到 2026-10-04T00:00Z。高信号集中在两条线索：Microsoft 与 Hugging Face 发布 ThinkingBox，把企业 agent 评测从“工具调用是否成功”推进到“后端状态和副作用是否真的正确”；Simon Willison 提醒 coding/personal agents 会显著降低调用付费 API、部署服务和消耗云资源的摩擦，因此 pay-by-usage 服务需要默认硬预算上限。今天官方博客/RSS 新增较少，OpenAI、GitHub、Google、LangChain、Interconnects 等本窗口没有新的高优先级条目；公开 X/RSSHub/Nitter 抽样仍无法稳定提供窗口内可核验时间线。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-10-04</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年10月4日（周日）</strong> · 覆盖窗口：2026-10-03 08:00 – 2026-10-04 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Hugging Face Blog RSS 与文章页、Simon Willison Atom 与文章页、OpenAI News RSS、GitHub Changelog RSS、LangChain Blog RSS、Google AI/DeepMind RSS、Interconnects RSS、公开 X/RSSHub/Nitter 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：本窗口内 OpenAI、GitHub、Google、LangChain、Interconnects 未见新的高优先级条目；RSSHub Twitter user 路径返回 302/404 类结果，xcancel RSS 返回 451，Nitter 抽样未稳定返回可读 feed，因此不把 X-only 时间线写成事实。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>企业 Agent 评测必须看最终状态</h4><p>Microsoft 与 Hugging Face 发布 ThinkingBox，核心观点是 tool call 成功不等于任务完成。一个 agent 可以正确调用订单、物流、客户、工单和政策工具，却仍然把业务对象留在错误状态，或给用户一个没有解决问题的结论。</p></div>
+  <div class="overview-item"><h4>Stateful workflow 成为 eval 主战场</h4><p>ThinkingBox 用隔离的 MCP tool session 执行 507 个有状态业务 workflow，并用终端后端状态和副作用评分。它把评测焦点从“模型会不会选工具”推进到“数据库、工单、账户状态、补偿动作是否符合真实流程”。</p></div>
+  <div class="overview-item"><h4>Agent 成本风险需要默认硬闸</h4><p>Simon Willison 指出 coding agents 与 personal agents 会让人更容易生成和部署会花钱的代码。软提醒式预算不够，因为半夜的一封警告邮件可能来不及阻止数百到数千美元的额外消耗。</p></div>
+  <div class="overview-item"><h4>模型路由与预算控制正在会合</h4><p>过去几天 LangChain model router、GitHub Copilot effort level 和今天的硬预算提醒共同指向同一个问题：agent 平台需要把质量、成本、延迟和风险放到统一控制面，而不是只靠更强模型。</p></div>
+  <div class="overview-item"><h4>今天不是发布大日，但信号密度高</h4><p>本窗口内公开官方 feed 新增不多；OpenAI 与 GitHub 的 10 月 2 日内容已在昨天日报覆盖。今天值得保留的是两条基础设施级提醒：评测要落到真实状态，预算要能硬停止。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>Agent 从 demo 走向生产后，最危险的不是“看起来没做事”，而是“看起来做完了但系统状态错了”；最昂贵的也不是一次模型调用，而是低摩擦自动化把付费资源消耗放大。eval 和 budget cap 会成为 agent 平台的基本安全带。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、ThinkingBox：不要用工具调用成功来替代业务完成</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Evals / Enterprise Workflows</span><strong>Hugging Face Blog / Microsoft</strong> · 2026-10-03 22:56 UTC · <a href="https://huggingface.co/blog/microsoft/thinkingbox">The Agent Said It Was Done. The Database Disagreed.</a></div>
+  <div class="summary"><p>ThinkingBox 用一个客服场景说明问题：agent 连续完成多个看似正确的工具调用，能查订单、物流、用户资料、退款政策和工单状态，也能写入工单记录，但最终仍可能把工单错误地关闭为 resolved，或者没有真正回应用户的核心诉求。工具调用轨迹看起来很干净，后端状态却暴露任务没有完成。</p><p>这篇文章把评测目标从动作过程转向业务终局：ThinkingBox 在隔离的 MCP tool sessions 中运行 507 个有状态业务 workflow，每个 workflow 对多个 LLM agent 重复运行，并依据终端数据库状态、关键字段和副作用评分。重点不是让模型“讲清楚自己做了什么”，而是验证它是否把系统推进到应有状态。</p><p>它也给了一个很实用的评测分层：tool call validity 只能说明 agent 会不会调用工具；state transition 与 side effect 检查才更接近企业流程的真实可靠性。对客服、订单、财务、权限、合规等场景来说，错误状态比错误回答更危险，因为它会沉入系统记录并影响后续流程。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里的 eval、agent engineering、MCP、企业 workflow 和 AI product 线索都绕不开这个问题。多数 agent demo 仍停留在“调用了正确工具”或“输出看起来合理”，但生产系统需要证明数据库、工单、账户、审批和通知都落在正确状态。</div>
+  <div class="action">后续行动：把内部 agent 的评测从 transcript review 扩展到状态断言；每类 workflow 设计 pre-state、expected terminal state、允许副作用和禁止副作用；优先为高风险流程建设可复现 sandbox，而不是只追加 prompt 约束。</div>
+</div>
+
+<h3>二、默认硬预算上限：Agent 让“意外花钱”变得更容易</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Ops / Cost Control</span><strong>Simon Willison</strong> · 2026-10-03 23:34 UTC · <a href="https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/">We’re going to need default hard budget caps on pretty much everything</a></div>
+  <div class="summary"><p>Simon Willison 提醒，coding agents 和 personal agents 会显著降低生成代码、接入 API、部署服务和消耗云资源的摩擦。一段自动生成的服务如果连接了付费 API、托管平台、对象存储或云计算资源，软预算提醒往往不足以防止账单在无人值守时继续扩大。</p><p>他的主张是 pay-by-usage 服务应默认提供硬预算上限：到达阈值后直接停止服务或返回错误，而不是只发邮件提醒。对个人开发者、小团队和实验项目来说，宁愿服务报错，也比醒来发现多出一笔巨大账单更可接受。</p><p>这条提醒和前几天的模型路由、Copilot review effort、GitHub token 迁移都在同一条线上：agent 平台不只是要“能执行”，还要有明确的成本边界、权限边界和失败边界。随着 agent 自动生成和启动更多后台任务，预算 cap 将从财务功能变成安全功能。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI agent 正在把一次性提示变成持续运行的软件行为。没有硬预算、配额、超时、并发限制和资源隔离，agent 的小错误会被自动化放大成真实账单或生产事故。</div>
+  <div class="action">后续行动：检查所有 agent/coding workflow 使用的 OpenAI、云厂商、数据库、爬虫、邮件、向量库和托管平台是否有硬上限；默认开启月度/日度 budget cap；对自动部署和后台任务设置 TTL、最大并发、最大重试和人工审批阈值。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Hugging Face / Microsoft：</strong>ThinkingBox 是今日最高优先级更新。它把 agent eval 的关注点从动作日志推向终端业务状态，尤其适合客服、订单、退款、权限、财务和企业系统自动化。</li>
+  <li><strong>Simon Willison：</strong>硬预算上限提醒非常贴近 agent ops。随着 coding agent 更容易创建会持续计费的服务，预算控制应默认硬停止，而不是仅提醒。</li>
+  <li><strong>LangChain：</strong>10 月 2 日的 model router 文章虽不在今日窗口内，但和今天的预算控制形成连续主线：agent harness 需要基于任务复杂度选择模型，并把成本约束纳入运行时决策。</li>
+  <li><strong>OpenAI / GitHub：</strong>本窗口内 RSS 没有新增高优先级条目；10 月 2 日的 GPT-6 family guide、Copilot review API 和 GitHub 安全 API 更新已在 10 月 3 日日报展开。</li>
+  <li><strong>Google / DeepMind / Interconnects：</strong>本窗口内未见新的窗口内高优先级文章；Google 仍以 9 月 AI roundup 为最新可见项，Interconnects 最新可见项停在 9 月 22 日。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Microsoft + Hugging Face：</strong>双方把 MCP、enterprise workflow 和 benchmark 放在一起，说明 agent 评测正在向更真实的工具环境和状态空间推进。</li>
+  <li><strong>Simon Willison：</strong>继续从 practitioner 角度补齐 agent 时代的工程防线：前几天关注 prompt injection / agent worm，今天转向成本爆炸与默认防护。</li>
+  <li><strong>LangChain：</strong>model router 与 Open SWE harness 的方向和今天的预算议题高度一致，说明 agent framework 厂商开始把“省钱且不降质”作为核心工程能力。</li>
+  <li><strong>GitHub：</strong>虽然今天无新增高信号，但 Copilot review API、effort level、模型弃用和安全 advisory API 仍是本周 agent 控制面主线。</li>
+  <li><strong>OpenAI：</strong>今天未见新条目；GPT-6 family guide 仍是本周 OpenAI 产品化信号的核心，需要后续复核全文和实际模型路由建议。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Stateful agent eval 模板：</strong>为内部典型 workflow 定义初始状态、允许工具、期望终态、禁止副作用和评分脚本，先覆盖客服/工单/审批/发布流程。</li>
+  <li><strong>MCP sandbox 评测：</strong>用隔离数据库或 mock backend 复现 ThinkingBox 的思路，验证 agent 是否真的修改了正确字段，而不是只生成正确解释。</li>
+  <li><strong>Agent 预算护栏清单：</strong>列出所有会产生费用的 provider，逐一确认硬 cap、日限额、并发限制、告警延迟、失败时行为和责任人。</li>
+  <li><strong>模型路由与成本策略：</strong>把 LangChain model router 的 64% median cost reduction 思路转成内部实验：按任务类型、上下文规模、风险等级选择模型与 effort。</li>
+  <li><strong>失败复盘库：</strong>把 agent “看似完成但终态错误”的案例单独归档，区别于普通 hallucination；这些案例更适合训练 verifier 和状态断言。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>ThinkingBox benchmark 细节：</strong>需要进一步查看论文/仓库，确认 507 个 workflow 的行业覆盖、评分规则、工具复杂度、模型配置和可复现实验成本。</li>
+  <li><strong>一致性成本：</strong>文章提到多次运行与一致性问题，但本期未完整复核所有模型结果；后续应关注“更强模型是否更稳定”以及稳定性提升的成本。</li>
+  <li><strong>预算硬停止的产品实现：</strong>Simon 的主张很强，但不同云服务、SaaS 和 API provider 对硬 cap 的定义差异很大；需要逐项验证哪些是真硬停止，哪些只是提醒或延迟停用。</li>
+  <li><strong>X 时间线：</strong>公开 X/RSSHub/Nitter 本轮仍无法稳定提供窗口内可核验时间线，不能据此判断 Follow List 人物无更新；只能说明当前抓取路径不可用。</li>
+  <li><strong>OpenAI GPT-6 guide 正文：</strong>昨天抓取环境下文章页仍有访问限制；今天未作为新增条目重复展开，后续可用可访问浏览器复核完整内容。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Simon 的 sponsors-only newsletter 是窗口内新条目，但正文不可公开复核，不纳入日报重点。</li>
+  <li>Simon 的 Rex's Dino Store 属于个人/摄影类内容，和本 Follow List 的 AI/agent/engineering 主线无关。</li>
+  <li>Google 9 月 AI roundup 仍是最新可见 Google AI 条目之一，但它是月度汇总，且已在昨天作为低优先级背景处理。</li>
+  <li>OpenAI 与 GitHub 的 10 月 2 日内容依然重要，但已经落在上一期窗口内，今天只保留为连续背景，避免重复灌水。</li>
+  <li>公开 X 镜像不可用本身不构成内容信号，不应解读为相关账号沉默。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/microsoft/thinkingbox">Hugging Face / Microsoft: The Agent Said It Was Done. The Database Disagreed.</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/">Simon Willison: Default hard budget caps</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/how-to-build-a-model-router-in-the-harness">LangChain: How to Build a Model Router in the Harness</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://blog.google/technology/google-deepmind/rss/">Google DeepMind RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://rsshub.app/twitter/user/simonw">RSSHub Twitter user route sample</a></li>
+  <li><a href="https://xcancel.com/simonw/rss">xcancel RSS sample</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-03T00:00:00Z / 2026-10-04T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
