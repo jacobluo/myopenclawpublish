@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：文本水印、ChatGPT 广告与 Agent 云端沙箱</title>
+    <meta name="description" content="Follow List 公开来源整理：本窗口从 2026-10-05T00:00Z 到 2026-10-06T00:00Z。高信号集中在四条线索：OpenAI 为欧盟文本来源规则推出文本水印与受控检测访问，把 provenance 从图片/音频/视频推进到文本和 Codex 输出；OpenAI 同日公布 ChatGPT 广告视觉格式与测量体系，说明 AI 助理商业化正在从订阅/API 扩展到广告基础设施；GitHub secret scanning 新增 Lovable、Supabase、Pydantic 等检测器，低代码/AI 应用栈的密钥暴露面继续扩大；Simon Willison 转述 Anthropic Cowork 从本地 VM 转向云端隔离 VM 的说明，agent 产品正在重新权衡本地权限、续跑能力、电池负担和沙箱边界。公开 X/RSSHub/Nitter 抽样仍无法稳定提供窗口内可核验时间线，本期不使用 X-only 内容作事实依据。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：文本水印、ChatGPT 广告与 Agent 云端沙箱</h1>
+      <p class="portal-lead">Follow List 公开来源整理：本窗口从 2026-10-05T00:00Z 到 2026-10-06T00:00Z。高信号集中在四条线索：OpenAI 为欧盟文本来源规则推出文本水印与受控检测访问，把 provenance 从图片/音频/视频推进到文本和 Codex 输出；OpenAI 同日公布 ChatGPT 广告视觉格式与测量体系，说明 AI 助理商业化正在从订阅/API 扩展到广告基础设施；GitHub secret scanning 新增 Lovable、Supabase、Pydantic 等检测器，低代码/AI 应用栈的密钥暴露面继续扩大；Simon Willison 转述 Anthropic Cowork 从本地 VM 转向云端隔离 VM 的说明，agent 产品正在重新权衡本地权限、续跑能力、电池负担和沙箱边界。公开 X/RSSHub/Nitter 抽样仍无法稳定提供窗口内可核验时间线，本期不使用 X-only 内容作事实依据。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-10-06</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年10月6日（周二）</strong> · 覆盖窗口：2026-10-05 08:00 – 2026-10-06 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、GitHub Changelog RSS、Simon Willison Atom、Hugging Face Blog RSS、Google AI/DeepMind RSS、Interconnects RSS、LangChain Blog RSS、Lilian Weng RSS、explainx.ai sitemap、公开 X/RSSHub/Nitter 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：OpenAI 文章正文页对当前环境返回 403，本期依据其官方 RSS / 搜索可见摘要和原始链接转述；X 公共 profile、RSSHub Twitter user、Nitter/xcancel 抽样仍未提供可稳定引用的时间线。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>文本 provenance 进入执行阶段</h4><p>OpenAI 在 10 月 5 日发布欧盟文本来源规则方案，RSS 摘要显示其重点是 text watermarking、检测访问和研究者验证。继 SynthID Bio、内容 C2PA、图像/音频水印之后，文本输出也被纳入合规与可检测体系。</p></div>
+  <div class="overview-item"><h4>ChatGPT 广告产品化加速</h4><p>OpenAI 同日发布 ChatGPT Ads 视觉格式和测量更新。广告从“是否会出现”进入“怎么展示、怎么归因、怎么保证品牌安全”的阶段，AI 助理的商业模型开始影响产品界面和用户信任。</p></div>
+  <div class="overview-item"><h4>AI 应用栈密钥成为供应链重点</h4><p>GitHub secret scanning 新增 Lovable、Supabase、Pydantic Services 等检测器。随着 AI 原型、低代码应用和 agent 后端快速增多，凭据泄露从传统云密钥扩展到新一代 AI app stack。</p></div>
+  <div class="overview-item"><h4>Agent 沙箱从本地 VM 走向云端 VM</h4><p>Simon Willison 转述 Anthropic Felix Rieseberg 对 Cowork 架构变化的解释：旧方案在用户机器上运行 Anthropic VM，新方案把模型推理和 VM 都放到云端，每个 session 独立沙箱，需要本机文件时再通过桌面 app 工具调用授权。</p></div>
+  <div class="overview-item"><h4>X 仍是覆盖缺口</h4><p>Follow List 高优先级人物仍大量活跃在 X，但公开 X HTML、RSSHub Twitter route、Nitter/xcancel 抽样没有产出可核验窗口内时间线。本期不把 X-only 片段写成事实。</p></div>
+  <div class="overview-item"><h4>本期判断</h4><p>今天的主线是“控制面商业化”：谁能标记文本、谁能卖广告、谁能扫描密钥、谁来托管 agent 沙箱。能力本身仍重要，但治理、信任、计费和权限边界正在成为产品竞争的一部分。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI 文本水印：EU AI Act 把 provenance 推进到普通文本与 Codex 输出</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Provenance</span><strong>OpenAI News RSS</strong> · 2026-10-05 15:00 UTC · <a href="https://openai.com/index/eu-text-provenance">Our approach to EU text provenance rules</a></div>
+  <div class="summary"><p>OpenAI 发布欧盟文本来源规则方案，官方 RSS 摘要称其重点是 text watermarking：解释水印适用范围、检测方式，以及为什么检测访问先从研究者开始。公开搜索摘要还显示，OpenAI 正与云合作伙伴推进 OpenAI 模型输出的水印能力。</p><p>这条比一般合规公告更值得看，因为它把 provenance 从多媒体内容推进到文字生成和开发者工作流。文本水印一旦进入 ChatGPT、Codex 或 API 分发链，会影响学术写作、企业文档、代码注释、客服回复、RAG 摘要和代理生成报告的可检测性。</p><p>风险也同样明显：文本很容易被编辑、翻译、摘要或模型改写，检测结果的误报/漏报、适用边界和解释责任会很敏感。本期无法阅读全文，只依据官方 RSS 与可见摘要记录为待复核重点。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 关注 OpenAI、Codex、agent、AI safety 和产品化。文本水印是模型输出从“生成能力”转为“可监管对象”的关键一步，会影响开发者平台、企业合规和内容生态。</div>
+  <div class="action">后续行动：复核 OpenAI 正文和帮助中心，确认哪些产品/地区/模型受影响；跟踪 detector 是否只给研究机构、是否覆盖 API/Codex/cloud partner 输出；对比 Google SynthID、Anthropic 文本水印和开源模型生态的差异。</div>
+</div>
+
+<h3>二、ChatGPT 广告视觉格式：AI 助理开始建设广告测量与品牌安全体系</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Ads</span><strong>OpenAI News RSS</strong> · 2026-10-05 10:00 UTC · <a href="https://openai.com/index/new-chatgpt-ads-format-and-measurement">Building advertising for the way people use AI</a></div>
+  <div class="summary"><p>OpenAI 宣布新的 ChatGPT 广告视觉格式，并扩展 measurement、attribution partnership 和 brand suitability 工具。RSS 摘要将其定位为“for the way people use AI”的广告建设，而不是传统搜索广告的简单平移。</p><p>这说明 ChatGPT 商业化正在从 Plus/Team/Enterprise/API 之外扩展到广告基础设施。广告一旦进入对话和图像生成场景，核心难题不是插入一张图，而是如何界定上下文安全、用户意图、品牌适配、可归因转化和广告与模型回答的边界。</p><p>这条对产品方向很重要，但也需要谨慎观察。AI 助理最宝贵的是信任和低摩擦，广告如果和回答边界不清，会损害长期体验；如果边界清晰，则可能成为免费/低价能力扩展的资金来源。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OpenAI 从模型平台进入广告网络意味着 AI assistant 的经济模型会变化。它会影响 ChatGPT UI、企业品牌安全诉求、用户增长，以及 Google/Microsoft/Meta 在 AI search 与 paid media 上的竞争。</div>
+  <div class="action">后续行动：跟踪广告最先出现的场景、标识方式、竞价/计费模型、隐私数据边界和品牌安全合作方；评估广告是否会进入企业版或仅限消费版；关注用户对 AI 回答旁广告的信任反馈。</div>
+</div>
+
+<h3>三、GitHub secret scanning 扩展：Lovable、Supabase、Pydantic 等 AI 应用栈进入凭据扫描清单</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Supply Chain</span><strong>GitHub Changelog</strong> · 2026-10-05 22:42 UTC · <a href="https://github.blog/changelog/2026-10-05-secret-scanning-adds-detectors-for-lovable-supabase-and-more">Secret scanning adds detectors for Lovable, Supabase, and more</a></div>
+  <div class="summary"><p>GitHub 宣布 secret scanning 新增 Lovable Labs、Pydantic Services、Supabase 等 secret types，并说明新 partner 加入后，公共仓库中发现对应密钥时可转交发行方撤销或轮换。对私有/公共仓库中的 user secrets，则生成 secret scanning alerts。</p><p>这条看似普通安全更新，但放在 AI 工程上下文里很关键。Lovable、Supabase、Pydantic 这类工具常出现在快速原型、AI app、agent 后端、数据连接和内部工具中；越容易让非专业工程人员快速上线，越容易把 token、数据库 URL、API key 直接带进仓库。</p><p>GitHub 近期连续更新 trusted publishing、stateless app tokens、SecurityAdvisory GraphQL 和 secret scanning，说明 agent 化开发带来的供应链控制面正在变厚。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI coding agent 会显著提高代码生成、仓库创建和部署频率，也会放大凭据误提交的概率。secret scanning 覆盖新 AI 应用栈，是让 agent 参与开发和发布前必须补齐的基础安全层。</div>
+  <div class="action">后续行动：检查内部仓库是否启用 secret scanning 和 push protection；把 Supabase、Lovable、Pydantic、OpenAI、Anthropic、GitHub App 等 token 纳入凭据清单；对 agent 生成项目默认提供 .env.example 和禁止提交 .env 的模板。</div>
+</div>
+
+<h3>四、Anthropic Cowork 架构信号：云端 VM 解决续跑与电池问题，也改变本地权限边界</h3>
+<div class="card">
+  <div class="source"><span class="tag">Claude Cowork / Agent Runtime</span><strong>Simon Willison Atom</strong> · 2026-10-05 23:56 UTC · <a href="https://simonwillison.net/2026/Oct/5/felix-rieseberg/">Quoting Felix Rieseberg</a></div>
+  <div class="summary"><p>Simon Willison 收录 Felix Rieseberg 对 Anthropic Cowork 架构变化的解释：旧版 Cowork 在云端做模型推理，但工具调用在用户电脑上的 Anthropic VM 中执行；新版则把模型推理和 VM 都放在云端，每个 session 使用独立 sandbox，不共享状态。</p><p>这个变化解决了本地 VM 的磁盘、电池、性能和合盖停止工作问题，也让手机等设备继续使用 Cowork 更自然。但它同时把安全边界重新划分：当云端 VM 需要用户设备文件时，由桌面 app 负责对应文件访问工具调用，理论上更清楚地把“远端执行”和“本机授权”拆开。</p><p>这是二手来源，需等待 Anthropic 官方文档或产品页面复核。但它非常贴近 agent runtime 的长期取舍：本地执行更接近用户环境，云端执行更适合持续任务、跨设备和集中隔离。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Claude Cowork、Codex、OpenAI dots、GitHub Copilot CLI/desktop 都在争夺“长时间替你干活”的 agent 入口。运行位置决定权限模型、成本模型、续跑能力、审计方式和用户对文件访问的信任。</div>
+  <div class="action">后续行动：查 Anthropic Cowork 官方帮助页，确认云端 VM 的数据保留、网络访问、文件授权、session 隔离和企业管理策略；对比 Codex remote、GitHub Copilot coding agent、OpenAI dots 的 runtime 边界。</div>
+</div>
+
+<h3>五、OpenAI 同日双线更新：监管信任与广告变现会互相牵制</h3>
+<div class="card">
+  <div class="source"><span class="tag">Platform Strategy</span><strong>OpenAI News RSS</strong> · 2026-10-05 · <a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></div>
+  <div class="summary"><p>同一天发布“文本 provenance”和“ChatGPT 广告”不是偶然的孤立信号。前者回应监管、真实性和可检测性，后者建设商业变现、测量和品牌适配。对一个大规模 AI 助理来说，这两条线会越来越深地纠缠。</p><p>广告需要品牌安全，品牌安全需要上下文理解、内容分类和可审计策略；文本 provenance 需要水印、检测和解释边界。二者共同推动 OpenAI 建设一套覆盖生成、展示、检测、归因和合规的控制面。</p><p>这会把 OpenAI 从“模型公司”继续推向“AI 操作系统 + 分发平台 + 信任基础设施”。短期要看用户体验是否受损，长期要看广告收入是否反过来补贴更强模型和免费访问。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条归纳帮助理解 OpenAI 的产品路线：不是只发模型，而是在围绕模型输出建立可监管、可商业化、可审计的生态。对投资、创业和产品设计都有参考价值。</div>
+  <div class="action">后续行动：把 OpenAI 后续发布按四类归档：能力模型、agent/runtime、provenance/safety、ads/distribution；观察它们是否开始共享同一套用户/上下文/策略基础设施。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>10 月 5 日有两条窗口内高信号：EU text provenance 和 ChatGPT ads format / measurement。前者是合规与可检测，后者是商业化与品牌安全。</li>
+  <li><strong>GitHub：</strong>secret scanning 新增 Lovable、Supabase、Pydantic 等检测器，是今天最直接的 AI engineering / supply chain 安全更新。</li>
+  <li><strong>Simon Willison：</strong>窗口内最有价值条目是 Anthropic Cowork 云端 VM 架构解释；10 月 4 日 Qwen3.8 加法实验发布时间落在上一期窗口，今天不作为新增重点。</li>
+  <li><strong>Hugging Face / LangChain：</strong>本窗口未见新文章；ThinkingBox、AstaBrief、AutoSynthData、model router 仍是本周连续背景，但不重复包装。</li>
+  <li><strong>Google / DeepMind / Interconnects / Lilian Weng：</strong>本窗口未见新的高优先级 AI agent / open model / frontier lab 条目。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Sam Altman / Kevin Weil 产品线：</strong>文本水印与广告测量说明 OpenAI 同时推进合规信任和平台变现，产品控制面继续扩张。</li>
+  <li><strong>GitHub / Copilot / developer platform：</strong>secret scanning 与前几天 Copilot review API、stateless tokens、trusted publishing 共同构成 agent 化开发后的治理底座。</li>
+  <li><strong>Anthropic / Claude Cowork：</strong>通过 Simon 转述可见，Cowork 正在从本地 VM 负担转向云端隔离运行，强化跨设备与持续任务能力；仍需官方复核。</li>
+  <li><strong>AI engineering 观察者：</strong>Simon 继续把看似产品细节的 runtime/预算/沙箱问题抽成工程原则，是本周 agent ops 的稳定信号源。</li>
+  <li><strong>X 人物账号：</strong>Sam Altman、Kevin Weil、Karpathy、Alex Albert、Hamel、Nathan Lambert 等高优先级 X 账号本期未通过公开路径拿到可核验时间线；不写新增人物动态。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>文本水印复核表：</strong>记录 OpenAI、Anthropic、Google、Meta、开源模型对 text watermark 的适用范围、检测访问、鲁棒性和开发者影响。</li>
+  <li><strong>ChatGPT Ads 体验监控：</strong>跟踪广告出现的位置、标识样式、是否进入图像生成、是否影响回答、品牌安全规则和用户反馈。</li>
+  <li><strong>Agent 安全模板：</strong>把 GitHub secret scanning、push protection、.env 禁止提交、OIDC publishing、最小权限 token 写入 agent 项目脚手架。</li>
+  <li><strong>云端沙箱对比：</strong>比较 Cowork、Codex remote、Copilot agent、OpenAI dots 的文件授权、网络权限、持久化、日志审计、企业管控和成本边界。</li>
+  <li><strong>X 覆盖升级：</strong>继续寻找合法稳定路径；没有 A/B 级证据时，人物动态只列待验证，不进入正文事实。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>OpenAI EU text provenance 正文：</strong>当前环境请求文章页返回 403，本期只依据官方 RSS / 搜索可见摘要；需要用可访问浏览器或后续缓存复核完整适用范围。</li>
+  <li><strong>ChatGPT Ads 具体展示：</strong>RSS 摘要说明视觉格式与测量工具，但广告 UI、投放场景、计费方式和隐私边界仍需官方文档确认。</li>
+  <li><strong>Cowork 云端 VM：</strong>Simon 条目是转述 Felix Rieseberg 的说明，需要 Anthropic 官方 help page 或产品文档确认 sandbox 和文件访问细节。</li>
+  <li><strong>X 时间线：</strong>公开 X profile 仍主要返回应用壳页，RSSHub Twitter user route 返回 404，xcancel 返回 451，nitter.net 连接失败；不能据此判断账号无更新。</li>
+  <li><strong>RSS 延迟：</strong>部分来源可能延迟发布 feed，本期按 2026-10-06 08:00 CST 抓取时可见内容处理。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Simon 的 Qwen3.8 加法实验有技术趣味，但发布时间为 2026-10-04 23:34 UTC，属于上一期窗口，今天只作为背景不重复展开。</li>
+  <li>Google AI 9 月 roundup、DeepMind SynthID Bio、Interconnects 9 月文章仍有价值，但均非本窗口新增。</li>
+  <li>Hugging Face ThinkingBox、AstaBrief、AutoSynthData 已在前几期展开，本期只保留连续背景。</li>
+  <li>搜索引擎与社交讨论里的 OpenAI 水印/广告解读不作为事实源，正文以官方 RSS 与原始链接为准。</li>
+  <li>X 镜像不可访问本身不是产业信号，只是抓取能力缺口。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/eu-text-provenance">OpenAI: Our approach to EU text provenance rules</a></li>
+  <li><a href="https://openai.com/index/new-chatgpt-ads-format-and-measurement">OpenAI: Building advertising for the way people use AI</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-05-secret-scanning-adds-detectors-for-lovable-supabase-and-more">GitHub: Secret scanning adds detectors for Lovable, Supabase, and more</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/5/felix-rieseberg/">Simon Willison: Quoting Felix Rieseberg</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://blog.google/technology/google-deepmind/rss/">Google DeepMind RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://lilianweng.github.io/index.xml">Lilian Weng RSS</a></li>
+  <li><a href="https://rsshub.app/twitter/user/sama">RSSHub Twitter user sample</a></li>
+  <li><a href="https://xcancel.com/sama/rss">xcancel RSS sample</a></li>
+  <li><a href="https://nitter.net/sama/rss">Nitter RSS sample</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-05T00:00:00Z / 2026-10-06T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
