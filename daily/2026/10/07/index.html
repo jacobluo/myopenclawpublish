@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：企业知识 Agent、AI Scan 治理与开源多模态 Embedding</title>
+    <meta name="description" content="Follow List 公开来源整理：本窗口从 2026-10-06T00:00Z 到 2026-10-07T00:00Z。高信号集中在五条线索：OpenAI 连续发布 Atlassian、Jump Trading、Ironclad 与数学研究进展，说明企业知识、专业工作流和长时研究正成为 agent 落地重点；GitHub 把 AI Scan 覆盖状态纳入安全总览，并修复 Copilot agent 指标归因，开发组织开始把 agent 使用当作可治理对象；Google 发布 Apache 2.0 的 EmbeddingGemma 2，把文本、代码、图像、音频、视频统一到轻量本地 embedding；Nathan Lambert 讨论开放权重与网络风险的政策叙事，提醒不要把开源模型治理做成失去竞争力又无法降低风险的双输；Mistral Large 4 预览让欧洲大模型重新进入开源权重与高性价比竞争。本期公开 X/RSSHub/Nitter 抽样仍无法稳定提供窗口内可核验时间线，不使用 X-only 内容作事实依据。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：企业知识 Agent、AI Scan 治理与开源多模态 Embedding</h1>
+      <p class="portal-lead">Follow List 公开来源整理：本窗口从 2026-10-06T00:00Z 到 2026-10-07T00:00Z。高信号集中在五条线索：OpenAI 连续发布 Atlassian、Jump Trading、Ironclad 与数学研究进展，说明企业知识、专业工作流和长时研究正成为 agent 落地重点；GitHub 把 AI Scan 覆盖状态纳入安全总览，并修复 Copilot agent 指标归因，开发组织开始把 agent 使用当作可治理对象；Google 发布 Apache 2.0 的 EmbeddingGemma 2，把文本、代码、图像、音频、视频统一到轻量本地 embedding；Nathan Lambert 讨论开放权重与网络风险的政策叙事，提醒不要把开源模型治理做成失去竞争力又无法降低风险的双输；Mistral Large 4 预览让欧洲大模型重新进入开源权重与高性价比竞争。本期公开 X/RSSHub/Nitter 抽样仍无法稳定提供窗口内可核验时间线，不使用 X-only 内容作事实依据。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-10-07</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年10月7日（周三）</strong> · 覆盖窗口：2026-10-06 08:00 – 2026-10-07 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、GitHub Changelog RSS、Simon Willison Atom、Google DeepMind RSS、Interconnects RSS、Hugging Face Blog RSS、Latent Space RSS、LangChain / Google AI / Lilian Weng / Chip Huyen 等公开 RSS 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：OpenAI 正文页对当前环境仍返回 403，本期依据其官方 RSS 摘要与原始链接转述；X 公共 profile、RSSHub Twitter user、Nitter/xcancel 抽样仍未提供可稳定引用的时间线。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>OpenAI 把 agent 叙事推向企业知识与专业工作</h4><p>窗口内 OpenAI RSS 连发 Atlassian、Jump Trading、Ironclad 和数学进展四条更新。共同主线不是单次聊天能力，而是把模型接入知识库、合同流程、量化研究和形式化证明，让 AI 在长流程里做可复核的工作。</p></div>
+  <div class="overview-item"><h4>GitHub 开始治理 agent 使用本身</h4><p>GitHub 新增 AI Scan 覆盖视图，并修复 Copilot agent activity 指标归因。agent 代码产出和 PR 安全检查正在从“体验功能”进入企业看板、覆盖率、审计和度量体系。</p></div>
+  <div class="overview-item"><h4>本地多模态 embedding 成为开源基础件</h4><p>Google DeepMind 发布 EmbeddingGemma 2，Apache 2.0、740M 参数、文本/代码/图像/音频/视频统一 embedding，并强调本地向量库和隐私优先用例。它对 coding agent、本地 RAG、媒体检索和端侧应用都很实用。</p></div>
+  <div class="overview-item"><h4>开放权重政策讨论需要更细颗粒度</h4><p>Nathan Lambert 在 Interconnects 讨论网络风险话语，核心提醒是：如果只把开放权重当风险源，而不讨论禁令有效性、防御能力、国际竞争和中国模型发布现实，容易形成政策双输。</p></div>
+  <div class="overview-item"><h4>Mistral 重新回到模型竞争视野</h4><p>Simon Willison 转述 Mistral Large 4 预览：1T 总参数、49B active、API 先行，并承诺月底开源权重。若兑现，它会成为欧洲模型生态和开放权重阵营的重要信号。</p></div>
+  <div class="overview-item"><h4>X 仍是覆盖缺口</h4><p>Follow List 高优先级人物很多仍以 X 为第一发布渠道，但公开抓取路径今天仍失败。本期人物动态以博客/RSS/官方源为准，X-only 账号不作新增判断。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI 企业线四连发：从聊天入口走向企业知识、合同、量化和数学证明</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Enterprise Agents</span><strong>OpenAI News RSS</strong> · 2026-10-06 10:00–16:00 UTC · <a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></div>
+  <div class="summary"><p>OpenAI 在本窗口发布四条高相关更新：与 Atlassian 扩大合作，把企业知识连接到行动；展示 Jump Trading 用 ChatGPT 扩大量化研究，强调长时工作流、多数据源和人工复核；与 Ironclad 推进复杂合同工作流的 computer use 训练与评估；同时公布数学开放问题的新结果、Lean proof formalizations 和 GitHub 研究材料。</p><p>这四条放在一起看，OpenAI 正在把“模型能回答问题”升级成“模型能在专业系统里执行工作”。Atlassian 代表知识和任务系统，Ironclad 代表合同与合规流程，Jump Trading 代表高价值研究工作，数学证明则代表可验证推理和形式化产物。</p><p>当前限制是 OpenAI 正文页对本环境返回 403，本期只依据官方 RSS 摘要和原始链接转述。即便如此，发布节奏本身已经清楚：OpenAI 在 DevDay 后继续强化 enterprise agent、computer use、long-running workflow 和 verifiable research 四条产品线。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 重点关注 OpenAI、Codex、agent 与 AI product direction。企业知识和专业工作流是 agent 从 demo 走向付费场景的关键，也是未来平台生态、权限模型、审计和数据连接的主战场。</div>
+  <div class="action">后续行动：复核四篇 OpenAI 正文，分别记录集成对象、权限边界、是否开放 API/connector、是否有评估集或 GitHub 材料；把 Atlassian、Ironclad、Jump Trading 案例归入“enterprise agent 落地样本库”。</div>
+</div>
+
+<h3>二、GitHub AI Scan 与 Copilot 指标：agent 开发进入可度量、可审计阶段</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Agent Governance</span><strong>GitHub Changelog</strong> · 2026-10-06 10:23 / 23:43 UTC · <a href="https://github.blog/changelog/2026-10-06-code-scanning-ai-scan-enablement-status-in-security-overview">AI Scan enablement status</a> · <a href="https://github.blog/changelog/2026-10-06-update-your-ide-to-restore-agent-activity-in-copilot-usage-metrics">Copilot agent metrics</a></div>
+  <div class="summary"><p>GitHub 在安全总览里加入 Code Scanning AI Scan for pull requests 的启用状态，组织和企业管理员可以看到仓库级覆盖情况，并用筛选条件区分 enabled / not-enabled。CSV 导出也新增对应列，方便把 AI Scan 纳入安全采用率追踪。</p><p>同日，GitHub 说明部分 IDE 把 Copilot agent sessions 迁移到 Copilot SDK 后，agent activity 和 agent lines of code 出现归因缺口，有些活动被漏报，有些被算到 Copilot CLI。VS Code 修复已可用，其他 IDE 预计到 2026 年 11 月完成；历史缺口不能回填，账单不受影响。</p><p>这两条合在一起很有意思：一条是“AI 生成代码如何被安全扫描覆盖”，另一条是“agent 生成了多少代码如何被准确度量”。企业采用 coding agent 后，最先要补的不是更炫的 UI，而是覆盖率、遥测、审计、责任边界和管理面。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI coding agent 的价值最终会被管理者追问：用了多少、改了什么、有没有安全扫描、能不能审计。GitHub 正在把 agent 从开发者个人体验推进组织级治理。</div>
+  <div class="action">后续行动：检查自有仓库是否启用 AI Scan、secret scanning 和 push protection；如果依赖 Copilot metrics 做管理报表，记录 IDE 版本要求和 2026 年 11 月前的指标缺口；把 agent activity 的口径写入内部统计说明。</div>
+</div>
+
+<h3>三、EmbeddingGemma 2：端侧多模态 embedding 变成 Apache 2.0 基础设施</h3>
+<div class="card">
+  <div class="source"><span class="tag">Google DeepMind / Open Models</span><strong>Google DeepMind RSS</strong> · 2026-10-06 16:00 UTC · <a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/">EmbeddingGemma 2</a></div>
+  <div class="summary"><p>Google 发布 EmbeddingGemma 2，定位为开放、轻量、本地运行的多模态 embedding 模型。公开页面显示它基于 Gemma 4 架构，740M 参数，Apache 2.0 许可证，能把文本、代码、图像、视频和音频映射到统一 embedding 空间。</p><p>技术上最值得记的是三点：第一，它支持模块化配置，文本工作负载可用更小参数量，按需增加视觉和音频编码器；第二，通过 Matryoshka Representation Learning 可把向量从 768 维截断到 512、256 或 128，降低本地向量库成本；第三，8K 上下文能处理更长音频、图片和视频帧组合。</p><p>这对 agent 工程很直接。coding agent 需要本地代码库语义检索，多模态个人知识库需要图片/录音/视频检索，企业又常常希望敏感素材不离开设备。EmbeddingGemma 2 把这些场景的基础部件进一步开源化、端侧化。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 同时关注 open models、AI engineering 和 agent 工具。Embedding 不像聊天模型那样吸睛，但它决定 RAG、代码搜索、记忆系统、媒体检索和本地隐私应用的底层质量。</div>
+  <div class="action">后续行动：测试 EmbeddingGemma 2 在代码库检索、中文/英文混合文档、截图/录音检索上的表现；对比 Gemini Embedding、Qwen/BAAI embedding、Jina、Voyage、OpenAI embedding 的成本、许可证、端侧可行性。</div>
+</div>
+
+<h3>四、开放权重与网络风险：Nathan Lambert 反对单线条风险叙事</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Weights / Policy</span><strong>Interconnects</strong> · 2026-10-06 14:22 UTC · <a href="https://www.interconnects.ai/p/the-cyber-risk-discourse-is-broken">The Cyber Risk Discourse is Broken</a></div>
+  <div class="summary"><p>Nathan Lambert 讨论开放权重模型与网络风险的政策叙事。他认为当前讨论容易落入两种简单化：一边假设限制开放模型能单独阻止坏人，另一边又忽略中国公司持续发布强能力开放模型的现实和不同风险评估逻辑。</p><p>文章的重点不是否认风险，而是要求把 trade-off 讲完整：禁开放模型是否真的能减少攻击者能力？会不会削弱美国和西方生态的防御、研究和产业竞争？如果其他国家继续发布开放模型，单边限制是否只会降低本方能力？</p><p>这条对开源模型政策很重要，因为它把争论从“开放好/开放坏”拉回“具体风险、具体能力、具体政策后果”。对 Hugging Face、Mistral、Gemma、Qwen 等开放生态而言，网络风险会持续成为监管焦点。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>开放权重是 AI 产业链、创业和研究生态的关键变量。政策如果过粗，会影响模型可得性、创业成本、安全研究和国家竞争。</div>
+  <div class="action">后续行动：跟踪 Anthropic GLM-5.3 cyber risk 报告、Hugging Face/Google/Mistral 的回应，以及美国政策层对 open weights 的新提案；把“能力阈值、模型发布形式、滥用证据、防御收益”作为分析框架。</div>
+</div>
+
+<h3>五、Mistral Large 4：欧洲模型厂商回到大模型竞争牌桌</h3>
+<div class="card">
+  <div class="source"><span class="tag">Mistral / Open Weights</span><strong>Simon Willison Atom</strong> · 2026-10-06 20:18 UTC · <a href="https://simonwillison.net/2026/Oct/6/le-chonk/">Introducing Mistral Large 4: Le chonk</a></div>
+  <div class="summary"><p>Simon Willison 转述 Mistral Large 4 预览：模型规模为 1T 总参数、49B active，先通过 Mistral API 提供，Mistral 承诺月底发布开放权重版本。Simon 的判断是它让 Mistral 重新回到竞争视野，虽然不是最前沿，但相比上一代进步明显。</p><p>这条的行业意义在于“开放权重承诺 + 欧洲独立算力叙事 + 大参数 MoE”。如果月底开放权重兑现，Mistral 会继续在企业私有部署、欧洲主权 AI、开源生态和高性价比推理市场里占位置。</p><p>需要注意：当前信息来自 Mistral 发布与 Simon 转述，模型真实能力、许可证细节、量化可部署性、上下文长度、工具调用表现和中文能力仍要等权重、model card、第三方评测和实际测试。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 关注开源模型、AI agent 与欧洲/美国/中国模型生态竞争。Mistral 若继续开放大模型权重，会影响企业自托管、开源 agent stack 和模型供应链选择。</div>
+  <div class="action">后续行动：月底检查权重是否如期发布；比较 Artificial Analysis、LMSYS/Chatbot Arena、代码/工具调用/长上下文评测；测试它在本地 RAG、函数调用和代码修复任务中的实际性价比。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI：</strong>Atlassian、Jump Trading、Ironclad、数学研究四条窗口内更新共同指向 enterprise agent、computer use、长时研究和可验证推理。</li>
+  <li><strong>GitHub：</strong>AI Scan 覆盖状态进入 security overview；Copilot agent metrics 因 IDE SDK 归因问题出现不可回填缺口，需要更新 IDE 才能恢复统计。</li>
+  <li><strong>Google DeepMind：</strong>EmbeddingGemma 2 发布，Apache 2.0、多模态、端侧、本地向量库友好，是今天最值得工程跟进的开源基础件。</li>
+  <li><strong>Interconnects / Nathan Lambert：</strong>开放权重网络风险文章提供政策分析框架，尤其适合跟踪开源模型监管。</li>
+  <li><strong>Simon Willison：</strong>窗口内多条技术记录中，Mistral Large 4 和 EmbeddingGemma 2 评论最相关；其他如 Datasette / OpenTelemetry、llm-mistral 0.16 属工具链背景。</li>
+  <li><strong>Hugging Face：</strong>Falcon-Emirati-7B 展示方言/文化适配模型路线，对阿拉伯语和区域模型生态有意义，但与今天 agent 主线相关性较低。</li>
+  <li><strong>Latent Space：</strong>AINews 提到 Reflection Beam 501B-A23B 美国开源模型，是开放模型生态背景信号；本期不作为重点展开。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Kevin Weil / Sam Altman 产品线：</strong>企业知识、合同 computer use、量化研究和数学证明同日出现，说明 OpenAI 把 agent 落地从 DevDay 叙事继续推向行业案例。</li>
+  <li><strong>GitHub / Copilot：</strong>GitHub 现在同时处理 agent 代码安全扫描覆盖和 agent 使用指标归因，组织级 AI coding 管理面正在变厚。</li>
+  <li><strong>Google DeepMind / Gemma：</strong>EmbeddingGemma 2 把 Gemma 生态从生成模型延伸到本地多模态检索基础设施。</li>
+  <li><strong>Nathan Lambert：</strong>继续围绕开放权重、政策和模型生态做高信号分析，是跟踪 open models 与监管的重要来源。</li>
+  <li><strong>Simon Willison：</strong>继续承担“把模型发布转成工程判断”的角色，本期对 Mistral Large 4 和 EmbeddingGemma 2 都给了可操作观察角度。</li>
+  <li><strong>X 人物账号：</strong>Sam Altman、Kevin Weil、Karpathy、Alex Albert、Hamel、Nathan Lambert 等高优先级 X 账号本期未通过公开路径拿到可核验时间线；不写新增 X 动态。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Enterprise Agent 案例库：</strong>把 Atlassian、Ironclad、Jump Trading、数学证明项目拆成行业、工作流、数据连接、人工复核、评估方式、商业模式六列。</li>
+  <li><strong>AI Coding 治理清单：</strong>将 AI Scan、secret scanning、push protection、Copilot metrics、IDE 版本和遥测口径纳入组织级 agent 管理模板。</li>
+  <li><strong>EmbeddingGemma 2 本地测试：</strong>用一个真实代码库、一个图片/截图集、一个音频转写集测试统一 embedding 的召回质量与资源占用。</li>
+  <li><strong>开放权重政策雷达：</strong>跟踪 Anthropic、OpenAI、Google、Mistral、Hugging Face、美国政策圈和中国模型发布之间的 cyber risk 论证差异。</li>
+  <li><strong>Mistral Large 4 权重发布监控：</strong>月底复核开放权重、许可证、量化版本、上下文、工具调用和第三方评测。</li>
+  <li><strong>X 覆盖升级：</strong>继续寻找合法稳定的 X 时间线来源；没有 A/B 级证据时，只列待验证，不进入正文事实。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>OpenAI 四篇正文：</strong>当前环境请求 OpenAI article page 返回 403，本期依据官方 RSS 摘要转述；需要后续用可访问浏览器或缓存复核完整内容。</li>
+  <li><strong>Atlassian 集成深度：</strong>需确认是 ChatGPT connector、Atlassian Rovo / Jira / Confluence 深集成，还是更广泛的企业知识行动层合作。</li>
+  <li><strong>Jump Trading 案例：</strong>需确认长时工作流的具体工具、数据边界、人工复核机制和是否涉及实时交易决策。</li>
+  <li><strong>Ironclad computer use：</strong>需确认训练/评估数据、合同流程范围、权限边界和是否有可公开 benchmark。</li>
+  <li><strong>Mistral Large 4 权重：</strong>月底是否如期开放、许可证是否商业友好、是否支持高质量工具调用仍待确认。</li>
+  <li><strong>X 时间线：</strong>公开 X profile 仍主要返回应用壳页，RSSHub Twitter user route 返回 404，xcancel 返回 451，nitter.net 连接失败；不能据此判断账号无更新。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub stacked pull requests GA 对开发流程很有用，但与 AI/agent 主题的直接关系弱于 AI Scan 和 Copilot metrics，本期只列入背景。</li>
+  <li>Simon 的 llm-mistral 0.16、Datasette/OpenTelemetry、Scrimshaw Jukebox 等条目有工具趣味，但不是今天的主线。</li>
+  <li>Falcon-Emirati-7B 对区域语言模型很有价值，但不是 Follow List 高优先级主题；后续可放入“区域/小语种模型”专题。</li>
+  <li>Latent Space AINews 汇总可作为发现源，但正文事实仍尽量回到原始模型发布或官方材料。</li>
+  <li>搜索引擎与社交讨论不作为事实源；OpenAI 条目在正文不可访问前，统一标注为基于官方 RSS 摘要的待复核内容。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/atlassian-partnership">OpenAI: Atlassian and OpenAI expand partnership to turn enterprise knowledge into action</a></li>
+  <li><a href="https://openai.com/index/jump-trading">OpenAI: How Jump Trading is scaling quant research with ChatGPT</a></li>
+  <li><a href="https://openai.com/index/sharing-ai-progress-in-mathematics">OpenAI: Sharing AI progress in mathematics</a></li>
+  <li><a href="https://openai.com/index/advancing-computer-use-with-ironclad">OpenAI: Advancing computer use with Ironclad</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-06-code-scanning-ai-scan-enablement-status-in-security-overview">GitHub: Code scanning AI Scan enablement status in security overview</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-06-update-your-ide-to-restore-agent-activity-in-copilot-usage-metrics">GitHub: Update your IDE to restore agent activity in Copilot usage metrics</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-06-stacked-pull-requests-generally-available">GitHub: Stacked pull requests generally available</a></li>
+  <li><a href="https://blog.google/technology/google-deepmind/rss/">Google DeepMind RSS</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/">Google: EmbeddingGemma 2</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://www.interconnects.ai/p/the-cyber-risk-discourse-is-broken">Interconnects: The Cyber Risk Discourse is Broken</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/6/le-chonk/">Simon Willison: Introducing Mistral Large 4: Le chonk</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/6/hn-49983751/">Simon Willison: EmbeddingGemma 2 comment</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/tiiuae/falcon-emirati">Hugging Face: Falcon-Emirati</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://www.latent.space/p/ainews-reflection-beam-501b-a23b">Latent Space: AINews Reflection Beam</a></li>
+  <li><a href="https://rsshub.app/twitter/user/sama">RSSHub Twitter user sample</a></li>
+  <li><a href="https://xcancel.com/sama/rss">xcancel RSS sample</a></li>
+  <li><a href="https://nitter.net/sama/rss">Nitter RSS sample</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-06T00:00:00Z / 2026-10-07T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
