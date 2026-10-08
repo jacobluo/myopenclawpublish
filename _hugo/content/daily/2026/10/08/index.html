@@ -1,0 +1,153 @@
+---
+title: "Follow 深度日报：Copilot 安全边界、Deep Agents 技能化与端侧决策模型"
+date: "2026-10-08"
+category: "daily"
+url: "/daily/2026/10/08/"
+summary: "Follow List 公开来源整理：本窗口从 2026-10-07T00:00Z 到 2026-10-08T00:00Z。高信号集中在六条线索：GitHub Copilot 同日加入 Claude Haiku 5.5、本地沙箱、本地模型发现和 AI secret detection，说明 coding agent 正进入成本、权限、离线模型与安全治理同步收敛阶段；LangChain Deep Agents 更新 skills 绑定工具、运行时 pin/reload、agent-created schedules 与 Slack reactions，把 agent 从一次性任务推进到可长期运行的工作伙伴；OpenAI 发布 GPT-6 Intelligent UI、ChatGPT 酒店插件和青少年学习规划，继续把模型能力包装成可交互界面、垂直交易入口和教育场景；Google 扩大 SynthID Detector，AI 内容识别从内部/合作伙伴工具走向公共验证平台；Hugging Face 新增 Liquid AI open d1 端侧多模态决策模型和 NVIDIA Nemotron IOI/IMO 微调案例，开源模型继续向边缘决策与专业推理分化；Stacklok 试图把 agent harness 云原生化，呼应本周 agent 运行环境从桌面走向云端控制面的趋势。本期公开 X/RSSHub/Nitter 抽样仍无法稳定提供窗口内可核验时间线，不使用 X-only 内容作事实依据。"
+---
+<div class="meta">
+  <strong>2026年10月8日（周四）</strong> · 覆盖窗口：2026-10-07 08:00 – 2026-10-08 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、GitHub Changelog RSS、Simon Willison Atom、Google DeepMind RSS、Hugging Face Blog RSS、Latent Space RSS、LangChain Blog RSS、Interconnects / Chip Huyen / Eugene Yan / Lilian Weng 等公开 RSS 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：OpenAI 正文页对当前环境仍返回 403，本期依据其官方 RSS 摘要和原始链接转述；X 公共 profile 仍只返回应用壳页，RSSHub Twitter user route 返回 404，nitter.net 连接失败，xcancel 返回 451。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Copilot 从“会写代码”转向“可管、可隔离、可选模型”</h4><p>GitHub 同日发布 Claude Haiku 5.5 in Copilot、本地沙箱 GA、本地 Ollama 模型发现和 AI secret detection。组合起来看，coding agent 的竞争点正在从单一模型能力扩展到成本、权限、离线模型、安全扫描和企业策略。</p></div>
+  <div class="overview-item"><h4>Deep Agents 把 skill 变成生产级组织方式</h4><p>LangChain 更新 Deep Agents skills：工具可绑定到 skill、skill 可运行时 pin、长线程可 reload；Managed Deep Agents v0.9 让 agent 自己创建日程、按 run 切换模型/skill/tool，并在 Slack 里用 reaction 先确认消息。</p></div>
+  <div class="overview-item"><h4>OpenAI 把 GPT-6 包进 UI、交易入口和教育场景</h4><p>OpenAI RSS 显示 GPT-6 Intelligent UI 面向全球 ChatGPT 推出，同时发布 Radisson 酒店发现/预订插件和青少年学习规划功能。主线是把大模型能力变成可操作界面、垂直商业入口和低龄用户学习工具。</p></div>
+  <div class="overview-item"><h4>AI 内容识别走向公共基础设施</h4><p>Google 扩大 SynthID Detector，称全球英文可用，可检查 Google AI 及合作伙伴生成的图片、视频和音频。内容溯源不再只是平台内部风控，而是在向公众、媒体和企业工作流开放。</p></div>
+  <div class="overview-item"><h4>开源模型向“端侧决策”和“竞赛级推理微调”分化</h4><p>Liquid AI 在 Hugging Face 发布 open d1 系列，强调边缘设备上的多模态决策；NVIDIA 展示 Nemotron 通过专门微调在 IOI 和 IMO 场景取得金牌级结果。开源模型不是只拼聊天，而是在向专门任务和部署形态拆分。</p></div>
+  <div class="overview-item"><h4>X 仍是主要覆盖缺口</h4><p>Follow List 高优先级人物很多仍以 X 为第一发布渠道，但今天公开抓取路径继续失败。本期人物动态只采纳 RSS、博客、官方 changelog 和可打开网页。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、GitHub Copilot：模型、沙箱、本地模型与 secret detection 同日补齐</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Coding Agent Governance</span><strong>GitHub Changelog</strong> · 2026-10-07 15:46–20:12 UTC · <a href="https://github.blog/changelog/2026-10-07-claude-haiku-5-5-in-github-copilot">Claude Haiku 5.5</a> · <a href="https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available">Local sandboxing</a> · <a href="https://github.blog/changelog/2026-10-07-discover-local-models-in-github-copilot-cli">Local models</a> · <a href="https://github.blog/changelog/2026-10-07-purpose-built-model-for-leaked-secret-detection">Secret detection</a></div>
+  <div class="summary"><p>GitHub 在同一窗口内发布四条 Copilot / 安全相关更新。Claude Haiku 5.5 已在 Copilot 中 GA，定位是高速、高频任务，例如 subagents、快速编辑和终端任务；GitHub 表示早测中它在许多 coding tasks 上接近 Claude Sonnet 5，同时消耗更少 token 和步骤。</p><p>本地沙箱也 GA，覆盖 Copilot CLI、Copilot app 和 VS Code Agent Host sessions。Copilot 发起的工具和命令可以在本机受限边界内运行，限制文件系统、网络、凭据和系统能力，策略由开发者或组织定义；这直接回应了 agent 运行代码时最核心的权限问题。</p><p>Copilot CLI 还加入本地模型发现，CLI 1.0.94-0 起可通过 <code>/model</code> 发现本地 Ollama 中支持的模型，并在当前会话中选择使用。另一条安全更新则把 GitHub 针对 secret detection 微调的模型带入 secret scanning alerts、push protection 和 Copilot <code>/security-review</code>，目标是识别没有固定 token 格式、但从上下文看像凭据的泄露。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Coding agent 的企业落地正在形成完整控制面：便宜的小模型负责高频子任务，本地模型处理隐私/离线需求，沙箱限制 agent 行为，secret detection 和 security review 兜住代码安全。</div>
+  <div class="action">后续行动：检查 Copilot CLI / VS Code Agent Host 是否升级到支持本地沙箱和本地模型发现的版本；把 agent 可访问的文件、网络和凭据策略列成默认模板；对私有仓库开启 secret scanning / push protection，并记录 AI secret detection 的计费和预览状态。</div>
+</div>
+
+<h3>二、LangChain Deep Agents：skills 变成长期 agent 的“操作系统模块”</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Agent Skills</span><strong>LangChain Blog</strong> · 2026-10-07 18:09 / 18:49 UTC · <a href="https://www.langchain.com/blog/revamping-skills-in-deep-agents">Revamping Skills in Deep Agents</a> · <a href="https://www.langchain.com/blog/managed-deep-agents-schedules-per-run-configuration-slack">Managed Deep Agents v0.9</a></div>
+  <div class="summary"><p>LangChain 更新 Deep Agents 的 skills 机制。现在工具可以绑定到 skill，工具 schema 不必一直塞进上下文，只有 agent 读取对应 skill 时才加载；应用也可以在运行时 pin skills，让关键指令在第一次模型调用前就进入上下文；长线程还可以中途 reload skills，使新增、修改或删除的技能在不停线程的情况下生效。</p><p>Managed Deep Agents v0.9 则把生产化能力往“长期工作伙伴”方向推进：agent 可以在对话中创建提醒、follow-up 和 recurring tasks；一次部署可以按每次 run 选择模型、skills 和 tools；Slack 集成可先用 reaction 确认消息，再生成完整回复。</p><p>这两篇文章合起来说明 agent 平台的关注点已经从“写一个 agent demo”转向“管理一组可演化能力”。Skill 是组织知识和工具边界的容器，schedule 是持续行动的机制，per-run configuration 是模型/工具路由，Slack reactions 是进入真实协作渠道后的社交协议。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 重点关注 agent、AI engineering 和 workflow。LangChain 这组更新很贴近真实组织：知识不可能一次性进提示词，工具不能全部常驻上下文，长期任务需要调度，协作界面需要轻量确认。</div>
+  <div class="action">后续行动：把现有 OpenClaw/Codex skills 与 LangChain skills 的抽象做一次对照：触发条件、上下文加载、工具绑定、版本更新、运行时 reload、审计记录；评估是否需要给内部 agent 增加“skill pin”和“reload”语义。</div>
+</div>
+
+<h3>三、OpenAI：GPT-6 Intelligent UI、酒店插件和青少年学习规划</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Product Surface</span><strong>OpenAI News RSS</strong> · 2026-10-07 00:00 / 07:00 / 12:00 UTC · <a href="https://openai.com/news/rss.xml">OpenAI News RSS</a> · <a href="https://openai.com/index/gpt-6-for-everyone">GPT-6 and Intelligent UI</a> · <a href="https://openai.com/index/radisson">Radisson</a> · <a href="https://openai.com/index/teens-learn-and-plan">Teens learn and plan</a></div>
+  <div class="summary"><p>OpenAI RSS 显示 GPT-6 正在全球 ChatGPT 中推出，并强调 Intelligent UI：更快响应、视觉和可交互体验。由于正文页当前对本环境返回 403，本期只依据官方 RSS 摘要转述，不展开未核验细节。</p><p>同日 OpenAI 发布 Radisson Hotel Group 与 Accenture 基于 OpenAI 技术构建的 ChatGPT plugin，用于酒店发现、比较和预订。这说明 ChatGPT 的商业入口正在从信息回答走向垂直交易流程，尤其适合旅游、零售、本地服务等高意图场景。</p><p>第三条是 ChatGPT for Teens：College Planner 将进入青少年版 ChatGPT，帮助学生管理大学申请，并加入 flashcards、quizzes 和 teen AI council。这条不只是教育产品新闻，也涉及低龄用户安全、学习规划、个性化辅导和家长/学校治理。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OpenAI 的产品线正在回答两个问题：模型能力如何以 UI 和插件形态被普通用户使用，商业场景如何进入 ChatGPT，青少年和教育场景如何在安全边界内扩张。</div>
+  <div class="action">后续行动：后续用可访问浏览器复核三篇正文，重点记录 Intelligent UI 的组件形态、插件权限/交易闭环、青少年数据和安全设置；把 Radisson 作为“ChatGPT 垂直交易入口”案例收进 agent 商业化样本库。</div>
+</div>
+
+<h3>四、Google SynthID Detector：AI 内容识别走向面向公众的验证平台</h3>
+<div class="card">
+  <div class="source"><span class="tag">Google DeepMind / Provenance</span><strong>Google DeepMind RSS</strong> · 2026-10-07 14:00 UTC · <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synth-id-ai-content/">Google expands SynthID Detector</a></div>
+  <div class="summary"><p>Google 宣布扩大 SynthID Detector，推出独立平台，帮助用户检查线上内容是否由 Google AI 或合作伙伴工具生成。公开页面写明该工具从今天起全球英文可用，可检查图片、视频和音频，合作伙伴包括 OpenAI、NVIDIA、Kakao，并称 Apple 将加入。</p><p>Google 同时把它和 Search、Gemini app、Chrome 中的验证功能放在一起，称这些内置验证功能每天处理超过 100 万次请求。也就是说，SynthID 不只是模型水印论文或平台内部检测，而是逐步接入消费端入口和公共验证流程。</p><p>这对内容产业、品牌安全、教育和企业合规都很关键。随着生成式图片、视频和音频进入营销、客服、媒体和知识库，内容是否可识别、可追溯、可解释会成为 AI 应用验收的一部分。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI 内容治理会影响模型平台、媒体、教育、广告和企业知识库。公共检测工具的可用性决定了“合规声明”能否从纸面承诺变成日常操作。</div>
+  <div class="action">后续行动：测试 SynthID Detector 对不同来源图片/音频/视频的识别体验；记录是否支持 API、批量检测、企业审计和非英文界面；跟踪 OpenAI、NVIDIA、Apple 等伙伴是否同步披露水印/检测兼容细节。</div>
+</div>
+
+<h3>五、Hugging Face：端侧多模态决策模型与 Nemotron 专业推理微调</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Edge & Reasoning</span><strong>Hugging Face Blog</strong> · 2026-10-07 12:45 / 16:54 UTC · <a href="https://huggingface.co/blog/LiquidAI/open-d1">Liquid AI open d1</a> · <a href="https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026">NVIDIA Nemotron IOI/IMO</a></div>
+  <div class="summary"><p>Liquid AI 发布 open d1 决策模型系列，包括 d1-3B 和实验性的 d1-omni-600M。文章强调 d1-3B 在 Decision Index 0.2.1 中取得 48.57，超过所有 4B/9B 模型以及 Decider 35B-A3B；d1-3B 支持文本和图像，d1-omni-600M 支持文本+图像或文本+音频。</p><p>关键差异是它们不是生成式聊天模型，而是单次前向即可给出决策输出的 decision models。Liquid AI 还强调边缘速度，例如 Jetson AGX Orin 和 Orin Nano 上的毫秒级响应，这让它更像机器人、设备控制、端侧分类/决策的基础件。</p><p>NVIDIA 另一篇文章展示 Nemotron 同一模型家族通过专门微调在 IOI 和 IMO 场景取得金牌级结果，并给出可复用的 specialization recipe：强 base model、领域问题与高质量推理数据、针对性训练，以及搜索/验证/改进系统。这是开源模型向专业推理和竞赛型任务细分的信号。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>开源模型生态正在从“通用聊天”分裂为端侧实时决策、专业代码/数学推理、企业 agent 数据生成等多个方向。对创业和工程选型来说，模型形态比排行榜名次更重要。</div>
+  <div class="action">后续行动：测试 open d1 在设备/视觉/音频决策任务中的延迟和准确率；复核许可证与模型权重；将 Nemotron 的微调配方整理成“专业领域模型训练 checklist”，用于评估内部数据是否足以支撑专门模型。</div>
+</div>
+
+<h3>六、Stacklok 与云原生 harness：agent 运行环境继续离开桌面</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent Harness / Cloud Native</span><strong>Latent Space</strong> · 2026-10-07 14:10 UTC · <a href="https://www.latent.space/p/stacklok">Can a Cloud-Native Harness Make Agents Reliable Beyond the Desktop?</a></div>
+  <div class="summary"><p>Latent Space 采访/分析 Stacklok：Kubernetes 共同创建者 Craig McLuckie 和 Joe Beda 正在把 agent harness 推向云原生。文章指出，coding agent 的基本结构是 LLM 调工具循环、携带上下文，但本地 CLI/桌面应用在长任务、状态管理、可靠性和团队协作上有限。</p><p>Stacklok 的方向是用类似 Kubernetes control loop 的方式管理 agent 工作负载，让 agent 不只是打开笔记本后跑一段命令，而是可以在云端被调度、恢复、扩展和观察。其 Mecatl 项目被描述为云原生 harness，并于 6 月作为开源项目启动。</p><p>这条和 GitHub 本地沙箱、LangChain Managed Deep Agents 放在一起看很有意思：agent 运行环境正在分叉。本地侧强调权限隔离、隐私和开发者控制；云端侧强调持久运行、团队管理、调度和恢复。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Agent 真正进入生产后，harness、状态、权限、恢复、观测、审计会比单次提示词更重要。云原生 agent harness 可能成为下一代 DevOps / AI Ops 的基础层。</div>
+  <div class="action">后续行动：跟踪 Mecatl 开源仓库、架构图和权限模型；比较 OpenAI Codex cloud agent、GitHub Copilot cloud agent、LangGraph/Deep Agents、OpenClaw sessions/cron 在状态、调度、沙箱和审计上的差异。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>GitHub：</strong>Claude Haiku 5.5 进入 Copilot；本地沙箱 GA；Copilot CLI 可发现本地 Ollama 模型；AI secret detection 扩展到 alerts、push protection 和 Copilot security review。</li>
+  <li><strong>LangChain：</strong>Deep Agents skills 支持工具绑定、runtime pin、mid-thread reload；Managed Deep Agents v0.9 支持 agent-created schedules、per-run configuration 和 Slack reactions。</li>
+  <li><strong>OpenAI：</strong>GPT-6 Intelligent UI 全球推出；Radisson 酒店插件进入 ChatGPT；ChatGPT for Teens 加入 College Planner、flashcards、quizzes 和 teen AI council。</li>
+  <li><strong>Google DeepMind：</strong>SynthID Detector 扩大为全球英文可用的独立平台，可检查 Google AI 和合作伙伴生成的图片、视频、音频。</li>
+  <li><strong>Hugging Face：</strong>Liquid AI 发布 open d1 端侧多模态决策模型；NVIDIA 展示 Nemotron 在 IOI/IMO 场景的专业微调路径。</li>
+  <li><strong>Simon Willison：</strong>重点转述 Claude Haiku 5.5 的价格、tokenizer 与长上下文成本；并跟进 Wikimedia 发现 OpenAI “rogue” agent 活动的治理问题。</li>
+  <li><strong>Latent Space：</strong>Stacklok 文章把 agent harness 的云原生方向讲清楚，与本地沙箱形成对照。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>GitHub / Copilot：</strong>同日补齐模型选择、沙箱、安全检测和本地模型发现，说明 Copilot 正从 IDE 辅助工具变成组织级 agent 平台。</li>
+  <li><strong>Anthropic / Claude：</strong>Claude Haiku 5.5 借 GitHub Copilot 和 Simon Willison 的独立分析进入开发者视野，定位是低成本、高频、子任务模型。</li>
+  <li><strong>LangChain / Harrison Chase 生态：</strong>Deep Agents 继续强化 skills、schedule 和协作渠道，agent 平台味道越来越重。</li>
+  <li><strong>OpenAI / Kevin Weil 产品线：</strong>GPT-6 Intelligent UI、Radisson 插件和青少年学习功能显示 ChatGPT 产品面继续扩张；正文仍需后续复核。</li>
+  <li><strong>Google DeepMind：</strong>SynthID Detector 扩大开放，把 AI 内容识别从研究/平台内部能力推向公众工具。</li>
+  <li><strong>Liquid AI / NVIDIA：</strong>开源模型新增端侧决策与竞赛推理两条高信号方向。</li>
+  <li><strong>X 人物账号：</strong>Sam Altman、Kevin Weil、Josh Woodward、Amanda Askell、Karpathy、Alex Albert、Logan Kilpatrick、Jeff Dean 等高优先级 X 账号本期未通过公开路径拿到可核验时间线；不写新增 X 动态。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>AI Coding Agent 治理模板：</strong>把本地沙箱、secret detection、AI Scan、push protection、local model discovery、agent activity metrics 合并成一张企业采用 checklist。</li>
+  <li><strong>Skill Runtime 设计对照：</strong>比较 LangChain skills 与 OpenClaw/Codex skills：何时加载、如何绑定工具、如何 reload、如何审计、如何避免上下文膨胀。</li>
+  <li><strong>ChatGPT 垂直插件商业化：</strong>跟踪 Radisson 酒店插件是否支持完整预订、支付、会员、取消和客服闭环；用作“AI 入口 + 交易流程”案例。</li>
+  <li><strong>SynthID Detector 测试：</strong>准备一批图片、视频和音频样本，测试 Google/合作伙伴/非合作伙伴内容的识别率、误报和使用门槛。</li>
+  <li><strong>端侧决策模型评估：</strong>用 open d1 跑视觉/音频/文本决策任务，关注延迟、功耗、准确率、部署依赖和许可证。</li>
+  <li><strong>云原生 Agent Harness：</strong>跟踪 Stacklok Mecatl、LangGraph Cloud、Copilot cloud agent、Codex cloud agent 的调度、状态恢复、沙箱和审计能力。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>OpenAI 正文：</strong>GPT-6 Intelligent UI、Radisson、ChatGPT for Teens 三篇正文当前环境返回 403，本期依据官方 RSS 摘要转述；需用可访问浏览器复核完整内容。</li>
+  <li><strong>Claude Haiku 5.5：</strong>GitHub 称早测中在许多 coding tasks 接近 Claude Sonnet 5 且 token/steps 更少；需等待独立 benchmark、真实 Copilot 任务和账单数据验证。</li>
+  <li><strong>GitHub AI secret detection：</strong>push protection 和 Copilot <code>/security-review</code> 中的 AI 检测仍涉及预览/计划状态，实际可用范围、AI Credit 消耗和误报率需要试用确认。</li>
+  <li><strong>LangChain skills：</strong>工具绑定、pin、reload 对不同模型和 prompt cache 的实际收益，需要在长线程和大 skill repository 中压测。</li>
+  <li><strong>open d1：</strong>Decision Index 分数和 Jetson 延迟来自发布方页面，需第三方复现；d1-omni-600M 仍是 early research release。</li>
+  <li><strong>SynthID Detector：</strong>“合作伙伴内容可检测”的覆盖范围、API、批量处理和非英文可用性仍待确认。</li>
+  <li><strong>X 时间线：</strong>公开 X profile 仍主要返回应用壳页，RSSHub Twitter user route 返回 404，xcancel 返回 451，nitter.net 连接失败；不能据此判断账号无更新。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Simon Willison 的 Ben Affleck / software blogging 条目有趣，但与 Follow List 的 agent、模型、工程治理主线关系较弱。</li>
+  <li>GitHub 的具体版本号和按钮交互细节不进入正文，只保留对治理、沙箱、本地模型和安全检测有用的部分。</li>
+  <li>Latent Space AINews 对 OpenAI 数学论文的描述很热闹，但昨天已经覆盖 OpenAI 数学进展，今天只把它作为背景，不重复展开。</li>
+  <li>Interconnects、Chip Huyen、Eugene Yan、Lilian Weng 在本窗口无新增条目；不把旧文硬塞进日报。</li>
+  <li>搜索引擎结果和社交讨论不作为事实依据；X-only 动态继续放入覆盖缺口。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/gpt-6-for-everyone">OpenAI: GPT-6 and Intelligent UI for everyone</a></li>
+  <li><a href="https://openai.com/index/radisson">OpenAI: Radisson Hotel Group brings hotel discovery into ChatGPT</a></li>
+  <li><a href="https://openai.com/index/teens-learn-and-plan">OpenAI: Helping teens learn, plan, and shape the future of AI</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-07-claude-haiku-5-5-in-github-copilot">GitHub: Claude Haiku 5.5 in GitHub Copilot</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available">GitHub: Local sandboxing for GitHub Copilot now generally available</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-07-discover-local-models-in-github-copilot-cli">GitHub: Discover local models in GitHub Copilot CLI</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-07-purpose-built-model-for-leaked-secret-detection">GitHub: Purpose-built model for leaked secret detection</a></li>
+  <li><a href="https://www.langchain.com/blog/revamping-skills-in-deep-agents">LangChain: Revamping Skills in Deep Agents</a></li>
+  <li><a href="https://www.langchain.com/blog/managed-deep-agents-schedules-per-run-configuration-slack">LangChain: Managed Deep Agents v0.9</a></li>
+  <li><a href="https://blog.google/technology/google-deepmind/rss/">Google DeepMind RSS</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synth-id-ai-content/">Google: SynthID Detector for AI content</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/LiquidAI/open-d1">Hugging Face / Liquid AI: Multimodal open d1 decision models for the edge</a></li>
+  <li><a href="https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026">Hugging Face / NVIDIA: Fine-Tuning Nemotron for IOI and IMO</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/7/claude-haiku-5-5/">Simon Willison: Claude Haiku 5.5</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/7/openai-rogue-agents-wikimedia/">Simon Willison: OpenAI “rogue” agent activities found on Wikimedia projects</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://www.latent.space/p/stacklok">Latent Space: Can a Cloud-Native Harness Make Agents Reliable Beyond the Desktop?</a></li>
+  <li><a href="https://rsshub.app/twitter/user/sama">RSSHub Twitter user sample</a></li>
+  <li><a href="https://xcancel.com/sama/rss">xcancel RSS sample</a></li>
+  <li><a href="https://nitter.net/sama/rss">Nitter RSS sample</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-07T00:00:00Z / 2026-10-08T00:00:00Z.</footer>
