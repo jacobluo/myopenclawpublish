@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：Agent 开始付费，Codex 成本治理与模型定制流水线升温</title>
+    <meta name="description" content="Follow List 公开来源整理：本窗口从 2026-10-08T00:00Z 到 2026-10-09T00:00Z。高信号集中在五条线索：LangChain 用 Restock 展示可在 Slack 中真实下单付款的 Managed Deep Agent，agent 从信息处理走向受预算约束的交易执行；OpenAI 同日发布 Oracle、LegalOn、Pollo AI 与影响行动处置案例，把 ChatGPT Work/Codex 的企业流程、成本路由、创意生产和安全治理同时推到台前；Hugging Face 展示 ML Intern 用低预算自动训练、评测、发布小模型，模型定制开始像一次 agent 任务而不是完整 ML 项目；LangChain 继续围绕 skills、身份凭据、用户记忆、HTTP channels 和 fine-tuning 组织生产 agent 控制面；GitHub Changelog 的 PR 限流、归档权限和时间线可访问性虽不是模型新闻，但指向开源维护在低质量贡献和协作负载下的治理需求。本期公开 X/RSSHub/Nitter 仍无法稳定提供可核验时间线，X-only 内容只作为待验证线索。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：Agent 开始付费，Codex 成本治理与模型定制流水线升温</h1>
+      <p class="portal-lead">Follow List 公开来源整理：本窗口从 2026-10-08T00:00Z 到 2026-10-09T00:00Z。高信号集中在五条线索：LangChain 用 Restock 展示可在 Slack 中真实下单付款的 Managed Deep Agent，agent 从信息处理走向受预算约束的交易执行；OpenAI 同日发布 Oracle、LegalOn、Pollo AI 与影响行动处置案例，把 ChatGPT Work/Codex 的企业流程、成本路由、创意生产和安全治理同时推到台前；Hugging Face 展示 ML Intern 用低预算自动训练、评测、发布小模型，模型定制开始像一次 agent 任务而不是完整 ML 项目；LangChain 继续围绕 skills、身份凭据、用户记忆、HTTP channels 和 fine-tuning 组织生产 agent 控制面；GitHub Changelog 的 PR 限流、归档权限和时间线可访问性虽不是模型新闻，但指向开源维护在低质量贡献和协作负载下的治理需求。本期公开 X/RSSHub/Nitter 仍无法稳定提供可核验时间线，X-only 内容只作为待验证线索。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-10-09</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年10月9日（周五）</strong> · 覆盖窗口：2026-10-08 08:00 – 2026-10-09 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、LangChain Blog RSS、Hugging Face Blog RSS、GitHub Changelog RSS、Google DeepMind RSS、Simon Willison Atom、Latent Space RSS、Interconnects / Chip Huyen / Eugene Yan / Lilian Weng 等公开 RSS 抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：OpenAI 正文页对当前环境返回 403，本期依据其官方 RSS 摘要和原始链接转述；X 公共 profile 仍只返回应用壳页，RSSHub Twitter user route 跳转 404，xcancel 返回 451，nitter.net 本轮无可用响应。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Agent 从“建议购买”进入“可控付款”</h4><p>LangChain 发布 Restock 示例：agent 在 Slack 里找商品、建购物车，并通过 Stripe Link 与 Machine Payments Protocol 付款。真正的重点不是买笔，而是预算授权、凭据隔离、人工确认和付款 API 如何合在一起。</p></div>
+  <div class="overview-item"><h4>OpenAI 用案例串起企业流程、成本和安全叙事</h4><p>OpenAI RSS 同日出现 Oracle、LegalOn、Pollo AI 和 false-front influence operation 四条更新。它们共同指向 ChatGPT Work/Codex 的企业流程自动化、模型路由降本、创意生产和滥用治理。</p></div>
+  <div class="overview-item"><h4>模型定制变成 agent 可执行任务</h4><p>Hugging Face 的 ML Intern 案例展示：用户用提示词定义目标、预算、基线、烟测和交付物，agent 在 HF 硬件上训练、评测并发布小模型。小模型不再只是研究团队手工产物，而可以成为按需生成的工作流输出。</p></div>
+  <div class="overview-item"><h4>生产 agent 控制面继续补齐</h4><p>LangChain 同窗口内的 skills、Managed Deep Agents v0.8 和 Fine-Tuning 条目继续补生产拼图：工具绑定、runtime pin、mid-thread reload、用户凭据、用户记忆、HTTP channel、web search 和 trajectory fine-tuning。</p></div>
+  <div class="overview-item"><h4>开源协作平台在处理“贡献噪音”</h4><p>GitHub Changelog 的三条更新围绕 PR 限流、归档权限和时间线可访问性。它们不是 AI 主发布，但在 AI 生成 PR、低质量贡献和大型项目维护压力增加的背景下，有实际治理价值。</p></div>
+  <div class="overview-item"><h4>X 仍是覆盖缺口</h4><p>Follow List 高优先级人物很多仍以 X 为第一发布渠道；今天公开抓取路径继续失败。本期人物动态只采纳 RSS、官方博客、changelog 和可打开网页，Latent Space 的 X 汇总仅列入待验证。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、LangChain Restock：能付款的 agent 开始进入样例工程</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Agent Payments</span><strong>LangChain Blog</strong> · 2026-10-08 17:37 UTC · <a href="https://www.langchain.com/blog/agents-that-can-pay-with-stripe-link">Agents that can pay: building Restock with Stripe's Link and Managed Deep Agents</a></div>
+  <div class="summary"><p>LangChain 发布 Restock 示例 agent：它运行在 Slack 上，使用 Managed Deep Agents 查找真实商品、构建购物车，并通过支持 Machine Payments Protocol 的 API 完成 checkout。示例请求是给办公室买 25 美元以内的蓝色圆珠笔，Restock 找到商品、生成付款请求，最后完成一笔受限金额内的订单。</p><p>这篇文章的价值在于把“agent 付款”拆成工程边界：浏览器自动结账很脆弱，页面会变，DOM 会变，凭据也容易暴露；用 API 和钱包协议则可以把商品选择、预算授权、付款凭据和用户确认分开。Stripe Link 负责支付，agent 不接触银行卡号；用户批准一个上限，agent 不能超额花钱。</p><p>这让 agent 从“搜索并建议”进入“执行真实世界动作”。一旦动作涉及钱，系统设计就必须包含预算、权限、审计、幂等、取消/退款、失败回滚和人类确认。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 重点关注 agent 和生产工作流。付款是 agent 落地的硬边界之一，Restock 提供了一个清楚样例：模型不是直接“拥有钱包”，而是在受控 API、用户授权和钱包服务之间被限制性地编排。</div>
+  <div class="action">后续行动：跟踪 MPP、Stripe Link agent payment、Managed Deep Agents 的权限与审计接口；为内部采购/报销/订阅类 agent 画一版“可支付动作安全清单”：预算上限、确认阈值、凭据托管、订单回滚、供应商 allowlist、日志留存。</div>
+</div>
+
+<h3>二、OpenAI：Oracle、LegalOn、Pollo AI 与影响行动处置同时更新</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Enterprise & Safety</span><strong>OpenAI News RSS</strong> · 2026-10-08 00:00 / 12:00 / 16:00 UTC · <a href="https://openai.com/news/rss.xml">OpenAI News RSS</a> · <a href="https://openai.com/index/oracle">Oracle</a> · <a href="https://openai.com/index/legalon-halves-codex-costs">LegalOn</a> · <a href="https://openai.com/index/pollo-ai">Pollo AI</a> · <a href="https://openai.com/index/disrupting-ai-enabled-false-front-operations">false-front operations</a></div>
+  <div class="summary"><p>OpenAI RSS 显示 Oracle 正在用 ChatGPT Work 和 Codex 把招聘、工程与运营中的专业知识转成更快、更可重复的工作流。由于正文页当前对本环境返回 403，本期只依据官方 RSS 摘要转述，不展开未核验细节。</p><p>LegalOn 案例更贴近 Codex 成本治理：RSS 称其通过把 Astra、Sol 和 Luna 匹配到不同任务，预计把日常 Codex 成本削减 65%，同时保持开发速度。这条和 LangChain model router、GitHub Haiku in Copilot 放在一起看，说明 agent 成本优化正在从“选最强模型”转向“按任务路由模型”。</p><p>Pollo AI 则是创意生产案例：RSS 称其使用 GPT-5.6、GPT-6 Astra 和 GPT-Image-2.5 把创意转为详细图像和电影感视频广告。另一条安全更新称 OpenAI 处置了两个 AI-enabled false-front influence operations，涉及伪装记者和智库传播地缘政治信息。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这四条不是同一产品，但组合信号很清楚：OpenAI 正在同时推进企业知识工作、Codex 成本效率、创意商业化和滥用治理。对大客户来说，能否控成本、控权限、控风险，和模型能力一样重要。</div>
+  <div class="action">后续行动：用可访问浏览器复核四篇正文，重点记录 Oracle 的流程模板、LegalOn 的模型路由策略与成本口径、Pollo AI 的图像/视频生产链路，以及 false-front 案例中的检测信号、处置方式和可复用企业风控指标。</div>
+</div>
+
+<h3>三、Hugging Face ML Intern：一次提示词生成一个小模型</h3>
+<div class="card">
+  <div class="source"><span class="tag">Hugging Face / Model Customization</span><strong>Hugging Face Blog</strong> · 2026-10-08 00:00 UTC · <a href="https://huggingface.co/blog/building-with-ml-intern">The model that didn't exist, so you made it yourself</a></div>
+  <div class="summary"><p>Hugging Face 文章展示 ML Intern 的一组案例：用户想要一个小型 prompt rewriter，官方版本是 9B、需要约 20GB 内存且输出前会消耗大量 token；他用 ML Intern 生成了 0.8B 版本，可在 CPU 上运行，输出有效率 99.7%，使用 token 约为 teacher 的四分之一，总计算成本约 16 美元。</p><p>作者随后又用同样方式生成多个模型。流程不是让 agent 盲目训练：提示词会写清目标、数据集、base model、训练脚本、已验证事实、预算上限、基线测试、烟测和交付物。ML Intern 默认预算为 0，执行付费任务前需要确认，先跑小实验，再做完整训练、评测和发布到 Hub。</p><p>这代表模型定制的门槛在下降。用户不一定要完整搭建 ML pipeline，而是把“我要什么模型、如何验证、最多花多少钱”写成任务，让 agent 处理数据标注、训练、评估和模型卡。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这和 agentic workflow、open model、AI engineering 三条 Follow List 主线交汇。未来企业内部可能不是只调用大模型，而是不断为窄任务生成、评估和部署小模型。</div>
+  <div class="action">后续行动：试跑一个内部小模型任务，例如“行业术语标准化”“销售线索分类”“文档片段质量打分”；要求包含 zero-shot baseline、50-step smoke test、成本上限、model card、可复现实验命令和失败样例。</div>
+</div>
+
+<h3>四、LangChain 生产控制面：skills、身份、记忆、HTTP channels 与 fine-tuning</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Production Agents</span><strong>LangChain Blog RSS</strong> · feed timestamp 2026-10-08 11:05 UTC · <a href="https://www.langchain.com/blog/revamping-skills-in-deep-agents">Deep Agents skills</a> · <a href="https://www.langchain.com/blog/langsmith-managed-deep-agents-whats-new">Managed Deep Agents v0.8</a> · <a href="https://www.langchain.com/blog/langsmith-fine-tuning">LangSmith Fine-Tuning</a></div>
+  <div class="summary"><p>LangChain 的 Deep Agents skills 更新继续值得追踪：工具可绑定到 skill，工具 schema 不必常驻上下文；应用可以在运行时 pin skills，让关键指令在首次模型调用前进入上下文；长线程可 mid-thread reload skills，让能力库变更不必重启线程。</p><p>Managed Deep Agents v0.8 文章页面显示发布时间为 2026-09-24，但 RSS 本窗口重新推送。其重点是用户自有凭据、用户级记忆、HTTP channels、Slack 文件传输和内置 web search。这些能力说明生产 agent 不只是模型和工具调用，还需要身份、记忆、渠道和工具生命周期。</p><p>LangSmith Fine-Tuning 同样页面日期早于本窗口，但 RSS 重新推送。它把 LangSmith trajectories 转成 fine-tuning 数据，并用 smithtune CLI 处理数据集、训练、评估和结果回传。和 ML Intern 放在一起看，agent 运行日志正在成为下一轮专门模型训练数据。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Agent 平台的竞争已经转向控制面：能力如何组织、凭据如何委托、记忆如何按用户隔离、渠道如何接入产品、运行轨迹如何变成训练数据。</div>
+  <div class="action">后续行动：把 OpenClaw/Codex skills、LangChain skills 和企业内部 SOP 做一次映射：触发条件、工具绑定、权限来源、版本更新、reload、审计日志、训练数据归档。特别关注“用户级记忆”和“用户自有凭据”如何避免跨用户泄漏。</div>
+</div>
+
+<h3>五、GitHub：PR 限流、归档权限和时间线可访问性</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Collaboration Governance</span><strong>GitHub Changelog</strong> · 2026-10-08 14:25–19:01 UTC · <a href="https://github.blog/changelog/2026-10-08-draft-pull-requests-count-toward-pull-request-limits">Draft PR limits</a> · <a href="https://github.blog/changelog/2026-10-08-screen-readers-can-navigate-timelines-as-lists">Timeline accessibility</a> · <a href="https://github.blog/changelog/2026-10-08-triage-role-users-or-higher-can-now-archive-pull-requests">Triage archive PRs</a></div>
+  <div class="summary"><p>GitHub 现在允许把 draft pull requests 计入 PR limits。背景是维护者正在看到更多低质量贡献，需要更好地管理仓库噪音；过去 draft PR 不计入限制，用户可以绕过普通 PR 限额提交大量草稿。</p><p>另一条更新允许 triage role 或更高权限的用户归档和取消归档 PR。归档会关闭 PR、让讨论只读，并将归档 PR 从公开视图中隐藏，但仍对仓库管理员可见。这让维护团队可以把 spam、重复或废弃 PR 的处理下放给 triagers，而不必给他们写权限。</p><p>第三条是可访问性：issue、PR、commit、secret scanning alert 和 license compliance alert 的 timeline 可以被 screen reader 当作列表导航，并在加载更多事件时播报新增数量。这类细节对大型协作系统的真实可用性很重要。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI coding 工具提高了提交速度，也可能提高低质量 PR 和自动化噪音。GitHub 的这些治理更新是平台层面对维护负担、spam 和可访问性的补丁。</div>
+  <div class="action">后续行动：给公开仓库检查 PR limit、draft PR limit、triage 权限和归档流程；为 AI-generated PR 增加标签、自动检测和人工 triage 规则，避免 CI/通知被低质量提交拖垮。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>LangChain：</strong>Restock 展示 Slack agent 通过 Stripe Link 和 MPP 完成受预算约束的真实购买；Deep Agents skills、Managed Deep Agents 和 LangSmith Fine-Tuning 继续补齐生产控制面。</li>
+  <li><strong>OpenAI：</strong>Oracle、LegalOn、Pollo AI 和 false-front operations 四条 RSS 更新分别指向企业流程、Codex 成本治理、创意广告生产和滥用处置。</li>
+  <li><strong>Hugging Face：</strong>ML Intern 案例展示用提示词、预算、基线和烟测驱动小模型训练、评估和发布。</li>
+  <li><strong>GitHub：</strong>draft PR 可计入 PR limits；triage role 可归档 PR；timeline 可被 screen reader 作为列表导航。</li>
+  <li><strong>Latent Space：</strong>AINews 汇总了 OpenAI 安全研究员争议、GPT-6.1 Sol Ultrafast、Claude Haiku 5.5、Gemini cloud-resident agent、MiMo reward hacking 等 X 线索；本期将其作为待验证二级来源，不把 X-only 内容写成已确认事实。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>LangChain / Harrison Chase 生态：</strong>重点从 agent harness 继续推进到付款、身份、记忆、技能库和 fine-tuning 数据闭环。</li>
+  <li><strong>OpenAI / Codex：</strong>LegalOn 案例把 Codex 费用优化讲成模型路由问题；Oracle 案例把 ChatGPT Work 与 Codex 放进跨部门企业流程。</li>
+  <li><strong>Hugging Face：</strong>ML Intern 把 Hub、训练硬件、评测和模型卡串成一个 agentic model-building loop，对开放模型生态是高信号。</li>
+  <li><strong>GitHub：</strong>围绕 PR 噪音、权限下放和可访问性做平台治理更新，适合开源维护和企业协作团队跟进。</li>
+  <li><strong>Google DeepMind / Simon Willison / Interconnects / Chip Huyen / Eugene Yan / Lilian Weng：</strong>本窗口公开 RSS 未见新的高优先级条目；Google DeepMind 最新仍是 10 月 7 日 SynthID Detector，昨天已覆盖。</li>
+  <li><strong>X 人物账号：</strong>Sam Altman、Kevin Weil、Josh Woodward、Amanda Askell、Karpathy、Alex Albert、Logan Kilpatrick、Jeff Dean 等高优先级 X 账号本期未通过公开路径拿到可核验时间线；不写新增 X 动态。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Agent Payment 安全模板：</strong>围绕 Restock / MPP / Stripe Link 建一张 agent 付款控制清单：预算、授权、凭据隔离、订单状态、退款、审计和供应商 allowlist。</li>
+  <li><strong>Codex 模型路由成本模型：</strong>基于 LegalOn 线索，设计“任务类型 - 模型 - 成本 - 质量 - 延迟”矩阵，评估 Astra/Sol/Luna 或其他 coding 模型的路由策略。</li>
+  <li><strong>内部 ML Intern 试验：</strong>选择一个小模型定制任务，要求 agent 给出 baseline、smoke test、成本上限、评测表和模型卡，验证“按需训练小模型”的实际可行性。</li>
+  <li><strong>Skill Runtime 对照：</strong>把 LangChain runtime pin / reload / tool-bound skills 与 OpenClaw/Codex skills 对照，评估是否需要增加更显式的版本、权限和审计字段。</li>
+  <li><strong>AI-generated PR 治理：</strong>检查公开仓库的 draft PR limit、triage archive、CI 触发规则和 AI PR 标签策略，减少维护噪音。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>OpenAI 正文：</strong>Oracle、LegalOn、Pollo AI 和 false-front operations 页面当前环境返回 403，本期依据官方 RSS 摘要转述；需用可访问浏览器复核完整内容。</li>
+  <li><strong>LangChain RSS 时间：</strong>Managed Deep Agents v0.8 与 LangSmith Fine-Tuning 的页面日期显示为 2026-09-24，但 RSS 在本窗口重新推送；本期作为“重新进入关注队列”的生产控制面内容处理。</li>
+  <li><strong>Restock 付款：</strong>示例展示的是 sample agent，仍需确认 MPP 的标准化程度、商户覆盖、退款路径、风控责任和企业审计接口。</li>
+  <li><strong>ML Intern 成本与质量：</strong>Hugging Face 文章中的 0.8B 模型、99.7% 有效率和 16 美元成本来自发布方案例，需用自己的任务复现。</li>
+  <li><strong>Latent Space AINews：</strong>关于 OpenAI 安全研究员、GPT-6.1 Sol、Gemini cloud-resident agent、MiMo reward hacking 等内容主要来自 X 汇总；需逐条打开原始链接或官方公告复核。</li>
+  <li><strong>X 时间线：</strong>公开 X profile 仍主要返回应用壳页，RSSHub Twitter user route 跳转 404，xcancel 返回 451，nitter.net 本轮无可用响应；不能据此判断账号无更新。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub 时间线可访问性和 PR 权限更新不直接属于 AI 模型发布，但保留为协作治理信号，不展开操作细节。</li>
+  <li>Simon Willison 本窗口最新条目是 Carson Gross 关于编程职业价值的引用，观点有趣，但与 agent/模型/工程治理主线较弱。</li>
+  <li>Latent Space AINews 标题称“not much happened today”，但正文汇总了大量 X 线索；由于原始 X 不可稳定核验，本期不把它们当作事实主线。</li>
+  <li>OpenAI Pollo AI 创意广告案例可能商业价值高，但在未复核正文前不展开宣传式细节。</li>
+  <li>Google DeepMind、Interconnects、Chip Huyen、Eugene Yan、Lilian Weng 本窗口无新增高信号 RSS 条目，不硬塞旧文。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/oracle">OpenAI: How Oracle turns days of work into minutes with ChatGPT and Codex</a></li>
+  <li><a href="https://openai.com/index/legalon-halves-codex-costs">OpenAI: LegalOn halves Codex costs while maintaining development speed</a></li>
+  <li><a href="https://openai.com/index/pollo-ai">OpenAI: Pollo AI turns creative ideas into campaigns with OpenAI</a></li>
+  <li><a href="https://openai.com/index/disrupting-ai-enabled-false-front-operations">OpenAI: Disrupting AI-enabled false front operations</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/agents-that-can-pay-with-stripe-link">LangChain: Agents that can pay with Stripe Link</a></li>
+  <li><a href="https://www.langchain.com/blog/revamping-skills-in-deep-agents">LangChain: Revamping Skills in Deep Agents</a></li>
+  <li><a href="https://www.langchain.com/blog/langsmith-managed-deep-agents-whats-new">LangChain: Managed Deep Agents v0.8</a></li>
+  <li><a href="https://www.langchain.com/blog/langsmith-fine-tuning">LangChain: LangSmith Fine-Tuning</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/building-with-ml-intern">Hugging Face: The model that didn't exist, so you made it yourself</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-08-draft-pull-requests-count-toward-pull-request-limits">GitHub: Draft pull requests count toward pull request limits</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-08-triage-role-users-or-higher-can-now-archive-pull-requests">GitHub: Triage role users or higher can now archive pull requests</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-08-screen-readers-can-navigate-timelines-as-lists">GitHub: Screen readers can navigate timelines as lists</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/8/carson-gross/">Simon Willison: Quoting Carson Gross</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://www.latent.space/p/ainews-not-much-happened-today-60f">Latent Space AINews: not much happened today</a></li>
+  <li><a href="https://www.latent.space/p/periodic">Latent Space: Periodic Labs</a></li>
+  <li><a href="https://www.latent.space/p/ainews-claude-haiku-55-better-than">Latent Space AINews: Claude Haiku 5.5</a></li>
+  <li><a href="https://blog.google/technology/google-deepmind/rss/">Google DeepMind RSS</a></li>
+  <li><a href="https://rsshub.app/twitter/user/sama">RSSHub Twitter user sample</a></li>
+  <li><a href="https://xcancel.com/sama/rss">xcancel RSS sample</a></li>
+  <li><a href="https://nitter.net/sama/rss">Nitter RSS sample</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-08T00:00:00Z / 2026-10-09T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
