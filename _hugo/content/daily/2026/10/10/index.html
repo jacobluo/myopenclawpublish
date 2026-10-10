@@ -1,0 +1,150 @@
+---
+title: "Follow 深度日报：Agent 成本路由、浏览器工作流与生产控制面继续收紧"
+date: "2026-10-10"
+category: "daily"
+url: "/daily/2026/10/10/"
+summary: "Follow List 公开来源整理：本窗口从 2026-10-09T00:00Z 到 2026-10-10T00:00Z。高信号集中在五条线索：OpenAI/Asana 用 GPT-6 Astra + Codex 优化 StackAI 浏览器 agent，把 GPT-6.1 Sol 工作流做到 76x 更低估算模型成本、5x 更快；LangChain 把模型路由放进 agent harness，报告编码任务中位成本下降 64%，并继续补 Managed Deep Agents 的 Slack 反应、用户体验与客户支持产品化案例；Hugging Face / Ai2 讨论 GPU 集群调度从排队转向预算和影响力，提示训练资源也需要治理层；GitHub Copilot 周报把本地沙箱、多账户、local model discovery、coding agent UI 与 code review 控制整合成 agent 权限面；Simon Willison 与 Interconnects 的更新分别指向运行时平台整合、token 工具维护和对“快速进展但非通用超智能”的判断。本期公开 X/RSSHub/Nitter 仍无法稳定提供可核验时间线，X-only 内容不作为事实依据。"
+---
+<div class="meta">
+  <strong>2026年10月10日（周六）</strong> · 覆盖窗口：2026-10-09 08:00 – 2026-10-10 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、LangChain Blog RSS、Hugging Face Blog RSS、GitHub Changelog RSS、Simon Willison Atom、Interconnects RSS、Google DeepMind RSS、Latent Space RSS 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：OpenAI 正文页对当前 curl 环境仍返回 403，但搜索索引可读取 Asana 案例摘要；X 公共 profile、RSSHub Twitter user route、Nitter/xcancel 类镜像本轮仍不可稳定作为时间线来源。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>浏览器 agent 的成本优化进入实证叙事</h4><p>OpenAI RSS 显示 Asana 用 GPT-6 Astra in Codex 调查 StackAI 浏览器 agent，并把 GPT-6.1 Sol 优化工作流做到 76x 更低估算模型成本、5x 更快。重点不是单个模型胜负，而是 agent 运行轨迹、请求结构、缓存策略和评审流程成为成本工程对象。</p></div>
+  <div class="overview-item"><h4>模型路由从网关问题变成 harness 问题</h4><p>LangChain 发布模型路由文章，强调路由器应在 harness 内部，因为任务上下文、工具状态、评测指标和失败代价都在这里。其 Open SWE 实验报告编码任务中位成本下降 64%，且没有可测质量下降。</p></div>
+  <div class="overview-item"><h4>生产 agent 的“人味 UI”也变成基础设施</h4><p>Managed Deep Agents 更新围绕 Slack reactions、动态 emoji、分布式 agent 的用户反馈和 Snyk Assist 客户化案例展开。生产 agent 不只要会做事，还要让用户知道它是否看见、在想、卡住或完成。</p></div>
+  <div class="overview-item"><h4>GPU 调度也在学习“预算治理”</h4><p>Hugging Face / Ai2 的 GPU scheduling 文章把集群治理从单纯排队推向预算、影响力、预占和反博弈。它和 agent 成本路由是同一类问题：稀缺资源必须按任务价值分配，而不是按谁先占住资源分配。</p></div>
+  <div class="overview-item"><h4>GitHub Copilot 权限面持续加厚</h4><p>GitHub Copilot 周报聚合了本地沙箱、多账户、local model discovery、coding agent UI、code review billing 与 MCP registry 体验。平台重点是把 agent 的文件、网络、凭据、模型和审查边界放到管理员可控范围。</p></div>
+  <div class="overview-item"><h4>X 仍是覆盖缺口</h4><p>Follow List 的高优先级人物很多以 X 为第一发布渠道，但今天公开抓取路径仍不可稳定核验。人物动态只采纳 RSS、官方博客、changelog 和可打开网页；X-only 内容不写成已确认事实。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI / Asana：浏览器 agent 从“会跑”进入“能算账”</h3>
+<div class="card">
+  <div class="source"><span class="tag">OpenAI / Codex / Browser Agent</span><strong>OpenAI News RSS / Search Index</strong> · 2026-10-09 07:00 UTC · <a href="https://openai.com/index/asana-browser-agent">Asana cuts model costs 76x in browser tests with GPT-6.1 Sol</a></div>
+  <div class="summary"><p>OpenAI RSS 显示，Asana 使用 GPT-6 Astra in Codex 优化 StackAI 的浏览器 agent 工作流，并在 GPT-6.1 Sol 上把估算模型成本降到原生产设置的 1/76，同时运行速度提升 5 倍。搜索索引披露的关键数字包括：144-run study、优化后平均约 0.47 美元模型成本、每次运行约 4 分钟，原生产设置在部分运行中至少约 36.21 美元且会撞到 step limit。</p><p>这个案例值得注意的不是“便宜模型替换贵模型”这么简单。Asana 让 GPT-6 Astra 在 Codex 中检查请求、用量记录和输出，提出并测试改进，再由团队通过 Command 审查结果、转为 tickets 和 PR，最后进入生产。这更像一条 agent-assisted performance engineering 流水线。</p><p>如果这些数字经正文复核成立，它说明浏览器 agent 的成本大头可能来自工作流结构：历史记录如何缓存、上下文如何追加、页面状态如何剪枝、失败重试如何设计。模型本身便宜是一部分，harness 与记录结构才是可以持续复利的地方。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 重点关注 Codex、agent 与生产化。Asana 案例把 Codex 从“写代码”扩展成“让 agent 优化另一个 agent 的成本和速度”，这对企业内部自动化项目非常实用。</div>
+  <div class="action">后续行动：复核 OpenAI 正文可访问版本，提取 144-run study 的方法；给内部浏览器自动化任务建立 cost/run、time/run、step limit、cache hit、retry rate、human review 的统一日志字段。</div>
+</div>
+
+<h3>二、LangChain：模型路由应长在 harness 里</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Model Routing</span><strong>LangChain Blog</strong> · RSS 2026-10-09 19:34 UTC（页面日期 2026-10-01） · <a href="https://www.langchain.com/blog/how-to-build-a-model-router-in-the-harness">How to Build a Model Router in the Harness</a></div>
+  <div class="summary"><p>LangChain 把模型路由定义为 harness 级能力，而不是通用 LLM gateway 的薄层功能。文章称，其实验中 coding task 的中位成本相对 baseline 降低 64%，且没有明显质量下降；原因是大量任务不需要 frontier-level intelligence，只有少数任务值得升级到更强模型。</p><p>文章的关键判断是：路由决策需要看到任务类型、仓库上下文、工具状态、历史轨迹、失败成本和评测信号，而这些信息通常在 agent harness 中，而不是在模型网关里。一个只看 prompt 的网关很难知道当前调用是代码定位、规划、补丁生成、测试诊断还是最终审查。</p><p>这条线和 Asana、LegalOn 的 Codex 成本叙事互相印证。模型路由正在从“省钱技巧”变成 agent 架构的一层：观测、评测、路由、回退、审计需要一起设计。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Agent 成本不是靠一次选型解决的，而是靠 harness 把任务拆清楚、记录清楚、评估清楚。对 OpenClaw/Codex 类系统，这直接影响多模型、多 subagent 和长任务的成本边界。</div>
+  <div class="action">后续行动：做一张“任务类型 - 推荐模型 - 升级条件 - 回退条件 - 成本字段”的路由表；优先覆盖代码搜索、计划、编辑、测试修复、报告撰写、网页抓取六类任务。</div>
+</div>
+
+<h3>三、LangChain / Snyk：生产 agent 需要可感知的 UX 与客户化路径</h3>
+<div class="card">
+  <div class="source"><span class="tag">LangChain / Production Agents</span><strong>LangChain Blog</strong> · 2026-10-09 10:29 / 19:34 UTC · <a href="https://www.langchain.com/blog/slack-sdk-managed-deep-agents">Managed Deep Agents Slack UX</a> · <a href="https://www.langchain.com/blog/how-snyk-turned-an-internal-support-agent-into-a-customer-feature">Snyk Assist</a></div>
+  <div class="summary"><p>Managed Deep Agents 的 Slack SDK 更新把 reactions 做成 API：agent 可以在 Slack 里用静态或动态 emoji 表达自己已看见、正在处理、发现问题或完成。看似小功能，其实是生产 UX 的基础件，因为用户需要低摩擦地判断 agent 是否进入了正确状态。</p><p>Snyk 案例则展示了另一条产品化路径：先把内部支持 agent 用于客户问题、知识库和排障流程，再逐步沉淀成面向客户的 Snyk Assist。LangChain、LangGraph 和 LangSmith 在这里分别承担编排、状态控制、观测与质量改进。</p><p>两条更新合起来看，生产 agent 的竞争点不只是推理能力，还包括渠道体验、用户反馈、内部支持数据、评测闭环和从 internal tool 到 external feature 的迁移能力。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>企业 agent 真正上线时，用户最先感知的是“它有没有收到、会不会乱动、结果能不能信”。Slack reactions、支持工单闭环和 LangSmith 轨迹比炫技 demo 更接近真实部署问题。</div>
+  <div class="action">后续行动：为内部 IM agent 定义标准状态反应：收到、思考中、需要人工确认、执行中、失败、完成；同时把支持类 agent 的问题分类、引用来源、升级人工和满意度纳入 eval 数据。</div>
+</div>
+
+<h3>四、Hugging Face / Ai2：GPU 集群调度从“排队”走向“预算 + 影响力”</h3>
+<div class="card">
+  <div class="source"><span class="tag">Hugging Face / AI Infra</span><strong>Hugging Face Blog / Ai2</strong> · 2026-10-09 15:20 UTC · <a href="https://huggingface.co/blog/allenai/impactful-scheduling">Impactful scheduling for GPU clusters</a></div>
+  <div class="summary"><p>Ai2 在 Hugging Face 上发布 GPU cluster scheduling 文章，讨论如何在保持 full occupancy 的同时，把 GPU 时间分配给更高影响力的研究工作。文章把调度指标拆成 availability、occupancy、impact 等层级，并用仿真环境测试 preemption 与 GPU assignment 决策。</p><p>它批评了“高优先级免费且不可抢占”带来的 tragedy of the commons：如果 HIGH priority 没有成本，所有人都会占用它，最终系统无法区分真正高价值任务。Ai2 的方向是让每个 GPU 时间请求都消耗预算；无意义占坑会消耗团队额度，反而让诚实申请更大预算变成更理性的路径。</p><p>这篇不是模型发布，但和 agent 系统高度相关。无论是 GPU 训练、浏览器 agent、coding agent 还是多模型调用，资源治理都要从“谁先发起任务”转为“任务价值、预算、可抢占性和复现证据”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI infra 的瓶颈不只是买更多 GPU，也包括把稀缺资源分配给更有价值的实验。对企业 agent 平台同样适用：预算和优先级必须是可执行的系统约束。</div>
+  <div class="action">后续行动：把 GPU scheduler 的预算思路借到 agent 任务队列：每类自动化任务设置预算、优先级、可中断性、人工批准阈值和“占坑成本”。</div>
+</div>
+
+<h3>五、GitHub Copilot：agent 权限、模型发现与 code review 控制继续合流</h3>
+<div class="card">
+  <div class="source"><span class="tag">GitHub / Copilot Governance</span><strong>GitHub Changelog</strong> · 2026-10-09 21:32 / 22:58 UTC · <a href="https://github.blog/changelog/2026-10-09-github-copilot-weekly-releases-october-5">Copilot weekly releases</a> · <a href="https://github.blog/changelog/2026-10-09-codeql-2-27-2-improves-c-go-rust-and-javascript-analysis">CodeQL 2.27.2</a></div>
+  <div class="summary"><p>GitHub Copilot 周报把多条上周更新打包：本地沙箱在 Copilot CLI、Copilot app 和 VS Code Agent Host 中 GA，用于限制 agent 对文件、网络和凭据的访问；Copilot app 支持许可证账号和仓库账号分离；Copilot CLI 可用 /model 发现本地 Ollama 模型；coding agent UI 增加独立标签页；code review 增加组织账单与控制。</p><p>周报还提到 MCP registry 体验改进和 code review agent 的管理能力。整体方向是把 agent 的执行边界、模型选择、账号上下文、代码审查和外部工具接入放进一个企业可治理框架，而不是让开发者各自散装配置。</p><p>CodeQL 2.27.2 同日更新，改善 C++、Go、Rust 和 JavaScript 分析。它不是 agent 新闻，但在 AI 生成代码增多的背景下，静态分析、secret detection 和 code review agent 会一起构成质量防线。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>GitHub 正在把 Copilot 从编辑器助手推向 agent platform。企业真正关心的是：agent 能访问什么、模型从哪里来、审查怎么计费、代码风险如何自动发现。</div>
+  <div class="action">后续行动：检查自己的工程环境是否已有本地沙箱、模型白名单、MCP registry 审批、code review 账单策略和 CodeQL 默认规则；把这些作为 AI coding agent 的上线检查项。</div>
+</div>
+
+<h3>六、Simon Willison / Interconnects：运行时整合、token 工具与“非通用超智能”的判断</h3>
+<div class="card">
+  <div class="source"><span class="tag">Independent Analysis</span><strong>Simon Willison / Interconnects</strong> · 2026-10-09 UTC · <a href="https://simonwillison.net/2026/Oct/9/deno-is-joining-cloudflare/">Deno is joining Cloudflare</a> · <a href="https://simonwillison.net/2026/Oct/9/ttok/">ttok 1.0</a> · <a href="https://simonwillison.net/2026/Oct/9/built-using-my-voice/">A new feature for my blog, built using my voice</a> · <a href="https://www.interconnects.ai/p/i-expect-rapid-progress-but-not-towards">I expect rapid progress but not towards general superintelligence</a></div>
+  <div class="summary"><p>Simon Willison 记录了 Deno 加入 Cloudflare，关注点在 celld 与 workerd self-hosting：Cloudflare 希望把 workerd 自托管变成构建和运行应用的一等方式。这对 edge/runtime 生态有意义，也会影响 agent 后端部署选择。</p><p>他还发布 ttok 1.0，把 token counting/truncation CLI 更新到更适合 GPT-5/GPT-6 时代的默认行为。另一个小更新是用语音工作流给自己的博客做 newsletters 索引，属于“个人软件 + AI 辅助维护”的高质量实践样本。</p><p>Nathan Lambert 在 Interconnects 写道，他预期 AI 会快速进展，但不认为方向是 general superintelligence。文章更重视训练/推理效率、可验证工程指标和成本优化，认为 agent 会帮助优化推理栈并继续压低 cost per answer。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这些不是大厂发布，但提供了工程师视角的温度计：运行时会整合，token 与上下文工具仍重要，AI 进展可能主要体现在工程效率、成本和可验证子问题上，而不是抽象叙事。</div>
+  <div class="action">后续行动：保留 Deno/Cloudflare 作为 edge agent runtime 线索；把 ttok 类工具纳入长上下文处理工具箱；继续跟踪 Interconnects 对开放模型、推理效率和 AI 增速的中期判断。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI / Asana：</strong>GPT-6 Astra in Codex 被用于优化 StackAI 浏览器 agent；GPT-6.1 Sol 优化工作流据称实现 76x 更低估算模型成本、5x 更快运行。</li>
+  <li><strong>OpenAI / Sophos：</strong>RSS 显示 Sophos 使用 OpenAI Daybreak 将威胁调查时间减少 96%，并自动化 52% MDR cases；正文需后续复核。</li>
+  <li><strong>LangChain：</strong>模型路由文章强调 router 应在 harness 内；Managed Deep Agents 增加 Slack reactions；Snyk Assist 案例展示内部支持 agent 客户化。</li>
+  <li><strong>Hugging Face / Ai2：</strong>GPU 调度文章把预算、影响力、预占和反博弈引入集群治理，适合作为 agent 资源调度类比。</li>
+  <li><strong>GitHub：</strong>Copilot 周报聚合本地沙箱、多账户、local model discovery、coding agent UI、code review controls 和 MCP registry 改进；CodeQL 2.27.2 同日发布。</li>
+  <li><strong>Simon / Interconnects：</strong>Deno 加入 Cloudflare、ttok 1.0、语音辅助博客功能和 Nathan Lambert 的 AI 进展判断构成独立工程视角补充。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI / Codex：</strong>继续通过企业案例讲成本、速度、流程和安全治理；今天新增 Asana 浏览器 agent 与 Sophos 安全运营案例。</li>
+  <li><strong>LangChain / Harrison Chase 生态：</strong>焦点从深度 agent 能力扩展到模型路由、Slack 产品体验和客户支持场景产品化。</li>
+  <li><strong>Hugging Face / Ai2：</strong>高信号不在新模型，而在 GPU 资源治理方法；这对训练、微调和 agent 任务队列都有启发。</li>
+  <li><strong>GitHub：</strong>Copilot 正在把 agent 权限、模型、本地执行、code review 和 MCP 生态放到统一企业控制面下。</li>
+  <li><strong>Simon Willison：</strong>继续提供工具链、运行时和个人 AI workflow 的高密度工程观察；ttok 1.0 对长上下文工作有直接实用价值。</li>
+  <li><strong>Nathan Lambert / Interconnects：</strong>本期主张是快速进展更可能来自可验证工程栈、推理效率和成本优化，而非直接通向 general superintelligence。</li>
+  <li><strong>Google DeepMind / Lilian Weng / Chip Huyen / Eugene Yan：</strong>本窗口公开 RSS 未见新的高优先级条目；Google DeepMind 最新仍是 10 月 7 日 SynthID Detector。</li>
+  <li><strong>X 高优先级人物：</strong>Sam Altman、Kevin Weil、Josh Woodward、Amanda Askell、Karpathy、Alex Albert、Logan Kilpatrick、Jeff Dean 等账号本期未通过公开路径拿到可核验时间线；不写新增 X 动态。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>浏览器 agent 成本基线：</strong>复刻 Asana 的指标框架，建立每次运行 cost/run、time/run、step count、失败率、cache hit、上下文长度和人工审查记录。</li>
+  <li><strong>Harness 内模型路由：</strong>把任务类型、模型等级、升级条件、降级条件和回退策略写成一张可执行表，不只靠模型网关。</li>
+  <li><strong>Agent UX 状态协议：</strong>为 IM/Slack/飞书 agent 设计统一状态反馈：已收到、处理中、等待授权、执行中、失败、完成，并绑定日志事件。</li>
+  <li><strong>预算化任务调度：</strong>把 GPU scheduler 的预算约束迁移到 agent 任务：低价值长任务可抢占，高价值任务要有证据与预算。</li>
+  <li><strong>Copilot / Codex 安全检查清单：</strong>检查本地沙箱、文件/网络/凭据权限、模型白名单、MCP 工具审批、CodeQL 和 code review 账单控制。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>OpenAI 正文：</strong>Asana 与 Sophos 页面当前 curl 环境返回 403；本期依据官方 RSS、搜索索引和公开摘要转述，需用可访问浏览器复核全文。</li>
+  <li><strong>Asana 数字口径：</strong>76x、5x、0.47 美元、144-run study 和 Model B 对比口径需要查看原文方法，确认是否为估算模型成本、是否包含工具/工程/人工成本。</li>
+  <li><strong>LangChain RSS 时间：</strong>模型路由页面日期为 2026-10-01，但 RSS 在 2026-10-09 重新推送；本期作为窗口内重新进入关注队列处理。</li>
+  <li><strong>Snyk Assist 细节：</strong>公开页面可读取标题和部分正文，完整客户化路径、评测指标和上线范围还需进一步打开核验。</li>
+  <li><strong>GPU 调度复现：</strong>Ai2 的 simulation 和 budget policy 需要阅读其完整配置，判断是否能迁移到企业内部 GPU/agent 队列。</li>
+  <li><strong>X 时间线：</strong>公开 X profile、RSSHub Twitter route、Nitter/xcancel 本轮仍不稳定；不能据此判断相关人物没有更新。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub CodeQL 2.27.2 属于安全/静态分析维护更新，不展开语言级规则细节，只保留为 AI coding 质量治理背景。</li>
+  <li>Simon Willison 的 Matthew Green 引用与密码学风险相关，值得读但离本期 agent/成本/生产控制面主线较远。</li>
+  <li>Latent Space 本窗口没有新的 10 月 9 日高信号条目；10 月 8 日 AINews 昨天已作为待验证二级来源处理。</li>
+  <li>Hugging Face 当日只有 Ai2 scheduling 属于高信号；其它榜单/旧文不硬塞进主线。</li>
+  <li>OpenAI Sophos 案例有企业安全价值，但在未复核正文前不展开产品宣传式细节。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://openai.com/index/asana-browser-agent">OpenAI: Asana cuts model costs 76x in browser tests with GPT-6.1 Sol</a></li>
+  <li><a href="https://openai.com/index/sophos">OpenAI: Sophos cuts threat investigation time by 96% with OpenAI Daybreak</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/how-to-build-a-model-router-in-the-harness">LangChain: How to Build a Model Router in the Harness</a></li>
+  <li><a href="https://www.langchain.com/blog/slack-sdk-managed-deep-agents">LangChain: How to build great out-of-the-box user experiences with Managed Deep Agents</a></li>
+  <li><a href="https://www.langchain.com/blog/how-snyk-turned-an-internal-support-agent-into-a-customer-feature">LangChain: How Snyk Turned an Internal Support Agent into a Customer Feature</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/allenai/impactful-scheduling">Hugging Face / Ai2: Impactful scheduling for GPU clusters</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-09-github-copilot-weekly-releases-october-5">GitHub: Copilot weekly releases - October 5</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-09-codeql-2-27-2-improves-c-go-rust-and-javascript-analysis">GitHub: CodeQL 2.27.2 improves C++, Go, Rust, and JavaScript analysis</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/9/deno-is-joining-cloudflare/">Simon Willison: Deno is joining Cloudflare</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/9/ttok/">Simon Willison: ttok 1.0</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/9/built-using-my-voice/">Simon Willison: A new feature for my blog, built using my voice</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://www.interconnects.ai/p/i-expect-rapid-progress-but-not-towards">Interconnects: I expect rapid progress but not towards general superintelligence</a></li>
+  <li><a href="https://blog.google/technology/google-deepmind/rss/">Google DeepMind RSS</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://rsshub.app/twitter/user/sama">RSSHub Twitter user sample</a></li>
+  <li><a href="https://xcancel.com/sama/rss">xcancel RSS sample</a></li>
+  <li><a href="https://nitter.net/sama/rss">Nitter RSS sample</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-09T00:00:00Z / 2026-10-10T00:00:00Z.</footer>

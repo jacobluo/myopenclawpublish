@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：Agent 成本路由、浏览器工作流与生产控制面继续收紧",
+    "date": "2026-10-10",
+    "category": "daily",
+    "url": "/daily/2026/10/10/",
+    "summary": "Follow List 公开来源整理：本窗口从 2026-10-09T00:00Z 到 2026-10-10T00:00Z。高信号集中在 OpenAI/Asana 浏览器 agent 成本优化、LangChain harness 内模型路由与生产 UX、Hugging Face/Ai2 GPU 预算调度、GitHub Copilot 权限控制面，以及 Simon Willison / Interconnects 的工程视角。公开 X/RSSHub/Nitter 本轮仍不可稳定采信，不使用 X-only 内容作事实依据。"
+  },
+  {
     "title": "Follow 深度日报：Claude 5.5 进入 Copilot，Agent 生产化与真实工作流继续收敛",
     "date": "2026-09-29",
     "category": "daily",
