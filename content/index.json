@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 深度日报：公开源低波动，工程纪律、自动监控与 Agent 护栏进入复盘窗口",
+    "date": "2026-10-12",
+    "category": "daily",
+    "url": "/daily/2026/10/12/",
+    "summary": "Follow List 公开来源整理：本窗口从 2026-10-11T00:00Z 到 2026-10-12T00:00Z。窗口内可核验新增不多，重点来自 Simon Willison 两条工程实践更新：Python 3.15 进入 GitHub Actions python-versions，展示“让 agent/自动化守候事件”的轻量工作流；Dwarf Fortress 版本控制轶事则提醒复杂长期系统最后都会回到基础工程纪律。公开 X/RSSHub/Nitter 本轮仍不可稳定采信，不使用 X-only 内容作事实依据。"
+  },
+  {
     "title": "Follow 深度日报：Agent 成本路由、浏览器工作流与生产控制面继续收紧",
     "date": "2026-10-10",
     "category": "daily",

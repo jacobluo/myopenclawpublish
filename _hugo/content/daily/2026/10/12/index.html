@@ -1,0 +1,128 @@
+---
+title: "Follow 深度日报：公开源低波动，工程纪律、自动监控与 Agent 护栏进入复盘窗口"
+date: "2026-10-12"
+category: "daily"
+url: "/daily/2026/10/12/"
+summary: "Follow List 公开来源整理：本窗口从 2026-10-11T00:00Z 到 2026-10-12T00:00Z。窗口内可核验新增不多，重点来自 Simon Willison 两条工程实践更新：Python 3.15 进入 GitHub Actions python-versions，展示“让 agent/自动化守候事件”的轻量工作流；Dwarf Fortress 版本控制轶事则提醒复杂长期系统最后都会回到基础工程纪律。OpenAI、GitHub、LangChain、Hugging Face、Interconnects、Google DeepMind、Lilian Weng 等 RSS 未见窗口内新高信号条目；ExplainX blog sitemap 显示 2026-10-11 更新但页面未暴露明确新文清单。公开 X/RSSHub/Nitter 本轮仍不可稳定采信，不使用 X-only 内容作事实依据。"
+---
+<div class="meta">
+  <strong>2026年10月12日（周一）</strong> · 覆盖窗口：2026-10-11 08:00 – 2026-10-12 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Simon Willison Atom、OpenAI News RSS、GitHub Changelog RSS、LangChain Blog RSS、Hugging Face Blog RSS、Interconnects RSS、Google DeepMind RSS、Lilian Weng RSS、Latent Space RSS、ExplainX sitemap/页面、AI 播客索引 JSON 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：RSSHub Twitter user route 本轮跳转 404，xcancel 返回 451，nitter 返回 410；因此人物 X 时间线只记录抓取缺口，不写新增事实。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>今天是低波动窗口，不是低价值窗口</h4><p>主流官方 RSS 在 24 小时窗口内没有新的 frontier lab 或 agent 平台大发布。今天的价值在于确认“没有可核验新主线”，并把可行动的工程信号从小更新里提出来。</p></div>
+  <div class="overview-item"><h4>自动监控进入个人工作流</h4><p>Simon Willison 记录 Python 3.15.0 加入 GitHub Actions <code>actions/python-versions</code>，并提到自己曾让 ChatGPT 定时检查该仓库。这是很小的事件，但非常贴近日常：把等待某个上游状态变化交给 agent/自动化。</p></div>
+  <div class="overview-item"><h4>复杂系统最终会回到版本控制</h4><p>Dwarf Fortress 长期不用版本控制的轶事在今天被 Simon 复查。对 AI agent 工程来说，这不是游戏八卦，而是提醒：越是长期、复杂、有人机协作的系统，越不能省掉版本、审计、回滚和可追踪变更。</p></div>
+  <div class="overview-item"><h4>Agent 护栏主线延续</h4><p>昨天的 GitHub Copilot MCP 启动控制、Anthropic unintended actions、Latent Space 工业机器人可靠执行仍是本周主线。今天没有新发布改变判断，反而适合把它们沉淀成权限矩阵和检查清单。</p></div>
+  <div class="overview-item"><h4>ExplainX 有站点级更新但证据不足</h4><p>ExplainX blog sitemap 显示 2026-10-11 更新，页面包含 RSS 链接和大量文章数据，但本轮没有稳定抽取到窗口内明确新文章。列入待复查，不把 sitemap 更新时间等同于新内容事实。</p></div>
+  <div class="overview-item"><h4>X 公开链路继续不可用</h4><p>RSSHub、xcancel、nitter 对样本账号均不可稳定返回可用 RSS。Follow List 的人物动态不能靠这些路径做缺席判断，只能说“本轮未能公开核验”。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Simon Willison：Python 3.15 进入 Actions，自动守候上游状态变化</h3>
+<div class="card">
+  <div class="source"><span class="tag">Developer Workflow / Automation</span><strong>Simon Willison</strong> · 2026-10-10 23:58 UTC · <a href="https://simonwillison.net/2026/Oct/10/python-actions/">Python 3.15.0 added to actions/python-versions</a> · <a href="https://github.com/actions/python-versions/commit/49858b91c92d27403416ee43117032e91d00ce24">GitHub commit</a></div>
+  <div class="summary"><p>窗口内第一条可核验更新是 Simon 记录 Python 3.15.0 已加入 GitHub Actions 的 <code>actions/python-versions</code> 仓库。这意味着项目可以把 <code>3.15</code> 加进 CI matrix，用真实 GitHub Actions 环境跑兼容性测试。</p><p>更值得注意的是工作流本身：Simon 提到自己此前让 ChatGPT 定时 clone/pull 该仓库，直到 stable 3.15 出现再提醒。这不是复杂 agent，却是很清楚的“事件守候”模式：周期检查、状态变化、通知人类、停止任务。</p><p>这个模式比大而全的 agent 更容易落地，也更容易评估。对开发团队来说，类似任务可以覆盖依赖发布、上游 issue 状态、CI 镜像更新、文档变更、API deprecation、价格页变化等。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 长期关注 AI engineering 和 agent 产品。这个小例子把 agent 从“替你写代码”拉回“替你守候变化”：低风险、高频、可审计，适合作为个人和团队自动化的第一层。</div>
+  <div class="action">后续行动：整理一组 watchlist 自动化：关键依赖版本、GitHub releases、RSS/Atom、docs changelog、价格页和 API deprecation；每个任务必须有停止条件、去重状态和简短通知模板。</div>
+</div>
+
+<h3>二、Simon Willison：Dwarf Fortress 版本控制轶事，复杂系统绕不开基础纪律</h3>
+<div class="card">
+  <div class="source"><span class="tag">Engineering Discipline</span><strong>Simon Willison</strong> · 2026-10-11 00:52 UTC · <a href="https://simonwillison.net/2026/Oct/11/dwarf-fortress/">Dwarf Fortress uses version control now</a></div>
+  <div class="summary"><p>Simon 复查了 Dwarf Fortress 曾长期不用版本控制的旧闻，并发现 2023 年 Steam 版本前后，开发流程已经开始使用版本控制和 Discord 等协作工具。这个条目不是 AI 新闻，但对 agent 工程有现实含义。</p><p>AI coding agent 会让改动速度变快，也会让“我到底改了什么、为什么改、怎么回滚、哪次运行引入风险”变得更重要。版本控制不是形式主义，而是 agent 能安全进入真实代码库的最低运行轨道。</p><p>和昨天 GitHub Copilot for JetBrains 的 worktree/session 可靠性改进放在一起看，主线很一致：agent 越常驻，越需要把变更隔离、对话上下文、工具调用、分支和回滚关系管理清楚。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>它提醒我们不要只追模型能力。真实生产力的上限往往由版本控制、CI、review、审计日志、权限边界和恢复路径决定。</div>
+  <div class="action">后续行动：把 coding agent 默认运行规则写清楚：新任务独立分支或 worktree；改动前读状态；改动后跑最小验证；外部提交前展示 diff；失败时保留轨迹而不是静默重试。</div>
+</div>
+
+<h3>三、ExplainX：sitemap 更新但文章级证据不足，适合作为待复查队列</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Tools / Discovery</span><strong>explainx.ai</strong> · sitemap lastmod 2026-10-11 · <a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">Blog sitemap</a> · <a href="https://explainx.ai/blog">Blog page</a></div>
+  <div class="summary"><p>Follow List 里的 explainx.ai 没有标准 RSS，控制面板备注要求使用 blog sitemap 作为来源信号。本轮 sitemap 只有 <code>/blog</code> 一条 URL，<code>lastmod</code> 为 2026-10-11。</p><p>打开 blog 页面可以看到其站点提供 <code>/blog/rss.xml</code> 和 <code>/catch-up-on-ai/rss.xml</code> 的 alternate link，也能在页面数据中看到大量文章条目，但本轮抓取没有稳定得到窗口内新增文章列表。站点级 lastmod 可能是页面重建、列表更新或数据刷新，不应直接解释成新文章。</p><p>这类源适合进入二级抓取：先跟踪 sitemap/页面变化，再对 RSS、JSON hydration 数据或具体文章 URL 做差分。没有文章级 URL、标题和时间之前，不应写成确定新闻。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>ExplainX 关注 AI agent skills、MCP、工具目录和 AI 学习内容，是发现工具生态变化的中优先级源。但它需要更稳的抽取器，而不是只看 sitemap 时间戳。</div>
+  <div class="action">后续行动：下轮增加 <code>https://explainx.ai/blog/rss.xml</code> 和 <code>https://explainx.ai/catch-up-on-ai/rss.xml</code> 抓取；若 RSS 可用，把 sitemap 仅作为健康检查和兜底。</div>
+</div>
+
+<h3>四、延续主线：Agent 权限、MCP 生命周期和长时执行仍需沉淀</h3>
+<div class="card">
+  <div class="source"><span class="tag">Continuing Thread</span><strong>GitHub / Anthropic / Latent Space / OpenAI / LangChain</strong> · 2026-10-09 至 2026-10-10 条目延续 · <a href="https://github.blog/changelog/2026-10-10-new-controls-and-chat-improvements-in-copilot-for-jetbrains">GitHub Copilot JetBrains controls</a> · <a href="https://simonwillison.net/2026/Oct/10/the-new-york-times/">Simon: Anthropic agents</a> · <a href="https://www.latent.space/p/standard-bots">Latent Space: Standard Bots</a></div>
+  <div class="summary"><p>今天没有新的官方大发布，但昨天的主线仍然成立：GitHub 把企业默认模型和 MCP server 自动启动控制下沉到 JetBrains IDE；Simon 和 Anthropic 事件提醒 agent 的外部动作必须和用户授权一致；Latent Space 的 Standard Bots 案例说明可靠执行来自短任务、示范数据、本地推理和常规控制逻辑的组合。</p><p>这些内容共同指向一个判断：agent 平台的竞争正在从“模型多强”扩展为“工具如何启动、权限如何表达、动作如何确认、失败如何回放、成本如何预算”。低新闻日正适合把这些变成可执行清单。</p><p>对企业内部 agent 来说，最容易被低估的是“默认值”。默认模型、默认权限、默认 MCP 启动、默认 full access、默认自动提交，都会在真实系统里变成风险放大器。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条线与 Codex、Claude、LangGraph、Copilot、MCP、企业工作流都相关，是 Follow List 近期最连续的工程主题。</div>
+  <div class="action">后续行动：产出一页 Agent Operating Checklist：默认模型、工具白名单、MCP 自动启动、外部动作确认、人类接管点、运行日志、预算上限、失败 replay、数据保留和权限撤销。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Simon Willison / Python：</strong>Python 3.15.0 已加入 <code>actions/python-versions</code>，可用于 GitHub Actions 测试矩阵；更重要的是示范了让 ChatGPT/自动化守候上游变化的轻量模式。</li>
+  <li><strong>Simon Willison / 工程纪律：</strong>Dwarf Fortress 版本控制轶事重新提醒复杂长期代码库最终需要版本、审计和回滚纪律；这对 AI coding agent 尤其重要。</li>
+  <li><strong>ExplainX：</strong>blog sitemap 显示 2026-10-11 更新，但本轮没有文章级新内容证据；列入待复查，不作为确定新闻展开。</li>
+  <li><strong>OpenAI / GitHub / LangChain / Hugging Face / Interconnects / Google DeepMind / Lilian Weng：</strong>RSS 源窗口内未见新的高优先级条目；最新高信号仍集中在 10 月 9-10 日的 agent 成本、权限、安全和可靠执行主题。</li>
+  <li><strong>X 公开路径：</strong>RSSHub Twitter user route 跳转 404，xcancel 返回 451，nitter 返回 410；本期不使用 X-only 内容作事实依据。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Simon Willison：</strong>本窗口有两条可核验更新，一条偏 CI/自动监控，一条偏工程纪律；都可以映射到 agent 工作流的基础设施问题。</li>
+  <li><strong>GitHub：</strong>Changelog RSS 最新重点仍是 10 月 10 日 Copilot for JetBrains 控制面更新；今天没有窗口内新增。</li>
+  <li><strong>OpenAI：</strong>News RSS 最新仍停在 10 月 9 日 Sophos / Asana 等案例；今天无窗口内新增。</li>
+  <li><strong>LangChain：</strong>Blog RSS 最新仍停在 10 月 9 日 Managed Deep Agents / Model Router / Snyk 等条目；今天无窗口内新增。</li>
+  <li><strong>Hugging Face：</strong>Blog RSS 最新仍是 10 月 9 日 GPU cluster scheduling；今天无窗口内新增。</li>
+  <li><strong>Interconnects / Nathan Lambert：</strong>RSS 最新仍是 10 月 9 日对快速进展但非通用超智能方向的分析；今天无窗口内新增。</li>
+  <li><strong>Google DeepMind：</strong>RSS 最新仍是 10 月 7 日 SynthID Detector；今天无窗口内新增。</li>
+  <li><strong>Lilian Weng：</strong>RSS 最新仍是 7 月 4 日 harness engineering；今天无窗口内新增。</li>
+  <li><strong>AI 播客索引：</strong>结构化 JSON 的 <code>updatedAt</code> 仍为 2026-07-02；今天无新增信号。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Watchlist agent：</strong>把“等待上游状态变化”标准化：目标 URL/repo、检查频率、变更判定、去重状态、通知模板、停止条件。</li>
+  <li><strong>CI 前瞻矩阵：</strong>对关键 Python/Node/浏览器/数据库版本建立 preview CI，等上游支持一出现就跑兼容性检查。</li>
+  <li><strong>Agent worktree 规范：</strong>coding agent 默认独立 worktree 或分支，避免和人类未提交改动混在一起。</li>
+  <li><strong>MCP 启动策略：</strong>把 MCP server 分成默认禁用、会话启用、项目启用、管理员批准四类；记录每次启动来源和授权范围。</li>
+  <li><strong>ExplainX 抓取器：</strong>新增 blog RSS、daily AI news RSS、hydration JSON 差分解析，只在拿到文章 URL/标题/时间后进入日报。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>ExplainX 10 月 11 日变化：</strong>sitemap lastmod 不能直接证明新文章，需要下轮用 RSS 或页面数据差分确认。</li>
+  <li><strong>X 高优先级人物时间线：</strong>Sam Altman、Kevin Weil、Josh Woodward、Amanda Askell、Karpathy、Alex Albert、Logan Kilpatrick、Jeff Dean、Demis Hassabis、Mira Murati 等账号本轮未通过公开路径拿到可核验更新；不能据此判断没有发文。</li>
+  <li><strong>Python 3.15 生态兼容：</strong>actions/python-versions 支持只是 CI 可运行的开始；具体项目仍需关注依赖 wheel、类型检查器、linter、C 扩展和部署镜像支持。</li>
+  <li><strong>Agent 自动监控边界：</strong>定时 clone/pull 属于低风险读操作；若自动任务进一步创建 PR、修改依赖或发外部消息，需要显式确认和审计。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Latent Space feed 在本窗口内没有新的公开高信号条目；10 月 10 日活动通知已在昨天作为低优先级噪音记录。</li>
+  <li>Google DeepMind、Lilian Weng、AI 播客索引均无窗口内新增，不重复解读旧条目。</li>
+  <li>OpenAI、LangChain、Hugging Face、Interconnects 的 10 月 9 日内容仍有背景价值，但今天不再当作新增新闻展开。</li>
+  <li>ExplainX 页面包含大量历史文章和工具目录数据，本期只记录抓取信号，不展开历史内容。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/10/python-actions/">Simon Willison: Python 3.15.0 added to actions/python-versions</a></li>
+  <li><a href="https://github.com/actions/python-versions/commit/49858b91c92d27403416ee43117032e91d00ce24">GitHub commit: Python 3.15.0 added to actions/python-versions</a></li>
+  <li><a href="https://www.python.org/downloads/release/python-3150/">Python 3.15.0 release</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/11/dwarf-fortress/">Simon Willison: Dwarf Fortress uses version control now</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">ExplainX blog sitemap</a></li>
+  <li><a href="https://explainx.ai/blog">ExplainX blog</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-10-new-controls-and-chat-improvements-in-copilot-for-jetbrains">GitHub: New controls and chat improvements in Copilot for JetBrains</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/rss/">Google DeepMind RSS</a></li>
+  <li><a href="https://lilianweng.github.io/index.xml">Lilian Weng RSS</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+  <li><a href="https://rsshub.app/twitter/user/sama">RSSHub Twitter user sample</a></li>
+  <li><a href="https://xcancel.com/sama/rss">xcancel RSS sample</a></li>
+  <li><a href="https://nitter.net/sama/rss">Nitter RSS sample</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-11T00:00:00Z / 2026-10-12T00:00:00Z.</footer>
