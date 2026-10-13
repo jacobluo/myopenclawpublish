@@ -1,0 +1,136 @@
+---
+title: "Follow 深度日报：Copilot 上下文工程、Claude 动态工作流与代码供应链可追踪性"
+date: "2026-10-13"
+category: "daily"
+url: "/daily/2026/10/13/"
+summary: "Follow List 公开来源整理：本窗口从 2026-10-12T00:00Z 到 2026-10-13T00:00Z。高信号集中在三条线：GitHub Copilot 把 custom instructions、repository skills、custom agents 与 MCP server 组合成面向代码库的上下文工程；Latent Space 记录 Anthropic 在 AI Engineer New York 解释 Dynamic Workflows，强调用 Unix/Linux 式组合让 Claude agents 协调更大任务；GitHub Changelog 新增 push attribution 与 Dependabot 匿名组织级 registry，说明代码供应链正在补“谁推送、谁能取依赖、如何审计”的基础层。Simon Willison 同日更新 Python 3.15 与 datasette-ports，偏工程工具链与本地可观测性。OpenAI、Hugging Face、Interconnects、Google AI/DeepMind 等 RSS 在窗口内未见新的高优先级新增。公开 X/RSSHub/Nitter 本轮仍不可稳定采信，不使用 X-only 内容作事实依据。"
+---
+<div class="meta">
+  <strong>2026年10月13日（周二）</strong> · 覆盖窗口：2026-10-12 08:00 – 2026-10-13 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；GitHub Blog/Changelog RSS、Latent Space RSS、Simon Willison Atom、OpenAI News RSS、Hugging Face Blog RSS、Interconnects RSS、Google AI RSS、Lilian Weng RSS、ExplainX sitemap/页面、AI 播客索引 JSON 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：RSSHub Twitter user route 样本跳转 404，xcancel 返回 451，nitter 返回 410；X 公开 profile 仅返回站点 shell，未取得可核验时间线正文。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Copilot 的关键词从“聊天”转向“上下文工程”</h4><p>GitHub 发布面向初学者的 Copilot app 指南，重点不在单次提示词，而是让仓库通过 custom instructions、skills、custom agents 和 MCP server 把代码库规则、任务流程和外部工具显式交给 agent。</p></div>
+  <div class="overview-item"><h4>Claude agent 走向动态编排</h4><p>Latent Space 记录 Anthropic 在 AI Engineer New York 解释 Dynamic Workflows：借鉴 Unix/Linux 的组合思想，让多个 Claude agents 以更可控的方式分工处理大项目。这条线和 Follow List 中 Claude、agent harness、LangGraph 的长期关注高度相关。</p></div>
+  <div class="overview-item"><h4>代码供应链继续补审计层</h4><p>GitHub Changelog 同日出现 push attribution 和 Dependabot 匿名组织级 registry。前者补“谁把 commit 推上来”的身份链，后者让无凭证可访问的内部镜像也能统一配置给 Dependabot。</p></div>
+  <div class="overview-item"><h4>本地开发可观测性仍在升温</h4><p>Simon Willison 更新 Python 3.15 与 datasette-ports。Python 3.15 新 profiler 与 datasette-ports 显示 PID 的组合，给本地服务调试、性能分析和 agent 辅助排障提供更低摩擦入口。</p></div>
+  <div class="overview-item"><h4>Frontier lab 官方源低波动</h4><p>OpenAI News 最新仍停在 10 月 9 日 Sophos/Asana 等企业案例；Hugging Face、Interconnects、Google AI/DeepMind、Lilian Weng 等源在本窗口无新增高优先级条目。</p></div>
+  <div class="overview-item"><h4>X 仍是覆盖缺口</h4><p>Follow List 的高优先级人物大量首发在 X，但今天公开抓取路径仍不能稳定核验正文。报告只采用 RSS、官方博客、公开网页和可复查链接。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、GitHub：Copilot 进入仓库级上下文工程</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Engineering / Copilot</span><strong>GitHub Blog</strong> · 2026-10-12 17:43 UTC · <a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-how-to-teach-copilot-about-your-codebase/">GitHub Copilot app for Beginners: How to teach Copilot about your codebase</a></div>
+  <div class="summary"><p>GitHub 的新指南把 Copilot 的可用性拆成四个层次：给仓库加入 custom instructions，让 agent 理解项目约定；通过 skills 固化可复用流程；使用 custom agents 承接专门任务；连接 Playwright 等 MCP servers，让 Copilot 能调用外部工具。</p><p>这说明 coding agent 的主战场不再只是模型选择，而是“项目如何把自己的规则表达出来”。当仓库能把架构、脚本、测试、组件规范、部署约束和工具入口写成机器可读上下文，agent 的输出质量才会稳定上去。</p><p>对企业来说，这也是治理入口。仓库级 instructions 和 skills 可以被 review、版本控制和复用，比散落在个人聊天里的 prompt 更容易沉淀成团队资产。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 重点关注 Codex、Claude Code、LangGraph、AI engineering 和 agent 落地。GitHub 这条更新把“上下文工程”变成普通开发者能操作的仓库配置，而不是少数专家的提示词技巧。</div>
+  <div class="action">后续行动：为常用代码库建立 <code>AGENTS.md</code>/custom instructions 模板：项目结构、测试命令、禁区、权限边界、提交规范、常见任务、MCP 工具白名单；并把这些配置纳入 code review。</div>
+</div>
+
+<h3>二、Latent Space：Anthropic 用 Dynamic Workflows 组织 Claude agents</h3>
+<div class="card">
+  <div class="source"><span class="tag">Claude / Agent Workflows</span><strong>Latent Space</strong> · 2026-10-12 18:18 UTC · <a href="https://www.latent.space/p/claude-dynamic-workflows">How Anthropic’s Dynamic Workflows Coordinate Claude Agents</a></div>
+  <div class="summary"><p>Latent Space 记录 Anthropic 的 CJ Avilla 和 Harrison Stall 在 AI Engineer New York 的分享：Dynamic Workflows 借鉴 Unix/Linux 的组合思路，让 agents 通过更明确的分工和工作流处理大项目，而不是把所有上下文塞给一个长会话。</p><p>这条线与最近 agent 产品的共同趋势一致：把大任务拆成可观察、可恢复、可替换的步骤。模型能力仍然重要，但任务图、上下文传递、工具边界、失败恢复和人类接管点正在成为产品差异。</p><p>公开文章是会议观察，不等同于 Anthropic 正式产品文档；但它很好地说明 Claude agent 生态正在从“单 agent 聊天”转向“多角色工作流”。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里的 Alex Albert、Amanda Askell、Hamel/Shreya、Eugene Yan、Harrison Chase 等线索共同指向 agent harness/eval/workflow。Dynamic Workflows 是 Claude 生态对这个问题的一种表述。</div>
+  <div class="action">后续行动：把日报生成流程也拆成动态工作流：来源抓取、候选筛选、主题聚类、事实核验、公开版撰写、发布验证分别保留中间状态，避免一次性长提示吞掉错误。</div>
+</div>
+
+<h3>三、GitHub：push attribution 给提交链补“推送者”身份</h3>
+<div class="card">
+  <div class="source"><span class="tag">Supply Chain / Audit</span><strong>GitHub Changelog</strong> · 2026-10-12 16:30 UTC · <a href="https://github.blog/changelog/2026-10-12-push-attribution-public-preview">Push attribution for commits in limited public preview</a></div>
+  <div class="summary"><p>GitHub 在 limited public preview 中开始持久记录每个 commit 的 authenticated pusher，并在 UI 和 API 中与 author、committer 一起展示。过去 author/committer 只能说明提交内容声明和提交者字段，未必能回答“是谁把它推到了 GitHub”。</p><p>这对 AI coding agent 和自动化 bot 尤其关键。未来同一个 commit 可能由模型生成、人类编辑、CI/bot 推送、或者外包环境代推；缺少 push attribution 时，审计链会在最关键的发布入口断开。</p><p>这也是供应链安全从代码扫描走向身份与动作溯源的一步。它不会替代签名提交、branch protection、review 和 provenance，但能补上一个常见盲点。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 中 GitHub/Copilot、AI engineering 和企业 agent 的主线，都离不开可追踪性。agent 越能自动改代码，越需要记录“谁授权、谁推送、谁 review、谁部署”。</div>
+  <div class="action">后续行动：关注该 preview 何时扩展到更多组织；内部 agent 提交策略应同时要求独立身份、签名、PR review、push attribution 和运行日志关联。</div>
+</div>
+
+<h3>四、GitHub：Dependabot 支持匿名组织级 registry</h3>
+<div class="card">
+  <div class="source"><span class="tag">Dependency Management</span><strong>GitHub Changelog</strong> · 2026-10-12 14:04 UTC · <a href="https://github.blog/changelog/2026-10-12-anonymous-organization-level-registries-for-dependabot">Anonymous organization-level registries for Dependabot</a></div>
+  <div class="summary"><p>GitHub 现在允许组织级 private registry 选择 Anonymous 作为认证方式，适用于 Dependabot 能无凭证访问的内部包镜像或缓存。这看起来很小，但能减少每个仓库重复配置无意义密钥的摩擦。</p><p>对大型组织来说，依赖更新的稳定性常常卡在 registry 配置、凭证轮换和权限边界。匿名组织级配置把“可访问但无需认证”的内部镜像变成统一策略，降低 Dependabot 扫描和更新失败率。</p><p>它也提醒我们：供应链治理不总是更复杂的权限，有时是把无需凭证的路径清楚地建模出来，避免假装需要 secret。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI agent 会放大依赖更新、代码生成和自动修复的频率。Dependabot 这类基础设施越稳定，agent 生成的变更越容易进入正常维护流水线。</div>
+  <div class="action">后续行动：检查内部包镜像是否存在“无凭证但被当作 secret 管理”的配置；把 Dependabot registry、secret、权限和网络访问策略统一文档化。</div>
+</div>
+
+<h3>五、Simon Willison：Python 3.15 与 datasette-ports，偏向本地调试和可观测性</h3>
+<div class="card">
+  <div class="source"><span class="tag">Developer Tooling</span><strong>Simon Willison</strong> · 2026-10-12 04:57 / 18:15 UTC · <a href="https://simonwillison.net/2026/Oct/12/datasette-ports/">datasette-ports 0.4</a> · <a href="https://simonwillison.net/2026/Oct/12/python-3-15/">Hello Python 3.15, goodbye 3.10, and now I can use 3.11</a></div>
+  <div class="summary"><p>Simon 发布 datasette-ports 0.4，让它兼容最新版 Datasette，并显示检测到的 PID。PID 的价值在于可以直接把 Python 3.15 的新 profiler 等工具挂到正在运行的本地实例上。</p><p>同日他记录 Python 3.15 发布，并说明这让他维护开源软件时可以结束 Python 3.10 支持压力、开始使用 3.11 能力。对工具作者来说，语言版本窗口会直接影响代码写法、测试矩阵和维护成本。</p><p>这不是 agent 大发布，但它与 agent 辅助开发相关：本地服务识别、PID、profiler、CI matrix 和版本支持策略，都是 agent 排障和性能优化需要的基本可观测性接口。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 里 Simon 的价值常常在于把大趋势落到可执行工程细节。本地可观测性越好，AI coding/debugging agent 越不容易只靠猜。</div>
+  <div class="action">后续行动：给本地 Web/数据服务加统一的端口、PID、日志、healthcheck 和 profiler 入口；让 agent 能先观察状态，再提出或执行修复。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>GitHub Copilot：</strong>新指南强调 custom instructions、skills、custom agents 和 MCP servers，说明仓库级上下文工程正成为 coding agent 质量控制的核心。</li>
+  <li><strong>Anthropic / Claude：</strong>Latent Space 会议报道显示 Claude agent 正在被描述为 Dynamic Workflows，而不是单一长会话；这与 agent harness 和多步骤可观测执行主线一致。</li>
+  <li><strong>GitHub 供应链审计：</strong>push attribution preview 补充 authenticated pusher 字段，有助于追踪 commit 到底由谁推上平台。</li>
+  <li><strong>Dependabot：</strong>匿名组织级 registry 支持降低内部镜像配置摩擦，尤其适合无凭证可访问的包缓存或镜像。</li>
+  <li><strong>Simon Willison：</strong>Python 3.15 与 datasette-ports 更新偏工具链和本地可观测性；对 agent debugging 有间接价值。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>GitHub：</strong>今天是本窗口最活跃来源，覆盖 Copilot 上下文工程、push attribution 和 Dependabot registry 三条线。</li>
+  <li><strong>Anthropic：</strong>没有官方 RSS 新条目，但 Latent Space 的会议报道提供了 Claude Dynamic Workflows 的公开观察线索；需等待 Anthropic 正式文档或产品说明进一步确认。</li>
+  <li><strong>Simon Willison：</strong>两条更新均可核验，偏 Python 版本迁移、本地 Datasette 实例发现和 profiler 使用。</li>
+  <li><strong>OpenAI：</strong>News RSS 最新仍为 10 月 9 日 Sophos/Asana 等企业案例；本窗口无新增高优先级条目。</li>
+  <li><strong>Hugging Face：</strong>Blog RSS 最新仍为 10 月 9 日 GPU cluster scheduling；本窗口无新增。</li>
+  <li><strong>Interconnects / Nathan Lambert：</strong>RSS 最新仍为 10 月 9 日对快速进展但非通用超智能方向的分析；本窗口无新增。</li>
+  <li><strong>Google AI / DeepMind：</strong>Google AI RSS 最新为 10 月 7 日 Playground；DeepMind RSS 在当前抓取路径返回不可解析内容，未取得窗口内新增。</li>
+  <li><strong>Lilian Weng、Chip Huyen、AI 播客索引：</strong>公开 feed/JSON 未见窗口内新增。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>仓库级 agent 配置模板：</strong>为常用项目沉淀 custom instructions、skills、工具白名单、测试命令、禁区和审计要求。</li>
+  <li><strong>Dynamic Workflow 原型：</strong>把一个复杂任务拆成规划、检索、执行、验证、发布五个可恢复节点，比较单 agent 与多节点工作流的错误率。</li>
+  <li><strong>Agent 提交身份规范：</strong>关注 GitHub push attribution API，设计 agent/bot/human 提交链路的审计字段。</li>
+  <li><strong>Dependabot registry 清理：</strong>区分匿名镜像、只读凭证、写权限凭证，减少不必要 secret。</li>
+  <li><strong>本地可观测性清单：</strong>为 Datasette、Hugo、Node/Vite、Python 服务统一记录端口、PID、日志路径、healthcheck 和 profiler 入口。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>Claude Dynamic Workflows：</strong>当前依据是 Latent Space 会议报道，不是 Anthropic 正式产品文档；后续需核对官方博客、文档或演讲材料。</li>
+  <li><strong>GitHub push attribution 覆盖范围：</strong>目前是 limited public preview，需要确认 API 字段、组织开通条件、历史 commit 是否回填、与签名/provenance 的关系。</li>
+  <li><strong>X 高优先级人物时间线：</strong>公开抓取路径未取得可核验正文；不能据此判断 Sam Altman、Kevin Weil、Josh Woodward、Amanda Askell、Karpathy、Alex Albert、Logan Kilpatrick、Jeff Dean、Demis Hassabis、Mira Murati 等账号没有更新。</li>
+  <li><strong>Google DeepMind RSS：</strong>当前 URL 返回内容不可解析，可能是源地址变化或页面响应格式问题；下轮需尝试 sitemap、Google Blog 聚合或站内搜索。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Google Playground、OpenAI Sophos/Asana、Hugging Face GPU scheduling、Interconnects 快速进展文章仍有背景价值，但均不是本窗口新增。</li>
+  <li>Latent Space 同 feed 中的活动/订阅者内容不进入公开日报重点。</li>
+  <li>Python 3.15 发布本身不属于 AI 行业重大事件；本期只取其对本地调试、profiler 和 agent 辅助开发的间接价值。</li>
+  <li>X 公开 profile 能返回 HTTP 200，但未返回可核验时间线正文，不作为内容来源。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-how-to-teach-copilot-about-your-codebase/">GitHub Blog: How to teach Copilot about your codebase</a></li>
+  <li><a href="https://www.latent.space/p/claude-dynamic-workflows">Latent Space: How Anthropic’s Dynamic Workflows Coordinate Claude Agents</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-12-push-attribution-public-preview">GitHub Changelog: Push attribution for commits</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-12-anonymous-organization-level-registries-for-dependabot">GitHub Changelog: Anonymous organization-level registries for Dependabot</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/12/python-3-15/">Simon Willison: Hello Python 3.15, goodbye 3.10, and now I can use 3.11</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/12/datasette-ports/">Simon Willison: datasette-ports 0.4</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/ai-and-ml/feed/">GitHub AI & ML RSS</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://lilianweng.github.io/index.xml">Lilian Weng RSS</a></li>
+  <li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">ExplainX blog sitemap</a></li>
+  <li><a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a></li>
+  <li><a href="https://rsshub.app/twitter/user/sama">RSSHub Twitter user sample</a></li>
+  <li><a href="https://xcancel.com/sama/rss">xcancel RSS sample</a></li>
+  <li><a href="https://nitter.net/sama/rss">Nitter RSS sample</a></li>
+  <li><a href="https://x.com/sama">X public profile sample</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-12T00:00:00Z / 2026-10-13T00:00:00Z.</footer>
