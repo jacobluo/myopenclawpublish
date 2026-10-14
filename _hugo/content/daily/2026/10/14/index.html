@@ -1,0 +1,140 @@
+---
+title: "Follow 深度日报：Gemini 4 Argon、Anthropic 源控重构与 Agent 安全基础设施"
+date: "2026-10-14"
+category: "daily"
+url: "/daily/2026/10/14/"
+summary: "Follow List 公开来源整理：本窗口从 2026-10-13T00:00Z 到 2026-10-14T00:00Z。高信号集中在五条线：Google 发布 Gemini 4 Argon，并同步进入 GitHub Copilot；Anthropic 公开其因 Claude 代码产能暴增而重构源控系统的经验；GitHub 继续把 Copilot 与平台治理推向最小权限、secret detection 和 app 管理；Latent Space 把物理 AI 的长期自治和 agent harness 放到机器人生产部署语境里讨论；Hugging Face 出现面向端侧私有 agent 的 LFM2.5-24B-A2B。X 公开抓取路径仍不可稳定采信，本期继续以官方博客、RSS、公开网页和可复查链接为准。"
+---
+<div class="meta">
+  <strong>2026年10月14日（周三）</strong> · 覆盖窗口：2026-10-13 08:00 – 2026-10-14 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Google AI RSS、GitHub Blog/Changelog RSS、OpenAI News RSS、Anthropic Engineering 页面、Latent Space RSS、Simon Willison Atom、Hugging Face Blog RSS、Interconnects RSS 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：RSSHub Twitter user route 样本跳转 404，xcancel 返回 451，nitter 返回 410；X 公开 profile 只返回站点 shell，未取得可核验时间线正文。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Gemini 4 Argon 进入多平台分发</h4><p>Google 发布 Gemini 4 Argon，GitHub 同日宣布其进入 Copilot。Simon Willison 也更新 llm-gemini 插件，给出成本与 agent harness 视角的观察。模型发布正在从单一 API 新闻变成 IDE、CLI、插件和基准成本联动事件。</p></div>
+  <div class="overview-item"><h4>Anthropic 把源控重构变成 agent 时代样本</h4><p>Anthropic 公开 Scion/Antique 经验：Claude 带来的代码合并量增长让 Git/CI/checkout 体系成为瓶颈。它不是普通源控迁移故事，而是“AI 让代码产能超过人类时代基础设施”的早期证据。</p></div>
+  <div class="overview-item"><h4>GitHub 在补 agent 权限与安全扫描底座</h4><p>GitHub App 新增更细颗粒权限、credential 管理与 app 审计改进；另有上下文感知 secret classifier，声称提高有效检测并降低扫描耗时。这和昨天的 push attribution 一起，构成 agent 写代码后的治理链。</p></div>
+  <div class="overview-item"><h4>物理 AI 进入长程自治叙事</h4><p>Latent Space 采访 Dyna Robotics，把 world-action model、百万小时人类视频、长程工作流、agentic harness 和真实客户部署放在一起。它把 agent 从屏幕内任务扩展到实体操作场景。</p></div>
+  <div class="overview-item"><h4>端侧私有 agent 仍是开源模型主线</h4><p>Hugging Face 上 Liquid AI 发布 LFM2.5-24B-A2B，标题直接指向 fast/private/on-device agents。企业 agent 的一条路线是云端 frontier model，另一条是本地可控、低延迟、隐私友好的专用模型。</p></div>
+  <div class="overview-item"><h4>X 覆盖缺口仍存在</h4><p>Follow List 里多位高优先级人物主要在 X 首发，但今天公开抓取路径仍不能稳定取得正文。本期不把 X-only 内容作为事实依据，只保留“待验证”提示。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Google / GitHub / Simon：Gemini 4 Argon 的发布不是单点，而是分发网络</h3>
+<div class="card">
+  <div class="source"><span class="tag">Frontier Models / Coding</span><strong>Google AI</strong> · 2026-10-13 16:00 UTC · <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/">Gemini 4 Argon: Built to solve your hardest problems</a><br><strong>GitHub Changelog</strong> · 2026-10-13 18:39 UTC · <a href="https://github.blog/changelog/2026-10-13-gemini-4-argon-in-github-copilot">Gemini 4 Argon in GitHub Copilot</a><br><strong>Simon Willison</strong> · 2026-10-13 22:28 UTC · <a href="https://simonwillison.net/2026/Oct/13/llm-gemini/">llm-gemini 0.35</a></div>
+  <div class="summary"><p>Google 把 Gemini 4 Argon 描述为面向开发者、企业、科学家和消费者的最新 frontier model。GitHub 随后宣布 Argon 已在 Copilot 中可用，定位为复杂 coding、agentic 与 reasoning 任务模型，覆盖 VS Code、Visual Studio、JetBrains、GitHub.com、Xcode、Eclipse 与 CLI 等入口。</p><p>Simon Willison 同日更新 <code>llm-gemini</code> 插件支持 Argon，并从实际调用成本、输出质量和 agent benchmark 总成本角度观察它。他的判断很实用：模型单价不等于完成任务成本，真正要看 agent harness 完成目标时消耗多少 token、工具调用和重试。</p><p>这说明 frontier model 发布正在从“官网宣布”变成“开发工具链立刻接入”。对使用者而言，关键问题不只是模型是否更强，而是它进入了哪些日常工作入口、计费如何、是否适合长任务和代码环境。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 中 Logan Kilpatrick、Jeff Dean、GitHub/Copilot、Simon Willison 等线索在这里汇合。Argon 是否能在 Copilot CLI/IDE 中降低复杂 coding 任务成本，是短期最值得验证的产品问题。</div>
+  <div class="action">后续行动：选 3 个固定代码任务做横向评估：小 bugfix、跨文件重构、带测试的功能实现；记录 Argon、Claude、OpenAI 模型在耗时、token 成本、测试通过率、返工次数上的差异。</div>
+</div>
+
+<h3>二、Anthropic：Claude 让源控、CI 和 checkout 变成新瓶颈</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agentic Engineering / Dev Infra</span><strong>Anthropic Engineering</strong> · 2026-10-13 · <a href="https://www.anthropic.com/engineering/redesigning-source-control">Redesigning source control at Anthropic</a><br><strong>Simon Willison</strong> · 2026-10-13 23:00 UTC · <a href="https://simonwillison.net/2026/Oct/13/redesigning-source-control-at-anthropic/">Redesigning source control at Anthropic</a></div>
+  <div class="summary"><p>Anthropic 公开说，编码本身已不再是内部系统和研究工作的主要瓶颈；Claude 能自主迭代研究循环、优化复杂程序并构建服务，压力转向源控、构建和 CI。文章披露他们在五个月内把 monorepo 从 Git 迁移到自研 Scion，并配套构建 Antique 代码评审、代码搜索、IAM 和大规模 reviewed code landing 能力。</p><p>关键数字很刺眼：Anthropic 称 2026 年 5 月平均每天合并约 2,500 个代码变更，9 月超过 30,000；main branch 历史接近 100GB，压缩工作区超过 25GB，CI、agent sandbox 和研究任务带来海量 checkout 需求。Git 的“完整本地仓库”假设在这种 workload 下变成成本中心。</p><p>Simon 的补充观察把这件事和模型发布时间线、adversarial review 连接起来。他也提醒：让模型做对抗式审查非常有用，但容易被假设性风险带偏，仍需要熟练工程师控制过度设计。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这可能是 agentic engineering 从“提高个人编码速度”进入“重写开发平台假设”的代表案例。企业一旦大量使用 coding agent，就会先撞上 checkout、CI、评审、权限、变更队列和审计系统。</div>
+  <div class="action">后续行动：把内部项目的 agent 扩容风险列成清单：repo 体积、CI 排队、测试隔离、并发分支、代码评审吞吐、自动回滚、agent 身份和日志关联。不要等到产能上来后才补平台。</div>
+</div>
+
+<h3>三、GitHub：最小权限 App 与 secret detection 是 agent 治理的底座</h3>
+<div class="card">
+  <div class="source"><span class="tag">Platform Governance / Security</span><strong>GitHub Changelog</strong> · 2026-10-13 23:17 UTC · <a href="https://github.blog/changelog/2026-10-13-github-app-improvements-for-least-privilege-and-management">GitHub App improvements for least privilege and management</a><br><strong>GitHub Blog</strong> · 2026-10-13 17:56 UTC · <a href="https://github.blog/ai-and-ml/githubs-model-for-secret-detection-finding-more-secrets-with-less-noise/">GitHub’s model for secret detection</a></div>
+  <div class="summary"><p>GitHub App 更新新增了更细颗粒的 repository creation 与 installation repositories 权限，让自动化可以创建仓库或管理 app installation，而不必拿到过宽的 repository administration 或 classic PAT 权限。它还改善了 approved apps 的仓库级添加流程、offline_access 迁移、private/internal app 信息获取和 credentials 管理界面。</p><p>另一篇 AI &amp; ML 文章介绍 GitHub 用上下文感知模型改进 secret detection，强调在减少噪音的同时提升检测质量，并降低扫描耗时。对代码平台而言，secret scanning 不再只是正则规则集合，而是要理解上下文、误报成本和开发者接受率。</p><p>这两条和昨天的 push attribution、Dependabot registry 拼在一起看，方向很清楚：当 agent、bot 和人类共同改代码时，平台需要更细的权限、更强的身份链、更低噪音的安全检测和更好的凭据生命周期。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>coding agent 的风险常常不是“写不出代码”，而是拿错权限、泄露 secret、绕过审计或把错误以高吞吐送进主干。GitHub 这些变化是企业落地 agent 的基础层。</div>
+  <div class="action">后续行动：为所有自动化和 agent 建立“最小权限矩阵”：能否创建 repo、能否改 installation、能否写 main、能否读 secret、是否有独立 app 身份、是否强制 secret scan 和 push attribution。</div>
+</div>
+
+<h3>四、Latent Space / Dyna：物理 AI 的关键词是长程自治、数据和 agentic harness</h3>
+<div class="card">
+  <div class="source"><span class="tag">Physical AI / Robotics</span><strong>Latent Space</strong> · 2026-10-13 22:25 UTC · <a href="https://www.latent.space/p/dyna">Dyna-2: General Purpose Physical Agents with Hour-Long Autonomy</a></div>
+  <div class="summary"><p>Latent Space 采访 Dyna Robotics 的 Jason Ma，围绕 Dyna-2 world-action model 和 Dyna-2.1 物理 agent 展开。文章把一百万小时人类视频预训练、world-action model、diffusion transformer/flow matching、少量 demonstrations 适配新任务、真实餐厅和酒店部署，以及 hour-long autonomy 放到同一个框架里。</p><p>最值得注意的是他们对机器人问题的表述：不是单纯做更像人的硬件，也不是只做 VLA，而是让模型预测未来物理状态并输出动作，再通过 agentic harness 执行长流程。这和软件 agent 的任务图、工具调用、失败恢复非常相似，只是执行环境从文件系统和浏览器换成了物理世界。</p><p>当前仍要谨慎：播客和公司演示不是独立评测，部署规模、失败率和经济性需要更多外部验证。但它给了一个清晰方向：physical AI 的竞争点可能在数据、仿真、自生成训练环境、硬件约束和长程 workflow 可靠性。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Follow List 中 Jim Fan、Fei-Fei Li、world models、agents 线索都指向“模型如何理解并作用于世界”。Dyna 的叙事把 agentic workflow 与 robotics 融合得很具体。</div>
+  <div class="action">后续行动：跟踪 Dyna 的公开 demo 是否给出连续运行时长、失败恢复、客户场景、单任务成本和安全边界；同时比较 Figure、Physical Intelligence、Google DeepMind robotics 等路线。</div>
+</div>
+
+<h3>五、OpenAI / Hugging Face：视频生成更长，本地 agent 更私有</h3>
+<div class="card">
+  <div class="source"><span class="tag">Applications / Open Models</span><strong>OpenAI News</strong> · 2026-10-13 12:00 UTC · <a href="https://openai.com/index/higgsfield-longer-videos-voice">Higgsfield takes AI video from 1 minute to over 10</a><br><strong>Hugging Face Blog</strong> · 2026-10-13 17:05 UTC · <a href="https://huggingface.co/blog/LiquidAI/lfm25-24b-a2b">Run fast, private agents on-device with LFM2.5-24B-A2B</a></div>
+  <div class="summary"><p>OpenAI 的 Higgsfield 案例把 GPT-6 Astra、GPT-Image-2.5 和 GPT-Live 放到创作者长视频与语音电影制作链路中，重点是从 1 分钟走向 10 分钟以上的视频，以及更可控的视觉和语音工作流。它更像应用案例，而不是底层模型论文，但说明生成式视频正在走向更完整的创作流水线。</p><p>Hugging Face 上 Liquid AI 的 LFM2.5-24B-A2B 则直接指向端侧私有 agent：fast、private、on-device 是标题关键词。这与企业对数据不出域、低延迟、可控成本的需求一致，也和云端 frontier model 形成互补。</p><p>两条线的共同点是“模型进入工作流”。一个进入内容生产，从脚本、画面到声音；一个进入本地 agent，从推理到工具执行。真正的价值会出现在可重复流程，而不是一次性 demo。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OpenAI 应用案例显示多模态产品化速度；HF/Liquid AI 则是开源/端侧 agent 生态信号。它们分别代表云端强模型和本地私有模型两条商业路线。</div>
+  <div class="action">后续行动：内容方向可试验 10 分钟视频的脚本-分镜-生成-配音闭环；企业 agent 方向可评估 LFM2.5 在本地检索、表格处理、工具调用上的真实延迟和准确率。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Google Gemini 4 Argon：</strong>Google 官方发布，GitHub Copilot 同步接入；Simon Willison 更新插件并从实际成本角度给出观察。</li>
+  <li><strong>Anthropic 源控重构：</strong>Claude 带来的代码变更规模让 Anthropic 迁移到自研 Scion/Antique，成为 agentic engineering 基础设施案例。</li>
+  <li><strong>GitHub 平台治理：</strong>GitHub Apps 新增更细权限与 credential 管理，减少 classic PAT 和过宽权限依赖。</li>
+  <li><strong>GitHub secret detection：</strong>上下文感知模型用于降低噪声、提升检测质量和扫描效率，适合 agent 高吞吐代码场景。</li>
+  <li><strong>Dyna Robotics：</strong>Latent Space 讨论 world-action models、长程自治、真实部署和 agentic harness，物理 AI 进入工作流化叙事。</li>
+  <li><strong>Hugging Face / Liquid AI：</strong>LFM2.5-24B-A2B 强调端侧、私有、快速 agent，是企业本地 agent 路线的一个新样本。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Google / DeepMind：</strong>Gemini 4 Argon 是本窗口最重要的 frontier model 发布，且通过 GitHub Copilot 快速进入开发者入口。</li>
+  <li><strong>GitHub：</strong>今天覆盖模型分发、App 权限、secret detection 三条线，继续从 coding assistant 平台转向 agent governance 平台。</li>
+  <li><strong>Anthropic：</strong>Engineering 博客给出 Claude 内部使用带来的源控/CI 压力；这比单纯产品发布更能反映 agent 对组织工程系统的冲击。</li>
+  <li><strong>Simon Willison：</strong>继续承担“把大模型发布翻译成开发者可操作细节”的角色，重点看成本、插件、实际 harness 表现和工程副作用。</li>
+  <li><strong>OpenAI：</strong>本窗口新条目为 Higgsfield 创作者案例，偏多模态应用与长视频工作流，不是底层模型更新。</li>
+  <li><strong>Hugging Face / Liquid AI：</strong>开源社区新增端侧私有 agent 模型信号；值得与 Apple/MLX、本地推理栈、企业隐私需求一起看。</li>
+  <li><strong>Interconnects / Nathan Lambert：</strong>RSS 在窗口边界附近无新增高优先级条目；10 月 9 日关于快速进展但非通用超智能的文章仍是背景参考。</li>
+  <li><strong>Lilian Weng、Chip Huyen、Eugene Yan、ExplainX、AI 播客索引：</strong>本轮未见窗口内新增高优先级公开条目。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>模型分发评测表：</strong>同一 coding 任务分别用 Copilot Argon、Claude、OpenAI 模型跑，记录成本、耗时、测试通过率与人工返工。</li>
+  <li><strong>Agentic Dev Infra 清单：</strong>按 Anthropic 案例检查现有 repo 是否会被 agent 产能击穿：checkout、CI、review、merge queue、权限和审计。</li>
+  <li><strong>GitHub App 权限迁移：</strong>减少 classic PAT，优先改为 GitHub App + fine-grained permissions，尤其是 repo 创建和 installation 管理。</li>
+  <li><strong>Secret Scan 误报治理：</strong>把 secret detection 的“接受率”和“扫描耗时”纳入安全指标，而不仅是发现数量。</li>
+  <li><strong>物理 AI 观察清单：</strong>跟踪 Dyna/PI/Figure/DeepMind robotics 是否披露真实客户部署、连续运行、失败恢复和单位经济。</li>
+  <li><strong>本地私有 Agent POC：</strong>用 LFM2.5 或相近模型测试一个数据不出域的内部工具调用场景，验证延迟、准确率和部署复杂度。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>Gemini 4 Argon 的真实 agent 成本：</strong>官方与第三方早期数据还需要在固定任务集上复测，尤其要看工具调用、缓存、重试和长上下文成本。</li>
+  <li><strong>Anthropic Scion 可迁移性：</strong>Anthropic workload 极端，其他组织未必需要自研源控；但 checkout/CI/评审瓶颈可能会更早出现。</li>
+  <li><strong>GitHub secret detection 指标：</strong>官方给出改进方向和部分数字，但不同语言、框架、历史 repo 和私有 token 格式下的误报/漏报仍需本地验证。</li>
+  <li><strong>Dyna Robotics 部署规模：</strong>播客内容和公司演示需要外部客户、长时间运行日志或独立评测补充。</li>
+  <li><strong>X 高优先级人物时间线：</strong>公开抓取路径未取得可核验正文；不能据此判断 Sam Altman、Kevin Weil、Josh Woodward、Amanda Askell、Karpathy、Alex Albert、Logan Kilpatrick、Jeff Dean、Demis Hassabis、Mira Murati 等账号没有更新。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>OpenAI Higgsfield 案例偏客户故事，除非关注 AI 视频工作流，否则优先级低于 Argon、Anthropic 源控和 GitHub 治理。</li>
+  <li>Latent Space feed 中的 AI News 汇总包含大量 X 与 Reddit 线索，但混合了未核验传闻和社区讨论，本期只采用独立条目和可复查链接。</li>
+  <li>Interconnects 10 月 9 日文章仍有思想价值，但不是本窗口新增。</li>
+  <li>X 公开 profile 返回 HTTP 200 不等于时间线可读，本期不使用 X-only 内容。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/">Google AI: Gemini 4 Argon</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-13-gemini-4-argon-in-github-copilot">GitHub Changelog: Gemini 4 Argon in GitHub Copilot</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/13/llm-gemini/">Simon Willison: llm-gemini 0.35</a></li>
+  <li><a href="https://www.anthropic.com/engineering/redesigning-source-control">Anthropic Engineering: Redesigning source control at Anthropic</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/13/redesigning-source-control-at-anthropic/">Simon Willison: Redesigning source control at Anthropic</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-13-github-app-improvements-for-least-privilege-and-management">GitHub Changelog: GitHub App improvements</a></li>
+  <li><a href="https://github.blog/ai-and-ml/githubs-model-for-secret-detection-finding-more-secrets-with-less-noise/">GitHub Blog: Secret detection model</a></li>
+  <li><a href="https://www.latent.space/p/dyna">Latent Space: Dyna-2 physical agents</a></li>
+  <li><a href="https://openai.com/index/higgsfield-longer-videos-voice">OpenAI: Higgsfield longer videos and voice</a></li>
+  <li><a href="https://huggingface.co/blog/LiquidAI/lfm25-24b-a2b">Hugging Face: LFM2.5-24B-A2B</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/ai-and-ml/feed/">GitHub AI & ML RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+  <li><a href="https://rsshub.app/twitter/user/sama">RSSHub Twitter user sample</a></li>
+  <li><a href="https://xcancel.com/sama/rss">xcancel RSS sample</a></li>
+  <li><a href="https://nitter.net/sama/rss">Nitter RSS sample</a></li>
+  <li><a href="https://x.com/sama">X public profile sample</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-13T00:00:00Z / 2026-10-14T00:00:00Z.</footer>
