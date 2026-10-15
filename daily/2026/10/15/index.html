@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 深度日报：OpenAI 网络安全 Agent 密集铺开、HydraFusion 多模型编排与金融 Agent 安全边界</title>
+    <meta name="description" content="Follow List 公开来源整理：本窗口从 2026-10-14T00:00Z 到 2026-10-15T00:00Z。高信号集中在五条线：OpenAI 同日连发多篇网络安全 agent 案例（SentinelOne、Block、Third Moment Research、Amp），Daybreak 成为主推叙事；GitHub 更新 HydraFusion 多模型编排并新增 Max 档位；Latent Space 讨论金融 agent 的自主性与安全边界；LangChain 提出 Deep Agents 上下文工程；Simon Willison 关注 AI 大规模反编译游戏的双面影响。公开 X/RSSHub/Nitter 本轮仍不可稳定采信，本期继续以官方博客、RSS、公开网页和可复查链接为准。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 深度日报：OpenAI 网络安全 Agent 密集铺开、HydraFusion 多模型编排与金融 Agent 安全边界</h1>
+      <p class="portal-lead">Follow List 公开来源整理：本窗口从 2026-10-14T00:00Z 到 2026-10-15T00:00Z。高信号集中在五条线：OpenAI 同日连发多篇网络安全 agent 案例（SentinelOne、Block、Third Moment Research、Amp），Daybreak 成为主推叙事；GitHub 更新 HydraFusion 多模型编排并新增 Max 档位；Latent Space 讨论金融 agent 的自主性与安全边界；LangChain 提出 Deep Agents 上下文工程；Simon Willison 关注 AI 大规模反编译游戏的双面影响。公开 X/RSSHub/Nitter 本轮仍不可稳定采信，本期继续以官方博客、RSS、公开网页和可复查链接为准。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-10-15</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年10月15日（周四）</strong> · 覆盖窗口：2026-10-14 08:00 – 2026-10-15 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；GitHub Blog/Changelog RSS、OpenAI News RSS、Google AI RSS、Latent Space RSS、Simon Willison Atom、Hugging Face Blog RSS、LangChain Blog RSS 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：OpenAI 文章详情页仍被 Cloudflare 拦截（仅用 RSS 摘要与标题）；X 公开 profile 只返回站点 shell，X/RSSHub/Nitter 时间线正文不可稳定采信。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>网络安全 Agent 是 OpenAI 本周的主推叙事</h4><p>OpenAI 在同一天连发四篇与安全/agent 相关的案例：SentinelOne 把恶意软件分析从数周压到数小时、Block 用 AI 做威胁排查和补丁、Third Moment Research 声称一次跑 1 万个 agent 连续 36+ 小时、Amp 把 agent 带出纯编码场景。Daybreak 安全模型正在成为一条清晰的产品线。</p></div>
+  <div class="overview-item"><h4>GitHub 把"多模型编排"内置进 Copilot</h4><p>HydraFusion 更新模型池（Claude Opus 5.5、GPT-6 Astra、GPT-6.1 Sol、GPT-6 Luna）并新增 Max 档位，按阶段分配推理强度，改进 Cascade 与 Critique 工作流。方向是让用户不必为每个任务手工选模型。</p></div>
+  <div class="overview-item"><h4>金融 Agent 的自主性与安全边界被单独拎出来讨论</h4><p>Latent Space 新一期把 OpenAI 与 Anthropic 在金融 agent 上的"自主性 vs 安全"取舍放上台面，是继 coding agent 之后第二个被明确建模的高风险垂直场景。</p></div>
+  <div class="overview-item"><h4>上下文工程成为长程 agent 的工程主线</h4><p>LangChain 发布 Deep Agents 上下文工程指南：用 offloading、摘要、skills、subagent 和 memory 让 agent"记住而不把所有东西塞进 context"。这与 Anthropic 源控重构、HydraFusion 分阶段推理属于同一股"让 agent 跑长任务"的底层工程化趋势。</p></div>
+  <div class="overview-item"><h4>AI for Science 出现两条新样本</h4><p>Leash Bio 谈"以计算速度做 lab-in-the-loop"的药物/生物实验闭环，Allen AI 的 HiRO-ACEv2 用低得多的成本做 3km 分辨率极端天气模拟。科学计算正在成为与 coding、安全并行的 agent 落地场。</p></div>
+  <div class="overview-item"><h4>游戏反编译的两面性进入公开讨论</h4><p>Simon Willison 转载独立开发者 Popcar 的观点：AI 已能大规模反编译游戏，既带来游戏保存/移植/所有权的利好，也意味着任何闭源软件都可能被"被迫开源"。版权与伦理边界待明确。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI：网络安全 Agent 同日多连发，Daybreak 成为清晰产品线</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agentic Security / Cybersecurity</span><strong>OpenAI News</strong> · 2026-10-14 12:00 UTC · <a href="https://openai.com/index/sentinelone">SentinelOne cuts malware analysis from weeks to hours</a><br><strong>OpenAI News</strong> · 2026-10-14 12:00 UTC · <a href="https://openai.com/index/amp-beyond-coding">Amp puts AI agents to work beyond code</a><br><strong>OpenAI News</strong> · 2026-10-14 07:00 UTC · <a href="https://openai.com/index/third-moment-research">Third Moment Research runs 10,000 agents for 36+ hours</a><br><strong>OpenAI News</strong> · 2026-10-14 07:00 UTC · <a href="https://openai.com/index/block-ai-powered-security">Block is building AI-powered security</a></div>
+  <div class="summary"><p>OpenAI 在同一天集中放出多条安全方向的案例，信号很明确：<strong>Daybreak 正在被塑造成一条面向企业安全团队的独立产品线</strong>。SentinelOne 用 Daybreak 把恶意软件分析从"数周"压缩到"数小时"，从而腾出人力调查更多威胁；Block 的安全团队用 AI 更快排查威胁、并在几分钟内给出补丁建议。</p><p>Third Moment Research 是这批里最"激进"的叙事：一家 AI lab 用 GPT-6 Astra、GPT-6.1 Sol、Codex 和 Daybreak，让 agent 专注于"数天级"的连续工作、随使用自我改进，并声称一次运行 1 万个 agent 持续 36+ 小时。这类数字目前只来自公司自述，没有独立复测，但它把"长程、大规模、多 agent 协作"从演示推向生产语境的意图很清楚。</p><p>Amp 这条则把 agent 带出纯编码：用 GPT-6 Astra、Ultrafast、GPT-Live-1 和 Sign in with ChatGPT 做代码之外的工作。综合看，OpenAI 正在把安全作为 agent 商业化最锋利的切入场景——因为安全团队天然有明确 ROI（时间、误报、漏报）。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>过去 agent 叙事集中在 coding，现在 OpenAI 把火力转向网络安全。安全场景的可量化指标（分析耗时、补丁速度、误报率）让 agent 的价值更容易被验证，也可能成为继 coding 之后第二个规模化落地的 agent 垂直。</div>
+  <div class="action">后续行动：把"安全 agent"作为一个独立跟踪主题；对比 SentinelOne/Block 与第三方（如 CrowdStrike、Palo Alto）的 agent 化进展；对 1 万 agent/36 小时这类数字保持"待独立验证"标注，不直接作为采购或投资依据。</div>
+</div>
+
+<h3>二、GitHub：HydraFusion 把多模型编排内置进 Copilot，并新增 Max 档位</h3>
+<div class="card">
+  <div class="source"><span class="tag">Model Orchestration / Coding</span><strong>GitHub Changelog</strong> · 2026-10-14 20:01 UTC · <a href="https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option">HydraFusion updates and new Max option</a></div>
+  <div class="summary"><p>HydraFusion 是 GitHub 把多个模型"编排成一个回答"的能力：它不再要求用户为每个任务挑模型，而是调度一个模型池，取各家之长合成单一响应。这次更新把模型池扩到 <strong>Claude Opus 5.5、GPT-6 Astra、GPT-6.1 Sol、GPT-6 Luna</strong>，并新增 HydraFusion Max 档位，覆盖 VS Code、GitHub Copilot app 和 CLI，目前仍是 research preview。</p><p>两个工程细节值得注意：一是<strong>按阶段分配推理强度</strong>——初稿用 medium、审校用 high，让起草高效、复查更充分；二是 Cascade 工作流加入"评判步骤"，只在必要时才触发修复，Critique 则从依赖文字摘要转向更多用工具实际检查代码。</p><p>这背后是一个更广的趋势：模型不再只是被比较的对象，而开始被<strong>路由、融合和按任务分段</strong>。配合昨天 Anthropic 源控重构、LangChain 上下文工程，这条线共同指向"agent 时代的基础设施在快速重写"。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>多模型编排是 coding agent 从"单模型对话"走向"产品化"的关键一步。如果编排本身能稳定优于单一最强模型，成本/质量/延迟的帕累托面会被重新定义。</div>
+  <div class="action">后续行动：在固定任务集上测 HydraFusion vs 单模型（Claude/GPT-6 系列），记录成本、耗时、通过率、返工次数；关注编排层的可观测性和可解释性是否跟得上。</div>
+</div>
+
+<h3>三、Latent Space：金融 Agent 的自主性与安全边界成为独立议题</h3>
+<div class="card">
+  <div class="source"><span class="tag">Autonomy & Safety / Finance</span><strong>Latent Space</strong> · 2026-10-14 21:40 UTC · <a href="https://www.latent.space/p/crossing-the-threshold">Crossing the Threshold: How OpenAI and Anthropic Approach Autonomy and Safety in Financial Agents</a></div>
+  <div class="summary"><p>Latent Space 把金融 agent 单独拎出来，比较 OpenAI 与 Anthropic 两家如何把握"自主性"和"安全"之间的阈值。金融是继 coding 之后，对 agent 的错误容忍度最低、监管最严、后果最直接的场景之一——一笔自动执行错误的交易或授权，代价立即可见且难以回滚。</p><p>这个选题的意义在于：它把"agent 能不能自主行动"从一个抽象问题，落到"在什么权限、什么金额、什么可逆性下才允许 agent 自主"的具体工程与治理问题。金融 agent 的护栏设计（人工确认点、金额上限、权限分级、审计日志）很可能成为其它高风险垂直的模板。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>当 coding agent 开始跑通后，行业自然会把目光转向金融、医疗、法律等高后果场景。金融 agent 的"安全阈值"讨论，是理解下一波 agent 落地的关键钥匙。</div>
+  <div class="action">后续行动：建立"高后果 agent"护栏清单（授权上限、人工复核点、回滚机制、审计、隔离环境），跟踪 OpenAI/Anthropic 在金融场景是否公布具体护栏策略与事故复盘。</div>
+</div>
+
+<h3>四、LangChain：上下文工程——"记住，但不把所有东西塞进 context"</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agentic Engineering / Memory</span><strong>LangChain Blog</strong> · 2026-10-14 17:39 UTC · <a href="https://www.langchain.com/blog/context-engineering-deep-agents-remember">Context Engineering with Deep Agents: How To Remember Without Keeping Everything In Context</a></div>
+  <div class="summary"><p>LangChain 这篇讲的是长程 agent 的一个核心痛点：context 越堆越长，agent 就越慢、越贵、越容易跑偏。文章给出的解法是一套<strong>上下文工程</strong>组合拳——offloading（把内容外移）、summarization（摘要）、skills（可复用技能）、subagents（子代理分工）和 memory（跨会话记忆），让 agent 保持 context 聚焦而不丢失信息。</p><p>这跟 Anthropic 因为代码产能暴增而重构源控、GitHub HydraFusion 按阶段分配推理强度，是同一股浪潮的不同切面：<strong>真正的瓶颈已经从"模型能答什么"转移到"长任务怎么在有限窗口和预算里可靠地跑下去"</strong>。上下文管理正在从技巧变成有工程规范的一等公民。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>上下文管理是 agent 生产成本和可靠性的隐形大头。谁把"记忆"做对，谁就能在长程任务上拉开成本与质量的差距。</div>
+  <div class="action">后续行动：在自己的 agent 里记录"上下文膨胀"指标（token 增长、响应延迟、任务失败点），逐个试验 offloading/摘要/子代理/记忆方案并对比成本。</div>
+</div>
+
+<h3>五、AI for Science：Leash Bio 与 Allen AI 的两条新样本</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI for Science</span><strong>Latent Space</strong> · 2026-10-14 20:35 UTC · <a href="https://www.latent.space/p/lab-in-the-loop-at-compute-speed">Lab-in-the-Loop at Compute Speed — Ian Quigley, Leash Bio</a><br><strong>Hugging Face Blog</strong> · 2026-10-14 16:12 UTC · <a href="https://huggingface.co/blog/allenai/hiro-acev2">HiRO-ACEv2: Simulating extreme weather at 3 km resolution for a fraction of the cost</a></div>
+  <div class="summary"><p>Leash Bio 的"lab-in-the-loop at compute speed"讲的是把实验设计、计算模拟和真实湿实验闭环，用计算速度驱动药物/生物发现迭代。Allen AI 的 HiRO-ACEv2 则是一个气候科学成果：以 3km 分辨率做极端天气模拟，同时把成本大幅压低。</p><p>两条线共同点是：<strong>科学计算不再只追求"更大更强"，而是追求"在给定预算内把昂贵的物理/生物过程模拟得足够好"</strong>。这跟 AI 领域"帕累托面、成本、延迟"的讨论高度同构，说明科学场景同样在经历 agent/模型工程化的渗透。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>AI for Science 是 Follow List 里 Fei-Fei Li、Demis Hassabis、Jim Fan 等线索的交汇点。降成本、提分辨率的天气模拟和生物闭环，是"AI 进入现实世界高价值场景"的硬证据，而非 demo。</div>
+  <div class="action">后续行动：把"科学模拟降成本/提分辨率"作为一个观察切片，跟踪 Allen AI、DeepMind、Isomorphic Labs 在气候、材料、药物上的可复现成果与真实部署。</div>
+</div>
+
+<h3>六、Simon Willison：AI 大规模反编译游戏——既酷又令人不安</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Ethics / Preservation</span><strong>Simon Willison</strong> · 2026-10-14 16:26 UTC · <a href="https://simonwillison.net/2026/Oct/14/ai-is-mass-decompiling-games/">AI is mass decompiling games. That's both awesome and scary.</a></div>
+  <div class="summary"><p>Simon 转载独立开发者 Popcar 对"AI 反编译游戏"浪潮的观察：AI 正在大规模反编译老游戏，催生不同游戏之间的"杂交 mashup"，并推动一波游戏保存（preservation）项目——把老游戏搬到新硬件、往往是通过 WebAssembly 在浏览器里跑。</p><p>文章刻意呈现两面性：<strong>利好</strong>是游戏保存、移植、增强、以及"我们真的能拥有自己买过的软件，而不受厂商服务器停服的摆布"；<strong>隐忧</strong>是这套能力不止针对老游戏——任何闭源软件都可能被反编译、被竞争对手"借鉴"、被"违背意愿地开源"。这是一把对所有软件都适用的双刃剑。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>它把"AI 能反编译任意软件"从技术事实推向产权与伦理后果。coding agent 越强，这个张力越大，值得作为一条长期观察线。</div>
+  <div class="action">后续行动：关注反编译类 AI 工具的法律边界与社区规范；区分"保存老游戏"与"窃取闭源代码"的灰色地带；持续跟踪版权与许可方面的判例或平台政策。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>OpenAI 网络安全 agent 密集铺开：</strong>同日发布 SentinelOne（恶意软件分析数周→数小时）、Block（威胁排查+分钟级补丁）、Third Moment Research（1 万 agent / 36+ 小时）、Amp（代码之外的 agent）四篇案例。</li>
+  <li><strong>GitHub HydraFusion：</strong>模型池扩至 Claude Opus 5.5 / GPT-6 Astra / GPT-6.1 Sol / GPT-6 Luna，新增 Max 档位，按阶段分配推理强度，改进 Cascade/Critique，仍为 research preview。</li>
+  <li><strong>Latent Space 金融 agent 安全：</strong>对比 OpenAI 与 Anthropic 在金融场景的自主性/安全阈值，高风险垂直场景的治理问题浮出水面。</li>
+  <li><strong>LangChain 上下文工程：</strong>Deep Agents 用 offloading/摘要/skills/子代理/memory 实现"不塞满 context 也能记住"。</li>
+  <li><strong>AI for Science：</strong>Leash Bio 的 lab-in-the-loop 计算闭环，Allen AI HiRO-ACEv2 低成本 3km 分辨率极端天气模拟。</li>
+  <li><strong>游戏反编译两面性：</strong>Simon Willison 转载 Popcar，AI 大规模反编译游戏带来保存利好与版权隐忧。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>OpenAI：</strong>本窗口从"发布单点模型新闻"转向"密集发布安全 agent 客户案例"，Daybreak 产品线定位清晰化；EU agentic 报告则从政策叙事补充。</li>
+  <li><strong>GitHub：</strong>HydraFusion 更新延续其从 coding assistant 走向多模型编排平台的方向，与昨天的 App 权限/secret detection 治理线并行。</li>
+  <li><strong>LangChain：</strong>把上下文工程从经验技巧提炼为方法，与 Deep Agents 产品线绑定，强化 agent 长程可靠性话语权。</li>
+  <li><strong>Simon Willison：</strong>继续扮演"把技术事实翻译成可操作判断"的角色，本窗口关注反编译的伦理/产权双面性。</li>
+  <li><strong>Latent Space：</strong>同日双线：金融 agent 安全 + 生物计算闭环，覆盖面和节奏都很密。</li>
+  <li><strong>Anthropic：</strong>本窗口公开源安静（news RSS 仍不可用，仅见旧 RSP 页面），其动态主要借由 Latent Space 金融 agent 对比文章间接体现。</li>
+  <li><strong>Allen AI / Leash Bio：</strong>AI for Science 侧的新信号，值得与 DeepMind、Isomorphic 等一起追踪。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>安全 Agent 独立跟踪主题：</strong>建一张表记录 OpenAI Daybreak、SentinelOne/Block 案例与第三方安全厂商 agent 化进展，标注指标与来源（自述 vs 独立评测）。</li>
+  <li><strong>多模型编排评测：</strong>固定任务集上对比 HydraFusion / 单模型 / 手工路由的成本、耗时、通过率与返工。</li>
+  <li><strong>高后果 Agent 护栏清单：</strong>授权上限、人工复核点、回滚、审计、隔离环境，作为金融/医疗/法律场景的前置检查。</li>
+  <li><strong>上下文工程 POC：</strong>在自有 agent 上记录上下文膨胀指标，逐项试验 offloading/摘要/子代理/memory。</li>
+  <li><strong>AI for Science 观察切片：</strong>跟踪气候/材料/药物模拟的"降成本提分辨率"与真实部署证据。</li>
+  <li><strong>反编译伦理跟踪：</strong>关注 AI 反编译工具的法律边界、平台政策与判例。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>Third Moment Research 的 1 万 agent / 36+ 小时：</strong>数字来自公司自述，无独立复测，需标注为待验证，不直接作为采购/投资依据。</li>
+  <li><strong>SentinelOne / Block 的具体指标：</strong>官方给出方向和部分数字，但不同威胁类型、误报率、漏报率仍需独立评估。</li>
+  <li><strong>HydraFusion 实际收益：</strong>仍处 research preview，多模型编排是否稳定优于单一最强模型、成本如何，需在固定任务集复测。</li>
+  <li><strong>金融 agent 护栏细节：</strong>Latent Space 是讨论/访谈性质，OpenAI 与 Anthropic 是否公布具体授权上限、复核点、事故复盘，仍需跟踪。</li>
+  <li><strong>游戏反编译的法律边界：</strong>当前更多是社区观点与现象描述，产权/版权后果尚无清晰判例或平台政策。</li>
+  <li><strong>X 高优先级人物时间线：</strong>公开抓取路径未取得可核验正文，不能据此判断 Sam Altman、Kevin Weil、Josh Woodward、Amanda Askell、Karpathy、Alex Albert、Logan Kilpatrick、Jeff Dean、Demis Hassabis、Mira Murati 等账号没有更新。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>OpenAI 的 EU agentic 报告偏政策与宏观叙事，除非关注欧洲市场与监管，否则优先级低于安全 agent 案例与 HydraFusion。</li>
+  <li>Latent Space 的 AINews 汇总混合了大量 X/Reddit 线索与未核验传闻，本期只采用独立条目与可复查链接。</li>
+  <li>OpenAI 客户案例（Amp 等）偏市场故事，底层模型/技术信息有限。</li>
+  <li>X 公开 profile 返回 HTTP 200 不等于时间线可读，本期不使用 X-only 内容。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option">GitHub Changelog: HydraFusion updates and new Max option</a></li>
+  <li><a href="https://openai.com/index/sentinelone">OpenAI: SentinelOne cuts malware analysis from weeks to hours</a></li>
+  <li><a href="https://openai.com/index/block-ai-powered-security">OpenAI: Block building AI-powered security</a></li>
+  <li><a href="https://openai.com/index/third-moment-research">OpenAI: Third Moment Research runs 10,000 agents for 36+ hours</a></li>
+  <li><a href="https://openai.com/index/amp-beyond-coding">OpenAI: Amp puts AI agents to work beyond code</a></li>
+  <li><a href="https://openai.com/index/the-eus-next-chapter-in-ai-is-agentic">OpenAI: The EU's next chapter in AI is agentic</a></li>
+  <li><a href="https://www.latent.space/p/crossing-the-threshold">Latent Space: Crossing the Threshold — financial agents autonomy & safety</a></li>
+  <li><a href="https://www.latent.space/p/lab-in-the-loop-at-compute-speed">Latent Space: Lab-in-the-Loop at Compute Speed — Leash Bio</a></li>
+  <li><a href="https://www.langchain.com/blog/context-engineering-deep-agents-remember">LangChain: Context Engineering with Deep Agents</a></li>
+  <li><a href="https://huggingface.co/blog/allenai/hiro-acev2">Hugging Face / Allen AI: HiRO-ACEv2 extreme weather simulation</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/14/ai-is-mass-decompiling-games/">Simon Willison: AI is mass decompiling games</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://github.blog/ai-and-ml/feed/">GitHub AI & ML RSS</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://blog.google/technology/ai/rss/">Google AI RSS</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-14T00:00:00Z / 2026-10-15T00:00:00Z.</footer>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
