@@ -1,0 +1,159 @@
+---
+title: "Follow 深度日报：Anthropic 上市前 Q3 营收 $16.8B、OpenAI 科研/教育下沉、Copilot 模型代际更替与开源多模态 MoE"
+date: "2026-10-16"
+category: "daily"
+url: "/daily/2026/10/16/"
+summary: "Follow List 公开来源整理：本窗口从 2026-10-15T00:00Z 到 2026-10-16T00:00Z。高信号集中在五条线：Anthropic 在 IPO 前向投资人披露 Q3 营收近 50% 环比增长至 $16.8B，并首次披露「蒸馏收入」占 5–7% 且已主动压减；OpenAI 同日把 GPT-Rosalind 推入学术实验室、Study Mode 推入教育；GitHub Copilot 宣布 11 月中旬退役 Claude Opus 4.8/5 与 GPT-5.6 Terra，并让 AI Scan/agentic autofix 转 GA；Meta 开源 816B 多模态 MoE「Muse Spark Open」；Modal 以 $1B ARR 完成 $16B Series D 成为 AI Infra 新 Decacorn。公开 X/RSSHub/Nitter 本轮仍不可稳定采信，本期以官方博客、RSS、公开网页与可复查链接为准。"
+---
+<div class="meta">
+  <strong>2026年10月16日（周五）</strong> · 覆盖窗口：2026-10-15 08:00 – 2026-10-16 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；GitHub Blog/Changelog RSS、OpenAI News RSS、Google DeepMind RSS、Latent Space RSS、Simon Willison Atom、Hugging Face Blog RSS、LangChain Blog RSS 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：Anthropic 官方 news RSS 返回 Next.js 错误页（不可用），其本窗口动态借由 Simon Willison 转载的 FT 报道间接采信；X 公开 profile 仍只返回站点 shell，X/RSSHub/Nitter 时间线正文不可稳定采信。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Anthropic IPO 前财务曝光：Q3 营收 $16.8B、环比近 50%</h4><p>Anthropic 在 IPO 前夕向投资人披露 Q3 营收 $16.8B（Q1 约 $4.8B → Q2 $11.5B → Q3 $16.8B），每 $1 算力投入换 $1.70 营收、调整后运营利润率 11%（不含股权激励）。最值得注意的新信号是「蒸馏收入」——对手实验室用其模型做蒸馏训练，一度占营收 5–7%，Anthropic 已在 Q3 主动压减。</p></div>
+  <div class="overview-item"><h4>OpenAI 从「agent 商业案例」转向科研与教育下沉</h4><p>同一窗口 OpenAI 发布 GPT-Rosalind 学术计划（面向生命科学实验室的赞助式访问）与 Study Mode 教育功能（教师节、葡萄牙语本地化）。信号是：在安全 agent 密集铺开之后，OpenAI 开始用「学术赞助 + 教育」两条线做生态与合规叙事下沉。</p></div>
+  <div class="overview-item"><h4>Copilot 模型代际更替加速：Opus 4.8/5、GPT-5.6 Terra 11 月退役</h4><p>GitHub 宣布 11 月 16 日退役 Claude Opus 4.8、Claude Opus 5、GPT-5.6 Terra，替代为 Claude Opus 5.5、GPT-6.1 Sol、GPT-6 Luna。旧旗舰模型的退役周期正在明显缩短，模型路由与迁移治理成为企业采购的新痛点。</p></div>
+  <div class="overview-item"><h4>开源多模态 MoE 逼近前沿：Meta Muse Spark Open（816B）</h4><p>Meta 开源 Muse Spark Open——约 816B 参数、约 42B 激活/ token、最高 1M token 上下文的多模态 MoE，覆盖文本/图像/音频/视频。开源侧在「参数规模 + 模态覆盖 + 长上下文」三个维度同时逼近闭源前沿。</p></div>
+  <div class="overview-item"><h4>AI Infra 融资进入 Decacorn 时代</h4><p>Modal 以 $1B ARR 完成 $16B Series D，成为纽约最新 AI Infra 十角兽（decacorn），5 个月内用量 3 倍、估值 3 倍，1 年内 15 倍。推理基础设施的商业化速度在显著加快。</p></div>
+  <div class="overview-item"><h4>安全/治理能力从「特性」走向「GA 产品」</h4><p>GitHub AI Scan 与 agentic autofix 双双转 GA，并新增 Code Quality 许可证用量 CSV 导出；Google SynthID 被 TIME 评为 2026 最佳发明。AI 生成内容的水印、可核验与代码安全修复正在形成产品化闭环。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Anthropic：IPO 前财务细节与「蒸馏收入」浮出水面（投资线索）</h3>
+<div class="card">
+  <div class="source"><span class="tag">Company / Finance</span><strong>Simon Willison（转载 Financial Times）</strong> · 2026-10-15 13:04 UTC · <a href="https://simonwillison.net/2026/Oct/15/anthropic-tells-investors/">Anthropic tells investors quarterly revenue up nearly 50% to $16.8bn ahead of IPO</a></div>
+  <div class="summary"><p>Simon 转述 FT 报道：Anthropic 周三面向投资人做了一天路演，披露了 IPO 前的一组关键财务数字。营收按季度是「约 $4.8B（Q1）→ $11.5B（Q2）→ $16.8B（Q3）」，即 Q3 环比增长近 50%；Q3 每 $1 算力投入对应 $1.70 营收；调整后运营利润率（不含股权激励）为 11%。</p><p>最有信息量的一点是关于<strong>蒸馏（distillation）</strong>：Anthropic 承认「对手实验室用其模型做蒸馏训练」一度占其营收的 5%–7%，并已在 Q3 大幅压减。Simon 的粗略估算很说明问题——如果蒸馏在 Q2 占 5%，那意味着「其它实验室」在那一季度花了超过 $5 亿去蒸馏 Anthropic 的模型。这揭示了一个通常被低估的事实：<strong>前沿模型的收入里，有相当一部分来自竞争对手的「复制」需求</strong>，而 Anthropic 正在主动切断这条收入线。</p><p>另一个信号是 Anthropic 开始<strong>不再使用「年化经常性收入（ARR run-rate）」话术</strong>向投资人沟通——对一家即将上市、且增长极陡的公司来说，这是一个审慎的叙事转向。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 AI 行业最头部公司 IPO 前的财务「窗口」，直接反映 agent 商业化的真实货币化速度。蒸馏收入占比这条，更是把「模型能力被复制」这个长期争议量化为了一笔真实的钱。</div>
+  <div class="action">后续行动：跟踪 Anthropic IPO 时间表与招股书（S-1）；把「蒸馏收入/模型被复制」作为一个独立观察指标，对比 OpenAI、Google 是否披露类似占比；关注压减蒸馏收入对短期增速的影响。</div>
+</div>
+
+<h3>二、OpenAI：GPT-Rosalind 学术计划 + Study Mode，科研与教育双线下沉</h3>
+<div class="card">
+  <div class="source"><span class="tag">Research / Education</span><strong>OpenAI News</strong> · 2026-10-15 19:00 UTC · <a href="https://openai.com/index/introducing-the-rosalind-academic-plan">Bringing GPT-Rosalind to academic research labs</a><br><strong>OpenAI News</strong> · 2026-10-15 13:00 UTC · <a href="https://openai.com/index/teaching-students-to-think-and-learn-through-questions">Teaching students to think and learn through questions</a></div>
+  <div class="summary"><p>OpenAI 发布 <strong>Rosalind Academic Plan</strong>：为符合条件的学术实验室提供 GPT-Rosalind 的赞助式访问及配套工具，用于推进生命科学研究。GPT-Rosalind 此前定位就是面向生命科学的专业模型，这条计划把「赞助学术访问」作为其分发与合规叙事的关键一步——既培养下一代研究者对模型的使用惯性，也在生命科学这种高监管领域建立「正当用途」的示范。</p><p>教育侧则是 <strong>Study Mode</strong>：配合教师节，推出巴西葡萄牙语的 AI for Educators，强调「通过提问让学生思考、逐步学习」，而非直接给答案。这与上周 OpenAI 在 Teens/教育合规、以及更早的「帮助青少年学习」形成一条连贯的教育治理线。</p><p>两条线共同指向一个策略转向：在安全 agent 案例（SentinelOne、Block、Third Moment）连续轰炸之后，OpenAI 开始用<strong>「科研赞助 + 教育」</strong>补足其公共叙事，把品牌从「企业 agent 军火商」拉回到「普惠的科研/教育工具」。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>GPT-Rosalind 学术计划是 OpenAI 在生命科学这条 Follow List 重点线索（Fei-Fei Li、Demis Hassabis、Jim Fan 交汇点）上的落地动作；教育线则与其合规叙事直接相关。</div>
+  <div class="action">后续行动：跟踪 Rosalind Academic Plan 的资格范围、赞助力度与是否公布受助实验室；对比 Google/DeepMind（AlphaFold、AlphaGenome）在学术生命科学上的免费开放策略，判断生态争夺的差异。</div>
+</div>
+
+<h3>三、GitHub：Copilot 旧旗舰模型退役 + 安全扫描/autofix 转 GA</h3>
+<div class="card">
+  <div class="source"><span class="tag">Coding / Model Lifecycle</span><strong>GitHub Changelog</strong> · 2026-10-15 19:35 UTC · <a href="https://github.blog/changelog/2026-10-15-upcoming-deprecation-of-selected-github-copilot-models-in-mid-november/">Upcoming deprecation of selected GitHub Copilot models in mid-November</a><br><strong>GitHub Changelog</strong> · 2026-10-15 15:04 UTC · <a href="https://github.blog/changelog/2026-10-15-ai-scan-for-pull-requests-generally-available/">AI Scan for pull requests generally available</a><br><strong>GitHub Changelog</strong> · 2026-10-15 13:49 UTC · <a href="https://github.blog/changelog/2026-10-15-agentic-autofix-for-code-scanning-alerts-general-availability/">Agentic autofix for code scanning alerts general availability</a><br><strong>GitHub Changelog</strong> · 2026-10-15 20:11 UTC · <a href="https://github.blog/changelog/2026-10-15-download-github-code-quality-license-usage-as-a-csv">Download GitHub Code Quality license usage as a CSV</a></div>
+  <div class="summary"><p>GitHub 宣布 <strong>11 月 16 日</strong> 退役三款 Copilot 模型：<strong>Claude Opus 4.8、Claude Opus 5、GPT-5.6 Terra</strong>，替代分别是 Claude Opus 5.5、GPT-6.1 Sol、GPT-6 Luna（其中 Claude Opus 4.8 对年付个人订阅者保留）。这是一个明确的「模型代际更替加速」信号：上一代旗舰（Opus 5、GPT-5.6 Terra）上市时间并不长就被划入退役清单，企业侧需要把「模型生命周期管理」纳入正式治理——哪些工作流锁在旧模型上、如何无痛迁移到替代模型、策略如何默认启用。</p><p>安全侧同日批量转 GA：<strong>AI Scan for pull requests GA</strong>（对 PR 做 AI 扫描）、<strong>Agentic autofix for code scanning alerts GA</strong>（对代码扫描告警做 agent 自动修复），并新增 <strong>Code Quality 许可证用量 CSV 导出</strong>（便于企业对账）。这几条把「AI 写代码 → AI 审代码 → AI 修代码 → 许可证对账」串成了一个更完整的治理闭环。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>模型退役清单直接反映 Copilot 背后的模型路线图（Claude 5.5 与 GPT-6.1 Sol/Luna 成为主流）；安全能力转 GA 意味着「AI 修安全漏洞」从预览进入生产默认，是 coding agent 最硬核的落地场景之一。</div>
+  <div class="action">后续行动：在团队内梳理锁在 Opus 4.8/5、GPT-5.6 Terra 上的工作流并做迁移验证；把「模型生命周期 + 许可证对账」纳入 Copilot 采购治理；关注 agentic autofix 的误报率与修复通过率数据。</div>
+</div>
+
+<h3>四、开源多模态 MoE 逼近前沿：Meta Muse Spark Open 与 IBM Granite Switch 4.1</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / Multimodal</span><strong>Hugging Face Blog</strong> · 2026-10-15 00:00 UTC · <a href="https://huggingface.co/blog/meta-muse-spark-open">Welcome Muse Spark Open: open-weight frontier multimodal mixture-of-experts model from Meta</a><br><strong>Hugging Face Blog</strong> · 2026-10-15 20:34 UTC · <a href="https://huggingface.co/blog/ibm-granite/granite-switch-4-1">Granite Switch 4.1: Chat, Decisions, and Speech from One Endpoint</a><br><strong>Hugging Face Blog</strong> · 2026-10-15 00:00 UTC · <a href="https://huggingface.co/blog/flux-3">Welcome FLUX.3 Image Klein in Diffusers</a></div>
+  <div class="summary"><p>Meta 开源 <strong>Muse Spark Open</strong>：一个约 <strong>816B 参数、约 42B 激活/ token、最高 1M token 上下文</strong>的多模态 MoE，统一处理文本、图像、音频、视频输入并生成文本，配套 Transformers、llama.cpp、SGLang、vLLM、MLX 等推理支持与 TRL 微调、Inference Endpoints 部署。这套「参数量 + 模态覆盖 + 长上下文」的组合，使开源侧第一次在多模态前沿上和闭源旗舰形成可比较的身位。</p><p>IBM 的 <strong>Granite Switch 4.1</strong> 则走另一条路线：把「对话、决策、语音」合到一个端点，强调企业部署的单一接入与低集成成本。FLUX.3 Image Klein 的 Diffusers 接入则补齐了图像生成侧的开源生态。</p><p>三件事叠加的宏观含义是：<strong>开源模型不再只是「追赶者」或「蒸馏对象」，而开始在多模态、企业一体化和图像生成上形成与闭源并行的产品矩阵</strong>。这也反向印证了 Anthropic 财报里「对手实验室花 $5 亿/季蒸馏」的生态现实。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Meta Muse Spark Open 是开源多模态 MoE 的一次标志性发布；配合 Anthropic 蒸馏收入、LangChain「开源模型已过门槛」的评测结论，开源/闭源的相对位置正在快速变化，直接影响模型选型与成本策略。</div>
+  <div class="action">后续行动：在固定任务上实测 Muse Spark Open 的多模态/长上下文能力与推理成本；跟踪其下游微调与行业采纳；对比 IBM Granite Switch 的「单端点多能力」是否真正降低企业集成成本。</div>
+</div>
+
+<h3>五、AI Infra 融资：Modal 以 $1B ARR 成为新 Decacorn（投资线索）</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI Infrastructure / Fundraising</span><strong>Latent Space AINews</strong> · 2026-10-15 10:08 UTC · <a href="https://www.latent.space/p/ainews-modals-1b-arr-16b-series-d">Modal's $1B ARR, $16B Series D makes it NYC's newest AI Infra Decacorn</a></div>
+  <div class="summary"><p>Latent Space 汇总：<strong>Modal 以 $1B ARR 完成 $16B Series D</strong>，成为纽约最新的 AI 基础设施十角兽（decacorn），5 个月内「用量 3 倍、估值 3 倍」，1 年内估值 15 倍。Modal 主打无服务器 GPU/推理基础设施，其爆发式增长直接反映「推理需求」正在成为 AI 经济里增长最快、货币化最直接的一层。</p><p>这与窗口内其它信号高度自洽：Anthropic 每 $1 算力换 $1.70 营收、GitHub 把多模型编排内置进 Copilot、开源 MoE 让推理需求进一步扩散——<strong>所有头部公司都在把收入与算力投入的比值（compute-to-revenue）当成核心经营指标</strong>，而 Modal 这类公司正是承接这波「算力货币化」的基础设施层。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 AI 基础设施层融资热度的最新刻度（$1B ARR / $16B 估值），也是判断「推理需求是否持续超预期」的市场侧指标，与模型层（Anthropic/OpenAI）财报形成上下游互证。</div>
+  <div class="action">后续行动：把 Modal、Together、Fireworks、Replicate 等推理基础设施厂商的 ARR/估值作为一组跟踪指标；关注其对「自有模型 vs 托管开源模型」的收入结构，判断基础设施层的护城河。</div>
+</div>
+
+<h3>六、安全/治理产品化：GitHub AI Scan/autofix GA 与 Google SynthID 获 TIME 最佳发明</h3>
+<div class="card">
+  <div class="source"><span class="tag">Safety / Verification</span><strong>Google DeepMind</strong> · 2026-10-15 13:00 UTC · <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synthid-time-best-inventions/">TIME has named Google SynthID one of the Best Inventions of 2026</a><br><strong>GitHub Changelog</strong> · 2026-10-15 15:04 UTC · <a href="https://github.blog/changelog/2026-10-15-ai-scan-for-pull-requests-generally-available/">AI Scan for pull requests GA</a></div>
+  <div class="summary"><p>Google 的 <strong>SynthID</strong>（AI 内容水印与核验技术）被 TIME 评为 2026 最佳发明之一。SynthID 从文本、图像，一路扩展到视频、音频，最近还延伸到合成生物学（SynthID Bio），正在成为「AI 生成内容可溯源」的事实基础设施。这一「最佳发明」背书，说明 AI 时代的<strong>溯源/核验（provenance）</strong>已经从技术 demo 进入主流认可。</p><p>把它和 GitHub 的 AI Scan/agentic autofix GA 放在一起看，能看出一个趋势：<strong>「AI 生成 → AI 核验 → AI 修复」的闭环正在产品化</strong>。前者解决「内容是否由 AI 生成、能否溯源」，后者解决「代码里的安全/质量问题能否被 AI 发现并自动修掉」。这对应着 AI 规模化之后最现实的治理需求。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>溯源与自动修复是 AI 进入生产后被监管与安全共同推高的两块「硬需求」，SynthID 的获奖与 GitHub autofix 的 GA 是这两个方向成熟的标志。</div>
+  <div class="action">后续行动：跟踪 SynthID 的行业采纳（是否成为平台默认）与跨平台互操作性；关注 AI 溯源相关监管（如内容标识要求）的落地时间表；评估 agentic autofix 在企业代码安全流程中的引入成本。</div>
+</div>
+
+<h3>七、LangChain：Interrupt NYC/London 发布盘点 + Agent 评估 FAQ</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agentic Engineering / Evaluation</span><strong>LangChain Blog</strong> · 2026-10-15 16:50 UTC · <a href="https://www.langchain.com/blog/october-2026-langchain-newsletter">October 2026 LangChain Newsletter: Everything we shipped at Interrupt NYC &amp; London</a><br><strong>LangChain Blog</strong> · 2026-10-15 01:19 UTC · <a href="https://www.langchain.com/blog/common-questions-about-agent-evals">The Most Common Questions About Agent Evals, Answered</a></div>
+  <div class="summary"><p>LangChain 的 10 月 Newsletter 盘点了在 Interrupt NYC/London 上发布的一批产品：LangSmith AI Search、Engine v2（red teaming + 自动测试）、Trajectories（agent 会话可读视图）、Custom Apps、Fine-Tuning（SmithTune），以及 Managed Deep Agents v0.9（调度、per-run 配置、Slack 反应）。整体方向是把「评估、可观测、部署」从零散能力收敛成一站式 agent 工程平台。</p><p>配套的 <strong>Agent Evals FAQ</strong> 则回答了一线最关心的实操问题：从哪里开始做 agent 评估、offline vs online eval 的区别、evaluator 类型、LLM-as-judge、Harbor 基准、多轮评估与成本控制。这延续了 LangChain「把 agent 工程经验产品化」的一贯打法，也呼应了上一窗口的「上下文工程」主线。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>评估是 agent 规模化落地的最大瓶颈之一。LangChain 密集发布的评估/可观测产品，以及「评估 FAQ」这类降门槛内容，说明行业正从「能不能跑起来」转向「怎么证明跑得对、跑得稳」。</div>
+  <div class="action">后续行动：把 offline/online eval、LLM-as-judge、成本控制纳入自有 agent 的评估基线；跟踪 LangSmith Engine v2 的 red teaming 是否形成行业默认的 agent 安全测试范式。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Anthropic IPO 前财务：</strong>Q3 营收 $16.8B（环比近 50%），每 $1 算力换 $1.70 营收、调整后运营利润率 11%；蒸馏收入曾占 5–7% 且 Q3 主动压减，对手实验室一度单季花 $5 亿+ 蒸馏其模型。</li>
+  <li><strong>OpenAI 科研/教育下沉：</strong>发布 GPT-Rosalind Academic Plan（生命科学实验室赞助访问）+ Study Mode（教育、巴西葡语本地化）。</li>
+  <li><strong>GitHub Copilot 模型退役：</strong>11 月 16 日退役 Claude Opus 4.8 / Claude Opus 5 / GPT-5.6 Terra，替代 Claude Opus 5.5 / GPT-6.1 Sol / GPT-6 Luna。</li>
+  <li><strong>GitHub 安全能力 GA：</strong>AI Scan for PRs GA、Agentic autofix for code scanning alerts GA、Code Quality 许可证用量 CSV 导出。</li>
+  <li><strong>开源多模态：</strong>Meta 开源 816B 多模态 MoE「Muse Spark Open」；IBM 发布 Granite Switch 4.1（对话/决策/语音单端点）；FLUX.3 Image Klein 接入 Diffusers。</li>
+  <li><strong>AI Infra 融资：</strong>Modal 以 $1B ARR 完成 $16B Series D，成为纽约 AI Infra 新 Decacorn。</li>
+  <li><strong>安全/溯源：</strong>Google SynthID 获 TIME 2026 最佳发明；LangChain 发布 Interrupt 盘点 + Agent Evals FAQ。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Anthropic：</strong>IPO 前主动向投资人披露季度营收与蒸馏收入，并弃用 ARR run-rate 话术，叙事转向「审慎 + 真实货币化」。官方 news RSS 仍不可用，动态主要借由 FT/Simon Willison 间接体现。</li>
+  <li><strong>OpenAI：</strong>本窗口从「安全 agent 案例密集铺开」转向「科研/教育下沉」，GPT-Rosalind 学术计划与 Study Mode 两条线补足公共叙事。</li>
+  <li><strong>GitHub：</strong>同时推进模型代际更替（退役旧旗舰）与安全治理产品化（AI Scan/autofix GA、许可证 CSV），coding 平台从「模型分发」走向「模型治理」。</li>
+  <li><strong>Meta：</strong>Muse Spark Open 开源 816B 多模态 MoE，在开源前沿上形成与闭源并行的一极。</li>
+  <li><strong>Google DeepMind：</strong>SynthID 获 TIME 最佳发明，溯源/水印技术线持续扩大覆盖面（文本→图像→音视频→合成生物）。</li>
+  <li><strong>IBM：</strong>Granite Switch 4.1 强调「单端点多能力」的企业落地路线，与 Meta 的「开源大模型」路线形成差异化。</li>
+  <li><strong>Modal：</strong>以 $1B ARR / $16B 估值跻身 AI Infra Decacorn，推理基础设施层商业化提速。</li>
+  <li><strong>LangChain：</strong>Interrupt 两站发布盘点 + 评估 FAQ，持续把 agent 工程经验产品化。</li>
+  <li><strong>Simon Willison：</strong>本窗口两条：一是高信号地转译了 Anthropic 财报（蒸馏收入），二是继续以 Claude Code 做「Chirp Pong」这类声波联网小游戏实验。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>Anthropic IPO 观察：</strong>跟踪招股书（S-1）与上市时间表；建立「蒸馏收入/模型被复制」独立指标，对比 OpenAI、Google 是否披露。</li>
+  <li><strong>Copilot 模型生命周期治理：</strong>梳理锁在 Opus 4.8/5、GPT-5.6 Terra 的工作流，做迁移验证与策略默认启用检查。</li>
+  <li><strong>开源多模态实测：</strong>在固定任务集上测 Muse Spark Open 的多模态/长上下文能力与推理成本，跟踪下游微调与采纳。</li>
+  <li><strong>推理基础设施跟踪组：</strong>Modal、Together、Fireworks、Replicate 的 ARR/估值与收入结构，判断基础设施层护城河。</li>
+  <li><strong>安全溯源/自动修复：</strong>跟踪 SynthID 行业采纳与 AI 溯源监管时间表；评估 agentic autofix 的误报率/修复通过率。</li>
+  <li><strong>agent 评估基线：</strong>把 offline/online eval、LLM-as-judge、成本控制纳入自有 agent 的评估基线，跟踪 LangSmith Engine v2 red teaming 范式。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>Anthropic 财务数字：</strong>来自 FT「知情人士」转述，非官方公告，需以正式招股书/财报为准；蒸馏收入 5–7% 与 $5 亿/季的估算是 Simon 的粗略推算，需谨慎引用。</li>
+  <li><strong>Modal 融资细节：</strong>来自 Latent Space AINews 汇总（本身混合多方线索），具体条款、估值基准、ARR 口径需以官方新闻稿确认。</li>
+  <li><strong>Muse Spark Open 实际能力：</strong>816B 参数、1M 上下文等为官方口径，实际多模态表现与推理成本需独立评测。</li>
+  <li><strong>GitHub autofix 效果：</strong>GA 不代表零误报，修复通过率、误报率、对复杂告警的覆盖仍需生产环境验证。</li>
+  <li><strong>Rosalind Academic Plan 范围：</strong>「符合条件」的实验室标准、赞助额度、是否公布受助名单尚未披露。</li>
+  <li><strong>X 高优先级人物时间线：</strong>公开抓取路径未取得可核验正文，不能据此判断 Sam Altman、Kevin Weil、Josh Woodward、Amanda Askell、Karpathy、Alex Albert、Logan Kilpatrick、Jeff Dean、Demis Hassabis、Mira Murati、Nathan Lambert 等账号没有更新。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>OpenAI Study Mode 的教育叙事偏品牌/合规，除非关注教育市场与本地化，否则优先级低于 Rosalind 学术计划与 Copilot 模型退役。</li>
+  <li>GitHub「Email notifications for repository push events retired」属运维层面通知，与 AI 主线关系弱。</li>
+  <li>Simon Willison 的 Chirp Pong、Tree Appreciator 等属个人实验/趣味项目，信息价值有限，仅作为其「Claude Code 实战」的持续样本。</li>
+  <li>Latent Space 的 AINews 汇总混合大量未核验传闻与 X/Reddit 线索，本期只采用 Modal 融资等独立条目与可复查链接。</li>
+  <li>X 公开 profile 返回 HTTP 200 不等于时间线可读，本期不使用 X-only 内容。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://simonwillison.net/2026/Oct/15/anthropic-tells-investors/">Simon Willison: Anthropic tells investors quarterly revenue up nearly 50% to $16.8bn ahead of IPO</a></li>
+  <li><a href="https://openai.com/index/introducing-the-rosalind-academic-plan">OpenAI: Bringing GPT-Rosalind to academic research labs</a></li>
+  <li><a href="https://openai.com/index/teaching-students-to-think-and-learn-through-questions">OpenAI: Teaching students to think and learn through questions</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-15-upcoming-deprecation-of-selected-github-copilot-models-in-mid-november/">GitHub: Upcoming deprecation of selected GitHub Copilot models in mid-November</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-15-ai-scan-for-pull-requests-generally-available/">GitHub: AI Scan for pull requests generally available</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-15-agentic-autofix-for-code-scanning-alerts-general-availability/">GitHub: Agentic autofix for code scanning alerts GA</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-15-download-github-code-quality-license-usage-as-a-csv">GitHub: Download Code Quality license usage as a CSV</a></li>
+  <li><a href="https://huggingface.co/blog/meta-muse-spark-open">Hugging Face / Meta: Muse Spark Open</a></li>
+  <li><a href="https://huggingface.co/blog/ibm-granite/granite-switch-4-1">Hugging Face / IBM: Granite Switch 4.1</a></li>
+  <li><a href="https://huggingface.co/blog/flux-3">Hugging Face: FLUX.3 Image Klein in Diffusers</a></li>
+  <li><a href="https://www.latent.space/p/ainews-modals-1b-arr-16b-series-d">Latent Space: Modal's $1B ARR, $16B Series D</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synthid-time-best-inventions/">Google DeepMind: SynthID named TIME Best Invention of 2026</a></li>
+  <li><a href="https://www.langchain.com/blog/october-2026-langchain-newsletter">LangChain: October 2026 Newsletter</a></li>
+  <li><a href="https://www.langchain.com/blog/common-questions-about-agent-evals">LangChain: The Most Common Questions About Agent Evals, Answered</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/rss/">Google DeepMind RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-15T00:00:00Z / 2026-10-16T00:00:00Z.</footer>
