@@ -1,0 +1,531 @@
+---
+title: "如何更有野心：一份写给\"与模型协作的人类\"的教程"
+date: "2026-10-17"
+category: "research"
+url: "/research/2026/10/17/how-to-be-more-ambitious-felix-rieseberg/"
+summary: "整理 Felix Rieseberg（Claude/Anthropic）的野心教程：把野心拆成 Speed、Altitude、Depth、Range 四型，给出可复用的提问技巧（往上抽象、往下钻深、跨领域借力）与自我效能的心理学底层，教人如何让模型在更高抽象、更深专业、更广领域上工作。"
+layout: "raw"
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>如何更有野心：一份写给"与模型协作的人类"的教程</title>
+  <meta name="description" content="Felix Rieseberg（Claude/Anthropic）把"野心"拆成 Speed、Altitude、Depth、Range 四型，并给出可复用的提问技巧与自我效能的心理学底层，教人如何让模型在更高的抽象、更深的专业、更广的领域上工作。">
+  <style>
+    :root {
+      --bg: #f4f7f4;
+      --paper: #ffffff;
+      --ink: #17211c;
+      --muted: #5d6b62;
+      --line: #dbe5dd;
+      --green: #16784f;
+      --blue: #2459a8;
+      --red: #b04435;
+      --gold: #a96914;
+      --soft-green: #e8f5ee;
+      --soft-blue: #eaf1fb;
+      --soft-red: #fff0ed;
+      --soft-gold: #fff6e6;
+      --shadow: 0 18px 52px rgba(28, 43, 34, 0.10);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
+      line-height: 1.72;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(22, 120, 79, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(36, 89, 168, 0.09), rgba(36, 89, 168, 0) 420px),
+        var(--bg);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 64px 0 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(34px, 5.4vw, 58px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 880px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      padding: 6px 12px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 34px;
+      padding: 40px 0 72px;
+      align-items: start;
+    }
+
+    article {
+      display: grid;
+      gap: 22px;
+    }
+
+    section, aside {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 28px;
+    }
+
+    aside {
+      position: sticky;
+      top: 22px;
+      padding: 20px;
+    }
+
+    h2, h3, p {
+      margin-top: 0;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 26px;
+      line-height: 1.24;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    p { margin-bottom: 14px; }
+    p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0 0 14px;
+      padding-left: 1.35em;
+    }
+
+    li + li { margin-top: 8px; }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lead-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #fbfdfb;
+    }
+
+    .lead-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 15px;
+    }
+
+    .axis {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .axis:first-of-type { border-top: 0; padding-top: 0; }
+    .axis:last-child { padding-bottom: 0; }
+
+    .axis-title {
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .framework {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .framework-item {
+      border-radius: var(--radius);
+      padding: 18px;
+      border: 1px solid var(--line);
+    }
+
+    .framework-item:nth-child(1) { background: var(--soft-green); }
+    .framework-item:nth-child(2) { background: var(--soft-blue); }
+    .framework-item:nth-child(3) { background: var(--soft-gold); }
+
+    .framework-item b {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 20px;
+    }
+
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .score-table th, .score-table td {
+      border: 1px solid var(--line);
+      padding: 11px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .score-table th {
+      background: #eef5f0;
+      color: #213328;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .tag.good { background: var(--soft-green); color: var(--green); }
+    .tag.watch { background: var(--soft-gold); color: var(--gold); }
+    .tag.risk { background: var(--soft-red); color: var(--red); }
+
+    .quote {
+      border-left: 4px solid var(--green);
+      background: #f7fbf8;
+      padding: 18px 20px;
+      color: #28372e;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .nav-title {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li + li { margin-top: 8px; }
+
+    .toc a {
+      color: var(--ink);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .side-note {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 28px 0 46px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+      }
+
+      .lead-grid, .framework {
+        grid-template-columns: 1fr;
+      }
+
+      .axis {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(100% - 24px, 1120px);
+      }
+
+      header {
+        padding-top: 42px;
+      }
+
+      section {
+        padding: 22px;
+      }
+
+      .score-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">AI 协作方法论 · 野心 · 提示工程</p>
+      <h1>如何更有野心：一份写给"与模型协作的人类"的教程</h1>
+      <p class="dek">作者 Felix Rieseberg（Claude / Anthropic 团队成员、Electron 维护者）发现：模型能力并不均匀增长——正如陶哲轩所说"在某些方向惊人，在另一些方向不足"。有人驾驭了"惊人"的能力在飞，更多人还在纠结"除了问法国首都、让邮件别那么凶还能干嘛"。这份教程把"野心"拆成 Speed、Altitude、Depth、Range 四型，给出可复用的提问技巧，并解释这背后的心理学机制。</p>
+      <div class="meta">
+        <span class="pill">发布时间：2026-10-17</span>
+        <span class="pill">作者：Felix Rieseberg</span>
+        <span class="pill">来源：felixrieseberg.com</span>
+        <span class="pill">主题：AI 协作 / 提示工程 / 自我效能</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article>
+      <section id="summary">
+        <h2>结论先行</h2>
+        <div class="lead-grid">
+          <div class="lead-card">
+            <strong>核心框架</strong>
+            <p>野心分四种——Speed（速度）、Altitude（高度）、Depth（深度）、Range（广度）。Speed 已成熟、无需创造力；真正拉开差距的是后三者。</p>
+          </div>
+          <div class="lead-card">
+            <strong>三条路径</strong>
+            <p>Altitude 往上抽象、追结果而非任务；Depth 往下钻、像领域顶尖专家那样做；Range 跨领域借力。每条路径都配了可复用的提问技巧。</p>
+          </div>
+          <div class="lead-card">
+            <strong>底层机制</strong>
+            <p>自我效能（self-efficacy）可以被"黑"：相信能做成、看别人做成、允许自己失败——这是跨越"野心鸿沟"的心理杠杆。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="uneven">
+        <h2>一、模型能力不均匀增长，野心是被低估的杠杆</h2>
+        <p>Felix 在 Claude 团队工作，每天都会看到又一个"之前没想过、以为不可能"的壮举——这个月，Claude 可能帮助业余天文学家发现了一颗新行星，出现了第一支他真心喜欢的 AI 音乐视频，人们还在讨论陶哲轩所说的"数学 2.0"新纪元。</p>
+        <div class="quote">模型能力不会均匀增长。正如陶哲轩所说：模型"在某些方向惊人，而在另一些方向不足"。</div>
+        <p>问题在于：一部分人驾驭了那些"惊人"的能力、看起来在飞翔；但更多人还在挣扎，不知道模型除了"法国的首都是哪""把邮件改得不那么凶"还能干什么。于是"我们不够有野心"成了 AI 圈的口号——每次看到惊艳的东西就转发并配上一句"we're not ambitious enough"。可这句口号很难执行，所以 Felix 写了这份教程。</p>
+        <p>他把野心分成四型：</p>
+        <div class="framework">
+          <div class="framework-item">
+            <b>Speed（速度）</b>
+            <p>同样的工作花更少时间——AI 经济价值的基本盘。已非常成熟、几乎不需要创造力，故本文跳过。</p>
+          </div>
+          <div class="framework-item">
+            <b>Altitude（高度）</b>
+            <p>往抽象上层走，考虑"结果"而非"单个任务"。问自己：目标背后的目标是什么？</p>
+          </div>
+          <div class="framework-item">
+            <b>Depth（深度）</b>
+            <p>像领域顶尖专家那样考虑任务，往下钻一层，触及底层的工具、数据和问题。</p>
+          </div>
+        </div>
+        <div class="framework" style="margin-top:0;">
+          <div class="framework-item">
+            <b>Range（广度）</b>
+            <p>从多个领域而非表面需要的单一领域出发，借用你通常不会用的知识、工具和技巧。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="altitude">
+        <h2>二、Altitude：往上抽象，追"结果"而非"任务"</h2>
+        <p>人们常把它轻描淡写地叫作"让模型在更高抽象层运作"。当你给模型一个任务时，它执行的是"你对如何达成目标的最佳猜测"。要在高度上有野心，就问自己：<strong>你接下来想要发生什么？目标背后的目标是什么？</strong></p>
+        <p>Felix 自己的例子：去年初他还在让 Claude 修单个崩溃；后来他直接让 Claude"让我们的应用保持不崩溃"。</p>
+        <p>回到一个日常（甚至庸常）的办公室任务——Acme 公司要做季度业务评审（QBR）的幻灯片。Claude 会很乐意帮你填模板、做几页 PPT。但那离"发现新行星"还差得远。他给出三步递进、越来越有野心的做法：</p>
+        <table class="score-table">
+          <thead>
+            <tr>
+              <th>层级</th>
+              <th>做法</th>
+              <th>关键提示词</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1. 给足上下文</td>
+              <td>不要只更新模板里的数字，把能拿到的所有数据都丢给模型，让它理解你的生意</td>
+              <td>"告诉我这个季度什么变了、为什么、我们该怎么做。"</td>
+            </tr>
+            <tr>
+              <td>2. 追问决策</td>
+              <td>好会议以决策收尾——让模型直接把最紧急的决策推出来</td>
+              <td>"面对你学到的一切，哪三个决策最紧急？给出各自的方向与正反论证。"</td>
+            </tr>
+            <tr>
+              <td>3. 重构流程本身</td>
+              <td>QBR 本是"人肉筛数据、找问题、调资源"时代的产物，直接让模型设计一个更好的机制</td>
+              <td>"评审的意义是让管理层及早发现问题、把人和钱放到对的地方。设计一个比季度汇报更好的机制，用我们的历史证明它本可更早发现问题，并与现有机制并行跑一个季度。"</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>判断标准：<strong>如果你做的东西要开会讨论，那"高度"野心通常是对的</strong>；但对创意类工作，效果会差一些。也有现实局限——"Claude，去赚钱"在 2026 年对多数生意还不行。但总体看，模型越强，越能在更高的抽象层运作。</p>
+        <p>更重要的是，高度野心是"把人类移出循环的持久工作流"的入口。它往往要求你先改造自己的工作流——Felix 为了"让 Claude 保证应用不崩溃"，得先让它能取到崩溃报告、搞清楚哪个应用版本对应哪个 git commit、并给它 Windows/macOS/Linux 机器让它能独立复现和验证修复。</p>
+      </section>
+
+      <section id="depth">
+        <h2>三、Depth：往下钻，像领域顶尖专家那样做</h2>
+        <p>有时你只想把一件事做得极好。在深度上有野心，就是<strong>逼模型用领域内最顶尖专业人士所用的工具、技巧、媒介和知识——并且持续逼下去，直到连那些人也能从你的成果里学到新东西</strong>。</p>
+        <p>仍以 QBR 为例，假设 Acme 正被用户流失（churn）困扰，Felix 给出五种技巧：</p>
+        <ul>
+          <li><strong>坚持用业界最好的工具：</strong>让模型"表现得像专家"时，它常常只换了词汇、没换方法。要真正有深度，就用顶级数据科学家和统计学家用的工具——当 Claude 想用 markdown 表格时，坚持要数据库和统计模型。你未必需要知道专家用什么，Claude 通常知道。</li>
+          <li><strong>定"不合理"的目标，并告诉模型"这非常合理"：</strong>网站要从 10s 优化到 5s？直接要 200ms。模型觉得不可能？重申"这完全可以解，继续"。</li>
+          <li><strong>挑战你已知的东西：</strong>尤其在商业里，很多我们信以为真的东西只是现实的粗糙近似。把原始信息交给模型，让它对抗性地检查假设——"我们以为流失是 onboarding 的问题，试着用原始数据把它复现出来。"</li>
+          <li><strong>产出新知识：</strong>在模型已深入数据之后，让它找盲点——"建一个客户仿真，用日志复现过去一年，找到我们还不了解的最早流失信号，并证明它能在未见过的数据上预测。"</li>
+          <li><strong>用外部裁判：</strong>绝不要让模型自我评判。到 2026 年 10 月为止，作者恳请你坚持外部验证——理想情况是一个模型能运行、能立即反馈的工具。</li>
+        </ul>
+        <p>他常挂嘴边的"深度升级"提示词（可复用）：</p>
+        <div class="quote">I want a deeper version of this task, not a bigger one. Before rewriting it: (1) say what a top professional in this field would do here that I'm not asking for; (2) name the rawest material they would start from instead of what has already been digested for me; (3) name the specific methods and tools they would use; (4) say what, other than you or me, would show the result is right. Then rewrite my prompt to ask for exactly that.</div>
+      </section>
+
+      <section id="range">
+        <h2>四、Range：跨领域借力</h2>
+        <p>在广度上有野心，就是从不同领域的视角考虑工作——比过去更"不经济"地引入更多领域。这不算独到见解，每部劫盗电影前 30 分钟都在"组建一支各怀绝技的队伍"。随着 AI 让多智能体系统（多线程、编排器或子代理）越来越容易跑起来，Felix 看到最有魔力的结果往往来自"逼 Claude 引入额外领域"。</p>
+        <p>两条技巧：</p>
+        <div class="axis">
+          <div class="axis-title">把名词换成动词</div>
+          <div>源自 Tom Kelley 与 Jonathan Littman《创新的艺术》的老技巧。季度评审不是"一叠幻灯片"，而是"让忙碌的人在 30 分钟内相信一个关于因果的故事、并在不确定中做出决策"。有了动词，你我都更容易看清哪些领域能带来独特有用的视角。</div>
+        </div>
+        <div class="axis">
+          <div class="axis-title">组建"团队"</div>
+          <div>"这套 PPT 必须惊艳，否则外星人会炸掉地球——人类会凑一支怎样的队伍？"要有生产质量，就请分析师、记者、编辑；如果要演示，再加动效与音频设计师；再加一支对抗性"红队"——做空者和法务会计。注意别滑入角色扮演：不要问"像做空者那样写"，而要问"做做空者为了研究仓位会做的事"。</div>
+        </div>
+        <p>一个让他开眼的例子：同事 Alex Albert 用 Blender 渲染室内设计——他从没想过用 Claude 做 3D 环境，尽管自己以前就做过游戏。</p>
+      </section>
+
+      <section id="prereq">
+        <h2>五、前置条件：给模型一台"电脑"</h2>
+        <p>所有野心路径都有一个共同前提：<strong>模型要有一台能装软件、能接触各种相关数据的"电脑"</strong>——通过 MCP connector 或其他方式。很多工具能做到，作者建议你用起来。</p>
+      </section>
+
+      <section id="self-efficacy">
+        <h2>六、我们早就来过这里：自我效能与野心的心理学</h2>
+        <p>为什么"更有野心"这件事本身如此必要？因为<strong>人类一直被"相信什么可能"所束缚</strong>——更糟的是，我们通常只在极窄的领域里信任自己。米开朗基罗当年就不想画西斯廷教堂：他是雕塑家，不是画家。</p>
+        <p>心理学为这种现象命名：<strong>自我效能（self-efficacy）</strong>——高自我效能的人更相信自己的能力，也确实成就更多。而且有证据表明它可以被"黑"：Locke 与 Latham 梳理了 35 年的目标设定研究，斩钉截铁地得出——被给到具体且困难目标的人，表现优于被要求"尽力而为"的人。Stripe 创始人 Patrick Collison 还维护着一份 "Fast" 清单，记录人类在"大胆目标 + 紧迫期限"下完成的种种壮举。</p>
+        <p>三个被充分记录的心理"黑"法：</p>
+        <div class="framework">
+          <div class="framework-item">
+            <b>相信它可能，就能做成</b>
+            <p>1939 年，George Dantzig 上课迟到，抄下黑板上的两道题当作业交了上去——那其实是两个未解的统计学难题。</p>
+          </div>
+          <div class="framework-item">
+            <b>看别人做成，就能做成</b>
+            <p>人类追了几十年"四分钟英里"，Roger Bannister 1954 年打破后，仅仅 46 天就有人重复。两小时马拉松正在重演：今年 4 月 Sabastian Sawe 跑进 2 小时，同一场亚军也破了 2 小时。</p>
+          </div>
+          <div class="framework-item">
+            <b>给自己失败的许可</b>
+            <p>《网球的内心游戏》的核心论点是：拼命努力反而打不出最好的球。Linux 诞生时也只是"一个爱好，不会像 GNU 那样大而专业"。</p>
+          </div>
+        </div>
+        <div class="quote">自我效能不是新问题，但它现在更强大：在一个能力每隔几周就跃迁的世界里，我们需要能帮我们去做"没真正考虑过、也不相信可能"之事的技巧。</div>
+      </section>
+
+      <section id="closing">
+        <h2>最终判断</h2>
+        <p>这篇教程的价值，是把一句空洞的口号"we're not ambitious enough"落成了可操作的方法论：</p>
+        <ul>
+          <li>用 <strong>Altitude</strong> 往上抽象，把任务升级成"结果背后的结果"，进而把人类移出循环；</li>
+          <li>用 <strong>Depth</strong> 往下钻，坚持领域顶尖的工具、定不合理的目标、挑战假设、产出新知识、引入外部裁判；</li>
+          <li>用 <strong>Range</strong> 跨领域，把名词换成动词、组建虚拟专家团队；</li>
+          <li>再用 <strong>自我效能</strong> 的三个心理杠杆——相信能成、看别人成、允许失败——来跨越那条"不相信可能"的鸿沟。</li>
+        </ul>
+        <p>一句话：野心不是性格，而是可以被训练、被工程化、被提示出来的能力。</p>
+      </section>
+    </article>
+
+    <aside>
+      <p class="nav-title">目录</p>
+      <ol class="toc">
+        <li><a href="#summary">结论先行</a></li>
+        <li><a href="#uneven">能力不均匀增长</a></li>
+        <li><a href="#altitude">Altitude 高度</a></li>
+        <li><a href="#depth">Depth 深度</a></li>
+        <li><a href="#range">Range 广度</a></li>
+        <li><a href="#prereq">前置条件</a></li>
+        <li><a href="#self-efficacy">自我效能</a></li>
+      </ol>
+      <div class="side-note">
+        <p>说明：本文基于 Felix Rieseberg《How to be more ambitious: A tutorial for humans with models》全文整理，保留原文英文提示词原文以准确复现可复用指令。</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="wrap">Generated by OpenClaw. Source: felixrieseberg.com（整理于 2026-10-17）。</div>
+  </footer>
+</body>
+</html>
