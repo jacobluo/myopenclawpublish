@@ -1,0 +1,133 @@
+---
+title: "Follow 深度日报：Anthropic 代码评审范式迁移、agents 证伪多义性、OpenAI 银行/开发者生态双案例与开源模型继续涌出"
+date: "2026-10-17"
+category: "daily"
+url: "/daily/2026/10/17/"
+summary: "Follow List 公开来源整理：本窗口从 2026-10-16T00:00Z 到 2026-10-17T00:00Z。高信号集中在四条线：Anthropic 工程博客披露 Claude Code 团队把代码评审从「人工逐行」迁到「机器持续评审」，并给出真实生产数据（Claude 写约 90% 自己的代码、合并 PR 翻倍而回滚降 40%、日落地变更 2500→30000）；Goodfire 的 Nick Cammarata 抛出「神经网络本就干净」的可解释性主张，称 agent 化分析能消解多义性/叠加态；OpenAI 发布 Itaú（巴西银行业）与 Stack Overflow for Agents 两个生态分发案例；开源侧 Reflection Beam 501B（Apache 2.0）与 NVIDIA Indic 2.8T tokens 继续涌出。公开 X/RSSHub/Nitter 本轮仍不可稳定采信，本期以官方博客、RSS、公开网页与可复查链接为准。"
+---
+<div class="meta">
+  <strong>2026年10月17日（周六）</strong> · 覆盖窗口：2026-10-16 08:00 – 2026-10-17 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；GitHub Blog/Changelog RSS、OpenAI News RSS、Google DeepMind RSS、Latent Space RSS、Simon Willison Atom、Hugging Face Blog RSS、LangChain Blog RSS 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：Anthropic 官方 news RSS 仍返回 Next.js 错误页，其工程博客动态借由 claude.dev 公开博客与 Simon Willison 转载采信；OpenAI 文章详情页本窗口返回 Cloudflare 校验页，摘要以 RSS 描述为准；X 公开 profile 仍只返回站点 shell，X/RSSHub/Nitter 时间线正文不可稳定采信。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>代码评审的范式迁移：从「人工读码」到「机器持续评审」</h4><p>Anthropic 工程博客公开了 Claude Code 团队的真实评审流程：Claude 写约 90% 自己的代码，6 月到 9 月合并 PR 翻倍、回滚率却降逾 40%，日落地变更从 5 月的约 2500 涨到 9 月的逾 30000。「有没有人读过这段代码」被明确判定为过时的代理指标，评审从「PR 末尾的一道闸」变成「像拼写检查一样随写随跑」。</p></div>
+  <div class="overview-item"><h4>可解释性出现激进主张：agents 证伪「多义性」</h4><p>Goodfire 的 Nick Cammarata 抛出「神经网络本就干净」的工作假说——许多被归因于多义性（polysemanticity）/叠加态（superposition）的「打结」权重，在进一步的 agent 化分析下会散开。若成立，这既是可解释性与对齐的突破，也直接下调 P(doom)。</p></div>
+  <div class="overview-item"><h4>OpenAI 生态分发两条腿：受监管银行业 + 开发者插件飞轮</h4><p>Itaú（巴西最大银行）用「ia.i 对话界面 + IARA 治理平台」把 AI First 推到客户与员工；Stack Overflow for Agents 两个工程师用 Codex 数周上线、ChatGPT 插件驱动 agent 创建量最高 10× 增长、注册量翻三倍。两者分别对应「高监管落地」与「平台生态冷启动」两种叙事。</p></div>
+  <div class="overview-item"><h4>GitHub 治理继续收紧：开源许可证合规 GA</h4><p>企业现在可以用 ruleset 集中执行依赖许可证策略，新增「合并前强制许可证合规结果」条件与「企业级开源许可证管理员」预置角色，把依赖引入的合规检查变成 PR 门禁。</p></div>
+  <div class="overview-item"><h4>开源模型继续密集涌出</h4><p>新实验室 Reflection 发布 501B MoE「Beam」（Apache 2.0、23B 激活、1M 上下文、专注 coding/agent）；NVIDIA 联合 AI4Bharat 开源 2.8T tokens 的 Indic 多语言预训练语料与可复用生成管线。开源侧仍在以「规模 + 可拥有性 + 区域语言」三个方向补位。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Anthropic：代码评审的范式迁移与真实生产数据（最高信号）</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agentic Engineering / Code Review</span><strong>Anthropic (claude.dev)</strong> · 2026-10-15 · <a href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a><br><strong>Simon Willison</strong> · 2026-10-16 22:06 UTC · <a href="https://simonwillison.net/2026/Oct/16/code-review/">Quoting Addy Osmani, Morgan Westlee Lunt, and Qing Wang</a></div>
+  <div class="summary"><p>Anthropic 工程团队（Addy Osmani、Morgan Westlee Lunt、Qing Wang）公开了 Claude Code 团队如何处理「agent 大规模产出代码之后，评审还做不做、怎么做」。核心数据：<strong>Claude 写大约 90% 的 Claude Code 自身代码</strong>；从 6 月到 9 月，合并进代码库的 PR 数量翻倍以上，而需要回滚的比例下降了 40% 以上；在 Anthropic monorepo 里，每日落地的变更从 5 月约 2500 涨到 9 月逾 30000。</p><p>方法上的关键判断是：<strong>「有没有人读过这段代码」是一个不精确的代理指标</strong>，真正该问的是「这个变更哪里会出问题，哪一个检查——自动的还是人工的——最适合抓住它」。于是评审从「PR 末尾的一道闸门」（写完→开 PR→等同事）变成「像拼写检查一样随写随跑」的持续过程：大多数变更在被要求人工查看之前，至少已经被 Claude 审过并修过一次。人工注意力被保留给更高层的问题。</p><p>Simon Willison 在 10 月 16 日专门引用这篇，并加了「coding-agents / agentic-engineering」等标签，说明这是他在持续跟踪的「agent 写代码」主线上的一个标志性案例。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 coding agent 规模化之后最硬核的组织实践公开披露——它用真实数字回答了「AI 写代码了，质量谁来兜底」，并把答案从「让人更努力地读」改写为「重构评审的职责与时机」。对团队如何组织 AI 辅助开发有直接借鉴价值。</div>
+  <div class="action">后续行动：把「评审的时机从闸门前移到随写随跑」与「机器先审、人工只处理高层问题」作为自有工程流程的对照实验；跟踪 Anthropic 是否公布回滚率/事故率的长期曲线与「哪些检查该自动化」的量化方法。</div>
+</div>
+
+<h3>二、可解释性：Nick Cammarata「神经网络本就干净」与 agents 证伪多义性（研究方向）</h3>
+<div class="card">
+  <div class="source"><span class="tag">Interpretability / Alignment</span><strong>Latent Space AINews</strong> · 2026-10-16 04:16 UTC · <a href="https://www.latent.space/p/ainews-agents-disprove-polysemanticity">[AINews] Agents disprove Polysemanticity; greatly improve Interpretability &amp; Alignment</a></div>
+  <div class="summary"><p>本期 Latent Space AINews 的标题故事是一则少见的「可解释性 + 对齐」突破主张：<strong>Goodfire 的 Nick Cammarata 发表重要文章，提出其工作假说「Neural Networks Are Already Clean（神经网络本就干净）」</strong>——很多已知的多义性（polysemanticity）与叠加态（superposition）案例，即那些抵抗人类解读的「打结」权重，其实只是缺乏进一步的 agent 化分析；一旦用 agent 去拆，这些结就会散开，网络比我们以为的更可解释。</p><p>该主张如果站稳，含义是双重的：其一，<strong>可解释性不再需要「从零发明新方法」，而可以借用 agent 的搜索/拆解能力</strong>（呼应了 Latent Space 去年总结的「解释性方法也在经历 bitter lesson 式 scaling」）；其二，配合 Anthropic 去年那套可解释性 scaling 的积累，这构成一次「全局下调 P(doom)」的信号。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是 Follow List 上 Amanda Askell（对齐/模型行为）、Nathan Lambert（可解释性生态）等线索的直接交汇点。多义性长期被视为深度网络「不可解释」的核心障碍，若被 agent 化分析系统性地消解，会改变对齐研究的技术路线。</div>
+  <div class="action">后续行动：找到并读 Nick Cammarata 原文，核对「agent 消解多义性」的实验方法与可复现性；对比 Anthropic 的可解释性 scaling 结论，判断这是否只是「重新命名」还是真正的机制突破；跟踪 Goodfire 是否有对应的工具/产品发布。</div>
+</div>
+
+<h3>三、OpenAI：受监管银行业 + 开发者插件飞轮两个生态案例</h3>
+<div class="card">
+  <div class="source"><span class="tag">Enterprise / Ecosystem</span><strong>OpenAI News</strong> · 2026-10-16 19:00 UTC · <a href="https://openai.com/index/itau-generative-ai">How Itaú is building generative AI for its entire customer base</a><br><strong>OpenAI News</strong> · 2026-10-16 00:00 UTC · <a href="https://openai.com/index/stack-overflow-chatgpt-plugin">Stack Overflow for Agents triples signups with ChatGPT plugin</a></div>
+  <div class="summary"><p>OpenAI 本窗口两个案例，正好覆盖生态分发的两端。<strong>Itaú</strong>（巴西最大银行）用「<strong>ia.i</strong> 对话式界面 + <strong>IARA</strong> 治理平台」把「AI First」策略同时铺给客户和员工——在一个高度受监管的行业里落地，是「企业级 agent + 治理」叙事在金融场景的旗舰案例，也呼应上一窗口 OpenAI「从企业 agent 军火商拉回合规叙事」的转向。</p><p><strong>Stack Overflow for Agents</strong> 则是平台冷启动样本：两个工程师用 Codex 几周内上线该产品，其 ChatGPT 插件把「agent 创建量」最高推到 <strong>10× 增长</strong>、注册量翻三倍。这验证了「插件/入口位」对开发者工具的杠杆——一个小的分发集成就能撬动数量级的创建量，也说明 ChatGPT 作为 agent 分发渠道的价值在兑现。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>两条线分别对应「高监管行业的合规落地」与「平台生态的网络效应」，是判断 OpenAI 商业化纵深（不只是卖 token/订阅，而是成为 agent 分发入口）的两个可复查样本。</div>
+  <div class="action">后续行动：跟踪 Itaú 案例里 IARA 治理平台的具体权限/审计设计（是否能成为银行级 AI 治理的参考架构）；观察 ChatGPT 插件生态的「agent 创建量」指标是否会作为 OpenAI 对外公开的分发 KPI 持续出现。</div>
+</div>
+
+<h3>四、GitHub：开源许可证合规 GA，依赖治理进入 PR 门禁</h3>
+<div class="card">
+  <div class="source"><span class="tag">Governance / Supply Chain</span><strong>GitHub Changelog</strong> · 2026-10-16 14:00 UTC · <a href="https://github.blog/changelog/2026-10-16-open-source-license-compliance-generally-available">Open source license compliance generally available</a><br><strong>GitHub Changelog</strong> · 2026-10-16 02:16 UTC · <a href="https://github.blog/changelog/2026-10-15-copilot-in-slack-and-teams-adds-model-and-repository-updates">Multi-repository support and other improvements for GitHub in Slack and Teams</a></div>
+  <div class="summary"><p>GitHub 把「<strong>开源许可证合规</strong>」转 GA：企业可以用 ruleset 对目标仓库启用集中式的许可证策略，新增 <strong>「合并前强制许可证合规结果」</strong>条件（与既有 code scanning 条件类似）。当开发者打开会新增/修改依赖的 PR 时，许可证检查自动确保每个新增或变更依赖的许可证可接受，并在 PR 上逐条标注不合规依赖；这些标注必须通过移除/替换依赖、修订策略或创建例外来解决。同时新增预置角色 <strong>「Enterprise Open-Source License Manager」</strong>，让指定人员/团队审批关闭请求。</p><p>这延续了上一窗口「AI 写代码 → AI 审代码 → AI 修代码 → 许可证对账」的治理闭环主线：<strong>依赖引入的合规检查从「事后审计」变成了「合并门禁」</strong>。另一条是 Copilot 在 Slack/Teams 里新增多仓库支持与模型/仓库更新，把 coding agent 的协作入口进一步下沉到 IM 里。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>许可证合规 GA 直接呼应 Follow List 上 Simon Willison 反复强调的「供应链/依赖风险」主线（此前 Rust 供应链攻击、dependency cooldowns 等），也是企业采购 GitHub Advanced Security 的一个新增合规理由。</div>
+  <div class="action">后续行动：评估「合并前许可证合规」对 monorepo / 大量依赖项目的 CI 时间与误报影响；把「许可证门禁 + License Manager 角色」纳入供应链治理方案对比（与 Dependabot dependency review action 的分工）。</div>
+</div>
+
+<h3>五、开源模型：Reflection Beam 501B 与 NVIDIA Indic 2.8T tokens</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models</span><strong>Hugging Face Blog</strong> · 2026-10-16 00:00 UTC · <a href="https://huggingface.co/blog/reflection-beam">Welcome Beam: a 501B open model you can own, customize, and scale</a><br><strong>Hugging Face Blog</strong> · 2026-10-16 01:44 UTC · <a href="https://huggingface.co/blog/nvidia/scaling-indic-pretraining">Scaling Indic Pretraining: 2.8 Trillion Tokens and an Open Data Generation Pipeline</a></div>
+  <div class="summary"><p><strong>Reflection Beam</strong>：新成立的美国实验室 Reflection 的首个开源模型，<strong>501B 参数 MoE（23B 激活/ token）、1M token 上下文、Apache 2.0 许可</strong>，明确主打 coding 与 agentic 场景，面向「想在自有硬件/云上跑前沿规模模型并定制」的团队。它自带开源 Rust harness，并有原生 transformers、vLLM、SGLang 支持，HF 还配了 SFT/RL（TRL、GRPO、LoRA）微调配方。这是继 Meta Muse Spark Open 之后，又一个「开源前沿规模模型」信号。</p><p><strong>NVIDIA × AI4Bharat</strong> 的「Scaling Indic Pretraining」则走数据/区域语言路线：<strong>2.8 万亿 tokens</strong>、覆盖 22 种语言的原生脚本数据（另 12 种罗马化），并提供可复用的 GPU 加速翻译/质量评估/修复管线，最终回补到 Nemotron 3.5 Super VL 的 Indic 能力。它把「开源数据生成管线」本身作为一个可复用的资产发布。</p><p>二者叠加的宏观含义与上一窗口一致：<strong>开源模型正在「规模 + 可拥有性 + 区域语言」三条线上同时补位</strong>，不再只是追赶者或蒸馏对象。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Beam 是「可拥有、可定制的 501B」——直接对标企业「不想把模型托管给第三方」的需求；Indic 数据管线则代表「非英语/低资源语言」的规模化开源投入，是区域市场信号。</div>
+  <div class="action">后续行动：在固定任务上实测 Beam 的 coding/agent 能力与推理成本（对比 Muse Spark Open、GLM-5.3、Kimi K3）；关注 Reflection 后续是否有更大规模或 RL 版本；把 Indic 语料/管线作为多语言能力评估的数据来源候选。</div>
+</div>
+
+<h2>重要更新</h2>
+<ul>
+  <li><strong>Anthropic 代码评审范式：</strong>Claude 写约 90% 自身代码；6→9 月合并 PR 翻倍、回滚率降逾 40%；日落地变更 2500→30000；评审从「闸门」变「随写随跑的持续评审」，人工只处理高层问题。</li>
+  <li><strong>可解释性主张：</strong>Goodfire Nick Cammarata「神经网络本就干净」，agent 化分析消解多义性/叠加态，显著改善可解释性与对齐。</li>
+  <li><strong>OpenAI 生态双案例：</strong>Itaú（ia.i + IARA 治理平台，巴西银行业 AI First）；Stack Overflow for Agents（Codex 数周上线，ChatGPT 插件 10× agent 增长、注册翻三倍）。</li>
+  <li><strong>GitHub 治理：</strong>开源许可证合规 GA（ruleset + 合并前强制合规 + Enterprise Open-Source License Manager 角色）；Copilot 在 Slack/Teams 新增多仓库支持与模型更新。</li>
+  <li><strong>开源模型：</strong>Reflection Beam 501B（Apache 2.0、23B 激活、1M 上下文、coding/agent）；NVIDIA×AI4Bharat Indic 预训练 2.8T tokens / 22 语言。</li>
+</ul>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+  <li><strong>Anthropic：</strong>通过 claude.dev 工程博客系统性地公开其 agent 开发实践（代码评审、90% 自写代码），从「模型发布」叙事转向「工程方法论」叙事。官方 news RSS 仍 404，动态借由 claude.dev 与 Simon Willison 转载体现。</li>
+  <li><strong>Simon Willison：</strong>本窗口高信号引用 Anthropic 代码评审长文，持续把「coding agent 如何影响软件工程」作为核心观察主线。</li>
+  <li><strong>Goodfire（Nick Cammarata）：</strong>抛出激进可解释性主张，把「agent 化分析」引入机制可解释性，可能重塑对齐研究技术路线。</li>
+  <li><strong>OpenAI：</strong>从「安全 agent 案例密集铺开」转向「受监管行业 + 开发者插件飞轮」两类分发叙事，商业化纵深在延伸。</li>
+  <li><strong>GitHub：</strong>许可证合规 GA，供应链/依赖治理从「事后审计」进入「合并门禁」，coding 平台持续从「模型分发」走向「模型 + 依赖治理」。</li>
+  <li><strong>Reflection：</strong>新实验室首发 501B 开源 MoE「Beam」，主打可拥有、可定制，瞄准不想托管模型的企业。</li>
+  <li><strong>NVIDIA × AI4Bharat：</strong>发布 2.8T tokens Indic 预训练语料与可复用生成管线，深耕区域语言。</li>
+  <li><strong>Meta（Muse Spark Open 后续）：</strong>AINews 补充了独立评测与生态反应——Artificial Analysis 综合指数 39（美国开源第一，但落后 GLM-5.3/Kimi K3，且 agentic 四项垫底），Nathan Lambert 批评其自定义许可证「trash」。</li>
+</ul>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>代码评审范式实验：</strong>把「机器先审、人工只处理高层问题 + 评审随写随跑」引入自有工程流程，记录回滚率/事故率变化。</li>
+  <li><strong>可解释性突破核对：</strong>读 Nick Cammarata 原文，核对「agent 消解多义性」的方法与可复现性，判断是机制突破还是概念重命名。</li>
+  <li><strong>OpenAI 生态分发指标：</strong>跟踪 ChatGPT 插件的「agent 创建量」是否成为 OpenAI 对外公开的分发 KPI；观察 Itaú IARA 治理平台能否成为银行级 AI 治理参考架构。</li>
+  <li><strong>开源前沿模型实测组：</strong>Beam 501B vs Muse Spark Open vs GLM-5.3 vs Kimi K3，在 coding/agent 与推理成本上做固定任务对比。</li>
+  <li><strong>供应链/许可证治理：</strong>评估 GitHub「合并前许可证合规」对 CI 时间与误报的影响，纳入企业供应链治理方案对比。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>Anthropic 评审数据：</strong>「90% 自写代码」「PR 翻倍/回滚降 40%」「2500→30000 变更/日」为官方博客口径，长期曲线与「哪些检查该自动化」的量化方法未完整披露。</li>
+  <li><strong>多义性主张：</strong>Nick Cammarata「神经网络本就干净」目前是工作假说/文章主张，未经过同行评审复现，需谨慎采信。</li>
+  <li><strong>Itaú 与 Stack Overflow 案例：</strong>OpenAI 文章详情页本窗口返回 Cloudflare 校验页，摘要基于 RSS 描述，具体指标口径（如 10× 的基线）需点开原文核对。</li>
+  <li><strong>Beam 实际能力：</strong>501B/23B 激活/1M 上下文为官方口径，coding/agent 实际表现与推理成本需独立评测。</li>
+  <li><strong>Muse Spark Open 生态反应：</strong>「美国开源第一但 agentic 垫底」「许可证 trash」来自 Latent Space 汇总的第三方/社区观点，非官方结论，需交叉验证。</li>
+  <li><strong>X 高优先级人物时间线：</strong>公开抓取路径未取得可核验正文，不能据此判断 Sam Altman、Kevin Weil、Josh Woodward、Amanda Askell、Karpathy、Alex Albert、Logan Kilpatrick、Jeff Dean、Demis Hassabis、Mira Murati、Nathan Lambert 等账号没有更新。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>GitHub「Xcode 27 runner image GA」属 iOS/macOS CI 基础设施更新，与 AI 主线关系弱。</li>
+  <li>OpenAI 的 Itaú、Stack Overflow 案例偏品牌/生态叙事，信息价值低于 Anthropic 代码评审与可解释性主张，但对商业化纵深判断有参考。</li>
+  <li>Latent Space AINews 汇总混合大量未核验传闻与 X/Reddit 线索，本期只采用 Nick Cammarata 主张与 Muse Spark Open 生态反应等独立条目与可复查链接。</li>
+  <li>NVIDIA Indic 语料偏「数据工程」而非「模型能力突破」，除非关注多语言/低资源语言市场，否则优先级低于 Beam 与 Muse Spark Open。</li>
+  <li>X 公开 profile 返回 HTTP 200 不等于时间线可读，本期不使用 X-only 内容。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://claude.dev/blog/solving-code-review-at-anthropic/">Anthropic (claude.dev): How the Claude Code team does code review</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/16/code-review/">Simon Willison: Quoting Addy Osmani, Morgan Westlee Lunt, and Qing Wang</a></li>
+  <li><a href="https://www.latent.space/p/ainews-agents-disprove-polysemanticity">Latent Space AINews: Agents disprove Polysemanticity</a></li>
+  <li><a href="https://openai.com/index/itau-generative-ai">OpenAI: How Itaú is building generative AI for its entire customer base</a></li>
+  <li><a href="https://openai.com/index/stack-overflow-chatgpt-plugin">OpenAI: Stack Overflow for Agents triples signups with ChatGPT plugin</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-16-open-source-license-compliance-generally-available">GitHub: Open source license compliance generally available</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-15-copilot-in-slack-and-teams-adds-model-and-repository-updates">GitHub: Multi-repository support for GitHub in Slack and Teams</a></li>
+  <li><a href="https://huggingface.co/blog/reflection-beam">Hugging Face / Reflection: Welcome Beam (501B open model)</a></li>
+  <li><a href="https://huggingface.co/blog/nvidia/scaling-indic-pretraining">Hugging Face / NVIDIA: Scaling Indic Pretraining</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/rss/">Google DeepMind RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-16T00:00:00Z / 2026-10-17T00:00:00Z.</footer>
