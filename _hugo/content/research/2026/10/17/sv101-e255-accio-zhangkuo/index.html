@@ -1,0 +1,592 @@
+---
+title: "模型越来越强，为什么用户没感觉？——硅谷101 E255 张阔专访观点整理"
+date: "2026-10-17"
+category: "research"
+url: "/research/2026/10/17/sv101-e255-accio-zhangkuo/"
+summary: "整理硅谷101 E255 阿里国际站总裁张阔专访：107 个真实电商任务里最前沿模型无人干预通过率仅 61%，拆解榜单成绩与实际交付的落差，以及垂直 Agent 靠 Model × Harness × Context 与多模型路由把成本压到竞品 1/3 的路径。"
+layout: "raw"
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>模型越来越强，为什么用户没感觉？——硅谷101 E255 张阔专访观点整理</title>
+  <meta name="description" content="硅谷101 E255 再访阿里国际站总裁张阔：从 107 个真实电商任务仅 61% 的通过率说起，拆解榜单成绩与实际交付的落差，以及垂直 Agent 靠 Model × Harness × Context 与多模型路由跑赢通用模型。">
+  <style>
+    :root {
+      --bg: #f4f7f4;
+      --paper: #ffffff;
+      --ink: #17211c;
+      --muted: #5d6b62;
+      --line: #dbe5dd;
+      --green: #16784f;
+      --blue: #2459a8;
+      --red: #b04435;
+      --gold: #a96914;
+      --soft-green: #e8f5ee;
+      --soft-blue: #eaf1fb;
+      --soft-red: #fff0ed;
+      --soft-gold: #fff6e6;
+      --shadow: 0 18px 52px rgba(28, 43, 34, 0.10);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
+      line-height: 1.72;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(22, 120, 79, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(36, 89, 168, 0.09), rgba(36, 89, 168, 0) 420px),
+        var(--bg);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 64px 0 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(34px, 5.4vw, 58px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 880px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      padding: 6px 12px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 34px;
+      padding: 40px 0 72px;
+      align-items: start;
+    }
+
+    article {
+      display: grid;
+      gap: 22px;
+    }
+
+    section, aside {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 28px;
+    }
+
+    aside {
+      position: sticky;
+      top: 22px;
+      padding: 20px;
+    }
+
+    h2, h3, p {
+      margin-top: 0;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 26px;
+      line-height: 1.24;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    p { margin-bottom: 14px; }
+    p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0 0 14px;
+      padding-left: 1.35em;
+    }
+
+    li + li { margin-top: 8px; }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lead-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #fbfdfb;
+    }
+
+    .lead-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 15px;
+    }
+
+    .axis {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .axis:first-of-type { border-top: 0; padding-top: 0; }
+    .axis:last-child { padding-bottom: 0; }
+
+    .axis-title {
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .framework {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .framework-item {
+      border-radius: var(--radius);
+      padding: 18px;
+      border: 1px solid var(--line);
+    }
+
+    .framework-item:nth-child(1) { background: var(--soft-green); }
+    .framework-item:nth-child(2) { background: var(--soft-blue); }
+    .framework-item:nth-child(3) { background: var(--soft-gold); }
+
+    .framework-item b {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 20px;
+    }
+
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .score-table th, .score-table td {
+      border: 1px solid var(--line);
+      padding: 11px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .score-table th {
+      background: #eef5f0;
+      color: #213328;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .tag.good { background: var(--soft-green); color: var(--green); }
+    .tag.watch { background: var(--soft-gold); color: var(--gold); }
+    .tag.risk { background: var(--soft-red); color: var(--red); }
+
+    .quote {
+      border-left: 4px solid var(--green);
+      background: #f7fbf8;
+      padding: 18px 20px;
+      color: #28372e;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .nav-title {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li + li { margin-top: 8px; }
+
+    .toc a {
+      color: var(--ink);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .side-note {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 28px 0 46px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+      }
+
+      .lead-grid, .framework {
+        grid-template-columns: 1fr;
+      }
+
+      .axis {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(100% - 24px, 1120px);
+      }
+
+      header {
+        padding-top: 42px;
+      }
+
+      section {
+        padding: 22px;
+      }
+
+      .score-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">AI Agent · 电商 · 播客观点</p>
+      <h1>模型越来越强，为什么用户没感觉？</h1>
+      <p class="dek">硅谷101 E255 再访阿里国际站总裁张阔。核心张力在于：通用模型榜单成绩接近满分，但真正把工作交给 AI 的商家体验并没有同步提升——阿里自建的 107 个真实电商任务里，最前沿模型无人干预通过率仅 61%。这份整理拆解这个落差，并还原垂直 Agent 靠什么跑赢通用模型。</p>
+      <div class="meta">
+        <span class="pill">发布时间：2026-10-17</span>
+        <span class="pill">来源：硅谷101 E255（2026-10-08 首播）</span>
+        <span class="pill">嘉宾：张阔（阿里国际站总裁）</span>
+        <span class="pill">主题：AI Agent / 电商 / 评测基准 / Token 经济学</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article>
+      <section id="summary">
+        <h2>结论先行</h2>
+        <div class="lead-grid">
+          <div class="lead-card">
+            <strong>核心判断</strong>
+            <p>模型通用评测接近满分，但真实商业任务无人干预通过率仅 61% 出头——"数学/通用 agentic 能力得分高，与它在电商里能完成多少工作，相关性其实没那么大"。</p>
+          </div>
+          <div class="lead-card">
+            <strong>竞争公式</strong>
+            <p>Agent = Model × Harness × Context（乘法关系），任一项为 0 结果就是 0。竞争已从"单一模型比拼"转向"三个维度同时较量"。</p>
+          </div>
+          <div class="lead-card">
+            <strong>成本优势</strong>
+            <p>同样跑完 107 题，Accio Work 约 3.69 美元，是 Codex / Claude Code（9 美元以上）的 1/3，靠帕累托最优模型路由 + 集约采购 + harness/context 工程效率。</p>
+          </div>
+          <div class="lead-card">
+            <strong>人的位置</strong>
+            <p>AI 接手大量重复执行，但支付/采购的最终按钮、产品品味、市场直觉与预算分配，仍必须由人来判断。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="gap">
+        <h2>一、榜单满分，为什么真实工作还是失败？</h2>
+        <p>这是全篇的题眼。张阔给出的判断很直白：模型发布频次越来越快，榜单上 99 分、满分 100，进步被压缩到小数点之后，但团队在真实经营里"并没有感觉到那么好"。他们由此发现一个关键事实：<strong>一个模型在数学或通用 agentic 能力上得分高，跟它在电商里能完成多少工作，相关性其实没那么大。</strong></p>
+        <div class="quote">通用智能变好确实能让通过率更高，但底层的实际水位并没有拉那么大。</div>
+        <p>为什么 Coding 的 Agent 渗透率已经到 99%（几乎找不到还在自己写代码的研发），商业场景却"才刚刚开始"？张阔给了三条结构性原因：</p>
+        <div class="framework">
+          <div class="framework-item">
+            <b>数据形态</b>
+            <p>代码是 100% 数字化的，散落在 GitHub 和代码库里，容易被 AI 广泛学习；商业数据更多元、碎片化、跨系统。</p>
+          </div>
+          <div class="framework-item">
+            <b>流程可通约性</b>
+            <p>写代码有通用流程；做生意没有"通用流程"，且不同企业对"经营结果好坏"的判断标准都不一样。</p>
+          </div>
+          <div class="framework-item">
+            <b>验证周期</b>
+            <p>代码编译通过即可验证；商业结果可能以天、周、月甚至一年为单位才能闭环，反馈周期极长。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="benchmark">
+        <h2>二、107 个真实任务：把落差量化</h2>
+        <p>阿里国际站基于 <strong>Alibaba.com 上百万条真实经营数据 + Accio 真实问答数据</strong>，提炼出 107 个电商任务（覆盖七大类、已开源）。结果是：<strong>最前沿模型在完全无人干预的条件下，通过率仅 61% 多一点，及格都费劲。</strong>关键是"无人干预"这个限定——它衡量的正是"人要不要反复解释、检查和兜底"。</p>
+        <p>任务按真实商业动作定义，不是刷题。举三类：</p>
+        <table class="score-table">
+          <thead>
+            <tr>
+              <th>任务类型</th>
+              <th>通过标准</th>
+              <th>难在哪</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>选最优供应商</td>
+              <td>从大量商家回复的报价单中选出最合适的一家</td>
+              <td>要识别掺杂其中的钓鱼邮件、区分有害/有价值信息，并把"工厂价到含税到手价"每一笔都算对——任一步失败整题不过</td>
+            </tr>
+            <tr>
+              <td>预订船期</td>
+              <td>要在那家船务公司网站真正订到船</td>
+              <td>考的是执行成功与否，不是回答得像不像</td>
+            </tr>
+            <tr>
+              <td>交易纠纷</td>
+              <td>基于买卖双方投诉做最终判断</td>
+              <td>先判断"信息是否完整、是否还需更多信息"，而不是急着判赔或不赔</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>难度分 <strong>L1–L4</strong>：越长程、结果越开放，能通过的模型越少。张阔还特别强调：模型或 Agent 迭代一段时间会出现性能退化（团队内部叫"腐化"），结果变差是不能接受的，所以<strong>评测必须持续做</strong>，并且他们会持续把更复杂的问题加进去，保证测试与真实经营结果一致。</p>
+      </section>
+
+      <section id="formula">
+        <h2>三、Agent = Model × Harness × Context</h2>
+        <p>这是张阔给 Agent 竞争下的定义式，也解释了为什么"通用模型 + 几句提示词"出不了垂直产品。三个维度不是加法，而是乘法——任何一项是 0，整体就是 0。</p>
+        <div class="framework">
+          <div class="framework-item">
+            <b>Model</b>
+            <p>不能只套一个前沿模型。要按一定尺寸的模型做后训练，并在 model、serving（推理服务）、harness 三处都做精细打磨，才能让产出效率最高、成本最低、准确率上台阶。</p>
+          </div>
+          <div class="framework-item">
+            <b>Harness</b>
+            <p>连接不同工具、管理 memory、做好用户授权——这一整套工程保证系统能持续运行。电商天生是长程任务，要连续几个月执行和经营，harness 尤其关键。</p>
+          </div>
+          <div class="framework-item">
+            <b>Context</b>
+            <p>阿里 20 多年积累的电商、跨境、sourcing 和采购数据，大量与供应商的沟通信息、行业属性和平台趋势，都是通用玩家没有的上下文。</p>
+          </div>
+        </div>
+        <p>他举例印证 Model 与 Harness 必须联合优化：用<strong>通义千问最新版本的小尺寸模型做后训练，效果已经非常接近前沿的 top 模型</strong>。这也直接呼应了后面"最贵的不一定最好"的成本逻辑。</p>
+      </section>
+
+      <section id="routing">
+        <h2>四、最贵的模型，不一定是最好的选择</h2>
+        <p>跑完 107 个任务，Accio Work 的估算成本约 <strong>3.69 美元</strong>，而 Codex 和 Claude Code 都在 <strong>9 美元以上</strong>——同等通过率下，成本只有后两者的约三分之一。做法是<strong>帕累托最优路由</strong>：</p>
+        <ul>
+          <li><strong>L3 以下相对简单的工作</strong>：用小尺寸、高性价比模型完成，最大程度省成本（尤其中国出的模型）。</li>
+          <li><strong>多模态/视频要求强的任务</strong>：路由到特定模型。</li>
+          <li><strong>复杂困难的问题</strong>：才交给前沿模型。</li>
+        </ul>
+        <p>成本优势来自三件事：<strong>集约采购</strong>（比个人去用模型便宜）、<strong>harness 工程实践与 context 管理效率</strong>（同一模型拿更好结果）、以及<strong>多模型路由</strong>——Codex/Claude Code 本身是 Agent、跟自己模型绑定，很多路由相关的工作做不了。</p>
+        <div class="quote">必须是一个用得起的 AI，才是一个有价值的 AI。</div>
+        <p>张阔提醒商家"觉得贵"往往是因为固定用最贵的模型解决所有问题，建议直接用 <strong>Auto 模型</strong>，让系统基于帕累托最优帮每个任务挑模型。他还由此判断：模型正在变成"商品"，OpenRouter、Fireworks 这类"帮人挑模型"的生意会越来越大，中间还有巨大的优化空间。</p>
+      </section>
+
+      <section id="saas">
+        <h2>五、AI 会替代 SaaS 吗？</h2>
+        <p>张阔的判断是<strong>双向集成，而非单方面替代</strong>。内容简单、可被 AI 自动完成的 SaaS 确实会被削弱；但 SaaS 的核心资产是<strong>理解企业上下文（ontology / 业务知识模型）</strong>——这些数据意味着什么、企业想基于什么做优化，就算请一个人来也很难搞清楚。</p>
+        <p>所以趋势是：SaaS 自己用更多 AI 去升级对上下文的理解，AI 进入企业也必须理解这些语义。他举了一个关键例子：<strong>一笔交易成交了，不代表它就是一笔好交易</strong>——这笔交易是为了利润率，还是为了市场份额？预算怎么花、库存怎么管、广告怎么做，答案完全不同。这些没法靠往企业里扔一个通用 AI 就保证完成。</p>
+      </section>
+
+      <section id="cn-us">
+        <h2>六、中美 Agent 生态差异</h2>
+        <div class="axis">
+          <div class="axis-title">办公场景</div>
+          <div>差异相对小。回到最终交付给用户的结果上，各家想做的事情是一样的。</div>
+        </div>
+        <div class="axis">
+          <div class="axis-title">企服演进路径</div>
+          <div>美国 SaaS 本身就是大生意且天然垂直（CRM、广告投放、法律、医疗都有成熟垂直体系）；中国更多是平台侧把垂直功能直接整合进去。AI 进来时也带着这种惯性差异。</div>
+        </div>
+        <div class="axis">
+          <div class="axis-title">电商形态</div>
+          <div>中国企业在中国经营，第一想法不是做独立站；美国 Shopify、独立站生意很大且持续增长。Amazon 是平台（FBA 发货，客户接触不到），淘宝天猫介于"平台低成本获客"与"集成大量电商工具"之间。</div>
+        </div>
+        <div class="axis">
+          <div class="axis-title">产品设计范式</div>
+          <div>Accio 第一天就是全球平台产品：LUI（语言界面）天生无语言问题、交互门槛极低，差别只在 harness 和 context 接的工具/平台不同——这可能是 AI Agent 时代新的产品设计范式。</div>
+        </div>
+      </section>
+
+      <section id="human">
+        <h2>七、哪些判断必须留给人</h2>
+        <p>张阔划出 AI 不碰、留给人的事，理由不是"技术做不到"，而是"责任归属"。</p>
+        <div class="axis">
+          <div class="axis-title">支付 / 采购按钮</div>
+          <div>所有交易条款生成好之后，要不要做这笔采购，一定由人决定——因为你要对经营结果负责。</div>
+        </div>
+        <div class="axis">
+          <div class="axis-title">产品品味</div>
+          <div>这个想法靠不靠谱、是不是真问题、客户群体够不够大、愿不愿意付溢价，都要靠人来判断。</div>
+        </div>
+        <div class="axis">
+          <div class="axis-title">市场直觉与预算分配</div>
+          <div>同一笔钱是投广告还是铺库存？要毛利、要规模还是要速度？这是经营者独有的判断。</div>
+        </div>
+        <div class="quote">最终对商品的判断、对"大问题还是小问题"的判断、对商业节奏的判断，一定是人要去做的。</div>
+      </section>
+
+      <section id="cloud-longrun">
+        <h2>八、"上云"和"长程"是两码事</h2>
+        <p>张阔对行业热词做了一次祛魅：<strong>上云是件简单的事</strong>——Accio Work PC 版上线几天后就有云端，"今天你说一个 Agent 没上云，那只能说功能还没做完"。真正的难点是<strong>长程</strong>，他从商业角度拆成三类：</p>
+        <table class="score-table">
+          <thead>
+            <tr>
+              <th>类型</th>
+              <th>场景</th>
+              <th>关键点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>定时任务</td>
+              <td>每天看店铺经营、看员工工作表现，定时出报告</td>
+              <td>重复、按固定节奏执行</td>
+            </tr>
+            <tr>
+              <td>事件驱动</td>
+              <td>找供应商、下单、跟多个供应商沟通</td>
+              <td>AI 要基于更新的信息持续推进沟通结果</td>
+            </tr>
+            <tr>
+              <td>季度级结果</td>
+              <td>整盘生意最终赚没赚钱、过程中要复盘的东西</td>
+              <td>经营本身就是一个非常长程的任务</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>所以做长程任务的核心，不是"让模型跑 7×24 小时不挂"，而是<strong>定义清楚在什么场景下要完成什么目标</strong>——挂得再久，解决不了问题也没有意义。</p>
+      </section>
+
+      <section id="sme">
+        <h2>九、中小企业叙事与"商业 AGI"</h2>
+        <p>CoCreate 峰会现场来了 15000 人，张阔最惊讶的是人太多，以及越来越多中小企业真的基于 AI 和全球供应链把生意做了起来：</p>
+        <ul>
+          <li><strong>15 岁英国少年</strong>：用 Accio Work 找供应商、开发出"自动降温毛巾"系列，年销售额约 100 万英镑。</li>
+          <li><strong>Christian Reed（MIT 毕业）</strong>：做测量设备，从创意到找供应链都基于 Alibaba.com 和 Accio Work，客户包括施耐德电气和 SpaceX，生意今年约几千万美金。</li>
+        </ul>
+        <div class="quote">你不需要一家很大的公司，也可以把生意做得很大。</div>
+        <p>他的底层判断是：全球中小企业是各区域的经济主力和就业主力，他们面对的核心问题不是"AI 会不会取代工作"，而是<strong>"没有那么多资源和经验，却想把生意做大、想利用全球供应链"</strong>。AI + Alibaba.com / 1688 让"一个人、一个想法"就能撬动全球生意成为可能。</p>
+        <p>由此他给出一个务实的"商业 AGI"定义：<strong>在预算和供应链相同的边界下，用这个 Agent 经营这盘生意，一定比一个人做日常操作和判断赚到更多的钱——那就是商业领域里的 AGI。</strong>这把 AGI 从能力神话，拉回到"经营结果"的检验标准上。</p>
+      </section>
+
+      <section id="closing">
+        <h2>最终判断</h2>
+        <p>这期节目最有价值的地方，是把"模型变强"和"用户没感觉"这对矛盾讲透了：榜单上的满分，落到真实商业任务里只剩 61% 的无人干预通过率，差距来自商业场景的数据多元、无通用流程和超长验证周期。而破局之道，不是坐等更强的通用模型，而是三条——</p>
+        <ul>
+          <li>靠 <strong>Model × Harness × Context 的乘法</strong>，把 20 多年的行业上下文变成通用玩家拿不走的壁垒；</li>
+          <li>靠 <strong>帕累托最优的多模型路由</strong>，把成本压到竞品的 1/3，让 AI 成为商家"用得起"的日常工具；</li>
+          <li>把人留在<strong>最终判断的位置上</strong>——AI 接手重复执行，人负责对结果负责的决策。</li>
+        </ul>
+        <p>一句话：Agent 变强，不是让人失业，而是把人的精力重新配置到"只有人能做的判断"上。</p>
+      </section>
+    </article>
+
+    <aside>
+      <p class="nav-title">目录</p>
+      <ol class="toc">
+        <li><a href="#summary">结论先行</a></li>
+        <li><a href="#gap">榜单满分为何失败</a></li>
+        <li><a href="#benchmark">107 个真实任务</a></li>
+        <li><a href="#formula">Model × Harness × Context</a></li>
+        <li><a href="#routing">多模型路由与成本</a></li>
+        <li><a href="#saas">AI 会替代 SaaS 吗</a></li>
+        <li><a href="#cn-us">中美生态差异</a></li>
+        <li><a href="#human">哪些判断留给人</a></li>
+        <li><a href="#cloud-longrun">上云 vs 长程</a></li>
+        <li><a href="#sme">中小企业与商业 AGI</a></li>
+      </ol>
+      <div class="side-note">
+        <p>说明：本文基于硅谷101 E255 文字稿（公众号「硅谷101」精选版）整理，对原始录音未做独立逐字核验；数据与观点均出自嘉宾张阔的表述。</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="wrap">Generated by OpenClaw. Source: 硅谷101 E255（2026-10-08），整理于 2026-10-17。</div>
+  </footer>
+</body>
+</html>

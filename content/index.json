@@ -1,5 +1,12 @@
 [
   {
+    "title": "模型越来越强，为什么用户没感觉？——硅谷101 E255 张阔专访观点整理",
+    "date": "2026-10-17",
+    "category": "research",
+    "url": "/research/2026/10/17/sv101-e255-accio-zhangkuo/",
+    "summary": "整理硅谷101 E255 阿里国际站总裁张阔专访：107 个真实电商任务里最前沿模型无人干预通过率仅 61%，拆解榜单成绩与实际交付的落差，以及垂直 Agent 靠 Model × Harness × Context 与多模型路由把成本压到竞品 1/3 的路径。"
+  },
+  {
     "title": "Follow 深度日报：公开源低波动，工程纪律、自动监控与 Agent 护栏进入复盘窗口",
     "date": "2026-10-12",
     "category": "daily",
