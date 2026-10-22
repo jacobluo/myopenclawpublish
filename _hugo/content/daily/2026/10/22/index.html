@@ -1,0 +1,129 @@
+---
+title: "Follow 深度日报：OpenAI 模型上架 Google Cloud，AI 安全披露双线加速，Claude Mods 把 harness 翻向人这一侧"
+date: "2026-10-22"
+category: "daily"
+url: "/daily/2026/10/22/"
+summary: "Follow List 公开来源整理：本窗口 2026-10-21T00:00Z 至 2026-10-22T00:00Z（单自然日）。三大高信号：①OpenAI 前沿模型 + Codex 工作流上架 Google Cloud 的 Gemini Model Garden / Marketplace——两家竞争关系的罕见分发合作，标志模型层的「中立云」分发格局成形；②AI 与安全披露双线并行：OpenAI 发布「Patch the Planet」协调式漏洞披露平台与「Empowering Cyber Defenders」网络防御蓝图，同期 PHP 全线爆出两个 RCE 漏洞（Wiz 用 AI 工具链发现），AI 既是漏洞发现加速器也是防御协调中枢；③Latent Space 提出 Claude Mods 是「Attention Interface」早期形态，把 agent harness 从「面向机器」翻向「面向人」，标志 harness 范式转变。另含 AI for Science（数千 agent 分析脑细胞数据 + Google AMIE 临床研究）、Hugging Face 多项推理优化、ChatGPT Ads 扩张、GitHub CLI OAuth token 等。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信（RSSHub 404、nitter 410、xcancel 451），不使用 X-only 内容作事实依据。"
+---
+<div class="meta">
+  <strong>2026年10月22日（周四）</strong> · 覆盖窗口：2026-10-21 08:00 – 2026-10-22 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、Simon Willison Atom、Latent Space RSS、GitHub Changelog RSS、Hugging Face Blog RSS、LangChain Blog RSS、Google AI/DeepMind RSS、Anthropic News 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信（RSSHub 404、nitter 410、xcancel 451），高优先级人物时间线无法据此核验，不代表无更新；Anthropic News 本窗口无 10-21 新增条目（置顶仍为 10-8 Usage Policy 与 10-14 中期选举），故 Anthropic 侧今日无新信号。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>OpenAI 模型上架 Google Cloud（本窗口最高信号）</h4><p>OpenAI 与 Google Cloud 宣布把前沿模型与 Codex 工作流带进 <strong>Gemini Model Garden</strong>，通过 Google Cloud Marketplace 分发。两家在模型与云上互为对手的罕见合作，标志着「模型由谁分发」走向中立云平台，企业可以在单一云账单里同时取用两家模型。</p></div>
+  <div class="overview-item"><h4>AI 与安全披露双线并行</h4><p>OpenAI 发布 <strong>「Patch the Planet」</strong>协调式漏洞披露平台（连接安全研究员、维护者、应急响应者），并发布「Empowering Cyber Defenders」网络防御蓝图；同期 PHP 全线（8.x 全系）爆出两个 RCE 漏洞且 PoC 已在流传，源头是 Wiz Research 用 AI 工具链（Wiz Atlas + Gemini 4 Argon + GPT-5.6 Sol）发现。AI 既是漏洞发现加速器，也被塑造成防御协调中枢。</p></div>
+  <div class="overview-item"><h4>Claude Mods 与「Attention Interface」</h4><p>Latent Space 的 Dan McAteer 撰文，把 <strong>Claude Mods</strong>（Claude Code 的 TypeScript/JS 插件）定义为「Attention Interface」的早期形态：当模型把越来越多 harness 能力吸收进权重后，剩下的那层开始<strong>面向人</strong>——决定何时打断你、展示什么、需要你做哪些决策。harness 正在从「面向机器」翻向「面向人」。</p></div>
+  <div class="overview-item"><h4>AI for Science 加速</h4><p>OpenAI 与 PerturbAI、Scripps Research 用<strong>分布式 AI agent 集群</strong>从数百万脑细胞数据里挖出有潜力的研究线索；Google 发布 AMIE 临床研究（就诊前预访谈、为医生省时）。生命科学/医疗是连续多窗口的稳定主线。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、OpenAI 模型上架 Google Cloud：竞争关系里的罕见分发合作（最高信号）</h3>
+<div class="card">
+  <div class="source"><span class="tag">Frontier / Cloud / 分发格局</span><strong>OpenAI</strong> · 2026-10-21 12:00 UTC · <a href="https://openai.com/index/openai-models-google-cloud">OpenAI models are coming to Google Cloud</a></div>
+  <div class="summary"><p>OpenAI 宣布与 Google Cloud 合作，把<strong>前沿模型与 Codex 工作流</strong>引入 <strong>Gemini Model Garden</strong>，并通过 Google Cloud Marketplace 分发。这意味着企业客户可以在 Google Cloud 的单一账单与统一治理里，同时取用 OpenAI 模型与 Google 自家的 Gemini 系列——而 OpenAI 与 Google 在基础模型、云、AI 助手（ChatGPT vs Gemini）上本是直接竞争对手。</p><p>这一动作的解读空间很大：对 OpenAI 而言，是<strong>把分发渠道铺到对手的云上</strong>、扩大企业触达（尤其是有 Google Cloud 存量、却想用 OpenAI 模型的客户）；对 Google 而言，是<strong>承认「模型中立」比「绑定自家模型」更能留住云客户</strong>，把 Gemini Model Garden 做成一个多模型的「模型集市」而非 Gemini 专属入口。这与上一窗口 OpenAI 发布的「Broad access through consistent standards」一文形成呼应——OpenAI 正在系统性建立一套与分发伙伴合作的标准（一致的安全护栏、负责任的访问、明确的使用政策边界）。</p><p>值得对照的是：此前 OpenAI 已与微软 Azure 深度绑定，如今再进 Google Cloud，等于在 Azure 之外开辟第二条「对手云」分发线。模型层的竞争，正在从「谁的模型更强」延伸到「谁的模型能被最多云、最方便地分发与治理」。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是「模型分发权力」从单一实验室向中立云平台转移的一个强信号。Follow List 上 Logan Kilpatrick（Google Gemini/API 方向）、Jeff Dean（Google 系统）、Sam Altman（OpenAI 战略）三条线在这里交汇：Google 把 Model Garden 变成跨供应商集市，OpenAI 用 Marketplace 扩大触达。对投资与产业判断而言，关键是看<strong>定价、推理承载（谁出算力）、以及模型上线后的实际客户结构</strong>，而不是「两家和好」的表面叙事。</div>
+  <div class="action">后续行动：跟踪上架的具体模型清单（是 GPT 全家桶还是仅 Codex/部分模型）、Google Cloud 侧的定价与 SLA、以及 Azure 是否被稀释份额；把「OpenAI-Azure / OpenAI-GCP / Google-Gemini 自有」三者的企业分发格局画成一张图，观察是否出现第三方「模型路由」层。</div>
+</div>
+
+<h3>二、AI 与安全：Patch the Planet 协调式披露 + PHP 双 RCE（AI 发现）+ 网络防御蓝图</h3>
+<div class="card">
+  <div class="source"><span class="tag">Security / 漏洞披露 / 网络防御</span><strong>OpenAI + Simon Willison</strong> · 2026-10-21 · <a href="https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities">Patch the Planet</a> / <a href="https://simonwillison.net/2026/Oct/21/php-security-release/">Simon Willison: PHP Security Release</a></div>
+  <div class="summary"><p>这一窗口安全侧出现一条清晰的「AI 既是矛又是盾」主线：</p><p><strong>①「Patch the Planet」（OpenAI，10-21 07:00）：</strong>一个协调式漏洞披露与修复响应平台，连接安全研究员、开源维护者与应急响应者，帮助把「AI agent 挖出的关键漏洞」更快地落到修复上。这是 OpenAI 上一窗口「Democratic governance of frontier AI」系列的延续，本期副标题即「Empowering Cyber Defenders」——把「用 AI 赋能网络防御者」做成一个公共产品叙事。</p><p><strong>② PHP 全线 RCE（Simon Willison 10-21 18:41 转述 PHP Foundation 官方博文）：</strong>PHP 8.x 全系发布安全更新，修复<strong>两个远程代码执行（RCE）漏洞</strong>，且由于协调披露流程被提前泄露（两个 CVE 编号 10-20 起在论坛流传、一家报告方误发 PoC 视频），漏洞利用已在公开扩散。Wiz Research 的复现时间线显示，这批漏洞最早由 <strong>Wiz Atlas、Gemini 4 Argon、GPT-5.6 Sol 这套 AI 工具链发现</strong>，并在 WordPress / Drupal 上确认了未授权 RCE。这是一个「AI 大幅压缩漏洞发现周期」的实证案例。</p><p><strong>③「Empowering Cyber Defenders」（OpenAI，10-21 00:00）：</strong>一份面向网络防御者的蓝图——更强的安全护栏、现代化网络安全、更有韧性的公共机构。与前两项合起来，OpenAI 正在把「安全」从内部能力外化成一套可对外讲的故事：AI 让攻击面变大，也让它自己成为防御基础设施。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>安全议题正在从前沿实验室的「负外部性」转变成「战略叙事资产」。Patch the Planet + 网络防御蓝图，本质是 OpenAI 在用「我们帮世界修复漏洞」对冲「我们的模型可能被滥用于攻击」的监管压力。而 PHP 案例则提供了 AI 加速漏洞发现的真实度量——从 8 月发现到 10 月公开，一条完整链路里 AI 工具链是起点。对 Follow List 上关注安全/对齐的 Amanda Askell、关注工程实践的 Simon Willison，都是高频相关。</div>
+  <div class="action">后续行动：确认自有环境（PHP 组件、任何依赖 PHP 的服务）是否需要升级；跟踪 Patch the Planet 是否产出首个「AI 发现→修复落地」的公开案例；观察「AI 辅助漏洞发现」是否被纳入主流漏洞赏金/披露政策。</div>
+</div>
+
+<h3>三、Claude Mods 与「Attention Interface」：harness 从面向机器翻向面向人</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent / Harness / 产品范式</span><strong>Latent Space（Dan McAteer）</strong> · 2026-10-21 13:04 UTC · <a href="https://www.latent.space/p/claude-mods">Claude Mods: Flipping the Harness Inside Out</a></div>
+  <div class="summary"><p>Dan McAteer 这篇在 Follow List 的 swyx（Latent Space）线上，把 <strong>Claude Mods</strong> 定位成一个范式转折的信号。Claude Mods 是跑在 Claude Code 内部的 TypeScript/JavaScript 函数插件，能自定义 agent 的行为与界面外观。作者的判断是：随着模型把越来越多的「harness（外部脚手架）」能力吸收进权重，harness 剩下的那部分不再面向机器，而是<strong>面向人</strong>——它变成「Attention Interface」：决定 agent 何时打断你、给你看什么、把哪些决策交给你。</p><p>他的核心赌注：<strong>harness 最终会成为一个平台</strong>，就像浏览器当年从「显示网页」变成「承载 Web 应用」的平台，harness 也会变成「人与 agent 之间界面」的平台，模型只是引擎。Claude Mods 就是这个平台的早期形态——而且是用户可以自己塑造的那种。</p><p>这与 Follow List 长期跟踪的「agent 架构」「context engineering」（Harrison Chase / LangChain 的 Deep Agents 线）形成一条可交叉验证的主线：上一窗口 LangChain 的「Open Models have crossed a threshold」「harness engineering」「Claude 写了 Claude Code 约 90% 代码」等信号，都指向同一个方向——<strong>竞争焦点正从模型能力转移到「人与 agent 之间的那一层」</strong>。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是对「agent 产品下一阶段在哪」的一个清晰命题。如果 harness 真的平台化，那么价值会沉淀在「Attention Interface」这个新层上——谁能定义人与 agent 交互的标准，谁就握有类似「浏览器/操作系统」的位置。对关注 AI 工程与创业方向的读者，这是一条值得长期下注观察的线索，且直接关联 swyx 一直在做的「AI Engineer 产业地图」。</div>
+  <div class="action">后续行动：实测 Claude Mods 的能力边界（能否跨工具、是否可分发/上架）；跟踪 Anthropic 是否把「Mods/Attention Interface」做成正式平台化 API；把这条线与 LangChain Deep Agents 的 harness 工程、OpenAI Codex 的 harness 设计并排比较，判断「人机交互层」的标准之争。</div>
+</div>
+
+<h3>四、AI for Science：数千 agent 挖脑细胞数据线索 + Google AMIE 临床研究</h3>
+<div class="card">
+  <div class="source"><span class="tag">Science / 生命科学 / 医疗</span><strong>OpenAI + Google</strong> · 2026-10-21 / 2026-10-20 · <a href="https://openai.com/index/scaling-ai-research-for-complex-biological-data">OpenAI: thousands of AI agents for biological data</a> / <a href="https://blog.google/innovation-and-ai/models-and-research/google-research/amie-clinical-study/">Google: AMIE clinical study</a></div>
+  <div class="summary"><p><strong>OpenAI 侧（10-21 04:50）：</strong>与 PerturbAI、Scripps Research 合作，用<strong>分布式 AI agent 集群</strong>在「数百万脑细胞」的数据里挖掘有潜力的研究线索。这是把「大规模并行 agent」用到真实科研数据上的一个标志性案例——呼应上一窗口 OpenAI 收购 Orchestra Bio、以及更早的 GPT-Rosalind 学术计划，OpenAI 在生命科学的「算力换研究线索」路径越来越清晰。</p><p><strong>Google 侧（AMIE 临床研究，10-20）：</strong>AMIE 是一个能在就诊前与患者对话、安全采集信息、为医生省时的 AI 系统。新发布的临床研究进一步验证其在协作式医疗里的价值——医生能把更多时间花在协作照护而非信息采集上。这是 Google「AI for health」长期线（AMIE 由来已久）的临床落地信号。</p><p>两条线合在一起，说明「AI for Science / Health」正在从 demo 走向可复现的科研与临床工作流，是连续多个窗口里最稳定的一条主线。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>生命科学是当前 AI 落地里「客单价高、真实需求硬、护城河深」的方向之一。OpenAI 用「数千 agent 并行分析」验证的是「研究线索发现」这个上游环节，Google 用 AMIE 验证的是「临床前置环节」。对投资与研究判断，重点看这类能力能否进入监管严格的真实临床/研发流程，而不只是「发现线索」。</div>
+  <div class="action">后续行动：跟踪 OpenAI-PerturbAI-Scripps 合作是否有可公开的研究产出或管线命中；关注 AMIE 是否推进到更大规模临床试验或产品化；把「AI for Science」的落地里程碑单独建一个跟踪项。</div>
+</div>
+
+<h3>五、开源模型 / 推理优化：NVIDIA Kumo Relational、SLM 词汇特化降 77% 成本、Granite Speech 5.0</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / 推理优化 / 语音</span><strong>Hugging Face Blog</strong> · 2026-10-21 · <a href="https://huggingface.co/blog/nvidia/kumo-relational">NVIDIA Kumo Relational</a> / <a href="https://huggingface.co/blog/Dharma-AI/vocabx-vocabulary-specialization">vocabx 词汇特化</a> / <a href="https://huggingface.co/blog/ibm-granite/granite-speech-5">Granite Speech 5.0</a></div>
+  <div class="summary"><p>Hugging Face 侧本窗口有四条偏「工程/效率」的更新，单条信号不高但方向一致——<strong>在不换大模型的前提下压成本、提效率</strong>：</p><p><strong>① NVIDIA Kumo Relational（18:26）：</strong>在关系型/表格数据上<strong>无需训练</strong>即可胜过监督学习 ML，瞄准企业结构化数据场景，把「零训练」做成卖点。</p><p><strong>② vocabx（Dharma-AI，17:35）：</strong>通过<strong>特化小语言模型（SLM）的词汇表</strong>，在真实应用里把推理成本<strong>降 77%</strong>——这是「模型不变、词汇表优化」这一常被低估的省钱手段的一个量化案例。</p><p><strong>③ Granite Speech 5.0（IBM，14:58）：</strong>语音转写/翻译/说话人归因更快更准，延续 IBM Granite 的开源语音线。</p><p><strong>④ TorchNeuron Profiling（AWS，16:04）：</strong>Trainium 系统级 profiling 系列第一篇，服务「在自家芯片上做性能调优」的开发者。</p><p>这几条与上一窗口的 DeepSeek DeepInfer（推理栈开源、毛利估算极高）、TorchTPU、AnyLanguageModel 等，共同拼出「推理成本持续下探、开源生态继续摊薄边际成本」的大趋势。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>当模型能力趋同时，<strong>推理成本与部署效率成为竞争胜负手</strong>。「词汇表特化降 77%」「表格数据零训练」这类优化，直接影响真实产品的毛利结构。对关注开源/推理基础设施的读者（Follow List 上 Nathan Lambert、Thomas Wolf、Clement Delangue 线），这是持续累积的底层信号。</div>
+  <div class="action">后续行动：验证 vocabx 词汇特化的可泛化性（是否仅限特定领域/语言）；把「推理成本下降」的公开数据点（DeepInfer、vocabx 77%、Asana 76x 等）汇总成一张趋势表，作为判断 agent 经济性拐点的依据。</div>
+</div>
+
+<h3>六、平台与生态动态：ChatGPT Ads 扩张、GitHub CLI OAuth token、东南亚 AI 数字经济</h3>
+<div class="card">
+  <div class="source"><span class="tag">商业化 / 开发者平台 / 区域经济</span><strong>OpenAI + GitHub + Google</strong> · 2026-10-21 · 多条</div>
+  <div class="summary"><p><strong>ChatGPT Ads 扩张（OpenAI 13:00 + 07:00）：</strong>广告平台扩展至 <strong>26 个新国家</strong>，累计超 <strong>10 万广告主</strong>使用过；配套发布「How we built ChatGPT's novel ad stack」讲其在用户信任与相关性上的广告技术栈。这是 OpenAI 商业化从「订阅 + API」扩展到「广告」的持续加码，且刻意把「信任」作为广告栈卖点。</p><p><strong>GitHub CLI 过期自动刷新 OAuth token（GitHub 16:43）：</strong>gh 现在可选「过期 + 自动刷新」的 OAuth 凭据（public preview），token 泄露后数小时即失效而非永久有效——一项务实的身份安全改进。</p><p><strong>东南亚数字经济（Google/Temasek/Bain，10-21 04:00）：</strong>e-Conomy SEA 2026 报告称，AI 采用正在推动东南亚数字经济 2026 年达 <strong>$368B</strong>、2035 年有望达 <strong>$1T</strong>。区域性的「AI 拉动数字经济」量化口径，可作为出海/区域布局的背景数据点。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这三条分别代表「商业化变现（广告）」「开发者安全基础设施」「区域经济」，都不是单一爆炸性信号，但合起来刻画出 AI 生态从「模型竞赛」进入「规模化运营」阶段的轮廓。ChatGPT Ads 的「信任」叙事尤其值得留意——广告与模型中立性之间存在张力，OpenAI 需要反复证明它不会为广告牺牲回答质量。</div>
+  <div class="action">后续行动：跟踪 ChatGPT Ads 是否引入更激进的变现（如结果置顶/竞价）、以及用户与监管的反馈；把 GitHub CLI 的 token 机制变化纳入开发安全最佳实践；东南亚 $368B 数据点留作区域判断参考。</div>
+</div>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>OpenAI-Google Cloud 合作细节：</strong>上架模型清单、定价/SLA、算力承载方、Azure 份额是否被稀释，画「模型分发格局」图。</li>
+  <li><strong>Patch the Planet 首例落地：</strong>是否出现「AI 发现→协调修复→公开」的完整闭环案例，判断其真实影响力。</li>
+  <li><strong>Attention Interface / harness 平台化：</strong>Claude Mods 能力边界与是否平台化，对比 LangChain Deep Agents、Codex 的 harness 设计。</li>
+  <li><strong>AI 辅助漏洞发现纳入主流流程：</strong>PHP/Wiz 案例后，漏洞赏金与披露政策是否正式接纳「AI 工具链」。</li>
+  <li><strong>AI for Science 里程碑：</strong>OpenAI-PerturbAI-Scripps 产出、AMIE 临床推进，单独建跟踪项。</li>
+  <li><strong>推理成本趋势表：</strong>汇总 DeepInfer、vocabx 77%、Asana 76x 等数据点，判断 agent 经济性拐点。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>OpenAI-Google Cloud 具体范围：</strong>官方仅给定性描述（「前沿模型 + Codex 工作流」），具体模型清单、可用区域、定价均未披露；OpenAI 文章页对脚本抓取返回 Cloudflare 验证页，RSS 摘要为唯一来源，需以官方页面/独立报道二次确认。</li>
+  <li><strong>「数千 AI agent」与「数百万脑细胞」口径：</strong>为 OpenAI 官方定性描述，agent 规模、数据类型、线索命中率无第三方核验。</li>
+  <li><strong>PHP 漏洞 CVSS 与影响面：</strong>泄露过程中曾出现「CVSS 10.0」的误传，官方实际评分 9.2；受影响 PHP 版本矩阵需以 php.net 官方公告为准。</li>
+  <li><strong>Claude Mods 定位：</strong>当前是 Claude Code 插件（早期形态），「Attention Interface」与「harness 平台化」是 Latent Space 的<strong>分析判断</strong>，非 Anthropic 官方产品路线图。</li>
+  <li><strong>Anthropic 本窗口无新增：</strong>其 News 页置顶仍为 10-8 Usage Policy、10-14 中期选举，10-21 无新条目，不代表无内部动作。</li>
+  <li><strong>X 高优先级人物时间线：</strong>公开抓取路径（RSSHub 404 / nitter 410 / xcancel 451）不可用，不能据此判断上述账号有无更新。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Simon Willison 的「Panache — RTS Belle Époque pour mobile」属个人项目，与主线信号无关。</li>
+  <li>Hugging Face 批量生态更新（TorchNeuron profiling、Granite Speech 5.0 等）多为可用性/效率更新，单条信号低，仅作趋势记录。</li>
+  <li>OpenAI「AT&T LegalEdge 法务知识接入」客户案例，延续其法务垂直（Itaú/Cooley/Sullivan &amp; Cromwell 之后），属常规案例沉淀。</li>
+  <li>ChatGPT Ads 扩张与 ad stack 技术博客偏营销口径，作背景即可。</li>
+  <li>Google「东南亚数字经济 $368B」为区域宏观报告，非技术信号。</li>
+  <li>LangChain Blog 本窗口无新增（最新仍为 10-19 Numan 案例），故 LangChain 侧今日静默。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://openai.com/index/openai-models-google-cloud">OpenAI: models are coming to Google Cloud</a></li>
+  <li><a href="https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities">OpenAI: Patch the Planet — coordinated disclosure of critical vulnerabilities</a></li>
+  <li><a href="https://openai.com/index/empowering-cyber-defenders">OpenAI: Democratic governance of frontier AI, part II — Empowering cyber defenders</a></li>
+  <li><a href="https://openai.com/index/scaling-ai-research-for-complex-biological-data">OpenAI: using thousands of AI agents to uncover leads in biological data</a></li>
+  <li><a href="https://openai.com/index/broad-access-through-consistent-standards">OpenAI: Broad access through consistent standards</a></li>
+  <li><a href="https://openai.com/index/att-legal">OpenAI: How AT&amp;T is rethinking in-house legal work</a></li>
+  <li><a href="https://openai.com/index/chatgpt-ads-expands-26-new-countries">OpenAI: ChatGPT Ads expands to 26 new countries</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/21/php-security-release/">Simon Willison: Today's PHP Security Release</a></li>
+  <li><a href="https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/">PHP Foundation: security release (two RCEs)</a></li>
+  <li><a href="https://www.latent.space/p/claude-mods">Latent Space: Claude Mods — Flipping the Harness Inside Out</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-21-github-cli-opt-in-to-expiring-auto-refreshing-oauth-tokens">GitHub: CLI opt-in to expiring, auto-refreshing OAuth tokens</a></li>
+  <li><a href="https://huggingface.co/blog/nvidia/kumo-relational">HF/NVIDIA: Kumo Relational</a></li>
+  <li><a href="https://huggingface.co/blog/Dharma-AI/vocabx-vocabulary-specialization">HF/Dharma-AI: vocabx vocabulary specialization (77% cost cut)</a></li>
+  <li><a href="https://huggingface.co/blog/ibm-granite/granite-speech-5">HF/IBM: Granite Speech 5.0</a></li>
+  <li><a href="https://huggingface.co/blog/amazon/profiling-torchneuron-part-1">HF/AWS: Profiling TorchNeuron (Part 1)</a></li>
+  <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-research/amie-clinical-study/">Google: AMIE clinical study</a></li>
+  <li><a href="https://blog.google/company-news/inside-google/around-the-globe/google-asia/e-conomy-sea-report-2026/">Google: e-Conomy SEA 2026 report</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic News</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-21T00:00:00Z / 2026-10-22T00:00:00Z.</footer>
