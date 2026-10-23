@@ -1,0 +1,128 @@
+---
+title: "Follow 深度日报：Agent Skills 标准捐入 AAIF，OpenAI Decisions API 转正，PHP2Shell 复盘与 agent 可靠性 RL 训练"
+date: "2026-10-23"
+category: "daily"
+url: "/daily/2026/10/23/"
+summary: "Follow List 公开来源整理：本窗口 2026-10-22T00:00Z 至 2026-10-23T00:00Z（单自然日）。五大高信号：①Anthropic 把 Agent Skills 标准捐给 Linux Foundation 下的 Agentic AI Foundation（AAIF）——继 MCP 之后第二个被捐出的 agent 标准，agent 互操作层的「标准版图」加速成形，Simon Willison 去年 12 月的预言落地；②OpenAI Decisions API 转 GA——用 GPT-6 Luna 做「有界答案的结构化小决策」，比 Responses API 快约 10 倍、$0.10/M 输入、无输出计费，把「高频小决策」做成独立基础产品；③PHP2Shell 复盘：昨日两个 PHP RCE 实际由两方独立发现，其中一方正是 OpenAI 自己的 Patch the Planet 项目（GPT-5.6 Sol），另一方是 Wiz，呼应其 $1B「Daybreak」网络防御补贴；④Agent 生产治理与可靠性双线：LangSmith LLM Gateway 公测（spend cap/限流/模型回退/PII 脱敏，无供应商锁定）+ Microsoft ThinkingBox 用「数据库终态」作 RL 奖励把 27B 模型可重复成功率近 3 倍、单可靠任务成本降 67%；⑤OlmoEarth v1.3 全地球 10m 卫星嵌入开源，世界模型/空间智能线再进一步。另含 Uber ChatGPT Work 全量 3 万员工、GitHub Copilot/agent 指标、IBM Granite 时间序列等。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信（RSSHub 404、nitter 410、xcancel 451），不使用 X-only 内容作事实依据。"
+---
+<div class="meta">
+  <strong>2026年10月23日（周五）</strong> · 覆盖窗口：2026-10-22 08:00 – 2026-10-23 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、Simon Willison Atom、Latent Space RSS、GitHub Changelog RSS、Hugging Face Blog RSS、LangChain Blog RSS、Anthropic News、Interconnects RSS 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信（RSSHub 404、nitter 410、xcancel 451），高优先级人物时间线无法据此核验，不代表无更新；Anthropic 本窗口官方新增一条（Agent Skills 捐给 AAIF，10-22），其余置顶仍为历史条目。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Agent Skills 标准捐入 AAIF（本窗口最高信号）</h4><p>Anthropic 宣布把 <strong>Agent Skills</strong> 标准捐给 Linux Foundation 旗下的 <strong>Agentic AI Foundation（AAIF）</strong>——正是去年它联合 Block、OpenAI 共同创立、并已接收 <strong>MCP（Model Context Protocol）</strong> 的同一个基金会。这是继 MCP 之后第二个被捐出的 agent 互操作标准，agent 层的「标准版图」在加速成形。</p></div>
+  <div class="overview-item"><h4>OpenAI Decisions API 转 GA</h4><p>一个基于 <strong>GPT-6 Luna</strong> 的独立端点，专注「有界答案的结构化小决策」：分类、路由、下一步动作。比 Responses API 快约 <strong>10 倍</strong>，$0.10/M 输入 token、<strong>无输出计费</strong>，支持 predicate/choice/score 三种答案类型、原生 GPT-Live 集成、单请求最多 400 个问题。把「高频小决策」做成独立基础产品形态。</p></div>
+  <div class="overview-item"><h4>PHP2Shell 复盘：Patch the Planet 是发现方之一</h4><p>昨日报告的 PHP 双 RCE（现被称 <strong>PHP2Shell</strong>，影响约 70% 网站）实际由<strong>两方独立发现</strong>：一是 OpenAI <strong>Patch the Planet</strong> 项目下的研究员 Ryan Austin（2026 年 8 月，用 GPT-5.6 Sol），二是 Wiz（Gemini 4 Argon + GPT-5.6 Sol + Wiz Atlas）。这修正并强化了「AI 成为漏洞发现与防御协调双重基础设施」的叙事。</p></div>
+  <div class="overview-item"><h4>Agent 生产治理与可靠性并行推进</h4><p><strong>LangSmith LLM Gateway</strong> 公测：spend cap、限流、模型回退、PII 脱敏，且不锁定供应商；<strong>Microsoft ThinkingBox</strong> 用「数据库终态」作 RL 奖励后训练 agent，把 Qwen3.8-27B 的可重复成功率（20/20）从 38 提升到 107 个任务（近 3 倍）、单可靠任务成本从 $24.36 降到 $8.00（−67%）。两条线都指向同一个问题：agent 要进入生产，需要「可控」和「可靠」。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Anthropic 把 Agent Skills 标准捐给 AAIF：agent 互操作层的标准版图加速成形（最高信号）</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent / 标准 / 开源治理</span><strong>Anthropic + Simon Willison</strong> · 2026-10-22 · <a href="https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation">Anthropic: Donating Agent Skills to the Agentic AI Foundation</a> / <a href="https://simonwillison.net/2026/Oct/22/donating-agent-skills/">Simon Willison: Donating Agent Skills</a></div>
+  <div class="summary"><p>Anthropic 官方宣布，把 <strong>Agent Skills</strong> 标准捐给 Linux Foundation 下的 <strong>Agentic AI Foundation（AAIF）</strong>。AAIF 是去年 Anthropic 联合 Block、OpenAI 共同创立、并已接收 <strong>Model Context Protocol（MCP）</strong> 的同一个基金会。Anthropic 的措辞很明确：目标是让 Agent Skills 保持「开放、社区驱动、供应商中立」。</p><p>这一动作的份量在于<strong>延续并复制了 MCP 的路径</strong>：MCP 已经是「模型如何调用工具/数据」的事实标准，而 Agent Skills 回答的是「agent 如何带着可复用的技能/工作流被分发与组合」。两者叠加，AAIF 正在从「单一协议的家」变成「agent 互操作层标准矩阵」的治理中枢——而这背后是 Anthropic、OpenAI、Block 三个原本竞争的主体在同一张桌子上维护共同标准。</p><p>Simon Willison 在当天的博客里点出了一个有趣的注脚：他<strong>去年 12 月就预言过</strong>这件事——当时 Anthropic 首次称 Agent Skills 是「开放标准」，他就判断「不排除最终落到 AAIF（当时刚成为 MCP 的新家）」。他还用了一个自嘲式的彩蛋：是靠 prompting Claude 通过 datasette-mcp 插件搜自己的博客，才找回那条预言。这从侧面说明「把技能/知识挂到可查询的标准接口上」本身已经开始运转。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是本窗口结构意义最重的一条。上一窗口 Latent Space 提出 Claude Mods 是「Attention Interface」，LangChain 在推 Deep Agents 的 harness 工程——现在 Anthropic 又把自己孵化的 Agent Skills 标准「上交」给中立基金会。三件事拼在一起，指向同一个判断：<strong>agent 的价值正在从「谁的模型更强」向「谁能定义人与 agent、agent 与工具之间的标准层」转移</strong>。谁握有标准，谁就拥有类似「HTTP/浏览器」的生态位。对 Follow List 上关注 agent 架构（Harrison Chase / LangChain 线）与开源治理（Nathan Lambert / swyx 线）的读者，这是需要长期跟踪的坐标点。</div>
+  <div class="action">后续行动：跟踪 AAIF 的成员构成与治理权分配（OpenAI/Anthropic 在同一基金会里如何共处）；观察 Agent Skills 是否会像 MCP 一样被主流 agent 框架（LangGraph、OpenAI、开源社区）快速采纳；把「MCP / Agent Skills / AAIF」的标准版图单独立项跟踪，判断下一个被捐出的标准会是什么（evals？harness？）。</div>
+</div>
+
+<h3>二、OpenAI Decisions API 转 GA：把「高频小决策」做成独立的基础产品</h3>
+<div class="card">
+  <div class="source"><span class="tag">API / Agent 基础设施 / 成本</span><strong>OpenAI</strong> · 2026-10-22 19:00 UTC · <a href="https://openai.com/index/decisions-api">Build more responsive apps with the Decisions API</a></div>
+  <div class="summary"><p>OpenAI 把 <strong>Decisions API</strong> 从公测转为<strong>正式可用（GA）</strong>。它基于 <strong>GPT-6 Luna</strong>，定位是「有界答案的结构化小决策」：一个应用或 agent 在工作流里会反复做出大量小决策——分类输入、路由请求、决定下一步动作——单个很简单，但规模化之后延迟与成本会累积。Decisions API 把 Luna 的智能聚焦到这类问题上，宣称比通过 Responses API 调用 GPT-6 Luna <strong>快约 10 倍</strong>。</p><p>产品要点：支持三种答案类型——<strong>predicate</strong>（估计某条件为真的概率 0–1）、<strong>choice</strong>（在预设选项里选一个，附概率与置信度）、<strong>score</strong>（按 rubric 打分，返回概率加权均值）；新增<strong>原生 GPT-Live 集成</strong>（在实时语音里做即时决策，如客服是否追问/路由/升级）、prompt 缓存、US/EU 推理驻留、原生 JSON 输入与图片问题、单请求最多 <strong>400 个问题</strong>（此前 200 的上限翻倍）。</p><p>定价是这条最值得记的数字：<strong>$0.10 / 百万输入 token</strong>，缓存输入 $0.01/M，<strong>无输出 token 计费</strong>（只付输入）。对「输入很长、输出只是一个标签/概率/分数」的决策类任务，这是显著的成本结构优化，且支持 Zero Data Retention（ZDR）。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条与 Follow List 长期跟踪的「agent 经济性」主线直接咬合。上一窗口的 DeepSeek DeepInfer、vocabx 词汇特化 77% 降本、Asana 76x 等都是「把单次推理做便宜」，而 Decisions API 做的是<strong>「把高频小决策做成一个专用、低价、低延迟的产品形态」</strong>——本质是把 agent 工作流里最碎、最重复的那类调用单独抽出、单独计价。它同时对应 Simon Willison 一直关心的「LLM 作为可编程原语」与 Eugene Yan / Chip Huyen 关注的「生产系统里推理成本与延迟」。对「agent 路由 / 分类 / 打分」这类高频场景，这可能改变默认实现方式。</div>
+  <div class="action">后续行动：实测 Decisions API 与「Responses API + GPT-6 Luna 全模型」在分类/路由任务上的延迟、成本与准确率差异；关注它是否会吃掉第三方「小模型路由/分类」市场的份额；把「专用决策端点」纳入 agent 架构选型清单，观察 Google/Anthropic 是否跟进类似产品（专用 judge/router 端点）。</div>
+</div>
+
+<h3>三、PHP2Shell 复盘：Patch the Planet 本身是两大发现方之一（安全主线延续与修正）</h3>
+<div class="card">
+  <div class="source"><span class="tag">Security / 漏洞披露 / AI 防御</span><strong>Latent Space（AINews）</strong> · 2026-10-22 07:42 UTC · <a href="https://www.latent.space/p/ainews-openais-patch-the-planet-program">AINews: OpenAI's Patch the Planet is 1 of 2 parties to discover PHP2Shell</a></div>
+  <div class="summary"><p>这是对昨日「PHP 双 RCE」事件的一处<strong>关键复盘与修正</strong>。Latent Space 的 AINews（10/20–10/21 摘要，10-22 发布）指出，这批影响核心 PHP、被社区称为 <strong>PHP2Shell</strong>、据称影响约 <strong>70% 网站</strong> 的漏洞，实际上由<strong>两个独立方几乎同时发现</strong>：</p><p><strong>① Ryan Austin（安全公司 Calif 的研究员）</strong>——作为 OpenAI <strong>Patch the Planet</strong> 项目的一部分，在 2026 年 8 月用 <strong>GPT-5.6 Sol</strong> 发现；<strong>② Wiz</strong>（刚被 Google Cloud 收购）——用 <strong>Gemini 4 Argon + GPT-5.6 Sol + 自有工具 Wiz Atlas</strong> 发现。</p><p>AINews 还补了一处重要背景：大约两个月前 OpenAI 推出了 <strong>「Daybreak for Frontline Defenders」</strong>，一个高达 <strong>$1B</strong> 的补贴项目，为一线防御者提供 Daybreak 网络模型的访问——这次 Patch the Planet 的发现正是这笔投入的早期回报之一。文章同时提醒，所有高调的网络披露都带有营销成分，这场漏洞是否达到 log4shell/Heartbleed 级别尚有争议，但「两方独立发现 + 跨 PHP 生态约两个月的协调响应」本身，是开源社区以理想形态协作的一次展示。作者判断：接下来至少一年还会持续发现这类关键漏洞，但「怪罪发现者」是错的——我们应当看到的是关键软件正在经历人类历史上最大规模的安全审计。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这条把昨日「AI 加速漏洞发现」的叙事从「Wiz 用 AI 找到」升级为「<strong>OpenAI 自己的防御项目也是发现方之一</strong>」——也就是说，前沿实验室不只是卖模型，还在直接用模型参与真实的关键基础设施漏洞发现与协调披露。对 Follow List 上关注安全/对齐的 Amanda Askell、关注工程实践的 Simon Willison，以及跟踪「AI 作为防御基础设施」这条主线的读者，这是一个「AI 既是矛也是盾」的实证闭环，也印证了 OpenAI 上一窗口「Empowering Cyber Defenders」蓝图不是空话。</div>
+  <div class="action">后续行动：把 PHP2Shell 的两方独立发现、协调时间线、CVSS（官方 9.2）与受影响 PHP 版本矩阵整理成一条完整时间线；跟踪 Patch the Planet / Daybreak 是否产出下一个「AI 发现→协调修复」案例；若自有环境依赖 PHP，确认是否已按 php.net 官方公告升级。</div>
+</div>
+
+<h3>四、Agent 生产治理与可靠性：LangSmith LLM Gateway + Microsoft ThinkingBox RL 训练</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent 治理 / Evals / RL</span><strong>LangChain + Microsoft/HF</strong> · 2026-10-22 · <a href="https://www.langchain.com/blog/langsmith-llm-gateway-runtime-controls-for-production-agents">LangSmith LLM Gateway</a> / <a href="https://huggingface.co/blog/microsoft/thinkingbox-training">Microsoft: ThinkingBox-Training</a></div>
+  <div class="summary"><p>本窗口在「agent 进入生产」上出现两条互补的信号：</p><p><strong>① LangSmith LLM Gateway（LangChain，10-22 13:09，公测）：</strong>为生产 agent 提供运行时控制——<strong>spend cap（花费上限）、rate limit（限流）、模型回退（fallback）、PII 脱敏（redaction）</strong>，且强调「无供应商锁定」。这是把「治理」从评测/追踪（LangSmith 的老本行）延伸到<strong>运行时的资金与安全边界</strong>，回应用户对「agent 失控烧钱 / 泄露隐私」的焦虑。</p><p><strong>② ThinkingBox-Training（Microsoft + Hugging Face，10-22 22:24）：</strong>把上一轮 ThinkingBox-Bench（用「数据库终态」检验 agent 是否真的完成任务）的思路反向用到<strong>训练</strong>上——把「可执行的终态校验」直接当作 RL 奖励。结果很硬：对 <strong>Qwen3.8-27B</strong> 做 50 步 GRPO 后训练，<strong>pass@1 从 51.70% 升到 60.78%</strong>；更关键的是「20 次全对的任务数（Observed 20/20）」从 <strong>38 升到 107（近 3 倍）</strong>，而「至少成功一次（pass@20）」略降——作者称之为「sharpen（变锐）」而非「broaden（变宽）」：模型没变广，但<strong>可重复地更可靠</strong>。经济性上，「单可靠任务成本」从 <strong>$24.36 降到 $8.00（−67%）</strong>，逼近 GPT-5.4 / GPT-6 Astra / Claude Opus 5.5 的 $6.8–$7.8 区间。文中还有一个方法论亮点：用「离线策略相对难度（offline policy-relative difficulty）」筛选训练任务——只保留模型「有时会、有时不会」的任务，因为全对或全错的 rollout 都无法给 GRPO 提供对比梯度。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这两条分别回答了 agent 生产化的两个核心问题——<strong>「怎么管」和「怎么可靠」</strong>。LangSmith LLM Gateway 对应的是治理层（钱、隐私、供应商可替换），ThinkingBox 对应的是可靠性层（用真实环境终态而非「看起来对」来训练和评测）。尤其是 ThinkingBox 把「reward = 数据库终态是否对」这个朴素但可执行的想法做出量化结果，与 Follow List 上 Hamel Husain、Shreya Shankar 的 evals 主线、Eugene Yan 的「可靠 AI 系统」主线高度同频：评测与训练正在从「文本像不像」转向「真实世界状态对不对」。</div>
+  <div class="action">后续行动：把 ThinkingBox 的「终态即奖励」范式记入 evals/RL 跟踪项，观察它是否被泛化到非数据库环境（文件系统、API 调用副作用）；评估 LangSmith LLM Gateway 的 spend cap/回退是否值得纳入自有 agent 生产栈；关注「sharpen vs broaden」这一 trade-off 是否成为评测新一代 agent 的标准维度。</div>
+</div>
+
+<h3>五、开源与世界模型：OlmoEarth v1.3 全地球卫星嵌入 + IBM Granite 时间序列</h3>
+<div class="card">
+  <div class="source"><span class="tag">Open Models / 空间智能 / 遥感</span><strong>AllenAI（Hugging Face）</strong> · 2026-10-22 · <a href="https://huggingface.co/blog/allenai/olmoearth-v1-3">OlmoEarth v1.3</a> / <a href="https://huggingface.co/blog/ibm-research/granite-timeseries-ensemble-r1">IBM Granite time-series ensemble</a></div>
+  <div class="summary"><p><strong>① OlmoEarth v1.3（AllenAI，10-22 16:11）：</strong>号称「覆盖整个地球的 SOTA 卫星嵌入模型」。它读一整年的雷达（Sentinel-1）与多光谱（Sentinel-2、Landsat）时序，为地球上每个 <strong>10 米像素</strong>输出一个 128 维向量（前 64 维可独立作为轻量版）。最关键是它<strong>预计算并开源了全球嵌入</strong>（每年约 150TB，2023–2025 全球、2017–2022 部分国家），并配了一个浏览器里的 <strong>Embeddings Explorer</strong>——无需 GPU、无需注册即可「计算一次、处处复用」地做作物分类、土地利用、变化检测。评估上，128 维在 27 项跨六洲评测里 20 项第一，64 维仍 18 项第一；训练成本只有上一代 v1.2 的 53%（碳排 50%）。文中还给出一个具体案例：秘鲁 Madre de Dios 的非法金矿，通过比较 2017→2020 与 2020→2025 的像素向量变化，「看到」了 2019 年 Operation Mercurio 执法打击的效果与之后死灰复燃的迹象。</p><p><strong>② IBM Granite 时间序列集成预测（10-22 07:51）：</strong>用 IBM Granite 时间序列模型做<strong>集成（ensemble）预测</strong>，延续 IBM 在时间序列/结构化预测上的开源线，偏工程可用性。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>OlmoEarth 是「世界模型 / 空间智能」这条长线（Follow List 上 Fei-Fei Li 的 spatial intelligence、Jim Fan 的 world models）的<strong>开源、可用、可复现</strong>落地。它最有意思的还不是模型本身，而是「<strong>把昂贵的全球嵌入一次性算好并公开</strong>」的发布方式——把「用 AI 理解地球」的门槛从「你有 GPU 吗」降到「你会训一个轻量分类器吗」。对一个常被低估的方向（遥感/地理空间 AI）来说，这是把基础设施开源化、摊薄边际成本的一步，与开源模型整体趋势一致。</div>
+  <div class="action">后续行动：把 OlmoEarth 的「全球预计算嵌入 + 浏览器 explorer」模式作为一个「开源基础设施」案例记录；关注其在地理空间/气候/农业/合规监测等真实场景的第三方采用；若跟踪「世界模型」主线，把「遥感嵌入」与 Fei-Fei Li 空间智能、Jim Fan 物理 AI 并排观察。</div>
+</div>
+
+<h3>六、平台与生态：Uber ChatGPT Work 全量、GitHub Copilot/agent 指标、Modal 算力「矩形」访谈</h3>
+<div class="card">
+  <div class="source"><span class="tag">企业采用 / 开发者平台 / Infra</span><strong>OpenAI + GitHub + Latent Space</strong> · 2026-10-22 · 多条</div>
+  <div class="summary"><p><strong>Uber ChatGPT Work 全量（OpenAI 10-22 00:00）：</strong>Uber 把 ChatGPT Work 铺到 <strong>超过 3 万名员工</strong>，用于研究、数据分析、做演示、跑复杂工作流——大企业「全员部署」的又一个案例，延续 OpenAI 企业侧的主线叙事。</p><p><strong>GitHub 批量更新（10-22，多条）：</strong>① <strong>usage metrics API 开始纳入 custom skills、agents、MCP servers</strong> 的使用数据——与主题一（Agent Skills 标准）形成产品层的呼应，说明「skills/agents/MCP」已经是 GitHub Copilot 生态里需要被度量的正式对象；② Copilot impact dashboard 新增<strong>行业对比（industry comparisons）</strong>；③ Copilot 功能的<strong>全局默认值 GA</strong>（企业治理粒度提升）；另有 PR 空白偏好/分屏、Actions blob 存储 Meta API、数据驻留公共监控等常规项。</p><p><strong>Modal 访谈（Latent Space 10-22 17:40）：</strong>Erik Bernhardsson（Modal CEO）在 Series D 后受访，核心论点是「<strong>AI 算力为什么是矩形</strong>」——典型容量合同给客户固定数量的 GPU、固定周期，画成「容量×时间」是一个矩形，但真实负载在一天内增长、尖峰、回落；按峰值买就为闲置硬件付费，买少了就错过需求。这是对「算力供给方式与真实负载形态不匹配」的清晰刻画，呼应 Modal 此前 $1B ARR / $16B 估值的背景（该数据点 10-15 已记录，本窗口为深度访谈而非新融资）。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这三条都不是爆炸性新闻，但合起来刻画了 AI 生态「从模型竞赛进入规模化运营」的日常纹理：企业端（Uber）在放量，开发者平台（GitHub）在把 skills/agents/MCP 纳入度量与治理，基础设施端（Modal）在重新思考算力供给的形态。尤其「GPU 需求不是矩形」这个比喻，对理解「agent 负载是突发、长尾、事件驱动」这一特性、进而判断推理基础设施的定价与调度，是有用的直觉。</div>
+  <div class="action">后续行动：跟踪 Uber 等大客户 ChatGPT Work 的续约与用量数据，判断企业 AI 采用是否进入「全员默认」阶段；把「GitHub 把 skills/agents/MCP 纳入 metrics」作为主题一标准的采用信号；Modal「非矩形需求」观点可作为推理基础设施投资的直觉框架。</div>
+</div>
+
+<h2>值得跟进项目</h2>
+<ul>
+  <li><strong>AAIF 标准版图：</strong>Agent Skills 捐赠后的成员治理、采纳速度，以及 MCP / Agent Skills / 下一标准的演进。</li>
+  <li><strong>Decisions API 市场影响：</strong>是否吃掉「小模型路由/分类」市场，Google/Anthropic 是否跟进专用 judge/router 端点。</li>
+  <li><strong>Patch the Planet / Daybreak：</strong>是否产出下一个「AI 发现→协调修复」闭环案例，$1B 补贴的投入回报。</li>
+  <li><strong>「终态即奖励」RL 范式：</strong>ThinkingBox 的 executable-reward 思路能否泛化到非数据库环境，成为 agent 可靠性训练的标准手段。</li>
+  <li><strong>世界模型/空间智能开源落地：</strong>OlmoEarth 全球嵌入的第三方采用，遥感/地理空间 AI 的基础设施化。</li>
+  <li><strong>agent 生产治理栈：</strong>LangSmith LLM Gateway（spend cap/限流/回退/PII）是否成为企业 agent 部署的标配。</li>
+</ul>
+
+<h2>待验证信息</h2>
+<ul>
+  <li><strong>Decisions API「快 10 倍」：</strong>为 OpenAI 官方口径，缺第三方延迟/成本/准确率基准，需实测核验（尤其与 Responses API 全模型、第三方小模型对比）。</li>
+  <li><strong>PHP2Shell 命名与影响面：</strong>「PHP2Shell」「影响约 70% 网站」来自 Latent Space AINews 转述，非官方 CVE 命名/口径；官方 CVSS 与受影响 PHP 版本矩阵以 php.net 公告为准。</li>
+  <li><strong>ThinkingBox 成本数字：</strong>「$8.00/可靠任务」「−67%」为 Microsoft/HF 的「比较性服务指数」，非真实云账单，且不含训练与任务筛选成本；仅限 Qwen3.8-27B 一个基座模型的单次实验。</li>
+  <li><strong>OlmoEarth 数据规模：</strong>「~150TB/年」「10m 分辨率」为官方披露，覆盖范围（2023–2025 全球、2017–2022 部分国家）需在下载时核实；授权为 OlmoEarth Artifact License。</li>
+  <li><strong>Agent Skills 捐赠的实际治理影响：</strong>是否立即改变开发者生态，还是「先有标准、后有采用」，需观察主流框架的跟进节奏。</li>
+  <li><strong>X 高优先级人物时间线：</strong>公开抓取路径（RSSHub 404 / nitter 410 / xcancel 451）不可用，不能据此判断上述账号有无更新。</li>
+</ul>
+
+<h2>低优先级噪音</h2>
+<ul>
+  <li>Simon Willison 的「DE STAAT - FREEDOM」音乐视频分享，属个人兴趣，与主线无关。</li>
+  <li>Simon Willison「Quoting Armin Ronacher」为引述帖，正文未在窗口内抓取，信号待确认（Armin Ronacher 为 Flask 作者、现 Anthropic，人物本身相关但本窗口无实质内容）。</li>
+  <li>GitHub PR「空白偏好 + 分屏视图」、Actions blob 存储 Meta API、公共监控数据驻留等，属常规可用性/治理更新，单条信号低。</li>
+  <li>IBM Granite 时间序列集成预测，偏工程可用性，单条信号低，作趋势记录。</li>
+  <li>Latent Space「Moshi」访谈（金融推荐引擎创业）与 Modal 访谈，均为人物/产品访谈，非硬信号，作背景素材。</li>
+  <li>Interconnects RSS 本窗口无新增（最新仍为 10-20 #25），故该线今日静默。</li>
+</ul>
+
+<h2>原始链接</h2>
+<ul>
+  <li><a href="https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation">Anthropic: Donating Agent Skills to the Agentic AI Foundation</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/22/donating-agent-skills/">Simon Willison: Donating Agent Skills to the Agentic AI Foundation</a></li>
+  <li><a href="https://simonwillison.net/2026/Oct/22/armin-ronacher/">Simon Willison: Quoting Armin Ronacher</a></li>
+  <li><a href="https://openai.com/index/decisions-api">OpenAI: Build more responsive apps with the Decisions API</a></li>
+  <li><a href="https://openai.com/index/uber-chatgpt-work-rollout">OpenAI: Uber brings ChatGPT Work to all employees</a></li>
+  <li><a href="https://www.latent.space/p/ainews-openais-patch-the-planet-program">Latent Space AINews: Patch the Planet is 1 of 2 parties to discover PHP2Shell</a></li>
+  <li><a href="https://www.langchain.com/blog/langsmith-llm-gateway-runtime-controls-for-production-agents">LangChain: LangSmith LLM Gateway — runtime controls for production agents</a></li>
+  <li><a href="https://huggingface.co/blog/microsoft/thinkingbox-training">HF/Microsoft: Turning Database Grading into RL Rewards (ThinkingBox-Training)</a></li>
+  <li><a href="https://huggingface.co/blog/allenai/olmoearth-v1-3">HF/AllenAI: OlmoEarth v1.3 — state-of-the-art embeddings for the whole planet</a></li>
+  <li><a href="https://huggingface.co/blog/ibm-research/granite-timeseries-ensemble-r1">HF/IBM: Ensemble forecasting with IBM Granite time-series models</a></li>
+  <li><a href="https://www.latent.space/p/modal-d">Latent Space: Why AI Compute Comes in Rectangles — Erik Bernhardsson, Modal</a></li>
+  <li><a href="https://www.latent.space/p/moshi">Latent Space: You are the Team — Anekha Sokhal, Moshi</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-22-custom-skills-agents-and-mcp-servers-in-usage-metrics-api">GitHub: custom skills, agents, and MCP servers in usage metrics API</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-22-industry-comparisons-in-the-copilot-impact-dashboard">GitHub: industry comparisons in the Copilot impact dashboard</a></li>
+  <li><a href="https://github.blog/changelog/2026-10-22-global-default-for-copilot-features-generally-available">GitHub: global default for Copilot features GA</a></li>
+  <li><a href="https://openai.com/news/rss.xml">OpenAI News RSS</a></li>
+  <li><a href="https://www.anthropic.com/news">Anthropic News</a></li>
+  <li><a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a></li>
+  <li><a href="https://huggingface.co/blog/feed.xml">Hugging Face Blog RSS</a></li>
+  <li><a href="https://www.latent.space/feed">Latent Space RSS</a></li>
+  <li><a href="https://simonwillison.net/atom/everything/">Simon Willison Atom</a></li>
+  <li><a href="https://www.langchain.com/blog/rss.xml">LangChain Blog RSS</a></li>
+  <li><a href="https://www.interconnects.ai/feed">Interconnects RSS</a></li>
+</ul>
+
+<footer>Generated by OpenClaw cron from Follow List public sources. Window: 2026-10-22T00:00:00Z / 2026-10-23T00:00:00Z.</footer>
