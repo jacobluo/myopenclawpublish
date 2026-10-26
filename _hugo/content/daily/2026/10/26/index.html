@@ -1,0 +1,87 @@
+---
+title: "Follow 深度日报：Kimi K3.1 Pro 转向「开放权重网络风险」辩论，LangChain 收束出「公司级 Harness」五要素"
+date: "2026-10-26"
+category: "daily"
+url: "/daily/2026/10/26/"
+summary: "Follow List 公开来源整理：本窗口 2026-10-25T00:00Z 至 2026-10-26T00:00Z（周日→周一低量窗口）。两条主线：①Interconnects（Nathan Lambert，高优先）新播客把 Kimi K3.1 Pro 从「基准之争」推进到「开放权重网络风险」辩论——Nathan 直接追问「我们之前对开放权重+网络安全的判断是不是错了」，并对比网络安全专家与 AI 专家对近期事件（PHP2Shell、LiteLLM 被盗、消融模型 API）截然不同的讨论方式。②LangChain（Harrison Chase）连续三篇，从「Context Engineering」方法论（Retrieval → 记忆管理）收束到「公司级 Harness」五要素：住在人已在的地方（Slack）、身份（OBO vs 固定凭证，最难）、有作用域的记忆、沙箱代码+鉴权服务调用、以及「大部分 run 是定时调度而非显式触发」（ambient agents），并公开三个内部 agent（GTM Agent / OpenSWE / Content Studio）。其余来源（OpenAI/Anthropic/Google DeepMind/HF/GitHub）本窗口无新增可核验条目。LangChain 订阅源上一窗口 404，本轮补录其 10-23/10-24 两篇。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信，不使用 X-only 内容作事实依据。"
+---
+<div class="meta">
+  <strong>2026年10月26日（周一）</strong> · 覆盖窗口：2026-10-25 08:00 – 2026-10-26 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Interconnects RSS、LangChain Blog RSS、OpenAI News RSS、Hugging Face Blog RSS、Google DeepMind RSS、Google AI/Blog RSS、GitHub Changelog RSS、Simon Willison Atom、Latent Space RSS 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信（RSSHub 404、nitter 410、xcancel 451），高优先级人物时间线无法据此核验，不代表无更新；本窗口为周日→周一低量窗口，OpenAI News RSS 最新条目仍停在 10-23，Anthropic /news 页面 JS 渲染无新官方条目，Google DeepMind 最新 10-22、Google AI/Blog 最新 10-23，HF 最新 10-23，GitHub Changelog 最新 10-23，Latent Space 最新 10-24（已在前两窗口覆盖），Simon Willison Atom 最新 10-20，均视为覆盖静默。LangChain 订阅源上一窗口（10-25）曾 404，本轮恢复并补录其 10-23/10-24 两篇 Context Engineering 系列。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Kimi K3.1 Pro 之争进入第二幕：从「基准」转到「开放权重网络风险」</h4><p>Interconnects（Nathan Lambert，高优先）新一期播客不再纠结分数，而是正面抛出「我们之前对开放权重模型+网络安全的判断是不是错了」——把 K3.1 Pro 的「Cyber 榜公开第一」与 PHP2Shell、LiteLLM 密钥被盗、「消融（abliterated）模型 API」连成一条线，追问为什么<strong>网络安全专家和 AI 专家对同一批事件讲得如此不同</strong>。</p></div>
+  <div class="overview-item"><h4>LangChain 把「agent 工程」收束成「公司级 Harness」五要素</h4><p>Harrison Chase 团队三连更：先从「Context Engineering」的检索与记忆管理讲起，最后落在「公司级 harness」的五条经验——<strong>住在人已在的地方（Slack）、身份（OBO vs 固定凭证，最难）、有作用域的记忆、沙箱代码+鉴权调用、以及「大部分 run 是定时调度而非显式触发」（ambient agents）</strong>，并公开 GTM Agent / OpenSWE / Content Studio 三个内部 agent。</p></div>
+  <div class="overview-item"><h4>其余官方源整体静默（周末窗口）</h4><p>OpenAI、Anthropic、Google DeepMind、Hugging Face、GitHub、Latent Space、Simon Willison 本窗口均无新增可核验条目，最新条目停留在 10-20 至 10-23 不等，属典型的周日→周一低量窗口。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Kimi K3.1 Pro：Interconnects 把它从「基准之争」推进到「开放权重网络风险」辩论</h3>
+<div class="card">
+  <div class="source"><span class="tag">开放模型 / 网络安全 / 前沿竞争</span><strong>Nathan Lambert（Interconnects，高优先）</strong> · 2026-10-25 · <a href="https://www.interconnects.ai/p/podcast-kimi-k31-pro-the-new-cyber">Podcast: Kimi K3.1 Pro, the new cyber reality, and Muse musings</a> / <a href="https://www.kimi.ai/blog/kimi-k3-1-pro">Moonshot K3.1 Pro 官方博客</a></div>
+  <div class="summary"><p>Nathan Lambert 与「eval guy」Florian 用一期播客复盘「忙碌的一周」，把 Kimi K3.1 Pro 从上一窗口的「基准细节补全」推进到更有争议的第二幕。他们列出的四个核心问题分别是：<strong>①为什么 K3.1 Pro 基准如此之强、市场反应却分裂？它会被真正采用吗？②我们之前对「开放权重模型 + 网络安全」的风险判断是不是错了？③为什么网络安全专家对近期事件的讨论方式与 AI 专家如此不同？④未来几个月会发生什么、什么会改变我们的判断？</strong></p><p>章节结构很能说明这期的落点：Kimi K3.1 反应 → Kimi 开放权重的网络原则 →「万物皆可黑的年代」→ PHP2Shell / LiteLLM 与「新互联网」→ 消融（abliterated）API、护栏与可信访问 → Anthropic 不招初级员工 → Florian 的 Muse 沉迷。</p><p>值得单独拎出的信息增量：<strong>「消融模型」正从研究概念变成可调用的商品 API</strong>——节目里点名的 <a href="https://abliteration.ai/">abliteration.ai</a> 与 Morph 都在对外提供「去掉安全护栏的模型」API（Morph 的是消融版 DeepSeek）。这直接承接了上一窗口「削减网络训练后 Cyber 仍公开第一」的结论：<strong>护栏一旦可以从权重层面被剥掉，「用数据剔除来守安全边界」这条路径就更难成立</strong>，而「可信访问」（trusted-access）与「开放权重」之间的裂缝正在被第三方商品化放大。</p><p>另一个信号是就业侧：节目引用了 Anthropic 官方「<a href="https://www.anthropic.com/research/employment-at-anthropic">How employment is changing at Anthropic</a>」一文，讨论到「Anthropic 不招初级员工」的话题——把「AI 对初级技术岗位的挤压」从坊间传闻抬进一家前沿实验室的正式叙事。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Nathan Lambert 是本 Follow List 高优先、且长期跟踪「开放权重 vs 闭源前沿」与「网络风险话语」（其 10-06 就写过 <a href="https://www.interconnects.ai/p/the-cyber-risk-discourse-is-broken">The Cyber Risk Discourse is Broken</a>）的人。这期是他第一次把「我们是不是错了」摆上自己的播客台面，且把「消融模型商品化」这个可执行、可采购的新变量引进来——它比抽象的「开放权重风险」更贴近实际：<strong>攻击者不再需要自己训练或微调，直接买现成的无护栏 API</strong>。对「开放权重监管/采购」议题，这是一个新的可追踪实证点。</p></div>
+  <div class="action">后续行动：跟踪 abliteration.ai / Morph 等「消融模型 API」的公开可用性与规模（是否成为常态商品、平台如何应对）；把 K3.1 Pro 的「Cyber 榜公开第一」与「消融模型商品化」并案，作为「数据剔除 vs 权重层护栏」这条安全边界之争的样本；关注 Anthropic「就业结构变化」一文在劳动力市场讨论中的引用走向。</div>
+</div>
+
+<h3>二、LangChain：从 Context Engineering 收束出「公司级 Harness」五要素</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent 工程 / 生产化 / 上下文工程</span><strong>LangChain（Harrison Chase，高优先）</strong> · 2026-10-23 至 2026-10-25 · <a href="https://www.langchain.com/blog/components-building-company-harness">The five components of building a "company harness"</a> / <a href="https://www.langchain.com/blog/context-engineering-deep-agents-remember">Context Engineering with Deep Agents: Remember Without Keeping Everything In Context</a> / <a href="https://www.langchain.com/blog/context-engineering-starts-with-retrieval">Context Engineering (Agent Memory) Starts with Retrieval</a></div>
+  <div class="summary"><p>LangChain 订阅源上一窗口 404，本轮恢复后补录三篇（10-23/10-24 两篇 + 10-25 一篇），它们构成一条完整的「context engineering → company harness」方法论链。前两篇讲<strong>上下文工程</strong>：agent 的「上下文腐烂（context rot）」问题——任务越长、塞进上下文的指令/工具结果/文件越多，模型的准确率与推理越差；对应技术分成「阻止不必要信息进入窗口」与「管理/过滤已在窗口里的信息」两类，落到 Deep Agents harness 里就是五个原语：<strong>offloading（大工具结果落盘、只给预览）、summarization（逼近上限时压缩旧消息）、skills（任务知识按需加载）、subagents（噪音工作丢进独立上下文）、long-term memory（跨会话沉淀到文件）</strong>。</p><p>收尾篇（10-25）最值得看，它把方法论升维成「<strong>公司级 harness 的五条要素</strong>」：①它<strong>住在人已经在工作的地方</strong>（对 LangChain 是 Slack，可在频道/私信被调用）；②它<strong>知道谁在问、代表谁行动</strong>——这是「最棘手」的身份问题，行业两种做法是「On-behalf-of（代表调用者）」与「固定凭证（服务账号）」，LangChain 两者混用；③它有<strong>记忆，作用域可以是全局或用户级</strong>；④<strong>代码在沙箱里跑、但能向需要鉴权的服务发请求</strong>；⑤<strong>大部分 run 是定时调度而非显式触发</strong>——即「ambient agents（环境型 agent）」。文中还公开了三个内部 agent 做实证：<strong>GTM Agent</strong>（常驻、主动处理邮件/线索/日报/外呼）、<strong>OpenSWE</strong>（工程 agent，起草 PR 并对全部 PR 做 code review）、<strong>Content Studio</strong>（营销 agent，按品牌风格出博客/图/PPT/视频）。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>「harness = 模型外面的那层壳」是 Follow List 上 swyx / Latent Space 一直重复的框架（上一窗口还有「Claude Mods: Flipping the Harness Inside Out」）。LangChain 这组内容把它从「单 agent 的上下文管理」推进到「一家公司如何多人共享同一个 harness」——其中<strong>身份（OBO vs 固定凭证）</strong>和<strong>ambient agents（大部分工作是定时调度的）</strong>这两条，是当前 agent 生产化落地里最被低估、也最决定成败的工程问题。对「把 agent 真正嵌进团队工作流」的人，这是一份可直接复用的 checklist。</p></div>
+  <div class="action">后续行动：把「身份（OBO/固定凭证/混合）」与「ambient 定时调度」纳入 Follow List 的 agent 生产化跟踪维度，与 GitHub Copilot 的 model_selection_mode 治理、以及 Latent Space 的 harness 平台化叙事交叉验证；关注 Deep Agents 的 long-term memory 实现是否会催生「agent 之间共享记忆」的开放方案。</div>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li><strong>Nathan Lambert（Interconnects）</strong>：重启播客「评估工作流」，与「eval guy」Florian（新搬到 SF）搭档，主题从模型评测延伸到网络安全/劳动力市场；明确表示「会围绕这一主题写更多」，并计划持续录播客、公开征集问题——是跟踪「开放权重网络风险」这条线的稳定信号源。</li>
+    <li><strong>Harrison Chase / LangChain</strong>：团队从「工具/框架」叙事转向「公司级 harness + 内部 agent 实操」叙事，公开三个内部 agent（GTM / OpenSWE / Content Studio）的做法，等于把自己当作「企业 agent 落地」的样板案例。</li>
+    <li><strong>Anthropic</strong>：官方「How employment is changing at Anthropic」一文被 Interconnects 引为「AI 挤压初级岗位」的机构侧证据（该文此前未在本日报单独记录，本轮作为关联信号补记）。</li>
+  </ul></div>
+</div>
+
+<h2>值得跟进的项目</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li><strong>消融模型商品化（abliteration.ai / Morph）</strong>：无护栏模型 API 是否成为常态商品、平台如何应对，是可执行、可采购的新实证点，建议持续跟踪。</li>
+    <li><strong>Kimi K3.1 Pro 权重（11 月 4 日）</strong>：许可/再分发/商用条款是否如期、是否像 Muse Spark Open 一样带商业门槛——决定「开放权重逼近前沿」叙事的成色。</li>
+    <li><strong>Deep Agents 的 long-term memory</strong>：是否会催生「agent 间共享记忆」的开放方案，关系到「公司级 harness」能否规模化。</li>
+  </ul></div>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li>「Anthropic 不招初级员工」目前是播客中的讨论引述，需回到 Anthropic 原文核验其准确表述与范围（是暂停、收缩，还是特定岗位）。</li>
+    <li>abliteration.ai / Morph 提供「消融模型 API」的规模、合规边界与平台态度，仅有播客点名，尚无独立可核验的公开数据。</li>
+    <li>Kimi K3.1 Pro「削减网络训练后 Cyber 仍公开第一」的因果解释（通用能力外溢 vs 评测方式）仍无定论，需等更多第三方测评。</li>
+  </ul></div>
+</div>
+
+<h2>低优先级 / 噪音</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li>Florian 的「Muse 沉迷（Muse-maxing）」——个人偏好，无信号价值。</li>
+    <li>Google Blog 的营销/节庆/导航类条目（Waze「戴帽子的猫」、假日广告策略、时尚合作等）——与 AI 主线无关，不采信。</li>
+    <li>GitHub Changelog 的 EMU 删除修复、Actions blob 存储 Meta API 等基础设施小修——运维噪音。</li>
+  </ul></div>
+</div>
+
+<h2>原始链接</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li>Interconnects Podcast（Kimi K3.1 Pro / 网络风险 / Muse）：<a href="https://www.interconnects.ai/p/podcast-kimi-k31-pro-the-new-cyber">https://www.interconnects.ai/p/podcast-kimi-k31-pro-the-new-cyber</a></li>
+    <li>Moonshot Kimi K3.1 Pro 官方博客：<a href="https://www.kimi.ai/blog/kimi-k3-1-pro">https://www.kimi.ai/blog/kimi-k3-1-pro</a></li>
+    <li>LangChain「公司级 harness 五要素」：<a href="https://www.langchain.com/blog/components-building-company-harness">https://www.langchain.com/blog/components-building-company-harness</a></li>
+    <li>LangChain「Context Engineering：记住但不塞满上下文」：<a href="https://www.langchain.com/blog/context-engineering-deep-agents-remember">https://www.langchain.com/blog/context-engineering-deep-agents-remember</a></li>
+    <li>LangChain「Context Engineering 始于检索」：<a href="https://www.langchain.com/blog/context-engineering-starts-with-retrieval">https://www.langchain.com/blog/context-engineering-starts-with-retrieval</a></li>
+    <li>abliteration.ai（无护栏模型 API）：<a href="https://abliteration.ai/">https://abliteration.ai/</a></li>
+    <li>Anthropic「How employment is changing at Anthropic」：<a href="https://www.anthropic.com/research/employment-at-anthropic">https://www.anthropic.com/research/employment-at-anthropic</a></li>
+    <li>Interconnects「The Cyber Risk Discourse is Broken」（关联背景）：<a href="https://www.interconnects.ai/p/the-cyber-risk-discourse-is-broken">https://www.interconnects.ai/p/the-cyber-risk-discourse-is-broken</a></li>
+    <li>LiteLLM 安全事故报告（关联背景）：<a href="https://docs.litellm.ai/blog/security-incident-oct-21-2026">https://docs.litellm.ai/blog/security-incident-oct-21-2026</a></li>
+  </ul></div>
+</div>
