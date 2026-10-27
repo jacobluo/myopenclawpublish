@@ -1,0 +1,797 @@
+---
+title: "Anthropic 如何解决代码评审：Claude Code 团队的七层防线（中文译文 + 总结）"
+date: "2026-10-27"
+category: "research"
+url: "/research/2026/10/27/solving-code-review-at-anthropic/"
+summary: "翻译 Anthropic 官方博客《How the Claude Code team does code review》：Claude 团队没有取消代码评审，而是把'读代码'从人转移到机器，围绕人类时间与注意力做优化。6—9 月合并 PR 翻倍、回滚率降 40%+，靠的是七层防线（PR 前验证、每个 PR 的 AI 评审、可阻塞的安全评审、自动化检查、按风险分级的人工批准、合并队列+flag、快速回滚），以及用事故当 eval、强制评审收敛、度量噪音让评审器持续变好。附原文与总结。"
+layout: "raw"
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anthropic 如何解决代码评审：Claude Code 团队的七层防线（中文译文 + 总结）</title>
+  <meta name="description" content="Anthropic 官方博客《How the Claude Code team does code review》中文译文：把代码评审从人工逐行阅读变成七层自动化防线，围绕人类时间与注意力优化，用事故当 eval、强制评审收敛。附原文与总结。">
+  <style>
+    :root {
+      --bg: #f4f7f4;
+      --paper: #ffffff;
+      --ink: #17211c;
+      --muted: #5d6b62;
+      --line: #dbe5dd;
+      --green: #16784f;
+      --blue: #2459a8;
+      --red: #b04435;
+      --gold: #a96914;
+      --soft-green: #e8f5ee;
+      --soft-blue: #eaf1fb;
+      --soft-red: #fff0ed;
+      --soft-gold: #fff6e6;
+      --shadow: 0 18px 52px rgba(28, 43, 34, 0.10);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
+      line-height: 1.72;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(22, 120, 79, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(36, 89, 168, 0.09), rgba(36, 89, 168, 0) 420px),
+        var(--bg);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 64px 0 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 880px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      padding: 6px 12px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 34px;
+      padding: 40px 0 72px;
+      align-items: start;
+    }
+
+    article {
+      display: grid;
+      gap: 22px;
+    }
+
+    section, aside {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 28px;
+    }
+
+    aside {
+      position: sticky;
+      top: 22px;
+      padding: 20px;
+    }
+
+    h2, h3, h4, p {
+      margin-top: 0;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 26px;
+      line-height: 1.24;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    h4 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 14px; }
+    p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0 0 14px;
+      padding-left: 1.35em;
+    }
+
+    li + li { margin-top: 8px; }
+
+    strong { color: #0f3d2a; }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lead-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #fbfdfb;
+    }
+
+    .lead-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 15px;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--green);
+      background: var(--soft-green);
+    }
+
+    .quote {
+      border-left: 4px solid var(--green);
+      background: #f7fbf8;
+      padding: 18px 20px;
+      color: #28372e;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .score-table th, .score-table td {
+      border: 1px solid var(--line);
+      padding: 11px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .score-table th {
+      background: #eef5f0;
+      color: #213328;
+    }
+
+    .layer {
+      border-left: 3px solid var(--green);
+      padding: 4px 0 4px 18px;
+      margin: 18px 0;
+    }
+
+    .original {
+      background: #f6f8fa;
+      border-left: 4px solid var(--blue);
+    }
+
+    .original p, .original li {
+      color: #2a3642;
+    }
+
+    .original h2, .original h3 {
+      color: #1d3a5f;
+    }
+
+    .en {
+      font-family: "Georgia", "Times New Roman", serif;
+      letter-spacing: .2px;
+    }
+
+    .divider-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 6px 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .divider-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .nav-title {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li + li { margin-top: 8px; }
+
+    .toc a {
+      color: var(--ink);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .side-note {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 28px 0 46px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+      }
+
+      .lead-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(100% - 24px, 1120px);
+      }
+
+      header {
+        padding-top: 42px;
+      }
+
+      section {
+        padding: 22px;
+      }
+
+      .score-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">AI 工程实践 · 代码评审 · Agent 协作</p>
+      <h1>Anthropic 如何解决代码评审：Claude Code 团队的七层防线</h1>
+      <p class="dek">这是 Anthropic 官方博客《How the Claude Code team does code review》的中文译文。核心结论：Claude 团队没有取消代码评审，而是把"读代码"这件事从人转移到了机器，围绕人类的时间与注意力做优化，并投入大量精力让"撤销错误"又快又容易。从 6 月到 9 月，合并进 Claude Code 代码库的 PR 翻了一倍多，回滚率反而降了 40% 以上。本文含<b>总结</b>、<b>中文译文</b>与<b>英文原文</b>三部分。</p>
+      <div class="meta">
+        <span class="pill">发布时间：2026-10-27</span>
+        <span class="pill">原文：Anthropic（claude.dev）</span>
+        <span class="pill">主题：代码评审 / Agent 工程 / 人类注意力</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article>
+
+      <section id="summary">
+        <div class="divider-label">总结 · Summary</div>
+        <h2>结论先行</h2>
+        <div class="lead-grid">
+          <div class="lead-card">
+            <strong>核心范式转变</strong>
+            <p>代码评审从"道路尽头的闸门"（写完代码、开 PR、等同事）变成"写字时的拼写检查"——评审持续发生，大多数变更在被人类过目之前，已经被 Claude 评审并修复过至少一次。</p>
+          </div>
+          <div class="lead-card">
+            <strong>稀缺资源是人</strong>
+            <p>目标是把人类时间与注意力留给"只有人能解决的问题"。用"人工批准数、人工评论数、PR 等待人的时长"度量人力，用<b>回滚率和事故率做护栏</b>——它们涨了就说明没省时间、只是挪了地方。</p>
+          </div>
+          <div class="lead-card">
+            <strong>可验证的成果</strong>
+            <p>6—9 月合并 PR 翻倍+，回滚率降 40%+；AI 评审上线后，获实质性评审评论的 PR 占比从 16% 涨到 54%。成果来自七层防线 + 让评审器持续进化的闭环。</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:22px;">七层防线（逐层过滤，底下垫着回滚）</h3>
+        <ol>
+          <li><strong>PR 前验证：</strong>给 Claude 可运行的东西（测试/构建/截图）并要它展示输出，子代理带全新上下文审 diff，再跑内部 skills。</li>
+          <li><strong>每个 PR 的 AI 评审：</strong>多个 agent 同时找 bug，另一组对每条发现投票、去掉风格/诊断类噪音，剩下的按严重度内联标注，每条都必须被回应。</li>
+          <li><strong>可阻塞的安全评审：</strong>安全发现未解决就禁止合并。</li>
+          <li><strong>可阻塞的自动化检查：</strong>lint、类型、各平台测试、构建。</li>
+          <li><strong>按风险分级的人工批准：</strong>低/中/高 → 0/1/2 人，<b>由变更而非作者定级</b>；agent 的批准永远不算人。</li>
+          <li><strong>合并队列 + flag + 渐进发布：</strong>防止两个各自通过的 PR 合起来搞坏 main。</li>
+          <li><strong>快速检测、快速回滚：</strong>flag 不部署就能关，一切可逆，几分钟撤销。</li>
+        </ol>
+
+        <h3 style="margin-top:22px;">让评审器持续变好</h3>
+        <ul>
+          <li><strong>事故即 eval：</strong>收集过去引发事故的 PR，评审器每天跑在这个集合上打分。</li>
+          <li><strong>度量噪音：</strong>按人对评论的回应（修了 / 错了 / 有意的 / 无所谓）分类，优先抓真 bug，其次才减轮次。</li>
+          <li><strong>强制评审收敛：</strong>轮次上限、头几轮后只复评 diff、标记 bug 类别、不重复旧发现——曾有一个 CLI PR 一夜跑了 50+ 轮。</li>
+        </ul>
+
+        <h3 style="margin-top:22px;">人类留在循环里的位置</h3>
+        <p>决定"该不该做"、评审高风险代码与架构、阅读证据、对结果负责——"你落地，你负责"。</p>
+      </section>
+
+      <section id="trans">
+        <div class="divider-label">中文译文 · Translation</div>
+        <h2>我们如何做代码评审</h2>
+        <p>我们之前说过，Claude Code 大约 90% 的代码是 Claude 自己写的。那么，在如此大的产出量级上，我们是如何做代码评审的？还有人读代码吗？如果出了问题，谁来兜底？</p>
+        <p>这篇文章讲的是 Claude Code 团队的代码评审流程，以及它是如何演进的。从 6 月到 9 月，合并进 Claude Code 代码库的 pull request 数量翻了一倍多，而需要被回滚的比例下降了 40% 以上。</p>
+        <p>我们并没有取消评审。但我们把大部分"阅读"交给了机器，围绕人类的时间与注意力做了优化，并投入大量精力让"撤销错误"这件事又快又容易。</p>
+
+        <h3>重新思考代码评审的目的</h3>
+        <p>当 agent 写代码时，变更的数量会快速上涨。在 Anthropic 的 monorepo 里，每天落地的变更从今年 5 月的约 2,500 个，涨到了 9 月的 30,000 多个。</p>
+        <p>Claude Code 住在自己独立的仓库里，和 monorepo 分开，但它同样承受着很大的压力。当你以这个速度交付时，逐行的人工代码评审即便不是不可能，也极其困难。</p>
+        <p>代码评审做两件事：</p>
+        <ul>
+          <li>在问题上线前发现并修复它们；</li>
+          <li>在整个团队中建立共享的上下文和对代码库的理解。</li>
+        </ul>
+        <p>本文主要聚焦于"发现并修复问题"，但我们会在结尾回到第二件事。</p>
+        <p>我们认为，"有没有人读过这些代码？"这个问法，是对"这个变更可能出什么问题，以及哪一个检查——自动化还是人工——最适合抓住它？"的一个不精确的代理。</p>
+        <p>问这个问题也改变了评审发生的时间点。以前，评审是道路尽头的闸门：写完代码、开 PR、等同事来看。现在，评审是持续进行的，更像是你写字时的拼写检查。大多数变更在被要求人类过目之前，已经被 Claude 至少评审并修复过一次。这抓住了大部分例行错误，把团队注意力留给了更高层次的问题和审视。</p>
+
+        <h3>稀缺资源：人类的时间与注意力</h3>
+        <p>我们想把人类的时间和注意力留给那些只有人类能解决的问题，并确保自动化检查能抓住其余部分。以我们当前的变更速率，人类仍然有海量的工作要做，团队几乎每天都会遇到新的、前所未见的挑战。</p>
+        <p>人类时间覆盖了评审成本的两面：人们花在评审上的时间，以及他们花在修复坏代码造成的问题上的时间。如果只是砍掉前者、而时间只是转移到了后者，那没有任何帮助。</p>
+        <p>所以我们的目标是：Claude Code 各仓库（CLI、桌面和 Web 应用、移动应用）中的大多数 pull request，在循环中最多只有一个人（可以是作者本人）的情况下就能合并，同时回滚率和事故率不上涨。为了度量人类时间，我们追踪每个 PR 的人工批准数（中位数和第 95 百分位）、人工评论数，以及一个 PR 等待人的时长。回滚率和事故率是护栏：如果它们上升，说明我们并没有节省人类时间，只是把它挪了地方。</p>
+
+        <h3>一个变更的生命周期</h3>
+        <p>一个典型的变更，从工程师的笔记本（或 Slack 里的一次 Claude 会话）出发，会经过多层代码评审。大部分路径是自动化的；人的注意力只投向有风险的地方。</p>
+
+        <h3>逐层拆解：层级，而非单一闸门</h3>
+        <p>六层检查，底下垫着回滚。每一层都会抓住一些问题、漏掉另一些。能穿过所有层的很少，回滚处理剩下的。</p>
+
+        <div class="layer">
+          <h4>第 1 层 · 在任何人过目之前，工作就先被验证了</h4>
+          <p>如今大部分评审发生在 PR 存在之前。我们给 Claude 一个它能运行的东西——比如测试、一次构建、或一张用来和设计稿比对的截图——并要求它展示输出，而不是说"做完了"。然后一个子代理（subagent）带着全新的上下文评审这份 diff。这两个习惯都来自我们的最佳实践指南。</p>
+          <p>在开 PR 之前，我们很多人还会跑几个内部技能（skills）：一个专门找 bug，一个简化 diff，一个端到端检查行为。UI 变更还会对照我们的设计规范做检查。</p>
+          <p>创建了 Claude Code 的 Boris Cherny 曾说，给 Claude 一个验证自己工作的方式，可能是获得好结果最重要的事。他估计这让最终结果好上两到三倍，并写道："验证在每个领域看起来都不一样。它可能简单到运行一条 bash 命令，或跑一个测试套件，或在浏览器或手机模拟器里测试这个应用。"</p>
+          <p>当自动化评审器反复标记同一个问题时，我们在源头修复它：改技能、加一条 lint 规则，或更新指令类文件，比如：</p>
+          <ul>
+            <li><strong>CLAUDE.md</strong> 告诉 Claude 这个项目是什么：技术栈、约定、目标和"非目标"。每次评审都会加载它，所以在大型代码库里我们把它保持简短，并从那里指向其他文档。评审器也会标记违反了其中某项约定的代码，以及让其中某一行过时的变更。</li>
+            <li><strong>REVIEW.md</strong>，由代码 owner 编写，告诉评审器在他们负责的这部分代码里什么才重要。我们会单独检查评审器是否真的遵循了它。好的 REVIEW.md 都很短。它们说清楚在这个仓库里"失败"长什么样（对文档来说是"它说谎了"，对配置来说是"它把请求路由错了"），给吹毛求疵的评论设上限，列出要跳过的路径，并要求用"文件和行号"作为证据、而不是凭名字瞎猜。它们还要求一个以计数开头的总结，并在没什么可修时直白地说出来。</li>
+          </ul>
+        </div>
+
+        <div class="layer">
+          <h4>第 2 层 · 每个 pull request 都有 AI 评审</h4>
+          <p>每个 pull request 在被人过目之前，都会先得到一次 Claude 评审。它会对照整个仓库和这个 PR 声明的意图来读 diff，并问：这个变更解决了它的问题吗？它和系统契合吗？它会不会搞坏别的东西？</p>
+          <p>对 bug 修复，它会找根因。公开版本——Claude Code 的 Code Review——现在已在 Team 和 Enterprise 计划上全面可用，而 /code-review 会在本地跑一个更轻量的版本。</p>
+          <p>当我们发布研究预览版时，获得实质性评审评论的内部 PR 比例从 16% 涨到了 54%。超过 1,000 行的 PR 大多会得到发现，而大多数小 PR 干净通过。管理员把每个仓库设成 Quick、Standard 或 Deep。在"漏掉一个 bug 的代价高于额外评审时间"的地方，Deep 是值得的。</p>
+          <p>发现会被其他 agent 验证过之后，才会交给人类评审。几个 agent 同时找 bug。然后一个独立的组对每个发现投票，只有足够多的人同意它是真的，它才会被贴出来。只涉及风格、诊断或清理的发现会被丢弃。我们在自己的 PR 上对这些过滤器做了 A/B 测试之后才保留下来。剩下的会以内联评论的形式出现，按严重程度排序。每条被标记为 Important（重要）、Nit（吹毛求疵）或 Pre-existing（既存问题），这样一个不是该 PR 引入的 bug 就不会看起来像作者的错。</p>
+          <p>每个发现都必须被回应。你要么修复它，要么给出理由解决这个线程。常常是一个 agent 在夜里接手修复，于是作者回来时，PR 已经又过了一轮。</p>
+        </div>
+
+        <div class="layer">
+          <h4>第 3 层 · 能阻塞合并的安全评审</h4>
+          <p>安全也有自己的自动化评审。只要 bug 评审或安全评审里还有任何一条发现处于打开状态，PR 就无法合并。你要么修复它，要么用一个简短的理由关闭该线程——这就是清除误报的方式。</p>
+          <p>如果后续某个 commit 修复了问题，这条发现会自动清除。你可以用开源的 security review GitHub Action 或 /security-review 命令搭建同样的东西。</p>
+        </div>
+
+        <div class="layer">
+          <h4>第 4 层 · 能阻塞合并的自动化检查</h4>
+          <p>老一套：lint、类型检查、每个平台上的测试，以及一次构建。一个典型的 CLI PR 在任何人过目之前可能就要跑几十项检查。PR 模板会问这个变更如何被测试、如何撤销它。Claude 可以填这部分，但提出这个变更的人要签字确认。</p>
+        </div>
+
+        <div class="layer">
+          <h4>第 5 层 · 按风险分级的人工批准</h4>
+          <p>一个文档修复和一个自动更新器的变更，风险不同，所以它们得到不同的评审。</p>
+          <table class="score-table">
+            <thead>
+              <tr>
+                <th>风险</th>
+                <th>例子</th>
+                <th>人工批准</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>低</strong></td>
+                <td>文档、文案、内部专属功能、flag 后面的增量变更</td>
+                <td>自动化评审和安全检查绿灯后<b>无需人工</b></td>
+              </tr>
+              <tr>
+                <td><strong>中</strong></td>
+                <td>普通产品变更，以及对缓存、自动更新器、系统提示词等敏感区域的变更</td>
+                <td><b>一人</b></td>
+              </tr>
+              <tr>
+                <td><strong>高</strong></td>
+                <td>最高风险的代码，加上一小撮总是需要两个人的路径</td>
+                <td><b>两人</b></td>
+              </tr>
+            </tbody>
+          </table>
+          <p>设定层级的是变更，而不是作者。一个分类器读取变更并挑出它的风险层级。第二个分类器会问：即便这个变更的层级说不需要，这个特定变更是否需要再来一个人。有些路径总是需要一个人——任何 owner 列为敏感的路径，以及任何 CI workflow 文件。</p>
+          <p>只有受信任的作者才能走更轻的路径。只有仓库受信任名单上的作者（大多是拥有它的那个团队）才能走更轻的路径。其他所有人都需要第二个人来批准。一个 agent 的批准也永远不算作一个人的批准。自动化评审可以为低风险变更放行，但它填不了一个"要求人类"的坑。</p>
+          <p>谁发起了这个变更，谁就对它负责。在一个 agent 写的 PR 上，指挥那个 agent 的人算作必需评审人之一，就像他自己敲的代码一样。</p>
+          <p>一次批准只覆盖一个特定的 commit。如果有新的 commit 落地、而系统无法为其背书——比如 agent 的一次 push，或某人手动解决的合并——批准就必须重新给一次。</p>
+        </div>
+
+        <div class="layer">
+          <h4>第 6 层 · 合并队列、feature flag 和渐进发布</h4>
+          <p>合并队列会把这个变更应用到 main 上、重新跑一遍所有检查，这样两个各自通过、但合起来会搞坏 main 的 PR 就无法组合成一个坏掉的 main。新行为通常先在一个 flag 后面发给 Anthropic 员工，我们的大量使用常常在用户之前就暴露了回归。公开发布先走 latest 通道，stable 通道跟在后面。</p>
+        </div>
+
+        <div class="layer">
+          <h4>第 7 层 · 快速检测，快速回滚</h4>
+          <p>总有些错误还是会漏过去，所以最后一层是关于快速抓住它们。flag 不用部署就能关掉。Claude Code 有一周一轮的值班制，事故复盘会问：哪一层本该抓住这个问题。</p>
+          <p>注意到一次糟糕的合并，仍然依赖作者和值班者，以及回滚和事故看板。我们还没有那种"当这些数字变动时就收紧批准"的断路器；工程师们希望在有更多代码走向零人工合并之前先有这些。</p>
+          <p>一位同事说，慢下来确实会降低你的错误率，但那多半是因为你所有事都做得更少了。我们宁愿更快地注意到并修复问题。</p>
+        </div>
+
+        <h3>我们如何让评审器变得更好</h3>
+        <p>我们的代码评审流程在一个循环里持续改进。</p>
+        <p>任何事故现在都成为一条 eval。团队收集了过去引发事故的 PR，连同它们的"向前修复"和回滚，并让懂那些代码的工程师确认每一个 bug 以及它住在哪里。评审器每天都跑在这个集合上。eval 随着每一起事故而增长，评审器的每一次改动都对照全部 eval 打分。</p>
+        <p>我们通过观察人们对评论做了什么来度量噪音。如果你不介意标记大量非 bug，那抓更多 bug 很容易，所以我们需要一个对此的检查。我们把评审器留下的每条评论，按 PR 上那个人的回应分类：他们修复了它、说它错了、说这个行为是有意的、或决定它无所谓。我们还在已知干净的 PR 上跑评审器，数它有多少次报告了会引导某人做出有害变更的东西。我们写下来的优先级是：先抓真实 bug，其次才是减少评审轮次。</p>
+        <p>当作者是一个 agent 时，噪音的代价更高。一个人几秒钟就能挥手打发掉一条吹毛求疵。一个 agent 会去修它，这意味着又一次 commit 和又一轮评审。</p>
+        <p>评审必须收敛。一个 agent 作者和一个 agent 评审者可以无限地让彼此忙下去。一个 CLI PR 在一夜之间经历了五十多轮评审和修复，直到它的作者叫停。</p>
+        <p>当我们对评审器反复标记的内容跑 git blame 时，其中约 59% 是自评审器第一遍起就存在的代码。评审器很少找到新 bug，它每一轮找到的是更多旧 bug。</p>
+        <p>我们自己把它搞得更糟了。我们已经习惯了默认跑好几轮，因为每一遍都能抓到点新东西。在一个高风险的变更上这可能值得，但不是每个 PR 都值得。团队现在同时追踪"跑到通过所需的轮次"和召回率，并改变了复评方式：</p>
+        <ul>
+          <li><strong>轮次上限：</strong>三轮之后，评审器请作者退后一步、重新考虑方案。</li>
+          <li><strong>头几轮之后只复评 diff。</strong></li>
+          <li><strong>标记 bug 的类别</strong>，让作者修复每一个实例，而不是一行。</li>
+          <li><strong>不重复已经贴过的发现。</strong></li>
+        </ul>
+        <p>评审 agent 也会每晚在既有代码上跑，帮我们在旧 bug 出现在别处之前就抓住它们。</p>
+
+        <h3>人类留在循环中的位置</h3>
+        <p>把一个资深工程师从深度工作中拽出来、去抓一个例行错误，代价远高于一次自动化评审。团队里的人仍然负责：</p>
+        <ul>
+          <li><strong>决定要不要做它。</strong>方向、品味和范围。有一个团队宣布自己的评审瓶颈已解决，却仍然为团队之外的变更保留人工评审，这样总有人会问一句"我们到底该不该做这个？"</li>
+          <li><strong>评审高风险的代码</strong>，比如计费、自动更新器和 CI 工作流。</li>
+          <li><strong>评审会设定范式的架构</strong>——别人会照着抄的那种。</li>
+          <li><strong>阅读证据。</strong>测试输出、跑过的命令和它返回了什么、一张截图、评审器的发现。如果你说不出这些检查会漏掉什么，那就去要一次真正的评审，而不是一次快速批准。</li>
+          <li><strong>对结果负责。</strong>每一个上线的变更都有一个人为之负责，不管是谁敲的代码。</li>
+        </ul>
+
+        <h3>跨团队共享上下文</h3>
+        <p>代码评审的第二份工作一直是传播对代码库的理解。读队友的 diff，就是你学习"改了什么、各部分如何拼起来"的方式。如果机器做了大部分阅读，那任何人还怎么学习代码？</p>
+        <p>我们对此没有正式的流程。团队里没有人把 Claude Code 的完整心智模型装在脑子里，而且我们认为没人需要。当有人想理解代码库的某一部分时，他们就让 Claude 为那一片写一个讲解器。几分钟搞定，而且反映的是代码"此刻"的样子。</p>
+        <p>我们中的一些人更进一步，让 Claude 构建一个小 artifact，把代码的那部分可视化，并用那个人喜欢的学习方式来教。</p>
+        <p>如果目标是善用人类注意力，这胜过逐行读那些琐碎的 diff。一行文案的改动几乎教不了你什么。一个关于你即将修改的模块的讲解器却能教你很多。我们"默认在开放的 Slack 频道里工作"的文化也有帮助，因为你会在别人构建的同时看到他们在构建什么。</p>
+
+        <h3>"你落地，你负责"</h3>
+        <p>如果你落地了一个小或中型的变更、而它还是出了问题，团队规范是通常由你来修复它。有几件事防止这变糟：</p>
+        <ul>
+          <li>变更都很小，所以容易评审、调试和回滚。</li>
+          <li>一切都是可逆的。flag、回滚和分阶段发布能在几分钟内撤销大多数错误。</li>
+          <li>爆炸半径决定门槛。昂贵的代码得到更多的人和更多的检查。</li>
+          <li>回归通过遥测和内部使用很快浮出水面。</li>
+          <li>这不是追责。拥有一个修复意味着你拥有最多的上下文；事故复盘看的是系统。</li>
+        </ul>
+        <p>所有权也是共享的。团队大部分人在开放的频道里工作，任何人都能看到别人在构建什么、接起一个线程、或把一个 Claude 指向一个缺口，反馈也来自那些并不拥有这些代码的人。这种开放性，是"不用在每一行上设闸门也能保持高质量"的重要原因。</p>
+
+        <h3>当我们改变方向时</h3>
+        <p>agent 让启动事情变得便宜，所以有些工作本不该落地。通常是频道里的某个人问一句为什么、指向一个更早的决定、或建议一条更简单的路线，然后作者关闭或重塑这个 PR。</p>
+        <p>既然代码写得快，关闭 PR 并不觉得是损失。诀窍是在线程里尽早提出一个不同的方向，而不是在一个完成的 PR 上留下一条阻塞性评论。</p>
+
+        <h3>你如何采纳这套流程</h3>
+        <p>和你团队一起做这件事所需的大部分组件，今天都已存在。</p>
+        <p><strong>开 PR 之前：</strong></p>
+        <ul>
+          <li>给你的 agent 一些它能运行的检查，列在一份简短的 CLAUDE.md 里，外加跑 formatter 和 linter 的 hooks。</li>
+          <li>在本地跑 /code-review 和 /security-review，或一次全新上下文的子代理评审。</li>
+          <li>加一份 REVIEW.md，把重复出现的评审评论搬进去。</li>
+        </ul>
+        <p><strong>每个 PR 上：</strong></p>
+        <ul>
+          <li>强制 CI，并在你的 PR 模板里加上"Testing""Risk"和"How to revert"。</li>
+          <li>在一个仓库上加一个 AI 评审器（Claude Code 的 Code Review，或 Claude Code GitHub Action），调几周 REVIEW.md，然后再扩大范围。</li>
+          <li>加上自动化安全评审，并要求合并前每个评审线程都已解决。</li>
+          <li>让评审力度匹配风险：例行变更快速过一遍，漏掉一个 bug 代价昂贵的地方深审一遍（Code Review 里的 Quick、Standard 或 Deep）。</li>
+          <li>给评审轮次设上限；头几轮之后只复评新的 diff。</li>
+        </ul>
+        <p><strong>批准：</strong></p>
+        <ul>
+          <li>写下风险层级，按变更而非作者来设定；从严开始，有证据再放松。</li>
+          <li>把更轻的批准路径留给你信任的作者。</li>
+          <li>用 CODEOWNERS 和分支保护，让 auth、计费、CI 和发布工作流、以及安装器总是需要一个人。</li>
+          <li>绝不让一个 bot 的批准替代一个必需的人类批准；新 commit 到来时撤销批准。</li>
+        </ul>
+        <p><strong>合并及之后：</strong></p>
+        <ul>
+          <li>用合并队列、feature flag、先内部用、分阶段发布和一步回滚。</li>
+          <li>把事故和回滚变成一个 eval 集，并在评审器的提示词、工具或模型每次变化时重新打分。</li>
+          <li>度量人类时间，以回滚率和事故率作为护栏。</li>
+        </ul>
+
+        <h3>未来走向</h3>
+        <p>Code Review 的公告说，批准一个 pull request 仍然是人类的决定；产品贴出的是发现，而不是批准。我们自己的仓库走得更远，让 owner 决定哪些低风险变更仅凭自动化检查就能合并，而这条线一直在移动。</p>
+        <p>当一次评审漏掉了什么时，我们会问：模型眼前少了什么？然后把修复放进一份 CLAUDE.md、一个技能或一项新检查。目标没变：每个变更更少的人类时间，以及不比从前更多的回滚。</p>
+        <p>如果你的团队让 agent 开 pull request，我们很想听听你自动化了哪些检查、哪些仍需要一个人，以及你认为我们哪里搞错了。</p>
+        <p>感谢 Emma Webb、Michael Segner 和 Amie Rotherham 的评审。</p>
+      </section>
+
+      <section id="original" class="original">
+        <div class="divider-label">英文原文 · Original</div>
+        <h2>How the Claude Code team does code review</h2>
+        <div class="en">
+          <p>We've said before that Claude writes about 90 percent of Claude Code's own code. So how do we review code at the volume we produce it? Does anyone read code anymore? And if something breaks, who catches it?</p>
+          <p>This post covers the code review flow on the Claude Code team and how it has evolved. From June to September, merged pull requests to Claude Code's codebase more than doubled while the share that had to be reverted fell by more than 40 percent.</p>
+          <p>We didn't remove review. But we did move most of the reading to machines, optimized for human time and attention, and invested heavily in making it fast and easy to undo mistakes.</p>
+
+          <h3>Rethinking the purpose of code review</h3>
+          <p>When agents write code, the number of changes goes up, fast. In Anthropic's monorepo, changes landing per day went from about 2,500 in May to more than 30,000 in September this year.</p>
+          <p>Claude Code lives in its own repository, separate from the monorepo, but it's seeing a lot of pressure too. When you are shipping this fast, manual, line-by-line code review is incredibly difficult if not impossible.</p>
+          <p>Code review does two jobs:</p>
+          <ul>
+            <li>Find and fix issues before they ship</li>
+            <li>Build shared context and codebase understanding across the team</li>
+          </ul>
+          <p>This article mainly focuses on finding and fixing issues, but we will come back to the second job near the end.</p>
+          <p>We think "did a human read the code?" is an imprecise proxy for "what could go wrong with this change, and which check—automated or human—is the right one to catch it?"</p>
+          <p>Asking that question also changed when review happens. Before, review was a gate at the end of the road: write the code, open a PR, wait for your colleague.</p>
+          <p>Now, review runs continuously, more like spellcheck while you write. Most changes have been reviewed and fixed by Claude at least once before a human is asked to look. This catches most routine mistakes, and saves team attention for higher-level questions and scrutiny.</p>
+
+          <h3>The scarce resource: human time and attention</h3>
+          <p>We want to preserve human time and attention for issues only humans can solve and make sure automated checks catch the rest. At our current rate of change, there is still an incredible amount of work for humans to do, and our team encounters new and novel challenges almost daily.</p>
+          <p>Human time covers both sides of review's cost: the time people spend reviewing, and the time they spend fixing what bad code breaks. Cutting the first doesn't help if the time just shows up in the second.</p>
+          <p>So the goal is that most pull requests in the Claude Code repos (the CLI, the desktop and web apps, and the mobile apps) merge with at most one human in the loop, who can be the author, with no increase in reverts or incidents. To measure human time, we track human approvals per PR (median and 95th percentile), human comments, and how long a PR waits on a person. Revert and incident rates are the guardrail: if they rise, we haven't saved human time, we've only moved it.</p>
+
+          <h3>The life of a change</h3>
+          <p>A typical change, from an engineer's laptop (or a Claude session in Slack), goes through multiple layers of code review. Most of the path is automated; a person's attention goes where the risk is.</p>
+
+          <h3>Layer by layer</h3>
+          <p>Layers, not one gate. Six layers of checks, with rollback under them. Each layer catches some problems and misses others. Few get through all of them, and rollback handles the rest.</p>
+
+          <h4>1. The work is verified before anyone else looks</h4>
+          <p>Most review now happens before a PR exists. We give Claude something it can run—like tests, a build or a screenshot to compare against the design—and ask it to show the output instead of saying it's done. Then a subagent reviews the diff with fresh context. Both habits come from our best-practices guide.</p>
+          <p>Before opening a PR, many of us also run a few internal skills: one hunts for bugs, one simplifies the diff, and one checks the behavior end to end. UI changes also get checked against our design guidelines.</p>
+          <p>Boris Cherny, who created Claude Code, has called giving Claude a way to verify its work probably the most important thing for getting good results. He estimates it makes the final result two to three times better, and writes, "Verification looks different for each domain. It might be as simple as running a bash command, or running a test suite, or testing the app in a browser or phone simulator."</p>
+          <p>When the automated reviewer keeps flagging the same thing, we fix it at the source: in the skill, with a lint rule, or with updates to instructional files such as:</p>
+          <ul>
+            <li><strong>CLAUDE.md</strong> tells Claude what the project is: the stack, the conventions, the goals and the non-goals. Every review loads it, so in a large codebase we keep it short and point to other docs from there. The reviewer also flags code that breaks a convention in it, and changes that make a line in it out of date.</li>
+            <li><strong>REVIEW.md</strong>, written by code owners, tells the reviewer what matters in their part of the code. We check separately whether the reviewer actually follows it. The good ones are short. They say what failure looks like in that repo (for docs it's "it lies," for config it's "it misroutes"), cap the nits, list paths to skip, and ask for a file and line as evidence instead of a guess from a name. They also ask for a summary that starts with a count and says plainly when there's nothing to fix.</li>
+          </ul>
+
+          <h4>2. AI review on every pull request</h4>
+          <p>Every pull request gets a Claude review before a person looks. It reads the diff against the whole repo and the PR's stated intent, and asks: does the change solve its problem, fit the system, or break something else?</p>
+          <p>On a bug fix, it looks for the root cause. The public version, Code Review for Claude Code, is now generally available on Team and Enterprise plans, and /code-review runs a lighter version locally.</p>
+          <p>When we launched the research preview, the share of internal PRs getting substantive review comments went from 16% to 54%. Most PRs over 1,000 lines get findings, and most small ones come back clean. Admins set each repo to Quick, Standard, or Deep. Deep is worth it where one missed bug costs more than the extra review time.</p>
+          <p>Findings get verified by other agents before humans review them. Several agents look for bugs at the same time. Then a separate group votes on each finding, and it only gets posted if enough of them agree it's real. Findings that are only about style, diagnostics, or cleanup get dropped. We A/B tested those filters on our own PRs before keeping them. What's left shows up as inline comments sorted by severity. Each is tagged Important, Nit, or Pre-existing, so a bug the PR didn't introduce doesn't look like the author's fault.</p>
+          <p>Every finding has to be answered. You either fix it or resolve the thread with a reason. Often an agent picks up the fix overnight, so the author comes back to a PR that's already been through another round.</p>
+
+          <h4>3. Security review that can block</h4>
+          <p>Security gets its own automated review too. A PR can't merge while any finding from the bug review or the security review is still open. You either fix it or close the thread with a short reason, which is how you clear a false positive.</p>
+          <p>If a later commit fixes the issue, the finding clears on its own. You can set up the same thing with the open-source security review GitHub Action or the /security-review command. Setup is covered in automated security reviews in Claude Code.</p>
+
+          <h4>4. Automated checks that block</h4>
+          <p>The usual: lint, type checks, tests on every platform, and a build. A typical CLI pull request may run dozens of checks before anyone looks at it. The PR template asks how the change was tested and how to undo it. Claude can fill that in, but the person who asked for the change signs off on it.</p>
+
+          <h4>5. Human approval, scaled by risk</h4>
+          <p>A docs fix and an auto-updater change carry different risk, so they get different review.</p>
+          <table class="score-table">
+            <thead>
+              <tr>
+                <th>Risk</th>
+                <th>Examples</th>
+                <th>Human approvals</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Low</td>
+                <td>Docs, copy, internal-only features, additive changes behind a flag</td>
+                <td>None required once automated review and security checks are green</td>
+              </tr>
+              <tr>
+                <td>Medium</td>
+                <td>Ordinary product changes, and changes to sensitive areas such as caching, the auto-updater, or system prompts</td>
+                <td>One person</td>
+              </tr>
+              <tr>
+                <td>High</td>
+                <td>The highest-risk code, plus a small set of paths that always need two people</td>
+                <td>Two people</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>The change sets the tier, not the author. A classifier reads the change and picks its risk tier. A second classifier asks whether this particular change needs another person even when its tier says it doesn't. Some paths always need a person, anything owners have listed as sensitive and any CI workflow file.</p>
+          <p>Only trusted authors get the lighter paths. Only authors on the repo's trusted list get the lighter paths, mostly the team that owns it. Everyone else needs a second person to approve. An agent's approval never counts as a person's, either. Automated review can clear a low-risk change, but it can't fill a slot that calls for a human.</p>
+          <p>Whoever prompted the change is on the hook for it. On an agent-written PR, the person directing the agent counts as one of the required reviewers, the same as if they'd typed the code themselves.</p>
+          <p>An approval covers one specific commit. If new commits land that the system can't vouch for, like an agent's push or a merge someone resolved by hand, the approval has to be given again.</p>
+
+          <h4>6. Merge queue, flags and a gradual release</h4>
+          <p>The merge queue re-runs every check against main with the change applied, so two PRs that pass separately can't combine into a broken main. New behavior usually ships behind a flag to Anthropic employees first, and our heavy use often surfaces regressions before users do. Public releases go to the latest channel first. The stable channel trails it.</p>
+
+          <h4>7. Fast detection, fast rollback</h4>
+          <p>Some mistakes will still get through, so the last layer is about catching them fast. Flags turn off without a deploy. Claude Code has a weekly on-call rotation, and incident reviews ask which layer should have caught the issue.</p>
+          <p>Noticing a bad merge still depends on the author and on-call as well as the revert and incident dashboards. We don't yet have circuit breakers that tighten approval when those numbers move; engineers here want them before more code moves to zero-human merges.</p>
+          <p>One colleague said slowing down does lower your error rate, but mostly because you're doing less of everything. We'd rather get faster at noticing and fixing problems.</p>
+
+          <h3>How we make the reviewer better</h3>
+          <p>Our code review process is constantly improving in a loop.</p>
+          <p>Any incidents are now an eval. The team collected past PRs that caused incidents, with their fix-forwards and reverts, and had engineers who know that code confirm each bug and where it lived. The reviewer runs against that set daily. The eval grows with every incident, and every change to the reviewer is scored against all of it.</p>
+          <p>We measure noise by watching what people do with the comments. It's easy to catch more bugs if you don't mind flagging a lot of non-bugs, so we need a check on that. We sort every comment the reviewer leaves by how the person on the PR responded: they fixed it, said it was wrong, said the behavior was intentional, or decided it didn't matter. We also run the reviewer on PRs we know are clean and count how often it reports something that would have led someone to make a harmful change. Our priority, written down, is catching real bugs first and cutting review rounds second.</p>
+          <p>Noise costs more when the author is an agent. A person can wave off a nit in seconds. An agent fixes it, which means another commit and another round of review.</p>
+          <p>Review has to converge. An agent author and an agent reviewer can keep each other busy indefinitely. One CLI PR went through more than fifty rounds of review and fixes overnight before its author stopped it.</p>
+          <p>When we ran git blame on what the reviewer kept flagging, about 59% of it was code that had been there since the reviewer's first pass. The reviewer was rarely finding new bugs, it was finding a few more old ones each round.</p>
+          <p>We made it worse ourselves. We'd gotten used to running several rounds by default, since each pass catches something new. This can be worthwhile on a risky change, but not on every PR. The team now tracks rounds-to-pass alongside recall, and changed re-review:</p>
+          <ul>
+            <li>A round cap. After three rounds, the reviewer asks the author to step back and reconsider the approach.</li>
+            <li>Diff-only re-review after the first few passes.</li>
+            <li>Flag the class of bug, so the author fixes every instance, not one line.</li>
+            <li>No repeats of findings already posted.</li>
+          </ul>
+          <p>Review agents also run nightly over existing code, helping us catch old bugs before they show up somewhere else.</p>
+
+          <h3>Where humans stay in the loop</h3>
+          <p>Pulling a senior engineer out of deep work to catch a routine mistake costs far more than an automated review. People on the team are still responsible for:</p>
+          <ul>
+            <li>Deciding whether to build it. Direction, taste and scope. One team that declared its review bottleneck solved still kept human review for changes from outside the team, so someone asks "should we even do this?"</li>
+            <li>Reviewing risky code such as billing, the auto-updater and CI workflows.</li>
+            <li>Reviewing architecture that sets a pattern others will copy.</li>
+            <li>Reading the evidence. Test output, the command that ran and what it returned, a screenshot, the reviewer's findings. If you can't say what the checks would miss, ask for a real review rather than a quick approval.</li>
+            <li>Owning the outcome. A person is accountable for every change that ships, whoever typed it.</li>
+          </ul>
+
+          <h3>Sharing context across the team</h3>
+          <p>Code review's second job has always been to spread codebase understanding. Reading a teammate's diff is how you learn what changed and how the pieces fit. If machines do most of the reading, how does anyone learn the code?</p>
+          <p>We don't have a formal process for this. Nobody on the team keeps a complete mental model of Claude Code in their head, and we don't think anyone needs to. When someone wants to understand a part of the codebase, they ask Claude to write an explainer for exactly that slice. It takes minutes and reflects the code as it is today.</p>
+          <p>Some of us go a step further and have Claude build a small artifact that visualizes that part of the code and teaches it the way that person likes to learn.</p>
+          <p>If the goal is to spend human attention well, this beats reading trivial diffs line by line. A one-line copy change teaches you almost nothing. An explainer for the module you're about to change teaches you a lot. Our culture of defaulting to working on open Slack channels helps too, since you see what others are building while they build it.</p>
+
+          <h3>"You land it, you own it"</h3>
+          <p>If you land a small or medium change and something still goes wrong, it's a team norm that you usually fix it. A few things keep this from going badly:</p>
+          <ul>
+            <li>Changes are small, so they're easy to review, debug and revert.</li>
+            <li>Everything is reversible. Flags, reverts and staged releases undo most mistakes in minutes.</li>
+            <li>Blast radius sets the bar. Expensive code gets more people and more checks.</li>
+            <li>Regressions surface fast through telemetry and internal use.</li>
+            <li>It isn't blame. Owning a fix means you have the most context; incident reviews look at the system.</li>
+          </ul>
+          <p>Ownership is also shared. Much of the team works in open channels where anyone can see what others are building, pick up a thread, or point a Claude at a gap, and feedback comes from people who don't own the code too. That openness is a big part of how quality stays high without a gate on every line.</p>
+
+          <h3>When we change direction</h3>
+          <p>Agents make it cheap to start things, so some work shouldn't land. Usually someone in the channel asks why, points at an earlier decision, or suggests a simpler route, and the author closes or reshapes the PR.</p>
+          <p>Since the code was fast to write, closing the PR doesn't feel like a loss. The trick is to raise a different direction in the thread early, not as a blocking comment on a finished PR.</p>
+
+          <h3>How you can adopt this process</h3>
+          <p>Most of the pieces to do this with your team exist today.</p>
+          <p><strong>Before the pull request:</strong></p>
+          <ul>
+            <li>Give your agent checks it can run, listed in a short CLAUDE.md, plus hooks that run formatters and linters.</li>
+            <li>Run /code-review and /security-review locally, or a fresh-context subagent review.</li>
+            <li>Add a REVIEW.md, and move repeated review comments into it.</li>
+          </ul>
+          <p><strong>On every pull request:</strong></p>
+          <ul>
+            <li>Require CI, and add "Testing", "Risk" and "How to revert" to your PR template.</li>
+            <li>Add an AI reviewer (Code Review for Claude Code, or the Claude Code GitHub Action) on one repo, tune REVIEW.md for a few weeks, then widen.</li>
+            <li>Add automated security review, and require every review thread resolved before merge.</li>
+            <li>Match review effort to risk: a quick pass on routine changes, a deep one where a missed bug is expensive (Quick, Standard or Deep in Code Review).</li>
+            <li>Cap review rounds; after the first few, re-review only the new diff.</li>
+          </ul>
+          <p><strong>Approval:</strong></p>
+          <ul>
+            <li>Write down risk tiers, set from the change rather than the author; start strict and loosen with evidence.</li>
+            <li>Keep the lighter approval paths for authors you trust.</li>
+            <li>Use CODEOWNERS and branch protection so auth, billing, CI and release workflows, and installers always need a person.</li>
+            <li>Never let a bot's approval replace a required human's; dismiss approvals on new commits.</li>
+          </ul>
+          <p><strong>Merge and after:</strong></p>
+          <ul>
+            <li>Use a merge queue, feature flags, internal use first, staged releases and one-step rollback.</li>
+            <li>Turn incidents and reverts into an eval set, and rescore the reviewer whenever its prompts, tools or model change.</li>
+            <li>Measure human time, with revert and incident rates as the guardrail.</li>
+          </ul>
+
+          <h3>Where this is going</h3>
+          <p>Code Review's announcement said approving a pull request is still a human call; the product posts findings, not approvals. Our own repos go further, letting owners decide which low-risk changes merge on automated checks alone, and that line keeps moving.</p>
+          <p>When a review misses something, we ask what the model didn't have in front of it and put the fix into a CLAUDE.md, a skill or a new check. The goal hasn't changed: less human time per change, and no more reverts than before.</p>
+          <p>If your team lets agents open pull requests, we'd like to hear which checks you've automated, which still need a person, and what you think we have wrong.</p>
+          <p>With thanks to Emma Webb, Michael Segner and Amie Rotherham for their reviews.</p>
+        </div>
+      </section>
+
+    </article>
+
+    <aside>
+      <p class="nav-title">目录</p>
+      <ol class="toc">
+        <li><a href="#summary">总结 · 结论先行</a></li>
+        <li><a href="#trans">中文译文</a></li>
+        <li><a href="#original">英文原文</a></li>
+      </ol>
+      <div class="side-note">
+        <p>说明：本文译自 Anthropic 官方博客《How the Claude Code team does code review》（claude.dev/blog/solving-code-review-at-anthropic/）。译文为人工整理，保留关键英文术语（如 CLAUDE.md、REVIEW.md、subagent、flag、merge queue 等）以准确对应原文与可落地操作。</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="wrap">Generated by OpenClaw. Source: claude.dev/blog/solving-code-review-at-anthropic/（译于 2026-10-27）。</div>
+  </footer>
+</body>
+</html>
