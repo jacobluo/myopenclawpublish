@@ -1,0 +1,117 @@
+---
+title: "GPT-6.1 Terra 补上 OpenAI「成本-智能」低价档（同日进 GitHub Copilot），Anthropic 递交 S-1 启动 IPO，前沿模型开始碰 Kakeya 猜想与量子色动力学"
+date: "2026-10-27"
+category: "daily"
+url: "/daily/2026/10/27/"
+summary: "Follow List 公开来源整理：本窗口 2026-10-26T00:00Z 至 2026-10-27T00:00Z（周一，量能明显回升）。四条主线：①OpenAI 发布 GPT-6.1 Terra——面向「视觉推理 + 精确计算机使用 + 自然写作」的快速低价档，标准 API 定价 $5/$25（比 GPT-5.6 Terra 降 50%），代理速度约 3 倍，Terminal-Bench 4.0 从 21.5% 翻倍到 50.3%；同日宣布在 GitHub Copilot GA，OpenAI 明确「复杂编码/深度研究仍用 GPT-6.1 Sol 或 GPT-6 Astra」，形成清晰的 Terra/Sol/Astra 三层定价策略。②Anthropic 向 SEC 递交 S-1，正式启动 IPO 流程（衔接 10-15「季度营收近 50% 增速、$16.8B」的上市前披露）。③OpenAI 发布「与学术界共建科学理解」，披露模型在 Kakeya 猜想、指数时间假设（ETH）、量子色动力学（QCD）上的进展与验证机制。④安全侧两条案例（CodeRabbit 用 GPT-6.1 Sol 做代码安全调查、Greptile 用 GPT-6 Astra/Daybreak 做漏洞检测）+ GPT-6.1 Terra 系统卡补充页的 ExploitBench 97.10%，延续「AI for 网络安全」主线。另有一条 AI 误用信号（ChatGPT 把普通技术支持问题导向 404 Media，经 Simon Willison 转引）。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信，不使用 X-only 内容作事实依据。"
+---
+<div class="meta">
+  <strong>2026年10月27日（周二）</strong> · 覆盖窗口：2026-10-26 08:00 – 2026-10-27 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；OpenAI News RSS、GitHub Changelog RSS、Simon Willison Atom、Hugging Face Blog RSS、Google DeepMind RSS、Google AI/Blog RSS、Anthropic News 页面、Interconnects RSS、Latent Space RSS、LangChain Blog RSS、explainx.ai sitemap、AI 播客索引 JSON 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信（RSSHub 404、nitter 410、xcancel 451），高优先级人物时间线无法据此核验，不代表无更新。OpenAI 文章正文页仍被 Cloudflare 拦截（RSS 摘要 + 官方 API changelog + 权威科技媒体报道交叉采信）；Anthropic News RSS 仍 404，用 /news 页面取官方条目；GPT-6.1 Terra 细节以 OpenAI API changelog、Deployment Safety Hub 系统卡补充页、GitHub Changelog 与公开报道交叉核验。其余源（Google DeepMind 最新 10-22、HF 最新 10-23、Interconnects 最新 10-25、Latent Space 最新 10-24、LangChain 三篇已在上一窗口覆盖）本窗口无新增条目。explainx.ai sitemap lastmod 10-26 但无新博客条目；AI 播客索引 JSON updatedAt 仍 2026-07-02。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>GPT-6.1 Terra：OpenAI 补上「成本-智能」低价档，Terra/Sol/Astra 三层定价成型</h4><p>OpenAI 发布 <strong>GPT-6.1 Terra</strong>，定位「视觉推理 + 精确计算机使用 + 自然写作」的快速低价模型：标准 API 定价 <strong>$5/1M 输入、$25/1M 输出（比 GPT-5.6 Terra 降 50%）</strong>，代理速度约 3 倍，<strong>Terminal-Bench 4.0 从 21.5% 翻倍至 50.3%</strong>；同日进入 GitHub Copilot。官方明确「复杂编码/深度研究仍用 Sol 或 Astra」，等于把三条产品线各就其位。</p></div>
+  <div class="overview-item"><h4>Anthropic 递交 S-1，IPO 从「传闻」变「流程」</h4><p>Anthropic 于 10-26 向 SEC 递交 S-1 注册声明，正式启动上市流程。这直接衔接 10-15 那则「季度营收近 50% 增速、$16.8B」的上市前披露——现在有了可查证的官方动作，而非仅媒体转述。</p></div>
+  <div class="overview-item"><h4>前沿模型开始「碰」开放数学与物理难题</h4><p>OpenAI 发布「与学术界共建科学理解」，披露模型在 <strong>Kakeya 猜想、指数时间假设（ETH）、量子色动力学（QCD）</strong> 上的结果，并给出学术界如何验证与在之上构建的机制。这是继早前「Sol Ultra 数学证明」之后，官方再次把前沿模型摆进开放科研的位置。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、GPT-6.1 Terra：OpenAI 的「成本-智能」低价档，且同日打通 GitHub Copilot 分发</h3>
+<div class="card">
+  <div class="source"><span class="tag">前沿模型 / 定价策略 / AI 编程代理</span><strong>OpenAI（官方）</strong> · 2026-10-26 · <a href="https://openai.com/index/introducing-gpt-6-1-terra">Introducing GPT-6.1 Terra</a> / <a href="https://developers.openai.com/api/docs/models/gpt-6.1-terra">API 模型页</a> / <a href="https://deploymentsafety.openai.com/gpt-6-1-terra">系统卡补充页</a> / <a href="https://github.blog/changelog/2026-10-26-gpt-6-1-terra-in-github-copilot">GitHub Changelog：GPT-6.1 Terra in GitHub Copilot</a></div>
+  <div class="summary"><p>GPT-6.1 Terra 是 OpenAI 在 10-26 发布的新一代「快速、高效」档模型，主打三类能力：<strong>视觉推理、精确的计算机使用（computer use）、清晰自然的写作</strong>。关键数字：标准 API 定价 <strong>$5/1M 输入、$0.50/1M 缓存输入、$25/1M 输出</strong>——比 GPT-5.6 Terra 的标准化定价整体低约 50%；OpenAI 官方口径是「代理速度约 3 倍」。基准上最突出的是 <strong>Terminal-Bench 4.0 拿到 50.3%（最大推理档）</strong>，而上一代 GPT-5.6 Terra 仅 21.5%，即翻倍还多，说明这一档在「终端操作 + C# 类工程任务」上补课明显。</p><p>系统卡补充页给出两个值得注意的细节：一是 GPT-6.1 Terra <strong>沿用 GPT-6 Astra 的训练数据与训练方式</strong>（即同一前沿基座家族派生出的低成本档，而非独立训练的小模型）；二是安全侧 <strong>ExploitBench 的 ACE 归一化均分为 97.10%</strong>——延续了近期「前沿模型即便低成本档也保有可观攻击性代码能力」这条被反复验证的观察。</p><p>分发的关键在于「同日进入 GitHub Copilot」：Changelog 明确 GPT-6.1 Terra 已 GA，定位「日常 agentic 编码 + 终端工作」，<strong>比 GPT-6.1 Sol 更便宜</strong>，早期测试中比 GPT-5.6 Terra 多解出不少终端与 C# 任务，「在收敛、合并步骤下处理边界清晰的任务」。计费走 usage-based 的 provider 目录价。</p><p>战略含义要放在整个模型家族里看：OpenAI 现在给出一条非常清晰的三层阶梯——<strong>Terra = 快/便宜/日常 agentic + 计算机使用；Sol = 复杂编码/深度研究；Astra = 前沿全能</strong>。官方在发布口径里反复说「复杂编码和深度研究请选 Sol 或 Astra」，这既是防误用的引导，也是一种「按工作量分级定价」的市场分层，与上一窗口 Kimi K3.1 Pro「$2/$10 激进定价」以及「2.8T MoE 部署成本 vs 定价」的争论形成对照。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①这是 Follow List 上 Kevin Weil / Josh Woodward / Sam Altman 等 OpenAI 高优先人物的主场信号，且是「成本-智能前沿」（cost-intelligence frontier）这一 OpenAI 反复强调叙事的最新落地。②「同日进 Copilot」把模型发布和开发者分发直接打通，验证了上一窗口「Copilot 正在被重定位为『超越 IDE 的模型供应商』」的判断——现在 Copilot 就是 Terra 的第一个规模化分发渠道。③50% 降价 + Terminal-Bench 翻倍，是「推理成本下探 → 更便宜档也能做 agentic 终端工作」这条趋势的量化样本，对「AI 编程代理的单位经济」讨论有直接参考价值。</p></div>
+  <div class="action">后续行动：跟踪 GPT-6.1 Terra 在 Copilot 的实际计费与用户迁移情况，以及它是否挤压 GPT-6.1 Sol 的中低价位；把「Terra/Sol/Astra 三层定价」与 Kimi K3.1 Pro、Claude Opus 5.5 的定价并案，做一张「前沿模型分层定价」对照表；关注 ExploitBench 97.10% 是否被安全圈引用，作为「低成本档网络能力不降反稳」的又一实证点。</div>
+</div>
+
+<h3>二、Anthropic 递交 S-1：IPO 从传闻变成可查证流程</h3>
+<div class="card">
+  <div class="source"><span class="tag">公司战略 / 资本市场</span><strong>Anthropic（官方 /news 页面）</strong> · 2026-10-26 · <a href="https://www.anthropic.com/news">Anthropic Newsroom</a>（条目：Anthropic files S-1 with the SEC for proposed initial public offering）</div>
+  <div class="summary"><p>Anthropic 于 10-26 在官方 Newsroom 挂出「<strong>Anthropic files S-1 with the SEC for proposed initial public offering</strong>」（向 SEC 递交 S-1，拟进行首次公开募股）。这是继 10-15 Simon Willison 转引的「Anthropic 向投资人披露季度营收近 50% 增长、达 $16.8B，为 IPO 做准备」之后，第一次出现<strong>官方可查证的动作</strong>——从「媒体转述上市准备」升级为「S-1 注册声明进入 SEC 流程」。</p><p>需要克制的一点：S-1 的提交只是 IPO 流程的早期节点，不等于定价、路演或上市日期已定；且本窗口内 OpenClaw 无法稳定读取 Anthropic 该文章正文（/news RSS 仍 404，/news 页面可见条目标题与日期但正文为 JS 渲染），所以上面只取「已递交 S-1」这一可核验事实，不展开营收、股权、承销行等未经确认的细节。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>Anthropic 是 Follow List 里 Sam Altman 之外的「前沿实验室」核心观察对象，Alex Albert（Anthropic，高优先）与 Dario 相关信号长期在列。IPO 落地会把「AI 公司如何估值、如何向公开市场交代营收/毛利/安全投入」变成持续的公开数据源，也会反向影响「开源 vs 闭源」「安全 vs 商业化」的话语权重。对跟踪 AI 产业链与二级市场的人，这是一个新的、高价值的观测节点。</p></div>
+  <div class="action">后续行动：在 SEC EDGAR 检索 Anthropic 的 S-1 原文（一旦公开可下载），提取营收结构、毛利、R&D/安全投入、客户集中度等关键指标；与 OpenAI 的融资/估值、以及「Anthropic Public Benefit Fund」的公司治理结构并案，观察 IPO 对「公益约束 vs 股东回报」叙事的影响。</div>
+</div>
+
+<h3>三、前沿模型开始碰开放数学/物理：Kakeya 猜想、ETH、量子色动力学</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI for Science / 前沿研究</span><strong>OpenAI（官方）</strong> · 2026-10-26 · <a href="https://openai.com/index/building-scientific-understanding-with-academic-communities">Working with academic communities to build scientific understanding</a></div>
+  <div class="summary"><p>OpenAI 发布「与学术界共建科学理解」，披露模型在三个开放问题上的结果：<strong>Kakeya 猜想（调和分析经典问题）、指数时间假设（ETH，计算复杂度核心猜想）、以及量子色动力学（QCD）</strong>，并说明学术界可以如何验证、以及如何在模型输出之上继续构建。RSS 摘要措辞克制：「OpenAI 分享模型在 Kakeya 猜想、指数时间假设与量子色动力学上的结果——以及研究者如何验证并在其上构建」。</p><p>这延续了更早窗口的一条暗线：从「Sol Ultra 64-subagent 数学证明信号」到现在的官方成体系发布，OpenAI 正把「前沿模型产出可被学术界验证的数学/物理进展」制度化为一种发布品类。与 DeepMind 侧的 AlphaProof/AlphaGenome 等「AI for Science」叙事形成对照：OpenAI 这里更强调「把结果交回学术共同体、并给出验证与复用机制」，而非单点夺旗。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>「模型能否在开放、可验证的硬问题上产出增量」是判断「推理能力是否真前沿」的少数干净试金石，比易被污染的私有基准可信得多。Kakeya 猜想与 ETH 都是业界公认的硬骨头，QCD 更是物理高能领域的核心。若这些结果能经得起同行复核，它对「AI 用于科研」的估值与叙事是实质利好；同时这也是 Follow List 里 Noam Brown（OpenAI 推理研究）、Demis Hassabis（DeepMind 科学/AI）两条高优先线的交叉点。</p></div>
+  <div class="action">后续行动：等学术共同体对 Kakeya/ETH/QCD 结果的第三方复核与论文链接；把「OpenAI 学术发布」与「DeepMind AlphaProof/AlphaGenome」并案，跟踪「AI for Science」的发布节奏与可信度；若结果被同行引用，记为「前沿模型具备真实科研增量」的强证据。</div>
+</div>
+
+<h3>四、AI for 网络安全主线延续：CodeRabbit、Greptile 两条案例 + ExploitBench 97.10%</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI 安全 / 代码安全 / 案例</span><strong>OpenAI（官方）</strong> · 2026-10-26 · <a href="https://openai.com/index/gpt-6-1-sol-coderabbit-code-security">GPT-6.1 Sol helps CodeRabbit strengthen security across complex codebases</a> / <a href="https://openai.com/index/greptile-code-review-codex-astra">Greptile takes bug detection beyond code review with GPT-6 Astra</a></div>
+  <div class="summary"><p>两条官方案例，共同落在「用前沿模型做代码/基础设施安全」这条已经连续多窗口出现的主线（此前有 PHP2Shell、Patch the Planet、Cloudflare、SentinelOne/Block 等）。</p><p>①<strong>CodeRabbit</strong>：用 <strong>GPT-6.1 Sol</strong> 在复杂代码库中调查安全风险，其「安全 agent」帮助开发者复核发现的问题与建议的修复——把「漏洞发现」往下游推到「修复建议的复核」。</p><p>②<strong>Greptile</strong>：用 <strong>GPT-6 Astra</strong> 把「bug 检测」延伸到 code review 之外——「测试用户工作流、用 Daybreak 强化安全、用 Codex 减少返工」。注意这里 Daybreak（OpenAI 的网络防御/红队线）与 Codex（编码 agent）被组合进同一客户工作流，是「模型矩阵协同」的样本。</p><p>叠加第一条 GPT-6.1 Terra 系统卡补充页的 <strong>ExploitBench ACE 归一化 97.10%</strong>，这条主线在本窗口的图景是：<strong>低成本档仍保有可观的攻击性代码能力，而同一批能力正在被官方打包成「安全 agent / 漏洞检测 / 修复复核」卖给防御方</strong>——「红队能力」与「防御产品」用的是同一套模型能力。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>这是「AI 双重用途」最清晰的商业呈现：攻击面（ExploitBench 97.10%）与防御面（CodeRabbit/Greptile）由同一模型家族同时供给。它直接回应上一窗口 Interconnects 抛出的「开放权重 + 网络安全是不是判断错了」——闭源前沿实验室正在把「网络能力」做成可采购的防御产品线，而开放权重侧则面临「消融模型商品化」。对跟踪「AI + 网络安全」生态的人，这是判断「能力扩散速度」和「防御商业化」两端的关键样本。</p></div>
+  <div class="action">后续行动：把 CodeRabbit/Greptile 纳入「AI 安全 agent 商业化」案例库，与 Cloudflare、SentinelOne、Block 并案；持续跟踪 ExploitBench / Cyber 类公开榜上「低成本档」的能力曲线，作为「模型成本下探是否同步带来攻击门槛下探」的量化指标。</div>
+</div>
+
+<h3>五、ChatGPT 的「工作世界」扩张：OpenAI Signals 165 项工作活动、近 100 国</h3>
+<div class="card">
+  <div class="source"><span class="tag">AI 采用 / 劳动力市场</span><strong>OpenAI（官方）</strong> · 2026-10-26 · <a href="https://openai.com/index/chatgpt-expanding-world-of-work">ChatGPT's expanding world of work</a></div>
+  <div class="summary"><p>OpenAI 发布「ChatGPT 的扩张中的工作世界」，基于 <strong>OpenAI Signals 数据：覆盖近 100 个国家的 165 项工作活动</strong>，展示人们如何用 ChatGPT 处理工作、以及这些用途如何随时间变化。这是继「ChatGPT Work 向 Uber 3 万员工铺开」等案例之后，一次偏宏观的采用数据披露，把「AI 如何进入具体工作活动」量化到 165 项活动的粒度。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>它承接了上一窗口 Anthropic「How employment is changing at Anthropic」这条「AI 与就业结构」主线，但把视角从「一家实验室的内部就业」拉到「近 100 国的采用分布」。对跟踪「AI 采用率 / 工作替代与增强」的人，165 项工作活动的明细是可做纵向对比的公开数据点（未来可观察哪些活动被 agent 化、哪些被保留）。</p></div>
+  <div class="action">后续行动：待该页可稳定抓取后，提取 165 项工作活动的分类与国别分布，与 Anthropic 就业文、以及「ambient agents / 定时调度」的 LangChain 框架交叉，判断哪些工作活动正在从「人主动调用」转向「agent 自动执行」。</div>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li><strong>OpenAI</strong>：单日密集发布（GPT-6.1 Terra + 学术科学理解 + CodeRabbit/Greptile 安全案例 + 工作世界数据），呈现「模型发布 + 科学叙事 + 安全商业化 + 采用数据」四线并进的节奏；Terra/Sol/Astra 三层定价策略正式成形。</li>
+    <li><strong>Anthropic</strong>：递交 S-1，IPO 从传闻进入可查证的 SEC 流程节点；公司治理叙事（Public Benefit Fund + 上市）进入新阶段。</li>
+    <li><strong>GitHub / Copilot</strong>：GPT-6.1 Terra 同日 GA 进入 Copilot，继续坐实「Copilot = 超越 IDE 的模型分发与治理层」的定位（与上一窗口 usage metrics API 的 model_selection_mode 治理呼应）。</li>
+    <li><strong>Simon Willison</strong>（高优先）：转引 404 Media 的 Jason Koebler，点出「ChatGPT 把普通技术支持问题导向 404 Media」这一误用现象，延续其「AI 伦理/误用」跟踪线。</li>
+  </ul></div>
+</div>
+
+<h2>值得跟进的项目</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li><strong>Anthropic S-1 原文</strong>：EDGAR 一旦可下载，提取营收结构、毛利、R&D/安全投入、客户集中度，作为 AI 产业链与二级市场的核心观测点。</li>
+    <li><strong>GPT-6.1 Terra 在 Copilot 的实际迁移与计费</strong>：低价档是否实质分流 Sol，单位经济如何变化。</li>
+    <li><strong>「AI for Science」可信度</strong>：Kakeya/ETH/QCD 结果是否被学术同行复核与引用。</li>
+    <li><strong>低成本档的网络安全能力曲线</strong>：ExploitBench 97.10% 及后续公开榜，是否「降价同时攻击门槛下探」。</li>
+  </ul></div>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li>Anthropic S-1 的具体财务与治理细节（营收、毛利、公益约束条款）本窗口未能核验正文，仅确认「已递交 S-1」这一动作，其余需等 EDGAR 公开原文。</li>
+    <li>GPT-6.1 Terra「3 倍代理速度」「50% 降价」为 OpenAI 官方口径，终端用户侧的实际延迟/成本体验需第三方测评佐证；API changelog 中「Billing begins on October 5」一处日期表述需澄清（疑似笔误，模型发布于 10-26）。</li>
+    <li>Kakeya/ETH/QCD 的具体结果强度与可复现性，仅有官方发布口径，尚未见同行复核或论文。</li>
+    <li>ExploitBench 97.10% 的解读口径（ACE 归一化均分）需对照该榜方法论，避免断章取义。</li>
+  </ul></div>
+</div>
+
+<h2>低优先级 / 噪音</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li>Google「AI Quest: Mapping the human brain（Polar Peaks）」——AI 素养教育类条目，与 AI 主线弱相关。</li>
+    <li>Google「Southeast Asia digital economy $368B」——e-Conomy SEA 报告，本窗口为再发布/更新日期，上一窗口已覆盖，不重复采信。</li>
+    <li>Simon Willison「Seam Cutter」——个人小工具（seam carving），无信号价值。</li>
+    <li>OpenAI「Fanatics 粉丝体验」「Ultrafast 事件调查」——客户案例，营销性质强，仅作背景。</li>
+  </ul></div>
+</div>
+
+<h2>原始链接</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li>Introducing GPT-6.1 Terra：<a href="https://openai.com/index/introducing-gpt-6-1-terra">https://openai.com/index/introducing-gpt-6-1-terra</a></li>
+    <li>GPT-6.1 Terra API 模型页：<a href="https://developers.openai.com/api/docs/models/gpt-6.1-terra">https://developers.openai.com/api/docs/models/gpt-6.1-terra</a></li>
+    <li>GPT-6.1 Terra 系统卡补充页：<a href="https://deploymentsafety.openai.com/gpt-6-1-terra">https://deploymentsafety.openai.com/gpt-6-1-terra</a></li>
+    <li>GitHub Changelog：GPT-6.1 Terra in GitHub Copilot：<a href="https://github.blog/changelog/2026-10-26-gpt-6-1-terra-in-github-copilot">https://github.blog/changelog/2026-10-26-gpt-6-1-terra-in-github-copilot</a></li>
+    <li>Anthropic Newsroom（S-1 条目）：<a href="https://www.anthropic.com/news">https://www.anthropic.com/news</a></li>
+    <li>Working with academic communities to build scientific understanding：<a href="https://openai.com/index/building-scientific-understanding-with-academic-communities">https://openai.com/index/building-scientific-understanding-with-academic-communities</a></li>
+    <li>GPT-6.1 Sol helps CodeRabbit strengthen security：<a href="https://openai.com/index/gpt-6-1-sol-coderabbit-code-security">https://openai.com/index/gpt-6-1-sol-coderabbit-code-security</a></li>
+    <li>Greptile takes bug detection beyond code review with GPT-6 Astra：<a href="https://openai.com/index/greptile-code-review-codex-astra">https://openai.com/index/greptile-code-review-codex-astra</a></li>
+    <li>ChatGPT's expanding world of work：<a href="https://openai.com/index/chatgpt-expanding-world-of-work">https://openai.com/index/chatgpt-expanding-world-of-work</a></li>
+    <li>Simon Willison：Quoting Jason Koebler：<a href="https://simonwillison.net/2026/Oct/26/jason-koebler/">https://simonwillison.net/2026/Oct/26/jason-koebler/</a></li>
+    <li>404 Media 原文：ChatGPT Keeps Telling People 404 Media Can Solve Their Tech Support Problems：<a href="https://www.404media.co/chatgpt-keeps-telling-people-404-media-can-solve-their-tech-support-problems/">https://www.404media.co/chatgpt-keeps-telling-people-404-media-can-solve-their-tech-support-problems/</a></li>
+  </ul></div>
+</div>
