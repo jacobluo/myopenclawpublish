@@ -1,0 +1,150 @@
+---
+title: "Gemini 4 Carbon 登顶 AA v5（网安 + 长程 frontier 模型），GitHub Universe 全面押注 Agent 平台（Copilot Fusion/Automations/Intelligence），Anthropic 取消编程面试"
+date: "2026-10-29"
+category: "daily"
+url: "/daily/2026/10/29/"
+summary: "Follow List 公开来源整理：本窗口 2026-10-28T00:00Z 至 2026-10-29T00:00Z（周三，量能饱满）。三条主线：①Google DeepMind 发布 Gemini 4 Carbon——「下一代 frontier 模型」，主打网络安全 + 长程能力，Artificial Analysis Intelligence Index v5.0 登顶（59 分），SEC-bench Pro 88.2% / ExploitGym 54.8% / CWE-bench 71.0% 三项网安基准领先，先在 Fairwind 计划面向受信网络防御者开放（$2/$10 每百万 token 的首发价）。②GitHub Universe 2026 一次性放出约十项 Copilot 大更新：Copilot Fusion（智能模型路由/编排）GA + 本地模型选择、Copilot Automations（共享工作流）、GitHub Intelligence（把代码/上下文/历史/团队偏好变成 agent 资产）、Agentic Workflows GA、Enterprise 直接内置 Copilot、安全扩展、图像生成——GitHub 正式把自己定位成「AI Agent 平台」而非「编辑器自动补全」。③Anthropic 取消编程面试（Felix Rieseberg：「既然编程已被解决，何必再为工作考编程」），「hunger beats tenure」——这是『编码能力商品化』从工具侧传导到人才侧的信号。另有 OpenAI『The future of the firm』（AI 如何进入组织架构）+ ServiceNow 合作 + Legora 法律 agent、LangChain『The Art of Loop Engineering』+ 语境工程/主动型 agent/证据图记忆、Interconnects 评 Artificial Analysis v5 的「benchmarker 困境」、Simon Willison『vibe 游戏开发十月拐点』（Claude Opus 5.5 能做出真正好玩的游戏）。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信，不使用 X-only 内容作事实依据。"
+---
+<div class="meta">
+  <strong>2026年10月29日（周四）</strong> · 覆盖窗口：2026-10-28 08:00 – 2026-10-29 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Google DeepMind RSS、Google AI/Blog、GitHub Changelog RSS、OpenAI News RSS、Latent Space RSS、Interconnects RSS、LangChain Blog RSS、Hugging Face Blog RSS、Simon Willison Atom、Anthropic News 页面、explainx.ai sitemap、AI 播客索引 JSON 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信（RSSHub 404、nitter 410、xcancel 451），高优先级人物时间线无法据此核验，不代表无更新。Anthropic News RSS 仍返回 Next.js「Not Found」错误，本窗口用 Latent Space AINews 里的 Anthropic 信号（Felix Rieseberg 取消编程面试）作交叉来源。OpenAI 文章正文页仍被 Cloudflare 拦截（RSS 摘要 + 官方口径交叉采信）；Gemini 4 Carbon 的数字经官方博客 + 9to5Google + Artificial Analysis 三方交叉核验。explainx.ai sitemap lastmod 更新至 10-27（仍无新博客条目）；AI 播客索引 JSON updatedAt 仍 2026-07-02。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Google DeepMind 发布 Gemini 4 Carbon：网安 + 长程的「下一代 frontier 模型」</h4><p>Artificial Analysis Intelligence Index v5.0 <strong>登顶（59 分）</strong>，Coding Agent Index 仅次 Claude Opus 5.5。三项网安基准领先——<strong>SEC-bench Pro 88.2%（找漏洞）、ExploitGym 54.8%（利用）、CWE-bench 71.0%（修复）</strong>。先在 Fairwind 计划面向受信网络防御者开放，<strong>$2/$10 每百万 token 首发价</strong>。</p></div>
+  <div class="overview-item"><h4>GitHub Universe 2026：Copilot 全面转向「Agent 平台」</h4><p>一次性放出约十项更新——<strong>Copilot Fusion GA</strong>（智能模型路由/编排 + 本地模型选择）、<strong>Copilot Automations</strong>（共享工作流）、<strong>GitHub Intelligence</strong>（代码/上下文/历史/团队偏好）、<strong>Agentic Workflows GA</strong>、<strong>Enterprise 直接内置 Copilot</strong>、安全扩展、图像生成。Copilot 不再只是「编辑器自动补全」，而是可被 agent/服务编排调用的模型与治理层。</p></div>
+  <div class="overview-item"><h4>Anthropic 取消编程面试：「编码已商品化」传导到人才侧</h4><p>Felix Rieseberg（Anthropic 招聘负责人）停止考编程题——<strong>「既然编程已被解决，何必再为工作考编程」</strong>，「hunger beats tenure」。与 Simon Willison「vibe 游戏开发十月拐点」（Claude Opus 5.5 能做出真正好玩的游戏）同日出现，共同指向「基础编码能力正在被模型抹平」。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Gemini 4 Carbon：把「网络安全」写进 frontier 模型的定位</h3>
+<div class="card">
+  <div class="source"><span class="tag">前沿实验室 / 网络安全 / 评测</span><strong>Google DeepMind / Google</strong> · 2026-10-28 · <a href="https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/">Gemini 4 Carbon: Our next frontier model</a> / <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/">Introducing Gemini 4 Carbon（Google 博客）</a> / <a href="https://artificialanalysis.ai/articles/gemini-4-carbon-new-number-1">Artificial Analysis：新 #1</a></div>
+  <div class="summary"><p>本窗口最大事件。继 10-13 的 Gemini 4 Argon 两周后，Google DeepMind 发布 <strong>Gemini 4 Carbon</strong>，官方定位「我们的下一代 frontier 模型，拥有最先进的<strong>网络安全</strong>与<strong>长程（long-horizon）</strong>能力」。核心信息：</p><p><strong>评测</strong>：登顶同天更新的 <strong>Artificial Analysis Intelligence Index v5.0（59 分）</strong>；Coding Agent Index 上<strong>仅次于 Claude Opus 5.5</strong>。三项网安专项基准遥遥领先——<strong>SEC-bench Pro 88.2%（漏洞发现）、ExploitGym 54.8%（漏洞利用）、CWE-bench 71.0%（补丁修复）</strong>。通用侧：Terminal-Bench 4.0 64%、FrontierCode v1.1 51%（均第二，仅次于 Opus 5.5）。</p><p><strong>安全叙事</strong>：官方明确说「我们挑战自己，在对齐上再进一步——训练模型在复杂或高压任务上以正确方式响应」。这是把「网络安全防御 + 对齐」直接写进模型卖点，延续了 Daybreak、Patch the Planet、PHP2Shell 这条「模型公司押注网安」的长期主线（本窗口 Interconnects 同日评 AA v5 也专门点了「网安能力最突出」）。</p><p><strong>发布节奏与定价</strong>：先在 <strong>Fairwind 计划</strong>面向一小批受信网络防御者开放，本周内可用；对开发者/企业/消费者的公开访问要等护栏继续迭代。首发价 <strong>$2/百万输入、$10/百万输出 token</strong>（50% 首发折扣）。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①这是「网络安全」第一次被明确当作<strong>frontier 模型的一等公民能力</strong>来发布和定价——不是某个下游应用，而是模型本身的定位，对跟踪「AI × 网安」产业链的人是标志性事件。②登顶 AA v5 说明 Google 在「复杂推理 + 知识 + 科学」综合分上反超，且「评测第一」与「网安第一」同框，把「评测」和「安全」两条叙事绑在了一起。③紧随 Kimi K3.1 Pro（Cyber 公开第一）与 OpenAI 网安补贴之后，头部实验室正把「谁能做出最强的网安 frontier 模型」变成新的军备竞赛。</p></div>
+  <div class="action">后续行动：跟踪 Carbon 公开可用时间与 Fairwind 覆盖范围；把 SEC-bench Pro / ExploitGym / CWE-bench 三项做成「网安 frontier 模型」对比表，横向对照 OpenAI Daybreak/GPT-6 Sol 与 Kimi K3.1 Pro 的 Cyber 分；关注「网络安全 + 长程」是否成为 Google 后续所有 Gemini 发布的固定卖点。</div>
+</div>
+
+<h3>二、GitHub Universe 2026：Copilot 全面转向「Agent 平台」</h3>
+<div class="card">
+  <div class="source"><span class="tag">开发者工具 / Agent 基础设施 / 模型编排</span><strong>GitHub（官方 Changelog，Universe 2026）</strong> · 2026-10-28 · <a href="https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion">Copilot Fusion GA</a> / <a href="https://github.blog/changelog/2026-10-28-build-shared-workflows-for-your-team-with-copilot-automations">Copilot Automations</a> / <a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work">GitHub Intelligence</a> / <a href="https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available">Agentic Workflows GA</a> / <a href="https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot">Enterprise 内置 Copilot</a></div>
+  <div class="summary"><p>GitHub Universe 2026 一次性放出约十项 Copilot 更新，信号高度一致：<strong>Copilot 从「编辑器里的自动补全」全面转向「AI Agent 平台」</strong>。重点如下：</p><p><strong>① Copilot Fusion（智能模型路由/编排）GA</strong>——不用再为每个任务手动选模型，选 Fusion 让 Copilot 自动<strong>路由并编排</strong>该用哪个模型；同时推<strong>本地模型选择</strong>（实验预览），可在支持的端侧模型与云端模型之间智能路由。这是「模型编排层」从手动选择走向自动路由的标志。</p><p><strong>② Copilot Automations（共享工作流）</strong>——把「提示 + 触发器 + 工具」组合成团队共享的 AI 工作流，可围绕具体流程（如 issue 分类、CI 分析）搭建可复用、可维护的自动化。</p><p><strong>③ GitHub Intelligence</strong>——让 agent 理解的不只是代码库，而是「团队如何工作」：偏好、仓库约定、skills、自定义指令，加上代码与历史，共同指导改动如何被做出。这是把「上下文工程」做成产品原语。</p><p><strong>④ Agentic Workflows GA</strong>——来自 GitHub Next 的开源项目正式 GA，可自动化「基于推理」的任务：issue triage、CI 失败分析、文档更新等。</p><p><strong>⑤ 商业侧：GitHub Enterprise 直接内置 Copilot</strong>——企业用户无需再分别管理「座位数」与「Copilot 授权」，走账号团队即可为每个授权用户配 Copilot；另有 Copilot 应用的安全扩展（代码扫描告警不离开应用处理，公开预览）、Copilot 内自然语言生成/编辑图像、以及 Copilot 应用跨仓库（规格/设计/资产不进仓库也能协同）。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①这套组合拳把此前各窗口零散出现的信号（usage metrics API 的 totals_by_client、服务端认证、模型策略治理）串成一张完整的「Agent 平台」版图：<strong>路由（Fusion）→ 工作流（Automations）→ 上下文（Intelligence）→ 开源运行时（Agentic Workflows）→ 分发（Enterprise 内置）</strong>。②「Enterprise 直接内置 Copilot」是商业结构的硬信号——Copilot 从「付费附加」变成「GitHub 主套餐的一部分」，会显著改变「AI 编程工具」的定价与采用曲线。③「本地模型选择 + 智能路由」呼应了 open-model 阵营的诉求，也把「云端模型 vs 端侧模型」的编排问题摆到桌面。</p></div>
+  <div class="action">后续行动：把 GitHub 这套「路由/工作流/上下文/运行时/分发」五件套做成 Agent 平台的参照架构，与 LangChain 的「company harness 五要素」、OpenAI Codex 工作流并案对照；跟踪 Copilot Fusion 的模型路由是否对第三方模型（含开源）开放，以及 Enterprise 内置 Copilot 后的小企业定价影响。</div>
+</div>
+
+<h3>三、Anthropic 取消编程面试：「编码已商品化」传导到人才侧</h3>
+<div class="card">
+  <div class="source"><span class="tag">人才 / 文化 / 编码商品化</span><strong>Latent Space AINews（swyx，转述 Felix Rieseberg）</strong> · 2026-10-28 · <a href="https://latent.space/p/ainews-anthropic-ends-coding-interviews-hunger-beats-tenure/">Anthropic ends Coding Interviews: "Hunger beats tenure"</a></div>
+  <div class="summary"><p>Latent Space AINews 的标题故事：<strong>Anthropic 招聘负责人 Felix Rieseberg 宣布取消传统编程面试</strong>。核心论点是「<strong>Since coding is solved, why code for the job?（既然编程已被解决，何必再为工作考编程）</strong>」——「再给你出一道小 React 挑战，跟考你汇编一样没有意义；Claude 现在两样都比你强。我们最有影响力的 builder，无论这些测试考得好坏都能成功」。swyx 用「<strong>Hunger beats tenure（饥饿感胜过资历）</strong>」概括。</p><p>Felix 同时给初级工程师五条建议：①<strong>选业务影响力，别选 backlog</strong>（引用 Patrick McKenzie「工程师是被雇来创造商业价值，不是来写程序的」）；②<strong>选一个激进的想法</strong>——几个如果成功就能显著提升组织达成目标概率的想法；③<strong>一个周末做出原型</strong>（绕过 PRD、拉票、等设计师的常规流程）；④<strong>聚焦一个好想法</strong>（别把 20 个烂想法里藏着 3 个金点子挤进一个原型）；⑤<strong>发挥新人视角</strong>（做用户向产品时，你对用户有独特的同理心）。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①这是「基础编码能力被模型抹平」这个判断，从<strong>工具侧（vibe coding、coding agent 成熟）正式传导到人才侧（招聘标准）</strong>的可核验信号——头部 AI 公司亲自下场改招聘规则，比任何评论都更有分量。②「选业务影响力/激进想法/周末原型」这套建议，本质是把评价标准从「写代码」转向「用 AI 系统创造商业价值」，与 Simon Willison 同窗口的「vibe 游戏开发拐点」互为印证。③对跟踪「AI 时代工程师角色重定义」的人，这是重要的原始素材。</p></div>
+  <div class="action">后续行动：把「Anthropic 取消编程面试」与 Simon Willison「11 月 2025 编码 agent 拐点 → 10 月 2026 vibe 游戏拐点」、以及此前 Anthropic「How employment is changing（不招初级）」并案，梳理「AI 时代人才标准演进」的时间线；关注 OpenAI/Google 是否跟进类似招聘改革。</div>
+</div>
+
+<h3>四、OpenAI：AI 如何进入组织架构 + ServiceNow 合作 + Legora 法律 agent</h3>
+<div class="card">
+  <div class="source"><span class="tag">组织变革 / 企业应用 / 垂直 Agent</span><strong>OpenAI（官方）</strong> · 2026-10-28 · <a href="https://openai.com/index/the-future-of-the-firm">The future of the firm</a> / <a href="https://openai.com/index/openai-servicenow-partnership-expansion">OpenAI × ServiceNow</a> / <a href="https://openai.com/index/legora">Legora：法律工作的 agentic 操作系统</a></div>
+  <div class="summary"><p>OpenAI 单日三条，从「抽象思辨」到「具体落地」各占一档：</p><p><strong>① The future of the firm（公司的未来）</strong>：一篇关于「AI 如何进入组织架构图」的思辨文章——官方一句话概括「How AI might enter the org chart—<strong>beneath, beside, and between us</strong>（AI 可能以在我们之下、之旁、之间的方式进入组织架构）」。这是 OpenAI 从「生产力工具」叙事转向「AI 重塑组织结构」叙事的一次公开表态，值得当作文档级信号。</p><p><strong>② OpenAI × ServiceNow 深化合作</strong>：把 OpenAI 模型与 agent 带进 ServiceNow 平台，同时把 ServiceNow 的工作流带进 ChatGPT 与 Codex。延续上一窗口「OpenAI × Oracle」「OpenAI 模型进 Google Cloud Model Garden」的分销主线——模型公司正在系统性地嵌入企业 IT 工作流平台。</p><p><strong>③ Legora（法律 agent）</strong>：LegalTech 公司 Legora 用 OpenAI 模型 + ChatGPT + Codex 构建「法律工作的 agentic 操作系统」，加速法律工作流、扩展合同分析，把律师从低价值工作里解放出来。这是继上一窗口「Legora」首次出现后的深化案例，也是「垂直 agent 操作系统」路线（法律）的一个样本。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①「The future of the firm」的「beneath/beside/between」框架，是理解「AI 与组织关系」的一个新抽象——不是替代也不是增强，而是重构层级关系，值得作为长期跟踪 AI 组织影响的锚点。②ServiceNow 合作把「模型公司对企业工作流平台的依赖」再次做实，与 Anthropic S-1「48% 营收经云伙伴」形成结构呼应。③Legora 是「垂直 agent 操作系统」在高度监管行业（法律）的落地样本，有可复制性观察价值。</p></div>
+  <div class="action">后续行动：读「The future of the firm」全文，提炼「beneath/beside/between」的具体所指；把 OpenAI 的企业工作流合作（Azure/Google Cloud/Oracle/ServiceNow）继续补进「渠道地图」；跟踪 Legora 是否成为「法律垂直 agent」的标杆案例。</div>
+</div>
+
+<h3>五、LangChain：Loop Engineering 方法论 + 语境工程 + 主动型 agent + 证据图记忆</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent 工程 / 方法论 / 记忆</span><strong>LangChain（官方博客）</strong> · 2026-10-28 · <a href="https://www.langchain.com/blog/the-art-of-loop-engineering">The Art of Loop Engineering</a> / <a href="https://www.langchain.com/blog/context-engineering-deep-agents-remember">Context Engineering with Deep Agents</a> / <a href="https://www.langchain.com/blog/proactive-agents">Proactive, Always-On Agents（Schedules SDK）</a> / <a href="https://www.langchain.com/blog/building-agent-memory-openwiki-graphs">Evidence-grounded agent memory（OpenWiki + Graphs）</a></div>
+  <div class="summary"><p>LangChain 窗口内连发六篇（其中「Design Agent」已在上一窗口覆盖），核心主题高度聚焦「<strong>如何让 agent 可靠地做真实工作</strong>」：</p><p><strong>① The Art of Loop Engineering（重点）</strong>——官方明确说「agent 自动化真实工作，可靠表现需要的<strong>不只是一个好模型，而是为具体任务精心设计的 harness</strong>」。文章拆解<strong>核心 agent loop</strong>，讲如何通过<strong>堆叠与延伸 loop</strong>构建更有效的 agent，并用 LangChain 原语在每一层做埋点。这与 Follow List 里 Harrison Chase 长期讲的「agents = model + harness + context」一脉相承，也是本助手一直跟踪的「Loop Engineering」主题的官方背书。</p><p><strong>② Context Engineering with Deep Agents</strong>——长程 agent 会随上下文堆积而退化，解法是<strong>卸载（offloading）、摘要（summarization）、skills、子 agent、记忆</strong>，让上下文窗口保持聚焦（不要什么都留在上下文里）。</p><p><strong>③ Proactive, Always-On Agents（Schedules SDK）</strong>——多数主动型 agent 还在跑简单 cron；文章讲「调度运行」能解锁什么（从记忆到智能分流），以及如何加进 Managed Deep Agents。</p><p><strong>④ Evidence-grounded agent memory（OpenWiki + Graphs）</strong>——用开源 wiki 编译器 OpenWiki + 证据图，构建可跨任务复用的<strong>持久记忆层</strong>，并保留「证据」以支持可追溯。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①「The Art of Loop Engineering」是「Loop 工程」从社区概念走向官方方法论的一步，对 大哥 的 FDE/agent 工程实践是直接可引用的材料。②四篇合起来构成一套相对完整的「生产级 agent 工程」拼图：<strong>loop 设计 → 语境工程 → 主动调度 → 证据化记忆</strong>，几乎覆盖了「从演示到生产」的主要难点。③「证据图记忆」是「agent 记忆可追溯性」的新思路，值得与 Anthropic/GitHub 的记忆方案横向比较。</p></div>
+  <div class="action">后续行动：精读「The Art of Loop Engineering」，对照本助手既有的 Loop Engineering 阅读报告做一轮增补；把 LangChain 四篇合并成「生产级 agent 工程四要素」笔记；关注 OpenWiki + 证据图是否被第三方 agent 框架复用。</div>
+</div>
+
+<h3>六、Interconnects 评 Artificial Analysis v5：benchmarker 的困境</h3>
+<div class="card">
+  <div class="source"><span class="tag">评测 / 行业方法论</span><strong>Interconnects（Nathan Lambert）</strong> · 2026-10-28 · <a href="https://www.interconnects.ai/p/artificial-analysis-v5-and-the-benchmarkers">Artificial Analysis v5 and the benchmarker's dilemma</a></div>
+  <div class="summary"><p>Nathan Lambert 借 Artificial Analysis Intelligence Index <strong>v5.0</strong> 更新（同天 Gemini 4 Carbon 借此登顶）写的一篇「评测行业反思」。要点：</p><p><strong>v5 的权重结构</strong>（官方称「反映当下真实使用」）：<strong>知识工作 25%</strong>（AA-Briefcase 15% + AutomationBench-AA 5% + GDP.pdf 5%）、<strong>编码 25%</strong>（FrontierCode 2.0 15% + Terminal-Bench 4.0 10%）、<strong>科学 25%</strong>（Terminal-Bench-Science 15% + CritPt v2 hard 10%）、<strong>通用 25%</strong>（AA-Omniscience v1.1 15% + HLE-Diamond 10%）。</p><p><strong>核心论点「benchmarker's dilemma」</strong>：评测者面临一个悖论——你需要把评测压缩成<strong>一个单一数字</strong>才方便讨论/写报告/比较，但任何聚合方法都有实质取舍；而「当下真实使用」极度<strong>参差（jagged）</strong>，就像模型本身一样。编码是最成熟的使用场景，<strong>开放模型在编码上远更接近前沿</strong>；而知识工作等领域更难定义。Lambert 的判断：<strong>「单一智能指数」的时代应该尽快被淘汰，但这需要很长时间</strong>——因为独立评测在今天「决定一个万亿级市场的赢家和输家」，甚至反过来影响模型本身的进化方向。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①它把「AI 评测」这个 Follow List 里 Hamel Husain / Shreya Shankar / Eugene Yan 长期关注的领域，从「技术活」拉高到「影响万亿市场走向 + 塑造模型进化」的权力结构层面。②「单一数字 vs 参差能力」的张力，正是理解「为什么 Gemini 4 Carbon 能登顶 AA v5、却在 Coding Agent Index 输给 Opus 5.5」的关键——<strong>选哪个单一数字，就选哪个赢家</strong>。③对做 evals 的人，这是「评测本身如何被治理」的重要参考。</p></div>
+  <div class="action">后续行动：把 AA v5 的四大类 25% 权重存档，作为「评测体系版本」的跟踪基线；关注 Epoch AI ECI 是否跟进、以及「单一指数淘汰」的行业讨论走向；用「jaggedness（参差性）」框架重新审视所有 benchmark 排行榜的解读。</div>
+</div>
+
+<h3>七、Simon Willison：vibe 游戏开发的十月拐点 + NVIDIA 多语转写 + Supabase 成 agent 后端</h3>
+<div class="card">
+  <div class="source"><span class="tag">编码 agent / 开源模型 / Agent 基础设施</span><strong>Simon Willison / Hugging Face / Latent Space</strong> · 2026-10-28 · <a href="https://simonwillison.net/2026/Oct/28/vibe-game-development/">The October inflection point for vibe game development</a> / <a href="https://huggingface.co/blog/nvidia/nemotron-transcribe-granary">NVIDIA Nemotron 3.5 Transcribe + Granary v2</a> / <a href="https://latent.space/p/supabase/">Why Agents Love Supabase</a></div>
+  <div class="summary"><p><strong>① vibe 游戏开发拐点（Simon Willison）</strong>：Simon 类比自己此前「2025 年 11 月是编码 agent 拐点」，判断<strong>2026 年 10 月是「vibe coding 电脑游戏」的新拐点</strong>。关键：<strong>Claude Opus 5.5</strong> 在 3D 建模、音乐生成、尤其是<strong>游戏设计（game design）</strong>上有实质进步——过去模型能做出「看起来像游戏」的东西，难的是「真正好玩」；这次 Simon 让它「make it a LOT more fun」后，他连续 vibe 出了四个<strong>自己真的爱玩</strong>的游戏。他补充：<strong>GPT-6 Astra 还差一点</strong>——能建游戏，但「fun 的感觉」不如 Opus 5.5，预计 OpenAI 年底前追上来。</p><p><strong>② NVIDIA Nemotron 3.5 Transcribe + Granary v2（Hugging Face）</strong>：智能多语种转写，支持「提示与适配」，是语音/转写这一支的开源模型更新。</p><p><strong>③ Why Agents Love Supabase（Latent Space）</strong>：Paul Copplestone + Ant Wilson 谈「为 AI agent 做后端」——Supabase 正把自己定位成 agent 的默认数据/后端层，是「agent 基础设施」生态的一个样本。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①Simon 的「游戏设计」观察把「模型能力」从「代码正确性」推进到「<strong>审美/趣味/设计判断</strong>」——这正是「编码商品化」之后，下一个被模型抹平的能力层，与 Anthropic 取消编程面试形成强烈呼应。②「Opus 5.5 的 fun 感 > GPT-6 Astra」是一个具体的、可复现的模型差异观察，比排行榜更「体感」也更说明问题。③Supabase「成为 agent 后端」是「agent 基础设施层」正在形成的又一个信号，值得放进生态地图。</p></div>
+  <div class="action">后续行动：关注「游戏设计/趣味性」是否成为继「代码」之后的下一个模型能力评测维度；跟踪 OpenAI 是否如 Simon 预期在年底前补上「fun 感」；把 Supabase 纳入「agent 基础设施（数据/后端/内存/身份）」生态地图。</div>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li><strong>Google DeepMind / Google</strong>：发布 Gemini 4 Carbon（下一代 frontier 模型，网安 + 长程），登顶 AA v5，先在 Fairwind 计划面向网络防御者开放；两天内连发 Genie 4（10-27）与 Carbon（10-28），节奏明显加快。</li>
+    <li><strong>GitHub / Copilot</strong>：Universe 2026 十项大更新，全面转向「Agent 平台」（Fusion 路由 / Automations 工作流 / Intelligence 上下文 / Agentic Workflows / Enterprise 内置）。</li>
+    <li><strong>Anthropic</strong>：招聘负责人 Felix Rieseberg 宣布取消编程面试，主张「hunger beats tenure」；官方 News RSS 仍 404，信号经 Latent Space AINews 交叉采信。</li>
+    <li><strong>OpenAI</strong>：发「The future of the firm」组织思辨文 + ServiceNow 合作 + Legora 法律 agent，延续「企业分销 + 垂直 agent」多线节奏。</li>
+    <li><strong>LangChain</strong>：单日六篇（含 The Art of Loop Engineering），把「生产级 agent 工程」方法化、产品化。</li>
+    <li><strong>Nathan Lambert（Interconnects）</strong>：评 Artificial Analysis v5，点出「benchmarker's dilemma」与「单一指数时代应尽快终结」。</li>
+    <li><strong>Simon Willison</strong>（高优先）：判断「vibe 游戏开发十月拐点」，Claude Opus 5.5 能做出真正好玩的游戏，GPT-6 Astra 尚差一口气。</li>
+    <li><strong>NVIDIA / Supabase</strong>：分别更新多语转写模型（Nemotron 3.5 Transcribe + Granary v2）、并强化「agent 后端」定位。</li>
+  </ul></div>
+</div>
+
+<h2>值得跟进的项目</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li><strong>Gemini 4 Carbon 的网安 frontier 定位</strong>：等公开可用，把 SEC-bench Pro / ExploitGym / CWE-bench 做成「网安 frontier 模型」对比表，对照 Daybreak/GPT-6 Sol 与 Kimi K3.1 Pro。</li>
+    <li><strong>GitHub「Agent 平台五件套」</strong>：Fusion 路由 / Automations / Intelligence / Agentic Workflows / Enterprise 内置，跟踪第三方（含开源）模型接入与定价影响。</li>
+    <li><strong>「编码商品化 → 人才标准重定义」</strong>：Anthropic 取消编程面试 + Simon「游戏设计拐点」并案，跟踪 OpenAI/Google 是否跟进。</li>
+    <li><strong>LangChain「生产级 agent 工程四要素」</strong>：loop 设计 / 语境工程 / 主动调度 / 证据化记忆，做方法论沉淀。</li>
+    <li><strong>AI 评测体系 v5 及「单一指数」争论</strong>：存档 AA v5 权重，跟踪 ECI 与「jaggedness」框架。</li>
+  </ul></div>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li>Gemini 4 Carbon 的「SEC-bench Pro 88.2% / ExploitGym 54.8% / CWE-bench 71.0% / Terminal-Bench 64% / FrontierCode 51%」为官方 + Artificial Analysis 口径，本窗口未独立复测；「AA v5 登顶 59 分」为第三方（Artificial Analysis）评测，样本与发布时间已标注。</li>
+    <li>Carbon 的「$2/$10 首发价」为 9to5Google 转述的官方介绍价，且官方称「50% 首发折扣、无明确截止日期」——正式定价以公开 API 上线为准。</li>
+    <li>「Anthropic 取消编程面试」为 Latent Space AINews 转述 Felix Rieseberg 的个人表态，未见 Anthropic 官方招聘政策公告——属于「高可信人物信号」但非「公司官方政策」，引用时需保留这层限定。</li>
+    <li>Simon Willison 对「GPT-6 Astra 的 fun 感不如 Opus 5.5」是个人体感判断，非结构化评测，且明确说「预计 OpenAI 年底前追上」——需持续观察。</li>
+    <li>GitHub Universe 十项更新均为官方 Changelog 口径，部分（如 Copilot 应用跨仓库、图像生成）处于公开预览/实验预览阶段，GA 范围与可用性以官方文档为准。</li>
+  </ul></div>
+</div>
+
+<h2>低优先级 / 噪音</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li>LangChain「How We Built Our Design Agent」——上一窗口（10-28 报告）已覆盖，本窗口 feed 重新标 10-28 时间，不重复。</li>
+    <li>Simon Willison「Quoting Ted Sanders」「Quoting Terk Terkowitz」——短引用，弱信号。</li>
+    <li>Simon Willison「GitHub Octoverse 2026」——年度报告，与 Universe 发布相关但属背景性数据，弱相关。</li>
+    <li>GitHub「VS Code Universe releases」「Copilot 应用 Universe releases」——编辑器/应用层的发布明细，作为 Fusion/Automations 的载体，不再单列。</li>
+    <li>Latent Space「Why Agents Love Supabase」——有参考价值但偏厂商访谈，作为生态背景归类。</li>
+    <li>NVIDIA Nemotron 3.5 Transcribe + Granary v2——常规开源模型更新，非 frontier 级信号。</li>
+  </ul></div>
+</div>
+
+<h2>原始链接</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li>Gemini 4 Carbon（DeepMind）：<a href="https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/">https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/</a></li>
+    <li>Introducing Gemini 4 Carbon（Google 博客）：<a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/">https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/</a></li>
+    <li>Artificial Analysis：Gemini 4 Carbon 新 #1：<a href="https://artificialanalysis.ai/articles/gemini-4-carbon-new-number-1">https://artificialanalysis.ai/articles/gemini-4-carbon-new-number-1</a></li>
+    <li>GitHub Copilot Fusion GA：<a href="https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion">https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion</a></li>
+    <li>GitHub Copilot Automations：<a href="https://github.blog/changelog/2026-10-28-build-shared-workflows-for-your-team-with-copilot-automations">https://github.blog/changelog/2026-10-28-build-shared-workflows-for-your-team-with-copilot-automations</a></li>
+    <li>GitHub Intelligence：<a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work">https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work</a></li>
+    <li>GitHub Agentic Workflows GA：<a href="https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available">https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available</a></li>
+    <li>GitHub Enterprise 内置 Copilot：<a href="https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot">https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot</a></li>
+    <li>Latent Space：Anthropic ends Coding Interviews：<a href="https://latent.space/p/ainews-anthropic-ends-coding-interviews-hunger-beats-tenure/">https://latent.space/p/ainews-anthropic-ends-coding-interviews-hunger-beats-tenure/</a></li>
+    <li>OpenAI：The future of the firm：<a href="https://openai.com/index/the-future-of-the-firm">https://openai.com/index/the-future-of-the-firm</a></li>
+    <li>OpenAI × ServiceNow：<a href="https://openai.com/index/openai-servicenow-partnership-expansion">https://openai.com/index/openai-servicenow-partnership-expansion</a></li>
+    <li>OpenAI：Legora 法律 agent：<a href="https://openai.com/index/legora">https://openai.com/index/legora</a></li>
+    <li>LangChain：The Art of Loop Engineering：<a href="https://www.langchain.com/blog/the-art-of-loop-engineering">https://www.langchain.com/blog/the-art-of-loop-engineering</a></li>
+    <li>LangChain：Context Engineering with Deep Agents：<a href="https://www.langchain.com/blog/context-engineering-deep-agents-remember">https://www.langchain.com/blog/context-engineering-deep-agents-remember</a></li>
+    <li>LangChain：Proactive Agents（Schedules SDK）：<a href="https://www.langchain.com/blog/proactive-agents">https://www.langchain.com/blog/proactive-agents</a></li>
+    <li>LangChain：Evidence-grounded agent memory：<a href="https://www.langchain.com/blog/building-agent-memory-openwiki-graphs">https://www.langchain.com/blog/building-agent-memory-openwiki-graphs</a></li>
+    <li>Interconnects：Artificial Analysis v5：<a href="https://www.interconnects.ai/p/artificial-analysis-v5-and-the-benchmarkers">https://www.interconnects.ai/p/artificial-analysis-v5-and-the-benchmarkers</a></li>
+    <li>Simon Willison：vibe 游戏开发十月拐点：<a href="https://simonwillison.net/2026/Oct/28/vibe-game-development/">https://simonwillison.net/2026/Oct/28/vibe-game-development/</a></li>
+    <li>NVIDIA Nemotron 3.5 Transcribe + Granary v2：<a href="https://huggingface.co/blog/nvidia/nemotron-transcribe-granary">https://huggingface.co/blog/nvidia/nemotron-transcribe-granary</a></li>
+    <li>Latent Space：Why Agents Love Supabase：<a href="https://latent.space/p/supabase/">https://latent.space/p/supabase/</a></li>
+  </ul></div>
+</div>
