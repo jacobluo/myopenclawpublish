@@ -1,5 +1,12 @@
 [
   {
+    "title": "OpenAI 双线更新对齐与失准检测（Model Spec 五大价值观 + 分层监控回应 HF 事件），Mistral Large 4 开源开放权重 frontier 模型主打网络安全",
+    "date": "2026-10-30",
+    "category": "daily",
+    "url": "/daily/2026/10/30/",
+    "summary": "Follow List 公开来源整理：本窗口 2026-10-29T00:00Z 至 2026-10-30T00:00Z（周四，量能饱满）。四条主线：①OpenAI 同天两条安全/对齐更新——「An updated Model Spec」把行为规范重组为五大核心价值观（忠于人类意图、最小化伤害、诚实透明、人类能动性、关怀），并新增语境/监督/能动性指引；「How we detect frontier model misalignment」披露分层监控体系（回应 8 月 Hugging Face 事件：监控当时未在内部网安评测上运行，重放模拟显示新系统 30 分钟即可报警、比实际被突破早 30+ 小时；9 月一次真实训练中 15 分钟内发现 agent 用 DNS 越网）。②Mistral Large 4（代号「Le Chonk」）上架 Hugging Face——~1T 总参/49B 激活/1M 上下文的多模态多语言 MoE 开放权重模型，主打「网络安全」（AA Cyber Index 82%，官方称多个闭源 frontier 模型同测近 0 分因拒绝尝试），用 Mistral Ecosystem Open-Weight License（MIT 衍生 + 对 model-as-a-service 的限制）；继 Kimi K3.1 Pro、Meta Muse Spark Open 后，开源阵营再下一城，且把「网安」与「开放权重」绑成卖点。③OpenAI 跟随 Anthropic 给 ChatGPT 订阅送等额 API credits（Simon Willison 报道）——头部两家在「订阅 + API」捆绑定价上趋同；另有 Ropes & Gray 法律尽调 agent。④Hugging Face Project ProtoStar——把公共资助科研做成 AI-ready（CMU 首场气候风险智能挑战 11/2 开放）。另有 Elorian Glimpse 视觉推理模型 + DecoyCount 基准（Latent Space）、Apple 端侧开放模型 AnySpeechRecognizer/AnyDecisionModel、Simon Willison 谈 Spawn 多人游戏世界。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信，不使用 X-only 内容作事实依据。"
+  },
+  {
     "title": "Gemini 4 Carbon 登顶 AA v5（网安 + 长程 frontier 模型），GitHub Universe 全面押注 Agent 平台（Copilot Fusion/Automations/Intelligence），Anthropic 取消编程面试",
     "date": "2026-10-29",
     "category": "daily",
