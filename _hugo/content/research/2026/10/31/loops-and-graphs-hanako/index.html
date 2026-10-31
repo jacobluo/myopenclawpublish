@@ -1,0 +1,536 @@
+---
+title: "Loops 与 Graphs：如何不再盯梢 Agent、只在最后一步批准（病毒帖解读 + 全文翻译）"
+date: "2026-10-31"
+category: "research"
+url: "/research/2026/10/31/loops-and-graphs-hanako/"
+summary: "解读 @hanakoxbt 的爆款教程《Loops and Graphs: how to stop babysitting agents and only approve the last step》（1020 万阅读）：把 Agent 工程拆成 loop（让一个工作单元自我变正确）与 graph（决定哪些单元存在、顺序与并行）两层，给出四种节点、两条返回路径、按爆炸半径而非置信度开门、以及'把失败变成永久约束'的学习边等可落地框架。附全文中文翻译。"
+layout: "raw"
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loops 与 Graphs：如何不再盯梢 Agent、只在最后一步批准（病毒帖解读 + 全文翻译）</title>
+  <meta name="description" content="解读 @hanakoxbt 爆款教程《Loops and Graphs: how to stop babysitting agents and only approve the last step》：loop 让单元自证正确，graph 决定单元的存在与顺序；四种节点、两条返回路径、按爆炸半径开门、把失败固化成约束。附全文翻译。">
+  <style>
+    :root {
+      --bg: #f4f7f4;
+      --paper: #ffffff;
+      --ink: #17211c;
+      --muted: #5d6b62;
+      --line: #dbe5dd;
+      --green: #16784f;
+      --blue: #2459a8;
+      --red: #b04435;
+      --gold: #a96914;
+      --soft-green: #e8f5ee;
+      --soft-blue: #eaf1fb;
+      --soft-red: #fff0ed;
+      --soft-gold: #fff6e6;
+      --shadow: 0 18px 52px rgba(28, 43, 34, 0.10);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
+      line-height: 1.72;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(22, 120, 79, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(36, 89, 168, 0.09), rgba(36, 89, 168, 0) 420px),
+        var(--bg);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 64px 0 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 880px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      padding: 6px 12px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 34px;
+      padding: 40px 0 72px;
+      align-items: start;
+    }
+
+    article {
+      display: grid;
+      gap: 22px;
+    }
+
+    section, aside {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 28px;
+    }
+
+    aside {
+      position: sticky;
+      top: 22px;
+      padding: 20px;
+    }
+
+    h2, h3, h4, p {
+      margin-top: 0;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 26px;
+      line-height: 1.24;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    h4 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 14px; }
+    p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0 0 14px;
+      padding-left: 1.35em;
+    }
+
+    li + li { margin-top: 8px; }
+
+    strong { color: #0f3d2a; }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lead-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #fbfdfb;
+    }
+
+    .lead-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 15px;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--green);
+      background: var(--soft-green);
+    }
+
+    .quote {
+      border-left: 4px solid var(--green);
+      background: #f7fbf8;
+      padding: 18px 20px;
+      color: #28372e;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .layer {
+      border-left: 3px solid var(--green);
+      padding: 4px 0 4px 18px;
+      margin: 18px 0;
+    }
+
+    .layer.blue { border-left-color: var(--blue); }
+    .layer.gold { border-left-color: var(--gold); }
+    .layer.red { border-left-color: var(--red); }
+
+    .en {
+      font-family: "Georgia", "Times New Roman", serif;
+      letter-spacing: .2px;
+      color: #2a3642;
+    }
+
+    .divider-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 6px 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .divider-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .nav-title {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li + li { margin-top: 8px; }
+
+    .toc a {
+      color: var(--ink);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .side-note {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .en-block {
+      background: #f6f8fa;
+      border-left: 4px solid var(--blue);
+      padding: 16px 18px;
+      border-radius: 6px;
+      margin: 12px 0 18px;
+    }
+
+    .en-block p { margin-bottom: 10px; color: #2a3642; }
+    .en-block p:last-child { margin-bottom: 0; }
+
+    footer {
+      padding: 28px 0 46px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+      }
+
+      .lead-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(100% - 24px, 1120px);
+      }
+
+      header {
+        padding-top: 42px;
+      }
+
+      section {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">Agent 工程 · Loop / Graph 架构 · 病毒帖解读</p>
+      <h1>Loops 与 Graphs：如何不再盯梢 Agent、只在最后一步批准</h1>
+      <p class="dek">这是 @hanakoxbt 的一篇爆款教程《Loops and Graphs: how to stop babysitting agents and only approve the last step》，阅读量 1020 万。核心命题一句话：<b>loop 让一个工作单元自我变正确，graph 决定哪些单元该存在、以什么顺序跑、哪些能并行</b>。绝大多数人只搭了前者，所以永远在"盯梢"——每个步骤都要亲眼看一眼才放心。本文含<b>结论先行</b>、<b>框架拆解</b>与<b>全文中文翻译</b>三部分。</p>
+      <div class="meta">
+        <span class="pill">发布时间：2026-10-31</span>
+        <span class="pill">原文：@hanakoxbt（X，2026-08-23）</span>
+        <span class="pill">主题：Agent 架构 / Loop / Graph / 人类把关点</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article>
+
+      <section id="summary">
+        <div class="divider-label">结论先行 · Summary</div>
+        <h2>一句话与三层框架</h2>
+
+        <div class="quote">
+          "A loop makes a unit of work correct without you. A graph decides which units exist at all."
+          <br><span style="font-size:15px;font-weight:400;">loop 让一个工作单元在没有你的情况下变正确；graph 决定哪些单元根本不该存在。</span>
+        </div>
+
+        <div class="lead-grid">
+          <div class="lead-card">
+            <strong>Loop：单元内的自证</strong>
+            <p>四个动作：产出 → 检查 → 修正 → 重复直到通过。关键是<b>检查</b>——一个能"在你不看的时候失败"的判定条件。没有它，你拥有的不是 loop，只是一台调度器（scheduler）。</p>
+          </div>
+          <div class="lead-card">
+            <strong>Graph：单元之间的形状</strong>
+            <p>节点 = 一个边界清晰的工作单元；边 = 依赖关系。它决定什么先跑、什么并行、什么永远不跑、结果往哪回流。这是 loop 给不了的东西。</p>
+          </div>
+          <div class="lead-card">
+            <strong>人类只在最后批准</strong>
+            <p>把人类放到"后果最高、可逆性最低"的那一步——批准合并、决定哪些修复上线。而不是审中间产物、不逐步确认。人在图中间会变成图里最慢的节点。</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:22px;">为什么只搭 loop 会卡住</h3>
+        <p>loop 的天花板在于：它只能让<b>一个</b>单元变好，却无法决定"该有哪些单元、以什么顺序、哪两个步骤其实不需要互相等待"。结果就是你得到一个很棒的 agent，用错误的顺序、一次一步地跑着错误的三个步骤——每一步都对，整体却慢且形状不对。这时候去调 loop 没用，因为问题根本不在任何一个单元内部。而人们恰恰在这一刻怪罪模型。</p>
+
+        <h3 style="margin-top:22px;">四条最反直觉的洞察</h3>
+        <ul>
+          <li><strong>"没有报错"不等于"正确"。</strong>absence of an error is not evidence of correctness。把 loop 建在这个假象上，你会得到一个自信地重复犯同一个错误、直到预算烧光、日志还全程干净的系统的系统。</li>
+          <li><strong>"然后"不是一条边。</strong>绝大多数无谓等待，都来自把"先做 A 再然后做 B"当成依赖。问一句：下一步真的读了上一步的输出吗？说不出跨过去的那个变量，就没有边，等待就是纯浪费。</li>
+          <li><strong>不是所有节点都是模型。</strong>合并、排序、去重、对比 before/after——这些都有唯一正确答案、几行代码就够。能用代码就别用模型，否则是在为"不该有的成本、延迟和方差"付租金。</li>
+          <li><strong>人按"爆炸半径"而非"置信度"开门。</strong>置信度是模型唯一能影响的输入，是最弱的变量；强变量是"如果错了，撤销有多贵"。迁移、删除、碰生产数据或钱的那条车道，<b>永远不开</b>，与分数无关。</li>
+        </ul>
+      </section>
+
+      <section id="framework">
+        <div class="divider-label">框架拆解 · Framework</div>
+        <h2>五块拼图</h2>
+
+        <div class="layer">
+          <h4>① Loop：一个能失败的检查</h4>
+          <p>剥掉一切，loop 只有四部分：<b>produce → check → correct → repeat until green</b>。检查是全部。没有"能在你离开房间时失败"的东西，你拥有的只是调度器。听起来像废话，但几乎没人先写检查——大家先建工作，再在末尾挂一个"让另一个模型看看输出"的评审，这是两个乐观主义者在互相点头。</p>
+          <p><b>先写条件，且写成程序能求值的形式。</b>否则你搭的是一个"自信地重复错误直到预算耗尽、日志却全程干净"的系统。</p>
+        </div>
+
+        <div class="layer blue">
+          <h4>② Graph：工作本身的形状</h4>
+          <p>graph 是"什么跑、什么并行跑、什么等待、什么永远不跑、结果往哪回流"。只有两样东西：<b>节点</b>（一个边界清晰的工作：一个输入进、一个输出出）和<b>边</b>（依赖：这个节点的输出喂给那个节点的输入）。</p>
+          <p>诊断法：对现有流水线里的每一支箭头问一句——"下一步真的读了上一步的输出吗？"如果你说不出跨过去的变量名，就没有边，等待就是纯浪费。多数链条里有两三支这样的箭头，找到它们通常是最大的单点提速。</p>
+        </div>
+
+        <div class="layer gold">
+          <h4>③ 四种节点，其中一种不是模型</h4>
+          <p><b>splitter（切分器）· worker（执行者）· code node（代码节点）· gate（闸门）。</b>就这四种。</p>
+          <ul>
+            <li><strong>splitter</strong> 把工作切成单元、站在最前面。它做的决定比任何节点都多——按错误的维度切（比如按文件夹），四个 worker 会审计同一批三个文件；按爆炸半径切，每个人看到别人看不到的东西。</li>
+            <li><strong>worker</strong> 各做各的单元、各带各的视角、各用各的上下文。共用上下文会让它们收敛——第一个写下发现，其余全读它，四个报告围绕同一件事，你花四份钱买一个意见加三个回声。</li>
+            <li><strong>code node</strong> 是最常被遗忘的存在。合并、排序、去重、对比——这些不是推理，各有唯一正确答案、几行代码。判断标准：如果你能<b>不用 judge / decide / assess / summarize 这些词</b>描述这个变换，它就是代码。</li>
+            <li><strong>gate</strong> 决定一个单元过不过、往哪回流。</li>
+          </ul>
+        </div>
+
+        <div class="layer red">
+          <h4>④ 两条返回路径，人人都跳过第二条</h4>
+          <p>没有回头路的 graph 只是流水线：产出输出然后遗忘，下周从同一处、带着同样的盲点重新开始。真正能工作的 graph 有两条返回路径：</p>
+          <ul>
+            <li><strong>修正边（短）：</strong>gate 把一个单元退回产生它的那一步，修复<b>当前这一次运行</b>。</li>
+            <li><strong>学习边（长）：</strong>一个被接受的结果，作为<b>约束</b>回流到 splitter，修复<b>之后每一次运行</b>。</li>
+          </ul>
+          <p>几乎人人都建了第一条、跳过第二条。标志是：一个系统很快，却永远不变得更聪明。学习边携带的不是输出，而是<b>从输出推导出的约束</b>——它落进的是"塑造工作如何被切分"的 brief，而不是 worker 的指令。一个被确认的原因变成一条规则，下一次破坏就从这一次结束的地方开始。</p>
+        </div>
+
+        <div class="layer">
+          <h4>⑤ 退回单元，而不是退回整批</h4>
+          <p>返回路径上最贵的错误。四个切片被移植，一个测试失败。如果整批退回，三个正确的切片被重写——它们的下一版只是"不同"而非"更好"，因为你根本没对它们做错任何事。然后你重新验证全部四个，其中任何一个这次都可能因为无关原因失败。你把一次失败转化成了四个不确定的结果，还为此付费。一次运行里做两次，就永远不收敛。</p>
+          <p>退回要带<b>范围行（scope line）</b>：没有它，被退回的单元会膨胀——agent 打开文件、发现两个相邻问题、顺手也修了，于是一个切片级的修正变成一个没人评审的四文件 diff。还要<b>封顶三次尝试</b>：一个单元失败三次修正，问题在产生它的计划里，而 loop 看不到计划。</p>
+        </div>
+
+        <h3 style="margin-top:22px;">开门按爆炸半径，不按置信度</h3>
+        <p>多数教程造一个置信度分数、设阈值、超过就放行。这是错的变量。置信度是模型<b>唯一能影响</b>的输入，是最弱的一环。强变量是"如果错了，撤销有多贵"。按撤销成本给工作分级：</p>
+        <ul>
+          <li><strong>可逆且局部</strong>——文案改动、测试、有覆盖的隔离函数。一次坏合并的成本只是一次 revert，这条车道可以先开。</li>
+          <li><strong>可逆但很宽</strong>——共享工具、schema 新增、十几个调用方碰到的东西。用确定性检查 + 干净轨迹来把关。</li>
+          <li><strong>难以逆转</strong>——迁移、删除、写生产数据、动钱。这条车道<b>不开，无论分数多高</b>。</li>
+        </ul>
+        <p>第三行不是"设得很高的阈值"，而是一条"永不开启的车道"。区别在于：阈值会被调整，关闭的车道不会。在开启的车道里，gate 按顺序读证据：确定性结果 → 本次运行的轨迹 → 这个节点以前被回滚过的频率 → <b>最后才是</b>模型自己的评估。</p>
+
+        <h3 style="margin-top:22px;">从哪开始</h3>
+        <p>拿一件你反复做的事。画出 splitter、车道、merge、一个 gate、一条回头边。<b>先建 gate</b>——一旦有什么能响亮地失败，一切都会变容易；没有 gate 的 graph 只是更快地产出未经验证的输出。然后是车道。最后是学习边，因为你没法从"被接受的结果"里推导约束，除非已经有什么在接受结果。</p>
+      </section>
+
+      <section id="trans">
+        <div class="divider-label">全文翻译 · Translation</div>
+        <h2>Loops and Graphs：如何不再盯梢 Agent、只在最后一步批准</h2>
+
+        <p>你检查你的 agent 走的每一步。不是因为你愿意，而是因为没有别的东西在做这件事。</p>
+        <p>从那张椅子上起身需要两样东西，而几乎每个人只造了其中一样。</p>
+        <p>一个 loop 让一个工作单元在没有你的情况下变正确。一个 graph 决定哪些单元根本该存在。</p>
+        <p>下面是两者的分野、那些并不显然的机制，以及那个"只批准一样东西而非每样东西"的节点。</p>
+
+        <h3>一个 loop 是一个能失败的检查</h3>
+        <p>剥掉一切，一个 loop 就是四部分：产出、检查、修正、重复直到通过。</p>
+        <p>检查是全部。没有一样"能在你离开房间时失败"的东西，你拥有的不是一个 loop，而是一台调度器。</p>
+        <p>这听起来像废话，却几乎没人先写检查。他们先建工作，然后在末尾栓上一个评审——那个评审是另一个被要求"看一眼输出"的模型。两个乐观主义者在互相点头。</p>
+        <p>先写条件，并且把它写成程序能求值的形式。</p>
+        <p>最后一条会抓住那些谨慎的人。<b>没有报错，不等于正确。</b>把 loop 建在这个上面，你会得到一个自信地重复同一个错误、直到预算烧光、日志全程干净的系统。</p>
+
+        <h3>没人警告过你的天花板</h3>
+        <p>一个 loop 让一个工作单元变得更好。这是它的全部工作，而且它做得非常好。</p>
+        <p>它无法决定哪些单元存在、它们的顺序，也注意不到五个步骤里有两个根本不需要互相等待。</p>
+        <p>于是你得到一个很棒的 agent，用错误的顺序、一次一步地跑着错误的三个步骤。每一步都正确。结果仍然慢、仍然形状不对，而调 loop 修不好它，因为问题不在任何一个单元内部。</p>
+        <p>这就是人们开始怪罪模型的时刻。也是下一层开始值回票价的时刻。</p>
+
+        <h3>Graph 是它上面的那一层</h3>
+        <p>一个 graph 是工作的形状：什么跑、什么并行跑、什么等待、什么永远不跑、结果往哪回流。</p>
+        <p>两样东西，仅此而已。一个节点是一个工作单元：一个有边界的工作，一个输入进、一个输出出。一条边是一个依赖：这个节点的输出喂给那个节点的输入。</p>
+        <p>每一次无谓等待背后的错误，是把"然后"当成一条边。"总结这个文件<b>然后</b>查一下天气"——这两者之间没有边。天气并不消费那份总结。那是两个独立的节点被线性脚本串了起来，而串起它们的只是你打字时的先后顺序。</p>
+        <p>所以，对既有流水线里的每一支箭头问一句：<b>下一步真的读了上一步的输出吗？</b>如果你说不出跨过去的那个变量，就没有边，等待就是纯浪费。</p>
+        <p>多数链条里有两三支这样的箭头，找到它们通常是可获得的、最大的一笔提速。</p>
+
+        <h3>四种节点，其中一种不是模型</h3>
+        <p>splitter、worker、code node、gate。这就是全部词汇。</p>
+        <p><b>splitter</b> 把工作切成单元，站在最前面。它做的决定比任何节点都多，因为按错误的维度切分，会浪费下游的一切。按文件夹切一个仓库，四个 worker 审计的是同一批三个文件；按爆炸半径切，每个人看到的是别人看不到的东西。</p>
+        <p><b>worker</b> 各做一个单元、各带一个视角、各用各的上下文。最后那点最常被跳过。给四个审计员一个共享窗口，他们会收敛：第一个写下一条发现，其余全读它，四份报告围绕同一件事。你花四份钱，买了一个意见加三个回声。</p>
+        <p><b>code node</b> 是那个被人忘记的存在。合并、排序、去重、对比每一次 export 的前后。这些没有一样是推理。各有唯一正确答案、各是几行代码，把它们跑过模型，只是给一个本没有成本的步骤加上了成本、延迟和方差。如果你能<b>不用 judge、decide、assess、summarize 这些词</b>描述这个变换，它就是代码。</p>
+        <p>一个每条边都是 agent 的 graph，是在为它自己的布线付租金。</p>
+
+        <h3>loop 到底住在哪</h3>
+        <p>一句话解决整个困惑：<b>loop 住在节点内部，graph 住在节点之间。</b></p>
+        <p>在一个单元内部：产出、检查、修正、重复直到通过。</p>
+        <p>在单元之间：切分、扇出、合并、把关、退回。第二份清单里的任何一样，都无法从单个单元内部表达出来。</p>
+        <p>所以你不必二选一。节点里没有 loop 的 graph，是并行地产出未经验证的工作——比串行还糟，因为量更大。没有 graph 环绕的 loop，是一个没人设计过的队列里、一个很棒的步骤。</p>
+
+        <h3>两条返回路径，以及人人都跳过的那一条</h3>
+        <p>没有回头路的 graph 是一条流水线。它产出输出然后遗忘。下周它从同一处、带着同样的盲点重新开始。</p>
+        <p>能工作的 graph 有两条返回路径，干的是不同的活。</p>
+        <p><b>修正边很短。</b>一个 gate 把一个单元退回产生它的那一步，它修复的是你正在跑的这一次。</p>
+        <p><b>学习边很长。</b>一个被接受的结果作为约束回流到 splitter，它修复的是之后每一次运行。</p>
+        <p>几乎人人都建第一条、跳过第二条。标志是一个很快、却永远不变得更聪明的系统。</p>
+        <p>学习边携带的不是输出，而是从输出推导出的约束。注意它落在哪：不是 worker 的指令里，而是塑造工作如何被切分的 brief 里。一个被确认的原因变成一条规则，下一次破坏就从这一次结束的地方开始。</p>
+
+        <h3>退回单元，而不是退回整批</h3>
+        <p>这是返回路径上最贵的错误，值得说清楚。四个切片被移植，一个测试失败。如果整批退回，三个正确的切片被重写。它们的下一版只是"不同"，而非"更好"，因为你对它们没做错任何事。现在你重新验证全部四个，其中任何一个这次都可能因为无关的原因失败。你把一次失败转化成了四个不确定的结果，还为此付了钱。一次运行里做两次，它就永远不收敛。</p>
+        <p>从外面看，这像模型在反复失败。其实是返回路径在摧毁正确的工作。</p>
+        <p>退回时要带四样东西，各司其职。范围行（scope line）比它看起来更重要：没有它，被退回的单元会膨胀——agent 打开文件、注意到两个相邻问题、顺手也修了，你那个切片级修正变成一个没人评审的四文件 diff。还要封顶三次尝试：一个单元失败三次修正，问题在产生它的计划里，而 loop 看不到计划。</p>
+
+        <h3>按爆炸半径开门，不按置信度</h3>
+        <p>多数教程造一个置信度分数、设一个阈值、让高于它的都通过。这是错的变量。</p>
+        <p>置信度是那个决定里最弱的输入，原因容易被忽略：它是模型<b>唯一能影响</b>的输入。强变量是"如果错了，会怎样"。按撤销错误的成本给工作排序：</p>
+        <ul>
+          <li><strong>可逆且局部。</strong>一次文案改动、一个测试、一个带覆盖的隔离函数。一次坏合并的成本只是一次 revert，所以这条车道可以先开。</li>
+          <li><strong>可逆但很宽。</strong>一个共享工具、一次 schema 新增、任何十几个调用方碰到的东西。用确定性检查 + 干净轨迹来把关。</li>
+          <li><strong>难以逆转。</strong>迁移、删除、任何写生产数据或动钱的东西。这条车道<b>不开，无论分数多高</b>。</li>
+        </ul>
+        <p>第三行不是一条设得很高的阈值。它是一条永不开启的车道，区别很重要，因为阈值会被调整，而关闭的车道不会。</p>
+        <p>在一条开启的车道里，gate 按顺序读证据：确定性结果，然后本次运行的轨迹，然后这个节点的产出以前被回滚过的频率，<b>最后才是模型自己的评估</b>。</p>
+
+        <h3>从你自己的活开始</h3>
+        <p>拿一件你反复做的事。画出 splitter、车道、merge、一个 gate、一条回头边。</p>
+        <p><b>先建 gate。</b>一旦有什么能响亮地失败，一切都会变容易；没有 gate 的 graph 只是更快地产出未经验证的输出。</p>
+        <p>然后是车道。最后是学习边，因为你没法从被接受的结果里推导约束，除非已经有什么在接受结果。</p>
+        <p>把人类放到一个步骤上——后果最高、可逆性最低的那一步。<b>批准合并。选择哪些修复上线。</b>而不是审中间产物，不是确认每一步。图中间的人类会成为图里最慢的节点，而 graph 会精确地以"一个人读东西的速度"运行。</p>
+
+        <h3>三句话撑起整门学问</h3>
+        <div class="en-block">
+          <p class="en">Measure the path, not only the answer it landed on.</p>
+          <p>度量那条路径，而不只是它最终落到的答案。</p>
+          <p class="en">A verdict that does not change what runs next is a report.</p>
+          <p>一个不改变"下一步跑什么"的结论，只是一份报告。</p>
+          <p class="en">Any failure you do not turn into a permanent constraint, you will meet again.</p>
+          <p>任何你没有固化成永久约束的失败，你都会再次遇见。</p>
+        </div>
+        <p>大多数人会继续调那一个 loop，然后管它叫系统。而那些围着它画出 graph 的人，会跑起一支舰队，并且永远搞不懂为什么别人觉得跟上这么难。</p>
+      </section>
+
+    </article>
+
+    <aside>
+      <p class="nav-title">目录</p>
+      <ol class="toc">
+        <li><a href="#summary">结论先行</a></li>
+        <li><a href="#framework">框架拆解 · 五块拼图</a></li>
+        <li><a href="#trans">全文翻译</a></li>
+      </ol>
+      <div class="side-note">
+        <p>说明：本文解读并翻译 @hanakoxbt 于 X 平台发布的《Loops and Graphs: how to stop babysitting agents and only approve the last step》（2026-08-23，阅读量约 1020 万）。作者另在 <a href="https://agent-layers.vercel.app/">agent-layers.vercel.app</a> 提供五层结构的完整课程。译文保留 loop、graph、gate、splitter、worker、code node、scope line、blast radius、revert 等英文术语，以对应可落地的工程实践。</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="wrap">Generated by OpenClaw. Source: x.com/hanakoxbt/status/2091515787366306154（解读与翻译于 2026-10-31）。</div>
+  </footer>
+</body>
+</html>

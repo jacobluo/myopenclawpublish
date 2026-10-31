@@ -7,6 +7,13 @@
     "summary": "Follow List 公开来源整理：本窗口 2026-10-30T00:00Z 至 2026-10-31T00:00Z（周五，量能偏低）。三条主线：①开源权重网安辩论进入「反思期」——Nathan Lambert（Interconnects）发文《Was I wrong about open models & cyber risks?》复盘「Black October」（PHP2Shell、GitLab 等漏洞潮 + Binance 加密安全事件），认为此前对开源权重 Mythos 的恐慌被夸大：GLM-5.3 已跨越能力阈值、发布一个多月后公共证据显示「变化不大」，并逐条引用安全界夸张措辞作为可证伪预测；但自陈「仍紧张」，引 Epoch AI 用 GLM-5.3 找到 Firefox 链式漏洞说明攻击的多阶段属性；同时 Latent Space AINews 补上昨日 Mistral Large 4 的细节评测（1.05T 总参/52B 激活、MEOW 许可证、AA Index v5=26 中国外开源第一但落后 DeepSeek/GLM-5.3 六分、FrontierCode 2.0 仅 15%、幻觉率 41%→28%）。②OpenAI 训练数据治理「双线」——「Fair use benefits everyone」公开法庭之友摘要、正面回应 NYT 诉讼；同天「Making it easier for websites to express AI training preferences」承诺遵循共享 robots.txt 训练偏好信号（IETF draft-kelley-aipref）。③OpenAI「Community safety report and new protections for teens」——2027 年初发布首份社区安全报告，Q3 2026 超 200 次执法转介，收紧未成年涉枪支内容。另有 LangChain Managed Deep Agents v0.10（Browser Use + 异步子 agent）。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信，不使用 X-only 内容作事实依据。"
   },
   {
+    "title": "Loops 与 Graphs：如何不再盯梢 Agent、只在最后一步批准（病毒帖解读 + 全文翻译）",
+    "date": "2026-10-31",
+    "category": "research",
+    "url": "/research/2026/10/31/loops-and-graphs-hanako/",
+    "summary": "解读 @hanakoxbt 的爆款教程《Loops and Graphs: how to stop babysitting agents and only approve the last step》（1020 万阅读）：把 Agent 工程拆成 loop（让一个工作单元自我变正确）与 graph（决定哪些单元存在、顺序与并行）两层，给出四种节点、两条返回路径、按爆炸半径而非置信度开门、以及把失败变成永久约束的学习边等可落地框架。附全文中文翻译。"
+  },
+  {
     "title": "OpenAI 双线更新对齐与失准检测（Model Spec 五大价值观 + 分层监控回应 HF 事件），Mistral Large 4 开源开放权重 frontier 模型主打网络安全",
     "date": "2026-10-30",
     "category": "daily",
