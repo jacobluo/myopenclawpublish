@@ -1,5 +1,12 @@
 [
   {
+    "title": "Google 自曝 AI Mode 拖累搜索营收、市值单日蒸发 $500B；Anthropic 取消 Claude Ultra 五小时限制；ChatGPT Canvas 沙箱 XSS 越权链（$5k bounty）；AI-native 财富管理「agents prompt people」",
+    "date": "2026-11-01",
+    "category": "daily",
+    "url": "/daily/2026/11/01/",
+    "summary": "Follow List 公开来源整理：本窗口 2026-10-31T08:00 至 2026-11-01T08:00（CST，周六→周日，量能偏低）。四条主线：①宏观/财务——Google 首席商务官 Philipp Schindler 承认 AI Mode 查询增长「因 AI Mode 货币化较低」拖累搜索营收，叠加其他不佳财报引发科技板块连锁下跌、Google 单日市值蒸发约 $500B（2004 IPO 以来最差），OpenAI 新一轮融资估值由 $1.4T 下调至 $1.25T，市场「AI 熊市」情绪抬头。②Anthropic 订阅层改版——Max 5x 更名 Max（$100/月）、Max 20x 更名 Ultra（$200/月），并取消已验证 Ultra 账号的 5 小时会话限制（新号保留临时限制直至验证，官方称反欺诈）。③安全——Simon Willison 转述 Parameter Labs 对 ChatGPT「HTML 预览」沙箱的复杂 XSS 越权链：MathLive 虚拟键盘 postMessage + innerHTML 注入 + 借道 CSP 白名单 YouTube oEmbed 反射执行 JS，可从任意分享链接窃取其他已登录用户私密数据，OpenAI 已修复并支付 $5,000 赏金。④Agent 长程工作流——Latent Space 访谈 Arca（AI-native 财富管理，General Catalyst 领投 $48.5M）：单任务最长 10 天、每客户持久记忆、自建 harness 按内部基准自动选模型（主用 Claude）、资金移动全由人类顾问执行、安全限制全确定性。其余（Gemini 4 Carbon、Genie 4、Mistral Large 4、Nemotron 3.5）为前几日已覆盖条目的 AINews 复盘，仅归纳不重复展开。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信，不使用 X-only 内容作事实依据。"
+  },
+  {
     "title": "开源权重网安辩论进入反思期（Nathan Lambert「Was I wrong?」+ Mistral Large 4 细节评测），OpenAI 训练数据治理双线（fair use 辩护 + 共享 robots.txt 训练偏好信号）与社区安全报告",
     "date": "2026-10-31",
     "category": "daily",

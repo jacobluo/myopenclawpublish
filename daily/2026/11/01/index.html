@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Google 自曝 AI Mode 拖累搜索营收、市值单日蒸发 $500B；Anthropic 取消 Claude Ultra 五小时限制；ChatGPT Canvas 沙箱 XSS 越权链（$5k bounty）；AI-native 财富管理「agents prompt people」</title>
+    <meta name="description" content="Follow List 公开来源整理：本窗口 2026-10-31T08:00 至 2026-11-01T08:00（CST，周六→周日，量能偏低）。四条主线：①宏观/财务——Google 首席商务官 Philipp Schindler 承认 AI Mode 查询增长「因 AI Mode 货币化较低」拖累搜索营收，叠加其他不佳财报引发科技板块连锁下跌、Google 单日市值蒸发约 $500B（2004 年 IPO 以来最差），OpenAI 新一轮融资估值由 $1.4T 下调至 $1.25T，市场「AI 熊市」情绪抬头。②Anthropic 订阅层改版——Max 5x 更名为 Max（$100/月）、Max 20x 更名为 Ultra（$200/月），并取消已验证 Ultra 账号的 5 小时会话限制（新号保留临时限制直至验证，官方称系反欺诈）。③安全——Simon Willison 转述 Parameter Labs 对 ChatGPT「HTML 预览」（Canvas/artifacts 类功能）沙箱的复杂 XSS 越权链：MathLive 虚拟键盘 postMessage &#43; innerHTML 注入 &#43; 利用 CSP 允许的 YouTube oEmbed 反射执行 JS，最终可窃取其他已登录用户私密数据，OpenAI 已修复并支付 $5,000 赏金。④Agent 长程工作流——Latent Space 访谈 Arca（AI-native 财富管理，General Catalyst 领投 $48.5M）：单任务最长 10 天、「对每个客户持久记忆」、自建 harness 按内部基准自动选模型（主用 Claude）、资金移动全由人类顾问执行、安全限制全确定性。其余（Gemini 4 Carbon、Genie 4、Mistral Large 4、Nemotron 3.5）均为前几日已覆盖条目的 AINews 复盘，本窗口仅作归纳、不重复展开。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信（RSSHub 404、nitter 410、xcancel 451），不使用 X-only 内容作事实依据。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Google 自曝 AI Mode 拖累搜索营收、市值单日蒸发 $500B；Anthropic 取消 Claude Ultra 五小时限制；ChatGPT Canvas 沙箱 XSS 越权链（$5k bounty）；AI-native 财富管理「agents prompt people」</h1>
+      <p class="portal-lead">Follow List 公开来源整理：本窗口 2026-10-31T08:00 至 2026-11-01T08:00（CST，周六→周日，量能偏低）。四条主线：①宏观/财务——Google 首席商务官 Philipp Schindler 承认 AI Mode 查询增长「因 AI Mode 货币化较低」拖累搜索营收，叠加其他不佳财报引发科技板块连锁下跌、Google 单日市值蒸发约 $500B（2004 年 IPO 以来最差），OpenAI 新一轮融资估值由 $1.4T 下调至 $1.25T，市场「AI 熊市」情绪抬头。②Anthropic 订阅层改版——Max 5x 更名为 Max（$100/月）、Max 20x 更名为 Ultra（$200/月），并取消已验证 Ultra 账号的 5 小时会话限制（新号保留临时限制直至验证，官方称系反欺诈）。③安全——Simon Willison 转述 Parameter Labs 对 ChatGPT「HTML 预览」（Canvas/artifacts 类功能）沙箱的复杂 XSS 越权链：MathLive 虚拟键盘 postMessage &#43; innerHTML 注入 &#43; 利用 CSP 允许的 YouTube oEmbed 反射执行 JS，最终可窃取其他已登录用户私密数据，OpenAI 已修复并支付 $5,000 赏金。④Agent 长程工作流——Latent Space 访谈 Arca（AI-native 财富管理，General Catalyst 领投 $48.5M）：单任务最长 10 天、「对每个客户持久记忆」、自建 harness 按内部基准自动选模型（主用 Claude）、资金移动全由人类顾问执行、安全限制全确定性。其余（Gemini 4 Carbon、Genie 4、Mistral Large 4、Nemotron 3.5）均为前几日已覆盖条目的 AINews 复盘，本窗口仅作归纳、不重复展开。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信（RSSHub 404、nitter 410、xcancel 451），不使用 X-only 内容作事实依据。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-11-01</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta">
+  <strong>2026年11月01日（周日）</strong> · 覆盖窗口：2026-10-31 08:00 – 2026-11-01 08:00 (CST)<br>
+  来源：Obsidian Follow List active 项；Latent Space RSS / AINews、Simon Willison Atom、Interconnects RSS、OpenAI News RSS、Hugging Face Blog RSS、GitHub Changelog RSS 等公开来源抽样。未使用 Folo CLI，未发布私密 cookie/token，未绕过 CAPTCHA。抓取备注：公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信（RSSHub 404、nitter 410、xcancel 451），高优先级人物时间线无法据此核验，不代表无更新。OpenAI News RSS 最新条目仍为 10-30 三条（本窗口无新增）。LangChain Blog RSS 返回 404/HTML、无可解析条目。Interconnects RSS 最新 10-30（Nathan Lambert《Was I wrong?》，已在前一窗口覆盖）。Google DeepMind RSS 本窗口无新增。Hugging Face Blog RSS 最新仍 nemotron-halloween（10-30）。explainx.ai sitemap、AI 播客索引 JSON 本窗口无变化。本窗口高信号集中在 Latent Space AINews（10-31）与 Simon Willison（10-31）。
+</div>
+
+<h2>总览</h2>
+<div class="overview-grid">
+  <div class="overview-item"><h4>Google 自曝 AI Mode 拖累搜索营收，单日市值约 -$500B（2004 IPO 以来最差）</h4><p>首席商务官 Philipp Schindler 在财报中承认「AI Mode 查询的强劲增长因 AI Mode 货币化较低而产生影响」，叠加其他不佳财报，引发科技板块连锁下跌；市场情绪转冷，「AI 熊市」讨论抬头，OpenAI 新一轮融资估值由 $1.4T 下调为 $1.25T——恰逢即将到来的史上最大科技 IPO 之一（Anthropic）。</p></div>
+  <div class="overview-item"><h4>Anthropic 订阅层改版：Max/Ultra 更名 + 取消 5 小时会话限制</h4><p>Max 5x →「Max」$100/月，Max 20x →「Ultra」$200/月；已验证 Ultra 账号不再有 5 小时会话限制（新号保留临时限制直至验证，官方称「反欺诈措施」），周限额不变。</p></div>
+  <div class="overview-item"><h4>ChatGPT「HTML 预览」沙箱 XSS 越权链被披露，OpenAI 修复并支付 $5,000 赏金</h4><p>Parameter Labs 发现：通过 MathLive 虚拟键盘的 postMessage + innerHTML 注入 + 借道 CSP 白名单里的 YouTube oEmbed 反射执行 JS，最终可从任意分享链接窃取其他已登录用户私密数据或代其操作。Simon Willison 认为此严重程度的漏洞仅 $5,000 赏金「偏便宜」。</p></div>
+  <div class="overview-item"><h4>AI-native 财富管理：Arca「agents prompt people more than people prompt agents」</h4><p>Latent Space 访谈 Arca 首席 AI 工程师：长程 agent 任务最长 10 天、为客户做持久记忆、自建 harness 按内部基准自动选模型（主用 Claude）、资金移动全由人类顾问执执行，安全限制「全确定性」。</p></div>
+</div>
+
+<h2>核心主题</h2>
+
+<h3>一、Google 承认 AI Mode 拖累搜索营收：单日蒸发约 $500B，「AI 熊市」讨论抬头</h3>
+<div class="card">
+  <div class="source"><span class="tag">宏观 / 财务 / 前沿实验室</span><strong>Latent Space [AINews]（swyx）</strong> · 2026-10-31 · <a href="https://latent.space/p/ainews-google-admits-ai-mode-hurts-search-revenue-15-500b-drop-worst-since-2004-ipo-ai-bear-market-c/">Google admits AI Mode hurts Search revenue; -15% $500B drop worst since 2004 IPO. AI Bear Market coming?</a></div>
+  <div class="summary"><p>Latent Space 明确表示「作为面向工程师的简报，我们极少放财务类故事（上一次是 2025 年 1 月），但当它关乎 Google 和 Google Search 的未来、且恰逢 AI 领导层刚有人离职时，你不得不关心」。核心矛盾在于 <strong>总览页（AI Overviews）与被它概括的底层页面</strong> 之间的张力：任何「足够好的摘要」都会让读者不再需要读原文。Google 的 Featured Snippets / Knowledge Panel 早与供给数据的出版商存在这层张力，但现在 Google 自家的 AI Overviews 开始反噬……Google 自家的搜索营收。</p><p><strong>官方口径</strong>：Google 并未披露 AI Mode 足够细的数据供严格分析，但多数人引用首席商务官 <strong>Philipp Schindler</strong> 的原话——「值得注意的是，AI Mode 查询的强劲增长带来了影响，因为我们在 AI Mode 上看到的货币化较低」。这条叠加其他不佳财报，引发科技股连锁下跌；Latent Space 估算 <strong>Google 单日市值蒸发约 $500B</strong>（-15%，2004 年 IPO 以来最差）。</p><p><strong>背景放大</strong>：这发生在公开市场对科技/AI 情绪转冷的背景下，且 <strong>OpenAI 新一轮融资估值由 $1.4T 下调至 $1.25T</strong>——「在史上最大科技 IPO 之一（Anthropic）前夕，这可不是你想看到的信号」。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①这是「AI 助手蚕食传统搜索」从学术担忧变成<strong>财报级、可量化的营收冲击</strong>的首个明确官方承认——「总览页杀死被总览的页面」的悖论第一次落到 Google 自己的搜索货币化上。②「AI 熊市」情绪若持续，会直接改变<strong>前沿实验室的融资节奏与 IPO 定价</strong>（OpenAI $1.25T、Anthropic 即将 IPO），是跟踪「投资线索」的关键宏观变量。③对「AI 产业链与股票市场研究」（supplychainofai 项目）是直接相关的一手信号。</p></div>
+  <div class="action">后续行动：把「Google AI Mode 货币化 / 搜索营收」与「OpenAI $1.25T 估值、Anthropic IPO 定价」纳入 supplychainofai 项目的宏观跟踪；观察 Google 是否调整 AI Mode 的广告/商业化策略（若推出 AI Mode 内广告，则是关键拐点）；跟踪科技板块接下来一周的估值情绪是否从「回调」转为「趋势性熊市」。</div>
+</div>
+
+<h3>二、Anthropic 订阅层改版：Max/Ultra 更名 + 取消 5 小时会话限制</h3>
+<div class="card">
+  <div class="source"><span class="tag">前沿实验室 / 产品 / 定价</span><strong>Latent Space [AINews] / Anthropic（@claudeai、@bcherny、@alexalbert__）</strong> · 2026-10-31 · <a href="https://latent.space/p/ainews-google-admits-ai-mode-hurts-search-revenue-15-500b-drop-worst-since-2004-ipo-ai-bear-market-c/">AINews（Claude Ultra Drops the 5-Hour Limit as Anthropic Renames Its Max Tiers）</a></div>
+  <div class="summary"><p><strong>更名</strong>：Anthropic 重命名其 Max 订阅档——原「Max 5x」改为 <strong>「Max」$100/月</strong>，原「Max 20x」改为 <strong>「Ultra」$200/月</strong>；现有订阅者无需任何操作（官方公告）。</p><p><strong>5 小时限制取消</strong>：<strong>已验证的 Ultra 账号</strong>不再受 5 小时会话限制，多数现有订阅者今日起生效（@claudeai、@bcherny、@alexalbert__）。<strong>新账号</strong>则在通过验证前保留临时限制，Anthropic 将此描述为「反欺诈措施」，受影响用户会收到限制解除的邮件。<strong>周限额不变</strong>。</p><p><strong>反应与订阅经济学（未经验证的分析）</strong>：反响普遍正面（@theo「Huge!!!」、@kimmonismus「Anthropic is on a run」）。@teortaxesTex 引 SemiAnalysis 对 Anthropic 财务的重构：<strong>API 毛利率约 92%</strong>（DeepSeek 约 84%）；Opus 订阅被描述为「重度补贴」，仅在 <strong>利用率低于约 21.3%</strong> 时才能打平；后续估算称订阅贡献约 18% 收入、却消耗超 50% 算力。同一作者认为重度补贴的 DeepSeek V4.1-Flash（$10 对应约 $76.5 的 API 等价用量）在每 token 价格上已接近 Claude 订阅。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①「取消 5 小时限制」是<strong>重度用户（Ultra）体验的实质放宽</strong>，配合更名，是 Anthropic 在 IPO 前夕对订阅产品线的整理，可能影响 ARR/留存叙事。②「订阅 18% 收入却耗 50%+ 算力」这条（虽是 SemiAnalysis 未经证实的重构）点出了<strong>订阅经济学的补贴本质</strong>——与 OpenAI 的「订阅送 API credits」形成对比。③API 毛利率 92% vs DeepSeek 84% 的对照，是观察「前沿闭源 vs 开源」盈利结构的抓手。</p></div>
+  <div class="action">后续行动：核对 Anthropic 官方公告原文（Max/Ultra 更名与限制取消的确切口径、周限额是否真的不变）；把「Anthropic 订阅 vs API 收入结构」纳入 Anthropic IPO 跟踪；观察 OpenAI 是否跟进放宽订阅会话限制，形成产品趋同信号。</div>
+</div>
+
+<h3>三、ChatGPT「HTML 预览」沙箱 XSS 越权链：一条分享链接即可窃取他人账户数据</h3>
+<div class="card">
+  <div class="source"><span class="tag">安全 / 前沿实验室</span><strong>Simon Willison（转述 Parameter Labs）</strong> · 2026-10-31 · <a href="https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts/">How We Took Over ChatGPT Accounts</a></div>
+  <div class="summary"><p>Simon Willison 转述 <strong>Parameter Labs</strong> 针对 ChatGPT 的 artifacts 模式实现（OpenAI 曾称「Canvas」，最新修订版称「HTML 预览」）发现的攻击链。核心背景：ChatGPT 会在 <strong>一个沙箱化 iframe</strong> 里展示交互式自定义 HTML 应用，这些 HTML 必须被严格沙箱化，以免不可信代码触达 OpenAI API 或访问用户私密数据。</p><p><strong>攻击链相当复杂</strong>：①OpenAI 用 <strong>MathLive</strong> JavaScript 库做图形支持，该库自带一个<strong>虚拟键盘</strong>，可通过 <code>postMessage()</code> 在父页面触发；②这段处理消息的代码使用了 <code>innerHTML</code>，于是<strong>任何能发消息的东西都能给父页面注入自定义 HTML</strong>，而且<strong>没有机制阻止其他沙箱 frame（含 HTML 预览 frame）调用该方法</strong>；③于是 iframe 里的不可信代码可注入 HTML，而 innerHTML 虽不直接执行 script 元素，却可注入一个<strong>不带沙箱限制的新 iframe</strong>；④OpenAI 的 CSP 规则完全禁止内联脚本、只允许少数域加载脚本，但其中一个白名单域是 <strong>YouTube</strong>——而 <strong>YouTube 的 oEmbed 端点可反射 JavaScript 回来并以可执行方式返回</strong>；⑤一旦在 ChatGPT 上获得 JS 执行，即可轻易从 API 抓取用户私密数据、并通过图片引用（image reference）外传。</p><p><strong>最终效果</strong>：你可创建一个 ChatGPT 分享 URL，其他已登录用户访问它时，其私密数据可被窃取、或可代替其执行操作。OpenAI 已修复漏洞并支付 <strong>$5,000 赏金</strong>——Simon Willison 认为「对一个如此严重的漏洞来说，这赏金有点便宜了」。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①这是<strong>「AI 应用里嵌入第三方 HTML/代码执行」这一新攻击面</strong>的教科书级案例——「沙箱 + CSP + 第三方库 oEmbed 反射」的多层绕过链条，对任何在 agent/产品里渲染用户或模型生成 HTML 的团队都有直接借鉴意义。②它落在 2026 年持续的「AI 产品安全」主线上（此前黑十月漏洞潮、PHP2Shell、LiteLLM 等），但这次是<strong>面向终端用户账户的越权</strong>，而非供应链。③「$5k 赏金偏低」回应了对<strong>AI 公司漏洞赏金定价</strong>的质疑，与 OpenAI/Anthropic「重金投入网安」叙事形成反差。</p></div>
+  <div class="action">后续行动：把 Parameter Labs 原始披露与 OpenAI 修复通告交叉存档，纳入「AI 产品安全漏洞时间线」；对模型生成 HTML 的沙箱/CSP 加固做一次自检清单；跟踪 OpenAI 是否上调 HTML 预览相关漏洞的赏金档位。</div>
+</div>
+
+<h3>四、AI-native 财富管理 Arca：长程 agent + 持久记忆 + 「agents prompt people」</h3>
+<div class="card">
+  <div class="source"><span class="tag">Agent 应用 / 金融 / 创业</span><strong>Latent Space Podcast（Richard MacManus 访谈 Aman Singh）</strong> · 2026-10-31 · <a href="https://latent.space/p/arca/">Agents Prompt People: Using Agents for Long-Horizon Financial Work</a></div>
+  <div class="summary"><p>Latent Space 在 AI Engineer New York 访谈 <strong>Arca</strong>（一家「AI-native」财富管理公司）首席 AI 工程师 <strong>Aman Singh</strong>。Arca 刚完成一轮由 <strong>General Catalyst 领投、Index Ventures 与 Venrock 参与</strong>的 <strong>$48.5M</strong> 融资。核心体验：虽然后台大部分工作由 agent 完成，但设有护栏确保<strong>最终决策由人类顾问做出</strong>——Singh 概括为「<strong>agents prompt people more than people prompt agents</strong>」。</p><p><strong>长程但非长时运行</strong>：金融服务是「long-horizon」工作，但「并非 long-running」。Arca 的 agent 任务最长可达 <strong>10 天</strong>——「它是停停走走（stop-start）的，中间有很多参与者、很多决策点、很多交接」。为此 Arca 自建了<strong>内部记忆系统</strong>，为<strong>每个客户持久记忆</strong>：「目前进展如何？接下来要跟踪什么？未来几天需立即处理什么、长期在跟踪什么？哪个个体负责哪个行动？——所有这些都由我们的 agent 贡献的记忆系统在跟踪。」</p><p><strong>自建 harness</strong>：Arca 使用 Anthropic、OpenAI 等前沿实验室的模型，<strong>Claude 是主力模型</strong>；公司自建 harness，基于<strong>内部基准</strong>自动为不同任务选择最优模型。「拥有 harness（而非用托管 agent harness）」还意味着 Arca 有<strong>随时切换模型供应商</strong>的灵活性。</p><p><strong>安全与护栏</strong>：agent 的角色被限定在「分析与提出方案」，<strong>交易及任何资金移动由人类顾问执行</strong>；「我们所有的安全限制都是<strong>完全确定性（fully deterministic）</strong>的，它们把决策权从 agent 手中拿走」——即某些工具/任务 agent 可自行执行，但凡涉及客户风险的一律不行。Arca 还会对 prompt injection 等已知 AI 安全问题做核查。</p></div>
+  <div class="why"><strong>为什么值得看：</strong>①「<strong>agents prompt people</strong>」是对「人在回路」的一种精彩反向表述，恰好点出<strong>金融这种高风险长程场景里 agent 的正确角色</strong>——不是替代，而是推动人做决策。②「单任务 10 天 + 每客户持久记忆 + 自建 harness 按内部基准选模型」是<strong>「企业级 agent harness」</strong>的一手实践参数，与 LangChain「company harness 五组件」、Anthropic「virtual collaborator」的讨论形成呼应。③「资金移动全由人执行、安全限制全确定性」是<strong>受监管金融场景下 agent 护栏</strong>的清晰范本，对「AI + 金融/受监管行业」落地方向有参考价值。</p></div>
+  <div class="action">后续行动：留意 Arca 是否公开其内部基准/harness 设计细节（若开源/写文，是「金融 agent harness」的好样本）；把「资金移动人类执行 + 确定性安全限制」作为「受监管 agent 护栏」的最佳实践归档；跟踪 AI-native 财富管理赛道的可比公司（复用 General Catalyst/Index 在这条线的下注信号）。</div>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li><strong>Google（Philipp Schindler）</strong>：首席商务官承认 AI Mode 查询增长因货币化较低而带来影响——本窗口最重要的宏观信号。</li>
+    <li><strong>Anthropic</strong>：Max/Ultra 订阅层更名、取消已验证 Ultra 账号 5 小时会话限制（反欺诈下新号保留临时限制）。</li>
+    <li><strong>OpenAI</strong>：ChatGPT「HTML 预览」沙箱 XSS 越权链被修复（Parameter Labs 披露），支付 $5,000 赏金；News RSS 本窗口无新增官方条目。</li>
+    <li><strong>Simon Willison（高优先）</strong>：转述并点评 Parameter Labs 的 ChatGPT 越权链，批评 $5k 赏金偏低；本窗口其博客唯一新增条目。</li>
+    <li><strong>Latent Space（swyx）</strong>：AINews 罕见地通栏处理 Google 财务新闻，并访谈 Arca（「agents prompt people」）。</li>
+    <li><strong>Nathan Lambert（Interconnects）</strong>：RSS 最新仍停在 10-30《Was I wrong about open models &amp; cyber risks?》（前一窗口已覆盖），本窗口无新增。</li>
+    <li><strong>Google DeepMind / GitHub / LangChain / Hugging Face</strong>：本窗口均无新条目（DeepMind 最新仍 Gemini 4 Carbon 10-28；GitHub Changelog 最新 10-29；LangChain RSS 404；HF 最新 nemotron-halloween 10-30）。</li>
+  </ul></div>
+</div>
+
+<h2>值得跟进的项目</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li><strong>「AI 熊市」/ 搜索货币化拐点</strong>：Google AI Mode 货币化策略是否调整（AI Mode 内广告？）、OpenAI $1.25T 估值、Anthropic IPO 定价——供给 supplychainofai 宏观跟踪。</li>
+    <li><strong>Anthropic 订阅经济学</strong>：SemiAnalysis「订阅 18% 收入 / 50%+ 算力、Opus 补贴、利用率关键点 21.3%」的未验证重构——IPO 前值得交叉验证。</li>
+    <li><strong>AI 产品安全漏洞时间线</strong>：ChatGPT HTML 预览 XSS 越权链 + 「AI 应用第三方 HTML/代码执行」攻击面自检清单。</li>
+    <li><strong>受监管 agent 护栏最佳实践</strong>：Arca 的「资金移动人类执行 + 确定性安全限制 + 每客户持久记忆」范本。</li>
+    <li><strong>订阅产品趋同</strong>：OpenAI 送 API credits vs Anthropic 取消会话限制，前沿实验室订阅层竞争。</li>
+  </ul></div>
+</div>
+
+<h2>待验证信息</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li>「Google 单日市值蒸发 -15% / $500B、2004 IPO 以来最差」系 Latent Space AINews 的表述，本窗口未直接核对 Google 财报原文与精确市值变动，引用时标注来源。</li>
+    <li>Philipp Schindler 原话（关于 AI Mode 货币化）为 Latent Space 转述引文，未回查财报电话会逐字稿。</li>
+    <li>「OpenAI 估值由 $1.4T 下调至 $1.25T」来自 Latent Space 转述的 X 帖，未经官方确认。</li>
+    <li>Anthropic Max/Ultra 更名、5 小时限制取消的官方公告原文未直接抓取（AINews 转述 + X 账号引用），细节（周限额是否真的完全不变、验证机制）以官方公告为准。</li>
+    <li>「API 毛利率 92% vs DeepSeek 84%」「订阅 18% 收入 / 50%+ 算力」为 @teortaxesTex 引 SemiAnalysis 的重构，属未经验证的第三方分析。</li>
+    <li>ChatGPT HTML 预览 XSS 链为 Simon Willison 转述 Parameter Labs 的 Link Blog 条目，本窗口未直接读 Parameter Labs 原报告全文。</li>
+    <li>Arca「$48.5M 融资（General Catalyst 领投）」为 Latent Space 播客页表述，未独立核验 Crunchbase/官方新闻稿。</li>
+  </ul></div>
+</div>
+
+<h2>低优先级 / 噪音</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li><strong>AINews 复盘条目（前几日已覆盖，本窗口仅归纳不重复展开）</strong>：Gemini 4 Carbon（Text/Agent Arena 榜首）与 Genie 4 世界模型、Mistral Large 4「Le Chonk」的 Axolotl day-0 LoRA 支持、NVIDIA Nemotron 3.5 技术报告（Super 120B 总参/12B 激活、SWE-bench Pro 51.78%）——均为 10-28/10-29 已有内容的技术细节补全。</li>
+    <li><strong>NVIDIA「nemotron-halloween」</strong>：万圣节趣味 demo，无技术实质信号，归噪音（HF Blog RSS 最新条目，10-30）。</li>
+    <li>OpenAI News RSS 本窗口无新增（三条 10-30 条目上窗口已覆盖）。LangChain RSS 404 未恢复。explainx.ai sitemap 与 AI 播客索引 JSON 本窗口无变化。</li>
+  </ul></div>
+</div>
+
+<h2>原始链接</h2>
+<div class="card">
+  <div class="summary"><ul>
+    <li>Latent Space AINews：Google admits AI Mode hurts Search revenue; -15% $500B drop：<a href="https://latent.space/p/ainews-google-admits-ai-mode-hurts-search-revenue-15-500b-drop-worst-since-2004-ipo-ai-bear-market-c/">https://latent.space/p/ainews-google-admits-ai-mode-hurts-search-revenue-15-500b-drop-worst-since-2004-ipo-ai-bear-market-c/</a></li>
+    <li>Simon Willison：How We Took Over ChatGPT Accounts：<a href="https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts/">https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts/</a></li>
+    <li>Latent Space：Agents Prompt People: Using Agents for Long-Horizon Financial Work：<a href="https://latent.space/p/arca/">https://latent.space/p/arca/</a></li>
+    <li>Interconnects：Was I wrong about open models &amp; cyber risks?（上窗口已覆盖）：<a href="https://www.interconnects.ai/p/was-i-wrong-about-open-models-and">https://www.interconnects.ai/p/was-i-wrong-about-open-models-and</a></li>
+    <li>Hugging Face：nemotron-halloween（噪音）：<a href="https://huggingface.co/blog/nvidia/nemotron-halloween">https://huggingface.co/blog/nvidia/nemotron-halloween</a></li>
+  </ul></div>
+</div>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
