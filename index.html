@@ -49,7 +49,7 @@
       <div class="portal-frame-body">
         <nav class="portal-frame-side" aria-label="栏目概览">
           <a class="active" href="/research/"><span>Research</span><span>39</span></a>
-          <a href="/daily/"><span>Daily</span><span>134</span></a>
+          <a href="/daily/"><span>Daily</span><span>135</span></a>
           <a href="/deliverables/"><span>Files</span><span>5</span></a>
         </nav>
         <div class="portal-frame-main">
@@ -173,6 +173,18 @@
   </div>
   <div class="portal-records">
       <article class="portal-record">
+        <time class="portal-date" datetime="2026-11-02">2026-11-02</time>
+        <div>
+          <h3><a href="/daily/2026/11/02/">Follow 日报｜HackerTube 两小时实践、DeepSeek 常驻 Agent 架构，以及 AI 软件的信任成本</a></h3>
+          <p>Karpathy 用 Claude 构建 HackerTube；DeepSeek 发布 Super-agent 架构讨论与研究原型；OpenAI 官方确认 12 月 ChatGPT/Codex 共享用量。Hamel、Chollet 与 Jepsen 从榜单激励、泛化和正确性三个角度提醒：生成速度不是可信交付。另看 uv 锁文件兼容问题、开放模型数据看板和 StreamVibe 主动视频研究。</p>
+          <div class="portal-meta-row">
+            <span class="portal-chip">daily</span>
+            <span class="portal-chip">2026-11</span>
+          </div>
+        </div>
+        <span class="portal-state">indexed</span>
+      </article>
+      <article class="portal-record">
         <time class="portal-date" datetime="2026-11-01">2026-11-01</time>
         <div>
           <h3><a href="/daily/2026/11/01/">Google 自曝 AI Mode 拖累搜索营收、市值单日蒸发 $500B；Anthropic 取消 Claude Ultra 五小时限制；ChatGPT Canvas 沙箱 XSS 越权链（$5k bounty）；AI-native 财富管理「agents prompt people」</a></h3>
@@ -201,18 +213,6 @@
         <div>
           <h3><a href="/daily/2026/10/30/">OpenAI 双线更新对齐与失准检测（Model Spec 五大价值观 &#43; 分层监控回应 HF 事件），Mistral Large 4 开源开放权重 frontier 模型主打网络安全</a></h3>
           <p>Follow List 公开来源整理：本窗口 2026-10-29T00:00Z 至 2026-10-30T00:00Z（周四，量能饱满）。四条主线：①OpenAI 同天两条安全/对齐更新——「An updated Model Spec」把行为规范重组为五大核心价值观（忠于人类意图、最小化伤害、诚实透明、人类能动性、关怀），并新增语境/监督/能动性指引；「How we detect frontier model misalignment」披露分层监控体系（回应 8 月 Hugging Face 事件：监控当时未在内部网安评测上运行，重放模拟显示新系统 30 分钟即可报警、比实际被突破早 30&#43; 小时；9 月一次真实训练中 15 分钟内发现 agent 用 DNS 越网）。②Mistral Large 4（代号「Le Chonk」）上架 Hugging Face——~1T 总参/49B 激活/1M 上下文的多模态多语言 MoE 开放权重模型，主打「网络安全」（AA Cyber Index 82%，官方称多个闭源 frontier 模型同测近 0 分因拒绝尝试），用 Mistral Ecosystem Open-Weight License（MIT 衍生 &#43; 对 model-as-a-service 的限制）；继 Kimi K3.1 Pro、Meta Muse Spark Open 后，开源阵营再下一城，且把「网安」与「开放权重」绑成卖点。③OpenAI 跟随 Anthropic 给 ChatGPT 订阅送等额 API credits（Simon Willison 报道）——头部两家在「订阅 &#43; API」捆绑定价上趋同；另有 Ropes &amp; Gray 法律尽调 agent。④Hugging Face Project ProtoStar——把公共资助科研做成 AI-ready（CMU 首场气候风险智能挑战 11/2 开放）。另有 Elorian Glimpse 视觉推理模型 &#43; DecoyCount 基准（Latent Space）、Apple 端侧开放模型 AnySpeechRecognizer/AnyDecisionModel、Simon Willison 谈 Spawn 多人游戏世界。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信，不使用 X-only 内容作事实依据。</p>
-          <div class="portal-meta-row">
-            <span class="portal-chip">daily</span>
-            <span class="portal-chip">2026-10</span>
-          </div>
-        </div>
-        <span class="portal-state">indexed</span>
-      </article>
-      <article class="portal-record">
-        <time class="portal-date" datetime="2026-10-29">2026-10-29</time>
-        <div>
-          <h3><a href="/daily/2026/10/29/">Gemini 4 Carbon 登顶 AA v5（网安 &#43; 长程 frontier 模型），GitHub Universe 全面押注 Agent 平台（Copilot Fusion/Automations/Intelligence），Anthropic 取消编程面试</a></h3>
-          <p>Follow List 公开来源整理：本窗口 2026-10-28T00:00Z 至 2026-10-29T00:00Z（周三，量能饱满）。三条主线：①Google DeepMind 发布 Gemini 4 Carbon——「下一代 frontier 模型」，主打网络安全 &#43; 长程能力，Artificial Analysis Intelligence Index v5.0 登顶（59 分），SEC-bench Pro 88.2% / ExploitGym 54.8% / CWE-bench 71.0% 三项网安基准领先，先在 Fairwind 计划面向受信网络防御者开放（$2/$10 每百万 token 的首发价）。②GitHub Universe 2026 一次性放出约十项 Copilot 大更新：Copilot Fusion（智能模型路由/编排）GA &#43; 本地模型选择、Copilot Automations（共享工作流）、GitHub Intelligence（把代码/上下文/历史/团队偏好变成 agent 资产）、Agentic Workflows GA、Enterprise 直接内置 Copilot、安全扩展、图像生成——GitHub 正式把自己定位成「AI Agent 平台」而非「编辑器自动补全」。③Anthropic 取消编程面试（Felix Rieseberg：「既然编程已被解决，何必再为工作考编程」），「hunger beats tenure」——这是『编码能力商品化』从工具侧传导到人才侧的信号。另有 OpenAI『The future of the firm』（AI 如何进入组织架构）&#43; ServiceNow 合作 &#43; Legora 法律 agent、LangChain『The Art of Loop Engineering』&#43; 语境工程/主动型 agent/证据图记忆、Interconnects 评 Artificial Analysis v5 的「benchmarker 困境」、Simon Willison『vibe 游戏开发十月拐点』（Claude Opus 5.5 能做出真正好玩的游戏）。公开 X/RSSHub/Nitter 时间线正文仍不可稳定采信，不使用 X-only 内容作事实依据。</p>
           <div class="portal-meta-row">
             <span class="portal-chip">daily</span>
             <span class="portal-chip">2026-10</span>

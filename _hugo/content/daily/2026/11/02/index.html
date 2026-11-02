@@ -1,0 +1,122 @@
+---
+title: "Follow 日报｜HackerTube 两小时实践、DeepSeek 常驻 Agent 架构，以及 AI 软件的信任成本"
+date: "2026-11-02"
+category: "daily"
+url: "/daily/2026/11/02/"
+summary: "Karpathy 用 Claude 构建 HackerTube；DeepSeek 发布 Super-agent 架构讨论与研究原型；OpenAI 官方确认 12 月 ChatGPT/Codex 共享用量。Hamel、Chollet 与 Jepsen 从榜单激励、泛化和正确性三个角度提醒：生成速度不是可信交付。另看 uv 锁文件兼容问题、开放模型数据看板和 StreamVibe 主动视频研究。"
+---
+<div class="meta"><strong>2026 年 11 月 2 日 · 周一</strong><br>覆盖窗口：2026-11-01 08:00 至 2026-11-02 08:00（北京时间，UTC+8）。下文时间均为北京时间，另有注明除外。来源以 Follow List 的 active 项为准，先检查 high，再检查 medium；清单中 30 个 X 账号均为 weekly，本轮全部尝试，另查 2 个 Web 资源。公开 X 页面本次能读取可见帖子，不能据此声称覆盖完整时间线。正文为中文转述；作者自述、研究结果、编辑分析分开标示。</div>
+
+<h2>总览</h2>
+<p>周末的有效新增不在新模型发布，而在<strong>“能快速做出来”之后，怎样持续工作、怎样证明可靠、怎样控制成本</strong>。Karpathy 给出一个约两小时完成垂直视频发现产品的实例；DeepSeek Harness 把讨论推进到跨会话、跨渠道、常驻工作的系统架构。与之对应，Hamel 质疑 AI 榜单的激励，Chollet 强调环境变化下的泛化，Jepsen 则展示了具体数据库中“文档看起来成熟”和“行为真的正确”之间的鸿沟。</p>
+<div class="overview-grid">
+<div class="overview-item"><h4>产品机会：重做发现体验</h4><p>HackerTube 从 HN 历史评论提炼视频推荐，而非重建一个视频平台。价值集中在语料筛选、排序目标和界面取舍；两小时是作者自报，不是通用交付承诺。</p></div>
+<div class="overview-item"><h4>架构机会：会话不应成为用户负担</h4><p>DeepSeek 的 Router/Worker、事件过滤、线程订阅与 Watchdog，针对的是多任务连续性。公开原型不等同于文章所有设计，更不是正式商用品。</p></div>
+<div class="overview-item"><h4>成本变化：聊天与代码用量合池</h4><p>OpenAI 帮助中心确认，12 月起 Plus/Pro/Business 的 ChatGPT 和 Codex 将共享按 token 计量的额度；Instant chat 不消耗该额度。各档具体数量仍未公布。</p></div>
+<div class="overview-item"><h4>验收变化：从榜单转向证据</h4><p>对采购、研究和投资而言，下一层筛选不只是看 demo 与排名，而是核对独立测试、版本边界、失败条件和可复现材料。</p></div>
+</div>
+
+<h2>核心主题</h2>
+<h3>一、AI 编程压缩原型成本，但没有取消验收成本</h3>
+<p><strong>跨来源归纳：</strong>Karpathy 的 HackerTube 说明，小团队可以更便宜地验证垂直产品；Simon 转述的 Jepsen 案例则提醒，高正确性系统不能用“代码生成完毕”替代“行为得到证明”。两者并不矛盾：内容发现类原型可以先验证体验，数据库、资金和权限系统必须先定义不可违反的约束。这个区分比笼统争论“vibe coding 好不好”更有用。</p>
+<h3>二、Agent 的竞争从单次回答转向连续性、克制与调度</h3>
+<p><strong>跨来源归纳：</strong>DeepSeek 关注多渠道任务如何继续、谁负责回复、何时恢复；StreamVibe 关注视频助手什么时候应该开口。两者共同要求把事件、任务状态和用户意图显式建模，而不是把所有信息都塞进一个不断增长的对话窗口。后者是本轮新发现的旧论文，不是过去 24 小时新发布。</p>
+<h3>三、榜单、泛化和成本必须一起看</h3>
+<p><strong>编辑分析：</strong>Hamel 的激励质疑、Chollet 的泛化观点，加上共享用量政策，指向同一个落地问题：某模型在公开榜单领先，不意味着它在自己的任务分布、价格约束和长期运行条件下最合适。建议用私有任务集同时记录成功率、长尾失败、延迟和实际消耗；不从这些观点直接推导任何公司的财务结论。</p>
+
+<h2>重要更新：事实、意义与行动</h2>
+<div class="card">
+<h3>1. Karpathy：HackerTube 把 HN 推荐信号变成独立视频入口</h3>
+<div class="source"><strong>@karpathy · high / weekly</strong> · 11-02 02:14:46 · <a href="https://x.com/karpathy/status/2116957135661945283">原帖</a> · <a href="https://hackertube.org/">HackerTube</a> · 交叉信号：<a href="https://x.com/swyx/status/2116773135668404286">swyx，11-01 14:03:37</a></div>
+<p><strong>摘要：</strong>Karpathy 自述用 Claude 从 20 年约 4,300 万条 Hacker News 评论中提取了 6,454 个被推荐的视频，以 Opus 5.5、Medium effort 在约两小时内完成 HackerTube。原帖说明网站无须登录、状态保存在本地浏览器，并用视频中段画面代替上传者优化过的缩略图；其手工工作主要是创建 YouTube API key、开 VPS 和购买域名。帖子还称底层分析数据可下载供再利用，本轮确认网站入口可达，但未下载数据或审计实现，因此上述规模与耗时均按作者自述处理。</p>
+<p class="why"><strong>为什么值得看：</strong>这是“社区历史语料 → 提炼偏好信号 → 新发现界面”的完整产品闭环。壁垒可能更靠近语料质量、排序标准与复用权限，而非页面本身；对创业者，比再做通用聊天框更具体。</p>
+<p class="action"><strong>后续行动：</strong>用固定 20 个兴趣主题对比原生 YouTube 与 HackerTube 的结果质量、重复率和发现耗时；检查数据包许可与更新机制，再考虑迁移到论文、工具或行业访谈发现。不要把作者让 Agent 加固服务器的叙述当成安全审计结论。</p>
+</div>
+
+<div class="card">
+<h3>2. DeepSeek Harness：常驻 Super-agent 的两层架构，与“更快”的边界</h3>
+<div class="source"><strong>@DeepSeekHarness（由 explainx.ai active 资源发现）</strong> · 11-01 19:37:54（帖子 ID 时间推算） · <a href="https://x.com/DeepSeekHarness/status/2116857257245987236">架构原文</a> · <a href="https://github.com/deepseek-ai/dsh-superagent-prototype">公开原型</a> · <a href="https://explainx.ai/blog/deepseek-super-agent-architecture-router-worker-triggers-watchdog-2026">explainx 解读，11-01</a></div>
+<p><strong>摘要：</strong>原文提出让长驻 Router 只承担交互、全局上下文与分派，隔离的 Worker 承担任务执行，再以程序过滤、语义过滤、线程订阅直达、异步工具和 Watchdog 支持常驻工作。作者的合成调度实验中，Super-agent 任务完成时间 p50/p95 为 12.4/15.7 分钟，中性提示的单会话方案为 20.4/29.5 分钟，但前者缓存读取 token 为 23.2M，后者为 6.1M；任务执行由耗时工具模拟，因此不是编程能力提升实验。GitHub README 明确声明这是研究参考原型、不是正式 DeepSeek 产品，且与内部实现及文章设计并不完全一致，部分设计尚未实现。</p>
+<p class="why"><strong>为什么值得看：</strong>文章把“一个助手同时处理多件事”的体验拆成可讨论的系统组件，而非依赖主模型临场决定是否分工。尤其重要的是代价披露：更稳定的调度可能换来更多 token，不能只引用“快 39%”而省略对照组、样本与成本。</p>
+<p class="action"><strong>后续行动：</strong>先审读原型的授权、任务领域模型和执行隔离文档，不直接连接生产账号；设计含追问、取消、重复事件和 CI 噪音的回放集，同时比较 p95、重复执行率及每完成任务成本。文章关于分工的描述不是本日报对任何现有系统配置的变更指令。</p>
+</div>
+
+<div class="card">
+<h3>3. OpenAI 官方确认：12 月 ChatGPT 与 Codex 共享用量</h3>
+<div class="source"><strong>OpenAI Help Center（由 explainx.ai 发现）</strong> · explainx 文章日期 11-01；官方页未提供可核验的绝对更新时间，本轮首次核实 · <a href="https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits">官方说明</a> · <a href="https://explainx.ai/blog/chatgpt-codex-usage-limits-merge-shared-token-allowance-december-2026">发现入口</a></div>
+<p><strong>摘要：</strong>帮助中心明确写明，随着 Work 的 agent 能力并入 ChatGPT 主体验，Plus、Pro、Business 从 12 月起共享 ChatGPT/Codex 使用额度。计量单位是 token，先进模型和复杂任务通常消耗更多，Instant chat 不计入；用户可在 Settings → Usage 查看合并剩余额度和重置时间，触限后可等待、升级或为适用功能购买 credits。页面没有列出各档 token 数、具体切换日，也没有在这段文字里说明原有各类限额将怎样保留或调整，因此不能据此断言涨价或缩水。</p>
+<p class="why"><strong>为什么值得看：</strong>重度聊天与编程可能开始竞争同一预算，模型路由、任务拆解和可观察用量会直接影响工作流。商业分析应区分“计量结构变化”与“单位价格变化”，目前只确认前者。</p>
+<p class="action"><strong>后续行动：</strong>记录切换前一周的工作类型与触限频次，待官方公布额度后再做同任务比较；重点确认按席位还是其他维度计量、重置窗口与 credits 覆盖范围，不以未公布数字做订阅采购判断。</p>
+</div>
+
+<div class="card">
+<h3>4. Simon / Jepsen：漂亮文档不能替代数据库正确性证据</h3>
+<div class="source"><strong>@simonw · high / weekly；Kyle Kingsbury / Jepsen</strong> · Simon 摘引 11-02 00:49:04；Jepsen 原报告绝对发布时间本轮未确认 · <a href="https://simonwillison.net/2026/Nov/1/kyle-kingsbury/">Simon 条目</a> · <a href="https://jepsen.io/analyses/particledb-1.1.4">ParticleDB 原报告</a></div>
+<p><strong>摘要：</strong>Simon 摘引 Kingsbury 对 LLM 时代软件信任的担忧，本轮回查了 Jepsen 原报告：测试覆盖 ParticleDB 1.1.4 至 1.1.18.11.rc-22，共呈现 96 项问题，绝大多数在后期版本似已解决，但最后被测版本仍有已提交写入丢失及事务异常。报告称多数问题在单服务器、单客户端、无故障条件下即可触发，并指出文档中的“Full ACID”“形式化证明”等说法与可核验证据存在落差。报告也公平列出厂商随后声称 1.1.19-rc.13 已解决剩余问题，并披露研究由 Orkes 资助；不能把旧版本发现写成“当前版本依然存在全部 96 项缺陷”。</p>
+<p class="why"><strong>为什么值得看：</strong>LLM 同时降低代码和成熟文档的生产成本，外观信号的鉴别力随之下降；Agent 的持久记忆、队列和任务状态最终仍依赖可靠存储。此处是一个具体案例，不能从单个案例推论所有 AI 生成软件都不可靠。</p>
+<p class="action"><strong>后续行动：</strong>基础设施选型要求提供精确版本、复现脚本、失败语义与修复验证；若评估新版本，单独复测提交后持久性、并发隔离与恢复路径，并区分厂商声明和第三方验证。</p>
+</div>
+
+<div class="card">
+<h3>5. Hamel 与 Chollet：榜单的商业激励，不等于泛化能力</h3>
+<div class="source"><strong>@HamelHusain · high / weekly</strong> · 11-02 04:16:06 · <a href="https://x.com/HamelHusain/status/2116987667716223160">原帖</a><br><strong>@fchollet · high / weekly</strong> · 11-02 07:43:28 · <a href="https://x.com/fchollet/status/2117039855012389214">原帖</a></div>
+<p><strong>摘要：</strong>Hamel 将 AI benchmark 公司与供应商排名、抵押证券评级、大学排名的生意作类比，表达了对评价机构激励结构的怀疑；帖子没有提供针对某家公司的利益冲突证据，不能扩写为已证实的操纵。Chollet 则用进化作比喻，认为系统需要泛化与鲁棒性，过度专门化会在环境变化时变得脆弱；这是一条观点，不是新论文或实测结果。两帖可共同提示评估者同时检查评价机制和分布变化，但不应被拼成两人共同发表的研究结论。</p>
+<p class="why"><strong>为什么值得看：</strong>模型采购和投资容易把排名当作压缩后的“质量事实”。真正应问的是谁付费、测什么、是否披露失败样本、换一批真实任务后结论是否仍成立。</p>
+<p class="action"><strong>后续行动：</strong>把公开排名仅用于候选筛选，再用未公开的实际任务与分布外样本复核；为每个结论附样本量、版本、评分规则和商业关系披露，避免以作者声望替代证据。</p>
+</div>
+
+<div class="card">
+<h3>6. Simon：升级 Python 后，先辨认锁文件造成的旧依赖约束</h3>
+<div class="source"><strong>@simonw · high / weekly</strong> · 11-02 07:24:22 · <a href="https://simonwillison.net/2026/Nov/1/delete-uv-lock-first/">If in doubt, delete the uv.lock file</a></div>
+<p><strong>摘要：</strong>Simon 在升级 Python 3.15 后遇到依赖构建错误：本地被忽略的 uv.lock 固定了 watchfiles 1.1.1，相关 PyO3 构建检查只支持到 Python 3.14。其库项目通常不提交锁文件，但运行 uv run pytest 会留下本地锁；他称删除该本地锁再运行测试通常能解决问题。这里的适用前提是作者自己的库开发环境，不能推成所有应用都应删除锁文件、或锁文件本身有害。</p>
+<p class="why"><strong>为什么值得看：</strong>Agent 环境升级的失败可能来自未提交的本地状态，而不是业务代码。若不记录解释器、锁文件与解析结果，自动修复很容易改错层。</p>
+<p class="action"><strong>后续行动：</strong>出现类似错误时先保存错误日志、解释器与锁定版本，在隔离环境验证重新解析能否解决；应用项目应保留可复现依赖策略，经过测试后再审查更新锁，而非盲目删除。</p>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+<li><strong>Karpathy / swyx：</strong>前者披露 HackerTube 实践，后者讨论其默认 effort 选择；作为一个事件合并，不制造两条产品发布。</li>
+<li><strong>Hamel / Chollet / Simon：</strong>本窗口的高价值讨论集中于评估激励、泛化与软件可信性；三者证据类型不同，已在正文区分。</li>
+<li><strong>Nathan Lambert：</strong><a href="https://x.com/natolambert/status/2116908567571955756">11-01 23:01:47 原帖</a>推广自己的开放模型数据站；短链接解析至 <a href="https://dashboard.interconnects.ai/">Open Models Dashboard</a>。站点可达，但静态抓取仅得到标题，未核验数据覆盖、更新频率与口径，不将其写成新数据发布。Interconnects RSS 最新仍为 10-30。</li>
+<li><strong>OpenAI / Google DeepMind / Anthropic：</strong>本轮所查 OpenAI News RSS、DeepMind RSS、Anthropic Newsroom 未发现窗口内新文章；这不是“公司没有更新”的结论。OpenAI 帮助中心的新发现另列正文，不与 News RSS 混为一谈。</li>
+<li><strong>LangChain：</strong>RSS 本轮 HTTP 200 且可解析，最新为 10-30《Managed Deep Agents v0.10: Browser Use and Async Subagents》。不延用此前 RSS 不可用的判断；本窗口没有新条目。</li>
+</ul>
+
+<h2>值得跟进项目与研究方向</h2>
+<table><thead><tr><th>项目 / 方向</th><th>已有证据</th><th>下一步与验收点</th></tr></thead><tbody>
+<tr><td>HackerTube / 垂直内容发现</td><td>作者原帖和公开网站；时间、语料规模是自述</td><td>验证推荐质量、数据许可、刷新成本；把技术可行性与商业留存分开</td></tr>
+<tr><td>dsh-superagent 研究原型</td><td>原文 + 官方组织仓库，明确非正式产品</td><td>对照设计与代码，做事件回放和授权边界审查；不把架构图当已实现功能</td></tr>
+<tr><td>Open Models Dashboard</td><td>Lambert 原帖 + 短链落地页</td><td>人工查看指标定义、数据导出与更新时间；本轮未据此生成投资信号</td></tr>
+<tr><td>StreamVibe：主动助手的“沉默决策”</td><td>explainx 11-01 解读；<a href="https://arxiv.org/abs/2610.34662">arXiv 原论文</a> v1 为 10-26、v2 为 10-28 02:53 北京时间</td><td>论文摘要报告 4.1K 评估、85K 训练样本，模型与分层记忆分别报告 10.7%、12.3% 改善。属于作者自建基准结果；优先复核长任务误打扰率和遗漏率，而非只看回答质量</td></tr>
+</tbody></table>
+<p><strong>研究补充（非本日新发布）：</strong>StreamVibe 将明确、隐含和动态意图区分评估，并用有生命周期的分层记忆维护意图状态。这与 DeepSeek 的常驻 Agent 问题互补，但论文不是对该架构的验证。explainx 所称长任务指标最多下降 61.5% 尚未在本轮摘要核验中复算，保留为待查线索，不作为标题事实。</p>
+
+<h2>待验证信息</h2>
+<ul>
+<li>HackerTube 的“约两小时”“4,300 万评论 / 6,454 视频”、默认配置及加固效果为作者叙述；本轮没有独立重跑或审计。</li>
+<li>DeepSeek 合成调度试验每种设计仅运行 5 次，作者明言仅供方向参考；相对中性单会话 p50 约缩短 39%，相对强制鼓励分工的对照则差距较小。缓存读取 token 不是最终费用，不能拿它直接等同于美元成本。</li>
+<li>OpenAI 官方页未列绝对发布时间、额度数字或精确切换日。本轮通过 11-01 explainx 文章发现并确认政策正文，按“本轮核实”处理，不冒充已知发布时间的 24 小时新公告。</li>
+<li>ParticleDB 1.1.19-rc.13 的剩余问题修复为报告所载厂商声明；本轮未执行新版本独立复测。</li>
+<li>StreamVibe 的改进数值来自作者自建 benchmark，无本轮独立复现；61.5% 长任务退化、基础模型及团队归属等二手细节未纳入已确认结论。</li>
+<li>explainx 的 EditAgent、AiSOC、FineDNA、HairDeck 等 11-01 条目，以及“疑似 Mythos 泄露”说法，本轮未逐一核验原始研究或仓库；不据标题当成已确认发布，也不传播疑似泄露材料。</li>
+</ul>
+
+<h2>低优先级噪音 / 不重复报道</h2>
+<ul>
+<li><a href="https://x.com/JeffDean/status/2117024473992056955">Jeff Dean 的投票提醒</a>（11-02 06:42）和 <a href="https://x.com/fchollet/status/2116962954877014152">Chollet 生日礼物帖</a>（11-02 02:37）与本日报技术主线关系较弱，保留索引，不展开。</li>
+<li>swyx 的 effort 偏好讨论并非对各推理档位质量的系统测试，不升格为选型结论。</li>
+<li>Latent Space RSS 最新仍是 10-31 的 Arca 与 Google AI Mode 条目，均在上个日报窗口内；本日不重复当作新事件。HF 最新 10-30、GitHub Changelog 最新 10-29，也未发现窗口内新增。</li>
+<li>explainx 的 sitemap 仅含博客索引，lastmod 为 11-01 00:00 UTC，不能代表某篇文章发布时间；本轮直接打开博客索引发现当日内容。AI 播客索引 JSON 的 metadata.updatedAt 仍为 2026-07-02，不作为“新播客发布”信号。</li>
+<li>没有从本窗口推出新的估值、股票目标价或融资结论；产品演示和评估观点不足以支持财务判断。</li>
+</ul>
+
+<h2>抓取覆盖与原始链接</h2>
+<p>本轮检查了清单全部 30 个 active X 账号（22 high、8 medium）的公开可见页面，窗口内提取到 7 条可见帖子：5 个相关信号及 2 条低优先级生活/公共提醒；其中 swyx 与 Karpathy 合并。时间取自页面时间戳，DeepSeek 衍生来源的时间另作标注；旧帖、置顶和引用内容没有仅凭页面顺序当作新帖。</p>
+<p>公开 X 均返回 200，但有限可见列表不等于完整历史；未使用登录凭证、GraphQL 私密数据或 Folo CLI。Nitter 样本返回 410、RSSHub 样本 404、xcancel 样本 451；搜索服务报 provider_error，未用搜索摘要补写事实。博客/RSS 补充包括 Simon、Interconnects、Latent Space、Hugging Face、LangChain、OpenAI、DeepMind、Google AI、Lilian Weng、Chip Huyen 和 Hamel；Hamel 初试 feed.xml 为 404，已从首页发现并改读 index.xml。Eugene Yan 所试 feed.xml 为 404，首页可达，未声称完成其全部文章核验。抓取失败与“无新条目”分别记录。</p>
+<ul>
+<li>公开账号入口：<a href="https://x.com/karpathy">Karpathy</a> · <a href="https://x.com/HamelHusain">Hamel Husain</a> · <a href="https://x.com/fchollet">François Chollet</a> · <a href="https://x.com/natolambert">Nathan Lambert</a> · <a href="https://x.com/simonw">Simon Willison</a> · <a href="https://x.com/swyx">swyx</a>。</li>
+<li>原文入口：<a href="https://simonwillison.net/atom/everything/">Simon Atom</a> · <a href="https://hamel.dev/index.xml">Hamel RSS</a> · <a href="https://www.interconnects.ai/feed">Interconnects RSS</a> · <a href="https://www.latent.space/feed">Latent Space RSS</a>。</li>
+<li>机构来源：<a href="https://openai.com/news/rss.xml">OpenAI News RSS</a> · <a href="https://www.anthropic.com/news">Anthropic Newsroom</a> · <a href="https://deepmind.google/blog/rss.xml">DeepMind RSS</a> · <a href="https://www.langchain.com/blog/rss.xml">LangChain RSS</a> · <a href="https://huggingface.co/blog/feed.xml">HF Blog RSS</a> · <a href="https://github.blog/changelog/feed/">GitHub Changelog RSS</a>。</li>
+<li>Web 清单来源：<a href="https://explainx.ai/blog">explainx 博客</a> · <a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">博客 sitemap</a> · <a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a>。</li>
+</ul>
+<p class="meta">阅读顺序建议：先看 HackerTube 的产品取舍，再看 DeepSeek 的调度边界，最后用 Jepsen 和两条评估观点校准验收标准。今天值得带走的不是“Agent 万能”，而是<strong>原型更便宜之后，独立验证与稳定运营变得更值钱</strong>。</p>
