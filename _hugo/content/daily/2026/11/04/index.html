@@ -1,0 +1,114 @@
+---
+title: "Follow 日报｜浏览器工具的成本杠杆、权重实验复核与专业 Agent 的验收线"
+date: "2026-11-04"
+category: "daily"
+url: "/daily/2026/11/04/"
+summary: "LangChain 比较七类浏览器工具，Simon 用本地 Qwen 复核权重识别；Hamel 追问评分器与答案泄漏。OpenAI 的 CAD/PCB、DeepMind 的化学工作台展示专业 Agent 的进展，也暴露制造与实验验收边界。附 Claude 更新、企业部署及待核线索。"
+---
+<div class="meta"><strong>2026 年 11 月 4 日 · 周三</strong><br>观察窗口：2026-11-03 08:00—2026-11-04 08:00（北京时间），承接上次运行。下文均为北京时间；X 时间由帖子 ID 推算至分钟，RSS 时间采用源数据，只有日期的页面不补造精确时刻。本轮依照 Follow List 的 active 状态，先检查 22 个 high 账号，再检查 8 个 medium 账号及 2 个 Web 资源；30 个账号的 Cadence 均为 weekly，本轮全部尝试。公开时间线仅能证明本轮可见内容，不代表完整覆盖。无 Folo、无登录凭据采集、无 CAPTCHA 绕过。</div>
+
+<h2>总览</h2>
+<p>今天的主线是<strong>模型之外的系统设计，开始决定 Agent 的实际价值</strong>。浏览器任务里，工具接口、返回上下文和往返次数能显著影响成本；权重空间实验里，本地模型的新复核提供了有趣证据，但不能直接推出递归自我改进；专业任务里，CAD、化学分析和物业运营都仍依赖领域人员给出验收标准。</p>
+<p>本轮在公开 X 页面获得窗口内 19 个唯一帖子链接，其中 14 个属于清单账号本人，5 个为页面嵌套引用来源。精选下文并不把它们全部算作独立新闻：Pando 仅补充商业化意向，旧论文的今日转发单独标注，付费通讯不读取或转述受限正文。日报优先纳入已经读到正文的官方或作者材料；二手索引中尚未核实的数字只列为线索。</p>
+
+<h2>核心主题：跨账号归纳</h2>
+<h3>一、上下文与工具设计，是 Agent 成本最容易被低估的杠杆</h3>
+<p>Harrison Chase 转引的浏览器实验把模型固定后比较工具，显示原生代码调用、精简页面快照和就地执行的价值；Claude Code 更新则提示，调度器附带了什么连接器、钩子失败后是否停止，也都是产品质量的一部分。<strong>编辑判断：</strong>下一轮工具选型应比较每项验收成功任务的总成本、延迟、失败恢复和权限范围，而不是只比较模型单价或工具数量。</p>
+<h3>二、能力证据必须拆开：识别权重、修改模型、完成任务不是同一件事</h3>
+<p>Simon 复核的是小型游戏网络的无工具权重识别；昨日热议的 Qwen 权重修复则属于另一类实验。Hamel 对评分器及答案泄漏的关注、LangChain 对完整会话的人类评审建议，共同指向同一个要求：保存输入、工具、轨迹、评分器和失败案例，才能判断成绩来自能力进步还是测试设置变化。</p>
+<h3>三、专业 Agent 的机会在工作流，但最后一公里仍是领域验证</h3>
+<p>OpenAI 展示从机械、电气到软件的设备设计，DeepMind 展示化学数据整理和候选分子设计，Heimstaden 展示资产数据处理。共同结构是“模型协调、多种专业工具执行、领域人员审核”；并不意味着工厂可以不审图、候选药物可以不做实验。<strong>产业观察：</strong>值得跟踪的不是通用聊天席位本身，而是专业软件连接、数据质量、版本溯源和结果验收环节是否形成持续收入。</p>
+
+<h2>重要更新</h2>
+<div class="card">
+<h3>1. LangChain：同一模型下，浏览器工具设计拉开成本与速度</h3>
+<div class="source"><strong>@hwchase17 / Sydney Runkle · high / weekly</strong> · Chase 11-04 02:13；作者帖 01:49，博客标注 11-03 · <a href="https://x.com/hwchase17/status/2117681681658437728">发现入口</a> · <a href="https://www.langchain.com/blog/how-we-optimized-browser-use-for-deep-agents">完整实验</a> · <a href="https://github.com/langchain-ai/deepagents/pull/6868">结果材料</a></div>
+<p><strong>摘要：</strong>LangChain 在 100 项 WebVoyager 任务上使用 Claude Sonnet 5.5 比较七种工具，报告 Stagehand 通过率 90%、合计成本 1.98 美元、任务耗时中位数 17.4 秒；Playwright MCP 对应为 78%、26.71 美元，成本约为前者的 13 倍。作者把主要优势归于代码模式批量执行、精简可交互元素快照，以及减少浏览器与 Agent 的往返；在较难任务上也报告了优势。实验还发现，简单截断快照会诱发再次读取而未改善单位成功成本，基于页面安静状态提前结束等待，比固定睡眠更有效。以上为厂商在特定模型、任务与评分器下的实验，不是所有站点、所有费用口径下的通用十三倍保证。</p>
+<p class="why"><strong>为什么值得看：</strong>浏览器任务通常是长串行流程，信息返回和工具调用方式的差别会累积放大。优化框架本身，可能比立即更换更昂贵模型更有收益。</p>
+<p class="action"><strong>后续行动：</strong>用十至二十个自己的只读任务比较现有工具和 Stagehand，分别记模型费用、浏览器服务费用、成功率、人工介入和重试次数；保留完整轨迹。遇到 CAPTCHA 或访问限制应停止或使用获准渠道，本轮未部署工具、未采用原文所提平台规避能力。</p>
+</div>
+
+<div class="card">
+<h3>2. Simon：本地 Qwen 也能辨认小型游戏网络，但不等于通用权重自改进</h3>
+<div class="source"><strong>@simonw · high / weekly</strong> · 博客 11-04 00:29，X 00:31 · <a href="https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/">实验与推理轨迹</a> · <a href="https://x.com/simonw/status/2117655816581071203">作者帖</a> · <a href="https://github.com/RikiyaT/lm_understand-logs">原始提示与日志</a></div>
+<p><strong>摘要：</strong>Simon 把 Weight-Space Programming 的无工具游戏识别提示交给笔记本上的 Qwen 3.8 27B，报告它辨认出 Pac-Man、Pong 和 Breakout，但没有辨认出 Freeway。三个成功案例分别耗时约 46、65 和 52 分钟，Pac-Man 使用约 4.35 万推理 token；这说明开放本地模型也能完成部分小型网络权重解释，而非只有最强闭源模型可以做到。作者明确把“直接读权重且不运行工具”与“借助代码修改模型”分开讨论，并反对从这些例子推导源码时代已经结束。本文是今日新增复核，不重复把昨日的数学提分数字当作新发布成果；本轮未亲自运行模型复现。</p>
+<p class="why"><strong>为什么值得看：</strong>它同时增加了开放模型的正面证据和边界证据：可检查的成功样本、失败样本以及很高的推理耗时，都比抽象的“自我改进突破”更有信息量。</p>
+<p class="action"><strong>后续行动：</strong>如果跟进研究，先做盲化游戏标签、陌生任务与多随机种子的识别实验，再与人类手算和简单程序基线比较；不要把识别四选一任务推广为任意大网络的理解或廉价自动训练。</p>
+</div>
+
+<div class="card">
+<h3>3. Hamel：BenchmarkGate 从排名争论走向工具接口与评分器审计</h3>
+<div class="source"><strong>@HamelHusain · high / weekly；关联 @PrimeIntellect</strong> · 11-04 06:33；Prime Intellect 02:54 · <a href="https://x.com/HamelHusain/status/2117746902402039859">完整评论</a> · <a href="https://x.com/PrimeIntellect/status/2117691977487831483">研究方入口</a> · <a href="https://x.com/HamelHusain/status/2117688053129171206">另一个今日转发</a></div>
+<p><strong>摘要：</strong>Hamel 介绍研究者发现的两组问题：AutomationBench 的请求体描述方式和评分器缺陷，OfficeQA Pro v2 的正则/Python 答案提取拒绝有效回答，以及模型可能通过联网找到公开答案的证据。Hamel 称修正这些问题后相关测试接近饱和，但本轮核读的是他的完整评论与 Prime Intellect 发布入口，未对修订代码、全部轨迹和成绩独立复算，因此不刊登未经复核的模型新排名。其另一个今日转发讨论移除图片后 SWE-bench Multimodal 分数变化很小；被转文章原发表于 10 月 21 日，属于旧材料再讨论，不是今日新研究。</p>
+<p class="why"><strong>为什么值得看：</strong>这比“模型会刷榜”更具体：工具接口可能限制能力，评分器可能拒绝正确答案，联网环境也可能使测试答案可得。三个机制需要分别审计，不能用一个总分概括。</p>
+<p class="action"><strong>后续行动：</strong>检查自建评测的输入 schema、答案规范化、网络访问和测试集公开程度；抽取人工判断正确但被判失败的轨迹。待研究者给出可定位的补丁与复算结果，再更新模型选择，不把转述当作已经证实的全榜失效。</p>
+</div>
+
+<div class="card">
+<h3>4. OpenAI：CAD、PCB 与仿真开始连成完整工程工作流</h3>
+<div class="source"><strong>OpenAI 官方，关联 @sama / @gdb</strong> · RSS 11-03 20:00 · <a href="https://openai.com/index/accelerating-engineering-for-the-physical-world/">原文</a></div>
+<p><strong>摘要：</strong>OpenAI 展示用 Astra 设计可与 Codex 对话的设备，覆盖外壳、内部结构、PCB、界面和软件集成；两名成员用不到一周的业余项目时间形成设计，合同制造商用不到一个月完成小批样机。文章同时承认制造前仍有多轮审查与迭代，模型未稳定考虑工厂能力、公差与装配细节，不能把“无直接人工编辑的设计测试”表述成“无需人工审核即可量产”。厂商还报告内部硬件团队 token 使用量自 2 月以来增长 23 倍，较新内部模型在 BenchCAD 2.0 的平均分为 0.875、Astra 高推理设置为 0.594，并宣布与 Mazda 及 Chip Ganassi Racing 的合作；这些是内部使用与评测数据，不是独立生产效率证明。</p>
+<p class="why"><strong>为什么值得看：</strong>Agent 从代码仓库进入 CAD、电子和制造工具链，可能带来新的数据接口与验证需求。最关键的商业门槛不是能画图，而是能否减少返工、满足制造约束并明确责任。</p>
+<p class="action"><strong>后续行动：</strong>选择一个非关键零件，从建模、工程图到制造规则检查做受控试点，记录审图修改、尺寸错误与返工量；单独核算仿真和专家时间。关注专业工具厂商的可编辑接口与标准格式，不把 token 增长倍数换算为生产率倍数。</p>
+</div>
+
+<div class="card">
+<h3>5. DeepMind：化学 Skills 把确定性工具与 Agent 编排接起来</h3>
+<div class="source"><strong>Google DeepMind 官方，关联 @JeffDean / @demishassabis</strong> · RSS 11-04 01:01 · <a href="https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/">技术演示</a></div>
+<p><strong>摘要：</strong>DeepMind 展示 Google Antigravity 的 Cheminformatics Skills，以 RDKit 和 ChEMBL、PubChem 连接器整理化合物，执行匹配分子对分析、活性预测和候选大环分子设计，并称所演示工作流约一小时完成。其结构是语言模型负责协调、检索和科学推理，确定性化学工具执行分子计算；文章还讨论按时间或分子骨架划分训练/验证数据，避免把相似样本泄漏误当泛化。作者明确强调稀疏数据、实验室差异和测量噪声限制预测精度，计算设计只是待测试假设，每个候选仍需合成与实验验证。文末称技能已经可用，并开放面向一万名科学家的六个月高用量层申请，受资格、容量和筛选限制，不是无条件普惠额度。</p>
+<p class="why"><strong>为什么值得看：</strong>领域 Skills 的价值在于把可重复步骤、数据来源与验证方法固化，而不是让模型凭语言直觉代替科学计算。它也为“专家 + AI”提供了比抽象口号更具体的工作流。</p>
+<p class="action"><strong>后续行动：</strong>优先审查来源溯源、结构标准化和数据拆分方案，再讨论候选设计质量；若有相关团队，以已知公开数据进行回放并邀请化学专家验收。本轮只阅读材料，不执行化学设计或宣称发现新药。</p>
+</div>
+
+<div class="card">
+<h3>6. Claude：新版本更关注调度权限、失败关闭与内容标识</h3>
+<div class="source"><strong>Anthropic 官方文档，关联 @alexalbert__ / @AmandaAskell</strong> · 发布记录均标注 11-03，精确时刻未提供 · <a href="https://code.claude.com/docs/en/changelog">Claude Code 2.1.317</a> · <a href="https://platform.claude.com/docs/en/release-notes/overview">平台更新</a> · <a href="https://platform.claude.com/docs/en/build-with-claude/text-watermark">水印说明</a></div>
+<p><strong>摘要：</strong>Claude Code 2.1.317 增加了新建云调度任务获得非用户请求连接器时的提示、向网络发送账户邮箱前的检查，以及 Agent SDK 钩子回调的 onFailure: "block"，使回调失败可以阻止动作。平台 11 月 3 日记录称 Claude Mythos 5、Opus 4.7 和 Sonnet 4.6 在列明的平台生成文本时携带水印；Sonnet 4.6 使用非默认采样参数时可能不携带。官方文档称该水印不增加 token 或隐藏字符，也不携带用户或组织信息；这不是所有模型、所有渠道、所有文本都可可靠识别的承诺。页面只提供日期，所以这一项是日期级增量，不能确认其发布精确落在北京时间窗口的哪一分钟。</p>
+<p class="why"><strong>为什么值得看：</strong>自主任务的可靠性不仅是完成率，还包括权限是否透明、检查失败时是否继续；水印则是另一层内容来源标识，不能与访问控制混为一谈。</p>
+<p class="action"><strong>后续行动：</strong>维护此类工具的团队应审查调度任务连接器清单，测试关键钩子失败后的实际行为；如依赖水印，核对模型、平台与采样设置。这里只报告更新，本轮没有升级软件、修改连接器或测试水印检测。</p>
+</div>
+
+<div class="card">
+<h3>7. 企业落地：Heimstaden 的业务案例与 LangSmith 的部署边界</h3>
+<div class="source"><strong>OpenAI / Heimstaden；LangChain 官方</strong> · Heimstaden RSS 11-03 16:00；BYOC 页面标注 11-03 · <a href="https://openai.com/index/heimstaden/">物业案例</a> · <a href="https://www.langchain.com/blog/langsmith-byoc-aws-gc-azure">BYOC 更新</a></div>
+<p><strong>摘要：</strong>Heimstaden 案例称，在荷兰生成一张虚拟布置房源图的成本从约 50 欧元降至不足 0.10 欧元，并报告以 Codex 支持环境风险数据管线、覆盖 20,112 项资产；“五人一年到两人两个月”是其估算的交付需求变化，不是随机对照试验或已经实现的公司整体效率倍率。LangSmith 同日宣布 BYOC 在 AWS 为 GA、Azure 和 Google Cloud 为 Beta，敏感追踪、提示、数据集和部署留在客户数据平面，但认证、组织配置、计费元数据等控制平面仍由 LangChain 运行。Google Cloud 数据平面发布时由美国控制平面管理，历史 trace 迁移当时仅 AWS 可用，不能说三云能力已经完全一致。</p>
+<p class="why"><strong>为什么值得看：</strong>具体业务收益和可采购部署形态要一起看：便宜生成未必改善整个流程，数据“在自己云内”也不等于没有外部控制平面或运营方访问责任。</p>
+<p class="action"><strong>后续行动：</strong>在房源等流程上分别衡量单项费用、审核工时、返工和业务效果；企业部署选型列出数据平面/控制平面的字段、地区、运营权限与迁移范围。不要将厂商客户案例直接当成收入预测。</p>
+</div>
+
+<h2>人物 / 机构动态</h2>
+<ul>
+<li><strong>Greg Brockman / OpenAI：</strong>11-04 07:05 欢迎 Jill Hazelbaker 加入；官方任命页称她将任首席企业事务官，负责全球传播与企业定位，来自 Uber。<a href="https://x.com/gdb/status/2117755028211642849">欢迎帖</a> / <a href="https://openai.com/index/jill-hazelbaker-chief-corporate-affairs-officer/">官方任命</a>（RSS 标时 11-03 08:00，恰为窗口起点）。<strong>意义与行动：</strong>跟踪公众沟通与监管接口变化，不从人事任命推断未宣布的产品或上市安排。</li>
+<li><strong>Greg Brockman / Pando：</strong>11-03 09:54 表示正在考虑向外部提供 Pando，并征求兴趣；<a href="https://x.com/gdb/status/2117435285021810921">原帖</a>。这是相较昨日技术稿的新增意向，尚非产品 GA 或定价公告；后续等候服务形态、数据边界、SLA 与开放范围。</li>
+<li><strong>Nathan Lambert：</strong>11-04 01:35 称 Fireworks 每天服务超过 40 万亿个“专门化模型”token，并把这类模型理解为面向客户后训练的模型；<a href="https://x.com/natolambert/status/2117672040807489553">原帖</a>。目前仅核到个人陈述，未核到独立计量与收入口径；后续查官方定义、付费占比与单位任务成本，不能以 token 数推算收入。</li>
+<li><strong>Kevin Weil：</strong>11-03 22:37 强调领域专长与 AI 结合仍有价值，引用数学界讨论；<a href="https://x.com/kevinweil/status/2117627190938595667">原帖</a>。这是观点而非新的数学结果；与本日工程、化学案例一起读，优先跟踪专家实际参与的验证工作。</li>
+<li><strong>Harrison Chase / swyx：</strong>Chase 在 11-03 11:55 提问组织/Agent 记忆是否可等同于会更新的 Skills，<a href="https://x.com/hwchase17/status/2117465596342509793">投票帖</a>不是定义共识；swyx 的 <a href="https://x.com/swyx/status/2117679157035602065">11-04 02:03 会议阵容帖</a>可作发现项目的入口，不把出场名单视为产品验证。</li>
+</ul>
+
+<h2>值得跟进项目与下一步</h2>
+<table><thead><tr><th>方向</th><th>先做什么</th><th>关键验收线</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/browserbase/stagehand">Stagehand / Deep Agents</a></td><td>回放一组自己的只读浏览器任务</td><td>每项成功任务总费用、延迟、恢复率；不同工具统一模型与评分口径</td></tr>
+<tr><td><a href="https://github.com/RikiyaT/lm_understand-logs">权重解释实验</a></td><td>先读提示、失败例和推理轨迹</td><td>盲测、随机种子、陌生任务；识别与编辑分开评估</td></tr>
+<tr><td><a href="https://www.langchain.com/blog/human-insight-strategic-advantage-agents">完整会话人类评审</a></td><td>把失败轨迹及专家理由变成可回放样本</td><td>不只看最终答案；核对早先约束、真实工具结果与裁判分歧</td></tr>
+<tr><td>工程 / 科研 Agent</td><td>选择可验证、非关键的历史任务回放</td><td>制造约束、数据拆分、原始来源和领域验收齐全</td></tr>
+<tr><td><a href="https://www.langchain.com/blog/langsmith-byoc-aws-gc-azure">BYOC</a></td><td>画出部署、数据和运维责任边界</td><td>AWS GA 与两云 Beta 区别、控制平面地区、迁移覆盖、总运维成本</td></tr>
+</tbody></table>
+<p>这些是阅读后的建议行动，不代表本轮已安装、实测或向外部产品上传数据。</p>
+
+<h2>待验证信息：不进入已证实结论</h2>
+<ul>
+<li><strong>评测修订：</strong>Hamel 所述 AutomationBench / OfficeQA 问题需定位原始补丁与轨迹，联网答案获取的频次与对总分影响未独立核算；SWE-bench Multimodal 旧文转发也不等于新版本已全面复测。</li>
+<li><strong>专门化 token 规模：</strong>Fireworks 的超过 40T/日说法缺独立口径；需区分自报、实际付费推理量和可比收入。</li>
+<li><strong>来自 explainx.ai 的研究发现线索：</strong><a href="https://explainx.ai/blog/ai2-statebench-long-context-state-tracking-gated-deltanet-frontier-models-13-percent-2026">StateBench 长上下文状态跟踪</a>、<a href="https://explainx.ai/blog/anthropic-flashprove-provable-inference-zksnark-llama-4-maverick-110-tokens-per-second-lean-apache-2026">FlashProve 可证明推理</a>和 <a href="https://explainx.ai/blog/sarvam-prism-open-weights-decision-model-105b-44ms-calibrated-confidence-apache-2-2026">Sarvam Prism</a>在索引中标注 11-03；本轮仅读到索引描述，尚未核原论文、代码、许可证及硬件口径，标题中的准确率、吞吐和延迟不作为已确认结论。</li>
+<li><strong>商业及产品传闻：</strong><a href="https://explainx.ai/blog/anthropic-ipo-valuation-1-5-trillion-1-6-trillion-wsj-investors-push-from-2-trillion-claimed-vs-verified-2026">Anthropic 估值谈判</a>、<a href="https://explainx.ai/blog/qwen4-qwen-code-commit-1m-context-default-qwen4-coder-plus-omni-120b-think-claimed-vs-verified-2026">Qwen4 代码线索</a>仅作下次核查队列；估值意向不等于定价，代码字符串不等于发布承诺，不据此形成交易判断。</li>
+</ul>
+
+<h2>低优先级噪音：今天主动不放大的内容</h2>
+<p>Nan Yu 对群聊 AI 打扰的批评可作为体验研究线索，但不是用户留存数据；其航班感受、Shreya 的一句话感慨以及 Clem 的 Reachy mini 滑板演示，没有足够新增技术细节，暂不升级为重点。会议宣传与转发量不等于研究质量。Simon 的赞助通讯只记录公开入口，不读取或摘录付费正文；其公开音频定位隐私链接与今日核心 AI 工程主题相关性较低，留作阅读候选。</p>
+
+<h2>抓取覆盖、限制与原始链接</h2>
+<p><strong>X：</strong>30 个账号公开页面本轮均返回 HTTP 200；19 个窗口内唯一帖子链接不等于完整时间线。能确认窗口内本人帖的账号是 @gdb、@swyx、@hwchase17、@natolambert、@thenanyu、@simonw、@HamelHusain、@kevinweil、@sh_reya、@ClementDelangue。其余 @joshwoodward、@AmandaAskell、@sama、@karpathy、@lilianweng、@polynoamial、@alexalbert__、@OfficialLoganK、@JeffDean、@demishassabis、@miramurati、@eugeneyan、@chipro、@DrJimFan、@fchollet、@drfeifei、@cjpedregal、@raizamrtn、@Thom_Wolf、@AndrewYNg 未在本轮公开可见部分确认窗口内本人新增，不能据此断言本人没有发帖。未使用登录态或 GraphQL，因为公开页面与关联来源已能提供有效材料。</p>
+<p><strong>镜像：</strong>Nitter RSS 返回 410、RSSHub 示例 404、xcancel 451，均未用来补造时间线。Eugene 的两个常见 RSS 地址为 404，不能据此判定博客未更新；LangChain 旧 RSS URL 返回 HTML，已改读官方博客索引及正文。部分 OpenAI 不带尾斜线地址返回访问挑战，正常的带尾斜线公开 URL 可读；未尝试挑战绕过。</p>
+<p><strong>两个 Web 控制项：</strong>explainx sitemap 返回 200，但仅列博客索引且 lastmod 为 11-02，不能作逐文更新时间；已检查博客 JSON-LD，提取 11-03 日期级线索并与原始来源区分。<a href="https://youtube.qiaomu.ai/data/podcasts.json">向阳乔木播客 JSON</a>可读，元数据 updatedAt 仍为 2026-07-02，不能当作今日新节目清单。</p>
+<p><strong>RSS 与博客：</strong><a href="https://simonwillison.net/atom/everything/">Simon Atom</a>、<a href="https://openai.com/news/rss.xml">OpenAI News</a>、<a href="https://deepmind.google/blog/rss.xml">DeepMind</a>、<a href="https://www.latent.space/feed">Latent Space</a>均发现窗口内条目；Latent Space 的权重专题为二次整理，主要结论已优先读 Simon。<a href="https://www.interconnects.ai/feed">Interconnects</a>、<a href="https://hamel.dev/index.xml">Hamel 博客</a>、<a href="https://lilianweng.github.io/index.xml">Lilian 博客</a>及 <a href="https://huyenchip.com/feed.xml">Chip 博客</a>本轮可读 feed 未确认窗口内新文章。另检查 <a href="https://www.anthropic.com/news">Anthropic News</a>并补读官方产品更新，避免只依赖新闻页排序。</p>
+<p><strong>阅读原则：</strong>全文为中文归纳与链接，不转载图片、受限正文或大段原文；厂商数据、第三方观点和编辑建议已标明。未将无法获取或只有二手标题的信息写成确定事实。</p>
