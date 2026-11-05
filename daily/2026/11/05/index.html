@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 日报｜安全流水线的验证瓶颈、Codex 的 Git 拼图与开放模型的成本账</title>
+    <meta name="description" content="OpenAI 报告 Linux 内核 948 项提权漏洞及候选补丁，并拟收购 Pierre；Ripple-65B 与 Kimi K3.1 Pro 权重引出成本、部署与许可证之辨。Simon 的权限修复、Hamel 的基准批评和 Claude Code 无人值守改进共同指向可验证的 Agent 工作流。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 日报｜安全流水线的验证瓶颈、Codex 的 Git 拼图与开放模型的成本账</h1>
+      <p class="portal-lead">OpenAI 报告 Linux 内核 948 项提权漏洞及候选补丁，并拟收购 Pierre；Ripple-65B 与 Kimi K3.1 Pro 权重引出成本、部署与许可证之辨。Simon 的权限修复、Hamel 的基准批评和 Claude Code 无人值守改进共同指向可验证的 Agent 工作流。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-11-05</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta"><strong>2026 年 11 月 5 日 · 周四</strong><br>观察窗口：2026-11-04 08:00—2026-11-05 08:00（北京时间）。承接上次运行，以下时间均为北京时间；X 时间按帖子 ID 推算，RSS 采用源时间，只有日期的资料不虚构时分。依照 Follow List 检查 30 个 active 账号（22 high、8 medium，均为 weekly）及 2 个 active Web 资源，high 优先；公开页面并非完整时间线。未使用 Folo、登录凭据或任何 CAPTCHA 绕过。</div>
+<h2>总览</h2>
+<p>今天有三件值得拆开理解的事：<strong>安全发现可以批量化，但验证与维护者承接仍是瓶颈；编码 Agent 正从生成代码走向 Git 协作基础设施；开放模型的竞争不能只看排行榜，还要看总成本、许可证和任务轨迹。</strong>OpenAI 的 Linux 研究提供了从候选发现到动态复现、提权验证与候选补丁的分层数字，Pierre 收购公告则补上代码审阅与版本管理拼图。Ripple 的小体量路线和 Kimi 的大规模稀疏路线同时出现，提醒我们“参数更大”不是部署决策的唯一轴。</p>
+<p>本轮公开 X 页面提取到窗口内 29 个唯一帖子链接，其中 22 个属于清单账号，7 个为引用或嵌套来源；这些并不都构成新事件。物理工程昨日已报，今天只有转发，不再包装成新发布；付费内容和不完整正文不作补写。以下把作者实测、厂商自报、编辑判断和待验证线索分别标注。</p>
+<h2>核心主题：跨账号归纳</h2>
+<h3>一、Agent 的关键产物不是“一个答案”，而是可审核的证据包</h3>
+<p>Greg Brockman 转述的安全研究强调复现证据和候选补丁，Simon 的 Datasette 更新则把可调用查询和写权限审批嵌入工具接口。Hamel 对排行榜传播方式的批评解释了二者的共同价值：如果用户只看到一个分数或一句“已修复”，就无法判断任务是否真正完成。<strong>编辑判断：</strong>专业 Agent 应交付输入版本、执行轨迹、验收结果和必要的人工签核，而非仅交付自然语言结论。</p>
+<h3>二、编码产品的竞争焦点向代码协作与运行可靠性延伸</h3>
+<p>Pierre 的文件树、差异审阅与代码存储，Claude Code 的无头运行错误状态和配置写入修复，分别解决“人怎样审代码”和“自动化怎样可信地结束”。这些不是模型能力的替代品，而是将模型能力转化为团队吞吐量的条件。投资与创业观察应跟踪审阅负担、故障率、回滚成本和团队留存，而不是把一次并购直接当成普遍估值公式。</p>
+<h3>三、开放权重经济必须同时量成本、许可与真实使用</h3>
+<p>Nathan Lambert、swyx 关注 Ripple 的训练效率，Thomas Wolf 与 Lambert 关注 Kimi 权重与许可，Lambert 的新通讯又直言开放模型采用数据不精确。<strong>编辑判断：</strong>训练费用、推理费用、活跃参数、模型下载量和付费收入各是不同口径；既不能用小模型的单榜成绩推导全面胜出，也不能把开放权重等同于无商业限制的开源。</p>
+<h2>重要更新</h2>
+<div class="card"><h3>1. OpenAI：948 项独立提权漏洞，重点在验证流水线而非“发现即修好”</h3><div class="source"><strong>@gdb · medium / weekly；OpenAI 官方研究</strong> · 官方 RSS 11-04 16:00；Greg 帖 11-05 07:53 · <a href="https://openai.com/index/a-thousand-fewer-paths-to-root/">研究原文</a> · <a href="https://x.com/gdb/status/2118129547443056763">发现入口</a></div><p><strong>摘要：</strong>OpenAI 报告在受控环境中得到 2,308 个候选发现，动态复现 1,724 项漏洞，并经变体分析形成对应 948 项独立本地提权漏洞的候选补丁；这不是 948 项已经全部被上游接受的修复。厂商报告新一轮端到端 API 费用约 121.34 万美元，除以 948 约为每项 1,280 美元，不含研究人员及基础设施全部成本，Greg 的“约 1,000 美元”是概略表述。流程仍保留人工审核；扫描完成后的十天中已有部分问题被上游修复或进入讨论，因此复核最新代码、避免重复报告也是研究结论。</p><p class="why"><strong>为什么值得看：</strong>把候选、动态复现、影响验证和上游合入分开计数，比单独的漏洞数量更能评价自动化安全服务。公开证据显示工作可规模化，但维护者处理能力与补丁质量并未消失。</p><p class="action"><strong>后续行动：</strong>对自有软件安全流程建立这四层漏斗，记录误报率、单位有效修复成本和维护者处理时间；跟踪补丁合入与发行版公告。本日报只做防御性研究整理，不提供利用步骤，也未对任何系统运行测试。</p></div>
+<div class="card"><h3>2. OpenAI 拟收购 Pierre：Codex 继续补齐 Git 工作流</h3><div class="source"><strong>@gdb · medium / weekly；OpenAI / Pierre</strong> · 官方 RSS 11-04 22:30；Greg 11-05 02:05 · <a href="https://openai.com/index/openai-to-acquire-pierre/">收购公告</a> · <a href="https://x.com/gdb/status/2118042051057250377">Greg 帖</a></div><p><strong>摘要：</strong>OpenAI 宣布将收购 Code Storage 背后的 Pierre，公告说其 Trees 与 Diffs 库已用于 Codex 的文件浏览和变更审阅。拟整合方向包括适应多人及 Agent 并行工作的 Git 流程，且表示开源项目将继续开源、现有客户在交割后仍可使用 Code Storage。交易仍需常规交割条件及监管批准，双方在交割前保持独立，公告没有披露价格。</p><p class="why"><strong>为什么值得看：</strong>这为“Agent 写得越多，人越需要高效审阅、溯源与合并”的需求提供产品战略信号，但不等于某项集成功能已上线。</p><p class="action"><strong>后续行动：</strong>跟踪交割、Code Storage 的产品变化及 Codex 审阅工作流；给团队测量每次变更的审阅分钟数和冲突率。不要把 swyx 关于工程师并购身价的泛化观点当作本交易价格。</p></div>
+<div class="card"><h3>3. Ripple-65B Preview：紧凑稠密模型与成本口径值得复核</h3><div class="source"><strong>@natolambert · high / weekly；@swyx · medium / weekly；Ricursive Intelligence</strong> · 原始发布帖 11-05 02:24；Lambert 02:34，swyx 04:11 · <a href="https://ricursive.com/ripple">作者技术说明</a> · <a href="https://x.com/RicursiveAI/status/2118046765857546733">发布帖</a> · <a href="https://x.com/natolambert/status/2118049168967290897">Lambert 评论</a> · <a href="https://x.com/swyx/status/2118073650356384239">swyx 评论</a></div><p><strong>摘要：</strong>Ricursive 发布从头训练的 65B 稠密模型 Ripple-65B Preview，称预训练使用 12 万亿 token、支持最高 100 万上下文，并在 TerminalBench 2.1 得到 80.52 分。其自报 3,200 万美元是含模型阶梯实验、数据、评测、调试与后训练在内的完整研发成本；“前代十分之一”则使用了对另一厂商成本的估算，不能当作经审计的同口径对比。技术说明强调基于 OLMo 路线做小尺度筛选、合成任务和高效强化学习；本轮读到的是发布方结果，未进行独立复现。</p><p class="why"><strong>为什么值得看：</strong>它提供了大规模 MoE 之外的可选路线，值得看小团队如何用实验设计换取成本效率。特定基准领先仍不代表在科学、长程任务及所有生产环境中都领先。</p><p class="action"><strong>后续行动：</strong>先核查模型卡、权重许可和部署要求，再用同一工具链跑自己的编码任务；同时记录成功率、输出速度、完整任务费用和失败轨迹。100 万上下文是否在目标硬件上实用需要另测。</p></div>
+<div class="card"><h3>4. Kimi K3.1 Pro：今日的新信号是权重可用及具体授权边界</h3><div class="source"><strong>@natolambert · high / weekly；@Thom_Wolf · medium / weekly</strong> · Lambert 11-04 23:45；Wolf 11-05 01:04（模型卡本轮读取） · <a href="https://huggingface.co/moonshotai/Kimi-K3.1-Pro">官方模型卡</a> · <a href="https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/main/LICENSE">许可证</a> · <a href="https://x.com/Thom_Wolf/status/2118026565879844910">Wolf 帖</a> · <a href="https://x.com/natolambert/status/2118006783751213133">Lambert 帖</a></div><p><strong>摘要：</strong>Kimi K3.1 Pro 之前已有讨论，今天围绕权重落地的帖子是增量，不应再当作全新模型发布。模型卡列出 2.8 万亿总参数、每 token 激活 1,040 亿、约 100 万上下文，并说明多个成绩来自不同 harness、预算或内部基准，不能简单横比。官方许可另规定：经营 Model-as-a-Service 且自身与关联方任意连续十二个月合计收入超过 2,000 万美元时，商业使用需另签协议；还有大型商业产品的署名要求，以及内部使用等例外，因此不能标为无条件宽松开源。</p><p class="why"><strong>为什么值得看：</strong>开放权重增加部署与研究选择，但激活参数不等于权重存储规模，许可可用性也不同于技术可运行性。真正的经济性需同时计算机器、长上下文与商业条款。</p><p class="action"><strong>后续行动：</strong>若进入候选清单，先由相关负责人判断业务是否落入 MaaS 及收入条件，再评估内存、吞吐与任务价格；保留具体模型版本与许可快照。本日报不构成法律解释或商业授权。</p></div>
+<div class="card"><h3>5. Simon：让数据库 Agent 的查询与模型选择真正受控</h3><div class="source"><strong>@simonw · high / weekly</strong> · datasette-apps 11-04 08:29；datasette-llm 23:26（Atom） · <a href="https://simonwillison.net/2026/Nov/4/datasette-apps/">Apps 更新</a> · <a href="https://simonwillison.net/2026/Nov/4/datasette-llm/">LLM 更新</a> · <a href="https://github.com/datasette/datasette-llm/pull/11">权限修复</a></div><p><strong>摘要：</strong>Simon 发布 datasette-apps 0.3a0，让 Agent 管理应用可以调用的 stored queries，创建应用时检查查询是否存在、用户是否可见，授予写查询前请求用户批准。随后 datasette-llm 0.1a10 修复了演示站可用模型没有按配置正确收窄的问题。这两条都是本窗口新增的具体变更，不是对前一天侧边面板发布的重复介绍，也不代表所有部署环境已经自动升级。</p><p class="why"><strong>为什么值得看：</strong>数据库生成应用的风险常藏在“能调哪些查询、能用哪些模型”而不只是生成 SQL 的正确率。把权限约束放在工具与后端比仅写进提示词更可审计。</p><p class="action"><strong>后续行动：</strong>使用相关 alpha 版本者应检查升级说明，在测试环境验证未授权查询、写入批准和模型白名单；保存拒绝案例。本轮未修改任何数据库或服务。</p></div>
+<div class="card"><h3>6. Hamel：基准像信用分一样被消费，传播方式本身需要修正</h3><div class="source"><strong>@HamelHusain · high / weekly</strong> · 11-05 03:32 · <a href="https://x.com/HamelHusain/status/2118063790935953440">完整原帖</a></div><p><strong>摘要：</strong>Hamel 反对把“批评基准”与“为何不自己贡献开源代码”混为一谈：许多人直接用分数做决策，并没有能力或时间检查轨迹。其观点是，问题不只在评测实现，还在营销口径与实际测量对象之间的距离，因而应保留健康怀疑并改善解释。这是一条方法论观点，不是新的评测论文或证明某个榜单造假的证据。</p><p class="why"><strong>为什么值得看：</strong>同日 Ripple 和 Kimi 的比较都涉及预算、harness 和任务子集差异，这条提醒能直接转化为采购与选型准则。</p><p class="action"><strong>后续行动：</strong>为重要模型比较增加口径卡：版本、样本、工具链、重试、预算、评分器、轨迹是否公开；缺失项明确写未知。优先抽查失败样本，而不是只保存总分。</p></div>
+<div class="card"><h3>7. Claude Code 2.1.318：无人值守的“失败必须算失败”</h3><div class="source"><strong>Anthropic 官方变更日志；作为 Claude / Agent 主题补充</strong> · 日志标注 11-04，未给出精确时刻 · <a href="https://code.claude.com/docs/en/changelog">官方变更日志</a></div><p><strong>摘要：</strong>2.1.318 增加登录到期时间的状态与 JSON 字段，并在非交互文本输出中提前提示到期；同时修复特定 mod 钩子条件下 API 错误或停止状态被报告为成功的问题。更新还涉及共享文件系统上的登录与配置保存、受损配置不再静默覆盖为默认值，以及按 URL 拒绝 MCP 服务时对相关连接器的匹配行为。以上均是官方日志声明，尚未在本机安装或复现，发布日期只有日级精度。</p><p class="why"><strong>为什么值得看：</strong>自动化任务是否按真实结果失败、凭据到期能否提前发现，比表面上的会话完成提示更重要。与 Simon 的白名单修复共同构成 Agent 运维的基础卫生。</p><p class="action"><strong>后续行动：</strong>在测试环境检查失败退出、停止行为、到期提示和连接器拒绝规则，再决定升级；不要因为一条完成消息就认定后台工作已成功。</p></div>
+<h2>人物 / 机构动态</h2>
+<p><strong>Sam Altman 与 François Chollet：</strong>Altman 于 11-04 09:40 表示人类应保持对未来的控制，并以此约束 AI 进步；Chollet 于 09:46 赞同 AI 应是提升人类处境的工具。这是价值立场上的公开呼应，不是组织合作或新安全技术的发布。<a href="https://x.com/sama/status/2117794005165748448">Altman 完整帖</a> · <a href="https://x.com/fchollet/status/2117795655297175980">Chollet 评论</a>。后续应观察权限、关停和人类最终决策如何落实到产品，而不是只比较口号。</p>
+<p><strong>Nathan Lambert / Interconnects：</strong>11-05 00:35（RSS）发布开放模型经济研究笔记，公开导言承认采用数据嘈杂、厂商披露与评测口径不完美，免费仪表盘继续开放。只整理公开导言与作者帖，不展开标注为付费的分析，不从 token 份额推导收入份额。<a href="https://www.interconnects.ai/p/how-well-can-we-measure-open-model">笔记入口</a> · <a href="https://dashboard.interconnects.ai/">免费仪表盘</a>。后续把 token 用量、付费客户、收入与毛利分别记录。</p>
+<p><strong>DevRev：</strong>OpenAI 案例的 RSS 时间为 11-04 08:00，处于窗口起点，展示 Computer / Operator 连接企业知识并强调权限、可逆操作与秒级响应。这是厂商客户案例，没有公开足够的独立成本和评测数据，不将其 CTO 的工具偏好概括为全行业结论。<a href="https://openai.com/index/devrev-enterprise-self-service/">官方案例</a>。后续关注真实解决率、转人工比例与可回滚动作覆盖。</p>
+<h2>值得跟进项目</h2>
+<ul><li><strong>防御性证据包：</strong>在自有项目上整理版本、复现日志、候选补丁与回归测试；看自动化是否降低维护者总负担，不以发现条数作唯一 KPI。</li><li><strong>开放编码模型对照：</strong>先读 Ripple 与 Kimi 的模型卡和许可，再选相同任务、预算、工具；高效稠密模型和巨型 MoE 各有部署前提，不直接比较不同基准分数。</li><li><strong>数据库小应用：</strong>在只读数据副本中试验 Datasette Apps 的查询授权，特别验证写权限必须经过批准、模型白名单不能越界。</li><li><strong>创业 / 投资观察表：</strong>围绕代码审阅、推理托管和安全补丁交付建立付费证据表，记录实际客户、使用量、服务成本与披露口径。并购、训练成本和 token 增长都不是独立的盈利证明。</li></ul>
+<h2>待验证信息：不进入事实结论</h2>
+<p>explainx 的博客 JSON-LD 本轮列出 11-04 的 Agent Autoloop、Altman 韩国存储器会谈、Apple 工程师 AI 预算以及 Arm 超大规模云计算份额等线索；这些是二手索引，日期不证明事件发生时刻。特别是 HBM 会谈、股价反应和份额数字，未在本轮交叉核对公司公告或原始财报，不形成投资判断。<a href="https://explainx.ai/blog/altman-surprise-korea-visit-sk-hynix-samsung-hbm-memory-talks-what-is-reported-2026">HBM 会谈线索</a> · <a href="https://explainx.ai/blog/agent-autoloop-claude-code-codex-background-hub-cron-github-issues-approval-cards-github-trending-2026">Autoloop 线索</a> · <a href="https://explainx.ai/blog/arm-over-half-top-hyperscaler-servers-claim-about-50-percent-shareholder-letter-nikkei-claimed-vs-verified-2026">Arm 份额线索</a>。下一步先找作者仓库、正式公告和监管文件，不安装未经审阅的自动化工具。</p>
+<p>Ripple 的成本与成绩、OpenAI 的漏洞数量目前均为发布方报告；还需第三方复核。Kimi 卡中的对比结果存在工具链与预算差异，本轮确认模型卡和许可文本可读，但未独立审计所有权重文件或复跑排行榜。</p>
+<h2>低优先级噪音与不重复内容</h2>
+<p>swyx 的 Bellwether 预告缺乏可审核产品信息，暂不猜测；工程师并购身价说法不当作 Pierre 的估值。Nan Yu 的语言笑话、Jeff Dean 的投票感想与 Andrew Ng 的会议邀请不列入技术更新。Chollet 的部分订阅帖正文不可读，不推断内容；Greg 对物理工程的再次转发不重复昨日报告。Latent Space 的新 AINews 虽于本窗口投递，但导语总结的是 11-03 话题，作为讨论延续，不作为新模型突破。</p>
+<h2>抓取覆盖、限制与原始链接</h2>
+<p>30 个 X 公开主页本轮均 HTTP 200，但可见帖子有限，引用内容单独去重，空白或旧帖不等于账号未更新。搜索工具返回 provider_error；普通 requests 访问部分 OpenAI 正文为 403，改用现有公开网页提取工具后读到 Linux 研究、Pierre 公告与 DevRev 正文，没有绕过访问验证。Nitter 样本 410、RSSHub 样本 404、xcancel 样本 451，本轮不依赖这些镜像。</p>
+<p>Simon、Interconnects、OpenAI、DeepMind、Chip、Lilian、Hamel、Latent Space 的公开 Feed 均已尝试；LangChain 旧 RSS 地址返回 HTML，转读官方博客，最新可见日期仍为 11-03，不补造今天发布；Eugene 两个常见 feed 路径为 404，不能据此断言无更新。explainx sitemap 未提供有效文章清单，转读博客 JSON-LD；播客索引 JSON 可读但没有可用的本日逐集发布时间，未将索引刷新视为新播客。</p>
+<ul><li><a href="https://simonwillison.net/atom/everything/">Simon 全部更新 Atom</a> · <a href="https://www.interconnects.ai/feed">Interconnects RSS</a> · <a href="https://openai.com/news/rss.xml">OpenAI RSS</a> · <a href="https://deepmind.google/blog/rss.xml">DeepMind RSS</a></li><li><a href="https://www.langchain.com/blog">LangChain 博客</a> · <a href="https://www.anthropic.com/news">Anthropic 新闻</a> · <a href="https://explainx.ai/blog">explainx 博客</a> · <a href="https://youtube.qiaomu.ai/">AI 播客索引</a></li></ul>
+<p class="meta">证据等级：官方原文 / 作者帖是本轮可查材料，不等于独立验证；编辑归纳已标识，未核线索单独隔离。仅中文转述和克制引用，不发布登录态、内部账号信息或受限正文。</p>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
