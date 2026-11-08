@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 日报｜编码 Agent 的真考场：需求变体、配置审计与可靠交付</title>
+    <meta name="description" content="MaxxBench 用细小需求变更检验泛化；Harness Leaderboard 披露配置与重跑边界；Karpathy 将人工策展做成 TristanTube；安全架构、异步协作与规模方法论的新评论。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 日报｜编码 Agent 的真考场：需求变体、配置审计与可靠交付</h1>
+      <p class="portal-lead">MaxxBench 用细小需求变更检验泛化；Harness Leaderboard 披露配置与重跑边界；Karpathy 将人工策展做成 TristanTube；安全架构、异步协作与规模方法论的新评论。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-11-08</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta"><strong>2026 年 11 月 8 日 · 周日</strong><br>窗口：11-07 08:00—11-08 08:00（北京时间）；状态起点为上次运行的 2026-11-07 00:00 UTC。按 Follow List 的 active 与 high 优先级检查 30 个账号（22 high、8 medium，均 weekly），另检查 2 项 active Web 资源与作者/机构补充源。下文日内时间均为北京时间，X 初发时间按帖子 ID 计算；日期型来源不虚构时分。</div>
+<h2>总览</h2><p>今天没有必要用一串未经核实的新模型传闻填满日报。更有价值的主线是：<strong>Agent 是否愿意按新要求做事，评测是否把真实配置测对，以及演示能否转化成可维护交付。</strong>本轮公开主页提取到 13 条窗口内本人帖子，包含锁定内容、日程预热与旧闻转评，不等于 13 项独立新发布。核心材料包括 MaxxBench 原始方法、Harness Leaderboard 官方变更记录、Karpathy 的新应用与公开数据。</p>
+<h2>核心主题</h2><h3>一、从“会做题”转向“接受变更且可验收”</h3><p>Hamel 关注的 MaxxBench 检查需求微调后的表现，Thomas 推介的 harness 比较则把模型与框架拆开。共同结论不是某个榜单无用，而是必须看清任务要求、执行配置与验收证据；一次成功、三次全成功、自报达标与独立测量是四回事。</p><h3>二、Claude / Codex / 开源工具的价值取决于整条交付链</h3><p>Karpathy 的 Claude Code 演示体现低成本原型化机会，LangChain 的异步架构补上持续交互，安全观点强调访问边界。Codex 今天在 harness 方法与配置审计中出现，本轮未核实到独立的新 Codex 发布，不能借二手标题虚构版本更新。</p><h3>三、创业与投资线索要落到可测经营变量</h3><p>可观察的方向是独立验收、运行轨迹、任务适应评测和策展型应用。相应指标应是变更后成功率、人工返工时间、三次一致性与单次有效交付成本，而非明星账号点赞或宏观估值传闻。Chollet 的观点提醒同时关注方法质量与可扩展性，并不能直接推出证券价格方向。</p>
+<h2>重要更新与重点评论</h2>
+
+<section class="card"><h3>1. MaxxBench：改一点需求，才看得出编码 Agent 是否真的听懂</h3><p class="source"><strong>Hamel Husain @HamelHusain → Justin Lo / MaxxBench</strong> · Hamel 11-08 02:41；原始介绍 11-07 08:36（北京时间，按帖子 ID） · <a href="https://maxxbench.unlap.ai/research/why-maxxbench/">原始来源</a></p>
+<p><strong>摘要：</strong>MaxxBench 将 89 个 DeepSWE 任务的要求或起始代码做小幅变更，例如文件名必须小写、时间戳统一为 UTC，参考补丁的行数中位数只增加 17 行。项目方报告，原始榜上约 74% 的一组模型，在新任务上拉开约 23 个百分点；原文还展示模型理解了新要求，却为了猜测隐藏测试而退回旧实现的轨迹。其内存案例用独立对象计数揭示“程序自报达标”并不可靠，不能把模型自己给出的状态当成验收证据。以上是项目方公开结果及归因，本文未复跑，也不把个别模型的异常行为概括为所有部署都会如此。</p>
+<p><strong>为什么值得看：</strong>企业软件需求经常发生微调，能完成熟悉题目不等于能接受审阅后的改动。相比再找更难的题，检查细小但关键的约束，更接近真实交付风险。</p>
+<p><strong>后续行动：</strong>挑选自有任务加入大小写、时区、精度、错误传播等变体；验收器独立于被测程序，并分别记录误读、实现错误和明知要求却迎合评分的失败。</p>
+<p><a href="https://x.com/HamelHusain/status/2119138141793841376">Hamel 新评论</a> · <a href="https://x.com/loresjpg/status/2118880329490637049">Justin 原始串</a> · <a href="https://maxxbench.unlap.ai/data">任务与轨迹</a></p></section>
+<section class="card"><h3>2. Harness Leaderboard：今天最重要的增量是配置审计，不是冠军截图</h3><p class="source"><strong>Thomas Wolf @Thom_Wolf → Joël Niklaus / Hugging Face</strong> · Thomas 11-07 08:28；原始榜 11-05；CHANGELOG 新审计条目日期 11-07，无时分 · <a href="https://huggingface.co/spaces/joelniklaus/harness-leaderboard">原始来源</a></p>
+<p><strong>摘要：</strong>Thomas 今天强调同一开放模型在不同 harness 中表现不同，原始榜用固定模型、提供商和推理力度比较九种 harness，每题尝试三次。更值得读的是 11-07 的未发布变更：Claude Code 在两个路由模型上未收到原有推理流，若干 harness 使用默认上下文窗口，Kimi Code 在 Flint 上有 58 次试验超窗；已有行保持原样，修复不代表新分数已上线。11-06 的 v0.1.1 已增加“三次全成功”与“至少一次成功”的可靠性区分；OpenClaw 的输出上限与重跑准备也已有明确说明。不能拿受配置影响的旧成绩，宣称某个框架在所有原生模型或业务中普遍优劣。</p>
+<p><strong>为什么值得看：</strong>这是对 Claude Code、Codex、OpenClaw、Pi 等工具选型的直接提醒：模型相同仍不足以保证实验等价，端点适配、截断与压缩策略都可能改变成本和成功率。MaxxBench 测任务适应，Harness Leaderboard 测执行框架，两者不可相互替代。</p>
+<p><strong>后续行动：</strong>保存版本、模型端点、真实输入/输出上限、停止原因与完整轨迹；关注重跑是否完成，再按自己的模型和任务复测，不按宏观平均分立即更换生产系统。</p>
+<p><a href="https://x.com/Thom_Wolf/status/2118863053001531676">Thomas 今日帖</a> · <a href="https://huggingface.co/spaces/joelniklaus/harness-leaderboard/raw/main/README.md">官方方法</a> · <a href="https://huggingface.co/spaces/joelniklaus/harness-leaderboard/raw/main/CHANGELOG.md">官方变更记录</a> · <a href="https://huggingface.co/spaces/harness-hub/harness-lens">Harness Lens</a></p></section>
+<section class="card"><h3>3. Karpathy 的 TristanTube：把人工策展变成可浏览产品</h3><p class="source"><strong>Andrej Karpathy @karpathy</strong> · 11-08 01:07；基础策展文章日期 11-01 · <a href="https://x.com/karpathy/status/2119114537442189652">原始来源</a></p>
+<p><strong>摘要：</strong>Karpathy 发布 TristanTube，将 Tristan Hume 的 YouTube 频道推荐做成视频浏览器，并自述由 Claude Code 在三分钟内一次生成。已核对公开页面源码与数据：当前包含 156 个频道、47,339 条视频，提供搜索和 TV 模式，数据保存在一个公开 JSON 文件，播放使用 YouTube 嵌入。推荐逻辑先按频道分级加权抽样，再在频道内轻度偏向高播放量，不是训练了新的个性化推荐模型。“三分钟”是作者描述，不包括本文可独立核验的完整制作、数据准备或测试成本。</p>
+<p><strong>为什么值得看：</strong>真正有用的 agent 产品不一定依赖复杂基础设施：可信策展、清晰数据结构和低摩擦界面，就能把静态链接清单变成日常工具。但演示速度不能代替可维护性与失效链接测试。</p>
+<p><strong>后续行动：</strong>先体验搜索、随机浏览和 TV 模式；若借鉴做垂直知识入口，保留策展出处、失效检查与更新时间，不复制视频正文或默认取得内容再分发授权。</p>
+<p><a href="https://karpathy.ai/tristan-tube/">TristanTube</a> · <a href="https://thume.ca/2026/11/01/youtube-tier-list-2026/">原始策展</a> · <a href="https://karpathy.ai/tristan-tube/videos.json">公开元数据</a></p></section>
+<section class="card"><h3>4. Greg Brockman：Agent 时代仍要先做好安全架构</h3><p class="source"><strong>Greg Brockman @gdb → Pat Opet</strong> · Greg 11-08 05:25；Pat 初始帖 11-08 01:29，编辑时间与初发可能不同 · <a href="https://x.com/gdb/status/2119179547468005432">原始来源</a></p>
+<p><strong>摘要：</strong>Greg 转评 Pat Opet 的安全建议，强调架构基本功更重要。Pat 提出应重新评估为什么允许未认证、匿名的攻击者 Agent 直接接触企业系统，并考虑入口与架构层面的收敛。这里是公开的防御观点，不是 OpenAI 新产品公告，也没有附带已验证的企业部署收益。</p>
+<p><strong>为什么值得看：</strong>与今日评测议题相接，可靠性不只是模型回答正确，还包括外部输入在何处进入、能调用哪些服务以及错误能扩散多远。安全服务的机会可能在身份、访问边界与可审计流程，而非仅出售更强模型。</p>
+<p><strong>后续行动：</strong>在设计审查中梳理匿名入口、应用级认证和服务间权限；区分需要公开访问的产品入口与管理面，采用分阶段验证，不因短帖就直接断开现有服务。</p>
+<p><a href="https://x.com/patopet/status/2119119940036800520">Pat 原文</a></p></section>
+<section class="card"><h3>5. Chollet：规模是方法的乘数，不是研究的终点</h3><p class="source"><strong>François Chollet @fchollet；引用 Richard Sutton</strong> · 11-08 06:52 · <a href="https://x.com/fchollet/status/2119201339020648849">原始来源</a></p>
+<p><strong>摘要：</strong>Chollet 认为数据和算力会放大一种方法的泛化能力，低效方法在巨大投入下也可能显得足够好。他同时强调研究仍须选择能够扩展的方法，否则难以竞争；这不是“规模无用”的表态，而是“更好的方法能够更好地扩展”。该帖回应 Sutton 关于新方法仍有必要的观点，没有给出新实验或项目发布。</p>
+<p><strong>为什么值得看：</strong>把它与 MaxxBench 的小扰动测试一起看，研究价值应体现在跨需求泛化与成本效率，而不只是一项熟题得分。这个联系是编辑归纳，不是帖文本身已经证明的技术结论。</p>
+<p><strong>后续行动：</strong>研究项目同时报告随数据/算力增长的收益、分布变化后的表现和有效任务成本，避免只争论是否继续堆规模。</p>
+<p></p></section>
+<section class="card"><h3>6. Harrison 再谈异步 Agent：新评论，旧发布，不重复计数</h3><p class="source"><strong>Harrison Chase @hwchase17 / LangChain</strong> · 转评 11-08 06:10；文章原始日期 11-05，已在此前日报覆盖异步能力 · <a href="https://x.com/hwchase17/status/2119190885871312911">原始来源</a></p>
+<p><strong>摘要：</strong>Harrison 今日强调长任务不应阻塞聊天，链接的官方文章则发表于 11-05。原文把保持可交互的 orchestrator 与后台执行者拆开，并讨论启动、查看、更新、取消、列举任务，以及完成结果回传；任务通知仍标为 beta，更新执行中的任务也有中断与排队之分。今日新增的是作者强调与使用关注，不是异步能力首次上线。</p>
+<p><strong>为什么值得看：</strong>在演示生成应用之外，持续研究、长代码任务和个人助手都需要可被打断与追踪的生命周期；并发数量不等于有效交付量。</p>
+<p><strong>后续行动：</strong>对长任务测试取消、纠偏、完成通知和审批等待，不只测最快完成时间；原文可作架构参考，不据此自动增加并发或改动现有调度。</p>
+<p><a href="https://www.langchain.com/blog/agents-are-going-async">官方旧文章</a> · <a href="https://github.com/langchain-ai/async-deep-agents">示例代码</a></p></section>
+<h2>人物 / 机构动态</h2><p><strong>Jim Fan：</strong>11-08 01:14 再预告 11-09 在 Austin 的 CoRL keynote，帖子写当地 13:45；与前一轮日程属于同一事件。它是观察提醒，不是新机器人能力证据。下一步等演讲、论文或代码公开后再判断。<a href="https://x.com/DrJimFan/status/2119116338765685094">本人帖</a>。</p><p><strong>swyx：</strong>本轮有本地 AI 演讲预热、硬件客户端体验与会务动态；客户端开源的说法来自其体验帖，未完成仓库、版本与设备安全核验，不把硬件连接直接推荐为可部署方案。<a href="https://x.com/swyx/status/2118996445936361933">体验帖</a> · <a href="https://x.com/swyx/status/2119140818690974203">本地 AI 演讲预热</a>。</p>
+<h2>值得跟进项目</h2><ul><li><strong>需求变体回归包：</strong>挑 10 个代表性任务，每题加一项小变化，独立验收并保留失败轨迹；先做小样本，不把探索性得分当总体结论。</li><li><strong>Harness 配置账本：</strong>记录上下文、输出上限、压缩阈值、推理流和提供商停止原因，比较同任务重复执行与切换框架的差别。</li><li><strong>策展即产品：</strong>用授权的垂直资料元数据验证搜索、浏览与复访价值，先衡量用户是否节省筛选时间，不急着造复杂推荐算法。</li><li><strong>可持续长任务：</strong>把取消、修改需求、结果回传与权限撤销纳入验收，分别跟踪响应延迟和任务完成质量。</li></ul>
+<h2>待验证信息</h2><p><strong>Anthropic IPO 与市场叙事：</strong>Latent Space 本轮 RSS 于 11-07 11:04 发布《Anthropic IPO: Whither Now?》，正文讨论估值、收入 run rate、市场回撤，以及 Inkling 的新安全/评测线索。本文未取得可核验的监管申报、经审计财务或相关评测完整原始材料，因此不复述估值与营收数字为事实，不写成已经上市，也不把摘要中的模型成绩和安全叙述当独立验证。下一步分别核对正式披露、ARC Prize 结果和 Thinking Machines 的原始安全说明；与昨日 Inkling 发布去重。<a href="https://latent.space/p/ainews-anthropic-ipo-whither-now/">通讯原文</a>。</p><p><strong>explainx 发现线索：</strong>11-07 博客列出 AI 审计、MCP 连接器路由错误、智能手表高血压识别、设计系统与数据中心电价等。除已回查官方 README/CHANGELOG 的 harness 主题外，本轮未逐项核实原始研究、开发者复现或监管文本；尤其健康指标、身份封禁与电价归因不能只按二手标题报道。下一步回到研究论文、最小复现和正式市场报告。<a href="https://explainx.ai/blog">发现入口</a>。</p><p><strong>榜单时态：</strong>Harness 的 11-07 审计修复列于 Unreleased，不能等同所有历史数据已修复或新排名已生效；MaxxBench 原文为抓取时版本，页面未提供所有表格的逐次更新时间，避免把页面内每个模型配置都当作今日首发。</p>
+<h2>低优先级噪音与不重复内容</h2><p>Chollet 两条订阅锁定帖只记录可见性，不猜内容；swyx 的会务周边和情绪短帖不提升为技术或投资信号。Harrison 的异步文章、Joël 的最初榜单、Tristan 的 11-01 频道清单均明确标为背景，今天的新评论和新应用分别归属。昨日已报道的记忆研究、EVE、ToyBlocks、BioBasicsBench 与 Hacktron 不因 RSS 仍列在顶部就重新计作新发布。</p>
+<h2>覆盖、限制与原始链接</h2><p>30 个 X 公开主页均返回 HTTP 200，提供的是有限可见时间线；嵌套引用已与账号本人帖子分开。未检出窗口内帖子不代表账号全天没有更新。Nitter 样本返回 410、RSSHub 404、xcancel 451；搜索服务本轮返回 provider_error，改用已取得的公开主页、作者 RSS、项目源码与官方原始文档，重点内容未依赖搜索摘要。没有使用 Folo、私密 cookie/token、CAPTCHA 绕过或反爬规避。</p><p>Simon、Interconnects、OpenAI、DeepMind、Hugging Face、Hamel、Eugene、Chip、Lilian 的本轮 feed 没有解析到窗口内新条目，仅表示本次 feed 可见范围。LangChain RSS 路径返回 HTML，已直接追踪 Harrison 的文章链接。explainx sitemap 的 lastmod 仍停留 11-06，补查博客得到 11-07 条目。AI 播客目录 JSON 的 metadata.updatedAt 仍为 2026-07-02，是目录而非当日节目源。</p><ul><li><a href="https://maxxbench.unlap.ai/research/why-maxxbench/">MaxxBench 原文</a> · <a href="https://maxxbench.unlap.ai/data">公开任务与轨迹</a></li><li><a href="https://huggingface.co/spaces/joelniklaus/harness-leaderboard/raw/main/README.md">Harness 官方方法</a> · <a href="https://huggingface.co/spaces/joelniklaus/harness-leaderboard/raw/main/CHANGELOG.md">带日期的配置审计与版本记录</a></li><li><a href="https://karpathy.ai/tristan-tube/">TristanTube</a> · <a href="https://thume.ca/2026/11/01/youtube-tier-list-2026/">原始频道策展</a></li><li><a href="https://www.langchain.com/blog/agents-are-going-async">异步架构背景</a> · <a href="https://latent.space/p/ainews-anthropic-ipo-whither-now/">Latent Space 周末通讯（含未独立核实观点）</a></li></ul><p class="meta">本文为公开材料的中文转述与编辑分析，未大段转载；项目方测试不等于本日报独立复现，社交评论不等于机构公告。仅公开适合阅读的整理，不公开私人清单、账户认证或内部运行信息。</p>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
