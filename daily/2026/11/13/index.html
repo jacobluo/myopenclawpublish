@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 日报｜Hydrogen 降低执行成本，会议上下文与开放权重争夺 Agent 工作流</title>
+    <meta name="description" content="Gemini 4 Hydrogen 与多模型编排；Claude Meetings、Granola MCP 2.0 的会议上下文；Inkling 2 Small 的真实显存门槛；IBM LLMON、Atlas 与 Daybreak 发布边界。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 日报｜Hydrogen 降低执行成本，会议上下文与开放权重争夺 Agent 工作流</h1>
+      <p class="portal-lead">Gemini 4 Hydrogen 与多模型编排；Claude Meetings、Granola MCP 2.0 的会议上下文；Inkling 2 Small 的真实显存门槛；IBM LLMON、Atlas 与 Daybreak 发布边界。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-11-13</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta"><strong>2026 年 11 月 13 日 · 周五</strong><br>观察窗口：11 月 12 日 08:00—11 月 13 日 08:00（北京时间），衔接上次运行。主清单：Obsidian Follow List，30 个 active X 账号（22 high、8 medium，Cadence 均为 weekly），先 high 后 medium；另查 2 个 Web 清单资源与作者/机构订阅。下文时间均为北京时间，X 时间由帖子 ID 推算，RSS 使用公开发布时间；只给日期的来源不虚构具体时刻。</div>
+<h2>总览</h2><p>今天最重要的变化不是又多一个榜单冠军，而是<strong>Agent 产品正同时争夺执行成本、组织上下文与部署控制权</strong>。Google 把 Hydrogen 放进多模型编排和搜索分发；Claude Meetings 与 Granola MCP 把会议变成可用工作上下文；Thinking Machines 开放 Inkling 2 Small 权重，IBM 用 LLMON 尝试在模型训练层区分指令与数据。</p><p>最值得立即验证的是三个小实验：用自己的任务测混合模型是否真的省钱；检验会议到产物的引用与权限是否闭环；用真实硬件预算而非“Small”命名判断开放模型是否适合自建。本文将厂商声明、可读取正文、编辑推论分开，不把演示和营销比例写成生产承诺。</p>
+<h2>核心主题</h2><h3>一、从单模型升级走向“重判断、轻执行”的组合</h3><p>Logan、Josh、Demis 的同日发布与 Google 主文相互印证 Hydrogen 上线。与 Latent Space 对 Jev 的工程案例并读，出现两种互补分层：复杂规划与日常执行分工，以及生成模型与闭集判断分工。编辑推论：模型选择应下沉到任务节点，但新增路由、复核和切换成本也必须进入账单。</p><h3>二、上下文不是越多越好，而是能引用、能授权、能更新</h3><p>Alex 强调补齐 Claude 缺失的上下文，Granola 则把会议转录保持为事实源并提供检索与写工具；Shreya 提醒，分析非结构化数据之后仍要有效传达给人。共同瓶颈是“找对事实—形成产物—支持决策”，不是把所有录音塞进更长窗口。</p><h3>三、开放权重与结构化协议，各自只解决一层问题</h3><p>Inkling 提供微调和部署自主性，但总参数与显存约束仍高；LLMON 用特殊 token 和绑定关系训练指令/数据分离，但作者明确这仍是学习到的行为，不是强制隔离。可研究的产业线索是推理托管、量化、上下文治理和评测工具；不能据此直接推导股票收益或公司收入。</p>
+<h2>重要更新</h2>
+<section class="card"><h3>1. Gemini 4 Hydrogen：面向日常 Agent 执行，而非只拼最深推理</h3><p class="source"><strong>Google DeepMind；@OfficialLoganK、@joshwoodward、@demishassabis</strong> · 11-13 02:00（RSS 02:00:50） · <a href="https://deepmind.google/blog/introducing-gemini-4-hydrogen/">原始来源</a> <a href="https://x.com/OfficialLoganK/status/2120940951292268640">Logan 发布</a> · <a href="https://x.com/joshwoodward/status/2120942262054232392">Josh 发布</a></p><p><strong>摘要：</strong>Google 宣布 Hydrogen 覆盖 AI Studio、API、企业、Gemini App、Search 等入口，API 在整个 100 万 token 上下文范围内统一定价为每百万输入 1.50 美元、输出 7.50 美元。Antigravity 新增 Orchestrator，在同一会话切换 Carbon 与 Hydrogen；官方称在 Terminal-Bench 4.0 上接近 Carbon 成功率，同时平均少用 24% 配额、快 19%。这些为特定测试下的厂商结果，且文中另有 Terminal-Bench 4.1 的代际比较，不能把两个版本分数混排。免费 Gemini App 用户通过自动路由在合适请求中获得 Hydrogen，并不等于所有层级都能无条件手动选用。</p><p><strong>为什么值得看：</strong>多模型编排开始进入一线产品默认流程，采购比较单位应从每百万 token 扩展到“成功验收一个任务的总成本”。</p><p><strong>后续行动：</strong>固定同一代码库和验收集，对比单 Hydrogen、单高端模型与混合编排；记录成功率、失败重试、人工分钟和实际配额，不把配额降幅直接等同美元成本降幅。</p></section>
+<section class="card"><h3>2. Claude Meetings：从会后总结走向会中共同产出</h3><p class="source"><strong>Claude @claudeai；Alex Albert @alexalbert__</strong> · 官方帖 11-13 04:16；Alex 04:54 · <a href="https://x.com/claudeai/status/2120973994191094179">原始来源</a> <a href="https://x.com/alexalbert__/status/2120983722182988206">Alex 评论</a></p><p><strong>摘要：</strong>Claude 官方宣布把 Claude 加入团队视频会议，在讨论进行时共同生成文档、白板和其他产物，开始向 Team 与 Enterprise 方案以 beta 形式推出。Alex 表示，获得好产出的关键之一是找到模型缺失的上下文并补齐，会议是其中一类来源。当前可核实的是公开发布帖，未读取到完整管理员文档，因此不补充支持的会议平台、地区、保留期限或默认录制设置。</p><p><strong>为什么值得看：</strong>竞争从“会议笔记”转向“会议中的工作协作”，也把参会者授权、错误归因和敏感信息处理带进核心流程。</p><p><strong>后续行动：</strong>只选获准的低敏会议做试点，用人工记录核对产物中的决议、负责人和截止日期；上线前查管理员设置、参会提示、访问权限与删除机制。</p></section>
+<section class="card"><h3>3. Granola MCP 2.0：让 Agent 成为接口设计的测试用户</h3><p class="source"><strong>Granola @meetgranola；Christopher Pedregal @cjpedregal</strong> · 官方 11-13 00:12；Christopher 00:15 · <a href="https://x.com/meetgranola/status/2120912538984747401">原始来源</a> <a href="https://x.com/cjpedregal/status/2120913308047884417">设计过程</a></p><p><strong>摘要：</strong>Granola 公布 Smart Search、可写议程与整理笔记的 Write Tools，以及为 AI 提供工作概况的 Agent Brief；宣称检索可少用 85% tokens，转录仍为事实源。Christopher 说团队像访谈真人用户一样访谈 Agent，收集对 MCP 的不满并重设计接口。85% 是产品声明，当前公开帖没有给出可复现负载与基线，不能外推到所有会议库或总成本。</p><p><strong>为什么值得看：</strong>MCP 的价值不止接通工具，而在于返回足够小、可定位原文、适合后续执行的上下文；加入写能力后权限边界也随之变化。</p><p><strong>后续行动：</strong>在同一会议集上测召回率、token 开销与原文可追溯性，准备相似人名和被撤销决议等困难样本；写工具先最小权限运行，并保留可恢复的变更记录。</p></section>
+<section class="card"><h3>4. Inkling 2 Small 开放权重：“Small”不代表可在个人显卡部署</h3><p class="source"><strong>Thinking Machines @thinkymachines；Mira Murati @miramurati</strong> · 官方帖 11-13 04:50；Mira 04:55 · <a href="https://huggingface.co/thinkingmachines/Inkling-2-Small">原始来源</a> <a href="https://x.com/thinkymachines/status/2120982625582195011">机构发布</a> · <a href="https://x.com/miramurati/status/2120983826407268458">Mira 确认</a></p><p><strong>摘要：</strong>官方宣布以 Apache 2.0 开放权重；已读取的模型卡列出 594B 总参数、17B 激活的 MoE，支持文本与图像输入、文本输出和最长 1M 上下文。模型卡称原生 NVFP4 检查点至少需要合计 500GB 显存，MXFP8 至少 800GB，并列出 SGLang、vLLM 等推理路径。开放使后训练和自建成为选项，但激活参数小并不消除权重存储、专家通信与长上下文 KV 缓存成本。</p><p><strong>为什么值得看：</strong>这是模型自主可控与推理平台的新增供给，真实机会更可能首先在云托管和专业集群，而非低成本端侧。</p><p><strong>后续行动：</strong>先检查许可证与随附使用条款，再比较托管 API 与自建的目标吞吐、延迟、显存、运维和微调成本；固定权重及推理框架版本，用自己的工具调用和图文任务验收。</p></section>
+<section class="card"><h3>5. IBM LLMON：训练模型理解“指令作用于哪一段数据”</h3><p class="source"><strong>IBM Granite / Hugging Face 机构补充来源</strong> · 11-13 03:07（RSS） · <a href="https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite">原始来源</a> <a href="https://github.com/generative-computing/llmon">代码与示例</a></p><p><strong>摘要：</strong>IBM 发布 Granite 4.1 3B、8B 的 LLMON 实验预览和工具库，用保留特殊 token 标记结构，并通过 ID 将指令、数据与要求绑定。作者称静态间接提示注入评测显著改善，同时维持同代 Instruct 模型的一般能力；这不等于任意模型套一层 XML 就安全。文章明确，多轮自适应攻击仍在研究，权限规则是训练习得行为而非强制保证，预览不适合直接投产。</p><p><strong>为什么值得看：</strong>提示注入不只是提示词写法，也涉及 tokenizer、数据格式和训练分布；对于小模型，显式结构可能是一条值得复现实验的方向。</p><p><strong>后续行动：</strong>先用公开示例与内部合成恶意文档比较基线，再扩展到多轮工具反馈、伪造工具 schema 和编码变体；无论分数如何，继续在应用层强制限制网络、文件及写权限。</p></section>
+<section class="card"><h3>6. Atlas 面向所有用户开放：世界模型开始提供多种输出接口</h3><p class="source"><strong>World Labs @theworldlabs；Fei-Fei Li @drfeifei</strong> · 机构 11-13 02:09；Fei-Fei 02:11 · <a href="https://x.com/theworldlabs/status/2120942033401717108">原始来源</a> <a href="https://x.com/drfeifei/status/2120942509786558671">Fei-Fei 动态</a></p><p><strong>摘要：</strong>World Labs 宣布开放 Atlas 使用入口，并表示已提供应用与 API，可从构建 3D 世界的想法得到关键帧、视频片段或 3D Gaussian splats；Fei-Fei 同日转发确认。公开帖不足以确认免费额度、输出许可、API 限流或几何精度，“面向所有人开放”不应转述为永久免费或权重开源。</p><p><strong>为什么值得看：</strong>关键看点是输出是否能进入现有 3D 资产与交互工作流，而不仅是单段视觉演示。</p><p><strong>后续行动：</strong>用一组固定室内与室外场景对比视频一致性、视角切换和 splat 导出可用性；先查资产使用许可与计费，再评估游戏原型、展示与仿真价值。</p></section>
+<section class="card"><h3>7. Jev 工程案例：结构化判断成为应用代码里的积木</h3><p class="source"><strong>Latent Space / swyx 关联媒体；TypeSafe、Glean、UiPath、Workday</strong> · 11-12 13:08 · <a href="https://latent.space/p/jev-revolution/">原始来源</a> </p><p><strong>摘要：</strong>Latent Space 的会议报道整理了 Jev 的生产与原型用法：Glean 将其与 LLM 和分类器混用，应对变化中的决策分类；UiPath 通过多轮小组晋级重排文档块；Workday 展示输入尚未完成时预填休假卡。文中对可靠性及大量调用耗时的说法来自演讲与案例，没有统一可复现配置。它补充的是新的应用模式，不重复把昨日 Gemini Decisions API 发布当作今日新闻。</p><p><strong>为什么值得看：</strong>低延迟判断可能改变交互设计与检索架构，但多次局部选择也可能累积偏差，需要整条链路验收。</p><p><strong>后续行动：</strong>用真实检索集对比锦标赛重排、传统 reranker 与生成式排序；记录尾延迟、相关性、调用数及费用，并检查局部淘汰是否丢失长尾正确答案。</p></section>
+<section class="card"><h3>8. Daybreak 新网安产品：已确认发布声明，技术细节暂缺</h3><p class="source"><strong>Greg Brockman @gdb / OpenAI</strong> · 11-13 06:16 · <a href="https://x.com/gdb/status/2121004237413142656">原始来源</a> </p><p><strong>摘要：</strong>Greg 宣布 Daybreak Defense Factory 与 Daybreak Red Team 两款产品，并将其定位为帮助企业使用前沿网安能力。两个官方产品页本轮均返回 HTTP 403，未读取到可验证的能力边界、价格和准入规则。当前只确认发布声明，不将名称解释为完全自治渗透测试，也不把旧帖被引用的日期当成新品发布日期。</p><p><strong>为什么值得看：</strong>安全能力正被包装为企业工作流；真正采购标准在于授权范围、可复核证据和修复闭环，而非攻击演示。</p><p><strong>后续行动：</strong>后续在官方公开文档恢复可读时核对准入、部署方式、审计输出及误报处理；仅在明确授权的测试资产范围内评估。</p></section>
+<h2>人物 / 机构动态</h2><ul>
+<li><strong>Shreya Shankar：</strong>11-13 03:55 强调下一代 BI 需要同时解决非结构化数据的大规模分析与面向人的高效沟通，并招募相关博士研究。摘要：她把“分析正确”和“帮助业务决策”并列，而不是把自动图表当终点。值得看：与会议上下文产品共同指向面向决策的闭环；行动：给数据分析原型增加来源定位、证据不确定性和人类复核环节。<a href="https://x.com/sh_reya/status/2120968641332359282">原帖</a>。</li>
+<li><strong>François Chollet：</strong>11-12 08:22 可见帖段强调教育 AI 应促进思考而非只给答案。摘要：这是目标函数与产品验收的观点，不是新模型发布；帖子显示“Show more”，本轮不推断折叠部分。值得看：学习效果与作业完成率可能方向不同；行动：教育产品测试增加延迟测验和无辅助迁移任务。<a href="https://x.com/fchollet/status/2120673529951813985">原帖</a>。</li>
+<li><strong>Harrison Chase：</strong>11-13 07:31 赞同“Persistent agents”这一命名。摘要：可见内容只是概念认同，不能当作 LangChain 新功能发布。值得看：持续状态 Agent 叙事仍在升温；行动：继续追踪状态持久化、恢复语义和权限隔离的实际接口，而不是只看术语。<a href="https://x.com/hwchase17/status/2121023221516599528">原帖</a>。</li>
+</ul>
+<h2>值得跟进项目与行动清单</h2><ol>
+<li><strong>多模型任务路由：</strong>构建包含失败样本的固定小型验收集，分别记录质量、美元成本、配额和人工时间；路由仅在可测收益超过切换成本时保留。</li>
+<li><strong>会议上下文闭环：</strong>选一组获准使用的低敏会议，对照 Claude Meetings 与 Granola 的引用、检索、决策变更和撤权行为；不要以笔记长短衡量价值。</li>
+<li><strong>开放模型 TCO：</strong>围绕 Inkling 的 500GB/800GB 显存门槛做托管与自建预算；将量化、框架兼容和利用率纳入研究，不因模型名称直接购买硬件。</li>
+<li><strong>结构化输入与安全：</strong>把 LLMON 放进隔离评测，而非生产替换；世界模型方向则先测 Atlas 可导出资产，再谈端到端创作或仿真。</li>
+</ol>
+<h2>待验证信息与抓取边界</h2><ul>
+<li><strong>X 覆盖：</strong>30 个清单账号均返回 HTTP 200，但仅为可见公开时间线，不保证完整；“没有抓到窗口内帖子”不等于该账号没有更新。部分文字折叠、图片和视频未完整读取，不据此填补参数。</li>
+<li><strong>NVIDIA 相关传闻：</strong>Nathan、Clem 的情绪与观点帖及 AINews 的二手汇总不足以独立确认人事、调查或治理变动；不纳入已确认商业新闻，也不据此给投资结论。需要原始公告或可核验正式报道，而非互相引用。</li>
+<li><strong>OpenAI 正文：</strong>Daybreak 两页和 Amplitude 案例页返回 403，本轮不绕过访问验证。RSS 中 Amplitude “1–2 天”、Gondola “收入翻倍 / 工程产出 +50%”、Holiday Extras 等均为厂商客户案例标题或摘要，未读取全文，不当作独立因果证据或跨企业效率基准。</li>
+<li><strong>订阅：</strong>LangChain 的旧 RSS 地址返回 HTML，未按有效 feed 处理；Eugene 的 /feed.xml 返回 404，不等同网站无更新。Simon、Interconnects、Chip、Lilian、Hamel 的可读订阅未检出本窗口条目；没有把旧文回填为今日更新。</li>
+<li><strong>清单 Web 资源：</strong>explainx sitemap 仅列博客索引，lastmod 为 11-11，不足以推断具体新文章；播客 JSON 的 updatedAt 仍为 2026-07-02，本轮不把旧目录当作新播客。Follow List 中的职务和备注只用于选源，不在未经核实情况下复述为最新履历。</li>
+</ul>
+<h2>低优先级噪音</h2><p>Logan 单词预热、Kevin 的简短赞同、swyx 的大会流量与玩笑帖，以及未说明细节的下周发布预告，均不扩写为产品事实。Shreya 的 Quail 论文预告没有可读论文支撑，只保留后续检查线索。昨日 Gemini Decision 1、AlphaGenome 2、AWS Emulator 等虽被今日 AINews 重述，不重复作为新发布；内容发布时间在窗口内也不等于其描述的事件刚发生。</p>
+<h2>原始链接与方法</h2><p>重点条目的原文均在各卡片提供；下列为补充阅读与监测入口。全文为中文转述，未刊载账户内部数据、登录信息或大段原文；厂商基准未经本报告独立复现。</p><ul>
+<li><a href="https://latent.space/p/ainews-d-day-decision-models-day/">AINews D-Day（11-12 13:26；聚合线索，不作单独证实）</a></li>
+<li><a href="https://openai.com/business/customer-stories/amplitude">Amplitude 案例（RSS 11-13 04:00，正文 403）</a> · <a href="https://openai.com/business/customer-stories/gondola">Gondola（RSS 11-12 20:00，仅摘要）</a> · <a href="https://openai.com/business/customer-stories/holidays-extras-codex">Holiday Extras（RSS 11-12 17:30，仅摘要）</a></li>
+<li><a href="https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/">Hydrogen 在 Search 的分发与 query fan-out（11-13 02:00）</a></li>
+<li><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx sitemap</a> · <a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客 JSON</a></li>
+</ul><p class="meta">方法：按 active、Priority 和 Cadence 排序抓取公开页面及来源原生订阅，按上次运行至本次 08:00 的固定窗口筛选，再对已发布 URL/ID 去重。没有使用 Folo CLI，没有绕过 CAPTCHA、付费墙或反爬验证。机构补充源用于交叉核验，不替代 Follow List 控制面板。</p>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
