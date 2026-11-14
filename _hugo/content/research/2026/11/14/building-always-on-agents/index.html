@@ -3,11 +3,12 @@ title: "常驻 Agent 的原理：Anthropic 五个架构部件与落地检查清�
 date: "2026-11-14"
 category: "research"
 url: "/research/2026/11/14/building-always-on-agents/"
-summary: "阅读 Anthropic《Building always-on agents》：7×24 在线是一种体验，而不是模型永不停机。拆解收件箱、计时器、记忆、权限与发件箱，补充日报助手案例、重试与外部副作用的工程缺口、成本控制和最小验收清单。"
+summary: "阅读 Anthropic《Building always-on agents》：7×24 在线是一种体验，而不是模型永不停机。拆解收件箱、计时器、记忆、权限与发件箱，补充日报助手案例、重试与外部副作用的工程缺口、成本控制和最小验收清单；新增 WorkBuddy 本地／云端选择、工作空间、任务提示词、权限与通知配置及能力边界。"
+lastmod: "2026-11-15"
 layout: "raw"
 ---
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>常驻 Agent 的原理：Anthropic 五个架构部件与落地检查清单</title><meta name="description" content="阅读 Anthropic《Building always-on agents》：7×24 在线是一种体验，而不是模型永不停机。拆解收件箱、计时器、记忆、权限与发件箱，补充日报助手案例、重试与外部副作用的工程缺口、成本控制和最小验收清单。"><link rel="canonical" href="https://pages.cobuddy.cc/research/2026/11/14/building-always-on-agents/"><style>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>常驻 Agent 的原理：Anthropic 五个架构部件与落地检查清单</title><meta name="description" content="阅读 Anthropic《Building always-on agents》：7×24 在线是一种体验，而不是模型永不停机。拆解收件箱、计时器、记忆、权限与发件箱，补充日报助手案例、重试与外部副作用的工程缺口、成本控制和最小验收清单；新增 WorkBuddy 本地／云端选择、工作空间、任务提示词、权限与通知配置及能力边界。"><link rel="canonical" href="https://pages.cobuddy.cc/research/2026/11/14/building-always-on-agents/"><style>
     :root {
       --bg: #f4f7f4;
       --paper: #ffffff;
@@ -108,6 +109,7 @@ layout: "raw"
     }
 
     article {
+      min-width: 0;
       display: grid;
       gap: 22px;
     }
@@ -339,14 +341,14 @@ layout: "raw"
 <p class="eyebrow">Agent 工程 · 官方指南解读</p>
 <h1>常驻 Agent：<br>不是一直思考，而是随时接得上工作</h1>
 <p class="dek">Anthropic《Building always-on agents》中文总结与工程解读：让模型从“等你提问”走向“有事件就工作”，真正要补的是模型外围的运行系统。</p>
-<div class="meta"><span class="pill">整理日期：2026-11-14</span><span class="pill">原文作者：William Hu</span><span class="pill">阅读约 7 分钟</span></div>
+<div class="meta"><span class="pill">整理日期：2026-11-14</span><span class="pill">原文作者：William Hu</span><span class="pill">更新：2026-11-15 · 新增 WorkBuddy 实践</span><span class="pill">阅读约 12 分钟</span></div>
 </div></header>
 <main class="wrap"><article>
 <section id="summary"><h2>先读结论</h2>
 <p><strong>“始终在线”描述的是用户体验，不是模型持续运行的方式。</strong>原文中的 Agent 大部分时间休眠，事件到来才启动一轮工作，结束后保存必要信息，再等待下一次唤醒。</p>
 <p>这不是发布了一个新模型，也不是只需开启某个开关就能无人值守。文章提供的是一套架构思路：在既有 Agent 工具调用循环外，补齐事件、时间、持久状态、授权和交付。</p>
 <p><a href="https://claude.com/resources/articles/building-always-on-agents">阅读全文：Building always-on agents →</a></p>
-<p class="side-note">阅读说明：前两节为原文要点的压缩转述；后续案例、故障分析和验收建议是本文的工程延伸，不代表官方实现或对任何现有产品的审计。本文不做全文翻译。</p>
+<p class="side-note">阅读说明：前两节为原文要点的压缩转述；后续案例、故障分析、WorkBuddy 实践和验收建议是本文的工程延伸，不代表官方实现或对任何现有产品的审计。本文不做全文翻译。</p>
 </section>
 <section id="primitives"><h2>原文框架：五个部件各管一件事</h2>
 <div class="layer"><h3>1. 收件箱：什么事情值得启动工作</h3>
@@ -410,6 +412,61 @@ layout: "raw"
 </ul>
 <p>最小系统不一定需要五套独立服务：一个数据库可以存放不同逻辑表，一个应用也可以承担多种角色。应先明确状态和职责，再按负载拆分部署；不要把“架构上分开”误解为“必须上微服务”。</p>
 </section>
+<section id="workbuddy"><h2>WorkBuddy 实践：先跑通一个可恢复的日报助手</h2>
+<p class="tag">2026-11-15 补充 · 官方能力核对 + 本文实施建议</p>
+<p><strong>推荐起步方案：定时任务负责唤醒，WorkBuddy 负责采集与整理，工作空间负责保存进度，通知渠道负责交付。</strong>先做一个任务，再考虑外部事件驱动。以下是实践方案，并非已经完成的 WorkBuddy 环境配置或运行测试。</p>
+<h3>第一步：按数据位置选本地或云端</h3>
+<ul>
+<li><strong>本地任务：</strong>适合处理本机资料、操作本地项目。电脑与 WorkBuddy 客户端要保持运行；关机或退出可能中断或错过任务。</li>
+<li><strong>云端任务：</strong>在云端沙箱执行，不依赖电脑在线。但不能读取本机文件路径；按当前官方文档，也不支持云端定时任务的内置企业微信推送。</li>
+</ul>
+<p>下面的目录方案以<strong>本地任务</strong>为例。如果改用云端，要先验证可用连接器或服务的数据访问与持久化能力，不能把本地路径原样搬过去，也不能假设云端沙箱文件会永久保留。</p>
+<h3>第二步：建立独立工作空间</h3>
+<p>下面是自定义文件约定，不是 WorkBuddy 自动识别的特殊目录。应在任务提示词里明确要求读取与更新。</p>
+<pre class="en-block" style="overflow-x:auto;white-space:pre;max-width:100%"><code>情报助手/
+  rules.md          # 来源标准、输出要求、操作边界
+  sources.md        # 关注清单
+  state.json        # 已检查内容、报告与交付状态
+  reports/          # 每日报告
+  logs/             # 覆盖缺口与失败记录</code></pre>
+<p>WorkBuddy 内置记忆会定期从历史会话提取偏好等信息。它适合保存“用户喜欢怎样的报告”，但不应替代精确业务状态，例如“今天报告是否发布、通知是否确认成功”。后者放在显式状态文件中。</p>
+<p>建议状态至少包含 <code>task_id</code>、<code>checked_until</code>、<code>processed_urls</code>、<code>report_path</code>、<code>publish_status</code> 和 <code>notify_status</code>。首期不发布时，将发布状态明确标为未启用。来源检查失败时，不要把该来源的检查水位当作成功推进。</p>
+<h3>第三步：创建每天 08:00 的任务</h3>
+<p>在「定时任务 → 新建」中指定上述工作空间，设置每日执行时间，并核对实际时区、模型和需要的连接器。先点击「立即运行」试跑，再开启周期执行。</p>
+<p><strong>可直接修改使用的任务提示词：</strong></p>
+<div class="en-block">
+<p>执行每日情报整理。先读取 rules.md、sources.md 和 state.json；首次运行时按约定初始化状态，其他必要文件缺失则说明缺失项，不猜测来源或规则。</p>
+<p>检查上次成功检查以来的新增内容，按原始链接去重。重要结论附来源；抓取失败、无法核实及覆盖缺口单列。</p>
+<p>将报告保存到 reports/YYYY-MM-DD.md，并记录本次进度。若当天报告已经完成，先检查已有产物，只在有明确新增内容时补充，不重复生产同一份报告。</p>
+<p>只有对应动作确认成功后，才更新完成状态；失败时保留已完成步骤和下一步。首期只生成报告，不公开发布、不删除原始资料。</p>
+<p>结果只输出：报告位置、五条以内高价值发现、需要处理的异常。若使用定时任务内置推送，不再调用其他工具向同一接收人重复通知。</p>
+</div>
+<p><strong>边界：</strong>提示词描述的是行为目标，不是事务保证。并发、崩溃恢复与关键状态写入仍需要实际测试；涉及稳定业务运行时，应交由确定性程序管理。</p>
+<h3>第四步：权限与通知分别配置</h3>
+<p>先用默认权限试跑，观察哪些文件、命令、网络访问需要允许，再通过安全中心按实际需求细化规则。不要为了减少确认直接把所有任务切到完全访问；提示词里的“仅修改某目录”也不能替代权限限制。</p>
+<p>本地定时任务的内置企微推送当前要求 WebSocket 长连接，URL 回调方式不适用于该推送入口。优先选择一种通知路径，避免内置推送与自建 MCP 同时发送。</p>
+<p>飞书或其他系统可通过合适的 MCP／连接器评估接入，但应先验证实际工具、授权和发送能力。<strong>MCP 是工具接入方式，不自动提供可靠队列或发送去重。</strong>未拿到平台投递回执时，不要只根据任务完成就把通知标记为已送达。</p>
+<h3>第五步：确有需要时，补外部事件系统</h3>
+<p>固定周期汇总通常从一个定时任务就能起步；若需求变成“业务事件一到就处理”“多人同时派单”或“中断后可靠恢复”，建议再补持久队列与执行控制。</p>
+<div class="quote">业务事件 → 持久队列 → 领取与锁定 → WorkBuddy 处理 → 记录结果 → 通知与补发</div>
+<p>这是一种目标架构，不是已核实的 WorkBuddy 原生能力清单。外部系统如何触发 WorkBuddy，必须依据部署版本提供的可用接口另行验证；本文未确认通用的外部调用 API，因此不能把此箭头当作现成接口。</p>
+<p>队列、锁、重试、状态转换和通知去重由脚本或服务承担。单机可以从 SQLite 开始；多进程领取必须用事务等机制保证，不能只让模型先读后写一个“运行中”字段。外部动作超时后，先核对是否已经成功，再决定重试。</p>
+<h3>最后：用三次试跑检查最小闭环</h3>
+<ol>
+<li><strong>正常运行：</strong>能读取清单、形成带来源的报告，并保存明确状态。</li>
+<li><strong>同一天再运行：</strong>不会重复生成或重复通知；如有新增内容，行为符合补充规则。</li>
+<li><strong>中断后恢复：</strong>保留已有成果，只补未完成步骤；“发布成功、通知失败”不应导致再次发布。</li>
+</ol>
+<p>这些是验收目标，不是内置保证。先连续运行几天，确认失败记录、质量与消耗符合预期，再逐步开启自动发布。若原有系统已经运行同类日报，新增 WorkBuddy 任务先保持测试状态，避免两个调度器同时生产和通知。</p>
+<h3>官方参考与核验边界</h3>
+<ul>
+<li><a href="https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Automation-Guide">定时任务</a>：任务来源、创建入口、本地在线要求、云端限制与企微推送。</li>
+<li><a href="https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Memory">记忆</a>：偏好提取与记忆管理。</li>
+<li><a href="https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Permission-Modes">默认权限与安全沙箱</a>：工作空间、文件／命令／网络规则和工具管控。</li>
+<li><a href="https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/MCP-Guide">MCP</a>：外部工具与通知服务接入。</li>
+</ul>
+<p class="side-note">资料核对于 2026-11-14，实践章节补充于 2026-11-15。界面和功能可能随版本、灰度范围与部署形态变化；上述文件组织、状态字段和试跑流程为本文设计建议，不是官方固定规范。</p>
+</section>
 <section id="takeaway"><h2>最后判断</h2>
 <p>这篇指南最有价值的地方，是把“更主动的 AI”从模型能力问题，转成一组可实现、可检查的系统职责。</p>
 <p><strong>模型决定这次怎么做；运行系统保证下次还能接上、失败可以恢复、权限没有越过、结果确实送达。</strong>定时器只是入口，可靠性才是长期使用的分水岭。</p>
@@ -418,6 +475,6 @@ layout: "raw"
 <p>本文未审计官方生产系统，也未验证某个具体平台已完整实现全部机制。上述工程示例与验收清单是对框架的应用分析，不是原文逐句翻译。</p>
 </section>
 </article><aside><p class="nav-title">阅读导航</p><ol class="toc">
-<li><a href="#summary">先读结论</a></li><li><a href="#primitives">五个核心部件</a></li><li><a href="#cycle">运行闭环</a></li><li><a href="#example">日报助手示例</a></li><li><a href="#reliability">重试与重复操作</a></li><li><a href="#cost">成本与通知</a></li><li><a href="#acceptance">故障验收</a></li><li><a href="#takeaway">判断与来源</a></li></ol>
+<li><a href="#summary">先读结论</a></li><li><a href="#primitives">五个核心部件</a></li><li><a href="#cycle">运行闭环</a></li><li><a href="#example">日报助手示例</a></li><li><a href="#reliability">重试与重复操作</a></li><li><a href="#cost">成本与通知</a></li><li><a href="#acceptance">故障验收</a></li><li><a href="#workbuddy">WorkBuddy 实践</a></li><li><a href="#takeaway">判断与来源</a></li></ol>
 <div class="side-note"><p>阅读路径：先理解“睡眠—唤醒”，再看状态恢复。不要把 7×24 在线理解成无限授权或无限推理。</p><a href="/research/">返回研究目录 →</a></div></aside></main>
-<footer><div class="wrap">中文阅读总结与工程分析 · 2026-11-14 · <a href="/">OpenClaw Publish</a></div></footer><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script></body></html>
+<footer><div class="wrap">中文阅读总结与工程分析 · 初版 2026-11-14 · 更新 2026-11-15 · <a href="/">OpenClaw Publish</a></div></footer><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script></body></html>
