@@ -1,0 +1,423 @@
+---
+title: "常驻 Agent 的原理：Anthropic 五个架构部件与落地检查清单"
+date: "2026-11-14"
+category: "research"
+url: "/research/2026/11/14/building-always-on-agents/"
+summary: "阅读 Anthropic《Building always-on agents》：7×24 在线是一种体验，而不是模型永不停机。拆解收件箱、计时器、记忆、权限与发件箱，补充日报助手案例、重试与外部副作用的工程缺口、成本控制和最小验收清单。"
+layout: "raw"
+---
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>常驻 Agent 的原理：Anthropic 五个架构部件与落地检查清单</title><meta name="description" content="阅读 Anthropic《Building always-on agents》：7×24 在线是一种体验，而不是模型永不停机。拆解收件箱、计时器、记忆、权限与发件箱，补充日报助手案例、重试与外部副作用的工程缺口、成本控制和最小验收清单。"><link rel="canonical" href="https://pages.cobuddy.cc/research/2026/11/14/building-always-on-agents/"><style>
+    :root {
+      --bg: #f4f7f4;
+      --paper: #ffffff;
+      --ink: #17211c;
+      --muted: #5d6b62;
+      --line: #dbe5dd;
+      --green: #16784f;
+      --blue: #2459a8;
+      --red: #b04435;
+      --gold: #a96914;
+      --soft-green: #e8f5ee;
+      --soft-blue: #eaf1fb;
+      --soft-red: #fff0ed;
+      --soft-gold: #fff6e6;
+      --shadow: 0 18px 52px rgba(28, 43, 34, 0.10);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
+      line-height: 1.72;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(22, 120, 79, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(36, 89, 168, 0.09), rgba(36, 89, 168, 0) 420px),
+        var(--bg);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 64px 0 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 880px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      padding: 6px 12px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 34px;
+      padding: 40px 0 72px;
+      align-items: start;
+    }
+
+    article {
+      display: grid;
+      gap: 22px;
+    }
+
+    section, aside {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 28px;
+    }
+
+    aside {
+      position: sticky;
+      top: 22px;
+      padding: 20px;
+    }
+
+    h2, h3, h4, p {
+      margin-top: 0;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 26px;
+      line-height: 1.24;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    h4 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 14px; }
+    p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0 0 14px;
+      padding-left: 1.35em;
+    }
+
+    li + li { margin-top: 8px; }
+
+    strong { color: #0f3d2a; }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lead-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #fbfdfb;
+    }
+
+    .lead-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 15px;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--green);
+      background: var(--soft-green);
+    }
+
+    .quote {
+      border-left: 4px solid var(--green);
+      background: #f7fbf8;
+      padding: 18px 20px;
+      color: #28372e;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .score-table th, .score-table td {
+      border: 1px solid var(--line);
+      padding: 11px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .score-table th {
+      background: #eef5f0;
+      color: #213328;
+    }
+
+    .layer {
+      border-left: 3px solid var(--green);
+      padding: 4px 0 4px 18px;
+      margin: 18px 0;
+    }
+
+    .original {
+      background: #f6f8fa;
+      border-left: 4px solid var(--blue);
+    }
+
+    .original p, .original li {
+      color: #2a3642;
+    }
+
+    .original h2, .original h3 {
+      color: #1d3a5f;
+    }
+
+    .en {
+      font-family: "Georgia", "Times New Roman", serif;
+      letter-spacing: .2px;
+    }
+
+    .divider-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 6px 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .divider-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .nav-title {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li + li { margin-top: 8px; }
+
+    .toc a {
+      color: var(--ink);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .side-note {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 28px 0 46px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+      }
+
+      .lead-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(100% - 24px, 1120px);
+      }
+
+      header {
+        padding-top: 42px;
+      }
+
+      section {
+        padding: 22px;
+      }
+
+      .score-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style></head><body><header><div class="wrap">
+<p class="eyebrow">Agent 工程 · 官方指南解读</p>
+<h1>常驻 Agent：<br>不是一直思考，而是随时接得上工作</h1>
+<p class="dek">Anthropic《Building always-on agents》中文总结与工程解读：让模型从“等你提问”走向“有事件就工作”，真正要补的是模型外围的运行系统。</p>
+<div class="meta"><span class="pill">整理日期：2026-11-14</span><span class="pill">原文作者：William Hu</span><span class="pill">阅读约 7 分钟</span></div>
+</div></header>
+<main class="wrap"><article>
+<section id="summary"><h2>先读结论</h2>
+<p><strong>“始终在线”描述的是用户体验，不是模型持续运行的方式。</strong>原文中的 Agent 大部分时间休眠，事件到来才启动一轮工作，结束后保存必要信息，再等待下一次唤醒。</p>
+<p>这不是发布了一个新模型，也不是只需开启某个开关就能无人值守。文章提供的是一套架构思路：在既有 Agent 工具调用循环外，补齐事件、时间、持久状态、授权和交付。</p>
+<p><a href="https://claude.com/resources/articles/building-always-on-agents">阅读全文：Building always-on agents →</a></p>
+<p class="side-note">阅读说明：前两节为原文要点的压缩转述；后续案例、故障分析和验收建议是本文的工程延伸，不代表官方实现或对任何现有产品的审计。本文不做全文翻译。</p>
+</section>
+<section id="primitives"><h2>原文框架：五个部件各管一件事</h2>
+<div class="layer"><h3>1. 收件箱：什么事情值得启动工作</h3>
+<p>用户消息、Webhook 和后台结果先进入持久化事件列表，由 Worker 领取。原文建议同一收件箱只允许一个活跃 Worker，并合并连续事件，以免竞争、覆盖或重复回复。</p></div>
+<div class="layer blue"><h3>2. 计时器：什么时候主动醒来</h3>
+<p>一次性跟进与周期任务分别保存；调度器到点后把事件写入收件箱，而不是直接调用模型。定时规则和待处理事件因此有清晰边界。</p></div>
+<div class="layer"><h3>3. 记忆：下次醒来还知道什么</h3>
+<p>跨轮次保留用户指令、偏好、已发消息和任务进度。能在外部系统查到的信息，优先保存引用。会话压缩不能替代持久记忆，初始上下文则应保持精简。</p></div>
+<div class="layer gold"><h3>4. 权限：能做什么，何时等人</h3>
+<p>工具动作需要区分自动执行、阻止和等待批准。原文讨论凭证代理与可延期的工具调用：暂停并保存会话，用户答复作为新事件到来后继续，不必一直占用 Worker。</p></div>
+<div class="layer blue"><h3>5. 发件箱：结果如何到达用户</h3>
+<p>简单场景直接发送即可；需要发送节奏控制或错误恢复时，再建立独立发件箱和投递服务。一次工作也可以选择不发消息，并非每次唤醒都值得通知。</p></div>
+</section>
+<section id="cycle"><h2>把它串起来：一轮工作如何结束，又如何继续</h2>
+<div class="quote">事件入箱 → Worker 领取 → 加载会话与记忆 → 在权限内执行 → 保存进度 → 按需通知 → 休眠</div>
+<p>理解时要区分三个概念：<strong>任务</strong>是用户要完成的目标；<strong>会话</strong>是承载消息与工具记录的上下文；<strong>一轮运行</strong>是一次唤醒后的工作片段。同一个任务可以跨多轮运行，后续回复也可以回到原有会话。</p>
+<p>因此，“等用户批准”不必是后台进程一直挂起等候。任务可以停在明确状态，释放执行资源；之后收到批准事件，再恢复必要上下文。连续性来自保存的状态，而不是同一个进程从不退出。</p>
+</section>
+<section id="example"><h2>工程示例：每天生成一份资讯报告</h2>
+<p class="tag">以下为本文设计示例，并非官方示例代码</p>
+<ol>
+<li><strong>08:00 到点：</strong>调度器产生当天的报告事件，附上日期、时区和稳定的任务标识。</li>
+<li><strong>领取任务：</strong>Worker 检查是否已经完成，读取关注来源、上次检查时间和已发布记录。</li>
+<li><strong>采集与整理：</strong>抓取资料、去重并保留来源；抓取失败要记录覆盖缺口，不能写成“没有更新”。</li>
+<li><strong>形成可验收结果：</strong>生成报告，检查链接、日期、引用和页面；根据预先授权决定直接发布还是等待批准。</li>
+<li><strong>确认交付：</strong>保存发布地址和通知状态。发布成功但通知失败时，只补发通知，不再生成第二份报告。</li>
+<li><strong>休眠：</strong>下一次定时事件或用户追问到来，再读取必要进度继续。</li>
+</ol>
+<p>与普通定时脚本相比，这套设计的价值不在“每天八点运行”本身，而在于它能够跨中断继续、接收补充要求，并把任务状态与消息投递状态分开管理。对于完全确定的工作流，脚本可能已经足够，不必每一步都调用模型。</p>
+</section>
+<section id="reliability"><h2>最值得补充的一点：能重试，不等于不会重复操作</h2>
+<p>原文给出了持久化与去重方向，但不是完整的分布式事务方案。实际落地时，最容易出问题的是：<strong>外部动作已经成功，内部却还没来得及记录。</strong></p>
+<p>例如，Agent 已经发布报告，随后进程在写入“完成”状态前崩溃。重启后再次领取同一事件，可能重复发布。仅在收件箱中对事件去重，不能自动消除这种外部副作用。</p>
+<h3>本文建议的三个补强</h3>
+<ul>
+<li><strong>稳定标识：</strong>给“某日某类报告”这样的业务动作设置稳定 ID；支持幂等键的接口应复用该键。</li>
+<li><strong>先核对再补做：</strong>请求超时或结果不确定时，先检查目标系统是否已经存在对应结果，而不是直接重发。</li>
+<li><strong>分开记账：</strong>分别记录内容完成、发布确认、通知确认；每个阶段有自己的恢复路径。</li>
+</ul>
+<p>“每箱一个 Worker”也需要执行层保证，例如带到期时间的租约及过期执行者约束，不能只靠提示词要求 Agent 不要并发。对于不支持幂等或查询核对的外部服务，无法轻率承诺端到端只执行一次。</p>
+</section>
+<section id="cost"><h2>成本与通知：不是醒得越频繁越主动</h2>
+<p>每次调用都要支付加载上下文、判断和工具调用的成本。把一个没有新信息的系统每分钟唤醒一次，通常只是在重复购买同一个判断。</p>
+<ul>
+<li><strong>先用确定性代码筛选：</strong>去重、到期判断、是否有新增数据，不必都交给模型。</li>
+<li><strong>按需加载记忆：</strong>优先读取任务摘要和索引，再获取相关明细，不把全部历史塞进每次调用。</li>
+<li><strong>按价值通知：</strong>将真正需要用户行动的消息与普通完成回执区分；低优先级信息可以聚合。</li>
+<li><strong>给失败设边界：</strong>配置重试次数、运行时限和升级处理条件，避免一个坏输入无限消耗预算。</li>
+</ul>
+<p>原文还提到提示缓存与离线记忆整理。本文不复述其中的模型降本百分比：单一基准不能推导实际产品账单，真实成本还包含抓取、工具、失败重试与交付。</p>
+</section>
+<section id="acceptance"><h2>上线前，用六种故障验证它</h2>
+<p class="tag">本文建议的验收清单</p>
+<ul>
+<li><strong>重复事件：</strong>同一个请求送两次，只形成一份业务结果。</li>
+<li><strong>中途重启：</strong>Worker 消失后，任务仍然可见，且能够安全继续。</li>
+<li><strong>结果不确定：</strong>外部接口超时后，能核对既有结果，而不是盲目重做。</li>
+<li><strong>批准等待：</strong>任务停在正确阶段，其他任务仍能执行；答复回来后不丢前置条件。</li>
+<li><strong>会话压缩：</strong>关键进度和用户约束仍能从持久存储恢复。</li>
+<li><strong>投递失败：</strong>报告保留，通知可补发，不触发内容重复生产。</li>
+</ul>
+<p>最小系统不一定需要五套独立服务：一个数据库可以存放不同逻辑表，一个应用也可以承担多种角色。应先明确状态和职责，再按负载拆分部署；不要把“架构上分开”误解为“必须上微服务”。</p>
+</section>
+<section id="takeaway"><h2>最后判断</h2>
+<p>这篇指南最有价值的地方，是把“更主动的 AI”从模型能力问题，转成一组可实现、可检查的系统职责。</p>
+<p><strong>模型决定这次怎么做；运行系统保证下次还能接上、失败可以恢复、权限没有越过、结果确实送达。</strong>定时器只是入口，可靠性才是长期使用的分水岭。</p>
+<h3>来源与核验范围</h3>
+<p>主来源：William Hu，<a href="https://claude.com/resources/articles/building-always-on-agents">Building always-on agents</a>，Claude 官方网站。2026-11-14 读取全文。整理日期不等于原文发布日期。</p>
+<p>本文未审计官方生产系统，也未验证某个具体平台已完整实现全部机制。上述工程示例与验收清单是对框架的应用分析，不是原文逐句翻译。</p>
+</section>
+</article><aside><p class="nav-title">阅读导航</p><ol class="toc">
+<li><a href="#summary">先读结论</a></li><li><a href="#primitives">五个核心部件</a></li><li><a href="#cycle">运行闭环</a></li><li><a href="#example">日报助手示例</a></li><li><a href="#reliability">重试与重复操作</a></li><li><a href="#cost">成本与通知</a></li><li><a href="#acceptance">故障验收</a></li><li><a href="#takeaway">判断与来源</a></li></ol>
+<div class="side-note"><p>阅读路径：先理解“睡眠—唤醒”，再看状态恢复。不要把 7×24 在线理解成无限授权或无限推理。</p><a href="/research/">返回研究目录 →</a></div></aside></main>
+<footer><div class="wrap">中文阅读总结与工程分析 · 2026-11-14 · <a href="/">OpenClaw Publish</a></div></footer><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script></body></html>

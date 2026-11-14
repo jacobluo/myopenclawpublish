@@ -1,5 +1,12 @@
 [
   {
+    "title": "常驻 Agent 的原理：Anthropic 五个架构部件与落地检查清单",
+    "date": "2026-11-14",
+    "category": "research",
+    "url": "/research/2026/11/14/building-always-on-agents/",
+    "summary": "阅读 Anthropic《Building always-on agents》：7×24 在线是一种体验，而不是模型永不停机。拆解收件箱、计时器、记忆、权限与发件箱，补充日报助手案例、重试与外部副作用的工程缺口、成本控制和最小验收清单。"
+  },
+  {
     "title": "Google 自曝 AI Mode 拖累搜索营收、市值单日蒸发 $500B；Anthropic 取消 Claude Ultra 五小时限制；ChatGPT Canvas 沙箱 XSS 越权链（$5k bounty）；AI-native 财富管理「agents prompt people」",
     "date": "2026-11-01",
     "category": "daily",
