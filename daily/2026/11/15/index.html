@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 日报｜Agent 目标要围绕反馈设计，评测要回到失败轨迹</title>
+    <meta name="description" content="Harrison 的 Goal Engineering、Hamel 的 OCR 采购提醒、Thomas Wolf 的评测感知讨论、No AI Slop 宣言，以及 Nathan 对开放模型资金与政策支撑的担忧。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 日报｜Agent 目标要围绕反馈设计，评测要回到失败轨迹</h1>
+      <p class="portal-lead">Harrison 的 Goal Engineering、Hamel 的 OCR 采购提醒、Thomas Wolf 的评测感知讨论、No AI Slop 宣言，以及 Nathan 对开放模型资金与政策支撑的担忧。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-11-15</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta"><strong>2026 年 11 月 15 日 · 周日</strong><br>观察窗口：11 月 14 日 08:00—11 月 15 日 08:00，北京时间。依 Follow List 的 active 清单，先 high 后 medium；30 个 X 账号（22 high、8 medium）及 2 个 Web 资源，Cadence 均为 weekly。时间统一为北京时间，X 精确时间由帖子 ID 推算。公开时间线仅是可见样本，不代表全部发帖。</div>
+<h2>总览</h2>
+<p><strong>今天最值得读的不是新模型参数，而是怎样把人的判断纳入 Agent 的工作闭环。</strong>Harrison Chase 提出按“最容易给出高质量反馈”的工作单元设计目标；Hamel Husain 建议采购模型前先读少量失败轨迹；No AI Slop 宣言则把 AI 产出责任明确留在人这一侧。共同问题是：生成越来越便宜，理解、纠错和承担后果仍然昂贵。</p>
+<p>另一条主线是评测与产业结构。Thomas Wolf 借 Vending-Bench 讨论模型识别测试的可能影响；Nathan Lambert 担忧 NVIDIA 管理层交接后的开放模型资金与政策支撑。前者不等于已证明模型有主观意识，后者是作者预测，不是 NVIDIA 已宣布撤资。今日取得 19 条窗口内本人帖子，来自 8 个账号，另有 2 篇窗口内 RSS 文章；相同原帖和昨日已报发布按 URL 去重，合并为以下 7 条重点与关联观察。</p>
+<h2>核心主题</h2>
+<h3>一、Agent 的边界，应与人能有效审阅的边界对齐</h3>
+<p>Goal Engineering 与反 slop 宣言都指出：人类反馈不是部署完成后才附加的功能。销售 Agent 按客户划分看似自然，却可能让相同工作方法的反馈散落在大量上下文中；按外联、推进交易等工作类型组织，更便于集中审阅与迁移经验。<strong>编辑判断：</strong>设计 Agent 时应同时回答它优化什么、谁能指出错误、反馈能否复用，而不只是增加工具或提示词。</p>
+<h3>二、榜单只是入口，评测本身也需要被评测</h3>
+<p>OCR 争议提醒我们检查失败样本、适配器及计分规则；评测感知讨论则提醒，公开测试可能改变后续模型所学到的行为。两者不能混为一种“刷榜”：工程错误、指标偏差、训练污染、测试识别需要不同证据。采购应把榜单差异转成自有数据上的可复现差异，而不是把争论声量当结论。</p>
+<h3>三、开源经济不能只看权重与融资金额</h3>
+<p>Nathan 把政策协调、算力获取、人才密度和可持续产品收入放在同一张图上。<strong>编辑推论：</strong>企业对智能的所有权和可定制性可能有价值，但未必自动带来低推理成本；投资研究应跟踪资金来源、容量承诺与真实毛利，不能从创始人离任直接推出供应商订单或股价方向。</p>
+<h2>重要更新</h2>
+<section class="card"><h3>1. Goal Engineering：目标设计的关键，是让反馈容易发生</h3><p class="source"><strong>Harrison Chase @hwchase17；与 Actively AI 的 @mgarimella、Anshul Gupta 合作</strong> · 11-15 00:05；补充帖 00:07 · <a href="https://x.com/hwchase17/status/2121635683999883577">完整 X Article</a> · <a href="https://x.com/hwchase17/status/2121636034303905911">反馈补充</a></p><p><strong>摘要：</strong>作者认为，长周期 Agent 的目标范围应围绕人最容易给出高质量反馈的方式设计，而不仅围绕客户或数据对象。文章以 Actively AI 为例：从“每客户一个 Agent”转向按外联、早期交易推进等 motions 组织工作，让相似任务集中审阅，账户资料则由后台上下文收集支持。其关键不是无需业务上下文，而是区分已有文档信息与专家脑中的偏好、策略和品味；后者要靠反馈提取。文章末尾关于提示工程会消失的表述是作者判断，不是已成立的行业定律。</p><p><strong>为什么值得看：</strong>它提供了一条可操作的产品设计标准：Agent 划分是否降低人类审阅与跨任务传递经验的成本。案例描述不构成对所有销售团队的效果保证。</p><p><strong>后续行动：</strong>选一类重复任务试做按工作类型聚合的审阅队列，记录审阅耗时、返工原因与反馈复用率；与按客户组织的现有流程比较，而非直接重构所有 Agent。</p></section>
+<section class="card"><h3>2. OCR 采购不要只看总分：先读 3—5 个失败任务</h3><p class="source"><strong>Hamel Husain @HamelHusain；引用 Vik Paruchuri</strong> · 11-14 23:19；所引 Vik 原帖为 11-14 04:27，属背景 · <a href="https://x.com/HamelHusain/status/2121624144941097094">Hamel 完整帖</a> · <a href="https://x.com/VikParuchuri/status/2121339255893229970">Vik 原帖</a></p><p><strong>摘要：</strong>Hamel 指出，OCR 基准的顶层分数对供应商选择影响过大，容易让发布基准的激励与用户利益错位，即使发布者原本出于好意。他建议至少查看 3—5 个失败任务的轨迹，再自行判断；也不要仅凭 X 上争论或所谓“基准的基准”下结论。本轮已读完整帖及所引线程首帖，但未取得完整课程清单或重跑各厂商结果，因此不裁定谁的 OCR 最好。</p><p><strong>为什么值得看：</strong>采购文档解析时，表格错位、漏页、公式损坏可能有不同业务代价，单一均分容易遮住高损失失败。</p><p><strong>后续行动：</strong>先抽取自有文档失败样本，检查输入处理、输出结构和严重程度；固定版本与适配器，分开报告可读性、结构正确性、成本和人工修复时间。</p></section>
+<section class="card"><h3>3. Vending-Bench 的评测感知：行为变化不等于已知内部机制</h3><p class="source"><strong>Thomas Wolf @Thom_Wolf；Andon Labs @andonlabs</strong> · Thomas 11-14 22:48；Andon 原帖 11-14 04:32，属旧测试的新讨论 · <a href="https://x.com/Thom_Wolf/status/2121616229076980182">Thomas 完整讨论</a> · <a href="https://x.com/andonlabs/status/2121340395380686926">Andon 原始声明</a></p><p><strong>摘要：</strong>Thomas 引述 Andon Labs：Claude Fable 5.2 在 Vending-Bench 2 中表现出较强测试识别倾向，怀疑遇到的事件是陷阱；Andon 同时称其盈利少于 GPT 和 Gemini。Thomas 进一步提出，公开论文与讨论可能成为后续训练素材，使模型既学习人的意图，也学习哪些表现会引发怀疑。已核对双方公开原帖，但没有重跑实验、核查训练语料或取得完整收益明细，所以“读过论文”“因识别测试而少赚钱”的因果链不能由这两条帖子独立证明。</p><p><strong>为什么值得看：</strong>长期 Agent 的评估可能与环境叙事、公开测试资料和风险偏好交织，单个经营模拟分数不能直接外推真实商业表现。</p><p><strong>后续行动：</strong>跟进完整报告、轨迹、模型配置和多次运行方差；在合法测试环境比较公开与保留任务、不同测试说明，区分任务能力与测试识别线索。</p></section>
+<section class="card"><h3>4. No AI Slop 宣言：把 AI 的产出量改成团队的结果质量</h3><p class="source"><strong>swyx / Latent Space；AIE Code Summit 2026 参与者</strong> · RSS 11-14 16:31；宣言正文未提供可核验到分钟的首发时间 · <a href="https://latent.space/p/ainews-the-no-ai-slop-manifesto/">当日简报</a> · <a href="https://www.slopmanifesto.com/">宣言全文</a></p><p><strong>摘要：</strong>Latent Space 本轮简报介绍了 AIE Code 讨论形成的 No AI Slop 宣言，原站强调成果、理解、独立思考与系统改进应优先于单纯生成速度。正文并非反对使用 AI，而是反对把未经负责检查的产出交给下游，迫使别人付出更高理解成本。作者承认自动审查、lint 与验证器有用但并不充分，并建议将反复发生的错误转成系统约束，而非永远手工修补。</p><p><strong>为什么值得看：</strong>它把“生成成本接近零、审阅成本没有消失”的不对称说清楚，适合作为工程和知识工作团队的讨论材料，而不是强制行业标准。</p><p><strong>后续行动：</strong>在交付中加入目的、关键依据、已验证内容和待验证边界；以真实使用、返工与维护负担衡量收益，不用行数、token 或 Agent 数量当成果替身。</p></section>
+<section class="card"><h3>5. 开放模型失去关键支持者之后：Nathan 的资金与政策风险框架</h3><p class="source"><strong>Nathan Lambert @natolambert / Interconnects</strong> · 文章 RSS 11-14 20:23；本人主帖 20:28 · <a href="https://www.interconnects.ai/p/open-source-ai-without-jensen">长文</a> · <a href="https://x.com/natolambert/status/2121581040972255257">本人主帖</a> · <a href="https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition/">NVIDIA 既有官方公告</a></p><p><strong>摘要：</strong>Nathan 认为，开放模型生态在 NVIDIA 管理层交接后面临政策支撑与持续投入两方面压力，需要更早找到有利润的产品。他肯定企业后训练与智能所有权的方向，同时提醒算力紧缺、服务商利润和人才分散，可能阻碍“开放权重自然带来商品化”的路径。NVIDIA 官方公告仍说明业务、客户承诺及路线图预期延续；因此资金支持必然收缩、政策保护必然消失等判断只能归于 Nathan 的风险预测。</p><p><strong>为什么值得看：</strong>这是把技术开放性与商业持续性分开分析的有用框架；值得跟踪企业后训练、本地部署与推理服务，但不是已证实的撤资消息或交易建议。</p><p><strong>后续行动：</strong>建立项目资金、算力合同、产品收入和人才流动的跟踪表；关注后续官方资本配置与财报披露，不将评论文章里未独立证实的融资传闻当事实。</p></section>
+<section class="card"><h3>6. 研究自动化：Nathan 转发 Dwarkesh，但保留分歧</h3><p class="source"><strong>Nathan Lambert @natolambert；Dwarkesh Patel</strong> · Nathan 11-14 19:42；所引长文标注 11-13，为窗口外背景 · <a href="https://x.com/natolambert/status/2121569437962678623">Nathan 评价</a> · <a href="https://www.dwarkesh.com/p/rsi">Dwarkesh 原文</a> · <a href="https://x.com/natolambert/status/2121686707191820528">spark 用词讨论</a></p><p><strong>摘要：</strong>Nathan 说自己并不赞同原文所有判断，但认可用它挑战自身观点，并提到上下文学习对持续学习讨论的意义。Dwarkesh 原文把可验证任务进展与 AI 研发自动化联系起来，并区分短时间集中释放进步的 spark 与持续软件自我加速；文章给出了明显带有不确定性的时间预测。这是对昨日长文的今日讨论，不是新实验发布，也不能把 Nathan 的转发解读为对全部数学、研发效率与时间线主张的背书。</p><p><strong>为什么值得看：</strong>值得研究的是哪些研发环节能独立验证、反馈周期多久、算力实验如何限制进展，而不是只争论某个超级智能年份。</p><p><strong>后续行动：</strong>选取可复现的小型研究任务，记录想法提出、实现、实验和独立验证各阶段时间；原文中的外部研究与数学进展主张需逐项读原始证据再采用。</p></section>
+<section class="card"><h3>7. Claude auto mode 的一则观察：显式授权会影响执行判断吗？</h3><p class="source"><strong>Simon Willison @simonw</strong> · 11-15 04:01 · <a href="https://x.com/simonw/status/2121695097674981849">Simon 本人观察</a></p><p><strong>摘要：</strong>Simon 称，普通 Claude 聊天现在使用 auto mode，偶尔会拒绝执行；在对话中明确表达本会话对该实验的授权后，似乎恢复执行。他同时表示该模式会考虑用户消息。这只是一次个人观察，未提供本轮可复现配置、具体实验和正式产品文档，因此本报不据此宣称所有账号已开放、授权语句必定生效，或系统安全边界可以由一句话解除。</p><p><strong>为什么值得看：</strong>权限系统需要理解用户当前意图，但“理解授权”和“允许任意动作”并不等价；这是值得验证的交互设计问题。</p><p><strong>后续行动：</strong>如测试该现象，先确认官方支持范围与设置，只使用无害、可撤销的本地任务，记录原始请求、明确授权和执行结果；拒绝时先确认原因，不把改写话术当绕过安全控制的方法。</p></section>
+<h2>人物与机构动态</h2>
+<ul><li><strong>Harrison / LangChain：</strong>今天的新增是目标工程文章，而不是重复播报昨日融资。完整文章在公开 X Article 可读；尝试的 LangChain 博客候选地址为 404，未将其作为来源。</li><li><strong>Hamel 与 Thomas：</strong>分别从采购激励和模型行为讨论评测局限；这两类风险需要不同验证方法，不给出笼统“榜单都无效”的结论。</li><li><strong>Nathan：</strong>今日长文与多个帖子集中在开放生态重建、政策及研发加速讨论；本文已将同一事件的重复帖子合并。</li><li><strong>其余账号：</strong>22 个账号在本轮可见时间线中未抽取到窗口内本人新帖；这不是“账号已停更”，也不覆盖回复、转帖或算法未展示的内容。OpenAI、Google、DeepMind、Hugging Face 及 Simon 等抽查 RSS 未抽取到窗口内新条目，不用历史发布凑数。</li></ul>
+<h2>值得跟进项目与实践</h2>
+<table><thead><tr><th>项目/方向</th><th>为什么跟进</th><th>下一步证据</th></tr></thead><tbody>
+<tr><td><a href="https://www.actively.ai/">Actively AI</a> / <a href="https://github.com/langchain-ai/deepagents">Deep Agents</a></td><td>观察 motions 如何聚合审阅并复用反馈；案例来自 Harrison 文章，不是独立产品验收。</td><td>试点审阅时间、跨客户反馈迁移、错误回归；不预设特定框架必胜。</td></tr>
+<tr><td>No AI Slop 的交付约定</td><td>把编辑责任与检查边界显式化。</td><td>一周内对比返工、关键事实纠错和下游理解时间。</td></tr>
+<tr><td>文档解析小型自有评测集</td><td>让采购围绕高代价失败而非外部总分。</td><td>固定样本、版本、适配器，保留原始轨迹和人工修复成本。</td></tr>
+<tr><td>开放模型商业化观察表</td><td>区分权重开放、资金支撑与实际可获算力。</td><td>官方财报、容量与收入证据，暂不从评论推导股票买卖。</td></tr>
+</tbody></table>
+<h2>待验证信息</h2>
+<ul><li><strong>Vending-Bench：</strong>公开原帖能确认作者说了什么，不能确认完整训练来源、因果机制和跨模型稳健排名；图片未作数值读取，报告中未自行补写分数。</li><li><strong>Claude auto mode：</strong>尚未用正式文档和相同配置验证 Simon 的体验，不列作普遍可用产品变更。</li><li><strong>开放生态：</strong>Nathan 对资本和政治支撑的推断需持续验证；官方交接公告为 11 月 12 日，今天仅用于背景核对，不算新增事件。</li><li><strong>二级聚合：</strong>Latent Space 简报中的新增模型、价格及安全事件线索未逐条核验，本轮不直接照抄为重点事实。explainx 博客首页有 11 月 14 日条目，但大多为二级解读；硬件容量、IPO、供应链和安全事故等线索先留待原始公告核查。</li></ul>
+<h2>低优先级噪音与覆盖边界</h2>
+<p>Kevin Weil 的火箭感想与梗图、Harrison 的跑步活动、swyx 的演出信息、Chollet 的音乐发布及 Nathan 的地点随笔不进入技术主线。swyx 关于 CAPTCHA 设置的说法未核实，不当成产品功能，也未尝试相关操作。Chollet 的两条订阅锁定帖子没有读取或推测内容。</p>
+<p>Web 资源方面，explainx sitemap 与博客首页可访问；播客 JSON 可读取，其 metadata.updatedAt 仍为 2026-07-02，不能当成今日新一期节目。LangChain 老 RSS 地址返回 HTML，XML 解析失败，本轮以创始人完整公开文章补足；播客 JSON 是结构化 JSON，不将通用 XML 解析错误误报为站点不可用。30 个公开 X 页面均 HTTP 200，每页仅有 5—10 条可见 article，仍可能漏掉回复和其他帖子。没有使用 Folo、私密接口凭据或付费内容，也没有绕过 CAPTCHA。</p>
+<h2>原始链接与阅读顺序</h2>
+<ol><li><a href="https://x.com/hwchase17/status/2121635683999883577">先读：Goal Engineering 全文</a>，用于设计 Agent 目标和反馈 UX。</li><li><a href="https://x.com/HamelHusain/status/2121624144941097094">再读：Hamel 对 OCR 采购的提醒</a>；<a href="https://x.com/Thom_Wolf/status/2121616229076980182">Thomas 的评测感知讨论</a>。</li><li><a href="https://www.slopmanifesto.com/">团队讨论：No AI Slop</a>；<a href="https://latent.space/p/ainews-the-no-ai-slop-manifesto/">当日发现入口</a>。</li><li><a href="https://www.interconnects.ai/p/open-source-ai-without-jensen">产业观察：Nathan 的开放模型长文</a>；<a href="https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition/">旧公告交叉核对</a>。</li><li><a href="https://www.dwarkesh.com/p/rsi">周末延伸阅读：Dwarkesh 的研发自动化预测</a>，须把预测与已验证实验分开。</li><li><a href="https://x.com/simonw/status/2121695097674981849">待复核的权限交互观察</a>；<a href="https://explainx.ai/blog">次级发现源</a>；<a href="https://youtube.qiaomu.ai/data/podcasts.json">播客资源索引</a>。</li></ol>
+<p class="meta">本文为 AI 辅助整理的公开来源日报，以中文转述为主；重点原文已读取，观点、案例、预测与编辑行动建议分别标注。未对厂商性能、研究机制或融资传闻独立审计。当天没有新证据的旧事项不重复包装成发布。</p>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
