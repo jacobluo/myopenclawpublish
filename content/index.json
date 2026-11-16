@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 日报｜AI 科研要看证明边界，Agent 产品要打通数据与交互",
+    "date": "2026-11-16",
+    "category": "daily",
+    "url": "/daily/2026/11/16/",
+    "summary": "OpenAI 科学博客与标准模型格点候选构造；Gemini 连接 Google Wallet；家庭 Agent 和轮内交互；SaaS 分化与开放生态集中风险。"
+  },
+  {
     "title": "常驻 Agent 的原理：Anthropic 五个架构部件与落地检查清单",
     "date": "2026-11-14",
     "category": "research",
