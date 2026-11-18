@@ -1,5 +1,12 @@
 [
   {
+    "title": "当创造快于判断：YC 对谈 Grok Bot 团队，AI 同事如何改变交付与组织",
+    "date": "2026-11-18",
+    "category": "research",
+    "url": "/research/2026/11/18/yc-grokbot-ai-coworkers/",
+    "summary": "基于 YC《The Rise Of AI Coworkers》完整官方对话稿，解读 Bot 身份与责任、Slack 外循环、自动验收、代码库护栏与产品判断瓶颈；区分访谈自述和工程推论，附时间导航及两周试点建议。"
+  },
+  {
     "title": "Follow 日报｜GPT‑6.2 降低任务成本，Gemini 把个人助理推向执行",
     "date": "2026-11-18",
     "category": "daily",
