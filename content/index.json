@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 日报｜GPT‑6.2 降低任务成本，Gemini 把个人助理推向执行",
+    "date": "2026-11-18",
+    "category": "daily",
+    "url": "/daily/2026/11/18/",
+    "summary": "GPT‑6.2 Astra/Sol 发布；Gemini 六国免费任务模式；Qwen × pi 的 RL 适配与评测边界；外部沙箱、LangSmith trace 治理、Devin 结果负责制与浏览器内 Python。"
+  },
+  {
     "title": "Follow 日报｜AI 科研要看证明边界，Agent 产品要打通数据与交互",
     "date": "2026-11-16",
     "category": "daily",
