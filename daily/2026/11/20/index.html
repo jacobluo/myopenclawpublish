@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 日报｜Agent 开始接管电脑，工具身份与安全修复成为交付底座</title>
+    <meta name="description" content="Gemini Mac 电脑操作、Genie 4 开发入口、LangSmith Tool Gateway、Ruby 安全公告、PostgreSQL 19 与 GR00T 灵巧手；Anthropic IPO 线索分层核验。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 日报｜Agent 开始接管电脑，工具身份与安全修复成为交付底座</h1>
+      <p class="portal-lead">Gemini Mac 电脑操作、Genie 4 开发入口、LangSmith Tool Gateway、Ruby 安全公告、PostgreSQL 19 与 GR00T 灵巧手；Anthropic IPO 线索分层核验。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-11-20</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta"><strong>2026 年 11 月 20 日 · 周五</strong><br>观察窗口：11 月 19 日 08:00—11 月 20 日 08:00（北京时间）。下文 X 时间均由帖子 ID 推算并转为北京时间；仅日期的公告不补造具体时刻。以 Follow List 为控制面板：31 个 active X 账号，22 high 优先，卡兹克为 daily，其余为 weekly，另检查 2 个 Web 资源。</div>
+<h2>总览</h2>
+<p><strong>今天的主线是：Agent 从“建议怎么做”走向“实际操作”，而身份、权限、安全补丁与数据一致性开始决定它能否可靠交付。</strong>Gemini Mac 演示后台电脑操作，Genie 出现开发者入口，LangSmith 将工具接入和身份治理独立为网关。Ruby 漏洞披露则提醒我们，AI 安全研究的价值最终要落到维护者确认与修复版本，而不是某个模型的宣传归功。</p>
+<p>本轮 31/31 公开 X 主页返回 HTTP 200，抽取 26 条窗口内账号可见顶层帖子，URL/ID 对照状态均未重复；这不代表完整时间线或 26 条都值得报道。11 个补充 RSS/Atom 端点中 10 个可解析，窗口内发现 Simon 的 1 条文章；LangChain 端点返回 HTML，改读官方正文。下面重点均有可读公开正文或明确标注的一手帖子，未访问订阅解锁内容，未使用 Folo。</p>
+<h2>核心主题</h2>
+<h3>一、从“模型选择”转向“执行链选择”</h3>
+<p>Josh 的电脑操作公告、Logan 的世界模型入口与中文用户的模型/harness 评价共同说明：沟通体验、工具环境、账号额度和任务成功率不能合并成一个模型榜单。Simon 的同模型不同思考档位对比也说明，评估对象应是<strong>模型 × 思考档位 × harness × 具体任务</strong>，而不是品牌。这里是跨来源编辑归纳，不是本轮完成的横向实测。</p>
+<h3>二、持久 Agent 的关键是“以谁的身份行动”</h3>
+<p>LangSmith 新网关将用户委托身份与 Agent 服务身份分开，呼应 Harrison 对主动、持续、常驻 Agent 的观察。<strong>工程判断：</strong>从有人陪着聊天走向夜间自动运行后，权限撤销、审计、等待认证与失败恢复，比再增加几十个工具更重要。创业机会更可能在可验证的连接和治理工作流，而不只是工具目录数量。</p>
+<h3>三、可交付成果必须有外部验收依据</h3>
+<p>Ruby 官方公告能确认漏洞和修复版本，却不能自动证实某个团队的全部发现归属；GR00T 视频能提供演示线索，却不能证明总体可靠性；数据库的等待机制能改善读后写一致性，却需要正确处理超时和主备切换。<strong>研究方向：</strong>将失败分布、验证条件与维护成本作为 Agent 评测的一部分。</p>
+<h2>重要更新</h2>
+<section class="card"><h3>1. Gemini Mac 电脑操作：后台执行，而非占用前台光标</h3>
+<p class="source"><strong>Josh Woodward @joshwoodward / Google Gemini</strong> · 11-20 05:52（Josh）；官方帖约 04:26<br><a href="https://x.com/joshwoodward/status/2123534862569324703">Josh 原帖</a> · <a href="https://x.com/GeminiApp/status/2123513203745538423">Gemini 官方演示</a></p>
+<p><strong>摘要：</strong>Josh 宣布 Mac 版 Gemini 可以在电脑上执行任务，所引官方帖称可跨文件夹、应用和网页操作，同时保留用户自己的屏幕与光标。演示描述为在后台实时窗口点击、滚动和输入，把草图转成 Blender 中带绑定的 3D 模型。公开材料足以确认功能公告和演示方向，但本轮未登录实际体验，也没有核实地区、套餐、系统要求和所有应用的兼容性。</p>
+<p><strong>为什么值得看：</strong>“人继续工作、Agent 并行执行”的交互方式比单纯代点鼠标更接近真实工作伙伴，但后台窗口不等于所有操作都隔离或可回滚。</p><p><strong>后续行动：</strong>用复制的非敏感文件测试一条跨应用流程，记录人工接管、失败重试、输出质量和权限提示；先确认账号开放范围，再做生产接入判断。</p></section>
+<section class="card"><h3>2. LangSmith Tool Gateway 公测：把工具、身份和策略收拢到一层</h3>
+<p class="source"><strong>Harrison Chase @hwchase17 / LangChain</strong> · 11-20 07:46；所引官方帖 11-20 01:59<br><a href="https://x.com/hwchase17/status/2123563652464971838">Harrison 原帖</a> · <a href="https://www.langchain.com/blog/langsmith-tool-gateway">完整官方说明</a></p>
+<p><strong>摘要：</strong>LangChain 宣布 Tool Gateway 进入 Public Beta，可注册 MCP 服务或使用内置服务，将工具子集打包为单个 kit URL，并以搜索模式按需加载。每次调用可采用用户自己的授权，或 Agent/profile 的共享服务凭据；平台另提供拒绝策略、敏感调用确认和带身份信息的 trace。官方说明工具调用 trace 不保存发往工具及返回的数据；组织 audit log 属 Enterprise，不能把全部治理能力写成所有套餐默认具备。</p>
+<p><strong>为什么值得看：</strong>它把“能连上工具”推进到“在正确身份下调用正确工具”；对无人值守任务，服务身份与个人授权的区别直接影响责任和可用性。</p><p><strong>后续行动：</strong>先建立只含少量读工具的 kit，验证身份映射、撤权、未认证等待、拒绝策略和日志；单独确认套餐及客户端确认机制，不把网关宣传理解为全链路绝对安全。</p></section>
+<section class="card"><h3>3. Genie 4 进入 Gemini API / AI Studio 的开发者公告</h3>
+<p class="source"><strong>Logan Kilpatrick @OfficialLoganK / Google</strong> · 11-20 01:24<br><a href="https://x.com/OfficialLoganK/status/2123467449257623770">Logan 原帖</a> · <a href="https://aistudio.google.com/live?model=genie-4">AI Studio 入口</a></p>
+<p><strong>摘要：</strong>Logan 宣布 Genie 4 进入 Gemini API 与 AI Studio，定位为开发者构建世界模型体验的入口。本轮跟随帖子短链接，最终进入指定 genie-4 的 AI Studio 登录页，没有获得可匿名核读的接口参数或价目表。昨日已报的是 Project Genie 产品开放，今天新增的是开发者渠道信号；两者合并理解，但不重复当成两次模型发布。</p>
+<p><strong>为什么值得看：</strong>世界模型若能作为可编程组件接入，将比单纯生成视频更有利于交互应用与仿真实验；这是产品方向判断，不是已验证的训练收益。</p><p><strong>后续行动：</strong>有可用账号后核对 API 文档、开放地区、配额、价格、会话状态与导出能力；当前不把登录入口等同于所有开发者已可生产使用。尝试公开文档路径遇重定向上限，接口细节保留待验。</p></section>
+<section class="card"><h3>4. Codex 辅助 Ruby 安全研究：确认修复，而非放大“通杀”口号</h3>
+<p class="source"><strong>Greg Brockman @gdb；Moritz Sanft；Ruby 维护者</strong> · Greg 11-19 22:19；研究文章与官方公告日期 11-19<br><a href="https://x.com/gdb/status/2123420851777220790">Greg 原帖</a> · <a href="https://durendal.sh/blog/ruby-case-mapping-bugs">研究者披露</a> · <a href="https://github.com/ruby/ruby/security/advisories/GHSA-34m4-m9fh-gqp5">堆越界公告</a> · <a href="https://github.com/ruby/ruby/security/advisories/GHSA-87fm-7w84-j2px">整数溢出公告</a></p>
+<p><strong>摘要：</strong>研究者称使用 Codex 梳理 Ruby/Rails 认证前攻击面，并在人类筛选、利用研究与 OpenAI 团队协助下完成披露；这不是无人参与的自动发现到修复。Ruby 官方确认两项字符串大小写转换缺陷，分别为单字节堆越界与整数溢出引发的堆越界，称部分场景已有 RCE 概念验证。官方列出修复版 3.3.14、3.4.13、4.0.10；本轮页面中 CVE 仍待分配，不能编造编号或断言所有 Rails 部署都可被相同方式利用。</p>
+<p><strong>为什么值得看：</strong>维护者确认的影响和版本比社交媒体叙述更适合指导防御；同时两条官方公告的致谢分别指向其他报告者，与该研究者叙述并不完全相同，说明不能仅凭一篇文章将全部发现独占归功于 Codex。</p><p><strong>后续行动：</strong>由维护责任人清点 Ruby 运行时并按对应分支更新，验证回归和部署产物；影响判断以官方公告及实际应用条件为准。本报不转载攻击载荷，也未对任何服务执行漏洞验证。</p></section>
+<section class="card"><h3>5. PostgreSQL 19：Agent 写完后，下一次读取不必再“看见旧世界”</h3>
+<p class="source"><strong>Simon Willison @simonw / PostgreSQL 社区</strong> · Simon 文章 11-20 04:43；官方发布日 11-19<br><a href="https://simonwillison.net/2026/Nov/19/postgresql-19/">Simon 解读</a> · <a href="https://www.postgresql.org/about/news/postgresql-19-released-3449/">官方发布</a> · <a href="https://www.postgresql.org/docs/19/sql-wait.html">WAIT 文档</a></p>
+<p><strong>摘要：</strong>PostgreSQL 19 官方列出并发 REPACK、计划建议扩展及更多分布式数据改进；Simon 特别关注 WAIT FOR LSN 的读后写一致性。应用可以保存主库提交之后的 WAL 位置，在只读副本等待回放到该位置再查询，而非任凭复制延迟导致下一步看不到刚写入的数据。官方文档明确超时、恢复中状态和模式差异；NO_THROW 返回状态仍需应用检查，数字 LSN 也不校验 timeline。</p>
+<p><strong>为什么值得看：</strong>这不是专门为 Agent 设计的功能，但多步自动工作流经常写后立即查询；不一致的状态可能诱发重复动作或错误“补救”。这是编辑提出的应用场景，未做本轮性能基准。</p><p><strong>后续行动：</strong>在测试库验证提交后取位点、等待成功、超时回主库和故障切换；不要将无限等待放入有时限任务，也不要误以为它替代业务幂等性与事务设计。</p></section>
+<section class="card"><h3>6. GR00T 2 灵巧手演示：新样例，不是新版本发布</h3>
+<p class="source"><strong>Jim Fan @DrJimFan / NVIDIA</strong> · 11-20 01:36<br><a href="https://x.com/DrJimFan/status/2123470587259732200">今日演示</a> · <a href="https://x.com/DrJimFan/status/2120186651741655428">所引 11-10 发布帖</a></p>
+<p><strong>摘要：</strong>Jim Fan 发布 GR00T 2 控制真实灵巧手的演示，称其自主、未剪辑且为 1 倍速。帖子引用 11 月 10 日的模型发布，后者宣称在机器人板载计算运行、开放权重；本轮新增事实是团队再次展示应用样例，而非今天又发布 GR00T 2。我们没有独立查看机器人运行日志、重复试验或下载模型验证。</p>
+<p><strong>为什么值得看：</strong>灵巧操作和板载执行值得跟踪，但视频中的一次成功无法给出任务成功率、泛化范围、安全性或设备成本。</p><p><strong>后续行动：</strong>跟进公开评测、失败样例、硬件依赖与完整许可；投资研究应等待部署数量、客户验收与成本证据，不把演示直接换算成收入。</p></section>
+<section class="card"><h3>7. 模型评价的正确单位：同一家族不同档位，也应分开看</h3>
+<p class="source"><strong>Simon Willison @simonw；数字生命卡兹克 @Khazix0918</strong> · 11-19 14:39、13:25<br><a href="https://x.com/simonw/status/2123305131206967571">Simon 对比</a> · <a href="https://x.com/Khazix0918/status/2123286419158536474">卡兹克工作流评价</a></p>
+<p><strong>摘要：</strong>Simon 用“鹈鹕骑自行车”的示例展示 Gemini 家族与思考档位带来的可见差别，强调其作为比较工具的用途。卡兹克则按沟通、审美、严谨度、harness 和可用额度表达对 Google、Claude 与 GPT 的不同体验，未给出可审计的标准任务集。两者都是实用评估线索，不构成通用能力排名或统一品牌结论。</p>
+<p><strong>为什么值得看：</strong>真实使用中的失败可能来自模型，也可能来自编排、额度和交互；“版本答案”往往应当是按任务路由，而非只保留一个品牌。</p><p><strong>后续行动：</strong>挑选写作、代码审查、跨应用执行三类固定任务，记录模型版本、思考强度、工具、失败与人工修改时间；将个人偏好和可复现正确率分列。</p></section>
+<h2>人物与机构动态</h2>
+<ul><li><strong>Anthropic 资本市场线索：</strong><a href="https://x.com/ClementDelangue/status/2123441379036537237">Clem 11-19 23:40 祝贺并呼吁更多开放科学</a>，<a href="https://x.com/natolambert/status/2123440413033783605">Nathan 11-19 23:37 肯定执行力</a>。追溯到<a href="https://www.anthropic.com/news/anthropic-prices-initial-public-offering">官方 11-18 定价公告</a>：每股 83 美元，计划 11-19 以 ANT 交易、11-20 完成交割，均应保留公告中的预期及条件措辞。这份公告早于本窗口，作为今日社交反应的背景补充，不冒充当天新发布；本轮没有交易所行情、最终交割或 SEC 招股书核验，不提供估值或涨跌判断。</li>
+<li><strong>Harrison / Hex：</strong><a href="https://x.com/hwchase17/status/2123491665092784224">11-20 03:00 推荐 Knowledge engine 方向</a>，讨论 context 与真正知识的区别；引文在公开页截断，引用的视频是一年前的播客，未将其写成已经读完的新技术白皮书。可跟进知识更新、冲突处理及可追溯证据。</li>
+<li><strong>Hamel / Shreya：</strong><a href="https://x.com/HamelHusain/status/2123236968452776270">11-19 10:08 提及 hackathon 及 evals</a>，适合活动发现；没有因此推断新书发布或新评测框架。</li>
+<li><strong>Jeff Dean：</strong><a href="https://x.com/JeffDean/status/2123521324471795785">11-20 04:58 祝贺 David Patterson 加入 Laude Institute</a>。属于人才流动线索，未读机构公告，不延伸为新项目、资金规模或合作承诺。</li>
+<li><strong>Claude：</strong>本轮未从清单账号可见更新与官网列表核实窗口内新的 Claude 模型发布；讨论重点是生态开放与使用体验。没有可见新公告不等于没有产品变化。</li></ul>
+<h2>值得跟进项目</h2>
+<table><thead><tr><th>方向</th><th>具体下一步</th><th>验收依据</th></tr></thead><tbody>
+<tr><td>电脑操作 Agent</td><td>Mac 非敏感文件跨应用试点</td><td>任务通过率、前台干扰、人工接管与可恢复性</td></tr>
+<tr><td>工具身份治理</td><td>小工具集分别测试用户/服务身份</td><td>撤权有效、拒绝可验证、trace 能追溯</td></tr>
+<tr><td>安全修复工作流</td><td>Ruby 资产版本清点与升级验证</td><td>修复版确实部署，业务回归通过</td></tr>
+<tr><td>Agent 数据一致性</td><td>复制延迟、WAIT 超时与主备切换实验</td><td>避免陈旧读取诱发重复写入</td></tr>
+<tr><td>世界模型与机器人</td><td>核对 Genie 接口、GR00T 许可与硬件</td><td>可重复交互结果与失败分布，而非单段视频</td></tr>
+<tr><td>创业/投资研究</td><td>观察治理层付费采用、开放生态及融资披露</td><td>真实客户与财务原始披露，不使用热度替代收入</td></tr>
+</tbody></table>
+<h2>待验证信息</h2>
+<ul><li>Gemini Mac 与 Genie 的账号资格、地区、价格、接口限制及任务成功率未实测；AI Studio 登录页不证明普遍开放。</li>
+<li>Tool Gateway 已读完整发布说明，但未部署验证；Enterprise audit log 与普通 trace、可配置确认与强制全局确认均应区别。没有对厂商安全承诺作独立审计。</li>
+<li>Ruby 官方公告支持漏洞及修复版信息，但研究归属叙述存在差异；保留多方报告可能性。未核对所有发行版回移补丁，不声称 GitHub/GitLab 当前线上仍受影响。</li>
+<li>PostgreSQL 功能已核对官方发布与 WAIT 文档，未复现性能；Simon 关于发布延迟原因的评论未单独核查，不作为确定事实转述。</li>
+<li>Anthropic 价格为发行价而非二级市场成交价；未核验实际开盘、融资净额、交割完成或财务贡献。官方日期只有 11-18，不据此擅自纳入本窗口公告。</li>
+<li>GR00T 开放权重、板载运行与自主性为团队声明；未查实完整权重许可、评测和多次试验。Hex 引文不完整，未声称理解其全部架构。</li></ul>
+<h2>低优先级噪音与抓取边界</h2>
+<p>模型元素周期表玩笑、命名抱怨、周边商品、旅行、电影预告和语境不足的短评不进入重点。Kevin 转发的火箭发动机内容偏离本报 AI 主线；swyx 所转演讲播放量与月度 PR 数属于宣传线索，未核读演讲及交付质量，不作为生产率证据。Chollet 的订阅锁定正文不访问、不猜测。</p>
+<p>公开 X 仅显示部分顶层帖子，回复、转发、编辑及引用全文可能缺失；HTTP 200 不等于全部内容可见。搜索服务两次返回 provider_error，因此以公开主页、官方公告和直接链接补核，未将搜索空缺解释为“没有新闻”。LangChain RSS 解析失败已用官方正文补位；explainx sitemap 仅见博客入口、lastmod 为 11-18；播客 JSON 的 metadata.updatedAt 仍为 2026-07-02，两者不计本窗口新内容。</p>
+<p>本轮所有重点以中文转述为主，区分作者声明、官方确认与编辑推论；没有公开 cookie、token、个人登录信息或私有状态。没有绕过 CAPTCHA 或访问限制。对昨日已报模型只记录真正新增的渠道或样例，原始 URL/ID 纳入本地状态用于去重。</p>
+<h2>原始链接与阅读顺序</h2>
+<ol><li><strong>先看执行与治理：</strong><a href="https://x.com/joshwoodward/status/2123534862569324703">Gemini Mac</a> → <a href="https://www.langchain.com/blog/langsmith-tool-gateway">Tool Gateway</a>。</li>
+<li><strong>再看可核实修复：</strong><a href="https://durendal.sh/blog/ruby-case-mapping-bugs">Ruby 研究披露</a> → 两条卡片 4 官方安全公告。</li>
+<li><strong>工程底座：</strong><a href="https://simonwillison.net/2026/Nov/19/postgresql-19/">Simon 解读</a> → <a href="https://www.postgresql.org/docs/19/sql-wait.html">WAIT 原始文档</a>。</li>
+<li><strong>研究发现：</strong><a href="https://x.com/OfficialLoganK/status/2123467449257623770">Genie 开发者公告</a> → <a href="https://x.com/DrJimFan/status/2123470587259732200">GR00T 样例</a>。</li>
+<li><strong>背景与发现面板：</strong><a href="https://www.anthropic.com/news/anthropic-prices-initial-public-offering">Anthropic 定价公告（前日）</a>；<a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx sitemap</a>；<a href="https://youtube.qiaomu.ai/data/podcasts.json">播客索引</a>。</li></ol>
+<p class="meta">公开来源日报 · 重点为可操作的工程、研究和产业跟进线索，不以社交热度、演示视频或个人偏好替代独立验证。</p>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
