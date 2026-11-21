@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 日报｜本地 Agent 的效率跃迁，与 AI 科研的证明边界</title>
+    <meta name="description" content="Inkling 2 Mini 开放权重、harness 定向 RL、黎曼猜想候选证明、MedChemBench、常驻 Agent 与试用滥用；区分新发布、旧公告反响和待审查主张。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 日报｜本地 Agent 的效率跃迁，与 AI 科研的证明边界</h1>
+      <p class="portal-lead">Inkling 2 Mini 开放权重、harness 定向 RL、黎曼猜想候选证明、MedChemBench、常驻 Agent 与试用滥用；区分新发布、旧公告反响和待审查主张。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-11-21</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta"><strong>2026 年 11 月 21 日 · 周六</strong><br>观察窗口：11 月 20 日 08:00—11 月 21 日 08:00（北京时间）。X 时刻按帖子 ID 推算；RSS 时间按源字段转换，只有日期的公告不补造具体时刻。</div>
+<h2>总览</h2>
+<p><strong>今天最值得关注的不是又一个通用排名，而是两条成本曲线：让小模型在真实 Agent 环境中完成更多工作，以及让科研成果获得可信验收所需的成本。</strong>Thinking Machines 发布面向本地部署的循环 Transformer；Hugging Face 将模型、任务与 harness 联合优化推进到可复用训练配方。另一边，Claude 参与黎曼猜想证明的声明迅速传播，但“作者称已完成形式化”与“第三方审查确认”仍是两件事。</p>
+<p>按 Follow List 检查 31 个 active X 账号，其中 22 个 high 优先，另覆盖 daily 的卡兹克和 2 个 Web 清单源。31 个公开主页均返回 HTTP 200，抽取 32 条窗口内可见帖子，与本地已发布 URL 对照无重复；不代表完整时间线。补充 12 个 RSS/Atom 端点，11 个可解析，共 10 条窗口内条目；LangChain 返回 HTML。没有使用 Folo、私密凭据或访问限制绕过。</p>
+<h2>核心主题</h2>
+<h3>1. 小模型竞争从参数量转向“完成任务的整套系统”</h3>
+<p>循环计算将更多推理留在内部层，harness adapter 则让模型学会当前工具环境的操作习惯。共同趋势是减少无效生成、重复工具调用和人工返工；但<strong>更少输出 token 不等于更少总计算</strong>，本地推理也需计入内存、速度、设备与维护。创业和投资研究可重点观察低成本常驻工作负载，而非仅跟踪模型下载量。</p>
+<h3>2. AI 科研的竞争单位是“主张—证据—审查—实验”链条</h3>
+<p>数学声明需要检查精确命题、形式化依赖和独立重放；药物研究则需要实验、候选物推进和临床证据。今天的数学讨论与 MedChemBench 正好构成对照：形式化文件和基准分数都可以提供证据，却不能越过其验证范围直接宣布科学问题已解决或药物已发现。</p>
+<h3>3. 常驻 Agent 必须同时具备治理与商业边界</h3>
+<p>Harrison 关于计划触发 Agent 的观察，与 ChatPRD 的试用滥用案例说明：无人值守的执行能力既是价值，也会变成算力成本入口。<strong>编辑判断：</strong>产品护城河更可能来自可追溯任务、业务定义、额度治理与可靠交付，而不是把通用代理接到无限试用入口。</p>
+<h2>重要更新</h2>
+<section class="card"><h3>1. Inkling 2 Mini：26.4B 开放权重循环模型，瞄准本地 Agent</h3>
+<p class="source"><strong>Mira Murati @miramurati；Clem @ClementDelangue / Thinking Machines、Hugging Face</strong> · 11-21 04:14、04:17；模型发布日期 11-20<br><a href="https://x.com/miramurati/status/2123872534970208421">Mira 原帖</a> · <a href="https://thinkingmachines.ai/news/inkling-2-mini/">发布说明</a> · <a href="https://huggingface.co/thinkingmachines/Inkling-2-Mini">权重与模型卡</a></p>
+<p><strong>摘要：</strong>官方发布的 Inkling 2 Mini 为 26.4B 总参数、3.4B 激活参数的多模态 MoE，24 层中间 12 层循环三次，每 token 折算 5.4B 权重激活。模型卡注明 Apache 2.0，混合 NVFP4/MXFP8 检查点约 20GB，支持的 Apple silicon 设备要求至少 32GB 内存；“能在笔记本运行”不是任意笔记本均可运行。厂商报告 DeepSWE v1.1 为 48.2%，同时承认多轮聊天、复杂约束及知识密集任务仍有短板；演示飞行模拟器的视频多数以 15 倍速播放。另发布可变循环研究模型，不能将其可变深度功能套到固定三轮的 Mini 上。</p>
+<p><strong>为什么值得看：</strong>本地持续运行、离线隐私和可定制工具链获得新候选；循环架构也让“读思维链就能监督推理”的假设需要重新检验。</p><p><strong>后续行动：</strong>先核对设备与推理框架，再用固定仓库任务比较成功率、端到端时延、内存和能耗；将官方的可监控性实验视为当前规模下的初步证据，不外推为更大模型的安全保证。</p></section>
+<section class="card"><h3>2. Harness adapters：在部署时的真实工具循环里训练模型</h3>
+<p class="source"><strong>Hugging Face；关联 Clem / Thomas Wolf 的开放生态跟踪</strong> · 官方 RSS 标记 11-20 08:00（GMT 零点，可能为日期占位）<br><a href="https://huggingface.co/blog/harness-adapters-at-scale">完整配方</a> · <a href="https://huggingface.co/collections/harness-hub/qwen38-27b-harness-adapters">适配器集合</a></p>
+<p><strong>摘要：</strong>团队分别在 pi、OpenCode 和 Hermes Agent 内，为 Qwen3.8-27B 训练 RL LoRA，冻结底座而非重训整个模型，并尝试合并为跨 harness 适配器。文章报告 pi 下 Terminal-Bench 2.1 从 39% 到 55% pass@1，平均 token 从 2.9K 到 1.5K；这是指定底座、任务和环境下的作者结果，不是所有 Agent 通用提升。训练配方强调排除评测集及同仓库任务，检查正确解、空操作与错误解，再选择基础模型有时能解、有时失败的题目。此次提供更大规模、多 harness 配方；不是把前几日已报的定向 RL 概念再包装成首次提出。</p>
+<p><strong>为什么值得看：</strong>价值不仅在 LoRA，还在可验证环境和难度筛选；奖励函数接受错误答案，会把错误行为强化得更高效。</p><p><strong>后续行动：</strong>优先审查自身任务的 verifier，建立独立保留集后再训练；比较通过任务的总成本、跨仓库迁移和适配器切换后的退化，勿只优化 token 数。</p></section>
+<section class="card"><h3>3. Claude 与黎曼猜想：强声明已出现，定论尚未建立</h3>
+<p class="source"><strong>Kevin Weil @kevinweil、Jim Fan @DrJimFan；Simon Willison；Levent Alpöge、Ravi Vakil</strong> · Kevin 11-20 23:18；Simon 两篇 11-21 00:30、03:21<br><a href="https://x.com/kevinweil/status/2123798040339419484">传播线索</a> · <a href="https://alpo.ge/remark.pdf">Alpöge 四页声明</a> · <a href="https://simonwillison.net/2026/Nov/20/levent-alpoge/">Simon 引介</a> · <a href="https://math216.wordpress.com/2026/11/20/hurried-announcement-alessandro-masullo-grh/">Vakil 独立候选稿说明</a></p>
+<p><strong>摘要：</strong>Alpöge 在本人 PDF 中称与 Claude 找到 RH 及 GRH 的证明、已无假设形式化，并给出分卷 Lean 文件；本轮已提取并阅读这份四页说明，但未下载和编译庞大证明工程。Kevin 与 Jim Fan 的反应扩大了传播，其中 Jim 明确保留“希望是真的”的条件。Ravi Vakil 同日另介绍 Alessandro Masullo 的人类独立 GRH 候选证明，称 Brian Conrad 已长期阅读反馈，仍希望同行检查和补足细节。这是两条不同的候选证明路线，不能混为 Claude 成果，也不能从任何一方的信心推断数学界已确认。</p>
+<p><strong>为什么值得看：</strong>若经确认将是重大科学事件；目前最有价值的工作是复核命题与依赖，而不是根据社交热度判定“AI 已解决”。</p><p><strong>后续行动：</strong>跟进独立数学家审查、Lean 可重放结果、所用公理与目标命题对应关系；确认项目版本与可理解证明。作者声称无假设不等于本报已验证无额外公理或形式化缺口。</p></section>
+<section class="card"><h3>4. MedChemBench：测药物化学推理，不能替代新药实验</h3>
+<p class="source"><strong>Greg Brockman @gdb / OpenAI</strong> · 11-21 03:22；官方发布日期 11-20<br><a href="https://x.com/gdb/status/2123859658473668694">Greg 原帖</a> · <a href="https://openai.com/index/introducing-medchembench/">官方研究说明</a></p>
+<p><strong>摘要：</strong>MedChemBench 从 117 篇论文和专利构建 99 个问题、761 种分子结构，测结构重建、科学解释、排序选择和性质预测。官方报告 xhigh 下 GPT‑6.2 Astra 获可得分数的 84.5%，GPT‑6 Astra 为 83.3%；后者结构重建明显强于候选选择及数值预测，不能将总分解释为药物发现成功率。作者明确无法排除历史材料暴露，每题单次作答且无工具、反馈或新实验，因此结果未证明能改善真实实验室决策。同窗口 Greg 另转述神经退行性疾病合作线索，本轮未核读完整研究，不和该基准合并为临床成果。</p>
+<p><strong>为什么值得看：</strong>结构正确不等于性质预测正确，分项成绩比“大模型懂化学”的总叙述更适合指导科研辅助工具。</p><p><strong>后续行动：</strong>跟进未公开新数据的前瞻性验证、药化专家盲评与真实实验；投资研究区分基准成绩、合作合同、候选物进入试验和临床疗效四个阶段。</p></section>
+<section class="card"><h3>5. 从试用滥用到对抗蒸馏：AI 产品要守住算力与数据边界</h3>
+<p class="source"><strong>Simon Willison 引介 Claire Vo / ChatPRD；OpenAI 官方补充</strong> · Simon 11-20 10:49；OpenAI RSS 11-20 18:00<br><a href="https://simonwillison.net/2026/Nov/20/token-fraud-is-here-and-its-bad/">Simon 文章</a> · <a href="https://www.youtube.com/watch?v=ZDpP7JXPlhc">Claire 视频线索</a> · <a href="https://openai.com/index/combatting-adversarial-distillation/">OpenAI 防护说明</a></p>
+<p><strong>摘要：</strong>Simon 介绍 Claire Vo 报告的 ChatPRD 试用滥用：批量试用和优惠码被当作通用算力入口，用于其他商业工作，并称她正取消免费试用；本轮读的是 Simon 的文字介绍，未观看完整视频，也不把较早的视频当作今天刚发生的事件。OpenAI 同日说明请求级防护与跨账号活动检测，报告自有自适应测试中先前请求的受保护推理提取成功率由 54.0% 降至 0.2%。两者是不同事件：产品额度套利不能自动等同于模型蒸馏，厂商内部攻击测试也不是线上永不泄漏的保证。</p>
+<p><strong>为什么值得看：</strong>Agent 若能自由调用工具，产品的试用预算就可能变成可转售资源；应同时测业务价值与异常成本，而不只统计注册增长。</p><p><strong>后续行动：</strong>对试用设总预算、工具范围、异常用量监测与人工复核；保留合法用户申诉路径。涉及第三方归属与国家安全的厂商指控不在未独立核验时扩写成结论。</p></section>
+<section class="card"><h3>6. 常驻 Agent：计划触发增加，但“多数”并非行业普查</h3>
+<p class="source"><strong>Harrison Chase @hwchase17；Hamel Husain @HamelHusain</strong> · 11-21 02:59、01:08<br><a href="https://x.com/hwchase17/status/2123853805276348782">计划触发讨论</a> · <a href="https://x.com/hwchase17/status/2123802088547250358">本周工具与治理回顾</a> · <a href="https://x.com/HamelHusain/status/2123825850332422230">Hamel 的 evals 观点</a></p>
+<p><strong>摘要：</strong>Harrison 称多数 Agent run 已非人工触发，所引讨论观察部署中的调度触发占比增长，但未提供可供本报审计的总体样本。其本周回顾列出 Tool Gateway、编码 Agent 成本观察与 trace 权限，是多天发布的汇总，不重复算今天新功能。Hamel 强调 evals 中好的流程比工具重要，这与常驻任务需要明确定义验收的方向一致，而非一个新评测产品发布。</p>
+<p><strong>为什么值得看：</strong>主动执行的产品价值在于正确时机完成可验收的事情；触发次数多本身不证明用户价值或收入。</p><p><strong>后续行动：</strong>为定时任务设置幂等键、重试预算、证据保留和失败通知；记录“被发现的有效信息”和“已完成交付”，不要用执行量替代成功率。</p></section>
+<h2>人物与机构动态</h2>
+<ul><li><strong>Demis / Isomorphic Labs / MSD：</strong><a href="https://x.com/demishassabis/status/2123871861843075099">11-21 04:11 评论合作</a>，追溯到<a href="https://www.isomorphiclabs.com/articles/isomorphic-labs-enters-into-a-research-collaboration-with-msd">11-19 合作公告</a>，官网确认将 AI 药物设计与 MSD 数据和研发能力结合。新增是 Demis 的窗口内评论，不是合作今天才签署；金额、候选药物及临床进度不在已读网页中，癌症方向来自其帖文，不能当作已获批疗法。</li>
+<li><strong>Simon / Nathan / Gemini：</strong><a href="https://x.com/simonw/status/2123808432830701909">11-20 23:59 追问 Neon 与 Carbon、Argon 的关系</a>，<a href="https://x.com/natolambert/status/2123737477101826152">Nathan 19:17 分享 Antigravity 体验</a>。追溯的<a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/">Neon 公告日期是 11-18</a>，属于旧公告的新反响；帖子疑问不能证明 Argon 已退役，个人体验也不能建立 Claude Code / Codex 通用排名。</li>
+<li><strong>Clem / Thomas Wolf / Hugging Face：</strong><a href="https://x.com/ClementDelangue/status/2123778652299198839">Clem 22:01 称月分发接近 1 exabyte</a>；<a href="https://x.com/Thom_Wolf/status/2123852806213730744">Thomas 次日 02:55 提及自建 CDN 和吞吐</a>。属于机构自述，未独立核验；月流量、峰值吞吐与商业收入不可直接换算，截断帖未当作完整架构分析。</li>
+<li><strong>Greg / ChatGPT：</strong><a href="https://x.com/gdb/status/2123855521996570772">11-21 03:06 转述 Space 向 Plus 开放</a>；本轮仅核读可见帖子，账号资格、地区与移动端能力未实际测试。<a href="https://x.com/gdb/status/2123876651583111322">机器人基准转述</a>同样未读完整评测，不将分数等同于现实机器人成功率。</li>
+<li><strong>卡兹克（daily）：</strong><a href="https://x.com/Khazix0918/status/2123627885730951241">11-20 12:01 发布 DeepSeek Harness 插件玩法线索</a>，公开时间线仅露出文章开头；未获取 13 个插件的完整正文、官方清单或限额规则，不把其观点直接升级为平台政策事实。后续应追溯官方仓库、权限和数据出境范围。</li></ul>
+<h2>值得跟进项目</h2>
+<table><thead><tr><th>项目方向</th><th>下一步</th><th>可验收结果</th></tr></thead><tbody>
+<tr><td>本地常驻 Agent</td><td>在符合内存条件的设备上试跑 Inkling 2 Mini</td><td>固定任务成功率、时延、内存、能耗和人工接管</td></tr>
+<tr><td>Harness 定向训练</td><td>先验证奖励环境，再选独立任务做适配</td><td>错误解不能过关，跨仓库保留集有效</td></tr>
+<tr><td>形式化科研证据</td><td>等待独立 Lean 重放与数学审查</td><td>精确命题、依赖、公理和版本均可复核</td></tr>
+<tr><td>药化 AI 工作流</td><td>分离结构识别与性质预测验收</td><td>未见新样本盲评和实验验证，而非历史总分</td></tr>
+<tr><td>Agent 商业防滥用</td><td>限定试用任务和成本，监控异常执行</td><td>单有效交付成本下降，正常用户转化不被误伤</td></tr>
+<tr><td>创业与投资观察</td><td>跟进本地部署付费需求、工具治理采用和药物合作进展</td><td>客户、合同与实验阶段证据，不把传播量当收入</td></tr>
+</tbody></table>
+<h2>待验证信息</h2>
+<ul><li>RH/GRH 两份候选路线均未由本报进行数学审查；已读 Alpöge 声明和 Vakil 公告，不声称读完或验证其证明工程。</li>
+<li>Inkling 2 Mini 的性能、能耗、离线演示及循环可监控性未复现；模型卡许可已核读，但部署兼容性和运行成本仍需实测。</li>
+<li>Harness adapter 已读方法、任务过滤及训练设置，文章后半详细结果未全面复核；39%→55%为作者摘要数值，不外推至自有任务。</li>
+<li>MedChemBench 不能排除训练材料暴露，且并非真实药物发现前瞻试验；研究合作并不自动意味着治疗获验证。</li>
+<li>ChatPRD 案例为 Simon 对早前视频的介绍；OpenAI 安全数字为内部评测，未独立审计。Cursor 开放模型政策、政治归因及社交传播的 IPO 行情未取得监管或交易所原始材料，不作定论或投资建议。</li>
+<li>Neon 官方公告早于窗口；本次只报道新讨论。LangChain 周回顾中的昨日产品不重复作为新发布。</li></ul>
+<h2>低优先级噪音与抓取边界</h2>
+<p>品牌自嘲、排名情绪、融资庆祝、订阅锁定帖子、没有数据的政治判断和语境不足的短评不列入重点。Jeff 的科研人员处境帖属于公共议题线索，本轮未取得当事人或机构原始核验，不转述具体个人细节。Chollet 的付费锁定帖不访问也不猜测；其 MyClaw 推荐为产品发现线索，未核验营销功能或源数量，不作为已测方案。</p>
+<p>公开 X 页面只显示部分顶层内容，回复、转发与引用全文可能缺失，HTTP 200 不证明完整覆盖。搜索服务报 provider_error，因此依赖直接公开页面、官方博客和 RSS；“未发现”不等于“没有更新”。LangChain RSS 返回 HTML，未作为成功订阅；播客 JSON 可正常读取，metadata.updatedAt 仍为 2026-07-02；explainx sitemap 仅有博客入口且 lastmod 为 11-19，均无可确认的窗口内新条目。部分 RSS 使用 GMT 零点，只表示源所标日期，本报不补造真实发布时分。</p>
+<p>重点内容以中文概述、短链接和核验边界为主；不发布私密账号信息、凭据或大段转载。页面中“编辑判断”和后续行动为研究建议，不是已完成的实验。所有可见原始帖子保留在本地抓取记录；只有实际引用的 URL 进入已发布去重索引，避免把未报道线索误标为已报道。</p>
+<h2>原始链接与阅读顺序</h2>
+<ol><li><a href="https://thinkingmachines.ai/news/inkling-2-mini/">Inkling 2 Mini 发布</a> → <a href="https://huggingface.co/thinkingmachines/Inkling-2-Mini">模型卡与许可</a>。</li>
+<li><a href="https://huggingface.co/blog/harness-adapters-at-scale">Harness adapters 配方</a> → <a href="https://huggingface.co/collections/harness-hub/qwen38-27b-harness-adapters">任务与适配器集合</a>。</li>
+<li><a href="https://alpo.ge/remark.pdf">Alpöge 原声明</a> → <a href="https://math216.wordpress.com/2026/11/20/hurried-announcement-alessandro-masullo-grh/">Vakil 的独立候选稿说明</a> → <a href="https://simonwillison.net/2026/Nov/20/ravi-vakil/">Simon 对照引介</a>。</li>
+<li><a href="https://openai.com/index/introducing-medchembench/">MedChemBench 研究边界</a> → <a href="https://www.isomorphiclabs.com/articles/isomorphic-labs-enters-into-a-research-collaboration-with-msd">MSD 合作背景</a>。</li>
+<li><a href="https://simonwillison.net/2026/Nov/20/token-fraud-is-here-and-its-bad/">试用滥用</a> → <a href="https://openai.com/index/combatting-adversarial-distillation/">防蒸馏说明</a> → <a href="https://x.com/hwchase17/status/2123853805276348782">常驻 Agent 讨论</a>。</li>
+<li>低频发现面板：<a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx sitemap</a>；<a href="https://youtube.qiaomu.ai/data/podcasts.json">播客 JSON</a>。</li></ol>
+<p class="meta">公开来源深度日报 · 抓取与编辑核验截至本次运行 · 不以社交声量代替独立审查。</p>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
