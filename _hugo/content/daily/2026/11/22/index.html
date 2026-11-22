@@ -1,0 +1,55 @@
+---
+title: "Follow 日报｜Agent 的下一步：知识维护、推理预算与单任务成本"
+date: "2026-11-22"
+category: "daily"
+url: "/daily/2026/11/22/"
+summary: "企业语义层与 curator、Gemini 推理预算近六倍成本差、OpenCode 开放模型降价、Antigravity 缓存额度、后训练六个方向及表征几何研究；区分公开证据、个人观察与待核实消息。"
+---
+<div class="meta"><strong>2026 年 11 月 22 日 · 周日</strong><br>观察窗口：11 月 21 日 08:00—11 月 22 日 08:00（北京时间）。X 时间按帖子 ID 推算并转为北京时间；静态网页价格为本次抓取快照。</div>
+<h2>总览</h2>
+<p><strong>今天的高价值信号集中在“怎样让 Agent 持续、便宜、正确地工作”，而不是一次新的模型发布。</strong>Harrison Chase 讨论企业知识的专门维护者，Shreya Shankar 强调供 Agent 查询的语义层；Simon 的推理预算对照与 OpenCode 的降价公告，则把成本讨论从参数和榜单拉回具体任务。</p>
+<p>按 Follow List 检查 31 个 active X 账号，其中 22 个 high 优先，并覆盖 daily 的卡兹克和两个 Web 来源。公开主页均返回 HTTP 200，共提取 30 条窗口内可见本人帖子，未命中已发布 URL 索引；公开时间线不完整。另检查 12 个 RSS/Atom 端点，其中 11 个可解析，只有 Latent Space 出现一条窗口内条目；LangChain 返回 HTML，改用 Harrison 原帖。没有使用 Folo、私密登录凭据或访问限制绕过。</p>
+<h2>核心主题</h2>
+<h3>1. 企业 Agent 的瓶颈，正在从“模型不够聪明”转向“组织知识不可执行”</h3>
+<p>企业术语、流程和优质案例如果只存在于员工脑中，购买 copilot 并不会自动形成业务能力。Harrison 的知识维护讨论与 Shreya 的数据语义层观点可以放在同一框架：一端维护可追溯知识，另一端让机器廉价、确定地查询。<strong>编辑推论：</strong>差异化机会在知识更新、权限与验收闭环，而不只是追加一个聊天入口。</p>
+<h3>2. 便宜的 token 与便宜的任务，不是同一件事</h3>
+<p>高推理档可能显著增加生成量，低价模型也可能因重试和返工抵消优势。缓存、模型路由、查询接口设计和人工接管需要合并计入成本；建议使用“每个通过验收的任务成本”，而不是只看每百万 token 报价。</p>
+<h3>3. 研究发现、传播热度和可复现结论必须分层</h3>
+<p>Jeff Dean 重新推荐数月前的表征研究，说明旧论文可以因新讨论重新值得读，但不能标为当天新论文。RH/GRH 候选证明的热度仍在，本轮没有取得足以升级为独立确认的证据；开放模型热榜也不等于新发布或已获商业采用。</p>
+<h2>重要更新</h2>
+<section class="card"><h3>1. 知识工厂需要 curator，数据 Agent 需要语义层</h3><p class="source"><strong>Harrison Chase @hwchase17；Shreya Shankar @sh_reya</strong> · 11-22 01:11、06:17；04:31<br><a href="https://x.com/hwchase17/status/2124188957001023548">知识维护讨论</a> · <a href="https://x.com/hwchase17/status/2124265949025235187">企业知识缺口</a> · <a href="https://x.com/sh_reya/status/2124239331804303420">语义层与查询成本</a></p><p><strong>摘要：</strong>Harrison 表示，在其观察中，主 Agent 或子 Agent 直接编辑 wiki 不够可靠，因此倾向把写入集中到专门的 curator；另帖将企业落地缺口归于未显式整理的业务知识。Shreya 则认为 AI 时代语义层更重要，需要一种供 Agent 廉价、快速发起大量查询的 BI 类接口。两者是从业者经验和设计建议，并非已经量化验证的通用架构；引用帖部分正文截断，不推测未显示细节。</p><p><strong>为什么值得看：</strong>两条讨论分别对应知识的“写入质量”和“读取成本”，比堆积文档或无约束多代理协作更接近实际交付问题。</p><p><strong>后续行动：</strong>工程建议：选一个流程，先定义知识版本、来源和验收标准；由单一维护入口合并建议，保留变更记录。对数据查询统一指标口径，比较同一问题的正确率、查询次数、总费用和人工修正。</p></section>
+<section class="card"><h3>2. 推理预算不是免费质量：一次图像绘制任务的近六倍成本差</h3><p class="source"><strong>Simon Willison @simonw</strong> · 11-22 03:06<br><a href="https://x.com/simonw/status/2124217876777464269">high 与 xhigh 对照原帖</a></p><p><strong>摘要：</strong>Simon 分享其 Gemini 4 Hydrogen 的 high 与 xhigh 鹈鹕绘制对照，称效果差异明显。帖中 high 使用 5,311 个输出 token、费用 3.99 美分；xhigh 为 31,477 个输出 token、23.61 美分，按该次记录计算约为 5.9 倍费用和输出量。这里是单个用户的单任务观察，本轮未复跑，也没有据此确认 API 全部档位、当前官方价格或通用质量优势。</p><p><strong>为什么值得看：</strong>相同模型名称不代表同一成本和能力；评测、采购和产品路由必须记录 effort 设置。</p><p><strong>后续行动：</strong>对自己的固定任务做分档比较，先用低预算尝试，失败再升级；报告成功率、尾延迟和每个合格结果总成本，不以图片偏好代替编码或业务评测。</p></section>
+<section class="card"><h3>3. OpenCode 将两款开放模型价格下调 60%，原始价目页可核对</h3><p class="source"><strong>Nathan Lambert @natolambert；OpenCode @opencode</strong> · 11-22 06:52；官方帖 06:14<br><a href="https://x.com/natolambert/status/2124274838554497271">Nathan 评论</a> · <a href="https://x.com/opencode/status/2124265178267005017">OpenCode 公告</a> · <a href="https://opencode.ai/zen">官方价格页</a></p><p><strong>摘要：</strong>OpenCode 公告 GLM 5.3 与 DeepSeek V4.1 Flash 降价 60%，本轮直接读取其价目页核对。页面显示每百万 token 的 GLM 5.3 输入/输出价为 0.56/1.76 美元，DeepSeek V4.1 Flash 为 0.12/0.48 美元；缓存读取另计，不能只用输入价估计总账单。Nathan 认为开放模型价格竞争有益，同时指出 GPU 供给约束；供应方“规模最大、最便宜”等营销判断和相对竞品价格未独立审计。</p><p><strong>为什么值得看：</strong>开放权重与托管服务竞争继续分化，实际优势取决于服务质量、缓存命中和任务完成效率，而不只是权重下载许可。</p><p><strong>后续行动：</strong>在相同仓库任务与时间预算下做小规模费用比较；另核对限速、区域、数据保留例外、活动有效期及失败计费，当前价格只作为抓取快照。</p></section>
+<section class="card"><h3>4. Antigravity 重置 Gemini 额度，缓存改进声明可追溯到负责人</h3><p class="source"><strong>数字生命卡兹克 @Khazix0918；Varun Mohan @_mohansolo</strong> · 11-21 19:44；原始确认 17:18<br><a href="https://x.com/Khazix0918/status/2124106642933653521">卡兹克监控线索</a> · <a href="https://x.com/_mohansolo/status/2124070033534161407">Varun 原始确认</a> · <a href="https://aihot.news/antigravity-reset">AIHOT 重置监控</a></p><p><strong>摘要：</strong>卡兹克介绍 AIHOT 已监控 Antigravity 等产品额度重置，并称开放匿名 API。追溯 Varun 原帖，其明确宣布重置所有人的 Antigravity Gemini 额度，并称缓存改进使额度内可完成工作量增加 22%；这是负责人自述，本轮未登录个人账户验证。AIHOT 页面记录 11 月 21 日确认，并说明日期不代表精确到账时间；匿名 API 的稳定性与调用文档未做实测。</p><p><strong>为什么值得看：</strong>额度和缓存会直接影响编码 Agent 的可用工作量，但“工作量增加”不等于 token 单价下降或所有任务都快 22%。</p><p><strong>后续行动：</strong>在产品内核对自身额度，记录缓存命中与任务完成量；若接入第三方监控，只使用公开事件，不把估算生效时间当作平台承诺。</p></section>
+<section class="card"><h3>5. Nathan 公布后训练六个研究方向，重点包含 harness 与推理效率</h3><p class="source"><strong>Nathan Lambert @natolambert</strong> · 11-21 22:47<br><a href="https://x.com/natolambert/status/2124152733145923892">已展开阅读的原帖</a></p><p><strong>摘要：</strong>Nathan 介绍在 Cornell 访问时使用的新讲稿，称其也表达 Trillium Labs 的研究目标，但不表示所有项目会同时开展。原帖列出 harness 专门化与设计、角色训练、开源 RL 环境、RL 推理效率、RL scaling laws，以及多 Agent scaling laws 六个方向，并讨论递归自我改进对研究的影响。本轮读取完整帖子，未拿到并逐页核读讲稿，也未观看尚待重录的视频；这是路线图，不是六项实验成果发布。</p><p><strong>为什么值得看：</strong>它把环境、人格、安全与计算效率纳入同一后训练议程，为研究选题提供结构，而非继续只比较基础模型大小。</p><p><strong>后续行动：</strong>先挑可验证的环境设计或推理效率问题，定义奖励漏洞检查与独立保留集；后续跟进公开数据、训练配方和实际实验，不将研究愿景写成已经实现的能力。</p></section>
+<section class="card"><h3>6. 词向量里的圆与曲线：Jeff Dean 推荐的是旧论文的新讨论</h3><p class="source"><strong>Jeff Dean @JeffDean；Dhruva Karkada 等作者</strong> · Jeff 转述 11-21 15:35；论文首版 02-16，v3 为 06-29<br><a href="https://x.com/JeffDean/status/2124043983878066407">Jeff 原帖</a> · <a href="https://arxiv.org/abs/2602.15029">论文摘要与版本</a> · <a href="https://arxiv.org/html/2602.15029v3">论文正文</a></p><p><strong>摘要：</strong>《Symmetry in language statistics shapes the geometry of model representations》将月份圆环、历史年份曲线及空间坐标线性解码，与语言共现统计中的平移对称性联系起来。作者在词嵌入模型中给出几何预测，并用嵌入与大语言模型的表示作经验对照；还讨论潜变量解释下，部分共现被扰动后几何结构为何仍能保留。本轮读摘要与正文前部的理论设定和贡献，未复现推导与实验；Jeff 明确说此前没看到二月论文，不能把转发时间当论文发布日期。</p><p><strong>为什么值得看：</strong>这提供了一个可分析的数据统计—表示结构联系，而不是把可视化形状直接当作模型具有人类概念的证据。</p><p><strong>后续行动：</strong>优先阅读 Figure 1—4、理论假设和实验附录；若用于企业嵌入系统，先在自有术语及时间/空间数据上测检索和线性探针，不外推为通用推理保证。</p></section>
+<h2>人物与机构动态</h2>
+<ul><li><strong>Thinking Machines / HF：</strong><a href="https://x.com/miramurati/status/2123941448479559687">Mira 11-21 08:47 分享团队飞行演示趣闻</a>；<a href="https://x.com/ClementDelangue/status/2124209139337331158">Clem 11-22 02:31 称 Inkling 2 Mini 登上 HF 热榜首位</a>。属于昨日已报道模型的新反响，不重复算模型新发布；演示与热榜均不替代本地部署实测。</li>
+<li><strong>Google 产品：</strong><a href="https://x.com/joshwoodward/status/2123943606906138868">Josh 11-21 08:56 介绍网页模型选择器长按交互</a>；<a href="https://x.com/OfficialLoganK/status/2124212276010102918">Logan 11-22 02:44 征集 Neon 周末作品</a>。前者是轻量交互更新，后者是社区互动，不升级为新模型发布。</li>
+<li><strong>Codex：</strong><a href="https://x.com/thenanyu/status/2123983081577267264">Nan 11-21 11:33 转述线程体验改进</a>，所引用开发者称冷启动加载最高改善 60%—70%。本轮只有公开转述，未复测应用版本、平台或分位延迟，不能保证所有用户获得同样提升。</li>
+<li><strong>Fei-Fei Li：</strong><a href="https://x.com/drfeifei/status/2124199134118948957">11-22 01:51 称在 AMD 的第一周结束并提及 World Labs</a>。仅按本人帖子记录动向；未取得任命公告、交易文件或职务细节，不据此推断并购、职位变更或合作金额。</li>
+<li><strong>OpenAI：</strong><a href="https://x.com/gdb/status/2124283509418422305">Greg 11-22 07:27 转述 Arena Alignment Index 排名</a>，<a href="https://x.com/gdb/status/2124218429133754499">03:08 谈游戏开发排名</a>。引用公告早于本窗口，本轮未核读完整方法和样本；对齐偏好榜不是系统安全认证，游戏开发排名也不是完整软件工程排名。</li></ul>
+<h2>值得跟进项目</h2>
+<table><thead><tr><th>方向</th><th>下一步</th><th>验收与商业信号</th></tr></thead><tbody>
+<tr><td>企业知识维护</td><td>单一 curator 合并可追溯知识建议</td><td>错误更新率、知识过期率和人工修正时间下降</td></tr>
+<tr><td>Agent 数据语义层</td><td>为固定指标提供低歧义查询入口</td><td>同题答案一致、查询总成本与权限审计可核对</td></tr>
+<tr><td>推理预算路由</td><td>简单任务低预算，失败再升级</td><td>每个合格结果的全成本而非单次 token 量</td></tr>
+<tr><td>开放模型托管</td><td>比较两款降价模型的实际任务表现</td><td>价格之外看稳定性、数据条款、限速与返工</td></tr>
+<tr><td>后训练环境</td><td>挑选可验证小任务，跟进开源 RL 配方</td><td>独立保留集有效、奖励不可被空操作骗过</td></tr>
+</tbody></table>
+<p><strong>创业与投资观察：</strong>知识维护、可查询业务语义和可控成本可能形成产品价值，但本轮没有新增经独立核对的营收、付费客户或交易数据。开放模型降价不能直接推导 GPU 需求下滑，也不能由 GPU 紧缺直接推导存储股低估。</p>
+<h2>待验证信息</h2>
+<ul><li><strong>供应商数据访问争议：</strong><a href="https://x.com/swyx/status/2124147427313861009">swyx 11-21 22:26 转述秘密链接被打开的指控</a>。未读到服务商完整回应、原始日志、访问主体与实验控制；链接被访问本身不能确定是人工查看、爬虫扫描或其他自动流程，不发布为已证实数据泄漏。</li>
+<li><strong>RH/GRH：</strong><a href="https://latent.space/p/ainews-riemann-hypothesis-proved-twice-independently/">Latent Space 11-21 13:02 的 RSS 汇总</a>继续传播两个候选证明。已读订阅正文相关段落，但未独立编译 Lean 工程或审查数学命题；汇总中的“很可能正确”属于作者判断，不能当作验证完成，亦不重复报道昨天已覆盖的候选声明。</li>
+<li><strong>计算供需与股票：</strong><a href="https://x.com/fchollet/status/2124246742644461569">Chollet 11-22 05:01 的买入机会观点</a>包含 GPU、HBM/DRAM 与估值判断。未取得现货成交、产能合同、公司财报或可核对的回购数据；不复述转帖估值数字，也不形成买入建议。</li>
+<li><strong>研究与商业数据：</strong>Simon 的成本是单例；OpenCode 价格为动态快照；Varun 的 22% 为负责人声明。Nathan 的六个方向是路线图，Fei-Fei 的帖子不建立具体任职或交易结论。</li></ul>
+<h2>低优先级噪音与抓取边界</h2>
+<p>游戏与读书玩笑、歌曲求赞、无语境短句、订阅锁定内容和单纯征集作品不作为重点。<a href="https://x.com/fchollet/status/2124212823563845839">Chollet 对未来架构效率的判断</a>可作研究问题，但“当前技术不在最高效的前 50%”没有给出可测量候选全集，不作为定量事实。</p>
+<p>搜索服务返回 provider_error，已使用直接公开 X 页面、RSS、原始价格页和论文补足；公开主页 HTTP 200 只说明可访问，不意味着完整覆盖回复与转发。LangChain RSS 返回 HTML，未算成功订阅；播客入口是 JSON，不是 XML，已另用 JSON 解析成功，metadata.updatedAt 仍为 2026-07-02。explainx sitemap 可读，博客入口 lastmod 为 11-20，早于窗口；两者均无可确认的窗口内新项目。</p>
+<p>本日报只发布适合公开的中文转述与链接，不包含账号内部信息、token 或大段原文。分析与行动建议不代表已经完成实验；仅将实际引用的 URL 加入去重索引，未报道的抓取条目保留为本地证据，不误标为已发布。</p>
+<h2>原始链接与阅读顺序</h2>
+<ol><li>先读企业知识维护、数据语义层与 Nathan 六个研究方向的原帖，明确“架构建议”与“已验证成果”的区别。</li>
+<li>再核对 OpenCode 官方价格与 Varun 缓存额度说明，结合 Simon 原帖建立自己的任务成本表。</li>
+<li>研究阅读以 arXiv 2602.15029 原文与版本记录为准；数学突破与数据访问争议保留为待核验线索。</li>
+<li>低频来源：<a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx sitemap</a>；<a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客 JSON</a>。各重点条目的原帖和核验页面均见对应卡片。</li></ol>
+<p class="meta">公开来源深度日报 · 不以热榜代替验收，不以传播代替审查。</p>
