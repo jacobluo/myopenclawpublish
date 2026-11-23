@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 日报｜预训练进展的安全门槛，与 Agent 的上下文质量</title>
+    <meta name="description" content="OpenAI 提议以困惑度等指标建立共同安全门槛；Shreya 强调有损上下文的业务评测；卡兹克自建多 CLI 调度层；开放模型社区出现隐私与自主权需求。区分官方提议、个人观察和未发布项目。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 日报｜预训练进展的安全门槛，与 Agent 的上下文质量</h1>
+      <p class="portal-lead">OpenAI 提议以困惑度等指标建立共同安全门槛；Shreya 强调有损上下文的业务评测；卡兹克自建多 CLI 调度层；开放模型社区出现隐私与自主权需求。区分官方提议、个人观察和未发布项目。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-11-23</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta"><strong>2026 年 11 月 23 日 · 周一</strong><br>观察窗口：11 月 22 日 08:00—11 月 23 日 08:00（北京时间）。帖子时间由 X ID 换算；官方文章仅给日期，RSS 时间不视为精确首发时间。</div>
+<h2>总览</h2>
+<p><strong>今天最重要的消息不是新模型上线，而是 OpenAI 主动披露预训练进展，并提出把发展门槛与理解、监控能力挂钩。</strong>Sam Altman、Greg Brockman、Noam Brown 与多位观察者围绕同一篇文章发声，不能把这轮传播算成多个独立技术突破。工程侧的高价值信号则是：上下文压缩会影响正确性，多 Agent 产品需要降低操作认知成本，而不只是多开终端。</p>
+<p>以 Follow List 为主清单，检查全部 31 个 active X 账号，其中 22 个 high 优先；daily 来源卡兹克也已展开阅读。31 个公开主页均返回 HTTP 200，提取到 15 条窗口内可见本人帖子，均未命中既有已发布 URL 索引；这不代表完整时间线覆盖。另检查 12 个 RSS/Atom 端点，11 个可解析，窗口内只有 OpenAI 的一条订阅更新；LangChain 返回 HTML。两个 Web 来源另按 sitemap 和 JSON 核验。搜索未返回结果，正文依据直接获取的公开原帖和官网，不使用搜索摘要补写事实。</p>
+<h2>核心主题</h2>
+<h3>1. 从“模型能做什么”延伸到“下一轮能力跃迁之前，要具备什么安全条件”</h3>
+<p>OpenAI 的文章把预训练进展当作可能提前观察新能力的指标，同时承认跨实验室比较和下游任务对应关系存在困难。值得关注的是其提出“共同门槛＋越过门槛的具体条件”的治理结构，而非将一个内部 loss 数值理解成全行业通用危险线。<strong>编辑判断：</strong>接下来应跟进可比较评测集、外部验证与承诺执行方式，而不是只转发曲线。</p>
+<h3>2. 基础模型的能力曲线，不能代替企业 Agent 的质量曲线</h3>
+<p>Shreya 的上下文讨论与上述文章形成互补：预训练指标适合观察基础能力变化，业务评测则检查检索、摘要和工具使用是否保留了任务所需事实。上下文更短不必然更正确，模型更强也不保证在权限、时效和缺失证据上表现可靠。<strong>工程延伸：</strong>应把模型版本、上下文选择与最终验收分别记录，避免把系统问题全部归因于模型。</p>
+<h3>3. Agent 产品差异化，可能来自体验和控制权</h3>
+<p>卡兹克对多款桌面 Agent 来回切换的抱怨，与 Nathan 对另一类开放模型社区的观察，分别指向交互负担和本地自主权。它们提供可访谈的用户需求，不构成市场规模或付费意愿证据。对创业项目而言，先验证用户是否真的节省切换、配置和返工时间，比宣称支持更多 Agent 更有意义。</p>
+<h2>重要更新</h2>
+<section class="card"><h3>1. OpenAI 发布《Perplexity and Intelligence》：披露进展并提出共同门槛</h3>
+<p class="source"><strong>Jakub Pachocki @merettm / OpenAI；Sam Altman @sama</strong> · 官文日期 11-22；Jakub 原帖 11-23 01:03，Sam 转述 01:12（北京时间）<br><a href="https://openai.com/index/perplexity-and-intelligence">官方文章全文</a> · <a href="https://x.com/merettm/status/2124549218995949967">作者原帖</a> · <a href="https://x.com/sama/status/2124551594691932405">Sam 转述</a></p>
+<p><strong>摘要：</strong>Jakub 提议用困惑度及其他测量建立共同发展门槛，后续推进应以理解和监控模型行为达到具体条件为前提。文章公开 OpenAI 在固定内部代码评测快照上的部分预训练进展，并强调压缩能力提升可能伴随事前难以预测的新能力。作者也明确列出跨实验室数据不可直接比较、不能直接对应业务任务、无法涵盖后训练进展和未知熵下限等局限；这是研究与治理提议，不是已经通过的行业规则。</p>
+<p><strong>为什么值得看：</strong>首要价值是将内部进展透明度与安全能力建设放到同一讨论框架，而不是公布一个可直接拿来采购模型的排名。</p>
+<p><strong>后续行动：</strong>跟进共同数据、比较协议、独立复核和门槛退出条件是否落地；企业模型评审继续使用自己的能力、权限与风险测试，不把内部困惑度当业务验收替代品。</p></section>
+<section class="card"><h3>2. 同一篇文章的不同解读：安全能力能否跟上预训练加速</h3>
+<p class="source"><strong>Greg Brockman @gdb；Noam Brown @polynoamial；swyx @swyx；Nathan Lambert @natolambert</strong> · 11-23 03:15、01:26、03:19、01:55<br><a href="https://x.com/gdb/status/2124582684840399311">Greg 完整讨论</a> · <a href="https://x.com/polynoamial/status/2124555186043818245">Noam 的透明度观点</a> · <a href="https://x.com/swyx/status/2124583459356373052">swyx 解读</a> · <a href="https://x.com/natolambert/status/2124562346353840302">Nathan 反响</a></p>
+<p><strong>摘要：</strong>Greg 强调安全与监控进展未必足以承接预训练的全部潜在加速度，因此需要共享门槛和明确的继续推进条件。Noam 主张公众有权了解包括内部模型在内的进展轨迹，swyx 更关注以困惑度观察进展相对于计算量指标的意义，Nathan 则赞赏图表表达。这些帖子主要是对同一官方文章的立场与解释，尚不能证明其他实验室已同意该框架。</p>
+<p><strong>为什么值得看：</strong>可以分清“企业内部支持”“外部观察者反响”和“跨行业正式承诺”三个层次，避免把讨论热度误当执行进度。</p>
+<p><strong>后续行动：</strong>建立小型跟踪表：参与机构、公开数据、可复核方法、承诺与执行机制；只有出现新增文件或可核查行动时才升级为落地进展。</p></section>
+<section class="card"><h3>3. 上下文层不是无损索引：压缩与检索也是正确性决策</h3>
+<p class="source"><strong>Shreya Shankar @sh_reya</strong> · 11-23 01:27<br><a href="https://x.com/sh_reya/status/2124555300539670845">已展开的完整原帖</a></p>
+<p><strong>摘要：</strong>Shreya 将上下文层与数据库优化类比：更少或更快地把数据交给模型，可以改善性能。她同时指出关键差别在于，传统索引通常不改变查询结果，而检索和摘要天生可能丢失信息，因此会影响答案正确性。她将公司特定评测视为必要手段；这是系统设计观点，不是某个上下文产品已取得性能提升的实验报告。</p>
+<p><strong>为什么值得看：</strong>它把“省 token”的优化目标推进到“节约成本时，哪些事实被丢掉”，对企业知识、数据分析与长任务 Agent 都有直接启发。</p>
+<p><strong>后续行动：</strong>工程建议：用一组带原始证据和标准答案的真实问题，对照全量读取、检索、摘要三种路径；同时记录遗漏率、错误率、延迟、费用和回退率，并检查权限及数据过期问题。</p></section>
+<section class="card"><h3>4. 卡兹克自建多 CLI Agent 调度层，尚未公布可验证开源交付</h3>
+<p class="source"><strong>数字生命卡兹克 @Khazix0918</strong> · 11-22 15:19<br><a href="https://x.com/Khazix0918/status/2124402284541194348">已展开的完整原帖</a></p>
+<p><strong>摘要：</strong>卡兹克表示对 Claude、Codex、Antigravity 桌面端之间切换以及多款调度产品的复杂界面不满意，因而开始基于各家 CLI 自建调度层。他自述已尝试通过 ACP 改善 Antigravity 的任务过程交互，并统一管理 skill 和规则文档，计划满意后开源。原帖没有提供本轮可核验的仓库、安装包和测试结果，因此只能确认个人开发计划与体验反馈，不能视为可用产品发布。</p>
+<p><strong>为什么值得看：</strong>信号在于调度产品的用户体验需求：信息负担、规则管理与任务过程可见性，可能比新增模型列表更影响持续使用。</p>
+<p><strong>后续行动：</strong>等待实际仓库后检查许可、版本兼容和凭据隔离；若自行做原型，先验证任务状态、取消与恢复、错误提示和配置作用域，不将个人原型经验当作协议的通用能力保证。</p></section>
+<section class="card"><h3>5. 开放模型的另一类受众：本地推理、隐私与自主权</h3>
+<p class="source"><strong>Nathan Lambert @natolambert</strong> · 11-23 04:36<br><a href="https://x.com/natolambert/status/2124603025499009164">Nathan 原帖及引用讨论</a></p>
+<p><strong>摘要：</strong>Nathan 观察到，一部分开放模型讨论社区与他熟悉的研究圈不同，氛围让他联想到早期加密社区。被引用的讨论强调本地模型、开放权重、私人推理与自主权，体现的是部分参与者的动机，不是用户行为统计。帖子没有给出装机量、付费转化、性能或安全审计数据，本轮也未据此核实具体模型或厂商。</p>
+<p><strong>为什么值得看：</strong>它提示开放模型的产品价值不只在便宜和榜单成绩，还可能包括离线可用、数据控制和部署选择权。</p>
+<p><strong>后续行动：</strong>访谈明确有离线或隐私需求的用户，核对本地硬件总成本、遥测默认项、许可证和更新机制；先用真实任务验证，再判断是否具备商业可行性。</p></section>
+<section class="card"><h3>6. Thomas Wolf 强调开放模型之间的相互促进</h3>
+<p class="source"><strong>Thomas Wolf @Thom_Wolf；引用 Sebastian Raschka @rasbt</strong> · Wolf 转述 11-22 20:09；引用帖为 11-21，早于本窗口<br><a href="https://x.com/Thom_Wolf/status/2124475314772627774">Wolf 原帖与引用</a></p>
+<p><strong>摘要：</strong>Wolf 转述 Raschka 对中美开放权重模型相互促进、开放与闭源竞争改善生态的判断。这里记录的是窗口内的新讨论，而不是当天出现了新权重、训练配方或实验证据。具体技术贡献、授权合规和价格变化不能从一句评论推导，需要回到模型卡、代码、论文和服务条款核对。</p>
+<p><strong>为什么值得看：</strong>模型竞争的价值可能体现在方法传播与选择权，不宜只用单次榜单或国别叙事概括。</p>
+<p><strong>后续行动：</strong>选一个正在使用的模型，建立可追溯的模型卡、许可与版本记录；只有明确获得代码或训练文档证据时，才描述其具体技术传承。</p></section>
+<h2>人物与机构动态</h2>
+<ul><li><strong>Hamel Husain：</strong><a href="https://x.com/HamelHusain/status/2124645792476713281">11-23 07:26 透露与 Eugene Yan、Randal Olson 筹划“Data Science for AI”</a>。可记为内容合作线索，尚无本轮可核验的完整课程、上线日期或交付范围，不提前作产品推荐。</li>
+<li><strong>OpenAI：</strong>Sam、Greg 和 Noam 的公开表态集中在进展透明度和安全门槛；本窗口所见材料不构成新模型、API 定价或 Codex 功能发布公告。</li>
+<li><strong>Google / Anthropic / World Labs 等：</strong>已检查清单内对应人物的公开主页，未在本次可见内容中提取到可确认的窗口内本人新帖。这是覆盖结果，不代表其没有活动或没有回复、转发。</li></ul>
+<h2>值得跟进项目</h2>
+<table><thead><tr><th>方向</th><th>下一步</th><th>验收信号</th></tr></thead><tbody>
+<tr><td>安全门槛追踪</td><td>跟进公开比较协议、外部参与与门槛退出条件</td><td>有可查文件与可复核方法，而非只有表态</td></tr>
+<tr><td>上下文质量评测</td><td>对同组业务问题比较全量、检索与摘要路径</td><td>成本下降且关键事实遗漏和权限错误不增加</td></tr>
+<tr><td>多 CLI 调度体验</td><td>先做单一流程的状态、取消、恢复和规则管理</td><td>切换时间、失败恢复时间与误操作减少</td></tr>
+<tr><td>本地开放模型</td><td>针对离线需求建立任务与硬件小样本评测</td><td>正确率、全成本、遥测与许可边界均可说明</td></tr>
+</tbody></table>
+<p><strong>创业与投资观察：</strong>以上是研究与产品验证方向，不是已证实投资机会。本轮没有新增经核对的营收、付费客户、融资交易或股票估值数据；不能从安全门槛提议推出算力订单变化，也不能从隐私讨论推导本地推理市场规模。</p>
+<h2>待验证信息</h2>
+<ul><li><strong>预训练能力预测：</strong>官方文章对未来能力跃迁和研究加速的判断仍是作者预测，不能写成已实现的结果。文中的 loss 数值基于特定内部数据，不能直接横向排名其他实验室；本轮阅读了完整正文及脚注，但没有获得内部数据、重算曲线或复现安全审计。</li>
+<li><strong>行业共识：</strong>未取得跨实验室共同签署的协议、统一阈值或执行机制，故不将该提议描述为监管新规或已经生效的标准。</li>
+<li><strong>调度产品：</strong>ACP 交互与规则统一管理仅为开发者自述，没有安装和实测；待开源不是已经开源。</li>
+<li><strong>开放生态：</strong>社区动机与竞争效应属于观察和观点，不构成已验证的商业数据，也不能由引用关系证明某个模型使用了另一模型的数据或权重。</li></ul>
+<h2>低优先级噪音与抓取边界</h2>
+<p><a href="https://x.com/thenanyu/status/2124592238974156861">Nan Yu 11-23 03:53 用“使用 Postgres”调侃万能提示词</a>，不将其当数据库选型基准；Shreya 的时间感慨、Kevin 的无语境简短赞同，以及 Chollet 的订阅锁定内容不纳入重点。没有绕过订阅、验证码或反爬限制。</p>
+<p>公开 X 页每个账号仅展示有限文章，HTTP 200 不等于完整抓取；“窗口内未见”不等于“没有更新”。12 个 RSS/Atom 端点中 LangChain 实际返回 HTML，未算成功订阅；播客入口按 JSON 正确解析，metadata.updatedAt 仍为 2026-07-02；explainx sitemap 只给博客入口，lastmod 为 11-21，早于本窗口，不能据此推断每篇文章都已检查。两者本轮均无可确认的窗口内新增条目。</p>
+<p>仅发布公开中文整理和必要链接，不包含登录信息、cookie、token 或大段原文。跨账号重复转述合并处理；去重索引只登记实际报道链接，不把所有抓到的内容都误标为已发布。工程行动均为后续建议，不表示已运行测试。</p>
+<h2>原始链接与阅读顺序</h2>
+<ol><li>先读 <a href="https://openai.com/index/perplexity-and-intelligence">OpenAI 原文与脚注</a>，再对照 Greg 和 swyx 的不同解读，重点注意内部评测数据的比较局限。</li>
+<li>再读 Shreya 的完整上下文讨论，将“索引效率”与“信息遗漏导致的正确性风险”分开。</li>
+<li>产品侧跟进卡兹克实际开源交付，以及 Nathan 与 Wolf 的开放模型讨论；所有窗口内原帖见上文对应条目。</li>
+<li>低频原始入口：<a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx sitemap</a>；<a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客 JSON</a>。</li></ol>
+<p class="meta">公开来源深度日报 · 把治理提议、工程观点与可验证交付分开阅读。</p>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
