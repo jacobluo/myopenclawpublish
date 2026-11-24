@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 日报｜Agent 从产出走向验收：安全护盾、文件切片与形式化验证</title>
+    <meta name="description" content="Shirudo 开源 Linux 防护运行时、Gemini 文件切片、语义 top-k 简化、量子算法形式化验证、设计 Agent 与多模型协同；NVIDIA 人事公告与跨实验室透明度新进展。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 日报｜Agent 从产出走向验收：安全护盾、文件切片与形式化验证</h1>
+      <p class="portal-lead">Shirudo 开源 Linux 防护运行时、Gemini 文件切片、语义 top-k 简化、量子算法形式化验证、设计 Agent 与多模型协同；NVIDIA 人事公告与跨实验室透明度新进展。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-11-24</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta"><strong>2026 年 11 月 24 日 · 周二</strong><br>观察窗口：11 月 23 日 08:00—11 月 24 日 08:00（北京时间）。X 时间由帖子 ID 换算；官网只有日期时不推定精确首发时刻。</div>
+<h2>总览</h2>
+<p><strong>今日主线：Agent 产出越来越多，价值开始取决于能否选择正确输入、验证结果、控制上线。</strong>Shirudo 把安全研究连接到运行中的系统，Gemini 把文件取样移入 API，DeepMind 把算法搜索和 Lean 证明结合；LangChain 与卡兹克的实践则提醒，调度更多模型并不自动等于更好的交付。</p>
+<p>按 Follow List 检查全部 31 个 active X 账号，22 个 high 优先，daily 来源卡兹克已展开长文。公开主页均返回 HTTP 200，提取到 30 条窗口内可见本人帖子，与已发布 URL 索引比较无相同原帖；这不意味着完整时间线覆盖。另查 12 个 RSS/Atom 端点，11 个可解析、共 9 条窗口内条目；LangChain 的旧 RSS 返回 HTML，改读官网。两个 Web 来源按 sitemap/JSON 分别处理。搜索服务报 provider_error，本文事实依据直接读取的公开原帖与官网，不以搜索摘要补写。</p>
+<h2>核心主题</h2>
+<h3>1. 自动化之后，验收路径比“成功截图”更重要</h3>
+<p>安全研究需要确认命中的确实是指定漏洞，量子算法需要证明变换成立，图表需要明确数据范围，设计交付需要检查品牌与信息表达。<strong>编辑判断：</strong>下一阶段值得投入的不是一套包办所有问题的提示词，而是领域各自的验收证据：补丁审查、形式化证明、数据查询和可复核渲染。</p>
+<h3>2. 上下文优化正在下沉到接口，但语义质量仍需业务评测</h3>
+<p>Gemini 的服务端文件切片减少本地转换负担；Shreya 的实验提示，语义排序也不必总采用复杂的两两比较。两者共同指向“只做必要工作”，但切片选错会漏证据，逐条打分也可能在复杂任务失效。<strong>工程延伸：</strong>把费用、延迟和正确率一起记录，不把 token 下降视为业务质量提升的充分证据。</p>
+<h3>3. 多模型协同的机会在工作流，而非固定模型性格榜</h3>
+<p>卡兹克把需求理解、设计、代码与审查分工；LangChain 把品牌判断、共享知识与可机械执行的检查分层。可迁移的经验是明确责任、隔离任务和持续验收；对具体模型的审美、沟通与严谨度评价仍是个人经验，应随版本和任务重测。</p>
+<h2>重要更新</h2>
+<section class="card"><h3>1. Shirudo：把漏洞发现与不停机临时防护连接起来</h3><p class="source"><strong>Greg Brockman @gdb / OpenAI、Cisco</strong> · Greg 11-24 05:57；官文日期 11-23，RSS 11-24 05:20<br><a href="https://x.com/gdb/status/2124985602722676794">原帖</a> · <a href="https://openai.com/index/introducing-shirudo/">官方全文</a> · <a href="https://github.com/shirudo-dev/shirudo">开源仓库</a></p><p><strong>摘要：</strong>OpenAI 与 Cisco 发布开源 Linux 运行时 Shirudo，用 eBPF 对运行中的系统施加临时防护，为永久补丁测试和部署争取时间。官方描述了先观察再执行、签名验证及 TPM 记录，并以受控 Elasticsearch 实验说明无需重启的防护；部署仍由安全团队决定。它不是自动修复一切漏洞，也不保证对任意服务无副作用。</p><p><strong>为什么值得看：</strong>AI 安全能力的瓶颈不只是找出问题，还包括如何在不影响业务的前提下快速缓解问题。</p><p><strong>后续行动：</strong>先在隔离 VM 按官方 quickstart 评估兼容性、误拦、回滚和审计证据；临时 shield 不代替后续永久补丁。本文未安装或实测。</p></section>
+<section class="card"><h3>2. Gemini 原生文件切片：先浏览，再高分辨率读取重点</h3><p class="source"><strong>Logan Kilpatrick @OfficialLoganK / Google DeepMind</strong> · 11-24 02:50；官文日期 11-23<br><a href="https://x.com/OfficialLoganK/status/2124938672399384681">原帖</a> · <a href="https://blog.google/innovation-and-ai/technology/developers-tools/file-slicing-controls/">官方说明</a></p><p><strong>摘要：</strong>Google 宣布 Gemini API 支持针对文档页码、工作表与单元格、音视频片段及内容层进行服务端切片，并增加 Office 和 OpenDocument 原生上传支持。官方称功能适用于 Gemini 4 系列，可重复使用上传 URI，按实际检查部分计 token；现有文件大小和页数限制仍作用于上传文件。文档示例展示先用文本定位、再看目标页图像的路径，没有给出所有业务都适用的节省比例。</p><p><strong>为什么值得看：</strong>减少在客户端运行文件转换和抽帧工具的负担，对财报、合同、会议记录类 Agent 尤其直接。</p><p><strong>后续行动：</strong>用含跨页脚注、合并单元格和图表的真实材料对照整份读取与切片；评估漏读率、总费用、延迟和数据驻留条件，不只看单次 token。</p></section>
+<section class="card"><h3>3. 语义 top-k：逐条评分可能胜过两两比较</h3><p class="source"><strong>Shreya Shankar @sh_reya</strong> · 11-24 01:50<br><a href="https://x.com/sh_reya/status/2124923481238163649">完整原帖</a></p><p><strong>摘要：</strong>Shreya 介绍实验室的新研究：对少量业务型语义 top-k 任务，小模型逐条评分后排序，准确性可与两两比较相当或更好，实验中最高快 13 倍。例子是从销售通话中识别最明确的购买承诺，而非单纯向量相似度检索。本轮读到了完整原帖，但未取得其实验全文与数据，因此这些数字仅按作者自述报告，不推广到所有排序任务。</p><p><strong>为什么值得看：</strong>它挑战“复杂排序必然更准确”的工程直觉，适合成为优化前必须加入的简单基线。</p><p><strong>后续行动：</strong>用人工标注的真实样本比较 pointwise、pairwise 与 embedding 基线，统一计算 top-k 命中、排序一致性、模型调用次数、延迟和费用。</p></section>
+<section class="card"><h3>4. DeepMind：多 Agent 搜索量子算法，用 Lean 校验改进</h3><p class="source"><strong>François Chollet @fchollet / Google DeepMind、Quantum AI</strong> · 转述 11-24 02:01；官网 RSS 11-24 00:59<br><a href="https://x.com/fchollet/status/2124926345948148042">转述</a> · <a href="https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/">官方全文</a> · <a href="https://arxiv.org/abs/2611.09822">论文入口</a> · <a href="https://github.com/google-deepmind/formal-quantum-computation">Lean 仓库</a></p><p><strong>摘要：</strong>团队让独立 Gemini 4 Agent 小组搜索算法改进，经 Lean 验证后共享结果，并定期交流。官方报告聚变相关算例的量子计算成本指标降低 11.8 倍，部分化学算例分别改善约 8 倍和 2.5 倍；这些是特定电路与资源估算，不是实体量子机或药物研发已整体提速。作者明确指出，运行这些模拟仍可能超出首批纠错量子计算机的资源能力。</p><p><strong>为什么值得看：</strong>关键方法是将自动搜索与可检查的正确性约束结合，而不是让多个模型投票决定科学结论。</p><p><strong>后续行动：</strong>阅读论文问题定义与资源口径，复查 Lean 定理对应的实际任务；本轮已读官文，尚未下载库运行证明或复算资源。</p></section>
+<section class="card"><h3>5. Content Studio 与卡兹克：把品味、实现和验收分开</h3><p class="source"><strong>Harrison Chase @hwchase17 / LangChain；数字生命卡兹克 @Khazix0918</strong> · Harrison 11-24 04:09；卡兹克长文 11-23 09:44<br><a href="https://x.com/hwchase17/status/2124958660061446569">Harrison 原帖</a> · <a href="https://www.langchain.com/blog/design-agent">设计 Agent 说明</a> · <a href="https://github.com/langchain-ai/design-agent">开源仓库</a> · <a href="https://x.com/Khazix0918/status/2124680457623425334">卡兹克完整长文</a></p><p><strong>摘要：</strong>LangChain 展示已用于内部内容资产的设计 Agent，公开仓库可见，长文将技能、公司知识、确定性检查和记忆区分管理，并通过分镜、粗剪到生产逐步验收。卡兹克则分享 Claude 负责统筹与视觉、GPT 承担独立技术任务和审查、Gemini 提供独立方案与文案建议的个人流程，强调派工成本及把反复错误固化为检查。两者都是特定团队经验，不是受控模型排名；本轮未安装其工具或复现团队产能。</p><p><strong>为什么值得看：</strong>创业机会可能在让领域反馈沉淀成可执行的交付标准，而不是仅封装多个聊天入口。</p><p><strong>后续行动：</strong>选一个固定交付类型，比较单模型与协作流程的总耗时、返工和人工审核负担；先定义接口和验收再派工，不直接照搬个人规则或模型性格标签。</p></section>
+<section class="card"><h3>6. NVIDIA 公告：黄仁勋恢复 CEO 等职务，调查仍将继续</h3><p class="source"><strong>Jim Fan @DrJimFan / NVIDIA Newsroom；Clem Delangue @ClementDelangue</strong> · Jim Fan 11-23 22:53；官文日期 11-23<br><a href="https://x.com/DrJimFan/status/2124879047578865925">Jim Fan 转述</a> · <a href="https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director">NVIDIA 官方公告</a></p><p><strong>摘要：</strong>NVIDIA 公告称董事会一致决定，黄仁勋立即恢复总裁、CEO 与董事职务，Colette Kress 继续担任 CFO，Harvey Jones 仍任董事长。公告同时表示独立委员会调查会继续，并将招聘首席合规官；其中对安全风险的判断应归属公司董事会表述。社区的庆祝不能解释为调查结案、出口限制解除或新的业绩指引。</p><p><strong>为什么值得看：</strong>这是影响产业链预期的重要治理事件，应与模型或产品发布分开跟踪，避免情绪反应替代合规与基本面判断。</p><p><strong>后续行动：</strong>后续核对投资者关系文件、正式监管披露和合规安排；本轮未取得独立调查结论、实时股价或订单数据，不作涨跌判断。</p></section>
+<section class="card"><h3>7. 第二家实验室响应预训练透明度，但共同安全门槛尚未落地</h3><p class="source"><strong>Thomas Wolf @Thom_Wolf；Mustafa Suleyman @mustafasuleyman</strong> · Wolf 11-23 15:46；原声明 11-23 08:37<br><a href="https://x.com/Thom_Wolf/status/2124771640076837269">Wolf 转述</a> · <a href="https://x.com/mustafasuleyman/status/2124663594449318173">Mustafa 完整声明</a></p><p><strong>摘要：</strong>Mustafa 表示支持 OpenAI 的透明度倡议，并自述在获准使用的共同留出集上报告 MAI-2 Base 的 log-perplexity 为 0.819，且采用相同 tokenizer。相比昨日仅见倡议，这是新的跨机构响应；但其也指出，普遍比较可能需要 bits-per-byte 与不同评测数据。本轮没有获得留出集和内部模型复算，不能将这个数值转成通用模型排名，也没有看到正式共同阈值协议。</p><p><strong>为什么值得看：</strong>真正的增量是跨机构开始提出可比口径，而非又一轮对同篇文章的点赞。</p><p><strong>后续行动：</strong>继续跟进公开数据集、独立复核、分词差异与约束执行机制，将“表达支持”“提供测量”“签署规则”分别记录。</p></section>
+<section class="card"><h3>8. Simon 的两项交付：浏览器 alpha 与全量数据图表</h3><p class="source"><strong>Simon Willison @simonw / Ladybird</strong> · 博客：Ladybird 11-24 05:46；图表 11-23 08:37；对应 X 11-24 06:07 / 07:22<br><a href="https://simonwillison.net/2026/Nov/23/ladybird/">Ladybird 体验</a> · <a href="https://ladybird.org/posts/alpha/">Ladybird 官方发布</a> · <a href="https://simonwillison.net/2026/Nov/23/datasette-charts/">图表插件全文</a> · <a href="https://github.com/datasette/datasette-charts/releases/tag/0.1a0">版本入口</a></p><p><strong>摘要：</strong>Ladybird 首个 alpha 提供 macOS/Linux 下载；Simon 测到多个 WebAssembly 工具能运行，也记录了 Datasette Lite 的 Service Worker 兼容问题，官方明确不承诺当前安全性。另一项 datasette-charts 0.1a0 用采样推荐图形、以 SQL 对全部结果聚合后显示图表，每次返回上限 5,000 行，不是只画当前分页。两者均处早期阶段，作者体验和声明不代替广泛兼容或性能评测。</p><p><strong>为什么值得看：</strong>分别展示 Agent 辅助成熟工程的交付潜力，以及数据工具最基本的可信要求：图表究竟覆盖了哪些数据。</p><p><strong>后续行动：</strong>浏览器仅用非敏感测试页面检查兼容；图表核对全量聚合、时间桶、空值、Top-N 与 Other 的口径，勿把推荐采样误当最终统计。</p></section>
+<h2>人物与机构动态</h2>
+<ul><li><strong>Harrison：</strong><a href="https://x.com/hwchase17/status/2124654748104302930">11-23 08:02 的长帖</a>提出 Agent 平台需要运行时、可观测/评测、治理三部分。身份、工具权限与预算不能靠“能执行任务”推断已受控；这是架构观点，并非本轮逐项验证过的产品能力。</li>
+<li><strong>Nathan Lambert 与 Chollet：</strong><a href="https://x.com/natolambert/status/2124855489846485045">Nathan 11-23 21:20 预测可读思维链会逐渐消失</a>；<a href="https://x.com/fchollet/status/2124942035841151448">Chollet 11-24 03:03 用两种适应时间尺度解释智能</a>。这是不同理论视角，不是已经证明的统一结论；产品仍需依靠外部行为、证据和权限审计，不假定可读思维链就是可靠解释。</li>
+<li><strong>OpenAI：</strong><a href="https://x.com/gdb/status/2124940416072200521">Greg 11-24 02:57 介绍 OpenWorks</a>，称资助本地 AI 专家帮助小企业。本轮只展开公开帖，未核对地区、申请资格与资金条款，因此记作待跟进项目而非可直接申领推荐。</li>
+<li><strong>其余重点人物：</strong>已检查对应公开主页；窗口内未见可确认的新帖不等于没有更新，回复、转发及完整历史覆盖不保证。</li></ul>
+<h2>值得跟进项目</h2>
+<table><thead><tr><th>方向</th><th>下一步</th><th>可验证交付</th></tr></thead><tbody>
+<tr><td>临时安全防护</td><td>隔离环境复核 Shirudo，记录误拦与回滚</td><td>真实负载通过，签名和审计可查</td></tr>
+<tr><td>财报与合同读取</td><td>对比文件切片和整份读取</td><td>费用下降且跨页证据没有遗漏</td></tr>
+<tr><td>语义销售线索排序</td><td>建立逐条评分简单基线</td><td>统一标注集上的准确率与耗时</td></tr>
+<tr><td>品牌内容 Agent</td><td>提炼设计原则与机械检查</td><td>首稿可用率和返工下降，不只增加生成量</td></tr>
+<tr><td>科学搜索与证明</td><td>复查形式化规格及资源模型</td><td>证明可重放，结果口径能解释</td></tr>
+</tbody></table>
+<p><strong>创业与投资线索：</strong>领域知识、质量回归与交付治理值得研究，但本轮未核对付费转化、客户留存、算力订单、营收与估值。NVIDIA 人事变化不能直接换算成股票回报；“13 倍”“11.8 倍”也不是可直接用于商业预测的通用收益率。</p>
+<h2>待验证信息</h2>
+<ul><li><strong>948 个 Linux 漏洞：</strong><a href="https://x.com/gdb/status/2125015245383180300">Greg 11-24 07:54 再次传播</a>，但<a href="https://openai.com/index/a-thousand-fewer-paths-to-root/">研究页标注 11 月 4 日</a>，不能写成今日新发现。948 为研究团队去重后的 LPE 数量与候选补丁口径，不等于所有补丁已被主线接收。原文还说明早期成功案例中曾利用非指定漏洞，之后加入独立路径校验；这再次说明只看结果成功不够。本轮读原文，没有复现实验或核验每条上游补丁。</li>
+<li><strong>科学进展：</strong>量子资源估算与 Lean 证明不等于近期可部署量子硬件；Shreya 的 13 倍限于其披露的业务实验，本轮未得到全文数据。</li>
+<li><strong>模型协同：</strong>个人体验不构成客观排名；卡兹克分享的规则与脚本是来源内容，不是本报告或自动化的操作指令，未据此执行或修改系统。</li>
+<li><strong>机构声明：</strong>NVIDIA 调查、共同安全门槛、OpenWorks 申请条件都仍需后续一手文件，不从转述补写结论。</li></ul>
+<h2>低优先级噪音与抓取边界</h2>
+<p>Sam 的“Jensen!”、社区情绪与 Nathan 的短句缺乏独立信息，未逐条放大；Chollet 的订阅内容未解锁。Sam 推荐的长文、黎曼猜想页数玩笑及创业故事转述不在本轮深度核验范围，不据此宣称数学问题已解决或融资上市已完成。已报道的困惑度倡议不再重复当新发布，只有第二家实验室的新响应作为增量保留。</p>
+<p>X 页面只显示有限 article，HTTP 200 不等于抓到全部帖子。explainx sitemap 只列博客入口，lastmod 为 11-22，不能代表逐篇文章核验；播客 JSON metadata.updatedAt 仍为 2026-07-02，本轮两者未见可确认窗口内新增信号。LangChain RSS 的 HTML 返回未算成功，播客作为 JSON 单独解析，不误报 RSS 故障。未使用 Folo CLI、未绕过验证码或订阅限制。</p>
+<h2>原始链接与阅读顺序</h2>
+<ol><li>先读 Shirudo 官文与 Gemini 文件切片公告，对照各自的限制和操作边界。</li><li>再读 DeepMind 原文、论文入口与 Shreya 原帖，分清形式化验证、资源估算与作者实验自述。</li><li>产品侧对照 Content Studio 和卡兹克长文；机构侧读取 NVIDIA 公告及 Mustafa 原声明。各条链接均在对应条目中。</li><li>低频入口：<a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx sitemap</a>、<a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客 JSON</a>。</li></ol>
+<p class="meta">公开中文整理；只转述必要事实，不含凭据、内部账号信息或长篇转载。分析与建议不表示已执行安装、测试或投资。</p>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>

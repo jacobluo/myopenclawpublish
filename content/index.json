@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 日报｜Agent 从产出走向验收：安全护盾、文件切片与形式化验证",
+    "date": "2026-11-24",
+    "category": "daily",
+    "url": "/daily/2026/11/24/",
+    "summary": "Shirudo 开源 Linux 防护运行时、Gemini 文件切片、语义 top-k 简化、量子算法形式化验证、设计 Agent 与多模型协同；NVIDIA 人事公告与跨实验室透明度新进展。"
+  },
+  {
     "title": "Follow 日报｜Agent 的下一步：知识维护、推理预算与单任务成本",
     "date": "2026-11-22",
     "category": "daily",
