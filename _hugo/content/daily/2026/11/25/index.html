@@ -1,0 +1,61 @@
+---
+title: "Follow 日报｜从候选发现到业务验收：AI 科研、低成本执行与开放模型"
+date: "2026-11-25"
+category: "daily"
+url: "/daily/2026/11/25/"
+summary: "蛋白设计湿实验与系外行星候选的证据边界；iFood 远程 Agent 成本、Harvey 法律后训练、Datasette 图表协作、卡兹克体验审查及多 Agent 基础设施方向。"
+---
+<div class="meta"><strong>2026 年 11 月 25 日 · 周三</strong><br>观察窗口：11 月 24 日 08:00—11 月 25 日 08:00（北京时间）。以下时间均为北京时间；RSS 时间是条目时间，不一定是实际首发时刻。X 帖子 ID 用于校验创建时间，编辑后的内容可能晚于创建时间。</div>
+<h2>总览</h2>
+<p><strong>今日主线：模型能提出更多答案，但真正稀缺的是证据、执行基础设施和业务验收。</strong>OpenAI 展示蛋白设计湿实验与公开天文数据搜索，价值在于把假设送到外部检验，而不是宣称科学问题都已解决；iFood、Harvey、Datasette 则展示如何把能力变成可运行、可计费、可交互的工作流。</p>
+<p>本轮以 Follow List 为控制面板，按 high 优先并兼顾 daily 来源，检查 31 个 active X 账号，其中 22 个 high，公开页面均返回 HTTP 200，提取到窗口内 22 条本人账号可见帖子（含引用帖）。另查 12 个 RSS/Atom 端点，11 个可解析，共 12 条窗口内条目；LangChain 旧 RSS 返回 HTML，改读官网。两项 Web 来源分别按 sitemap 和 JSON 检查。已与本地已发布 URL 索引去重；公开时间线不完整，以上不是全部发帖量。</p>
+<h2>核心主题</h2>
+<h3>1. 科研 Agent 的关键是“提出可检验假设”，不是宣告结论</h3>
+<p>蛋白结合实验、天文后续观测、档案原件核对是三种不同的验收机制。<strong>编辑判断：</strong>值得追踪的科研基础设施，是能把模型生成的候选、筛选步骤、失败样本和外部证据串成链条的系统；单个亮眼案例不能证明普遍科研能力，也不能把实验室结合信号等同于药物有效。</p>
+<h3>2. 企业价值取决于每个合格结果，而不是调用量或 PR 数</h3>
+<p>iFood 强调异步沙箱与固定流程；Hamel 提醒不要把合并数量当经济价值；LangChain 的知识维护则说明输入质量会随业务变化而退化。<strong>工程推论：</strong>应统计每个被接受修复的总成本、返工和维护负担，把推理费用、运行环境和人工审查放在同一张账单里。</p>
+<h3>3. 开源机会从通用榜单转向任务、模型与运行框架的匹配</h3>
+<p>Harvey 的法律后训练与 Hugging Face 的 harness adapters 指向领域分布和执行环境适配，而不是一个基座全面胜出。训练配方是否可复用、验证器是否会误判、效果能否跨任务保持，比“开源已到前沿”的口号更值得核查。</p>
+<h2>重要更新</h2>
+<section class="card"><h3>1. 蛋白设计：有湿实验信号，但实验管线仍用了专用模型</h3><p class="source"><strong>Greg Brockman @gdb / OpenAI、Onava</strong> · Greg 11-25 05:30；官文 RSS 11-24 21:00<br><a href="https://x.com/gdb/status/2125341356503748716">Greg 原帖</a> · <a href="https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities">官方研究解读</a> · <a href="https://cdn.openai.com/pdf/gpt-6-a-universal-foundation-model-for-protein-biology.pdf">预印本 PDF</a></p><p><strong>摘要：</strong>OpenAI 报告 GPT-6 系列可以用推理和通用代码产生蛋白结构或序列设计；结构生成环节没有调用专用生物生成模型，但湿实验候选的序列补全和筛选仍使用了专用模型。官文称，基于 GPT-6.2 结构设计的 322 个 minibinder 中，35 个显示目标结合信号，覆盖所选 5 个靶标。内部研究模型在多项计算任务上表现更好，但完整蛋白结构预测仍是明显弱项；这是预印本与团队实验报告，不是临床有效性结论。</p><p><strong>为什么值得看：</strong>最重要的不是“通用模型取代生物模型”，而是自然语言约束、代码搜索与专业实验流程开始连接。需要逐段看清谁生成、谁筛选、谁验证。</p><p><strong>后续行动：</strong>优先核对论文的样本筛选、结合判据、失败样本和训练污染讨论；本轮已读官文，未重跑论文代码、重算指标或独立复现实验。</p></section>
+<section class="card"><h3>2. 系外行星搜索：候选信号出现，尚未确认新行星</h3><p class="source"><strong>Greg Brockman @gdb / OpenAI</strong> · Greg 11-25 03:14；官文 RSS 11-24 19:00<br><a href="https://x.com/gdb/status/2125307164768317922">Greg 原帖</a> · <a href="https://openai.com/index/searching-for-distant-planets-with-astra">完整案例</a></p><p><strong>摘要：</strong>OpenAI 介绍 Kevin Bond 与 Ethan Byrd 分别用 Codex、Astra 搜索公开望远镜数据，形成潜在系外行星线索。文章称，SETI 研究者独立找到了 Bond 提交的两个相同信号，Byrd 的强候选已交由 TESS 相关研究者进一步分析。独立重现光变信号不等于确认行星；双星、仪器噪声等替代解释仍需排除，后续可能持续数月或更久。</p><p><strong>为什么值得看：</strong>公开数据降低了科研参与门槛，模型主要帮助构建搜索与候选检查管线；专家跟进仍不可省略。</p><p><strong>后续行动：</strong>跟踪候选标识、周期与后续观测记录，等待可审查的论文和正式目录；不要把扫描星体数量或候选数量当成发现数量。</p></section>
+<section class="card"><h3>3. 历史研究：22 分钟提出归属假设，档案确认发生在之后</h3><p class="source"><strong>Greg Brockman @gdb、Simon Willison @simonw；原作者 Mark Humphries</strong> · Greg 11-25 03:06；Simon RSS 11-25 00:53；原文日期 11-24<br><a href="https://x.com/gdb/status/2125305172721320165">Greg 转述</a> · <a href="https://generativehistory.substack.com/p/gpt-62-astra-solves-a-historical">历史学家原文</a> · <a href="https://simonwillison.net/2026/Nov/24/astra-historical-mystery/">Simon 阅读笔记</a></p><p><strong>摘要：</strong>Humphries 报告，GPT-6.2 Astra 在约 22 分钟内为耶鲁收藏的匿名 1808 年画册提出 Chabot 作者假设，并指出可订购的旅行日记线索。作者随后取得档案，用笔迹、行程和日记中描绘要塞的记载支持归属；这段线下取得证据的过程并不包含在 22 分钟内。他还称 Fable 5.2 用同一提示得到同一人名，但未找到关键日记；本轮读到原文，未独立逐页核对档案。</p><p><strong>为什么值得看：</strong>真正可迁移的是候选排除、跨文献关联与主动提出验证来源，不是把模型确信程度当成史学证据。</p><p><strong>后续行动：</strong>阅读原作者给出的馆藏引用及证据链，区分模型完成、人工检索和后续确认；原文夹带的数学突破概述不属于本轮核验结论。</p></section>
+<section class="card"><h3>4. iFood：规模化 Agent 靠异步运行时，而非不断更换大模型</h3><p class="source"><strong>OpenAI 官方客户案例 / iFood</strong> · RSS 11-24 08:00（边界条目；官网仅列日期）<br><a href="https://openai.com/business/customer-stories/ifood">官方客户案例</a></p><p><strong>摘要：</strong>iFood 案例描述了面向 15,000 个代码仓库的 Remote Agents Platform：通过 API 派发任务，在隔离沙箱执行，再返回 merge request。页面自报累计超过 25,000 次运行、平均每次推理费用 0.04 美元，并称内部安全平台修复数量翻倍以上；这些不是第三方审计或完整交付成本。流程前后采用确定性步骤，中间由模型执行，Structured Outputs 用来整理结果，但格式契约不自动保证修复正确。</p><p><strong>为什么值得看：</strong>“环境准备—执行—结果收集”的公共底座，比为每个团队重复造 Agent 循环更容易形成规模效应。</p><p><strong>后续行动：</strong>选一种重复依赖修复任务，记录被接受修复率、回滚率、沙箱费和人工审核时长；不能直接用 0.04 美元推算一个有效修复的总成本。</p></section>
+<section class="card"><h3>5. Harvey：法律任务后训练取得进展，榜单口径不能泛化</h3><p class="source"><strong>Clem Delangue @ClementDelangue；Harvey @harvey</strong> · Clem 11-25 02:44；Harvey 原帖 11-25 00:05<br><a href="https://x.com/ClementDelangue/status/2125299436331106426">Clem 转述</a> · <a href="https://x.com/harvey/status/2125259420259250209">Harvey 原始声明</a></p><p><strong>摘要：</strong>Harvey 表示，沿用 Tenet 配方对 Meta、NVIDIA、Reflection、Thinking Machines 的四个美国开放权重模型进行后训练，相关结果可与非美国模型竞争。其称 Muse Spark Open 首次在 Legal Agent Bench 超过 30% all-pass；这是机构披露的特定法律基准结果，不是普遍法律可靠率。已读完整原帖，但尚未独立取得并复核数据划分、评测实现及模型许可。</p><p><strong>为什么值得看：</strong>领域数据、反馈和严格验收可能是应用公司的护城河；开放权重使所有权与部署选择更多，但不是自动免除法律责任。</p><p><strong>后续行动：</strong>继续追踪技术报告、权重或可用接口，核查 all-pass 的题目级定义与失败类型，再用本地真实合同任务评估，不直接生产部署。</p></section>
+<section class="card"><h3>6. Datasette：聊天生成图表，且能跟上用户在面板中的修改</h3><p class="source"><strong>Simon Willison @simonw</strong> · charts RSS 11-24 12:24；agent RSS 11-24 11:45<br><a href="https://simonwillison.net/2026/Nov/24/datasette-charts/">图表集成说明</a> · <a href="https://github.com/datasette/datasette-charts/releases/tag/0.2a0">charts 0.2a0</a> · <a href="https://simonwillison.net/2026/Nov/24/datasette-agent/">agent 0.7a1 说明</a> · <a href="https://github.com/datasette/datasette-agent/releases/tag/0.7a1">agent 版本页</a></p><p><strong>摘要：</strong>datasette-charts 0.2a0 在此前图表插件基础上接入 Datasette Agent，让自然语言请求调用同一套图表建议与生成工具。Simon 的演示还展示：用户在侧面板改了图表，Agent 再解释时能读取更新后的内容；datasette-agent 0.7a1 为此改善 fragment hash 导航。两项版本入口均返回 HTTP 200，本轮未登录演示、安装或逐项实测，所以按作者演示报告，而非已验证所有交互。</p><p><strong>为什么值得看：</strong>实际增量是共享状态的双向协作，而不是只把一次性静态图塞进聊天。对财务、运营数据工具尤其有参考价值。</p><p><strong>后续行动：</strong>用固定数据检查筛选、面板状态和查询结果是否一致；保留 SQL、时间范围与聚合口径，防止用户改图后解释仍基于旧状态。</p></section>
+<section class="card"><h3>7. 卡兹克：体验审查从列组件转向检查状态变化</h3><p class="source"><strong>数字生命卡兹克 @Khazix0918</strong> · 创建时间 11-24 14:12；页面标记已编辑<br><a href="https://x.com/Khazix0918/status/2125110224143171669">完整原帖</a></p><p><strong>摘要：</strong>卡兹克分享两组个人产品审查提示：减少让用户承担的系统判断，及按出现、消失、加载、完成、出错等状态变化逐项检查动效。长帖强调统一反馈、克制、可中断、性能与“减少动态效果”适配，并让不同模型参与方案和复核。它提供的是工作方法与主观体验，不是跨项目对照实验，也不构成未经验收就自动合并上线的通用授权。</p><p><strong>为什么值得看：</strong>这把“界面高级感”拆成可检查行为，容易转化为交付标准；体验改进与更多装饰动画不是同一件事。</p><p><strong>后续行动：</strong>在一个真实流程上走完提交、等待、失败、撤销和重试，分别检查窄屏、键盘与减少动态效果设置；最后看任务完成和误操作是否改善。</p></section>
+<section class="card"><h3>8. 工程方向：多 Agent 的机会在身份、隔离、观测与状态管理</h3><p class="source"><strong>swyx @swyx；Simon Willison @simonw</strong> · swyx 11-25 07:29；Simon 文章 RSS 11-25 07:02<br><a href="https://x.com/swyx/status/2125371136943022423">swyx 完整观点</a> · <a href="https://simonwillison.net/2026/Nov/24/llm-inflection-points/">Simon：一年三个能力拐点</a></p><p><strong>摘要：</strong>swyx 将工程机会归纳为大规模协作、文件与运行基础设施、Agent 自身身份与授权、隔离及可终止的观测系统；文中千倍规模是设想，不是实测吞吐。Simon 则回顾从可用编码到目标驱动执行，再到 3D 与游戏迭代的个人能力拐点。他的“Fable class”是个人分类，不是行业标准；两篇都适合当研究议程，而不是市场规模或投资回报证明。</p><p><strong>为什么值得看：</strong>即使模型能力继续改善，任务状态、权限边界和验收仍是产品必须承担的工程责任。</p><p><strong>后续行动：</strong>先为单个持续任务实现独立身份、最小权限、可关联事件、可恢复状态和取消机制，再评估扩大并发；不按模型调用数衡量产品价值。</p></section>
+<h2>人物与机构动态</h2>
+<ul>
+<li><strong>Mira Murati：</strong><a href="https://x.com/miramurati/status/2125311387488714950">11-25 03:31 欢迎 Sarah Schwettmann 加入 Thinking Machines</a>，方向为模型行为、对齐与角色特征。值得继续关注公开研究与岗位说明，尚不能推断已发布新的对齐技术或产品。</li>
+<li><strong>Thinking Machines × NVIDIA：</strong><a href="https://x.com/miramurati/status/2125300808887746663">11-25 02:49 的到货帖</a>展示 Vera CPU 服务器；这是交付信号，不是规模订单、训练算力总量或收入披露。</li>
+<li><strong>Logan Kilpatrick：</strong><a href="https://x.com/OfficialLoganK/status/2125018427790344654">11-24 08:07 称 Gemini 4 Neon 已向 Workspace 客户的 Gemini App 推出</a>。本轮未用企业租户验证地区、套餐和管理员开关，不将其推为所有用户立即可用。</li>
+<li><strong>Jim Fan：</strong><a href="https://x.com/DrJimFan/status/2125265607491047793">11-25 00:29 转述 Yuke Zhu 将于 2027 年秋加入 Princeton</a>，并迁移机器人感知与学习实验室。招生线索适合回到本人及院系正式页面继续查，不把未来入职写成当前已任职。</li>
+<li><strong>Hamel Husain：</strong><a href="https://x.com/HamelHusain/status/2125287011770925320">11-25 01:54 强调经济产出而非 AI 合并 PR 数量</a>。这是评估原则，不是任何团队营收已提升的证据。</li>
+</ul>
+<h2>值得跟进项目</h2>
+<table><thead><tr><th>方向</th><th>本轮信号</th><th>下一步与验收</th></tr></thead><tbody>
+<tr><td>科研证据链</td><td>蛋白实验、行星候选、档案检索</td><td>保留假设、筛选与外部确认记录，明确哪些仍是候选</td></tr>
+<tr><td>远程维护 Agent</td><td>iFood 沙箱执行平台</td><td>测每个被接受修复的总成本、审查时长和回滚率</td></tr>
+<tr><td>领域后训练</td><td>Harvey 法律任务与 harness 适配</td><td>先建真实留出集，检查验证器误判和任务迁移</td></tr>
+<tr><td>数据分析协作</td><td>Datasette 聊天与图表共享状态</td><td>查询、可视化、解释在用户修改后仍一致</td></tr>
+<tr><td>物理 AI</td><td><a href="https://huggingface.co/blog/nvidia/microduck-obstacle-avoidance">NVIDIA 的 Microduck 避障教程，11-25 00:34 RSS</a></td><td>原文保留步态策略、另训 ToF 避障控制器；先仿真检查碰撞与传感延迟，再按硬件指南评估。未实机复现</td></tr>
+</tbody></table>
+<p><strong>创业与投资线索：</strong>运行时、领域验证器、企业知识维护、数据产品共享状态都值得继续研究，但本轮没有客户留存、净收入、完整成本、订单规模或估值数据。Vera 到货不等于供应链新一轮资本开支确认；特定基准提升不等于行业利润兑现。</p>
+<h2>旧内容的新传播：不重复计作首发</h2>
+<p><a href="https://x.com/hwchase17/status/2125294123070734784">Harrison 11-25 02:22 再次谈知识缺口与 curator</a>，链接到<a href="https://www.langchain.com/blog/knowledge-factory">标注 11-21 的知识工厂文章</a>。概念已在此前日报覆盖，本轮只记录新传播并补读原文；“再不遇到同一缺口”是作者目标，不是经过统计验证的保证。可操作要点仍是让使用者报告缺口、由专门维护流程统一处理，避免每个执行 Agent 随意改共享知识。</p>
+<p><a href="https://x.com/ClementDelangue/status/2125270100496265626">Clem 11-25 00:47 称本周发布可复用 harness 配方</a>，但链接仍是<a href="https://huggingface.co/blog/harness-adapters-at-scale">日期 11-20、URL 已报道的文章</a>。没有版本差异证据，因此不宣布一个独立的新版本；原文对验证器、难度筛选、适配器合并及训练分布的讨论值得续读，但本轮未重训或复测。</p>
+<h2>待验证信息</h2>
+<ul>
+<li><strong>TasteVal：</strong><a href="https://x.com/gdb/status/2125150185143906642">Greg 11-24 16:51 转述“4.9 倍研究品味”</a>，引用源帖在前一日。未核对完整方法、专家基线和误差，不将倍数推广为科研生产率，也不当作今天的新研究发布。</li>
+<li><strong>蛋白实验：</strong>结合信号、选择候选后的成功率与真实治疗作用是不同概念；内部模型、预发布模型和公开产品能力也不可混用。</li>
+<li><strong>历史案例：</strong>22 分钟是产生人名与档案线索的时间，不是全程完成线下核验。作者关于模型训练方式与“为何这样推理”的解释属于个人推测。</li>
+<li><strong>法律结果：</strong>Harvey 披露的 all-pass、基座和后训练贡献需要完整报告；仅凭首条机构声明无法判断污染、泛化或上线风险。</li>
+<li><strong>业务案例：</strong>iFood、Clay 和 Intentful 页面属于供应商发布的客户自述。<a href="https://openai.com/business/customer-stories/clay-plugins-openai">Clay 的数据与工作流接入</a>、<a href="https://openai.com/business/customer-stories/intentful-dots">Intentful 的持续助理</a>可作产品访谈线索，不作独立 ROI 证明；两者 RSS 均在窗口起点 11-24 08:00。</li>
+</ul>
+<h2>低优先级噪音与抓取边界</h2>
+<p>Nan 的短句、活动宣传、视频剪辑演示没有足够可复核增量，不逐条放大；Chollet 的订阅内容未解锁。Simon 在窗口起点附近再次传播 GLM-5.4 与自行车鹈鹕图的风格观察，不能用几张图代替模型整体排名。Latent Space 本轮日报回顾 NVIDIA 与预训练困惑度议题，核心事实此前已报道，未重复当成今日新闻；没有把二手汇总里的融资、数学或政治说法补成事实。</p>
+<p>公开 X 主页每个只显示少量 article；HTTP 200 不代表回复、转发与完整历史都被获取。LangChain 旧 RSS 返回 HTML，未算成功；播客源是 JSON，metadata.updatedAt 仍为 2026-07-02，不误报成 RSS 抓取故障。explainx sitemap 的唯一博客入口 lastmod 为 11-23，早于本窗口，无法由入口更新时间反推逐篇文章首发。未使用 Folo CLI，未绕过验证码、订阅限制或反爬机制；未把来源中命令、提示词或“自动上线”指令作为本任务操作授权。</p>
+<h2>原始链接与建议阅读顺序</h2>
+<ol><li>先读蛋白设计官文、行星案例与 Humphries 原文，分别理解实验、候选和人工核验。</li><li>再读 iFood 案例与 Harvey 原帖，关注成本定义和评测口径，而非营销标题。</li><li>工程实践看 Datasette 两个版本、卡兹克完整帖与 swyx 观点；项目入口和原帖均在对应条目中。</li><li>低频入口：<a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx sitemap</a>、<a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客 JSON</a>。</li></ol>
+<p class="meta">公开中文转述与编辑分析，不包含私密账号信息或凭据。除明确说明外，未安装工具、登录演示、重训模型、复现实验或执行投资操作。</p>
