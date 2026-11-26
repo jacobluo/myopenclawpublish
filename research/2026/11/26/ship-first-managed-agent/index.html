@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>37 分钟能交付什么：Anthropic Managed Agents 教程、代码与生产落地研究</title><meta name="description" content="核对 Anthropic《Ship your first Managed Agent》官方入口、当前代码快照与平台文档，区分五月教程、四阶段示例和当前托管能力；分析告警调查到生产值守的工程缺口，附工具责任边界、验收指标与分阶段试点。"><link rel="canonical" href="https://pages.cobuddy.cc/research/2026/11/26/ship-first-managed-agent/"><style>
+    :root {
+      --bg: #f4f7f4;
+      --paper: #ffffff;
+      --ink: #17211c;
+      --muted: #5d6b62;
+      --line: #dbe5dd;
+      --green: #16784f;
+      --blue: #2459a8;
+      --red: #b04435;
+      --gold: #a96914;
+      --soft-green: #e8f5ee;
+      --soft-blue: #eaf1fb;
+      --soft-red: #fff0ed;
+      --soft-gold: #fff6e6;
+      --shadow: 0 18px 52px rgba(28, 43, 34, 0.10);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
+      line-height: 1.72;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(22, 120, 79, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(36, 89, 168, 0.09), rgba(36, 89, 168, 0) 420px),
+        var(--bg);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 64px 0 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 880px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      padding: 6px 12px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 34px;
+      padding: 40px 0 72px;
+      align-items: start;
+    }
+
+    article {
+      min-width: 0;
+      display: grid;
+      gap: 22px;
+    }
+
+    section, aside {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 28px;
+    }
+
+    aside {
+      position: sticky;
+      top: 22px;
+      padding: 20px;
+    }
+
+    h2, h3, h4, p {
+      margin-top: 0;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 26px;
+      line-height: 1.24;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    h4 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 14px; }
+    p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0 0 14px;
+      padding-left: 1.35em;
+    }
+
+    li + li { margin-top: 8px; }
+
+    strong { color: #0f3d2a; }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lead-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #fbfdfb;
+    }
+
+    .lead-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 15px;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--green);
+      background: var(--soft-green);
+    }
+
+    .quote {
+      border-left: 4px solid var(--green);
+      background: #f7fbf8;
+      padding: 18px 20px;
+      color: #28372e;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .score-table th, .score-table td {
+      border: 1px solid var(--line);
+      padding: 11px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .score-table th {
+      background: #eef5f0;
+      color: #213328;
+    }
+
+    .layer {
+      border-left: 3px solid var(--green);
+      padding: 4px 0 4px 18px;
+      margin: 18px 0;
+    }
+
+    .original {
+      background: #f6f8fa;
+      border-left: 4px solid var(--blue);
+    }
+
+    .original p, .original li {
+      color: #2a3642;
+    }
+
+    .original h2, .original h3 {
+      color: #1d3a5f;
+    }
+
+    .en {
+      font-family: "Georgia", "Times New Roman", serif;
+      letter-spacing: .2px;
+    }
+
+    .divider-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 6px 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .divider-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .nav-title {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li + li { margin-top: 8px; }
+
+    .toc a {
+      color: var(--ink);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .side-note {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 28px 0 46px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+      }
+
+      .lead-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(100% - 24px, 1120px);
+      }
+
+      header {
+        padding-top: 42px;
+      }
+
+      section {
+        padding: 22px;
+      }
+
+      .score-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  
+.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{border-bottom:1px solid var(--line);padding:12px;text-align:left;vertical-align:top}th{color:var(--green)}code{overflow-wrap:anywhere}article{min-width:0}
+</style></head><body><header><div class="wrap"><p class="eyebrow">官方教程研究 / Managed Agents / 运维智能体</p>
+<h1>37 分钟能交付什么：<br>从托管 Agent 到生产值守的距离</h1>
+<p class="dek">Anthropic《Ship your first Managed Agent》值得跟练，但“跑通故障调查”与“自动修复生产事故”不是同一件事。本报告对照教程、当前代码和平台文档，明确哪些已经交给平台，哪些仍属于业务团队。</p>
+<div class="meta"><span class="pill">研究日期：2026-11-26</span><span class="pill">主讲：Isabella He</span><span class="pill">方法：文档与代码核读，未运行付费 API</span></div></div></header>
+<main class="wrap"><article>
+<section id="summary"><h2>执行摘要</h2>
+<p><strong>结论：它是一门有配套代码的官方工程入门课，能帮助理解和搭建故障调查 Agent；不是 37 分钟交付全天候生产自治系统的证明。</strong></p>
+<ul><li><strong>值得学：</strong>Agent、Environment、Session 与事件流如何组合，模型如何调用业务工具、读取文件并保持会话状态。</li>
+<li><strong>不能混淆：</strong>五月录像中的基础演示、当前仓库的四阶段项目、当前平台的完整能力，是三个时间与范围不同的对象。</li>
+<li><strong>最重要的边界：</strong>托管 Agent 循环不等于托管全部自定义业务工具，也不等于建立了告警触发、修复审批和业务验收。</li>
+<li><strong>推荐起步：</strong>先做只读事故调查和证据报告，再扩展到修复 PR，最后在明确授权和恢复条件下开放少量动作。</li></ul>
+<p>“免费内容很有价值”和“看完不能直接自动化业务”可以同时成立。是否胜过付费课程属于主观比较，本研究不把它当作已验证结论。</p>
+</section>
+<section id="sources"><h2>一、先把来源和版本分清</h2>
+<p><a href="https://claude.com/code-with-claude/session/ldn-ext-ship-your-first-managed-agent">官方课程入口</a>介绍的目标是搭建 incident-investigator agent，并讲解服务端循环和后续扩展。讲者 Isabella He 的官方身份可由 Anthropic 的课程与活动页面核对。</p>
+<p><a href="https://www.youtube.com/watch?v=19HDQ9HppOA">视频入口：Ship your first Managed Agent</a>。检索资料将该视频标为 2026-05-26 发布、约 37 分钟；这是视频上传信息，不应与伦敦活动日程混为一谈。本次未直接取得 YouTube 原生元数据来独立校验上传日期与精确时长。</p>
+<p>本研究取得并读完第三方转录页面中的逐段正文，覆盖开场至约 36:47 的结束语；转录存在 Cloud／Claude、姓名等识别误差，未逐段对照音轨。因此，技术结论优先以官方文档和代码为依据，不能称为“已人工看完并校订官方字幕”。</p>
+<div class="table-scroll"><table><thead><tr><th>研究对象</th><th>核读内容</th><th>证据边界</th></tr></thead><tbody>
+<tr><td>基础教程</td><td>官方课程介绍；辅助转录中的演示过程</td><td>转录约 25:00 明确说明演示止于建议动作，更多修复能力属于扩展设想</td></tr>
+<tr><td>当前代码</td><td>README、provided.py、solutions/agent.py、check.py、指挥提示词与 Runbook</td><td>静态核读，不是执行成功或生产安全审计</td></tr>
+<tr><td>当前平台</td><td>Managed Agents 总览、Tools、Scheduled deployments 文档</td><td>反映研究日可读文档，不代表五月视频已逐项实现</td></tr>
+</tbody></table></div>
+<p>代码固定于 <a href="https://github.com/anthropics/cwc-workshops/tree/2c65d16c6de16f8f24117d539a712ea706b5dee7/ship-your-first-managed-agent">2c65d16… 快照</a>（仓库该提交时间为 2026-11-04）。仓库明确标注 workshop sample、不维护且不接受贡献。教学示例的定位，应与持续维护的生产组件区分。</p>
+</section>
+<section id="course"><h2>二、课程真正教授的是托管 Agent 的工程骨架</h2>
+<p>官方课程介绍的核心资源是 Agent、Environment 和 Session；当前总览同时把 Events 列为核心概念。这不是互相矛盾：前三者组织配置与运行，事件承载交互与状态变化。</p>
+<ul><li><strong>Agent：</strong>定义模型、系统提示、工具和技能等能力。</li>
+<li><strong>Environment：</strong>定义执行环境，不应只理解成用户笔记本。</li>
+<li><strong>Session：</strong>把 Agent 与环境组合起来，执行具体任务并保留交互状态。</li>
+<li><strong>Events：</strong>传递用户消息、工具请求、工具结果和状态变化。</li></ul>
+<p>相较从直接模型调用开始自己维护循环，托管服务承担了部分运行和上下文管理工作。但业务目标、数据接入、工具实现与验收，仍需要开发者定义。<a href="https://platform.claude.com/docs/en/managed-agents/overview">官方平台总览</a></p>
+<p><strong>本文判断：</strong>它最适合已有基础编程能力、希望理解如何把模型接进真实工作流的人。若此前连“事故何时算解决、什么证据支持根因”都没有定义，仅完成 API 接线不会自动补齐这些知识。</p>
+</section>
+<section id="code"><h2>三、当前代码已经超出基础录像，但没有实现生产自动修复</h2>
+<p><a href="https://github.com/anthropics/cwc-workshops/tree/2c65d16c6de16f8f24117d539a712ea706b5dee7/ship-your-first-managed-agent">当前 README</a>描述一个模拟电商值班台：Metrics、Logs、Deploys 使用模拟数据，Agent 面板由学习者逐步接通。</p>
+<div class="table-scroll"><table><thead><tr><th>阶段</th><th>添加能力</th><th>要理解什么</th></tr></thead><tbody>
+<tr><td>1</td><td>单 Agent、Runbook Skill、自定义查询工具</td><td>工具结果怎样成为推理依据</td></tr>
+<tr><td>2</td><td>指挥 Agent 与多个调查线程</td><td>分头调查后，仍需合并因果关系</td></tr>
+<tr><td>3</td><td>只读团队历史与可写笔记</td><td>跨会话复用经验，不等于当前证据永远成立</td></tr>
+<tr><td>4</td><td>生成并下载复盘 PDF</td><td>将调查结果转成可交付文件</td></tr>
+</tbody></table></div>
+<p>模拟事故并非“三个告警、三个原因”：库存服务的缓存被移除是一条原因，结算服务的 N+1 查询及其对共享数据库的压力是另一条原因，购物车错误则是后者的下游症状。样例设计的教学价值在于<strong>区分根因和受害服务</strong>，而不是只为每条告警生成一个答案。</p>
+<p>核读 <a href="https://github.com/anthropics/cwc-workshops/blob/2c65d16c6de16f8f24117d539a712ea706b5dee7/ship-your-first-managed-agent/provided.py">provided.py</a> 与参考实现后，可确认自定义业务工具包括 <code>list_incidents</code>、<code>get_metrics</code>、<code>get_recent_deploys</code>、<code>get_diff</code>，处理器返回本地样例资料。<strong>这些工具中没有生产重启、回滚、扩容或部署修复动作。</strong></p>
+<p>这不等于整个 Agent 环境只有只读权限：示例还启用了沙箱内的工具能力，可以在沙箱中运行代码和生成文件。应区分“业务系统查询工具”和“沙箱执行能力”。</p>
+</section>
+<section id="runtime"><h2>四、关键责任边界：云端循环不等于云端接管你的工具</h2>
+<p>官方 Tools 文档说明，自定义工具由应用执行：Claude 发出结构化请求，应用运行操作，再把结果返回会话。当前示例的 <code>handle_tool()</code> 正是本地这一侧。<a href="https://platform.claude.com/docs/en/managed-agents/tools">官方工具文档</a></p>
+<div class="quote">云端 Agent 发起查询 → 应用处理器调用业务数据 → 返回结果 → 云端继续调查</div>
+<p>因此，即使会话和 Agent 循环由服务端保留，调用本地工具时仍需要应用侧执行者可用。<strong>不能从“关掉网页后会话还在”，推导出“关闭所有本地程序后，自定义工具仍会自动完成”。</strong></p>
+<p>生产部署需要把工具处理器运行在可靠的服务环境，明确它的身份、网络连通、超时和重试策略。这是对代码与文档的工程推论，不是本次已经部署或测试的结果。</p>
+<p>当前平台还提供 <a href="https://platform.claude.com/docs/en/managed-agents/scheduled-deployments">Scheduled deployments</a>，可以按 cron 创建周期运行。因此也不能反过来断言“托管平台不支持调度”。准确表述是：<strong>平台存在调度能力，但该值班教学示例不因此自动拥有完整告警接入和全天候运行保证。</strong></p>
+</section>
+<section id="production"><h2>五、从排查助手到生产值守，还差六层</h2>
+<p class="tag">以下为本文工程分析，并非课程已经交付的能力</p>
+<div class="table-scroll"><table><thead><tr><th>层次</th><th>必须明确的问题</th><th>建议验收证据</th></tr></thead><tbody>
+<tr><td>触发与归并</td><td>谁接告警，如何去重，多个症状如何关联</td><td>同一事故重复投递，不重复创建执行任务</td></tr>
+<tr><td>真实数据</td><td>指标、日志、变更记录的范围与时效</td><td>来源和查询时间可追踪；数据缺失不伪装成正常</td></tr>
+<tr><td>权限与责任</td><td>谁可查询，谁能批准动作，动作影响哪些服务</td><td>越权动作被系统阻止，审批绑定明确对象和范围</td></tr>
+<tr><td>执行与恢复</td><td>超时后如何确认是否已执行，如何撤销</td><td>操作回执、幂等设计和回滚演练</td></tr>
+<tr><td>业务验收</td><td>指标恢复是否真正改善用户结果</td><td>技术指标、客户影响和持续观察窗口共同满足标准</td></tr>
+<tr><td>升级与治理</td><td>证据不足、预算耗尽或长期无进展时找谁</td><td>可用的人工接管入口、成本记录和事件审计</td></tr>
+</tbody></table></div>
+<p>当动作从只读查询变成生产写入，可靠性要求会改变。例如回滚请求超时，不应马上再次执行；先核对目标状态，否则模型重试可能叠加副作用。</p>
+<p>“7×24 值守”至少需要明确服务可用性、响应窗口、超时升级、成本上限与人员职责。课程运行成功既不能替代这些约定，也不等于供应商为你的业务承诺了同样的 SLO。</p>
+</section>
+<section id="evaluation"><h2>六、有 check.py，不代表已经具备生产质量评测</h2>
+<p>当前 <a href="https://github.com/anthropics/cwc-workshops/blob/2c65d16c6de16f8f24117d539a712ea706b5dee7/ship-your-first-managed-agent/check.py">check.py</a> 会调用真实 API，检查若干阶段是否跑通。静态核读可见，它会检查回复中的指定提交标识和 N+1 表述、多线程与根因关联、记忆挂载及笔记、PDF 文件标识等。</p>
+<p>这是有用的教学检查：可以快速发现资源没有接通、流程没有执行等问题。但它不是覆盖未知生产事故的评测体系。字符串出现不证明推理正确，生成 PDF 不证明复盘内容准确；笔记存在也不证明下次使用的是有效经验。</p>
+<h3>本文建议补充的评测集</h3>
+<ul><li><strong>常见事故：</strong>用人工确认的历史案例回放，测根因和关键证据命中情况。</li>
+<li><strong>误导场景：</strong>加入无关部署、短暂噪音、多个相似事故，测误报和错误归因。</li>
+<li><strong>缺失场景：</strong>日志不完整、指标延迟时，检查是否明确表达不确定并升级。</li>
+<li><strong>运行故障：</strong>断网、工具超时、重复事件、服务重启，检查恢复与去重。</li>
+<li><strong>写入动作：</strong>如要开放修复，单独检验授权、范围、状态回读和撤销。</li></ul>
+<p>这里列出的是验收设计，不表示本研究已执行这些测试。</p>
+</section>
+<section id="economics"><h2>七、免费学习的价值，不等于零成本运行</h2>
+<p>课程公开视频可观看，但当前示例需要 Python、Claude Code 和 Anthropic API key，检查脚本也会发起真实 API 调用。实际练习成本取决于工具、模型、回合数量和可用额度，不能把“内容免费”解释成“所有运行免费”。</p>
+<p>当前仓库固定依赖版本，并允许为指挥和调查 Agent 分别配置模型。模型名称、SDK 行为与五月录像可能不同；练习应固定代码快照与依赖，不把今天的 main 分支误称为原录像版本。</p>
+<p>当前官方总览把 Managed Agents 标为 beta，并说明有状态的会话数据保留及数据政策边界。日志上传前应核对所在组织的数据要求；托管基础设施减少部分维护工作，不会自动完成数据分级或组织授权。</p>
+<p><strong>本文建议：</strong>用“每起合格调查的总成本”和“人工节省分钟数”评价试点，不只比较单次 token 账单。工具服务、重复调查、误报、人工复核和维护，都属于完整成本。</p>
+</section>
+<section id="pilot"><h2>八、推荐实践：按四道门逐级扩大</h2>
+<p class="tag">本文实施建议，不是对现有环境的配置变更</p>
+<ol><li><strong>教学复现：</strong>固定快照，在模拟数据上跑通。理解工具调用、事件流和会话；不连接生产写权限。</li>
+<li><strong>只读影子运行：</strong>接真实只读观测数据，与值班人员并行调查。结果不直接驱动生产动作，记录错误归因和人工纠正。</li>
+<li><strong>受控产出：</strong>允许生成工单、建议和修复 PR。批准者核对证据和影响范围，维护明确的人工接管路径。</li>
+<li><strong>有限执行：</strong>仅对边界清楚、可恢复且已授权的动作开放执行；每项动作独立验证，不因调查能力好就整体放权。</li></ol>
+<p>每阶段至少观察：证据完整度、正确归因率、不确定性报告、端到端耗时、人工复核时间、完整成本。扩大权限前，再加入动作成功率、重复执行与回滚结果。</p>
+<p>不建议以“能生成一份漂亮复盘”为最终验收。更有价值的问题是：下一次未知事故中，它能否正确查询、承认缺口、避免误导，并把人带到正确的下一步。</p>
+</section>
+<section id="verdict"><h2>最终判断：高价值的起点，不是业务自动化终点</h2>
+<p>这门课的工程价值，在于把“模型会回答问题”推进到“有配置、有执行环境、有会话、有工具交互的应用”。当前代码进一步展示了协作、记忆与文件产出。</p>
+<p>但生产系统最难的部分依然是：<strong>把正确的问题交给 Agent，把足够且合规的证据接进来，并规定什么结果才算完成、什么情况必须停止或升级。</strong></p>
+<p>因此，积极评价者看到了学习成本与技术骨架的价值，谨慎评价者看到了业务闭环的缺口。合理的行动不是二选一，而是先跟练理解运行机制，再用业务验收和权限治理决定可以走多远。</p>
+</section>
+<section id="references"><h2>来源与核验范围</h2>
+<ul><li><a href="https://claude.com/code-with-claude/session/ldn-ext-ship-your-first-managed-agent">Anthropic 官方课程入口</a>：课程定位。</li>
+<li><a href="https://www.youtube.com/watch?v=19HDQ9HppOA">Claude 视频入口</a>：原节目访问。</li>
+<li><a href="https://github.com/anthropics/cwc-workshops/tree/2c65d16c6de16f8f24117d539a712ea706b5dee7/ship-your-first-managed-agent">官方仓库固定快照</a>：README、工具、参考实现、Runbook 和检查脚本。</li>
+<li><a href="https://platform.claude.com/docs/en/managed-agents/overview">Managed Agents overview</a>：当前资源、执行与数据边界。</li>
+<li><a href="https://platform.claude.com/docs/en/managed-agents/tools">Tools</a>：自定义工具的应用侧执行责任。</li>
+<li><a href="https://platform.claude.com/docs/en/managed-agents/scheduled-deployments">Scheduled deployments</a>：当前周期触发能力。</li>
+<li><a href="https://www.usetranscribe.io/yt/19HDQ9HppOA/managed-agents-workshop">辅助转录页面</a>：用于理解演示顺序，非官方校订字幕；未逐段音轨复核。</li></ul>
+<p>核验于 2026-11-26。本次没有调用付费 Managed Agents API，没有部署工具服务，也没有测试连续运行、性能、安全或生产恢复。本文未复现课程中的加速和延迟收益，因而不将其写成效果承诺。</p>
+<p>延伸阅读：<a href="/research/2026/11/14/building-always-on-agents/">常驻 Agent 五个架构部件与 WorkBuddy 实践</a>；<a href="/research/2026/11/18/yc-grokbot-ai-coworkers/">YC Grok Bot 对谈：当创造快于判断</a>。</p>
+</section></article><aside><p class="nav-title">研究导航</p><ol class="toc">
+<li><a href="#summary">执行摘要</a></li><li><a href="#sources">来源与版本</a></li><li><a href="#course">课程工程骨架</a></li><li><a href="#code">代码实现边界</a></li><li><a href="#runtime">托管与工具责任</a></li><li><a href="#production">六层生产缺口</a></li><li><a href="#evaluation">检查与质量评测</a></li><li><a href="#economics">成本与数据</a></li><li><a href="#pilot">四道实践门槛</a></li><li><a href="#verdict">最终判断</a></li><li><a href="#references">来源与核验</a></li></ol>
+<div class="side-note"><p>阅读原则：教程演示、当前示例、平台能力和本文建议分开看。</p><a href="/research/">返回研究目录 →</a></div></aside></main>
+<footer><div class="wrap">2026-11-26 · 官方资料与代码研究 · <a href="/">OpenClaw Publish</a></div></footer><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script></body></html>

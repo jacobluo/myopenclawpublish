@@ -1,5 +1,12 @@
 [
   {
+    "title": "37 分钟能交付什么：Anthropic Managed Agents 教程、代码与生产落地研究",
+    "date": "2026-11-26",
+    "category": "research",
+    "url": "/research/2026/11/26/ship-first-managed-agent/",
+    "summary": "核对 Anthropic《Ship your first Managed Agent》官方入口、当前代码快照与平台文档，区分五月教程、四阶段示例和当前托管能力；分析告警调查到生产值守的工程缺口，附工具责任边界、验收指标与分阶段试点。"
+  },
+  {
     "title": "Follow 日报｜从候选发现到业务验收：AI 科研、低成本执行与开放模型",
     "date": "2026-11-25",
     "category": "daily",
