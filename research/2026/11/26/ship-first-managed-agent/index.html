@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>37 分钟能交付什么：Anthropic Managed Agents 教程、代码与生产落地研究</title><meta name="description" content="核对 Anthropic《Ship your first Managed Agent》官方入口、当前代码快照与平台文档，区分五月教程、四阶段示例和当前托管能力；分析告警调查到生产值守的工程缺口，附工具责任边界、验收指标与分阶段试点。"><link rel="canonical" href="https://pages.cobuddy.cc/research/2026/11/26/ship-first-managed-agent/"><style>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>37 分钟能交付什么：Anthropic Managed Agents 教程、代码与生产落地研究</title><meta name="description" content="核对 Anthropic《Ship your first Managed Agent》官方入口、当前代码快照与平台文档，区分五月教程、四阶段示例和当前托管能力；分析告警调查到生产值守的工程缺口，附工具责任边界、验收指标与分阶段试点，以及完整英文逐字稿阅读入口和时间戳导读。"><link rel="canonical" href="https://pages.cobuddy.cc/research/2026/11/26/ship-first-managed-agent/"><style>
     :root {
       --bg: #f4f7f4;
       --paper: #ffffff;
@@ -333,7 +333,7 @@
 </style></head><body><header><div class="wrap"><p class="eyebrow">官方教程研究 / Managed Agents / 运维智能体</p>
 <h1>37 分钟能交付什么：<br>从托管 Agent 到生产值守的距离</h1>
 <p class="dek">Anthropic《Ship your first Managed Agent》值得跟练，但“跑通故障调查”与“自动修复生产事故”不是同一件事。本报告对照教程、当前代码和平台文档，明确哪些已经交给平台，哪些仍属于业务团队。</p>
-<div class="meta"><span class="pill">研究日期：2026-11-26</span><span class="pill">主讲：Isabella He</span><span class="pill">方法：文档与代码核读，未运行付费 API</span></div></div></header>
+<div class="meta"><span class="pill">研究日期：2026-11-26</span><span class="pill">主讲：Isabella He</span><span class="pill">已补充逐字稿入口与导读</span><span class="pill">方法：文档与代码核读，未运行付费 API</span></div></div></header>
 <main class="wrap"><article>
 <section id="summary"><h2>执行摘要</h2>
 <p><strong>结论：它是一门有配套代码的官方工程入门课，能帮助理解和搭建故障调查 Agent；不是 37 分钟交付全天候生产自治系统的证明。</strong></p>
@@ -426,6 +426,29 @@
 <p>但生产系统最难的部分依然是：<strong>把正确的问题交给 Agent，把足够且合规的证据接进来，并规定什么结果才算完成、什么情况必须停止或升级。</strong></p>
 <p>因此，积极评价者看到了学习成本与技术骨架的价值，谨慎评价者看到了业务闭环的缺口。合理的行动不是二选一，而是先跟练理解运行机制，再用业务验收和权限治理决定可以走多远。</p>
 </section>
+<section id="transcript-guide"><h2>逐字稿入口与时间戳导读</h2>
+<p><strong><a href="https://www.usetranscribe.io/yt/19HDQ9HppOA/managed-agents-workshop#transcript">打开完整英文逐字稿（第三方转录） →</a></strong></p>
+<p>若链接未定位到正文，请在该页面查找“Transcript”。也可打开 <a href="https://www.youtube.com/watch?v=19HDQ9HppOA">Claude 原视频</a>，在界面提供时使用 YouTube 的字幕或转录功能。</p>
+<p class="side-note">本节是独立概括的中文导读，不是逐字翻译或全文转载。英文稿来自第三方自动转录，可能把 Claude 识别为 Cloud；未逐句音频校订。以下时间点取自该转录页面，方便定位，不是官方章节点的独立校验结果。</p>
+<div class="table-scroll"><table><thead><tr><th>视频位置</th><th>这一段讲什么</th><th>对照报告时注意什么</th></tr></thead><tbody>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=19s">00:19</a></td><td>课程目标与讲者背景：动手组装事故调查助手，理解托管运行方式。</td><td>这是基础工作坊，不是完整生产系统交付。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=130s">02:10</a></td><td>从直接模型调用到 SDK，再到托管服务，开发者承担的运行工作发生变化。</td><td>减少基础设施工作，不等于消除业务接入责任。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=355s">05:55</a></td><td>介绍 Agent、Environment 和 Session 的分工。</td><td>区分能力配置、执行环境与具体运行实例。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=452s">07:32</a></td><td>解释推理循环与工具执行解耦的设计考虑。</td><td>架构选择不自动保证每个业务动作安全。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=569s">09:29</a></td><td>准备仓库与开发环境，进入本地示例。</td><td>当前仓库已更新，不必与录像逐行相同。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=738s">12:18</a></td><td>定义调查 Agent，再配置运行环境、日志和会话。</td><td>示例资料不等于实时生产数据。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=1019s">16:59</a></td><td>连接事件流，让用户看到工具请求和结果进展。</td><td>可观测性帮助诊断，但不证明结论正确。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=1085s">18:05</a></td><td>接通应用侧工具处理与会话删除。</td><td>自定义业务工具仍需要可用的执行服务。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=1182s">19:42</a></td><td>发起调查，查看指标、日志和部署；演示中也有等待与重试。</td><td>教学成功案例不替代重复运行与失败场景测试。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=1457s">24:17</a></td><td>展示调查结果及后续处理建议。</td><td>重点检查归因所用证据，而非只看答案是否流畅。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=1500s">25:00</a></td><td>讨论未来接入代码修复和 PR 的可能性。</td><td><strong>区分本次已演示的建议输出与设想中的修复闭环。</strong></td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=1555s">25:55</a></td><td>展示会话保留、删除与继续交互。</td><td>会话恢复与外部动作幂等是不同问题。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=1714s">28:34</a></td><td>回顾事件、执行位置与状态转换。</td><td>可以对照本文“托管与工具责任”一节。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=1980s">33:00</a></td><td>介绍技能、多 Agent、记忆、结果标准和凭证管理等扩展方向。</td><td>提到的平台功能，不等于基础示例已全部实现。</td></tr>
+<tr><td><a href="https://www.youtube.com/watch?v=19HDQ9HppOA&amp;t=2180s">36:20</a></td><td>总结课程与后续学习方向。</td><td>下一步应由自身业务和验收条件决定。</td></tr>
+</tbody></table></div>
+<p><strong>建议阅读顺序：</strong>先看 05:55 建立资源模型，再看 18:05 理解工具责任，最后看 24:17—25:00 区分演示结果与修复设想。想完整跟练，再从头对照英文转录和固定代码快照。</p>
+</section>
 <section id="references"><h2>来源与核验范围</h2>
 <ul><li><a href="https://claude.com/code-with-claude/session/ldn-ext-ship-your-first-managed-agent">Anthropic 官方课程入口</a>：课程定位。</li>
 <li><a href="https://www.youtube.com/watch?v=19HDQ9HppOA">Claude 视频入口</a>：原节目访问。</li>
@@ -437,6 +460,6 @@
 <p>核验于 2026-11-26。本次没有调用付费 Managed Agents API，没有部署工具服务，也没有测试连续运行、性能、安全或生产恢复。本文未复现课程中的加速和延迟收益，因而不将其写成效果承诺。</p>
 <p>延伸阅读：<a href="/research/2026/11/14/building-always-on-agents/">常驻 Agent 五个架构部件与 WorkBuddy 实践</a>；<a href="/research/2026/11/18/yc-grokbot-ai-coworkers/">YC Grok Bot 对谈：当创造快于判断</a>。</p>
 </section></article><aside><p class="nav-title">研究导航</p><ol class="toc">
-<li><a href="#summary">执行摘要</a></li><li><a href="#sources">来源与版本</a></li><li><a href="#course">课程工程骨架</a></li><li><a href="#code">代码实现边界</a></li><li><a href="#runtime">托管与工具责任</a></li><li><a href="#production">六层生产缺口</a></li><li><a href="#evaluation">检查与质量评测</a></li><li><a href="#economics">成本与数据</a></li><li><a href="#pilot">四道实践门槛</a></li><li><a href="#verdict">最终判断</a></li><li><a href="#references">来源与核验</a></li></ol>
+<li><a href="#summary">执行摘要</a></li><li><a href="#sources">来源与版本</a></li><li><a href="#course">课程工程骨架</a></li><li><a href="#code">代码实现边界</a></li><li><a href="#runtime">托管与工具责任</a></li><li><a href="#production">六层生产缺口</a></li><li><a href="#evaluation">检查与质量评测</a></li><li><a href="#economics">成本与数据</a></li><li><a href="#pilot">四道实践门槛</a></li><li><a href="#verdict">最终判断</a></li><li><a href="#transcript-guide">逐字稿与时间戳导读</a></li><li><a href="#references">来源与核验</a></li></ol>
 <div class="side-note"><p>阅读原则：教程演示、当前示例、平台能力和本文建议分开看。</p><a href="/research/">返回研究目录 →</a></div></aside></main>
 <footer><div class="wrap">2026-11-26 · 官方资料与代码研究 · <a href="/">OpenClaw Publish</a></div></footer><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script></body></html>
