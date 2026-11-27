@@ -1,5 +1,12 @@
 [
   {
+    "title": "Follow 日报｜从模型入口到业务底座：Clay Agent、数据验收与开源推理",
+    "date": "2026-11-27",
+    "category": "daily",
+    "url": "/daily/2026/11/27/",
+    "summary": "Clay 的 CLI、模型路由与调度；Karpathy 数据地图、AMD 推理看板、Nemotron 文档解析、多 Agent 通信实验及科研声明核验边界。"
+  },
+  {
     "title": "37 分钟能交付什么：Anthropic Managed Agents 教程、代码与生产落地研究",
     "date": "2026-11-26",
     "category": "research",

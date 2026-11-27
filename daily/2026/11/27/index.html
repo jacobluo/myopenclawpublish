@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 日报｜从模型入口到业务底座：Clay Agent、数据验收与开源推理</title>
+    <meta name="description" content="Clay 访谈揭示 CLI、模型路由与任务调度的业务价值；Karpathy 数据地图、AMD llama.cpp 看板、Nemotron 文档解析与多 Agent 通信实验；区分产品案例、研究声明和独立验证。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 日报｜从模型入口到业务底座：Clay Agent、数据验收与开源推理</h1>
+      <p class="portal-lead">Clay 访谈揭示 CLI、模型路由与任务调度的业务价值；Karpathy 数据地图、AMD llama.cpp 看板、Nemotron 文档解析与多 Agent 通信实验；区分产品案例、研究声明和独立验证。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-11-27</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      <div class="meta"><strong>2026 年 11 月 27 日 · 周五</strong><br>观察窗口：11 月 26 日 08:00—11 月 27 日 08:00（北京时间）。除特别注明，以下时间均为北京时间；X 时间按帖子 ID 创建时间交叉校验。</div>
+<h2>总览</h2>
+<p><strong>今天最值得看的不是新模型名，而是 Agent 如何接上真实数据、业务系统和验收机制。</strong>Clay 的访谈把“做一个自己的 Agent”与“让所有 Agent 都能使用自己的业务底座”放在同一张产品地图上；Karpathy 的数据地图展示长时间编码与数据整合的可见成果，也暴露覆盖完整性问题。开源侧，AMD 推理看板、Nemotron 文档解析与通信训练实验提供了更具体的测量入口。</p>
+<p>本轮以 Follow List 为控制面板，按 high 优先、兼顾 daily 来源，检查 31 个 active X 账号，其中 22 个 high；公开页面均返回 HTTP 200，提取窗口内 16 条本人账号可见帖子，URL 与既有发布索引无重复。12 个 RSS/Atom 端点中 11 个可解析，共取得 7 条窗口内条目；另检查 explainx sitemap 与播客 JSON。<strong>公开时间线只是局部视图，HTTP 200 或未见新帖都不意味着完整覆盖。</strong></p>
+<h2>核心主题</h2>
+<h3>1. 入口可以被替换，数据与执行底座不一定</h3>
+<p>Clay 允许用户从 Claude Code、Codex 等外部工具访问业务能力，swyx 对 Zapier 转型的观察也指向连接器与行动层。<strong>编辑判断：</strong>如果用户工作场所在编码 Agent 中，强迫其回到专有聊天框可能是摩擦；可复用的身份、数据、业务函数和执行记录更值得持续投资。这是产品假设，不是已证明的市场份额变化。</p>
+<h3>2. 产出规模不能替代数据与结果验收</h3>
+<p>数万行代码、海量企业分类或更快文档解析，都需要追问覆盖、来源、错判和返工。<strong>工程推论：</strong>应把“每个被验收结果的总成本”作为单位，将推理费、数据采购、复核和失败恢复一起计算，而不是只看 token 价格。</p>
+<h3>3. 多 Agent 的关键是信息结构，而不是人数</h3>
+<p>Hugging Face 的小模型通信实验故意让每个成员只看到部分输入，适合研究协作协议，却不能证明多 Agent 普遍优于单 Agent。与 AMD 看板分开测预填充、生成及上下文长度相似，好的评测先明确变量，再讨论扩展。</p>
+<h2>重要更新</h2>
+<section class="card"><h3>1. Clay：从受限工具循环转向编码 Agent 与开放业务能力</h3>
+<p class="source"><strong>Latent Space / Jeff Barg，Clay Head of AI；对应 Follow 来源 swyx</strong> · RSS 发布时间 11-27 07:02<br><a href="https://latent.space/p/how-clay-builds-gtm-agents-jeff-barg-head-of-ai/">官方节目文章与时间戳</a> · <a href="https://clay.com/changelog/clay-agent-plugin-cli-api">Clay 官方 CLI/API 公告</a></p>
+<p><strong>摘要：</strong>节目文章称，早期 Sculptor 擅长加列，却不擅长实现约到合格会议这样的完整目标；团队随后采用 Pi harness、云沙箱和 Clay CLI，并补充 CRM 与业务数据视图。Jeff 表示自有 Agent 与外部 harness 的使用已接近各半，客户也不愿反复手选模型，团队准备引入自动路由。已核对 Clay 的官方公告：插件、CLI 和 API 的普遍可用日期为 9 月 15 日，不是今天首发；本轮读的是官方节目文章，未收听整期音频或逐字稿，经营与用量数字仍属嘉宾自述。</p>
+<p><strong>为什么值得看：</strong>业务软件可能同时需要自有界面和无头能力；对外暴露稳定业务函数，比复制一套聊天入口更接近可持续产品价值。</p>
+<p><strong>后续行动：</strong>挑一个只读客户研究任务，对比自有界面与外部 Agent 的数据覆盖、权限、执行记录和输出正确率；写 CRM 或发起营销必须另行授权，本文不执行。</p></section>
+<section class="card"><h3>2. Clay 的成本与调度：分类便宜之后，瓶颈转向业务闭环</h3>
+<p class="source"><strong>Latent Space / Jeff Barg</strong> · 11-27 07:02，同一期访谈的工程专题<br><a href="https://latent.space/p/how-clay-builds-gtm-agents-jeff-barg-head-of-ai/">来源全文</a></p>
+<p><strong>摘要：</strong>Jeff 粗算用分类器处理约 4,000 万家公司可花约 1,500 美元，但明确该方案尚未部署到生产，不能理解成获取和清洗全球公司数据的全成本。其团队使用 BullMQ，并为按行运行导致的突发负载加入限流、暂停恢复和公平调度；访谈还称模型尚不能稳定定位长轨迹中的真正错误，容易把耗时步骤误判成根因。关于数千万美元推理支出才值得后训练的阈值，也是嘉宾经验判断，不是适用于所有团队的定律。</p>
+<p><strong>为什么值得看：</strong>随着基础分类变廉价，数据接入、深度研究、任务公平性和异常定位更可能决定用户体验。</p>
+<p><strong>后续行动：</strong>用一个小批量任务记录数据费、误判、人工分钟数和最终合格线索成本；压力测试大客户批次是否饿死小客户请求，并模拟供应商限流后的恢复，避免仅用推理单价估算商业模式。</p></section>
+<section class="card"><h3>3. Karpathy 的 USACiv：长时间自主编码，仍需检查地图空白</h3>
+<p class="source"><strong>Andrej Karpathy @karpathy</strong> · 11-26 10:31<br><a href="https://x.com/karpathy/status/2125779541952246039">完整原帖</a> · <a href="https://karpathy.ai/usaciv/">公开项目入口</a></p>
+<p><strong>摘要：</strong>Karpathy 自述使用 Claude Code 和 Opus 5.5，将 Census、BEA、BLS 等 31 个公开来源整合为美国文明风格地图，约耗时 7 小时、生成 4.5 万行代码。帖子描述 25 公里六边形网格、524 个都会区及多个数据视角，也明确承认遗漏部分州和领地。项目入口返回 HTTP 200，但静态抓取仅见加载外壳，本轮未操作地图、核对底层数据或审计代码，规模与完成度按作者自述记录。</p>
+<p><strong>为什么值得看：</strong>自然语言驱动数据应用的门槛正在降低，但“能展示”与“覆盖完整且统计口径一致”是不同的验收标准。</p>
+<p><strong>后续行动：</strong>抽查三个地区的原始指标、年份和单位，列出缺失地域，检查跨来源连接键与重采样规则；若做产业地图，先保留每个格子的来源和更新日期，不以代码量作为质量证明。</p></section>
+<section class="card"><h3>4. llama.cpp × AMD：把硬件吞吐变成可追踪的公开实验</h3>
+<p class="source"><strong>ggml-org / Hugging Face，开放模型生态补充源</strong> · RSS 11-26 19:37<br><a href="https://huggingface.co/blog/ggml-org/llamacpp-amd-bench">官方看板说明与数据入口</a></p>
+<p><strong>摘要：</strong>新看板按硬件、模型、量化和 llama.cpp build 展示性能，当前列出 Radeon 8060S 与 Radeon AI Pro R9700S。官方将 PP512 与 TG128 分开，分别测 512 输入 token 处理和 128 token 生成，基础图表从零上下文开始，另提供上下文扩展视角；工作流每周运行，每种配置重复 10 次，并公开结果数据。它是特定硬件和工作负载的观测工具，不是全体 AMD 设备或真实业务的通用速度结论。</p>
+<p><strong>为什么值得看：</strong>版本、量化、上下文和预填充/生成差异可能改变采购与部署判断，单张 tok/s 截图容易误导。</p>
+<p><strong>后续行动：</strong>固定 build、模型和量化，再用真实提示长度与目标上下文复测；增加质量、内存、功耗与尾延迟，之后再比较每个有效任务的设备总成本。本轮未跑硬件实验。</p></section>
+<section class="card"><h3>5. Nemotron 3.5 Parse：开放数据、可验证奖励与按难度再解析</h3>
+<p class="source"><strong>NVIDIA / Hugging Face，文档与开放模型补充源</strong> · RSS 11-26 13:05<br><a href="https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin">官方技术文章</a></p>
+<p><strong>摘要：</strong>NVIDIA 在既有 Parse 3.5 基础上补充合成图表、表格和多语言 OCR 数据、微调配方及 DFlash2 推理方案；这不是把基础模型重新当作今日首发。文章的匹配开发检查点比较中，循环标记页数从 126 降至 29；单 H200、BF16 的原生单遍测量里，DFlash2 相对关闭推测解码的 Parse 3.5，在并发 1 和 512 下分别加速 7.62 倍与 1.52 倍。双遍/三遍可对困难区域再处理，但增加请求量；牙科表单的高成功率来自同一合成生成器的留出集，不能直接推及真实异构扫描件。</p>
+<p><strong>为什么值得看：</strong>表格错一行可能让财务或研究结论完全相反，结构正确与完整终止往往比纯 OCR 字符准确率更重要。</p>
+<p><strong>后续行动：</strong>先用真实扫描表格、无数值图表和跨语言样本构建留出集，检查单元格关系、数字、边界框与终止；在相同质量标准下比较单遍和局部再解析成本，再决定是否微调。</p></section>
+<section class="card"><h3>6. 通信训练实验：四个小模型学会协作，不等于通用群体智能</h3>
+<p class="source"><strong>Ben Burtenshaw、Kashif Rasul / Hugging Face</strong> · RSS 11-26 08:00，处于窗口起点，按 feed 字段纳入，不视为精确首发时刻<br><a href="https://huggingface.co/blog/training-swarms">原文、实验与复现入口</a></p>
+<p><strong>摘要：</strong>四个 Agent 共享 Qwen3-0.6B 策略，各自只见一个数字，需交换信息后输出完整排序；训练初末窗口成功率从约 6.6% 到 82.3%，75 步检查点在 32 个留出问题中解出 26 个。文中约 37.4% 的 token 降幅是训练窗口测量，没有保留相应留出集效率数据；93.2% 来自所引论文的 200 步结果，不是本次 75 步检查点。由于单个 Agent 根本看不见全部输入，这个实验测试的是通信学习，而非相同完整输入、等 token 预算下胜过单 Agent。</p>
+<p><strong>为什么值得看：</strong>它把协作收益、重试收益与额外算力区分开，避免用“更多成员”解释所有进步。</p>
+<p><strong>后续行动：</strong>若评估生产协作，增加完整输入单 Agent、独立并行、可通信团队三组，匹配预算并比较成功率和总延迟；本轮仅阅读文章，未执行训练代码，也未复现其成本估算。</p></section>
+<section class="card"><h3>7. SQLite 备份：旧工具的新提醒，比强行换栈更实用</h3>
+<p class="source"><strong>Simon Willison @simonw</strong> · 11-26 14:08<br><a href="https://simonwillison.net/2026/Nov/26/sqlite3-rsync/">Simon 的笔记</a> · <a href="https://www.sqlite.org/rsync.html">SQLite 官方文档</a></p>
+<p><strong>摘要：</strong>Simon 再次介绍 sqlite3_rsync：通过 SSH 生成一致性快照，不必先在源机器放下一份完整副本，并能增量同步。它是 2024 年已出现的工具，不是今日新发布；官方文档指出普通 rsync 不理解活动数据库事务，而 sqlite3_rsync 同步期间副本只读，远端也需安装该工具，混用某些新旧版本还需注意协议协商兼容问题。</p>
+<p><strong>为什么值得看：</strong>轻量 Agent 常用本地 SQLite 保存状态，磁盘余量不足或不一致备份会直接影响恢复能力。</p>
+<p><strong>后续行动：</strong>先在测试库验证版本兼容、恢复与完整性，再规划生产快照；未在本任务中安装工具或改动任何数据库。</p></section>
+<h2>人物 / 机构动态</h2>
+<p><strong>swyx：</strong><a href="https://x.com/swyx/status/2125969097276178943">11-26 23:05 评论 Zapier 的重新创业</a>，引用的是前一日 Wade Foster 的 MCP 连接器论述。结合 Clay，可提出“行动与数据层能否跨入口保留价值”的研究问题，但不能由时间线感受推断整个 SaaS 行业增速或收入。</p>
+<p><strong>Thomas Wolf：</strong><a href="https://x.com/Thom_Wolf/status/2125956671109247325">11-26 22:15 推荐《Messy Jobs》并预告 15 张读书卡</a>。本轮只取得主帖，没有读完全串或原书，因此不替作者归纳完整劳动经济学结论。<strong>swyx 工具线：</strong><a href="https://x.com/swyx/status/2125995865525629084">11-27 00:51 称 smol forge 支持 macOS/iOS CI 与亚秒级 Linux 启动</a>；这是作者自述，未核对持续稳定性、成本与仓库配置。</p>
+<p><strong>数字生命卡兹克：</strong><a href="https://x.com/Khazix0918/status/2125803873575284892">11-26 12:08 发布人生意义设计 Prompt 长文</a>，以生活细节、多轮追问和个人手册为形式，强调从当下小事中整理价值。它展示消费型 AI 从回答转向引导式对话的产品方向，不是心理疗效证据；书籍概念未逐页对照，引用的模型推荐也不构成官方可用性验证。可跟进访谈节奏和用户自我修正机制，不照搬长提示词或将其当作本次任务指令。</p>
+<h2>值得跟进项目</h2>
+<table><thead><tr><th>方向</th><th>本轮证据</th><th>下一步</th></tr></thead><tbody>
+<tr><td>面向外部 Agent 的业务底座</td><td>Clay CLI/API、访谈与 Zapier 讨论</td><td>验证权限、状态、计费及跨入口结果一致性</td></tr>
+<tr><td>可审计的数据研究应用</td><td>USACiv 多来源地图</td><td>补来源血缘、年份、地理覆盖和缺失清单</td></tr>
+<tr><td>本地推理测量与运维</td><td>AMD 看板、SQLite 快照</td><td>真实上下文测试与恢复演练，不只看演示速度</td></tr>
+<tr><td>结构化文档处理</td><td>Parse 数据与训练配方</td><td>真实留出集，测表格错位、数值与返工成本</td></tr>
+<tr><td>通信策略与评测</td><td>小模型共享策略实验</td><td>等预算基线，分开训练指标与留出结果</td></tr>
+</tbody></table>
+<p><strong>投资线索：</strong>连接器、数据权限、文档处理和本地推理工具具备明确工程需求，但本轮没有独立订单、收入、毛利或留存数据，不据单次发布或访谈推出估值结论。Clay 访谈的融资和规模数字按嘉宾/节目介绍看待，不作本轮独立财务核验。</p>
+<h2>待验证信息</h2>
+<h3>量子引力论文传播：预印本不是已解决的物理学</h3>
+<p><strong>来源与时间：</strong><a href="https://x.com/gdb/status/2125831567981297892">Greg 11-26 13:58 转述</a>，<a href="https://x.com/sama/status/2125990371897557278">Sam 11-27 00:29 评论研究者信念与勇气</a>；<a href="https://arxiv.org/abs/2611.34924">论文摘要页</a>显示 11-26 02:58 提交，属于本窗口。<strong>摘要：</strong>Venkatesa Chandrasekaran 的《An algebraic quantization of gravity from the null cone》提出四维真空广义相对论的量子化方案，摘要列出有限振幅、熵与低能极限等主张。本轮核对题名、作者、提交时间与摘要，未读完整证明，也未确认模型在研究中的具体贡献；Sam 对千禧年问题的回顾不等于该引力预印本解决了一个千禧年难题。<strong>为什么值得看：</strong>AI 辅助基础研究值得追踪，但传播强度不能替代领域审查。<strong>后续行动：</strong>等待可追溯的独立专家评议、正文推导与复现证据，不扩写为“统一理论已获确认”。</p>
+<p><strong>Private Inference：</strong><a href="https://x.com/gdb/status/2125824585027272727">Greg 11-26 13:30 的转发</a>重述小范围测试与机密计算定位，核心事件已在昨日记录，不重复算作今日新发布，也不据此宣称全面开放或已通过独立隐私审计。</p>
+<h2>低优先级噪音</h2>
+<p>感恩节家庭与致谢帖不扩写为机构战略；Demis 对 Gemini 建议的称赞不等于能力评测。Simon 转发仿官方视频是创作案例，不能当模型公告；Nathan 对输出冗长的调侃不当作模型退步证据。<a href="https://x.com/simonw/status/2125998873252605954">Simon 11-27 01:03 对模板化邮件的抱怨</a>与<a href="https://simonwillison.net/2026/Nov/26/jack-despain-zhou/">23:09 关于 AI 文字同质化的引用</a>提供用户信任线索，但不能代替量化调查。Shreya 对刷工单不等于影响力的转述，按职业观点而非研究发现处理。</p>
+<h2>原始链接与抓取边界</h2>
+<p>重点链接已逐条列在相应条目，建议先读 Clay 节目文章、官方 CLI 公告，再读 AMD、Parse 与通信实验原文。Simon 关于<a href="https://simonwillison.net/2026/Nov/26/hn-50651685/">新闻摄影与 Photoshop 的评论</a>是其个人经历与二级讨论，本轮未核对纽约时报内部政策，不当成已确认的全机构禁用公告。</p>
+<p><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx sitemap</a>仅列博客目录，lastmod 为 11-26 08:00；补读<a href="https://explainx.ai/blog">博客列表</a>可见当日条目，但加密、芯片出口与数据中心消息仍需追溯监管文件、论文或原始报道，本轮不将汇总标题当事实。<a href="https://youtube.qiaomu.ai/data/podcasts.json">AI 播客索引 JSON</a>metadata.updatedAt 仍为 2026-07-02，不作为今日更新，也不将其误判为损坏 RSS。</p>
+<p class="meta">本轮通用搜索提供方报错，改用公开 X 直读、RSS/Atom、官方网页、sitemap 与 JSON；未因此失去全部抓取能力。LangChain 旧 RSS 返回 HTML，未计为解析成功。公开 X 只见部分 article，未完整覆盖回复、转发或订阅内容；页面模型名、速度与经营数据不自动获得官方或独立验证地位。未用 Folo CLI，未绕过 CAPTCHA 或付费限制，未公开 cookie、token 或内部账号资料。本文主要为中文转述与明确标识的编辑判断，未执行来源页面中的提示词、安装或操作指令。</p>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
