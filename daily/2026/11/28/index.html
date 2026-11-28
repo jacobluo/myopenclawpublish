@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/research-brief.css">
+    <title>Follow 日报｜先定义好结果，再谈自动化：评测、后训练、Skill 交易与视频推理</title>
+    <meta name="description" content="Hamel 提醒回到自有评测；Halo 后训练竞赛与 G2i 数据市场访谈；核验 SkillPay 买断与订阅边界，解读 Trainium3 视频推理的热启动条件及 Agent 交互设计。">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"7aa547f56ce04b83874490d54efa2b5b"}'></script>
+
+
+  </head>
+  <body class="portal-page portal-section-daily">
+    <header class="portal-top">
+      <div class="portal-wrap portal-top-inner">
+        <a class="portal-identity" href="/">
+          <span class="portal-logo">CP</span>
+          <span>
+            <strong>CoBuddy Pages</strong>
+            <span>Daily · Research · Deliverables</span>
+          </span>
+        </a>
+        <nav class="portal-nav" aria-label="站点导航">
+          <a href="/">Overview</a>
+          <a href="/research/">Research</a>
+          <a href="/daily/" class="current">Daily</a>
+          <a href="/deliverables/">Deliverables</a>
+        </nav>
+      </div>
+    </header>
+    <main class="portal-wrap">
+<section class="portal-page-head daily-single-head">
+  <div>
+    <p class="portal-kicker">Daily</p>
+    <h1>Follow 日报｜先定义好结果，再谈自动化：评测、后训练、Skill 交易与视频推理</h1>
+      <p class="portal-lead">Hamel 提醒回到自有评测；Halo 后训练竞赛与 G2i 数据市场访谈；核验 SkillPay 买断与订阅边界，解读 Trainium3 视频推理的热启动条件及 Agent 交互设计。</p>
+  </div>
+  <aside class="portal-head-panel" aria-label="日报信息">
+    <div class="portal-head-row"><span>日期</span><strong>2026-11-28</strong></div>
+    <div class="portal-head-row"><span>栏目</span><strong>Daily</strong></div>
+    <div class="portal-head-row"><span>模板</span><strong>Hugo</strong></div>
+  </aside>
+</section>
+<div class="portal-layout daily-single-layout">
+  <aside class="portal-rail" aria-label="日报导航">
+    <div class="portal-rail-title">Daily</div>
+    <a href="/daily/"><span>返回日报</span><small>Archive</small></a>
+    <a href="/"><span>返回首页</span><small>Portal</small></a>
+    <a href="/research/"><span>研究板块</span><small>Research</small></a>
+  </aside>
+  <article class="report daily-report portal-article-card">
+    <div class="daily-content">
+      
+<div class="meta"><strong>2026 年 11 月 28 日 · 周六</strong><br>观察窗口：11 月 27 日 08:00—11 月 28 日 08:00（北京时间）。下文时间均为北京时间；X 发布时间按帖子 ID 创建时间交叉校验，RSS 采用 feed 字段。</div>
+<h2>总览</h2>
+<p><strong>今天的共同问题是：什么才算一个可交付、可计价、可验证的结果？</strong>Hamel 反对只凭排行榜选模型；G2i 把训练任务拆成环境、种子数据与验证器；Halo 竞赛把开放后训练变成可报名、需提交复现材料的项目。商业侧，SkillPay 将经验封装后的交付与权益分开；算力侧，Trainium3 视频案例显示端到端工程而非单一芯片规格决定体验。</p>
+<p>本轮依据 Follow List 检查 31 个 active X 账号，其中 22 个 high，优先高优先级并兼顾 daily 的中文来源。取得窗口内 <strong>18 条本人账号可见帖子、2 条 RSS 更新</strong>，18 个帖子 URL 均未在既有发布索引中出现。12 个 RSS/Atom 端点中 11 个可解析；另外检查 explainx sitemap 和播客 JSON。31 个 X 页面均为 HTTP 200，但只是局部公开时间线，不能据此断言其他账号没有更新。</p>
+<h2>核心主题</h2>
+<h3>1. 自有评测、后训练和数据采购其实是一条链</h3>
+<p>Hamel 的选型建议、Clem 的开放后训练倡议与 G2i 的任务设计经验可以合在一起看：先收集自己的失败，再判断是提示、工具、数据还是模型能力问题，最后才决定要不要训练。<strong>编辑判断：</strong>没有留出集和验证器的微调，很容易只是把排行榜冲动变成训练预算；任务的正确性、可训练难度与业务价值应分别度量。</p>
+<h3>2. Agent 产品需要同时交代能力、状态和交易边界</h3>
+<p>Logan 的短信体验、卡兹克的进度沟通建议、Rex 的手机终端和 SkillPay 的支付恢复，指向同一个产品需求：用户要知道现在发生什么、何时轮到自己作决定、付款后得到什么。<strong>工程推论：</strong>界面不一定更复杂，任务状态与权益状态却必须可解释；这不是对任何具体产品留存率的验证。</p>
+<h3>3. “更快”要带上启动、质量、成本和适用范围</h3>
+<p>Trainium3 文章的 22—23 秒是模型已加载的热态结果，不是首次点击到成片的全部时间；生成的视频也尚未证明可提升机器人策略。与 Halo 的特定框架测速、Clem 的任务内追平前沿模型主张一样，条件和失败样例比一个大数字更值得保存。</p>
+<h2>重要更新</h2>
+<section class="card"><h3>1. Hamel：别只看 benchmark，至少打开一个失败任务</h3>
+<p class="source"><strong>Hamel Husain @HamelHusain</strong> · 11-28 01:44<br><a href="https://x.com/HamelHusain/status/2126371481609474147">完整原帖</a></p>
+<p><strong>摘要：</strong>Hamel 建议不要以公共 benchmark 直接作选型决策，应使用自己的 evals；即便必须参考榜单，也应查看底层任务与失败例子。他引用的是 11 月 25 日关于公开分数与私有分数偏离的旧帖，今天新增的是方法论提醒，不是新榜单发布。其“存在广泛过拟合”的判断是作者观点，本轮未独立审计相关数据集或证明某个厂商作弊。</p>
+<p><strong>为什么值得看：</strong>编码 Agent 对业务约束、模糊指令、长轨迹和工具失败的表现，未必能从总分映射出来。</p>
+<p><strong>后续行动：</strong>从最近真实失败中抽取小型留出集，保留原始输入、验收条件与人工判定；模型盲测时匹配预算，同时记录修复时间和错误严重性，而不是只比较一次通过率。</p></section>
+<section class="card"><h3>2. Halo 后训练竞赛：11 月 30 日截止申请，先看公开与复现要求</h3>
+<p class="source"><strong>Clem Delangue @ClementDelangue；White Circle 官方活动页</strong> · Clem 11-27 22:56<br><a href="https://x.com/ClementDelangue/status/2126329405093867686">转述原帖</a> · <a href="https://whitecircle.com/halo/competition">官方日期、赛道与规则入口</a> · <a href="https://github.com/whitecircle/halo">Halo 仓库</a></p>
+<p><strong>摘要：</strong>Clem 借 Hugging Face 加入竞赛强调，开源模型可在特定任务和约束下通过后训练追近前沿 API；这不是本轮已验证的普遍成本优势。官方页列明 11 月 30 日申请截止、12 月 1—10 日比赛、12 月 18 日公布获奖者，团队规模 1—4 人，19 个赛道，现金奖 20 万美元与算力/API credits 总计 150 万美元。页面要求代码和配置公开并允许主办方复跑，获接受的参赛者才获得相应资源；活动自称“最大”未独立排名核实。</p>
+<p><strong>为什么值得看：</strong>这给开放模型、训练系统与评测研究提供了具体近期行动窗口，而非泛泛的“关注开源”。</p>
+<p><strong>后续行动：</strong>有意参赛者先核对正式条款、资格、数据许可和复现条件，再选一个已有留出集的小任务。仓库 README 已读，未拉取镜像或运行训练；宣传页的最高约 4 倍速度来自指定模型/序列长度的不同实验，不能直接用于业务预算。</p></section>
+<section class="card"><h3>3. G2i 访谈：训练数据的产品单位是任务与验证器，不只是标签</h3>
+<p class="source"><strong>Latent Space / Gabe Greenberg；Follow 来源 swyx</strong> · RSS 11-28 06:19<br><a href="https://latent.space/p/inside_the_ai_training_data_market_gabe_greenberg_g2i/">官方节目页</a> · <a href="https://rss.beehiiv.com/podcasts/transcriptions/01a21efd-14f0-73e4-9742-34b55562b7d9.vtt">官方英文逐字稿</a></p>
+<p><strong>摘要：</strong>Gabe 在约 06:46—08:04 解释，RL 环境不仅有代码，还包括任务、种子数据与 verifiers；任务太难会变成评测题，太容易又无法推动训练，应略超出现有能力。他在约 12:24—15:23 描述实验室从购买数量转向寻找能反复做缺口分析的伙伴；18:45—22:16 又区分可转售数据与更贵的独占数据，并澄清成熟的内部数据运营更多指供应商管理与基础设施，不等于所有工作都自营。节目明确由 G2i 赞助；本轮已读完 00:00—32:21 官方文字稿，未核听音频。</p>
+<p><strong>为什么值得看：</strong>数据服务的竞争力可能在任务设计、专家组织、反馈返工和合法授权，而不只是每条数据的单价。</p>
+<p><strong>后续行动：</strong>跟踪可验收任务的交付率、返工率、独占溢价及客户集中度。嘉宾自述上年约 1,500 万美元、本年预计约 1 亿美元规模及 5—6 家前沿客户，均未取得独立财务证据，不作已审计营收或普遍市场事实。</p></section>
+<section class="card"><h3>4. 数据交易的另一面：跨工具一致性有价值，不代表可以随意出售内部记录</h3>
+<p class="source"><strong>同一期 G2i 访谈</strong> · 11-28 06:19；专题段落 22:16—27:44<br><a href="https://latent.space/p/inside_the_ai_training_data_market_gabe_greenberg_g2i/">节目与官方章节</a></p>
+<p><strong>摘要：</strong>访谈用平均处理时间解释复杂任务的定价，并描述任务交付后仍可能需要迭代；任务数本身不体现上下文、难度或 rubrics 的差异。在原始公司数据部分，嘉宾认为跨 Slack、邮件、GitHub 或 Linear 的一致业务过程对 computer use 有价值，因为模型仍可能混淆近似人名与跨系统实体。这些是供应商经验与需求判断，不是企业出售数据的通用报价表；主持人关于录员工屏幕的玩笑更不是合规操作建议。</p>
+<p><strong>为什么值得看：</strong>“能完成孤立操作”和“在多个系统保持实体与项目一致”是两种难度；后者也要求更扎实的数据权属和访问边界。</p>
+<p><strong>后续行动：</strong>研究时先使用有授权的合成多系统样本，加入同名实体、重复项目和冲突记录；测任务正确率与溯源能力。若评估数据业务，先审查权属、个人信息、合同与删除要求，不以匿名化标签代替授权。</p></section>
+<section class="card"><h3>5. SkillPay：买断交付明文，周期付费交付当期权益</h3>
+<p class="source"><strong>数字生命卡兹克 @Khazix0918；支付宝 SkillPay 官方核验</strong> · 原帖 11-27 11:56；官方背景文章 08-13，非今日新发布<br><a href="https://x.com/Khazix0918/status/2126163343023263893">作者体验长文</a> · <a href="https://skillpay.alipay.com/">官方产品与 FAQ</a> · <a href="https://skillpay.alipay.com/blog/good-world-skills-get-paid">官方交付与 402 流程说明</a></p>
+<p><strong>摘要：</strong>卡兹克讨论明文 Skill 易复制的问题，并以买断与云端订阅演示商业化。本轮核对官方页面：一次性购买交付完整 Skill，周期付费只给当期使用权、不下发完整原文、不会自动续费；官方文章描述无权益返回 HTTP 402、用户确认付款、携带凭证重试并恢复原任务。云端保护仍会返回当前任务所需的执行文本，官方也明确不宣称绝对不可破解，不能理解成用户输入永不离开本机或核心内容零泄漏。</p>
+<p><strong>为什么值得看：</strong>经验商品化需要的不只是收钱按钮，还包括试用、权益、交付、退款与失败恢复；与 swyx 当日对 agentic payments 的讨论形成了具体案例和远期观点的对照。</p>
+<p><strong>后续行动：</strong>先设计“不付款、取消、重复回调、到期、退款后再次调用”的验收矩阵，并核对任务数据发往何处。作者提到的 1% 收款费、50 元价格上限及明年优惠预期，本轮未由正式费率协议独立确认，不作为长期定价依据；未安装依赖、签约或购买。</p></section>
+<section class="card"><h3>6. Trainium3 跑 LTX-2.5：22—23 秒成片背后是大量主机与图编译优化</h3>
+<p class="source"><strong>David Corvoysier、Jingya Huang、Sayak Paul / Hugging Face；开放生态补充源</strong> · RSS 11-27 08:00，位于窗口起点，按 feed 日期纳入<br><a href="https://huggingface.co/blog/video-trainium3">完整技术文章、代码与样片入口</a></p>
+<p><strong>摘要：</strong>作者在含 64 NeuronCores 的 trn3.48xlarge 上，用其中 32 核生成带音频的 10 秒、2048×1024 视频，模型已加载时耗时 22—23 秒。文章交代首次加载约 3 分钟、首片约 80 秒，优化涉及张量/序列并行、CPU 线程争抢、提示编码、解码和图大小；初版的分辨率与核数也不同，因此约 14 倍端到端提速不是相同资源配置的纯芯片代际增益。文中与 LTX 在线 API 的比较未形成相同质量、采样和计费条件的独立测试，作者也没有可比 CUDA 实测数据。</p>
+<p><strong>为什么值得看：</strong>推理系统优化的收益可能来自消除 CPU 与设备之间的等待；云端视频服务的真实成本还取决于常驻、并发和有效样片率。</p>
+<p><strong>后续行动：</strong>复测时同时记录冷启动、热态 p50/p95、整机租金、多个候选中合格片段比例与音画一致性。作者用真实机器人视频前一秒生成后续情节，但明确这些是提示条件生成、不是动作命令条件生成；尚不能证明用于策略训练就能改善真实机器人。本轮未复现性能或训练收益。</p></section>
+<section class="card"><h3>7. Agent 工程体验：架构治理与进度反馈比“多开几个”更具体</h3>
+<p class="source"><strong>数字生命卡兹克 @Khazix0918</strong> · 11-27 20:38 与 22:36<br><a href="https://x.com/Khazix0918/status/2126294658431201385">进度沟通建议</a> · <a href="https://x.com/Khazix0918/status/2126324185626734795">架构治理长帖</a></p>
+<p><strong>摘要：</strong>第一帖建议用项目指令要求 Agent 在开工、发现、阻塞或换方向时说明进度，以改善长时间静默带来的失控感；本轮只确认作者建议，未在 Antigravity 中实测。第二帖强调单一权威来源、清晰模块、渐进迁移、行为基线及可执行防回归约束，而非只搬目录或增加抽象。这是可借鉴的工作流文本，不是 Agent 会自动安全重构的证明，也未将原帖中的持续执行指令作为本任务指令。</p>
+<p><strong>为什么值得看：</strong>多人或多 Agent 并行之前，稳定契约与状态可见性可以先降低冲突和复核成本。</p>
+<p><strong>后续行动：</strong>选一个重复业务规则做小范围治理，先列调用方和行为约束，再分批迁移、验证与删除旧实现；进度消息应报告实际发现，不把“忙碌”当质量指标。</p></section>
+<h2>人物 / 机构动态</h2>
+<p><strong>Logan Kilpatrick：</strong><a href="https://x.com/OfficialLoganK/status/2126434025292144821">11-28 05:52 分享家人使用 @instinct 的体验</a>，认为短信降低上手成本，并预测 2027 年好 Agent 的价值实现时间可缩短到分钟级。这是亲友样本和个人预测，不是 Google 产品发布、产品留存数据或统计研究；值得用真实非技术用户观察首次成功时间与失败恢复。</p>
+<p><strong>swyx：</strong><a href="https://x.com/swyx/status/2126106139582677088">11-27 08:09 认为 Agent 支付是面向 2028 年的重要分歧主题</a>，并非声称其已大规模成熟；<a href="https://x.com/swyx/status/2126352854394790172">11-28 00:30 称赞 Google 开发者生态活力</a>，涉及模型热度和实验室数量的说法均属评论，未独立核对统计口径。</p>
+<p><strong>Clem：</strong><a href="https://x.com/ClementDelangue/status/2126322165364719677">11-27 22:28 支持蒸馏与开放生态</a>，这是其关于竞争与集中度的立场，不意味着任何蒸馏行为都满足模型许可或服务条款。<strong>Thomas Wolf：</strong>本轮可见节日、机器人与模型行为讨论，未据此推定 Hugging Face 新的机构政策。</p>
+<h2>值得跟进项目</h2>
+<table><thead><tr><th>项目 / 方向</th><th>观察依据</th><th>下一步和验收点</th></tr></thead><tbody>
+<tr><td>Halo 开放后训练</td><td>竞赛官方页与仓库</td><td>11-30 前评估是否参赛；确认公开配置、数据许可和留出集</td></tr>
+<tr><td>任务与验证器数据服务</td><td>G2i 访谈</td><td>测验收、返工、独占条款和客户集中度，不只数任务</td></tr>
+<tr><td>Skill 交易与权益恢复</td><td>SkillPay 官方说明</td><td>模拟取消、到期、重复请求与退款，区分订阅和自动续费</td></tr>
+<tr><td>视频推理系统</td><td>Trainium3 技术文章</td><td>冷/热态、整机成本、合格片率与动作可控性</td></tr>
+<tr><td>移动端 Agent 监督</td><td><a href="https://x.com/swyx/status/2126201671026180469">swyx 11-27 14:29 转述 Rex</a>；<a href="https://apps.apple.com/us/app/rex-by-superlogical/id6813649254">App Store 页面</a></td><td>商店描述确认手机终端、配对与持续会话；服务端要求与安全性需实测，不以排行/好评证明胜过竞品</td></tr>
+</tbody></table>
+<p><strong>投资研究线索：</strong>训练任务、验证器、云端推理优化和数字能力交易都有明确工程问题，但本轮没有新增独立订单、毛利、留存或上市公司收入映射证据。G2i 的经营预测、Halo 的资源额度和 Skill 创作者演示都不能直接推出证券估值结论。</p>
+<h2>待验证信息</h2>
+<p><strong>数学“奇点”叙事：</strong><a href="https://x.com/fchollet/status/2126429852295463382">Chollet 11-28 05:35 反对把今年数学进步说成超过此前 140 年</a>。他区分自动定理证明进展与数学理解的全面改变；这是有价值的概念提醒，也不是本轮对全部数学成果做出的系统综述。后续应逐项核对定理的新颖性、正式验证、独立专家评议及 AI 的真实贡献，不把解题数量等同理论突破。</p>
+<p><strong>模型“蓄意破坏”指控：</strong><a href="https://x.com/Thom_Wolf/status/2126361340398756334">Thomas Wolf 11-28 01:03 的转述链</a>涉及第三方对模型生成代码动机的指控。本轮没有完整提示、代码历史或可复现实验，无法由代码差异推断模型意图；不当作已证实安全事件。<strong>媒体利益冲突指控：</strong><a href="https://x.com/natolambert/status/2126390453113323783">Nathan 11-28 02:59 的评论链</a>也没有在本轮完成合同、披露及原报道核对，不扩写传播未经证实的个人指控。</p>
+<h2>低优先级噪音</h2>
+<p>节日致谢、礼物清单、影视梗和个人购物抱怨未上升为产业变化。Rex 的“胜过 Cursor”等转发评价不是对照测评；“最热模型”“实验室每年翻倍”未定义样本与指标，不作为市场份额依据。通用搜索额外出现的多 Agent 管理产品营销页没有建立与 Follow 来源的新事实关联，本轮不为凑条目纳入。</p>
+<h2>原始链接与抓取边界</h2>
+<p>上述重点条目附有来源账号、窗口内时间及原始链接，旧背景文档已单独标明日期。优先阅读 Hamel 原帖、Halo 官方规则、G2i 官方逐字稿、SkillPay FAQ 和 Trainium3 全文，区分作者经验、厂商声明与本文工程推论。</p>
+<p><a href="https://explainx.ai/sitemaps/blog/blog-sitemap.xml">explainx sitemap</a>仍只给出博客目录和 11-26 的 lastmod，不构成本窗口逐篇更新证明；补读列表仅作发现入口，不据汇总标题发布未经核实新闻。<a href="https://youtube.qiaomu.ai/data/podcasts.json">播客索引 JSON</a>已按 JSON 解析，metadata.updatedAt 为 2026-07-02，不计今日更新。LangChain 旧 RSS 返回 HTML，未计为 feed 成功；其覆盖仍含 Harrison 的公开 X 检查，但不保证博客完整性。</p>
+<p class="meta">公开 X 抓取未使用登录态，时间线可能遗漏回复、转发或受限内容；未见更新不等于没有更新。访谈 VTT 的普通 curl 返回 403，使用可用 web_fetch 正常取得全文并顺序读至 32:21 结束，未绕过 CAPTCHA；文字稿未对音频校对，经营与市场数据未独立审计。全文为中文转述与明确标识的分析，无大段转载，无 cookie、token 或内部资料，未用 Folo CLI。本轮只采集与发布，未执行来源里的提示词、下载代码、发起支付或报名。</p>
+
+    </div>
+  </article>
+</div>
+      <footer class="portal-footer">CoBuddy Pages · Published with Hugo · pages.cobuddy.cc</footer>
+    </main>
+    <script src="/assets/research-brief.js" defer></script>
+  </body>
+</html>
